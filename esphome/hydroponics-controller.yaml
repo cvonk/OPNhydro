@@ -129,6 +129,81 @@ one_wire:
   - platform: gpio
     pin: GPIO3
 
+# Home Assistant time for scheduling
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+    on_time:
+      # Reset daily dose counters at midnight
+      - seconds: 0
+        minutes: 0
+        hours: 0
+        then:
+          - lambda: |-
+              id(daily_ph_up_dosed) = 0;
+              id(daily_ph_down_dosed) = 0;
+              id(daily_nutrient_dosed) = 0;
+              ESP_LOGI("dosing", "Daily dose counters reset");
+
+# =============================================================================
+# GLOBALS (State Variables)
+# =============================================================================
+
+globals:
+  # Dosing lockout timestamps (millis)
+  - id: last_ph_dose_time
+    type: unsigned long
+    restore_value: no
+    initial_value: '0'
+
+  - id: last_ec_dose_time
+    type: unsigned long
+    restore_value: no
+    initial_value: '0'
+
+  # Daily dose tracking (mL)
+  - id: daily_ph_up_dosed
+    type: float
+    restore_value: no
+    initial_value: '0'
+
+  - id: daily_ph_down_dosed
+    type: float
+    restore_value: no
+    initial_value: '0'
+
+  - id: daily_nutrient_dosed
+    type: float
+    restore_value: no
+    initial_value: '0'
+
+  # ATO state
+  - id: ato_pending
+    type: bool
+    restore_value: no
+    initial_value: 'false'
+
+  - id: ato_approved
+    type: bool
+    restore_value: no
+    initial_value: 'false'
+
+  - id: ato_fill_start_time
+    type: unsigned long
+    restore_value: no
+    initial_value: '0'
+
+  # Local automation enable flags
+  - id: local_ph_control_enabled
+    type: bool
+    restore_value: yes
+    initial_value: 'true'
+
+  - id: local_ec_control_enabled
+    type: bool
+    restore_value: yes
+    initial_value: 'true'
+
 # =============================================================================
 # SENSORS
 # =============================================================================
@@ -307,6 +382,33 @@ sensor:
     name: "Uptime"
     update_interval: 60s
 
+  # --- Daily pH Up Dosed ---
+  - platform: template
+    name: "Daily pH Up Dosed"
+    id: daily_ph_up_sensor
+    unit_of_measurement: "mL"
+    accuracy_decimals: 1
+    lambda: 'return id(daily_ph_up_dosed);'
+    update_interval: 30s
+
+  # --- Daily pH Down Dosed ---
+  - platform: template
+    name: "Daily pH Down Dosed"
+    id: daily_ph_down_sensor
+    unit_of_measurement: "mL"
+    accuracy_decimals: 1
+    lambda: 'return id(daily_ph_down_dosed);'
+    update_interval: 30s
+
+  # --- Daily Nutrients Dosed ---
+  - platform: template
+    name: "Daily Nutrients Dosed"
+    id: daily_nutrient_sensor
+    unit_of_measurement: "mL"
+    accuracy_decimals: 1
+    lambda: 'return id(daily_nutrient_dosed);'
+    update_interval: 30s
+
 # =============================================================================
 # BINARY SENSORS
 # =============================================================================
@@ -351,12 +453,25 @@ binary_sensor:
   - platform: status
     name: "Status"
 
+  # --- ATO Pending Approval ---
+  - platform: template
+    name: "ATO Pending Approval"
+    id: ato_pending_sensor
+    lambda: 'return id(ato_pending);'
+    device_class: problem
+
+  # --- ATO Filling ---
+  - platform: template
+    name: "ATO Filling"
+    id: ato_filling_sensor
+    lambda: 'return id(ato_valve).state;'
+
 # =============================================================================
 # SWITCHES (Pump Control)
 # =============================================================================
 
 switch:
-  # --- Main Circulation Pump (24V) ---
+  # --- Main Circulation Pump (12V) ---
   - platform: gpio
     pin: GPIO6
     name: "Main Pump"
@@ -383,7 +498,7 @@ switch:
 
   # --- Dosing Pump: pH Down ---
   - platform: gpio
-    pin: GPIO8
+    pin: GPIO21  # Moved from GPIO8 (DevKit uses GPIO8 for onboard RGB LED)
     name: "Pump pH Down"
     id: pump_ph_down
     icon: "mdi:arrow-down-bold"
@@ -407,6 +522,51 @@ switch:
     icon: "mdi:flask-outline"
     restore_mode: ALWAYS_OFF
     internal: false
+
+  # --- ATO Solenoid Valve (12V NC) ---
+  - platform: gpio
+    pin: GPIO20
+    name: "ATO Valve"
+    id: ato_valve
+    icon: "mdi:water-pump"
+    restore_mode: ALWAYS_OFF
+    # Safety: disable if high level detected (overflow protection)
+    on_turn_on:
+      - if:
+          condition:
+            binary_sensor.is_on: float_high
+          then:
+            - switch.turn_off: ato_valve
+            - lambda: |-
+                id(ato_approved) = false;
+                id(ato_pending) = false;
+            - logger.log: "ATO valve blocked - high water level!"
+
+  # --- Local pH Control Enable ---
+  - platform: template
+    name: "Local pH Control"
+    id: local_ph_control_switch
+    icon: "mdi:auto-fix"
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_ON
+    lambda: 'return id(local_ph_control_enabled);'
+    turn_on_action:
+      - lambda: 'id(local_ph_control_enabled) = true;'
+    turn_off_action:
+      - lambda: 'id(local_ph_control_enabled) = false;'
+
+  # --- Local EC Control Enable ---
+  - platform: template
+    name: "Local EC Control"
+    id: local_ec_control_switch
+    icon: "mdi:auto-fix"
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_ON
+    lambda: 'return id(local_ec_control_enabled);'
+    turn_on_action:
+      - lambda: 'id(local_ec_control_enabled) = true;'
+    turn_off_action:
+      - lambda: 'id(local_ec_control_enabled) = false;'
 
   # --- Restart Switch ---
   - platform: restart
@@ -477,6 +637,78 @@ number:
     restore_value: true
     unit_of_measurement: "mL"
 
+  # --- Dosing Lockout Time (minutes between doses) ---
+  - platform: template
+    name: "Dose Lockout Minutes"
+    id: dose_lockout_minutes
+    min_value: 1
+    max_value: 30
+    step: 1
+    initial_value: 5
+    optimistic: true
+    restore_value: true
+    unit_of_measurement: "min"
+
+  # --- Daily pH Dose Limit (mL) ---
+  - platform: template
+    name: "Daily pH Dose Limit"
+    id: daily_ph_limit
+    min_value: 10
+    max_value: 200
+    step: 5
+    initial_value: 50
+    optimistic: true
+    restore_value: true
+    unit_of_measurement: "mL"
+
+  # --- Daily Nutrient Dose Limit (mL) ---
+  - platform: template
+    name: "Daily Nutrient Dose Limit"
+    id: daily_nutrient_limit
+    min_value: 10
+    max_value: 500
+    step: 10
+    initial_value: 100
+    optimistic: true
+    restore_value: true
+    unit_of_measurement: "mL"
+
+  # --- ATO Low Level Threshold (%) ---
+  - platform: template
+    name: "ATO Low Level Threshold"
+    id: ato_low_threshold
+    min_value: 50
+    max_value: 90
+    step: 5
+    initial_value: 70
+    optimistic: true
+    restore_value: true
+    unit_of_measurement: "%"
+
+  # --- ATO High Level Threshold (%) ---
+  - platform: template
+    name: "ATO High Level Target"
+    id: ato_high_threshold
+    min_value: 80
+    max_value: 100
+    step: 5
+    initial_value: 95
+    optimistic: true
+    restore_value: true
+    unit_of_measurement: "%"
+
+  # --- ATO Max Fill Time (seconds) ---
+  - platform: template
+    name: "ATO Max Fill Time"
+    id: ato_max_fill_time
+    min_value: 30
+    max_value: 600
+    step: 30
+    initial_value: 180
+    optimistic: true
+    restore_value: true
+    unit_of_measurement: "s"
+
 # =============================================================================
 # TEXT SENSORS
 # =============================================================================
@@ -487,11 +719,24 @@ text_sensor:
     name: "System Status"
     id: system_status
     lambda: |-
-      if (id(float_low).state) return {"LOW WATER"};
+      if (id(float_low).state) return {"LOW WATER - CRITICAL"};
+      if (id(ato_valve).state) return {"ATO FILLING"};
+      if (id(ato_pending)) return {"ATO PENDING APPROVAL"};
       if (id(ezo_ph).state < 5.0 || id(ezo_ph).state > 7.5) return {"pH WARNING"};
       if (id(water_temp).state > 28.0) return {"TEMP HIGH"};
       if (id(main_pump).state) return {"Running"};
       return {"Idle"};
+    update_interval: 10s
+
+  # --- ATO Status ---
+  - platform: template
+    name: "ATO Status"
+    id: ato_status
+    lambda: |-
+      if (id(ato_valve).state) return {"Filling"};
+      if (id(ato_pending)) return {"Awaiting Approval"};
+      if (id(water_level_percent).state < id(ato_low_threshold).state) return {"Low - Needs Fill"};
+      return {"OK"};
     update_interval: 10s
 
   # --- WiFi Info ---
@@ -576,19 +821,247 @@ interval:
           else:
             - if:
                 condition:
-                  lambda: 'return id(ezo_ph).state < 5.5 || id(ezo_ph).state > 6.5;'
+                  lambda: 'return id(ato_pending) || id(ato_valve).state;'
                 then:
                   - light.turn_on:
                       id: status_led
-                      red: 100%
-                      green: 50%
-                      blue: 0%
-                else:
-                  - light.turn_on:
-                      id: status_led
+                      effect: "Slow Pulse"
                       red: 0%
-                      green: 100%
-                      blue: 0%
+                      green: 50%
+                      blue: 100%
+                else:
+                  - if:
+                      condition:
+                        lambda: 'return id(ezo_ph).state < 5.5 || id(ezo_ph).state > 6.5;'
+                      then:
+                        - light.turn_on:
+                            id: status_led
+                            red: 100%
+                            green: 50%
+                            blue: 0%
+                      else:
+                        - light.turn_on:
+                            id: status_led
+                            red: 0%
+                            green: 100%
+                            blue: 0%
+
+  # --- Temperature Compensation for EZO Circuits (every 60s) ---
+  - interval: 60s
+    then:
+      - lambda: |-
+          if (!isnan(id(water_temp).state)) {
+            // Temperature compensation is handled by EZO circuits automatically
+            // when temperature is sent via the T command
+            // ESPHome's EZO platform handles this if temperature_compensation is configured
+            ESP_LOGD("temp_comp", "Water temp: %.1f°C", id(water_temp).state);
+          }
+
+  # --- Local pH Control (every 5 minutes) ---
+  - interval: 300s
+    then:
+      - lambda: |-
+          if (!id(local_ph_control_enabled)) {
+            ESP_LOGD("ph_control", "Local pH control disabled");
+            return;
+          }
+
+          float ph = id(ezo_ph).state;
+          float target = id(ph_target).state;
+          float tolerance = id(ph_tolerance).state;
+          unsigned long now = millis();
+          unsigned long lockout_ms = id(dose_lockout_minutes).state * 60 * 1000;
+
+          // Check lockout
+          if ((now - id(last_ph_dose_time)) < lockout_ms) {
+            ESP_LOGD("ph_control", "pH dosing locked out for %lu more ms",
+                     lockout_ms - (now - id(last_ph_dose_time)));
+            return;
+          }
+
+          // Check if pH is out of range
+          if (ph < (target - tolerance)) {
+            // pH too low - need pH Up
+            float daily_dosed = id(daily_ph_up_dosed);
+            float daily_limit = id(daily_ph_limit).state;
+
+            if (daily_dosed >= daily_limit) {
+              ESP_LOGW("ph_control", "Daily pH Up limit reached: %.1f mL", daily_dosed);
+              return;
+            }
+
+            ESP_LOGI("ph_control", "pH %.2f below target %.2f - dosing pH Up", ph, target);
+            id(last_ph_dose_time) = now;
+            id(dose_ph_up_action).execute();
+
+          } else if (ph > (target + tolerance)) {
+            // pH too high - need pH Down
+            float daily_dosed = id(daily_ph_down_dosed);
+            float daily_limit = id(daily_ph_limit).state;
+
+            if (daily_dosed >= daily_limit) {
+              ESP_LOGW("ph_control", "Daily pH Down limit reached: %.1f mL", daily_dosed);
+              return;
+            }
+
+            ESP_LOGI("ph_control", "pH %.2f above target %.2f - dosing pH Down", ph, target);
+            id(last_ph_dose_time) = now;
+            id(dose_ph_down_action).execute();
+          }
+
+  # --- Local EC Control (every 10 minutes) ---
+  - interval: 600s
+    then:
+      - lambda: |-
+          if (!id(local_ec_control_enabled)) {
+            ESP_LOGD("ec_control", "Local EC control disabled");
+            return;
+          }
+
+          float ec = id(ezo_ec).state;
+          float target = id(ec_target).state;
+          float tolerance = id(ec_tolerance).state;
+          unsigned long now = millis();
+          unsigned long lockout_ms = id(dose_lockout_minutes).state * 60 * 1000;
+
+          // Check lockout
+          if ((now - id(last_ec_dose_time)) < lockout_ms) {
+            ESP_LOGD("ec_control", "EC dosing locked out");
+            return;
+          }
+
+          // Only dose if EC is low (we don't remove nutrients)
+          if (ec < (target - tolerance)) {
+            float daily_dosed = id(daily_nutrient_dosed);
+            float daily_limit = id(daily_nutrient_limit).state;
+
+            if (daily_dosed >= daily_limit) {
+              ESP_LOGW("ec_control", "Daily nutrient limit reached: %.1f mL", daily_dosed);
+              return;
+            }
+
+            // Also check pH is in acceptable range before dosing nutrients
+            float ph = id(ezo_ph).state;
+            if (ph < 5.5 || ph > 6.5) {
+              ESP_LOGW("ec_control", "pH %.2f out of range - skipping nutrient dose", ph);
+              return;
+            }
+
+            ESP_LOGI("ec_control", "EC %.0f below target %.0f - dosing nutrients", ec, target);
+            id(last_ec_dose_time) = now;
+            id(dose_nutrients_action).execute();
+          }
+
+  # --- ATO Level Check (every 60s) ---
+  - interval: 60s
+    then:
+      - lambda: |-
+          float level = id(water_level_percent).state;
+          float low_threshold = id(ato_low_threshold).state;
+
+          // Check if we need to request ATO
+          if (level < low_threshold && !id(ato_pending) && !id(ato_valve).state) {
+            id(ato_pending) = true;
+            ESP_LOGI("ato", "Water level %.0f%% below threshold %.0f%% - requesting approval",
+                     level, low_threshold);
+          }
+
+  # --- ATO Fill Monitor (every 5s when filling) ---
+  - interval: 5s
+    then:
+      - lambda: |-
+          if (!id(ato_valve).state) return;
+
+          float level = id(water_level_percent).state;
+          float target = id(ato_high_threshold).state;
+          unsigned long now = millis();
+          unsigned long max_fill_ms = id(ato_max_fill_time).state * 1000;
+          unsigned long elapsed = now - id(ato_fill_start_time);
+
+          // Check if we've reached target level
+          if (level >= target) {
+            ESP_LOGI("ato", "Target level %.0f%% reached - stopping fill", level);
+            id(ato_valve).turn_off();
+            id(ato_approved) = false;
+            id(ato_pending) = false;
+            return;
+          }
+
+          // Check timeout
+          if (elapsed > max_fill_ms) {
+            ESP_LOGW("ato", "Fill timeout after %lu ms - stopping", elapsed);
+            id(ato_valve).turn_off();
+            id(ato_approved) = false;
+            id(ato_pending) = false;
+            return;
+          }
+
+          // Check float switch (hardware safety)
+          if (id(float_high).state) {
+            ESP_LOGI("ato", "High float switch triggered - stopping fill");
+            id(ato_valve).turn_off();
+            id(ato_approved) = false;
+            id(ato_pending) = false;
+            return;
+          }
+
+          ESP_LOGD("ato", "Filling... Level: %.0f%%, Elapsed: %lu ms", level, elapsed);
+
+# =============================================================================
+# SCRIPTS (Reusable Actions)
+# =============================================================================
+
+script:
+  # --- Dose pH Up Script ---
+  - id: dose_ph_up_action
+    then:
+      - switch.turn_on: pump_ph_up
+      - delay: !lambda 'return (id(dose_amount).state / ${pump_ph_up_rate}) * 1000;'
+      - switch.turn_off: pump_ph_up
+      - lambda: 'id(daily_ph_up_dosed) += id(dose_amount).state;'
+      - logger.log:
+          format: "Dosed %.1f mL pH Up (daily total: %.1f mL)"
+          args: ['id(dose_amount).state', 'id(daily_ph_up_dosed)']
+
+  # --- Dose pH Down Script ---
+  - id: dose_ph_down_action
+    then:
+      - switch.turn_on: pump_ph_down
+      - delay: !lambda 'return (id(dose_amount).state / ${pump_ph_down_rate}) * 1000;'
+      - switch.turn_off: pump_ph_down
+      - lambda: 'id(daily_ph_down_dosed) += id(dose_amount).state;'
+      - logger.log:
+          format: "Dosed %.1f mL pH Down (daily total: %.1f mL)"
+          args: ['id(dose_amount).state', 'id(daily_ph_down_dosed)']
+
+  # --- Dose Nutrients Script ---
+  - id: dose_nutrients_action
+    then:
+      - switch.turn_on: pump_nutrient_a
+      - delay: !lambda 'return (id(dose_amount).state / ${pump_nutrient_a_rate}) * 1000;'
+      - switch.turn_off: pump_nutrient_a
+      - delay: 2s
+      - switch.turn_on: pump_nutrient_b
+      - delay: !lambda 'return (id(dose_amount).state / ${pump_nutrient_b_rate}) * 1000;'
+      - switch.turn_off: pump_nutrient_b
+      - lambda: 'id(daily_nutrient_dosed) += (id(dose_amount).state * 2);'
+      - logger.log:
+          format: "Dosed %.1f mL each nutrient (daily total: %.1f mL)"
+          args: ['id(dose_amount).state', 'id(daily_nutrient_dosed)']
+
+  # --- Start ATO Fill Script ---
+  - id: start_ato_fill
+    then:
+      - lambda: |-
+          if (id(float_high).state) {
+            ESP_LOGW("ato", "Cannot start fill - high level switch active");
+            id(ato_approved) = false;
+            id(ato_pending) = false;
+            return;
+          }
+          id(ato_fill_start_time) = millis();
+          ESP_LOGI("ato", "Starting ATO fill");
+      - switch.turn_on: ato_valve
 
 # =============================================================================
 # BUTTONS
@@ -600,32 +1073,69 @@ button:
     name: "Dose pH Up"
     icon: "mdi:plus-circle"
     on_press:
-      - switch.turn_on: pump_ph_up
-      - delay: !lambda 'return (id(dose_amount).state / ${pump_ph_up_rate}) * 1000;'
-      - switch.turn_off: pump_ph_up
+      - script.execute: dose_ph_up_action
 
   # --- Dose pH Down ---
   - platform: template
     name: "Dose pH Down"
     icon: "mdi:minus-circle"
     on_press:
-      - switch.turn_on: pump_ph_down
-      - delay: !lambda 'return (id(dose_amount).state / ${pump_ph_down_rate}) * 1000;'
-      - switch.turn_off: pump_ph_down
+      - script.execute: dose_ph_down_action
 
   # --- Dose Nutrients ---
   - platform: template
     name: "Dose Nutrients"
     icon: "mdi:flask-plus"
     on_press:
-      # Dose A first, then B with delay
-      - switch.turn_on: pump_nutrient_a
-      - delay: !lambda 'return (id(dose_amount).state / ${pump_nutrient_a_rate}) * 1000;'
-      - switch.turn_off: pump_nutrient_a
-      - delay: 2s
-      - switch.turn_on: pump_nutrient_b
-      - delay: !lambda 'return (id(dose_amount).state / ${pump_nutrient_b_rate}) * 1000;'
-      - switch.turn_off: pump_nutrient_b
+      - script.execute: dose_nutrients_action
+
+  # --- ATO Approve ---
+  - platform: template
+    name: "Approve ATO Fill"
+    icon: "mdi:water-check"
+    on_press:
+      - lambda: |-
+          if (!id(ato_pending)) {
+            ESP_LOGW("ato", "No ATO request pending");
+            return;
+          }
+          ESP_LOGI("ato", "ATO fill approved by user");
+          id(ato_approved) = true;
+          id(ato_pending) = false;
+      - script.execute: start_ato_fill
+
+  # --- ATO Cancel ---
+  - platform: template
+    name: "Cancel ATO Request"
+    icon: "mdi:water-off"
+    on_press:
+      - lambda: |-
+          ESP_LOGI("ato", "ATO request cancelled");
+          id(ato_pending) = false;
+          id(ato_approved) = false;
+      - switch.turn_off: ato_valve
+
+  # --- Stop ATO Fill ---
+  - platform: template
+    name: "Stop ATO Fill"
+    icon: "mdi:stop-circle"
+    on_press:
+      - switch.turn_off: ato_valve
+      - lambda: |-
+          id(ato_approved) = false;
+          id(ato_pending) = false;
+          ESP_LOGI("ato", "ATO fill stopped manually");
+
+  # --- Reset Daily Counters ---
+  - platform: template
+    name: "Reset Daily Counters"
+    icon: "mdi:counter"
+    on_press:
+      - lambda: |-
+          id(daily_ph_up_dosed) = 0;
+          id(daily_ph_down_dosed) = 0;
+          id(daily_nutrient_dosed) = 0;
+          ESP_LOGI("dosing", "Daily dose counters reset manually");
 
   # --- Factory Reset ---
   - platform: factory_reset

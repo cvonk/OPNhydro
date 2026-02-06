@@ -2,15 +2,16 @@
 
 ## Summary
 
-| Category | Budget Option | Recommended Option |
-|----------|---------------|-------------------|
-| Microcontroller | $8 | $8 |
-| Power Management | $12 | $15 |
-| Sensors | $80 | $180 |
-| Actuators | $45 | $65 |
-| Connectors & PCB | $25 | $40 |
-| Enclosure | $15 | $25 |
-| **Total** | **~$185** | **~$333** |
+| Category | Cost |
+|----------|------|
+| Microcontroller | $8 |
+| Power Management | $15 |
+| Water Quality Sensors (Atlas Scientific) | $285 |
+| Environmental Sensors | $20 |
+| Actuators (pumps + ATO valve) | $75 |
+| Connectors & PCB | $40 |
+| Enclosure | $25 |
+| **Total** | **~$468** |
 
 ---
 
@@ -18,9 +19,9 @@
 
 | Qty | Part | Description | Budget Source | Price |
 |-----|------|-------------|---------------|-------|
-| 1 | ESP32-C6-WROOM-1-N8 | WiFi 6 + BLE 5 module, 8MB flash | LCSC, Digikey | $4-8 |
+| 1 | ESP32-C6-DevKitC-1-N8 | WiFi 6 + BLE 5 devkit, 8MB flash, USB-C | Digikey, Mouser | $10-15 |
 
-Alternative: ESP32-C6-DevKitC-1 ($10-15) for prototyping without custom PCB.
+Note: Using DevKit instead of bare module - includes USB-C, antenna, and boot/reset buttons. Mounts via 2×20 pin headers.
 
 ---
 
@@ -28,40 +29,34 @@ Alternative: ESP32-C6-DevKitC-1 ($10-15) for prototyping without custom PCB.
 
 | Qty | Part | Description | Notes | Price |
 |-----|------|-------------|-------|-------|
-| 1 | XL4015 module | 24V→12V buck, 5A | Dosing pumps | $3 |
-| 1 | MP1584EN module | 24V→5V buck, 3A | Logic power | $2 |
+| 1 | MP1584EN module | 12V→5V buck, 3A | Logic power | $2 |
 | 1 | AMS1117-3.3 | 5V→3.3V LDO, 1A | ESP32 power | $0.50 |
 | 1 | B5819W | Schottky diode, reverse protection | Or SS54 | $0.20 |
 | 1 | SI2301 | P-MOSFET, reverse polarity | SOT-23 | $0.30 |
-| 2 | 100µF/35V | Electrolytic capacitor | Input/output | $0.50 |
+| 2 | 100µF/25V | Electrolytic capacitor | Input/output | $0.50 |
 | 4 | 10µF/25V | Ceramic capacitor | Decoupling | $0.40 |
-| 1 | 5.5×2.1mm jack | Barrel connector, panel mount | 24V input | $1 |
-| 1 | PTC fuse 2A | Resettable fuse | Protection | $0.50 |
+| 1 | PTC fuse 5A | Resettable fuse | Protection | $0.50 |
 
-**Subtotal: ~$8-15**
+**Subtotal: ~$5-10**
 
 ---
 
 ## Sensors
 
-### Water Quality (Recommended: EZO-compatible I2C circuits)
+### Water Quality (Atlas Scientific - Selected)
 
 | Qty | Part | Description | Source | Price |
 |-----|------|-------------|--------|-------|
 | 1 | Atlas Scientific EZO-pH | pH circuit, I2C | Atlas Scientific | $42 |
 | 1 | Atlas Scientific EZO-EC | Conductivity circuit, I2C | Atlas Scientific | $42 |
-| 1 | Atlas Scientific EZO-DO | Dissolved oxygen circuit | Atlas Scientific | $48 |
-| 1 | pH Probe | Lab grade, BNC | Atlas / Amazon | $20-80 |
-| 1 | EC Probe K=1.0 | Conductivity probe | Atlas / Amazon | $15-60 |
-| 1 | DO Probe | Galvanic DO probe | Atlas Scientific | $108 |
+| 1 | Atlas Scientific EZO-DO | Dissolved oxygen circuit, I2C | Atlas Scientific | $48 |
+| 1 | Atlas pH Probe | Lab grade, BNC, ±0.1 pH | Atlas Scientific | $65 |
+| 1 | Atlas EC Probe K=1.0 | Conductivity probe, ±2% | Atlas Scientific | $45 |
+| 1 | Atlas DO Probe | Galvanic DO probe | Atlas Scientific | $108 |
 
-**Budget Alternative: DFRobot or Keyestudio**
+**Water Quality Subtotal: ~$350**
 
-| Qty | Part | Description | Source | Price |
-|-----|------|-------------|--------|-------|
-| 1 | DFRobot SEN0161-V2 | Gravity pH sensor kit | DFRobot | $30 |
-| 1 | DFRobot DFR0300 | Gravity EC sensor kit | DFRobot | $35 |
-| 1 | Generic DO kit | Analog DO sensor | AliExpress | $25 |
+Note: Atlas Scientific probes include calibration data and have better longevity than budget alternatives.
 
 ### Environmental
 
@@ -83,36 +78,46 @@ Alternative: ESP32-C6-DevKitC-1 ($10-15) for prototyping without custom PCB.
 
 | Qty | Part | Description | Source | Price |
 |-----|------|-------------|--------|-------|
-| 1 | 24V DC pump | Brushless, 800L/H min | Amazon/AliExpress | $15-25 |
+| 1 | 12V DC pump | Brushless, 800L/H min | Amazon/AliExpress | $15 |
 
 Recommended models:
-- Jebao DCP series (controllable)
-- Generic brushless 24V submersible
+- Generic brushless 12V submersible
+- AUBIG DC40E-1250 (12V, 500L/H, 5m head)
 
 ### Dosing Pumps
 
 | Qty | Part | Description | Source | Price |
 |-----|------|-------------|--------|-------|
-| 4 | Peristaltic pump 12V | ~100mL/min, 3mm tubing | AliExpress | $6-12 ea |
+| 4 | Peristaltic pump 12V | ~100mL/min, 3mm tubing | AliExpress | $12 ea |
 
 Recommended:
 - Kamoer KFS (quality, $20 ea)
 - Generic 12V peristaltic (budget, $6 ea)
 
-**Actuators Subtotal: $45-65**
+### ATO Solenoid Valve
+
+| Qty | Part | Description | Source | Price |
+|-----|------|-------------|--------|-------|
+| 1 | 12V NC Solenoid Valve | 1/2" normally closed, food safe | Amazon/AliExpress | $8 |
+
+Recommended:
+- US Solid 12V NC solenoid (food grade)
+- Must be NC (normally closed) for fail-safe operation
+
+**Actuators Subtotal: ~$75**
 
 ---
 
-## Pump Driver Components
+## Pump/Valve Driver Components
 
 | Qty | Part | Description | Notes | Price |
 |-----|------|-------------|-------|-------|
-| 5 | IRLZ44N | N-MOSFET, logic level | TO-220 | $0.50 ea |
-| 5 | 10kΩ resistor | Gate pull-down | 0805 | $0.05 ea |
-| 5 | 100Ω resistor | Gate series | 0805 | $0.05 ea |
-| 5 | 1N5819 | Flyback diode | DO-214 | $0.10 ea |
+| 6 | IRLZ44N | N-MOSFET, logic level | TO-220 (1 main + 4 dosing + 1 ATO) | $0.50 ea |
+| 6 | 10kΩ resistor | Gate pull-down | 0805 | $0.05 ea |
+| 6 | 100Ω resistor | Gate series | 0805 | $0.05 ea |
+| 6 | 1N5819 | Flyback diode | DO-214 | $0.10 ea |
 
-**Subtotal: ~$5**
+**Subtotal: ~$6**
 
 ---
 
@@ -120,15 +125,16 @@ Recommended:
 
 | Qty | Part | Description | Notes | Price |
 |-----|------|-------------|-------|-------|
-| 5 | Screw terminal 2P | 5.08mm pitch | Pumps | $0.30 ea |
-| 3 | BNC panel mount | For probes | pH/EC/DO | $2 ea |
+| 2 | Female header 1×20 | 2.54mm pitch | DevKit mounting | $0.50 ea |
+| 6 | Pluggable terminal 2P | 3.5mm pitch | Pumps + ATO valve (header + plug) | $0.50 ea |
+| 1 | Pluggable terminal 2P | 3.5mm pitch | 12V power input (header + plug) | $0.50 |
+| 3 | BNC panel mount female | For probes | pH/EC/DO (use included SMA-to-BNC adapters) | $2 ea |
 | 4 | JST-PH 4P | I2C sensors | Qwiic compat | $0.20 ea |
 | 2 | JST-PH 3P | 1-Wire, float | | $0.15 ea |
 | 1 | JST-XH 4P | Ultrasonic | | $0.20 |
-| 1 | USB-C receptacle | Programming | Mid-mount | $0.50 |
 | 1 | 4-pin header | OLED display | 2.54mm | $0.20 |
 
-**Subtotal: ~$10**
+**Subtotal: ~$11**
 
 ---
 
@@ -162,7 +168,7 @@ Recommended:
 | 1 | SSD1306 OLED 0.96" | Local status display | $4 |
 | 1 | WS2812B LED | Status indicator | $0.50 |
 | 1 | Buzzer (passive) | Alarm notification | $0.50 |
-| 1 | 24V 3A power supply | Mean Well or equiv | $15-25 |
+| 1 | 12V 5A power supply | Mean Well or equiv | $10-20 |
 | 4 | Silicone tubing 3mm | Dosing pump tubing, 1m each | $2/m |
 | 1 | Calibration solutions | pH 4, 7, 10 + EC standards | $15-25 |
 
@@ -195,4 +201,4 @@ Recommended:
 
 4. **Tubing**: Use only food-grade silicone for dosing pumps. Cheap tubing degrades with nutrients/acids.
 
-5. **Power Supply**: Don't skimp on the 24V supply. A quality Mean Well supply prevents noise issues.
+5. **Power Supply**: Don't skimp on the 12V supply. A quality Mean Well supply prevents noise issues.

@@ -18,9 +18,9 @@ This document describes the circuit design for the OPNhydroponics controller PCB
 │  ┌─────────────┐    ┌─────────────────────────────────────────────────────┐  │
 │  │   POWER     │    │                    SENSORS                          │  │
 │  │             │    │  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐     │  │
-│  │ 24V ──►12V  │    │  │ EZO-pH │  │ EZO-EC │  │ EZO-DO │  │ BME280 │     │  │
-│  │     ──►5V   │    │  │  I2C   │  │  I2C   │  │  I2C   │  │  I2C   │     │  │
-│  │     ──►3.3V │    │  └───┬────┘  └───┬────┘  └───┬────┘  └───┬────┘     │  │
+│  │ 12V ──►5V   │    │  │ EZO-pH │  │ EZO-EC │  │ EZO-DO │  │ BME280 │     │  │
+│  │     ──►3.3V │    │  │  I2C   │  │  I2C   │  │  I2C   │  │  I2C   │     │  │
+│  │             │    │  └───┬────┘  └───┬────┘  └───┬────┘  └───┬────┘     │  │
 │  └──────┬──────┘    │      │           │           │           │          │  │
 │         │           │      └───────────┴───────────┴───────────┘          │  │
 │         │           │                      │ I2C Bus                      │  │
@@ -37,12 +37,17 @@ This document describes the circuit design for the OPNhydroponics controller PCB
 │                     └──────────────────────┬──────────────────────────────┘  │
 │                                            │                                 │
 │         ┌──────────────────────────────────┼──────────────────────────────┐  │
-│         │                           PUMP DRIVERS                          │  │
+│         │                   PUMP/VALVE DRIVERS (all 12V)                  │  │
 │         │  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐     │  │
-│         │  │ 24V    │  │ 12V    │  │ 12V    │  │ 12V    │  │ 12V    │     │  │
+│         │  │ 12V    │  │ 12V    │  │ 12V    │  │ 12V    │  │ 12V    │     │  │
 │         │  │ Main   │  │ pH Up  │  │ pH Dn  │  │ Nut A  │  │ Nut B  │     │  │
 │         │  │ Pump   │  │ Dose   │  │ Dose   │  │ Dose   │  │ Dose   │     │  │
 │         │  └────────┘  └────────┘  └────────┘  └────────┘  └────────┘     │  │
+│         │                                                  ┌────────┐     │  │
+│         │                                                  │ 12V    │     │  │
+│         │                                                  │ ATO    │     │  │
+│         │                                                  │ Valve  │     │  │
+│         │                                                  └────────┘     │  │
 │         └─────────────────────────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -54,24 +59,24 @@ This document describes the circuit design for the OPNhydroponics controller PCB
 ### 1.1 Input Protection
 
 ```
-24V DC IN ──┬──[PTC 2A]──┬──[TVS 30V]──┬──► 24V_PROTECTED
+12V DC IN ──┬──[PTC 5A]──┬──[TVS 15V]──┬──► 12V_PROTECTED
             │            │             │
            ─┴─          ─┴─           ─┴─
            GND          GND           GND
 
 Component Selection:
-- PTC: RXEF200 (2A hold, 4A trip)
-- TVS: SMBJ28A (28V standoff, 45V clamp)
+- PTC: RXEF500 (5A hold, 10A trip)
+- TVS: SMBJ15A (15V standoff, 24V clamp)
 ```
 
 ### 1.2 Reverse Polarity Protection
 
 ```
-24V_PROTECTED ────┬───────────────────────► 24V_RAIL
+12V_PROTECTED ────┬───────────────────────► 12V_RAIL
                   │
               ┌───┴───┐
               │       │ D (Source tied to input)
-       ┌──────┤ Q1    │──────────────────────────────────► 24V_SAFE
+       ┌──────┤ Q1    │──────────────────────────────────► 12V_SAFE
        │      │ (P-FET)│
        │      └───┬───┘ S
        │          │G
@@ -87,29 +92,19 @@ Q1: SI2301 (P-channel MOSFET, SOT-23)
 - Vds = -20V, Id = -2.8A, Rds(on) = 80mΩ
 ```
 
-### 1.3 Buck Converters
+### 1.3 Buck Converter
 
-**24V to 12V (Dosing Pumps)**
+**12V to 5V (Logic/USB)**
 ```
-24V_SAFE ──► [XL4015 Module] ──► 12V @ 3A
-             Set via feedback resistors
-
-Use pre-made module or:
-- IC: XL4015E1
-- L: 47µH, 5A
-- D: SS54 Schottky
-- Cout: 2×100µF/25V
-- Cin: 100µF/35V
-```
-
-**24V to 5V (Logic/USB)**
-```
-24V_SAFE ──► [MP1584EN Module] ──► 5V @ 2A
+12V_SAFE ──► [MP1584EN Module] ──► 5V @ 2A
 
 Use pre-made module or:
 - IC: MP1584EN
 - L: 10µH, 3A
 - Cout: 2×22µF ceramic
+- Cin: 22µF ceramic
+
+Note: 12V rail powers pumps and ATO valve directly.
 ```
 
 ### 1.4 LDO (3.3V)
@@ -128,17 +123,19 @@ Use pre-made module or:
 
 ## 2. ESP32-C6 Section
 
-### 2.1 Module Connections
+### 2.1 DevKit Pin Headers
+
+The ESP32-C6-DevKitC-1-N8 mounts to the carrier PCB via 2×20 pin headers.
+USB-C, boot/reset buttons, antenna, and power regulation are on the DevKit.
 
 ```
                     ┌─────────────────────────────────────┐
-                    │        ESP32-C6-WROOM-1-N8          │
+                    │        ESP32-C6-DevKitC-1-N8        │
+                    │     (includes USB-C, antenna,       │
+                    │      boot/reset buttons, RGB LED)   │
                     │                                     │
            3.3V ────┤ 3V3                            GND  ├──── GND
-                    │                                     │
-            EN ─────┤ EN (10k pullup + 100nF to GND)      │
-                    │                                     │
-     BOOT BTN ──────┤ GPIO0 (10k pullup)                  │
+            5V ─────┤ 5V (from USB or external)          │
                     │                                     │
        I2C_SDA ─────┤ GPIO1                               │
        I2C_SCL ─────┤ GPIO2                               │
@@ -150,48 +147,30 @@ Use pre-made module or:
                     │                                     │
      PUMP_MAIN ─────┤ GPIO6                               │
       PUMP_PH+ ─────┤ GPIO7                               │
-      PUMP_PH- ─────┤ GPIO8                               │
      PUMP_NUT_A ────┤ GPIO9                               │
      PUMP_NUT_B ────┤ GPIO10                              │
                     │                                     │
     FLOAT_LOW ──────┤ GPIO11                              │
     FLOAT_HIGH ─────┤ GPIO12                              │
                     │                                     │
-      WS2812B ──────┤ GPIO13                              │
+     (reserved) ────┤ GPIO8 (RGB LED on DevKit)           │
                     │                                     │
-           TX ──────┤ GPIO15 (U0TXD)                      │
-           RX ──────┤ GPIO16 (U0RXD)                      │
-                    │                                     │
-        USB_N ──────┤ GPIO18                              │
-        USB_P ──────┤ GPIO19                              │
+     ATO_VALVE ─────┤ GPIO20                              │
+      PUMP_PH- ─────┤ GPIO21                              │
                     │                                     │
                     └─────────────────────────────────────┘
+
+Note: DevKit has onboard RGB LED on GPIO8 - we use external WS2812B on GPIO13
+      for visibility through enclosure. GPIO8 is reserved (do not use).
 ```
 
-### 2.2 USB-C Connector
+### 2.2 Carrier PCB Headers
 
 ```
-                    ┌─────────────────┐
-           VBUS ────┤ A4/B9 (VBUS)    │
-                    │                 │
-           CC1 ─────┤ A5 (CC1)        ├─── 5.1k to GND
-           CC2 ─────┤ B5 (CC2)        ├─── 5.1k to GND
-                    │                 │
-          USB- ─────┤ A6/B6 (D-)      ├─── GPIO18
-          USB+ ─────┤ A7/B7 (D+)      ├─── GPIO19
-                    │                 │
-           GND ─────┤ A1/B12 (GND)    │
-                    └─────────────────┘
+Use 2×20 female headers (2.54mm pitch) on carrier PCB.
+DevKit plugs in from above.
 
-Note: 5.1k resistors on CC1/CC2 identify device as UFP (sink)
-```
-
-### 2.3 Decoupling
-
-```
-Place near ESP32-C6 VDD pins:
-- 4× 100nF ceramic (0402 or 0603)
-- 1× 10µF ceramic (0805)
+Header spacing: 22.86mm (900 mils) between rows
 ```
 
 ---
@@ -232,7 +211,7 @@ Each EZO circuit:
 │   GND ◄──── GND (isolated)           │
 │   SDA ◄───► I2C SDA                  │
 │   SCL ◄──── I2C SCL                  │
-│   PRB ◄──── BNC Probe connector      │
+│   PRB ◄──── BNC panel-mount (probe uses SMA-to-BNC adapter) │
 │                                      │
 └──────────────────────────────────────┘
 
@@ -328,10 +307,12 @@ Repeat for GPIO12 (second float switch)
 
 ## 7. Pump Driver Circuits
 
-### 7.1 24V Main Pump Driver
+All pumps and the ATO valve use the same 12V rail and identical driver circuits.
+
+### 7.1 12V Main Pump Driver
 
 ```
-                                    24V
+                                    12V
                                      │
                         ┌────────────┤
                         │            │
@@ -369,13 +350,62 @@ D1: SS34 (3A Schottky flyback diode)
 ### 7.2 12V Dosing Pump Drivers (×4)
 
 ```
-Same circuit as main pump but connected to 12V rail.
+Same circuit as main pump, all on 12V rail.
 Use separate MOSFET for each dosing pump.
 
 GPIO7  ──► Pump pH Up
-GPIO8  ──► Pump pH Down
+GPIO21 ──► Pump pH Down
 GPIO9  ──► Pump Nutrient A
 GPIO10 ──► Pump Nutrient B
+```
+
+### 7.3 ATO Solenoid Valve Driver
+
+```
+Same circuit as dosing pumps, connected to 12V rail.
+Uses normally-closed (NC) solenoid valve for fail-safe operation.
+
+GPIO20 ──► ATO Solenoid Valve (12V NC)
+
+                                    12V
+                                     │
+                        ┌────────────┤
+                        │            │
+                       D1         VALVE+
+                    (SS34)          │
+                        │         VALVE
+                        │        (NC)
+               ┌────────┴───────┐   │
+               │     DRAIN      │   │
+        ┌──────┤  Q6            ├───┴── VALVE-
+        │      │  IRLZ44N       │
+        │      │                │
+        │      └───────┬────────┘
+        │           SOURCE
+        │              │
+       R2             ─┴─
+      100Ω            GND
+        │
+        │
+GPIO20 ─┼────────┬─────────────────► Gate Drive
+                 │
+                R1
+               10k
+                 │
+                ─┴─
+                GND
+
+Solenoid Valve Selection:
+- Type: Normally Closed (NC) - fails safe (closed when power off)
+- Voltage: 12V DC
+- Current: 300-500mA typical
+- Connection: 1/2" NPT or hose barb
+- Material: Food-safe (brass or plastic body, EPDM seals)
+
+Safety Notes:
+- NC valve ensures no water flow if controller loses power
+- Float switch (GPIO12) provides hardware backup cutoff
+- Software timeout prevents flooding if level sensor fails
 ```
 
 ---
@@ -453,8 +483,7 @@ Add test points for debugging:
 - TP1: 3.3V
 - TP2: 5V
 - TP3: 12V
-- TP4: 24V
-- TP5: GND
-- TP6: I2C SDA
-- TP7: I2C SCL
-- TP8: 1-Wire
+- TP4: GND
+- TP5: I2C SDA
+- TP6: I2C SCL
+- TP7: 1-Wire

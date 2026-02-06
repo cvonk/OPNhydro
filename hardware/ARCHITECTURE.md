@@ -2,26 +2,26 @@
 
 ## System Overview
 
-ESP32-C6 based NFT hydroponics controller with full sensor suite and dosing pump control, designed for Home Assistant integration via ESPHome.
+ESP32-C6 based NFT hydroponics controller with full sensor suite, dosing pump control, and automatic top-off (ATO) capability. Designed for Home Assistant integration via ESPHome with standalone operation support.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                           24V DC INPUT                                   │
+│                           12V DC INPUT                                   │
 │                               │                                          │
-│                    ┌──────────┼──────────┐                               │
-│                    │          │          │                               │
-│                    ▼          ▼          ▼                               │
-│              ┌─────────┐ ┌─────────┐ ┌─────────┐                         │
-│              │ 24V Bus │ │ 12V DC  │ │ 5V DC   │                         │
-│              │ (Pump)  │ │ (Dosing)│ │ (Logic) │                         │
-│              └────┬────┘ └────┬────┘ └────┬────┘                         │
-│                   │           │           │                              │
-│                   ▼           ▼           ▼                              │
-│            ┌──────────┐ ┌──────────┐ ┌──────────┐                        │
-│            │Main Pump │ │ Dosing   │ │ 3.3V LDO │                        │
-│            │ MOSFET   │ │ MOSFETs  │ │          │                        │
-│            └──────────┘ └──────────┘ └────┬─────┘                        │
-│                                           │                              │
+│                    ┌──────────┴──────────┐                               │
+│                    │                     │                               │
+│                    ▼                     ▼                               │
+│              ┌─────────┐           ┌─────────┐                           │
+│              │ 12V Bus │           │ 5V DC   │                           │
+│              │ (Pumps) │           │ (Logic) │                           │
+│              └────┬────┘           └────┬────┘                           │
+│                   │                     │                                │
+│         ┌─────────┼─────────┐           ▼                                │
+│         ▼         ▼         ▼     ┌──────────┐                           │
+│   ┌──────────┐ ┌──────────┐ ┌─────┤ 3.3V LDO │                           │
+│   │Main Pump │ │ Dosing   │ │ ATO └────┬─────┘                           │
+│   │ MOSFET   │ │ MOSFETs  │ │Valve     │                                 │
+│   └──────────┘ └──────────┘ └─────┘    │                                 │
 │                                    ┌──────┴──────┐                       │
 │                                    │  ESP32-C6   │                       │
 │                                    │             │                       │
@@ -86,47 +86,64 @@ Specification:
 ### 3. ESP32-C6 Module Selection
 
 Options:
-- **ESP32-C6-WROOM-1** - Standard module, good availability
-- **ESP32-C6-MINI-1** - Smaller footprint
+- **ESP32-C6-WROOM-1** - Bare module, requires antenna trace design and USB circuit
+- **ESP32-C6-DevKitC-1** - Development board with USB-C, buttons, and antenna
 
-Selected: **ESP32-C6-WROOM-1-N8** (8MB flash) for easier hand soldering and good flash size.
+Selected: **ESP32-C6-DevKitC-1-N8** (8MB flash) - Includes USB-C, PCB antenna, boot/reset buttons, and RGB LED. Mounts to carrier PCB via pin headers.
+
+### 4. Automatic Top-Off (ATO) System
+
+Uses existing ultrasonic sensor for level detection with a normally-closed solenoid valve:
+- **Detection**: Ultrasonic sensor monitors water level continuously
+- **Valve type**: 12V NC (normally closed) solenoid - fails safe (closed)
+- **Safety**: Float switch provides hardware backup cutoff
+- **User confirmation**: System requests approval via Home Assistant before filling
+- **Timeout**: Maximum fill time prevents overflow if sensor fails
+
+### 5. Standalone Operation
+
+The controller operates independently when Home Assistant is unavailable:
+- Local pH control: Doses pH up/down based on setpoints stored on device
+- Local EC control: Doses nutrients when EC drops below threshold
+- Safety interlocks: Float switch protection always active
+- ATO: Requires HA for user confirmation (manual override via physical button possible)
+- Data logging: Buffers readings until HA reconnects
 
 ## Pin Assignment
 
 | GPIO | Function | Notes |
 |------|----------|-------|
-| 0 | BOOT | Button to GND |
+| 0 | BOOT | On DevKit (directly wire button to GND) |
 | 1 | I2C SDA | Sensors, display |
 | 2 | I2C SCL | Sensors, display |
 | 3 | 1-Wire | DS18B20 temp probes |
 | 4 | Ultrasonic TRIG | Water level |
 | 5 | Ultrasonic ECHO | Water level |
-| 6 | Main Pump PWM | 24V pump control |
+| 6 | Main Pump | 12V pump control |
 | 7 | Dosing 1 (pH Up) | 12V peristaltic |
-| 8 | Dosing 2 (pH Down) | 12V peristaltic |
+| 8 | (DevKit RGB LED) | Reserved - do not use |
 | 9 | Dosing 3 (Nutrient A) | 12V peristaltic |
 | 10 | Dosing 4 (Nutrient B) | 12V peristaltic |
 | 11 | Float Switch 1 | Low level alarm |
 | 12 | Float Switch 2 | High level (optional) |
-| 13 | Status LED | WS2812B RGB |
-| 15 | TX (UART) | Debug/programming |
-| 16 | RX (UART) | Debug/programming |
-| 18 | USB D- | Native USB |
-| 19 | USB D+ | Native USB |
-| 20 | Probe Power Enable | Isolator control |
-| 21 | Spare GPIO | Future expansion |
+| 13 | Status LED | WS2812B RGB (external) |
+| 15 | TX (UART) | Debug (directly wire if needed) |
+| 16 | RX (UART) | Debug (directly wire if needed) |
+| 18 | USB D- | On DevKit |
+| 19 | USB D+ | On DevKit |
+| 20 | ATO Solenoid Valve | 12V NC solenoid for top-off |
+| 21 | Dosing 2 (pH Down) | 12V peristaltic (moved from GPIO8) |
 | 22 | Spare GPIO | Future expansion |
 | 23 | Spare GPIO | Future expansion |
 
 ## Power Architecture
 
 ```
-24V DC Input (2A min)
+12V DC Input (5A min)
     │
-    ├──► 24V Rail ──► Main Pump MOSFET (IRLZ44N or similar)
-    │
-    ├──► XL4015 Buck ──► 12V @ 3A ──► Dosing Pump MOSFETs
-    │                                  (4x IRLZ44N)
+    ├──► 12V Rail ──┬──► Main Pump MOSFET (IRLZ44N)
+    │               ├──► Dosing Pump MOSFETs (4x IRLZ44N)
+    │               └──► ATO Solenoid Valve MOSFET
     │
     └──► MP1584 Buck ──► 5V @ 2A ──► USB/Sensors
                               │
@@ -152,10 +169,10 @@ Selected: **ESP32-C6-WROOM-1-N8** (8MB flash) for easier hand soldering and good
 | WS2812B LED | 5V | 20mA | 60mA |
 | **3.3V Total** | | ~150mA | ~550mA |
 | **5V Total** | | ~25mA | ~80mA |
+| Main Pump | 12V | 500mA | 1.5A |
 | Dosing Pump (each) | 12V | 0 (idle) | 300mA |
-| **12V Total** | | 0 | 1.2A |
-| Main Pump | 24V | 500mA | 1.5A |
-| **24V Total** | | 500mA | 1.5A |
+| ATO Solenoid Valve | 12V | 0 (idle) | 500mA |
+| **12V Total** | | 500mA | 3.2A |
 
 ## Sensor Specifications
 
@@ -216,10 +233,11 @@ Selected: **ESP32-C6-WROOM-1-N8** (8MB flash) for easier hand soldering and good
 ### Connector Selection
 | Function | Connector Type |
 |----------|----------------|
-| 24V Power | 5.5×2.1mm barrel or screw terminal |
-| Main Pump | 2-pin screw terminal (5.08mm) |
-| Dosing Pumps | 4×2-pin JST-XH or screw terminal |
-| pH/EC/DO Probes | BNC female (panel mount) or SMA |
+| 12V Power | 2-pin pluggable screw terminal (3.5mm) |
+| Main Pump | 2-pin pluggable screw terminal (3.5mm) |
+| Dosing Pumps | 4×2-pin pluggable screw terminal (3.5mm) |
+| ATO Solenoid | 2-pin pluggable screw terminal (3.5mm) |
+| pH/EC/DO Probes | BNC female (panel mount) - use included SMA-to-BNC adapters |
 | I2C Sensors | 4-pin JST-PH (Qwiic compatible) |
 | 1-Wire | 3-pin JST-PH |
 | Float Switches | 2-pin JST-XH |
@@ -244,5 +262,5 @@ Selected: **ESP32-C6-WROOM-1-N8** (8MB flash) for easier hand soldering and good
 
 Recommended: IP65 rated ABS enclosure, ~150×100×70mm
 - Cable glands for all wiring
-- Panel-mount BNC connectors for probes
+- Panel-mount BNC connectors for pH/EC/DO probes (3×)
 - Optional: Clear lid for status LED visibility

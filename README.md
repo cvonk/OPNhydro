@@ -1,143 +1,192 @@
-# ESP32-C6 Hydroponics Controller
+# OPNhydro - ESP32-C6 Hydroponics Controller
 
-A fully autonomous, data-rich hydroponics automation system with precision control and remote monitoring.
+A fully autonomous, data-rich hydroponics automation system with precision control, automatic top-off, and remote monitoring via Home Assistant.
 
-## Project overview
+## Features
 
-Build a custom ESP32-C6-based controller for hydroponics/aquaponics that monitors water quality and environment, automatically doses nutrients and adjusts pH, logs everything to Home Assistant, and provides rich dashboards.
+- **Full Water Quality Monitoring**: pH, EC/TDS, dissolved oxygen, temperature
+- **Environmental Monitoring**: Air temp/humidity, light intensity (lux/PPFD), VPD
+- **Automatic Dosing**: pH up/down, two-part nutrients (A/B)
+- **Automatic Top-Off (ATO)**: Ultrasonic level sensing with user-approved filling
+- **Standalone Operation**: Local automation continues if Home Assistant is offline
+- **Safety Features**: Float switch interlocks, dosing limits, timeout protection
 
-* Domain: Hydroponics/Aquaponics
-* Scope: Go big (custom PCB)
-* Goals: Autonomous + Data + Precision + Remote
-* Available parts: Environmental sensors (BME280, etc.), pumps/solenoids
-* Infrastructure: Home Assistant and Google Home already running, both supporting Matter/Thread
+## Project Structure
 
+```
+OPNhydroponics/
+├── esphome/                    # ESPHome firmware configuration
+│   ├── hydroponics-controller.yaml
+│   ├── secrets.yaml.example
+│   └── home-assistant-automations.yaml
+├── hardware/
+│   ├── ARCHITECTURE.md         # System design and pin assignments
+│   ├── BOM.md                  # Bill of materials with pricing
+│   ├── SCHEMATIC_DESIGN.md     # Circuit design guide
+│   └── kicad/                  # KiCad PCB project
+│       ├── hydroponics-controller.kicad_pro
+│       └── README.md
+├── docs/                       # Additional documentation
+├── firmware/                   # Custom ESPHome components (if needed)
+└── README.md
+```
 
-## Idea
+## Hardware Overview
 
-Category	        | Selection
-------------------|-----------
-System	          | Nutrient Film Technique (NFT), 20-60 plants
-Integration       | Home Assistant/Wifi via ESPHome first, then add Matter/Thread.
-Analytics         | InfluxDB and Grafana
-Controller        | ESP32-C6 based custom PCB with daughter boards
+| Category | Selection |
+|----------|-----------|
+| System Type | NFT (Nutrient Film Technique), 20-80 plants |
+| Controller | ESP32-C6-DevKitC-1-N8 (WiFi 6, Thread, USB-C) |
+| Sensors | Atlas Scientific EZO (pH, EC, DO) + environmental |
+| Actuators | 1× 12V main pump, 4× 12V dosing pumps, 1× 12V ATO valve |
+| Integration | Home Assistant via ESPHome, standalone capable |
 
+### Sensor Suite
 
-## Bill of Materials
-
-### Sensors (Water Quality)
-
-Purpose               | Interface     | Component     | Description
-----------------------|---------------|---------------|-------------
-pH sensor	            | analog to I2C | ENV-40-pH     | Atlas Scientific lab grade pH probe
-EC sensor             | analog to i2C | ENV-40-EC-K10 | Atlas Scientific conductivity probe K 1.0
-Water temp            | 1-wire        | DS18B20       | waterproof water temperature sensor, 3.3V - 5V 
-Reservoir water level | GPIO          | JSN-SR04T     | waterproof ultrasonic distance sensor, 3.3V - 5V, 20 - 600 cm range
-
-### Sensors (Environment)
-
-Purpose                | Interface     | Component     | Description
------------------------|---------------|---------------|-------------
-Temp/humidity/pressure | I2C           | BME280        | optional Air temp, humidity, pressure
-Light intensity        | I2C           | BH1750        | optional Light intensity (lux)
+| Sensor | Interface | Purpose |
+|--------|-----------|---------|
+| Atlas EZO-pH | I2C | Water pH monitoring |
+| Atlas EZO-EC | I2C | Nutrient concentration (EC/TDS) |
+| Atlas EZO-DO | I2C | Dissolved oxygen |
+| DS18B20 | 1-Wire | Water temperature |
+| HC-SR04 | GPIO | Water level (ultrasonic) |
+| BME280 | I2C | Air temp, humidity, pressure |
+| BH1750 | I2C | Light intensity (lux) |
+| Float switches | GPIO | Safety level detection |
 
 ### Actuators
 
-Purpose               | Interface      | Component        | Description
-----------------------|----------------|------------------|-------------
-pH down               | GPIO PWM/Relay |                  | Peristaltic pump, 12V
-Nutrient A up         | GPIO PWM/Relay |                  | Peristaltic pump, 12V
-Nutrient B up         | GPIO PWM/Relay |                  | Peristaltic pump, 12V
-Water inlet valve     |                | Hunter 3/​4 in.   | Anti-siphon irrigation valve
-Circulation pump      | GPIO Relay     | AUBIG DC40E-1250 | Submersible pump, 12V, 500 l/hr, 5 m head
-Optional air pump     | GPIO Relay     |                  | Air pump 
+| Actuator | Voltage | Control |
+|----------|---------|---------|
+| Main circulation pump | 12V DC | GPIO → MOSFET |
+| pH Up dosing pump | 12V DC | GPIO → MOSFET |
+| pH Down dosing pump | 12V DC | GPIO → MOSFET |
+| Nutrient A dosing pump | 12V DC | GPIO → MOSFET |
+| Nutrient B dosing pump | 12V DC | GPIO → MOSFET |
+| ATO solenoid valve | 12V DC (NC) | GPIO → MOSFET |
 
-### Core Electronics
+## Quick Start
 
-Purpose                 | Component               | Description
-------------------------|-------------------------|-------------
-Main controller         | ESP32-C6-DevKitC-1-N8   | SoC supporting Matter over Thread or WiFi
-pH sensor interface     | EZO-pH                  | Atlas Scientific pH SNA to I2C daughter board
-EC sensor interface     | EZO-EC                  | Atlas Scientific EC SNA to I2C daughter board
-Logic level shifters  	|                         | 3.3V ↔ 5V for sensors
-Power supply            |                         | 12 V, 3 A, 5.5 mm male barrel plug
-MOSFETs                 | IRLZ44N                 | PWM actuator control
-Power input             |                         | panel mount 5.5mm female barrel socket for 12 V power
+### 1. Hardware Setup
 
-### Other
+See [hardware/BOM.md](hardware/BOM.md) for the complete parts list.
 
-Category	        | Selection
-------------------|-----------
-Channels          | 4× e.g. AmHydro finishing channel 52 inch (amhydro.com)
-Valves            | manual valve for each channel, and drain valve for each group
-Seedlings         | e.g. Lettuce seeds, hydroponic performer, pelleted seeds such as Rex (or Nancy, Salanova red oakleaf) (johnnyseeds.com)
-Nutrients         | e.g. AmHydro Lettuce Nutrients  (amhydro.com)
-Growth medium     | e.g. Oasis Horticubes 162CT (LC-1) 5225 (amhydro.com)
-pH down liquid    | e.g. hydroponics pH-down liquid, 1-Gallon (amazon.com)
-Filter            | add filter in return path. e.g. foam gutter filter insert
-Slope             | about 2 degrees (make adjustable)
-Tubing            | various rigid and flexible tubing and adapters
+**Minimum for testing:**
+- ESP32-C6-DevKitC-1-N8 development board
+- Atlas Scientific EZO-pH kit (or DFRobot for budget option)
+- DS18B20 waterproof temperature probe
+- Peristaltic dosing pump (12V)
 
+### 2. ESPHome Configuration
 
-## Software Features
+1. Copy `esphome/secrets.yaml.example` to `esphome/secrets.yaml`
+2. Fill in your WiFi credentials and generate API keys
+3. Update DS18B20 address in the YAML (run I2C scan to find it)
+4. Flash to ESP32-C6:
 
-### User Interface 
+```bash
+cd esphome
+esphome run hydroponics-controller.yaml
+```
 
-* Home Assistant
-* Matter/Thread, for Google Home and Apple Homekit support
+### 3. Home Assistant Integration
 
-### Control Algorithms
+1. The device will auto-discover in Home Assistant
+2. Add the provided automations from `home-assistant-automations.yaml`
+3. Create a dashboard with the exposed entities
 
-1. pH Control - PID controller maintaining target pH (5.5-6.5 typical)
-   * Hysteresis to prevent oscillation
-   * Configurable dosing intervals and max doses
-   * Safety limits (never dose if pH is within acceptable range)
+## Local Automation
 
-2. EC Control - Proportional nutrient dosing
-   * Target EC based on growth stage
-   * Ratio-based A/B dosing
-   * Top-off detection (EC drop = water added, don't dose)
+The controller runs standalone pH and EC control without Home Assistant:
 
-3. Scheduling
-   * Circulation pump intervals
-   * Air pump duty cycle
+**pH Control (every 5 minutes):**
+- If pH < (target - tolerance): dose pH Up
+- If pH > (target + tolerance): dose pH Down
+- Respects lockout timer (default 5 min between doses)
+- Respects daily limits (default 50 mL/day)
 
-### Data & Analytics
+**EC Control (every 10 minutes):**
+- If EC < (target - tolerance): dose Nutrient A, then B
+- Only doses if pH is within range (5.5-6.5)
+- Respects same lockout and daily limits
 
-* Home Assistant - Real-time entity display, automations, notifications
-* InfluxDB - Long-term time-series storage
-* Grafana - Rich visualization dashboards:
-   * pH/EC trends over time
-   * Nutrient consumption tracking
-   * Environmental correlations
-   * Growth stage timeline
+**ATO (Automatic Top-Off):**
+- Monitors water level via ultrasonic sensor
+- When level drops below threshold (default 70%), requests approval
+- User approves via Home Assistant notification or dashboard
+- Fills until target level (95%) or timeout
 
-### Autonomous Features
+## Safety Features
 
-* Auto-calibration reminders (pH probe drift)
-* Reservoir refill alerts
-* Anomaly detection (sudden pH/EC swings, water leaks)
-* Nutrient depletion estimates
-* "Vacation mode" - conservative dosing
+1. **Float Switch Interlocks**: Main pump stops if low level detected
+2. **ATO Overflow Protection**: High float switch stops fill immediately
+3. **Dosing Lockout**: Minimum time between doses prevents overdosing
+4. **Daily Limits**: Maximum mL per day for each chemical
+5. **Timeout Protection**: ATO fill times out after configurable period
+6. **Fail-Safe Valve**: NC (normally closed) solenoid prevents flooding on power loss
 
+## PCB Design
 
-## Custom PCB Design
+The custom PCB is designed for JLCPCB fabrication:
 
-### Features
+- **Size**: 100mm × 80mm
+- **Layers**: 2-layer
+- **Features**: Reverse polarity protection, TVS diodes, proper isolation
 
-* ESP32-C6-DevKitC-1-N8 module footprint (has USB C for programming)
-* EZO-pH module footprint for Atlas Scientific pH SNA to I2C daughter board
-* EZO-EC module footprint for Atlas Scientific EC SNA to I2C daughter board
-* JSN-SR04T module footprint for Ultrasonic sensor
-* Isolated analog input section (to reduce noise)
-* SNA connectors for pH/EC probes
-* Screw terminals for pump connections
-* Fixed terminal block for other inputs, e.g. Phoenix-Contact 1862437
-* Status LEDs for each channel
-* Optional: RS-485 for expansion
+See [hardware/kicad/README.md](hardware/kicad/README.md) for design files and manufacturing instructions.
 
-### Stackup
+## Configuration Reference
 
-* 2-layer board sufficient
-* Ground plane under analog section
-* Star grounding for analog/digital separation
+### Setpoints (adjustable via Home Assistant)
+
+| Parameter | Default | Range | Description |
+|-----------|---------|-------|-------------|
+| pH Target | 6.0 | 5.0-7.5 | Target pH value |
+| pH Tolerance | 0.3 | 0.1-1.0 | Deadband before dosing |
+| EC Target | 1500 µS/cm | 500-3000 | Target conductivity |
+| EC Tolerance | 200 µS/cm | 50-500 | Deadband before dosing |
+| Dose Amount | 2.0 mL | 0.5-20 | Per-dose volume |
+| Lockout Time | 5 min | 1-30 | Min time between doses |
+| Daily pH Limit | 50 mL | 10-200 | Max pH adjustment per day |
+| Daily Nutrient Limit | 100 mL | 10-500 | Max nutrients per day |
+| ATO Low Threshold | 70% | 50-90 | Level to trigger ATO request |
+| ATO High Target | 95% | 80-100 | Level to stop filling |
+| ATO Max Fill Time | 180s | 30-600 | Timeout for safety |
+
+### Pin Assignment
+
+See [hardware/ARCHITECTURE.md](hardware/ARCHITECTURE.md) for complete GPIO mapping.
+
+## Cost Estimate
+
+| Category | Cost |
+|----------|------|
+| Microcontroller | $8 |
+| Power Management | $15 |
+| Water Quality Sensors (Atlas) | $350 |
+| Environmental Sensors | $20 |
+| Actuators | $75 |
+| PCB + Connectors | $40 |
+| Enclosure | $25 |
+| **Total** | **~$530** |
+
+Budget option with DFRobot sensors: ~$280
+
+## Contributing
+
+This is an open project. Contributions welcome:
+
+- Bug reports and feature requests via Issues
+- PCB improvements and alternative designs
+- ESPHome component enhancements
+- Documentation improvements
+
+## License
+
+See [LICENSE](LICENSE) file.
+
+## Acknowledgments
+
+- [ESPHome](https://esphome.io/) for the excellent ESP32 framework
+- [Atlas Scientific](https://atlas-scientific.com/) for quality sensor documentation
+- [Home Assistant](https://www.home-assistant.io/) for the automation platform
