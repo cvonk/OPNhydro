@@ -1,0 +1,215 @@
+# Home Assistant Automations for Hydroponics Controller
+# Add these to your Home Assistant automations.yaml or create via UI
+
+# =============================================================================
+# pH AUTO-DOSING
+# =============================================================================
+
+# pH Too Low - Dose pH Up
+- id: hydroponics_ph_up
+  alias: "Hydroponics: pH Auto-Dose Up"
+  description: "Automatically dose pH Up when pH drops below target"
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.hydroponics_controller_ph
+      below: input_number.hydroponics_ph_target
+      for:
+        minutes: 5
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.hydroponics_controller_ph
+      below: 5.5  # Safety minimum
+    - condition: state
+      entity_id: switch.hydroponics_controller_main_pump
+      state: "on"
+  action:
+    - service: button.press
+      target:
+        entity_id: button.hydroponics_controller_dose_ph_up
+    - delay:
+        minutes: 10  # Wait for mixing before next dose
+  max_exceeded: silent
+
+# pH Too High - Dose pH Down
+- id: hydroponics_ph_down
+  alias: "Hydroponics: pH Auto-Dose Down"
+  description: "Automatically dose pH Down when pH rises above target"
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.hydroponics_controller_ph
+      above: input_number.hydroponics_ph_target
+      for:
+        minutes: 5
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.hydroponics_controller_ph
+      above: 7.0  # Safety maximum
+    - condition: state
+      entity_id: switch.hydroponics_controller_main_pump
+      state: "on"
+  action:
+    - service: button.press
+      target:
+        entity_id: button.hydroponics_controller_dose_ph_down
+    - delay:
+        minutes: 10
+  max_exceeded: silent
+
+# =============================================================================
+# EC AUTO-DOSING
+# =============================================================================
+
+# EC Too Low - Dose Nutrients
+- id: hydroponics_nutrients
+  alias: "Hydroponics: EC Auto-Dose Nutrients"
+  description: "Automatically dose nutrients when EC drops below target"
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.hydroponics_controller_ec
+      below: input_number.hydroponics_ec_target
+      for:
+        minutes: 10
+  condition:
+    - condition: state
+      entity_id: switch.hydroponics_controller_main_pump
+      state: "on"
+    # Don't dose if pH is out of range
+    - condition: numeric_state
+      entity_id: sensor.hydroponics_controller_ph
+      above: 5.5
+    - condition: numeric_state
+      entity_id: sensor.hydroponics_controller_ph
+      below: 6.5
+  action:
+    - service: button.press
+      target:
+        entity_id: button.hydroponics_controller_dose_nutrients
+    - delay:
+        minutes: 15  # Wait for mixing
+  max_exceeded: silent
+
+# =============================================================================
+# SAFETY AUTOMATIONS
+# =============================================================================
+
+# Low Water Level Alert
+- id: hydroponics_low_water_alert
+  alias: "Hydroponics: Low Water Alert"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hydroponics_controller_water_level_low
+      to: "on"
+  action:
+    - service: notify.notify
+      data:
+        title: "Hydroponics Alert"
+        message: "Low water level detected! Main pump disabled."
+    - service: persistent_notification.create
+      data:
+        title: "Hydroponics: Low Water"
+        message: "Reservoir water level is critically low. Refill required."
+        notification_id: hydroponics_low_water
+
+# Temperature Warning
+- id: hydroponics_temp_warning
+  alias: "Hydroponics: Temperature Warning"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.hydroponics_controller_water_temperature
+      above: 26
+      for:
+        minutes: 5
+  action:
+    - service: notify.notify
+      data:
+        title: "Hydroponics Warning"
+        message: "Water temperature is {{ states('sensor.hydroponics_controller_water_temperature') }}°C - consider cooling!"
+
+# pH Critical Alert
+- id: hydroponics_ph_critical
+  alias: "Hydroponics: pH Critical Alert"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.hydroponics_controller_ph
+      below: 4.5
+    - platform: numeric_state
+      entity_id: sensor.hydroponics_controller_ph
+      above: 8.0
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id: switch.hydroponics_controller_main_pump
+    - service: notify.notify
+      data:
+        title: "Hydroponics CRITICAL"
+        message: "pH is {{ states('sensor.hydroponics_controller_ph') }} - CRITICAL! Pump disabled."
+
+# =============================================================================
+# SCHEDULING
+# =============================================================================
+
+# Morning Startup
+- id: hydroponics_morning_start
+  alias: "Hydroponics: Morning Startup"
+  trigger:
+    - platform: time
+      at: "06:00:00"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.hydroponics_controller_water_level_low
+      state: "off"
+  action:
+    - service: switch.turn_on
+      target:
+        entity_id: switch.hydroponics_controller_main_pump
+
+# Night Shutdown (optional - remove if 24/7 operation)
+# - id: hydroponics_night_shutdown
+#   alias: "Hydroponics: Night Shutdown"
+#   trigger:
+#     - platform: time
+#       at: "22:00:00"
+#   action:
+#     - service: switch.turn_off
+#       target:
+#         entity_id: switch.hydroponics_controller_main_pump
+
+# =============================================================================
+# MAINTENANCE REMINDERS
+# =============================================================================
+
+# Weekly Calibration Reminder
+- id: hydroponics_calibration_reminder
+  alias: "Hydroponics: Weekly Calibration Reminder"
+  trigger:
+    - platform: time
+      at: "10:00:00"
+  condition:
+    - condition: time
+      weekday:
+        - sun
+  action:
+    - service: persistent_notification.create
+      data:
+        title: "Hydroponics Maintenance"
+        message: "Weekly reminder: Check pH and EC probe calibration"
+        notification_id: hydroponics_calibration
+
+# Monthly Probe Cleaning Reminder
+- id: hydroponics_cleaning_reminder
+  alias: "Hydroponics: Monthly Cleaning Reminder"
+  trigger:
+    - platform: time
+      at: "10:00:00"
+  condition:
+    - condition: template
+      value_template: "{{ now().day == 1 }}"
+  action:
+    - service: persistent_notification.create
+      data:
+        title: "Hydroponics Maintenance"
+        message: "Monthly reminder: Clean pH and EC probes, check DO membrane"
+        notification_id: hydroponics_cleaning
