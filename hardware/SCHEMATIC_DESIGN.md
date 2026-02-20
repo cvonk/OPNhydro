@@ -96,13 +96,48 @@ Q1: SI2301 (P-channel MOSFET, SOT-23)
 
 **12V to 5V (Logic/USB)**
 ```
-12V_SAFE ──► [MP1584EN Module] ──► 5V @ 2A
+                        Cbst
+            ┌──────────┤├───────────────────────────────┐
+            │         100nF                             │
+            │                                      BST─┘
+12V_SAFE ───┼──[Cin]──┬──────────────────────────┐
+            │  10µF   │                      VIN─┤2      1├─BST
+            │        ─┴─                         │           │
+            │        GND          EN ────────────┤3  TPS  6 ├─SW──┬──[L1 4.7µH]──┬──► 5V
+            │                    3.3V             │  62933    │     │               │
+            │                    Rrt ─────────────┤4  DRL  5 ├─GND │            [Cout]
+            │                    47k              │           │    ─┴─           2×22µF
+            │                    │               ─┴─         GND   │               │
+            │                   ─┴─              GND               │              ─┴─
+            │                   GND                                │              GND
+            │                                                      │
+            │              ┌──[R_top 200k]────────────────────────┤ 5V
+            │              │                                       │
+            │           FB─┤7                                     ─┴─
+            │              └──[R_bot 38.3k]──► GND               GND
+            │
+            │        Css ──────────────────── SS─┤8
+            │       10nF                          │
+            │                                    ─┴─
+            │                                    GND
+           ─┴─
+           GND
 
-Use pre-made module or:
-- IC: MP1584EN
-- L: 10µH, 3A
-- Cout: 2×22µF ceramic
-- Cin: 22µF ceramic
+Vout = 0.8V × (1 + R_top/R_bot)  →  5V = 0.8 × (1 + 200k/38.3k) ≈ 4.98V ✓
+Fsw  = 57,400 / RT(kΩ) + 10.3    →  RT = 47kΩ → Fsw ≈ 1 MHz
+
+Component Selection:
+- IC:   TPS62933DRLR (SOT583, synchronous buck, 3.8–30V in, 3A, 200kHz–2.2MHz)
+- L1:   4.7µH, 3A, DCR < 50mΩ (e.g. Würth 744043004)
+- Cin:  10µF / 25V ceramic (X5R or X7R)
+- Cout: 2×22µF / 10V ceramic (X5R or X7R)
+- Cbst: 100nF / 10V ceramic (BST to SW)
+- Css:  10nF (soft-start ≈ 1.5ms; minimum 6.8nF, do not float)
+- Rrt:  47kΩ to GND → Fsw = 1MHz
+- R_top: 200kΩ 1%
+- R_bot:  38.3kΩ 1% (E96 series)
+- No external compensation required (internal loop compensation)
+- No external diode required (synchronous rectification)
 
 Note: 12V rail powers pumps and ATO valve directly.
 ```
@@ -135,33 +170,33 @@ USB-C, boot/reset buttons, antenna, and power regulation are on the DevKit.
                     │      boot/reset buttons, RGB LED)   │
                     │                                     │
            3.3V ────┤ 3V3                            GND  ├──── GND
-            5V ─────┤ 5V (from USB or external)          │
+            5V ─────┤ 5V (from USB or external)           │
                     │                                     │
-       I2C_SDA ─────┤ GPIO1                               │
-       I2C_SCL ─────┤ GPIO2                               │
-                    │                                     │
-      ONE_WIRE ─────┤ GPIO3                               │
-                    │                                     │
-       US_TRIG ─────┤ GPIO4                               │
-       US_ECHO ─────┤ GPIO5                               │
-                    │                                     │
-     PUMP_MAIN ─────┤ GPIO6                               │
-      PUMP_PH+ ─────┤ GPIO7                               │
-     PUMP_NUT_A ────┤ GPIO9                               │
-     PUMP_NUT_B ────┤ GPIO10                              │
-                    │                                     │
-    FLOAT_LOW ──────┤ GPIO11                              │
-    FLOAT_HIGH ─────┤ GPIO12                              │
+    FLOAT_LOW ──────┤ GPIO1                               │
+       US_ECHO ─────┤ GPIO2                               │
+   FLOAT_HIGH ──────┤ GPIO3                               │
+       I2C_SDA ─────┤ GPIO4                               │
+       I2C_SCL ─────┤ GPIO5                               │
+      ONE_WIRE ─────┤ GPIO6                               │
+       US_TRIG ─────┤ GPIO7                               │
                     │                                     │
      (reserved) ────┤ GPIO8 (RGB LED on DevKit)           │
+     ATO_VALVE ─────┤ GPIO9  (strapping pin - see note)   │
+     PUMP_MAIN ─────┤ GPIO10                              │
+     PUMP_PH_UP ────┤ GPIO11                              │
                     │                                     │
-     ATO_VALVE ─────┤ GPIO20                              │
-      PUMP_PH- ─────┤ GPIO21                              │
+     PUMP_PH_DN ────┤ GPIO15                              │
+    PUMP_NUT_A ─────┤ GPIO19                              │
+    PUMP_NUT_B ─────┤ GPIO20                              │
                     │                                     │
                     └─────────────────────────────────────┘
 
 Note: DevKit has onboard RGB LED on GPIO8 - we use external WS2812B on GPIO13
       for visibility through enclosure. GPIO8 is reserved (do not use).
+
+WARNING: GPIO9 is a strapping pin (boot mode). For output use (ATO_VALVE), ensure
+         the MOSFET driver circuit has a 10k pullup to 3.3V on the GPIO side so the
+         pin floats high during boot. Do not pull low externally during power-on.
 ```
 
 ### 2.2 Carrier PCB Headers
@@ -419,7 +454,7 @@ Safety Notes:
               100nF
                  │
                ─┴┬─
-               GND│
+              GND│
                  │
                  │    ┌─────────────┐
         GPIO13 ──┴──► │ DIN         │

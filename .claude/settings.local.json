@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python generate_schematic.py:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "WebFetch(domain:www.alldatasheet.com)",
+      "WebFetch(domain:www.ti.com)"
     ]
   }
 }
