@@ -77,21 +77,21 @@ Drain is the protected output. R1 (10kΩ) connects Source to Gate; R2 (100kΩ)
 connects Gate to GND.
 
 ```
+
                               Q1 (P-MOSFET, SOT-23)
                          ┌────────────────────────┐
                          │  S                  D  │
-24V_PROTECTED ───────────┤  (in)          (out)   ├──────────── 24V_SAFE
-                         │           G            │
-                         └───────────┬────────────┘
-                                     │
-                          ┌──────────┘
-                          │  (R1 10kΩ — Source to Gate)
-                     Source (24V_PROTECTED)
-                          │
-                         [R1]
-                         10kΩ
-                          │
-                         Gate ──────[R2 100kΩ]──── GND
+24V_PROTECTED ────┬──────┤  (in)          (out)   ├─────── 24V_SAFE
+                  │      │           G            │
+                 [R1]    └───────────┬────────────┘
+                 10kΩ                │
+                  │                  │
+                  ├──────────────────┘
+                  │
+                 [R2]
+                 100kΩ
+                  │
+                 GND
 ```
 
 **How it works:**
@@ -105,10 +105,7 @@ Reverse polarity (supply plugged backwards → Source at −24V):
 - Vgate = −24V × 100/(10+100) ≈ −21.8V
 - Vgs = −21.8 − (−24) = **+2.2V** → P-ch FET stays OFF; channel does not conduct
 
-⚠ **Component rating note — SI2301 is not suitable for 24V:**
-The SI2301 has Vds(max) = −20V. On reverse polarity the full supply voltage appears across D-S; at 24V this exceeds the rating. Replace with a 30V-rated SOT-23 device.
-
-**Recommended replacement: AO3401A** (P-ch, −30V Vds, 4A, Rds(on) 45mΩ, SOT-23)
+**Recommended: AO3401A** (P-ch, −30V Vds, 4A, Rds(on) 45mΩ, SOT-23)
 - Vgs(th) = −0.45 to −1V; Vgs = −2.2V with the 10kΩ/100kΩ divider → FET fully ON
 - Vgs(max) = ±12V; Vgs = −2.2V at 24V → well within rating
 - Drop-in SOT-23 replacement for SI2301
@@ -116,8 +113,7 @@ The SI2301 has Vds(max) = −20V. On reverse polarity the full supply voltage ap
 ### 1.3 Buck Converter
 
 **Design Rationale — why a switching buck converter for 24V→5V:**
-A linear regulator dropping 24V to 5V would dissipate P = (24−5) × I = 19×I watts as heat. At 500mA load that's 9.5W — requiring a large heatsink and dominating PCB thermal budget. The TPS62933 synchronous buck operates at ~90% efficiency: at 500mA load it
-dissipates only ~(1−0.9) × 24×0.5 = 1.2W.
+A linear regulator dropping 24V to 5V would dissipate P = (24−5) × I = 19×I watts as heat. At 500mA load that's 9.5W — requiring a large heatsink and dominating PCB thermal budget. The TPS62933 synchronous buck operates at ~90% efficiency: at 500mA load it dissipates only ~(1−0.9) × 24×0.5 = 1.2W.
 Noise and ripple from the switcher are acceptable on the 5V rail, which only powers the HC-SR04 and WS2812B; sensitive analog/RF loads run on the 3.3V LDO downstream.
 
 **24V to 5V (Logic/USB)**
