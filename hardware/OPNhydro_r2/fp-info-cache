@@ -1,4 +1,4 @@
-27513112321481097
+27514892312383601
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -6937,7 +6937,7 @@ DIODE SCHOTTKY 40V 3A DIOM7959X265N DO214AB
 2
 2
 Coert-Vonk
-DIODE TVS 15VWM 24.4VC SMBJ15A DO214AA
+DO-214AA
 
 SMBJ15A 
 0
@@ -7045,6 +7045,13 @@ Coert-Vonk
 FERRITE BEAD 330Ω 0805
 
 
+0
+2
+2
+Coert-Vonk
+FUSE 4A 125V 2-SMD
+
+0451004.MRL 
 0
 2
 2
@@ -7294,13 +7301,6 @@ MOSFET N-CH 60V 320MA SOT23
 3
 3
 Coert-Vonk
-MOSFET P-CH 20V 3.1A SI2301CDS SOT23-3
-
-SI2301CDS-T1-GE3 
-0
-3
-3
-Coert-Vonk
 MOTOR HAPTIC 13000RPM 3V 10mm
 
 
@@ -7420,13 +7420,6 @@ RES 10kΩ ±1 18W Yageo 0805
 2
 2
 Coert-Vonk
-RES 16.9kΩ ±1 18W 0805
-
-
-0
-2
-2
-Coert-Vonk
 RES 52.3kΩ 0805
 
 RC0805FR-0752K3L 
@@ -7463,6 +7456,13 @@ RC0805FR-0768RL
 2
 Coert-Vonk
 RES 220mΩ ±1 18W Yageo 0805
+
+
+0
+2
+2
+Coert-Vonk
+RES 0805 YAGEO
 
 
 0
@@ -7559,6 +7559,13 @@ SOIC8
 0
 8
 8
+Coert-Vonk
+SOT23-3
+
+SI2301CDS-T1-GE3 
+0
+3
+3
 Coert-Vonk
 SPDT_100SP1T1B4M2QE
 Switch toggle SPDT 5A 120V{return}{return}https://www.digikey.com/en/products/detail/e-switch/100SP1T1B4M2QE/378824 Device link

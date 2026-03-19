@@ -516,7 +516,8 @@
     "pinned_footprint_libs": [
       "UltraLibrarian",
       "Snapeda",
-      "Coert-Vonk-EAGLE"
+      "Coert-Vonk-EAGLE",
+      "Coert-Vonk"
     ],
     "pinned_symbol_libs": [
       "Coert-Vonk",
@@ -592,6 +593,9 @@
       "12V": [
         "Power"
       ],
+      "24V": [
+        "Power"
+      ],
       "3V3": [
         "Power"
       ],
@@ -608,6 +612,12 @@
         "Power"
       ],
       "Net-(C13-Pad1)": [
+        "Power"
+      ],
+      "Net-(C14-Pad1)": [
+        "Power"
+      ],
+      "Net-(C16-Pad1)": [
         "Power"
       ],
       "Net-(C27-Pad1)": [
@@ -807,6 +817,30 @@
           "group_by": false,
           "label": "#",
           "name": "${ITEM_NUMBER}",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "UPC",
+          "name": "UPC",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "AKPN",
+          "name": "AKPN",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "BLPN",
+          "name": "BLPN",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "ASIN",
+          "name": "ASIN",
           "show": false
         }
       ],
