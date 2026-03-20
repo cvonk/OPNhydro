@@ -590,6 +590,12 @@
     },
     "net_colors": null,
     "netclass_assignments": {
+      "/V_{ISO,EC}": [
+        "Power"
+      ],
+      "/V_{ISO,pH}": [
+        "Power"
+      ],
       "12V": [
         "Power"
       ],
