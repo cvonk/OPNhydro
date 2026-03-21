@@ -238,6 +238,8 @@ $$
   - for 100 nF: use 0402 X7R capacitors within 1 or 2 mm of the pins (for noise)
   - for 10 μF: use 0805 X7R capacitors within 4 mm of the pins (for power stability)
 
+- The signal **`EZO_PDIS`** is intended for powering down sensors between long monitoring intervals. Power to the sensors need to be restored and stabilized well before the measurement is taken.
+
 To visualize the ADM3260 on a 4-layer stack-up, imagine the chip sitting like a bridge over a **moat**. The goal is to ensure that no electrical path exists between the Mainland and the Island except through the silicon of the chip itself. Ensure the Moat is at least 6mm wide for high-voltage safety (creepage).
 
 Below is how the layers should be carved to maintain 2.5kV isolation:

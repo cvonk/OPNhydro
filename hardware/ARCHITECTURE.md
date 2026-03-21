@@ -22,7 +22,7 @@ The system **prioritizes longevity** in harsh, mineral-heavy environments by sel
 - **Level Sensing:** A Benewake TF-Luna LiDAR provides continuous non-contact depth monitoring, while Flowline LH25-1101 mechanical float switches serve as hardware failsafes to protect the pump from running dry or the reservoir overflowing.
 
 The architecture is built around a **24V rail**, which was chosen specifically to accommodate a wide variety of main circulation pumps and solenoid valves. The Mean Well LRS-150-24 PSU was chosen to accommodate voltage-sensitive brushless pumps, stepper dosing pumps and solenoid valve. The system operates within a comfortable margin on this 6.5A supply.
-- 3.3V Logic: ~100 mA (Typ) / **~150 mA (Peak)**, managed by an AMS1117.
+- 3.3V Logic: ~100 mA (Typ) / **~150 mA (Peak)**, managed by an AZ1117-3.3.
 - 5V Peripheral: 240 mA (Typ) / **750 mA (Peak)**, managed by a TPS62933.
 - 24V Actuators: Peak draw of **~4.7A** (Peak) with main pump + two nutrient pumps + reflected logic load, leaving nearly 20% headroom on the supply.
 
@@ -163,18 +163,18 @@ These sensors provide a real-time measurement of the liquid height, which is ide
 
 ##### Technologies Considered
 
-Feature  | LiDAR | Capacitive | Ultrasonic | Hydrostatic
----------|-------|------------|------------|------------
-Contact | Non-contact | ❌Contact | Non-contact | ❌Contact
-Precision | Very High (mm) | High (±0.2%) | Moderate (±0.25") | High (±0.1%)
-Foam/Vapor | Unaffected | Unaffected | Poor | Unaffected
-Blind Spot | 10 cm | 0 cm | ❌20 cm | 0 cm
-Best For | Clean liquids | Viscous/Sticky fluids | General water/Chemicals | Deep tanks/Turbulence
-Example Product | Benewake TF-Luna | uFire Capacitive | JSN-SR04T | DFRobot Gravity
-Interface | I2C/UART | I2C | GPIO | ❌Analog
-Approx. Price | \$25 – \$40 | \$35 – \$50 | \$10 – \$15 | ❌\$60 – \$80
+Feature         | LiDAR            | Capacitive            | Ultrasonic        | Hydrostatic
+----------------|------------------|-----------------------|-------------------|------------
+Contact         | Non-contact      | ❌Contact             | Non-contact       | ❌Contact
+Precision       | Very High (mm)   | High (±0.2%)          | Moderate (±0.25") | High (±0.1%)
+Foam/Vapor      | Unaffected       | Unaffected            | Poor              | Unaffected
+Blind Spot      | 10 cm            | 0 cm                  | ❌20 cm          | 0 cm
+Best For        | Clean liquids    | Viscous/Sticky fluids | General water/Chemicals | Deep tanks/Turbulence
+Example Product | Benewake TF-Luna | uFire Capacitive      | JSN-SR04T         | DFRobot Gravity
+Interface       | I2C/UART         | I2C                   | GPIO              | ❌Analog
+Approx. Price   | \$25 – \$40      | \$35 – \$50           | \$10 – \$15       | ❌\$60 – \$80
 
-**✅Selected: LiDAR** since it stays dry, so it is maintenance-free. The 10 cm head room is acceptable since it only needs to measure the level up to the high alarm float sensor. Capacitance and hydro static were rejected since mineral buildup eventually affects these sensors.  Ultrasonic is rejected, since it needs excessive head room.
+**✅Selected: LiDAR** since it stays dry, so it is maintenance-free. To cope with the 10cm head room, it is suggested to use a rise pipe to ensure the sensor is at least 10cm above the maximum water level Capacitance and hydro static were rejected since mineral buildup eventually affects these sensors.  Ultrasonic is rejected, since it needs excessive head room.
 
 ##### Parts Considered
 
@@ -235,7 +235,7 @@ Voltage         | 24V DC                  | 24V DC            | 9-24V AC/DC
 Body            | Plastic                 | Stainless steel   | Stainless steel
 Default state   | Normally Closed         | Normally Closed   | Normally Closed
 Port            | 1/4" Quick Connect      | 1/4" NPT thread   | 1/4" NPT thread
-Current         | 0.2A                    | 0.6A              | 0.2A (when moving)
+Current         | 200 mA                  | 600 mA            | 200 mA (when moving)
 Max pressure    | 0.8 MPa (116 PSI)       | 0.7 MPa (101 PSI) | 1.0 MPa (145 PSI)
 Design          | Solenoid orifice        | Solenoid orifice  | Ball valve
 Response time   | <1s                     | <1s               | ❌3-5s
@@ -324,7 +324,7 @@ To bring the pH back down to 5.9 points:
 
 The table below includes EMI (Electromagnetic Interference), because the pH and EC probes are essentially high-impedance antennas. If the motor creates significant electrical noise, it can cause the sensor readings to "jitter", but also affect delicate digital parts of the system.
 
-Feature           | Brushed DC    | ✅Stepper       | Brushless DC
+Feature           | Brushed DC    | ✅Stepper      | Brushless DC
 ------------------|---------------|-----------------|-------------
 Flow Control      | ❌Inaccurate  | Highly Precise | Needs Encoder
 Min. Dose         | mL range      | µL range       | mL range
@@ -348,7 +348,7 @@ Part selection for a 1–100 mL/min dosing pump in a hydroponic PID loop require
 Requirements
 - 24V DC motor
 - I2C or UART control
-- Continuous flow rate of ~5ml/min for pH down.
+- Continuous flow rate of ~5mL/min for pH down.
 - Continuous flow rate of ~50 mL/min for Nutrients.
 
 Feature       | [ANKO A200SX](https://ankoproducts.com/products/a200sx) | [Kamoer KAS-SE](https://www.kamoer.cn/us/product/detail.html?id=9005)
@@ -374,7 +374,7 @@ Again, no clear winner.  But if we're willing to accept some limitations on how 
 
 Running the motor at 1A RMS (~60% of its 1.7A rating) will significantly reduce the electromagnetic field strength and current ripples that contribute to EMI. This will also reduce torque, but **40-45% less torque** will still meet the requirements.
 
-**✅Selected: ANKO A200SX** but with the promise to implement Slient Read  (turning off motors to read sensors) and limit the motor current as far as feasible (1A ?).  Since we'll not read pH/EC while pumping, we eliminate the biggest risk of the ANKO (chopper noise). The code simply disables the motor drivers (ENN = HIGH) before requesting data from the ADM3260 islands.
+**✅Selected: ANKO A200SX** but with the promise to implement Silent Read  (turning off motors to read sensors) and limit the motor current as far as feasible (1A ?).  Since we'll not read pH/EC while pumping, we eliminate the biggest risk of the ANKO (chopper noise). The code simply disables the motor drivers (ENN = HIGH) before requesting data from the ADM3260 islands.
 
 **Microstep resolution calculation**
 
@@ -442,7 +442,7 @@ This current should be limited in hardware and firmware:
 
 #### 1.6.2. Nutrient A and B Channels
 
-Two-part nutrients (Part A: calcium/iron; Part B: phosphate/sulphate) are kept separate in concentrate to prevent precipitation, but are always dosed at a 1:1 ratio in normal operation — same STEP pulse count, at the same time.
+"Nutrient A" and "Nutrient B" are Nitrate-based and Phosphate-based concentrates, that need to be kept separate in concentrate to prevent precipitation.  However, they are always dosed at a 1:1 ratio in normal operation — same STEP pulse count, at the same time.
 
 Combining both pump motors on a single TMC2209 was considered and rejected:
 
@@ -550,7 +550,7 @@ Feature      | ✅Isolated I2C (EZO Style)     | TDM / MOSFET Switching
 Philosophy   | Continuous, simultaneous data  | One sensor at a time (sequential)
 Hardware     | I2C and DC/DC isolator         | MOSFETs + ADS1115 (16-bit ADC)
 Ground Loops | Eliminated by physical air gap | Reduced, but still risky
-Complexity   | Low (Plug and Play).           | High (complex wiring & timing)
+Complexity   | Low to moderate                | High (complex wiring & timing)
 Accuracy     | Highest (no interference)      | Moderate (switching noise/latency)
 Cost         | ~$40–$60 for all channels      | ~$15 for all channels
 
@@ -585,7 +585,7 @@ To manage the hydroponic system with high-precision probes and dosing pumps, you
 
 2. **Processing and Memory**
    - Single-Core
-   - Non-Volatile Memory: Essential for storing calibration data for your pH/EC probes and your "steps-per-ml" pump values so they aren't lost during power outages.
+   - Non-Volatile Memory: Essential for storing calibration data for your pH/EC probes and your "steps-per-mL" pump values so they aren't lost during power outages.
 
 3. **Power and Logic Levels**
    - 3.3V Logic: The ESP32 operates at 3.3V.
@@ -630,7 +630,7 @@ The system must manage a peak draw of approximately 4.7A when the 1.2A main pump
 
 2. **Integration of High-Precision Dosing and EMI Mitigation**
 The system uses stepper-based pumps to achieve micro-dosing in the microliter (µL) range, which is necessary because as little as 0.2 mL of acid can shift the pH of 100L of soft water. However, these steppers generate significant Electromagnetic Interference (EMI) through high-speed PWM switching.
-   - *Sensor Power Gating:* The design utilizes the ADM3260 isolation chips, allowing the firmware to shut down isolated DC/DC converters during sensor reads (via EZO_PDIS) to create a "blackout" of switching noise for the sensitive pH and EC probes
+   - *Sensor Power Gating:* The design utilizes the ADM3260 isolation chips, allowing the firmware to shut down isolated DC/DC converters during sensor reads (via STEP_PDIS) to create a "blackout" of switching noise for the sensitive pH and EC probes. Note that these circuits require a "constant charge to remain stable" and to avoid "reading drift". 
 
 3. **Maintaining Signal Integrity via Isolation**
 In a conductive nutrient solution, multiple probes (pH, EC, RTD) can create ground loops, where small currents leak between probes and distort readings.
@@ -684,24 +684,24 @@ Reflected 3.3V Rail   |    100 mA   |     150 mA   | Full load of 3.3V Rail
 The 24V rail powers all high-draw components. Dosing pumps are disabled when idle to save power. Per the dosing sequence, nutrients and pH Down never step simultaneously. **Peak case:** The main circulation pump is running while two Nutrients dosing pumps are active.
 
 
-Component                   |  Typ Current  | Peak Current  | Notes
-----------------------------|--------------:|--------------:|------
-SHYSKY DC40F-2470 Main Pump |    1,200 mA   |    1,200 mA   | Main circulation
-ANKO A200SX (pH Down)       |        0 mA   |    1,530 mA   | EN disabled when idle
-ANKO A200SX (Nutrient A)    |        0 mA   |    1,530 mA   | EN disabled when idle
-ANKO A200SX (Nutrient B)    |        0 mA   |    1,530 mA   | EN disabled when idle
-DIGITEN ATO Solenoid Valve  |        0 mA   |      200 mA   | Energized only during fill
-Reflected 5V Rail           |       56 mA   |      175 mA   | Assuming Buck at 90% efficiency
-**Total 24V Rail**          | **~1,300 mA** | **~4,700 mA** | [^3]
+Component                   | Typ Current  | Peak Current | Notes
+----------------------------|-------------:|-------------:|------
+SHYSKY DC40F-2470 Main Pump |     1.20 A   |     1.20 A   | Main circulation
+ANKO A200SX (pH Down)       |        0 A   |     1.53 A   | EN disabled when idle
+ANKO A200SX (Nutrient A)    |        0 A   |     1.53 A   | EN disabled when idle
+ANKO A200SX (Nutrient B)    |        0 A   |     1.53 A   | EN disabled when idle
+DIGITEN ATO Solenoid Valve  |        0 A   |     0.20 A   | Energized only during fill
+Reflected 5V Rail           |    ~0.06 A   |    ~0.18 A   | Assuming Buck at 90% efficiency
+**Total 24V Rail**          |   **~1.3 A** |   **~4.7 A** | [^3]
 
 
 #### Parts Selected
 
 The main requirements is to use a PSU with built-in soft-start. Generic PSUs may trip overcurrent during capacitor charging + motor startup.  It would also be worth considering an UPS or battery backup for the main pump to prevent plant stress during **power outages**.
 
-Rail | Model                        | Current | Notes
-----:|------------------------------|--------:|------
- 24V | ✅**Mean Well LRS-150-24**     |    6.5A | For comfortable headroom, and soft start
-  5V | ✅**TPS62933 buck converter**  |    3.0A | For efficiency, and soft start
-3.3V | ✅**AMS1117 linear regulator** |    1.0A | For low ripple
+Rail | Model                              | Current | Notes
+----:|------------------------------------|--------:|------
+ 24V | ✅**Mean Well LRS-150-24**        |    6.5A | For comfortable headroom, and soft start
+  5V | ✅**TPS62933 buck converter**     |    3.0A | For efficiency, and soft start
+3.3V | ✅**AZ1117-3.3 linear regulator** |    1.0A | For low ripple
 
