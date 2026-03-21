@@ -228,15 +228,15 @@ $$
   = 3.3\rm{\,V} \cdot \frac{10\,kΩ}{10\,kΩ+16.9\,kΩ} = 1.23\rm{V}
 $$
 
-- **I2C pullups** are required on the isolated side, just like the main side. A "stiff" 2.2kΩ here is better for fighting the noise.
+- **I2C pullups** are required on the isolated side, just like the main side. A "stiff" 2.2kΩ here is better for fighting the noise. Use 1% tolerance resistors. This ensures the I2C rise times are identical on SDA and SCL, preventing timing "jitter" that can occur in high-noise environments.
 
 - **Bypass capacitors** are mandatory for the device to function correctly and provide stable isolated power.
   - 10 μF // 100 nF from V<sub>IN</sub> to GND<sub>P</sub>.
   - 10 μF // 100 nF from V<sub>ISO</sub> to GND<sub>ISO</sub>.
   - 10 μF // 100 nF from VDD<sub>P</sub> to GND<sub>P</sub>.
   - 10 μF // 100 nF from VDD<sub>ISO</sub> to GND<sub>ISO</sub>.
-  - for 100 nF: use 0402 X7R capacitors within 2 mm of the pins
-  - for 10 μF: use 0805 X7R capacitors within 4 mm of the pins
+  - for 100 nF: use 0402 X7R capacitors within 1 or 2 mm of the pins (for noise)
+  - for 10 μF: use 0805 X7R capacitors within 4 mm of the pins (for power stability)
 
 To visualize the ADM3260 on a 4-layer stack-up, imagine the chip sitting like a bridge over a **moat**. The goal is to ensure that no electrical path exists between the Mainland and the Island except through the silicon of the chip itself. Ensure the Moat is at least 6mm wide for high-voltage safety (creepage).
 
@@ -257,7 +257,7 @@ L4 (Bot) | Steppers and glue      | No Copper     | (Keep empty for signal)
 
 Physical distance is your best friend to limit the effect of EMI. Separate the "Noisy" from the "Quiet."
 
-The gold standard for this specific "Multi-EZO" PCB layout is the [Atlas Scientific i4 InterLink](https://files.atlas-scientific.com/i4-interlink-datasheet.pdf) and the [Whitebox Labs T3 schematics](https://github.com/whitebox-labs/tentacle-raspi-oshw).
+The gold standard for this "Multi-EZO" PCB layout is the [Atlas Scientific i4 InterLink](https://files.atlas-scientific.com/i4-interlink-datasheet.pdf) and the [Whitebox Labs T3 schematics](https://github.com/whitebox-labs/tentacle-raspi-oshw).
 
 [^^8]: Analog Devices AN-0971 (Recommendations for Control of Radiated Emissions with isoPower Devices). This document also details how to use PCB "Stitching Capacitance" to keep the board quiet.
 
@@ -285,18 +285,23 @@ The gold standard for this specific "Multi-EZO" PCB layout is the [Atlas Scienti
 
 While we disable the stepper motors to stop external EMI, the ADM3260 itself is a switching power supply. A pi-filter at the V_ISO ensures that the internal noise of the isolation chip does not "leak" into the high-impedance analog front-end of the pH and EC circuits.
 
+>The ADM3260 uses an internal isoPower transformer switching at ~180MHz, it can cause the "Island" to act like a radio antenna.
 
-> The ADM3260 uses an internal isoPower transformer switching at ~180MHz, it can cause the "Island" to act like a radio antenna. On L2 (GND) and L3 (PWR), allow the Mainland copper and the Island copper to overlap by about 1cm but stay on different layers. This creates a "PCB embedded capacitor" that shunts high-frequency noise without breaking DC isolation.
-
-
-- Add footprints for **Ferrite beads** for EMI mitigation (but populate with 0Ω)
+To mitigate the EMI:
+- Add footprints for **Ferrite beads** (but for now: populate with 0Ω)
   - FB from V<sub>ISO</sub> to the EZO mezzanine.
   - FB from GND<sub>ISO</sub> to the EZO mezzanine.
-  - Use 0603-sized beads that have high impedance at 100MHz and low DC resistance.
+  - Use 0603-sized beads that have high impedance at 100MHz and low DC resistance.[^BLM18]
+  - The adding ferrite beads makes creates a π-filter to futher limit EMI.
+      ```
+        V_ISO ─────┬───────┬──►── [FB]─────┬─────► VCC_EZO
+                   │       │               │
+                 [10uF]  [100nF]       [EZO Cap]
+                   │       │               │
+        GND_ISO ───+───────+───────────────+─────
+      ```
 
-- Use the **"Stitching Capacitance" trick**: Overlap the isolated ground plane and the non-isolated ground plane on internal layers (with a specific safety gap, usually ~0.4mm to 1mm depending on your isolation voltage requirements). This creates a low-impedance path for high-frequency common-mode noise to return to its source, which is much more effective than beads for the ADM3260’s isoPower switching noise.
-
-> A simple method of achieving a good stitching capacitance is to extend GND<sub>P</sub> and GND<sub>ISO</sub> into the moat. The capacitive coupling of the structure is calculated with the following basic relationships for parallel plate capacitors:[^A-0971]
+- Use the **"Stitching Capacitance" trick**: Extend GND<sub>P</sub> and GND<sub>ISO</sub> on seperate inner layers into the moat. The capacitive coupling of the structure is calculated with the following basic relationships for parallel plate capacitors:[^A-0971]
 $$
     \begin{align}
       C  &= \frac{A\varepsilon}{d} \rm{\ and\ } \varepsilon=\varepsilon_0\times\varepsilon_r  \\
@@ -309,64 +314,16 @@ $$
     \end{align}
 $$
 
+[^BLM18]: Murata EMI Guide: Recommends the BLM18 series ferrite beads for suppressing high-frequency noise in isolated DC/DC converters.
 [^A-0971]: [A-0971](https://www.analog.com/en/resources/app-notes/an-0971.html)
 
-
-
-
-The Typical Applcation Diagram in Figure 20 of the [ADM3260 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf):
-> The power supply section of the ADM3260 uses a 125 MHz oscillator frequency to efficiently pass power through its chip-scale transformers. Choose bypass capacitors carefully because they must perform more than one function. Noise suppression requires a low inductance, high frequency capacitor; ripple suppression and proper regulation require a large value bulk capacitor. Connect these capacitors most conveniently between Pin VIN and Pin GNDP for VIN and between Pin VISO and Pin GNDISO for VISO. To suppress noise and reduce ripple, a parallel combination of at least two capacitors is required. The recommended capacitor values are 0.1 µF and 10 µF for VIN. The smaller capacitor must have a low ESR; for example, use of an NP0 or X5R ceramic capacitor is advised. Ceramic capacitors are also recommended for the 10 µF bulk capacitance. Add an additional 10 nF capacitor in parallel if further EMI/EMC control is desired.
-
-
-
-
-
-```
-   V_ISO ─────┬───────┬──►── [FB]─────┬─────► VCC_EZO
-              │       │               │
-            [10uF]  [100nF]       [C in EZO]
-              │       │               │
-   GND_ISO ───+───────+───────────────+─────
-```
-
-For decoupling of the VDD_ISO rail, add a 10nF and 100nF capacitor pair as shown.
-```
-   V_ISO ─────┬───────┬──►── [FB]────┬─────┬────► VDD_ISO
-              │       │              │     │
-            [10uF]  [100nF]        100nF  10nF
-              │       │              │     │
-   GND_ISO ───+───────+──────────────+─────+──
-```
-
-**Design Source Verification:**
-- **Analog Devices (ADM3260 Datasheet):** Confirms the requirement for a 10µF and 0.1µF capacitor pair on both VDD1 and VISO to maintain stability [1].
-- **Murata EMI Guide:** Recommends the BLM18 series ferrite beads for suppressing high-frequency noise in isolated DC-DC converters [3].
+- To futher mitigate EMI, consider using a **Via Fence and Guard Ring** to limit edge radiation.[^A-0971]
 
 
 
 
 
 
-
-
-
-#### Component Placement Strategy
-
-1. **The "Pair" Rule:** Each side of the ADM3260 needs one 0.1µF (for high-frequency noise) and one 10µF (for power stability) capacitor.
-2. **Proximity:** The 0.1µF caps are the most critical. If they are more than 5mm away from the chip, the trace inductance will render them useless against the 180MHz switching noise of the isoPower transformer.
-3. **Resistor Selection:** Use 1% tolerance resistors. This ensures the I2C rise times are identical on SDA and SCL, preventing timing "jitter" that can occur in high-noise environments.
-
-**4-Layer Trace Routing Logic**
-- **VCC/VISO:** Route these on Layer 3 (Power Plane) using a "star" pattern from the ADM3260 to the EZO socket.
-- **SDA/SCL:** Route on Layer 1 (Top). Ensure they are at least 3x the trace width away from any other signal to prevent crosstalk.
-- **Keep-Out Zone:** Double-check that no copper (including ground pours) exists on any layer within the 6mm "moat" beneath the ADM3260.
-
-To ensure your single-PCB design handles the high-frequency switching of the ADM3260 and the 24V noise from the TMC2209 drivers, use these specific high-performance components. The capacitors selected are X7R dielectric (stable over temperature) and Low-ESR to handle the internal transformer's ripple.
-
-
-[1]: Analog Devices ADM3260 Datasheet
-[2]: Atlas Scientific EZO-ISO Schematic
-[3]: Murata Ferrite Bead Application Guide
 
 
 
