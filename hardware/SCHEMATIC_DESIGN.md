@@ -1,8 +1,406 @@
 # Schematic Design Guide
 
-This document describes the circuit design for the OPNhydroponics controller PCB.
+This document describes the circuit design for the OPNhydroponics controller PCB.  It **answers how:** to implement the architecture.  As such it covers the schematics including the glue around the ICs, trace widths and placement rules.
+
+The key challange with this board is the mix of a **sensitive** MCU and sensors (pH/EC), and their **noisy neighbors** such as a buck converter, isolated DC/DC converter (ADM3260), and high-noise steppers (TMC2209).
+
+In the design, we will diver deeper into the **Power Architecture**:
+1. Stability Under High-Current Peak Loads
+2. Integration of High-Precision Dosing and EMI Mitigation
+3. Maintaining Signal Integrity via Isolation
+
+
+---
+
+
+## 1. Stability Under High-Current Peak Loads
+
+The system must manage a **peak draw of approximately 4.7A** when the 1.2A main pump and two 1.53A nutrient pumps are active simultaneously on top of the amperage demanded by the Reflected 5V Rail and Solenoid Valve.
+
+Stability is provided by:
+- Bulk Capacitance that supply instantaneous current surges, preventing "voltage sags".
+- PCB Specifications: a 4-layer PCB with 2oz copper outer layers.
+
+
+---
+
+
+### 1.1. Bulk Capacitors are Your Friend
+
+The use of a hierarchical capacitance strategy — employing a global reservoir and multiple local reservoirs — is fundamental to maintaining the chemical and thermal stability required for this high-precision 100L systems. This approach ensures that peak loads stay as local as possible.
+
+Every wire and PCB trace has inductance. Inductance resists instantaneous changes in current:
+$$
+  U = L \  \frac{dI}{dt}
+$$
+
+When a stepper driver or motor demands a sudden surge of current, the inductance of the supply path creates a voltage drop — the rail sags. The further the current has to travel from the supply, the worse the sag. Bulk capacitance acts as a local energy reservoir — storing charge close to the load so it can be delivered instantly when current demand spikes.
+
+For this board, the TMC2209 is of special concern, because it chops current to the stepper coils at 20–50kHz. Every switching cycle it draws a sharp current pulse from the VM pin. Without local capacitance, these pulses travel back through the trace inductance to the bulk cap at the power entry.
+
+The recommended bulk capacitors:
+
+Rail | Place               | Peak Current | Value / Voltage | Dielectric             | Purpose
+----:|---------------------|--------------|----------------:|------------------------|--------
+ 24V | Main power entry    | ~4.7A        | 1000µF / 50V    | Aluminium electrolytic | Primary reservoir
+ 24V | Each TMC2209 VM pin | ~1.5A        |  220µF / 50V    | Aluminium electrolytic | Local reservoir
+ 24V | Main Pump MOSFET    | ~1.2A        |  220µF / 50V    | Aluminium electrolytic | Local reservoir
+  5V | Buck output         | ~0.75A       |  220µF / 10V    | Aluminium polymer      | ESP32 WiFi Tx
+3.3V | LDO output          | ~0.15A       |   22µF / 10V    | MLCC X7R               | Low current
+
+The Engineering:
+- Given the acceptable ripple and transient duration, the required capacitance follows as: $C = I × Δt / ΔU$.
+- If these are unknown, use a rule of thumb: provide 100µF to 200µF electrolytic capacitors for every 1A of current. 
+- To reduce aging, use electrolytic capacitors that are rated for 150% to 200% of the expected voltage.
+- Aluminium polymer is low ESR, but hard to find at above 25V. Aluminium electrolytic capacitors are a pragmatic choice for 50V.
+- Use low-ESR capacitors: e.g. Panasonic FR series for Aluminium electrolytic, and Panasonic FK or Kemet R60 for Aluminium polymer.
+- Place local bulk capacitance directly at the Voltage Supply (VS) pins of the three TMC2209 drivers and MOSFETs.
+
+
+---
+
+
+### 1.2. PCB guidelines
+
+To safely handle the peak **4.7A** load, the architecture mandates a **4-layer PCB** with **2oz copper** outer layers. This copper weight is essential for managing the heat and resistance of the 24V power traces under continuous 24/7 operation.
+
+
+#### Layer Stack-Up
+
+Layer | Name | Function               | Components
+------|------|------------------------|--------------------------
+L1    | Top  | Signal layer           | MCU, LiDAR, I2C, UART, EZO, BNC
+L2    | GND  | Solid Main GND Plane   | One uninterrupted copper pour. This is your shield.
+L3    | PWR  | 3.3V / 5V / 24V Planes | Seperate copper pours for low resistance.
+L4    | Bot  | Steppers / MOSFETs     | So GND plane shields them from signal layer
+
+
+#### Trace Widths
+
+Trace width is calculated using the IPC-2221 empirical formula for external conductors.[^1]
+[^1]: [IPC-2221 Trace Width Calculator, Altium PCB Design Guide](https://resources.altium.com/p/ipc-2221-calculator-pcb-trace-current-and-heating).
+
+$$
+    \begin{align}
+    I  &= k × ΔT^{0.44} × A^{0.725} \\
+    \rm{where\ \ } I &= \rm{current\ [A]} \nonumber \\
+    k  &= 0.048 \rm{\ for\ outer\ layer,\ or\ } 0.024 \rm{\ for\ inner\ layer} \nonumber \\
+    ΔT &= \rm{allowable\ temperature\ increase\ [°C]} \nonumber \\
+    A  &= \rm{cross\ sectional\ area\ [mil²]} =  width_{mil} × thickness_{mil} \nonumber \\
+   \rm{thickness_{mil}} &= 1.37\rm{mil\ for\ 1oz\ Cu,\ or\ } 2.74\rm{mil}\rm{\ for\ 2oz\ Cu} \nonumber 
+\end{align}
+$$
+
+The table below use a conservative $ΔT = 10°\rm{C}$ (IPC-2221 permits 20°C for most PCB classes). 
+
+Net                     | Target Current    | Internal Trace Width | External Trace Width | Rationale
+------------------------|-------------------|----------------------|----------------------|----------
+24V input (PSU→TVS→RPP) | 6.5A (Peak)       | 5.0mm (200mil)       |  2.0mm (80mil)       | Reduce sag
+24V main pump           | 1.2A (Continous)  | 1.0mm  (40mil)       |  0.4mm (15mil)       | Manage heat
+24V each dosing pump    | 1.53A (Peak)      | 1.0mm  (40mil)       |  0.4mm (15mil)       | Lower inductance
+24V ATO valve           | 0.3 (Peak)        | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
+5V rail (post-buck)     | 0.75A (Peak)      | 0.5mm  (20mil)       |  0.2mm  (8mil)       | Stable power
+3.3V rail (post-LDO)    | 0.15 (Peak)       | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
+
+
+Plane and Routing Guidelines
+- **Star Power**: Run a dedicated pair of 24V wires from your main power input connector directly to the stepper section, and a separate pair to the logic regulator. Do not "daisy chain" the power from the motors to the sensors.
+- **Via Stitching:** If you must switch the 24V rail between layers, use multiple vias (at least 3–4 vias per 2A connection). A single standard 10-mil via is only rated for about 0.5A–1A before it acts like a fuse.
+- **Antenna Support:** The ground plane should not extend under the **ESP32-C6 antenna** keep-out area to ensure proper wireless performance.
+- **Analog/Digital Isolation:** The layout must keep **analog traces physically isolated** from switching power supplies (like the TPS62933) and high-current motor traces.
+
+
+
+---
+
+
+
+## 2. Integration of High-Precision Dosing and EMI Mitigation
+
+The MCU communicates with the TMC2209 drivers over a single UART bus. The required wiring:
+- One TX/RX pair from the MCU to all three drivers.
+- MS1/MS2 hard-wired on the PCB to set addresses 0, 1, and 2.
+
+The high precission steppers generate significant **Electromagnetic Interference (EMI)** through high-speed PWM switching. To mitigate this:
+- A *"Silent Read" Strategy* protects sensitive probes from the electromagnetic interference (EMI) generated by stepper PWM switching. The firmware shuts down the stepper drivers during sensor reads (via ENA) to create a "blackout" of switching noise for the sensitive pH and EC probes
+- *Bypass Capacitors* surpress the middle and high frequency noise.
+- *PCB Layout Strategy*, thermal relief and EMI shielding.
+
+
+---
+
+
+### 2.1. "Silent Read"
+
+Since you are using pH Down and Nutrients, your logic should be:
+1. Turn OFF the TMC2209 drivers (using the ENN or Enable pin) while reading the sensors to ensure 100% electrical silence
+2. Read pH/EC (EZO sensors) and calculate Dose.
+4. Enable Drivers and Step the motors.
+5. Wait for the reservoir to mix before reading again.
+
+The firmware should use Use **StealthChop2** for dosing. It’s not just quieter for your ears; it generates significantly less Electrical Noise (EMI) than the high-torque SpreadCycle mode, which is better for your EZO-EC data integrity.
+
+Engineering note: the firmware can use the **TeensyStep** or **TMCStepper** library (by Peter Polidoro/teemuatlut).
+
+
+---
+
+
+### 2.2. Capacitor are here to help
+
+The existing 220µF bulk caps at VM also suppress the **medium-frequency** switching ripple by providing charge locally, within the short trace between cap and VM pin, before the inductance of the supply path has time to cause a voltage dip.
+
+Recommended MF capacitors:
+
+Rail | Place               | Peak Current | Value / Voltage | Dielectric             | Purpose
+----:|---------------------|--------------|----------------:|------------------------|--------
+ 24V | Main power entry    | ~4.7A        |   10µF / 50V    | MLCC X7R[^2]           | MF bypass
+ 24V | Each TMC2209 VM pin | ~1.5A        |  220µF / 50V    | Aluminium electrolytic | MF bypass
+ 24V | Main Pump MOSFET    | ~1.2A        |  220µF / 50V    | Aluminium electrolytic | MF bypass
+  5V | Buck output         | ~0.75A       |   10µF / 10V    | MLCC X7R[^3]           | MF bypass
+
+[^2]: e.g. Murata GRM31CR61H106KA12L (SMD Comm X7R). DC bias derating is better for 1206 package.
+[^3]: e.g. Murata GRM21BR61C106KE15L. Use 0805 package.
+
+Note that the Benewake TF-Luna LiDAR includes a 100nF capacitor to debounce signals and prevent EMI-induced false triggers on the safety interlock lines.
+
+For **high-frequency bypass** (decoupling), the goal is to present the lowest possible impedance at the frequencies we care about. The capacitor value sets the resonant frequency with its parasitic inductance (ESL).
+
+Recommended HF/VHF bypass capacitors:
+
+Rail | Value / Voltage | Dielectric | Package   | Purpose
+----:|----------------:|------------|-----------|---------
+ 24V | 100nF / 50V     | MLCC X7R   | 0402/0603 | HF bypass
+  5V | 100nF / 16V     | MLCC X7R   | 0402/0603 | HF bypass per IC
+3.3V | 100nF / 10V     | MLCC X7R   | 0402/0603 | HF bypass per IC
+3.3V |  10nF / 10V     | MLCC X7R   | 0402      | VHF bypass for sensitive pins
+
+The Engineering:
+- *Why 100nF:* Self-resonant frequency of a 100nF 0402 MLCC[^4] is SRF=~30MHz, while the equivalent series resistance ESR=~0.2mΩ at 1 MHz → it operates as an effective bypass to ground up from about ~1 Mhz to ~30MHz — covering the HF-part of the switching harmonics.
+- *Why 10nF:* a similar 10nF cap[^5] as the is SRF=~85MHz and ESR=~0.2mΩ at 1 MHz → it operates as bypass to ground up from ~1MHz to ~85MHz — covering the VHF-end of switching harmonics.
+- *Why X7R not X5R:* X7R holds capacitance better across temperature (−55°C to +125°C, ±15%). X5R is acceptable on low-voltage rails but degrades more with temperature and DC bias.
+- *Why those pesky small 0402/0603:* Smaller package = lower ESL = lower impedance at high frequency. 0805 and larger have noticeably higher ESL and are less effective as HF bypass caps.
+
+[^4]: Such as the Murata GRM155R71C103KA01D
+[^5]: Such as the Murata GRM155R71C104KA88J
+
+Long PCB traces or component leads add inductance, which reduces the SRF. The placement priority order is:
+1. 10nF ceramics: <2mm from IC pins
+1. 100nF ceramics: <5mm from IC pins
+2. 10-22µF ceramics: <10mm from IC
+3. electrolytics: <20mm from load
+
+For added protection, use **ferrite beads** on power inputs to further reject high-frequency noise.
+
+
+### 2.3 PCB Layout Strategy
+
+At 1.0A RMS, the TMC2209 drivers generate only a 1/4 of the heat compared to their 2.0A limit.
+- **A "Thermal Chimney":** Use a large GND plane on the bottom layer as a heatsink. Use a 4×4 array of 16 thermal vias, 0.3mm diameter, spaced 1mm apart under the TMC2209 center pad connecting to the GND plane to pull heat away.
+- **EMI Shielding:** By keeping your high-speed switching (stepper drivers) **on the bottom** (L4) and your sensitive logic on the top (L1), the internal Ground and Power planes act as a Faraday shield, preventing motor noise from "leaking" into your pH and EC readings. 
+
+
+---
+
+
+## 3. Maintaining Signal Integrity via Isolation
+
+In a conductive nutrient solution, multiple probes (pH, EC, RTD) can create ground loops, where small currents leak between probes and distort readings.  
+
+Our defenses:
+   - *Isolation:* Isolated DC and I2C via the ADM3260 chip, providing a physical air gap to eliminate ground loops.  
+   - *PCB Zone Map*: Physically separate Noisy and Sensitive neighbors.
+   - *Pi-Filters:* Ensures noise of the isolation chip itself does not "leak" into the high-impedance analog front-end of the pH and EC circuits.
+
+To prevent Ground Loops, the architecture uses Isolated I2C via the ADM3260 chip, providing a physical air gap to eliminate these loops.  
+
+
+---
+
+
+### 3.1. Isolation (ADM3260)
+
+The Typical Applcation Diagram in Figure 20 of the [ADM3260 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf) and [UG-724](https://www.analog.com/media/en/technical-documentation/user-guides/EVAL-ADM3260MEBZ_UG-724.pdf) show a typical Isolated I2C Interface using the ADM3260 and its suggested footprint. We follow their lead:
+
+- **V<sub>SEL</sub>** sets the isolated output voltage V<sub>ISO</sub>. For V<sub>ISO</sub>=3.3V, create a voltage divider matches so that V<sub>SEL</sub> matches the 1.25V reference voltage: 
+$$
+  V_{SEL} = V_{ISO} \cdot \frac{\rm{R_{19}}}{\rm{R_{17}}+\rm{R_{19}}}
+  = 3.3\rm{\,V} \cdot \frac{10\,kΩ}{10\,kΩ+16.9\,kΩ} = 1.23\rm{V}
+$$
+
+- **I2C pullups** are required on the isolated side, just like the main side. A "stiff" 2.2kΩ here is better for fighting the noise.
+
+- **Bypass capacitors** are mandatory for the device to function correctly and provide stable isolated power.
+  - 10 μF // 100 nF from V<sub>IN</sub> to GND<sub>P</sub>.
+  - 10 μF // 100 nF from V<sub>ISO</sub> to GND<sub>ISO</sub>.
+  - 10 μF // 100 nF from VDD<sub>P</sub> to GND<sub>P</sub>.
+  - 10 μF // 100 nF from VDD<sub>ISO</sub> to GND<sub>ISO</sub>.
+  - for 100 nF: use 0402 X7R capacitors within 2 mm of the pins
+  - for 10 μF: use 0805 X7R capacitors within 4 mm of the pins
+
+To visualize the ADM3260 on a 4-layer stack-up, imagine the chip sitting like a bridge over a **moat**. The goal is to ensure that no electrical path exists between the Mainland and the Island except through the silicon of the chip itself. Ensure the Moat is at least 6mm wide for high-voltage safety (creepage).
+
+Below is how the layers should be carved to maintain 2.5kV isolation:
+
+Layer    | Mainland               | The Moat      | The Island (pH or EC)
+---------|------------------------|---------------|----------------------
+L1 (Top) | MCU, LiDAR             | No Copper     | EZO Socket, BNC
+L2 (GND) | Solid Main GND Plane   | Stitching Cap | Floating GND_ISO
+L3 (PWR) | 3.3V / 5V / 24V Planes | Stitching Cap | Floating V_ISO (3.3V)
+L4 (Bot) | Steppers and glue      | No Copper     | (Keep empty for signal)
+
+
+---
+
+
+### 3.2. PCB Zone Map
+
+Physical distance is your best friend to limit the effect of EMI. Separate the "Noisy" from the "Quiet."
+
+The gold standard for this specific "Multi-EZO" PCB layout is the [Atlas Scientific i4 InterLink](https://files.atlas-scientific.com/i4-interlink-datasheet.pdf) and the [Whitebox Labs T3 schematics](https://github.com/whitebox-labs/tentacle-raspi-oshw).
+
+[^^8]: Analog Devices AN-0971 (Recommendations for Control of Radiated Emissions with isoPower Devices). This document also details how to use PCB "Stitching Capacitance" to keep the board quiet.
+
+1. **Zone A: Power Entry (Edge of Board)**
+   - Components: DC Jack, 4A Fast Fuse, RPP, TVS Diode, Bulk Cap.
+   - Goal: Kill spikes and provide bulk current immediately upon entry.
+2. **Zone B: High-Power Drive (Bottom Half)**
+   - Components: 3x TMC2209 drivers, 3x Bulk caps, Solenoid MOSFET.
+   - Routing: Keep the 24V "VM" traces on L4 (Bottom).
+   - Thermal: Place the drivers here to utilize the L2 GND plane as a heatsink.   
+   - Noise profile: Extreme (source)
+3. **Zone C: Digital Logic (Top Center)**
+   - Components: MCU, LiDAR header, 5V/3.3V Regulators, EZO-RTD (Non-isolated).
+   - Routing: Keep I2C/UART on L1 (Top), shielded by the L2 GND Plane.
+   - Noise profile: Moderate (sensitive)
+4. **Zone D: Isolated Islands (Top Corners)**
+   - Components: 2x ADM3260, EZO-pH/EC sockets, BNC connectors.
+   - Noise profile: zero tolerance
+
+
+---
+
+
+### 3.3. Self Defense (π-filters)
+
+While we disable the stepper motors to stop external EMI, the ADM3260 itself is a switching power supply. A pi-filter at the V_ISO ensures that the internal noise of the isolation chip does not "leak" into the high-impedance analog front-end of the pH and EC circuits.
+
+
+> The ADM3260 uses an internal isoPower transformer switching at ~180MHz, it can cause the "Island" to act like a radio antenna. On L2 (GND) and L3 (PWR), allow the Mainland copper and the Island copper to overlap by about 1cm but stay on different layers. This creates a "PCB embedded capacitor" that shunts high-frequency noise without breaking DC isolation.
+
+
+- Add footprints for **Ferrite beads** for EMI mitigation (but populate with 0Ω)
+  - FB from V<sub>ISO</sub> to the EZO mezzanine.
+  - FB from GND<sub>ISO</sub> to the EZO mezzanine.
+  - Use 0603-sized beads that have high impedance at 100MHz and low DC resistance.
+
+- Use the **"Stitching Capacitance" trick**: Overlap the isolated ground plane and the non-isolated ground plane on internal layers (with a specific safety gap, usually ~0.4mm to 1mm depending on your isolation voltage requirements). This creates a low-impedance path for high-frequency common-mode noise to return to its source, which is much more effective than beads for the ADM3260’s isoPower switching noise.
+
+> A simple method of achieving a good stitching capacitance is to extend GND<sub>P</sub> and GND<sub>ISO</sub> into the moat. The capacitive coupling of the structure is calculated with the following basic relationships for parallel plate capacitors:[^A-0971]
+$$
+    \begin{align}
+      C  &= \frac{A\varepsilon}{d} \rm{\ and\ } \varepsilon=\varepsilon_0\times\varepsilon_r  \\
+      \rm{where\ \ } 
+      A  &= \rm{area\ of\ the\ overlapping\ reference\ planes} \nonumber \\
+      C  &= \rm{total\ stiching\ capacitance} \nonumber \\
+      d  &= \rm{thickness\ of\ the\ insulation\ layer\ in\ the\ PCB} \nonumber \\
+      \varepsilon_0 &= \rm{permittivity\ of\ free\ space} = 8.854\times10^{-12} \rm{\ F/m} \nonumber \\
+      \varepsilon_r &= \rm{relative\ permittivity\ of\ the\ PCB\ insulation\ material\ } \approx 4.5\rm{\ for\ FR4} \nonumber \\
+    \end{align}
+$$
+
+[^A-0971]: [A-0971](https://www.analog.com/en/resources/app-notes/an-0971.html)
+
+
+
+
+The Typical Applcation Diagram in Figure 20 of the [ADM3260 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf):
+> The power supply section of the ADM3260 uses a 125 MHz oscillator frequency to efficiently pass power through its chip-scale transformers. Choose bypass capacitors carefully because they must perform more than one function. Noise suppression requires a low inductance, high frequency capacitor; ripple suppression and proper regulation require a large value bulk capacitor. Connect these capacitors most conveniently between Pin VIN and Pin GNDP for VIN and between Pin VISO and Pin GNDISO for VISO. To suppress noise and reduce ripple, a parallel combination of at least two capacitors is required. The recommended capacitor values are 0.1 µF and 10 µF for VIN. The smaller capacitor must have a low ESR; for example, use of an NP0 or X5R ceramic capacitor is advised. Ceramic capacitors are also recommended for the 10 µF bulk capacitance. Add an additional 10 nF capacitor in parallel if further EMI/EMC control is desired.
+
+
+
+
+
+```
+   V_ISO ─────┬───────┬──►── [FB]─────┬─────► VCC_EZO
+              │       │               │
+            [10uF]  [100nF]       [C in EZO]
+              │       │               │
+   GND_ISO ───+───────+───────────────+─────
+```
+
+For decoupling of the VDD_ISO rail, add a 10nF and 100nF capacitor pair as shown.
+```
+   V_ISO ─────┬───────┬──►── [FB]────┬─────┬────► VDD_ISO
+              │       │              │     │
+            [10uF]  [100nF]        100nF  10nF
+              │       │              │     │
+   GND_ISO ───+───────+──────────────+─────+──
+```
+
+**Design Source Verification:**
+- **Analog Devices (ADM3260 Datasheet):** Confirms the requirement for a 10µF and 0.1µF capacitor pair on both VDD1 and VISO to maintain stability [1].
+- **Murata EMI Guide:** Recommends the BLM18 series ferrite beads for suppressing high-frequency noise in isolated DC-DC converters [3].
+
+
+
+
+
+
+
+
+
+#### Component Placement Strategy
+
+1. **The "Pair" Rule:** Each side of the ADM3260 needs one 0.1µF (for high-frequency noise) and one 10µF (for power stability) capacitor.
+2. **Proximity:** The 0.1µF caps are the most critical. If they are more than 5mm away from the chip, the trace inductance will render them useless against the 180MHz switching noise of the isoPower transformer.
+3. **Resistor Selection:** Use 1% tolerance resistors. This ensures the I2C rise times are identical on SDA and SCL, preventing timing "jitter" that can occur in high-noise environments.
+
+**4-Layer Trace Routing Logic**
+- **VCC/VISO:** Route these on Layer 3 (Power Plane) using a "star" pattern from the ADM3260 to the EZO socket.
+- **SDA/SCL:** Route on Layer 1 (Top). Ensure they are at least 3x the trace width away from any other signal to prevent crosstalk.
+- **Keep-Out Zone:** Double-check that no copper (including ground pours) exists on any layer within the 6mm "moat" beneath the ADM3260.
+
+To ensure your single-PCB design handles the high-frequency switching of the ADM3260 and the 24V noise from the TMC2209 drivers, use these specific high-performance components. The capacitors selected are X7R dielectric (stable over temperature) and Low-ESR to handle the internal transformer's ripple.
+
+
+[1]: Analog Devices ADM3260 Datasheet
+[2]: Atlas Scientific EZO-ISO Schematic
+[3]: Murata Ferrite Bead Application Guide
+
+
+
+
+
+
+---
+
+
+
+
 
 ## Block Diagram
+
+```
+                           ┌─────────────┐
+                           │  ESP32-C6   │
+                           │             │
+                           └──────┬──────┘
+                                  │
+         ┌──────────────────┬─────┴───────────────┐
+         │                  │                     │
+    ┌────┴────┐        ┌────┴────┐         ┌──────┴──────┐
+    │  I2C    │        │  GPIO   │         │    UART     │
+    │  Bus    │        │         │         │    Bus      │
+    └────┬────┘        └────┬────┘         └──────┬──────┘
+         │                  │──────────────┐      │
+    ┌────┴───────┐  ┌───────┴────────┐     │      │
+    │ pH EZO     │  │ LiDAR          │  ┌──┴──────┴───────┐
+    │ EC EZO     │  │ Float switches │  │ Dosing steppers │
+    │ RTD EZO    │  │ Main pump      │  └─────────────────┘
+    └────────────┘  │ OTA valve      │
+                    └────────────────┘
+```
 
 ```
                        ┌─────────────────────────────────────────────────────┐
@@ -58,6 +456,32 @@ This document describes the circuit design for the OPNhydroponics controller PCB
 ## 1. Power Supply Section
 
 The **main pump**, **stepper motors**, the **solenoid** and **buck converter** turns the PCB into a high-noise environment. Stepper drivers are notorious for creating Electromagnetic Interference (EMI) and ground bounce that can "ghost" your I2C bus or cause your pH readings to jump.
+
+**Topology:**
+
+```
+ [PSU]
+   │
+   ├──► 24V Rail ──┬──► MOSFET ───► Main Pump
+   │               ├──► MOSFET ───► Solenoid Valve
+   │               ├──► TMC2209 ──► Stepper pH Down
+   │               ├──► TMC2209 ──► Stepper Nutrient A
+   │               └──► TMC2209 ──► Stepper Nutrient B
+[Buck 24V─►5V]
+   │
+   ├──► 5V Rail ───┬──► ESP32-C6 (makes its own 3.3V rail)
+   │               └──► LiDAR
+   │
+ [LDO 5V─►3V3]
+   │
+   └──► 3V3 Rail ──┬──► ADM3260 ──► pH EZO (isolated 3.3V via isoPower)
+                   ├──► ADM3260 ──► EC EZO (isolated 3.3V via isoPower)
+                   ├──► RTD EZO circuit
+                   ├──► BME280
+                   └──► BH1750
+```
+
+
 
 ### 1.1. Protection Gauntlet
 
@@ -1873,4 +2297,99 @@ Sources and Documentation:
 - **AN-0971 Application Note:** "Recommendations for Control of Radiated Emissions with isoPower Devices." [12]
 
 
+
+
+
+## 3. PCB Layout and EMI
+
+
+Recommended: IP65 rated ABS enclosure, ~150×100×70mm
+- Cable glands for all wiring
+- Panel-mount BNC connectors for pH/EC/RTD probes (3×)
+- Optional: Clear lid for status LED visibility
+
+- **Size:** 100mm × 80mm (fits common enclosures)
+- **Finish:** HASL or ENIG
+
+----
+
+### 3.6. Float Switches Specifics
+
+Require external debounce caps, such as:
+- 10kΩ to the 3V3 rail, and 100nF to GND to generate the FLOAT_LOW signal.
+- 100nF to the 3V3 rail, and 10kΩ to GND to generate the FLOAT_HIGH signal.
+
+
+---
+
+
+### 3.7. Digital Core Specifics (MCU & LiDAR)
+
+Since the TF-Luna LiDAR and MCU share the 3.3V/5V mainland rail, they need protection from the 24V "noise floor."
+
+Net            | Value       | Role
+---------------|-------------|-----
+TF-Luna Header | 100µF / 10V | Electrolytic/Tantalum near the header to prevent "brownouts" during laser pulses.
+I2C Bus        | 0.1µF       | Scattered near pull-up resistors to keep the SDA/SCL lines quiet.
+
+Keep-out area PCB around antenna.  
+
+
+---
+
+
+
+
+---
+
+
+### 3.3. Hand-Soldering
+
+Hand-soldering a 4-layer PCB with an ADM3260 (SSOP package) and EZO modules is a fun challenge, but the internal copper planes act like a giant heat sink. If you aren't careful, you'll get "cold solder joints" where the solder balls up instead of flowing into the hole.
+
+- **Thermal Reliefs:** Because your **Layer 2 (Ground Plane)** is a massive sheet of copper, it will "suck" the heat away from your soldering iron. Ensure your PCB design software uses Thermal Reliefs (spokes) for ground pads, or you will struggle to get the solder to melt.
+- **Flux is Mandatory:** When soldering the **ADM3260** (SSOP-20 package), use plenty of liquid flux. It prevents bridges between the tiny pins and makes the solder flow onto the pads instantly.
+- **The "Island" Connectors:** For your **pH/EC BNC connectors**, use Through-Hole versions. Surface-mount BNCs can easily tear off the board if you accidentally tug on a probe cable.
+- **Height Clearance:** Place tall **electrolytic caps** and the **EZO-PMP headers** near the edges of the board so they don't block your iron when you try to solder the smaller components in the center.
+- **Soldering the ADM3260 (SSOP-20)**
+This is the hardest part. The pins are close together (0.65mm pitch). Use the "Tack and Drag" Method:
+Use a **"Hoof" or "Chisel" tip**, not a needle-point tip. Needle tips don't hold enough thermal mass for 4-layer boards.
+   1. Tack one corner pin to align the chip.
+   2. Flood all 10 pins on one side with Tacky Flux.
+   3. Put a small "blob" of solder on your iron tip.
+   4. Drag the iron across the pins. The flux will magically pull the solder onto the pads and off the green solder mask.
+
+For a 4-layer PCB that you are soldering by hand, you need to balance two competing needs: high-voltage safety (creepage) and the physical reality of a soldering iron tip. In a mineral-heavy reservoir environment, humidity can cause "tracking" (electricity jumping across the board surface), so your Moats must be wider than a standard digital gap.
+
+#### "Safety Moat" Clearance
+
+Set your **Design Rule Check (DRC)** for the following minimums specifically around the **ADM3260** and the **pH/EC Islands**:
+   - **Minimum Moat Width: 6 mm:** While 2.5 mm is technically enough for 2.5kV isolation, an 6 mm gap ensures that a stray "solder splash" or a drop of nutrient-rich condensation won't bridge the gap.
+   - **Copper-to-Board-Edge: 1 mm:** This prevents the V-cut or router bit from smearing copper across the isolation boundary during manufacturing.
+   - **Solder Mask Expansion: 0.05 mm:** This ensures the green "paint" (solder mask) stays as close to the pad as possible, preventing solder from bridging between the tight SSOP-20 pins of the ADM3260.
+
+#### "Keep-Out" Zones
+
+Since you are soldering by hand, the tip of your iron (usually 1.5mm–2.4mm wide) needs "elbow room."
+   - **The "Shadow" Zone:** Do not place the 1206 Bulk Capacitors (10µF) directly in front of the ADM3260 pins. Leave at least 3 mm of horizontal clearance. If they are too close: You won't be able to lay your iron flat enough to "drag solder" the chip pins without melting the plastic end of the capacitor.
+   - **The BNC Overhang:** Most *Through-Hole BNC connectors** have large metal legs. Ensure the "Moat" starts at least **2 mm** away from the BNC pads. If the BNC leg is right on the edge of the moat, it's very easy to accidentally bridge to the "Mainland" ground plane with a blob of solder.
+
+#### Moat Integrity Checklist
+
+Before you hit "Generate Gerbers," run these three manual checks in your PCB software:
+   - **The "Ghost" Check:** Turn off all layers except Layer 2 (GND) and Layer 3 (PWR). Ensure the "canyon" is completely empty of copper. No floating traces, no vias, no text.
+   - **The "Stitching" Check:** Ensure your internal Ground (Mainland) and Isolated Ground (Island) overlap slightly on different layers (e.g., L2 Mainland overlaps L3 Island) to create that EMI-filtering capacitance, but check that they are separated by the board substrate.
+   - **The Silkscreen Labels:** Since we have three EZO-PMPs and two sensors, label the "Island" side clearly on the silkscreen (e.g., "ISO-PH" and "ISO-EC"). This prevents you from accidentally plugging a non-isolated sensor into an isolated port during assembly.
+
+**Summary Table for DRC Settings**
+
+Parameter            | Hand-Solder Value
+---------------------|------------------
+Track to Track       | 8 mils (0.2 mm)
+Track to Pad         | 8 mils (0.2 mm)
+Moat (Isolation Gap) | 250 mils (6.35 mm)
+Minimum Via Drill    | 12 mils (0.3 mm)
+Via Pad Diameter     | 24 mils (0.6 mm)
+
+If your software allows, add a **"Route Keep-Out"** area over the moats. This prevents the "Auto-Router" from trying to be "helpful" by running a 24V line across your isolation gap!
 
