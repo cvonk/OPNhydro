@@ -23,7 +23,14 @@
       "WebFetch(domain:atlas-scientific.com)",
       "WebFetch(domain:www.manualslib.com)",
       "WebFetch(domain:mans.io)",
-      "WebFetch(domain:forum.arduino.cc)"
+      "WebFetch(domain:forum.arduino.cc)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.n-wells.co.uk)",
+      "WebFetch(domain:learn.watterott.com)",
+      "WebFetch(domain:wiki.fysetc.com)",
+      "WebFetch(domain:klipper.discourse.group)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

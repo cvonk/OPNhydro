@@ -93,20 +93,20 @@ Cost           | \$26         | \$30 on AliExpress  |
 
 ### 1.2. Main Reservoir Selection
 
-In a Nutrient Film Technique (NFT) system, the reservoir acts as a nutrient bank for the entire closed-loop operation. Since we are building a PID-controlled system, the reservoir’s most critical function is providing chemical and thermal buffering to ensure your sensors and pumps have a stable environment to work within. 
+In a Nutrient Film Technique (NFT) system, the reservoir acts as a nutrient bank for the entire closed-loop operation. In a PID-controlled system, the reservoir’s most critical function is providing chemical and thermal buffering to ensure the sensors and pumps have a stable environment to operate within. 
 
 #### 1.2.1. Functions of the Reservoir
 
-- **Chemical Buffering:** A larger reservoir volume acts as a buffer against rapid pH and EC fluctuations. For the PID loop this is vital; a small reservoir would cause "jittery" sensor readings, making it difficult for your system to learn gain without overshooting.
+- **Chemical Buffering:** A larger reservoir volume acts as a buffer against rapid pH and EC fluctuations. For the PID loop this is vital; a small reservoir would cause "jittery" sensor readings, making it difficult for the system to learn gain without overshooting.
 - **Thermal Stability:** Water has a high heat capacity, so the reservoir helps regulate the temperature of the nutrient solution. This protects roots from rapid temperature swings that could lead to stress or dissolved oxygen issues.
-- **Recirculation & Filtration Point:** It serves as the collection point where gravity returns the nutrient film from the channels. This is where you place filters to prevent debris from reaching your pumps and air stones to maintain high dissolved oxygen levels.
-- **Sensor Hub:** In an automated system, the reservoir is the ideal location for your pH and EC probes. It provides a "mixed" sample of the entire system's chemistry, ensuring your PID loop makes decisions based on the average state of the solution rather than localized channel data.
+- **Recirculation & Filtration Point:** It serves as the collection point where gravity returns the nutrient film from the channels. Place filters here to prevent debris from reaching the pumps, and air stones to maintain high dissolved oxygen levels.
+- **Sensor Hub:** In an automated system, the reservoir is the ideal location for the pH and EC probes. It provides a "mixed" sample of the entire system's chemistry, ensuring the PID loop makes decisions based on the average state of the solution rather than localized channel data.
 
 #### 1.2.2. Requirements
 
-- **PID Stability:** A 100L+ volume provides enough chemical inertia so that a 1 mL dose from your stepper pump doesn't cause a massive pH spike. This makes your Integral (I) tuning much easier to stabilize. It acts as a Low-Pass Filter for your chemical concentrations.
-- **Evapotranspiration:** On a hot day, 50 mature plants can easily drink 10–15 liters. A 100L reservoir ensures we're not refilling every 24 hours.
-- **Drain-Back capacity:** In an NFT system, when the pump stops, the "film" in the channels drains back. You need roughly 15-20% extra headspace in the tank to catch this water without an overflow.
+- **PID Stability:** A 100L+ volume provides enough chemical inertia so that a 1 mL dose from the stepper pump doesn't cause a massive pH spike. This makes Integral (I) tuning much easier to stabilize. It acts as a Low-Pass Filter for the chemical concentrations.
+- **Evapotranspiration:** On a hot day, 50 mature plants can easily drink 10–15 liters. A 100L reservoir ensures the system does not need refilling every 24 hours.
+- **Drain-Back capacity:** In an NFT system, when the pump stops, the "film" in the channels drains back. The reservoir requires roughly 15–20% extra headspace to catch this volume without overflow.
 - **Light proofing:** the reservoir must be fully opaque. Any light penetration drives algae growth, which consumes nutrients, clogs the system, and destabilises pH. Black HDPE tanks or IBC totes with an opaque cover are preferred.
 - **Tight fit:** use a tight-fitting lid at all times to reduce evaporation (slowing EC drift), blocks ambient light, and prevents insects, and debris from entering the solution. Keep cutouts for plumbing and sensor cables small as practical and sealed.
 
@@ -130,7 +130,7 @@ Mixing Ratio     | 100:1 (Ideal for 1mL/min to 100mL/min pump range)
 
 #### 1.2.4. Mixing Ratio
 
-The **Mixing Ratio** refers to the relationship between the total reservoir volume and the maximum volume of a single dosing event. This ratio is the "sweet spot" for ensuring that your sensors can detect a change without the system becoming chemically unstable or "oscillating".
+The **Mixing Ratio** refers to the relationship between the total reservoir volume and the maximum volume of a single dosing event. This ratio is the "sweet spot" for ensuring that sensors can detect a change without the system becoming chemically unstable or "oscillating".
 - **High Ratio (e.g., 500:1):** Very stable, but slow to correct.
 - **Low Ratio (e.g., 20:1):** Very fast, but high risk of "jitter".
 
@@ -150,7 +150,7 @@ Requirements:
 - **Timeout**: Maximum fill time prevents overflow if sensor fails
 - **Safety**: Float switches provides hardware backup cutoff
 - **Valve type**: 24V NC (normally closed) solenoid - fails safe (closed)
-- **Hysteresis** in driving the ATO valve. If you triggered a refill the second the water dropped 1mm, your pump would "chatter" (rapidly flip on/off).
+- **Hysteresis** in driving the ATO valve. If a refill is triggered the moment the water drops 1mm, the pump chatters (rapidly flips on/off).
 
 Purpose:
 - A **continuous depth sensor** measure the liquid height to track consumption and guide the automatic top-off (ATO) feature
@@ -266,7 +266,7 @@ Requirements:
 
 #### 1.4.1. Requirements
 
-Before we can explore dosing pumps, we need to know the required dosing.
+Before selecting a dosing pump, the required dosing volume must be determined.
 
 In an active NFT or DWC system, pH creeps upward between doses due to two mechanisms:
 
@@ -336,7 +336,7 @@ Price             | \$10 – \$60   | \$60 – \$170   | ❌\$150 – \$400+
 A note about PCB Layout challenges:
 - **Brushed DC:** While it has the worst noise, the layout is simple. The noise comes from the motor, and can be mitigated using by placing a large decoupling capacitors as close to the motor terminals as possible.
 - **Stepper:** The challenge here is the high-speed switching frequency of the PWM by the driver. Requires a solid ground plane and keeping high-current motor traces short and physically isolated from the analog front-end.
-- **Brushless DC:** requires a 3-phase inverter layout. Any slight imbalance in trace length or impedance can lead to timing issues and significantly higher EMI. Requires you to manage signal integrity and thermal dissipation simultaneously, making it the most complex board to design.
+- **Brushless DC:** requires a 3-phase inverter layout. Any slight imbalance in trace length or impedance can lead to timing issues and significantly higher EMI. Managing signal integrity and thermal dissipation simultaneously makes it the most complex board to design.
 
 **✅Selected: Stepper Motor**. The Brushed DC is far to inaccurate.  The Brushless DC is very expensive. The Stepper appears to be the golden middle route.
 
@@ -387,11 +387,11 @@ Running the motor at 1A RMS (~60% of its 1.7A rating) will significantly reduce 
 
 ### 1.5. Dosing Reservoir Level Monitoring
 
-Monitoring the dosing reservoir (the small bottles of concentrated Nutrients and pH Down) is just as critical as monitoring your main 100L tank. In a "learning" PID system, an empty dosing bottle is a "silent killer" of your logic.
+Monitoring the dosing reservoir (the small bottles of concentrated Nutrients and pH Down) is just as critical as monitoring the main 100L tank. In a "learning" PID system, an empty dosing bottle is a "silent killer" of the control loop.
 
-50 mature plants are "hungry." We’ll be using ~70 mL of each concentrate daily.
+50 mature plants are "hungry." The system uses ~70 mL of each concentrate daily.
 - A 1L bottle will last about 4 weeks.
-- Without a level sensor, you have to manually check the bottles. A simple Non-contact Liquid Level Sensor on the outside of the dosing bottle can trigger an "Add Nutrients" alert to your phone before the system crashes.
+- Without a level sensor, bottles must be checked manually. A Non-contact Liquid Level Sensor on the outside of the dosing bottle can trigger an "Add Nutrients" alert before the system crashes.
 
 For monitoring dosing reservoirs in a hydroponic system, the XKC-Y25 series is the most highly recommended non-contact liquid level sensor. These sensors use capacitive sensing technology to detect the presence of liquid through non-metallic container walls, such as plastic or glass, without direct contact.
 
@@ -442,7 +442,7 @@ This current should be limited in hardware and firmware:
 
 #### 1.6.2. Nutrient A and B Channels
 
-"Nutrient A" and "Nutrient B" are Nitrate-based and Phosphate-based concentrates, that need to be kept separate in concentrate to prevent precipitation.  However, they are always dosed at a 1:1 ratio in normal operation — same STEP pulse count, at the same time.
+"Nutrient A" and "Nutrient B" are Nitrate-based and Phosphate-based concentrates, that need to be kept separate in concentrate to prevent precipitation.  At least initially, they are dosed 1:1 ratio in normal operation.
 
 Combining both pump motors on a single TMC2209 was considered and rejected:
 
@@ -455,11 +455,9 @@ Combining both pump motors on a single TMC2209 was considered and rejected:
 | Tubing wear compensation | Not possible per-pump     | Recalibrate each pump independently
 | Fault isolation          | One failure disables both | Identify which pump failed
 
-**✅Selected: Nutrition pumps have a dedicated driver.**
+**✅Selected: Nutrition pumps have a dedicated driver.**   Providing Nutrition pumps with dedicated drivers, future-proofs the system for independent step-count adjustment, which is the most effective way to handle the differing wear rates of Norprene tubing in Nitrate vs. Phosphate concentrates. The cost delta is one TMC2209 and glue (~$5). 
 
-**Rationale:** with stepper pumps the primary calibration concern shifts from flow-rate drift (eliminated by step counting) to tubing bore wear. Bore wear affects pump A and B at different rates depending on chemical exposure. Separate STEP channels allow independent step-count adjustment per pump without mechanical changes. The cost delta is one TMC2209 and glue (~$5). DIR is hardwired to 3.3V on all drivers — peristaltic pumps are self-sealing and never need direction reversal.
-
-**Future field change:** if combining is ever desired, tie the two coil outputs in parallel externally and leave one TMC2209 unpopulated (DNP). No PCB revision required.
+Note: DIR can be hardwired to 3.3V on all drivers — peristaltic pumps are self-sealing and never need direction reversal.
 
 
 ---
@@ -473,7 +471,7 @@ Why this is critical:
 - pH Drift: for glass probes, pH readings change by ~0.025 pH per 1°C deviation from the 25°C calibration point.
 - EC Drift: Conductivity is even more sensitive, changing by roughly 2%/°C. E.g. a reservoir temperature warming up from 18°C to 28°C, could result in a 20% error in nutrient concentration.
 
-To link your EZO-RTD to your pH and EC circuits, you must use a "read-then-write" loop. Atlas EZO circuits do not "talk" to each other directly on the I2C bus; your microcontroller must act as the bridge by reading the temperature and then sending it to the other sensors using `T,n` commands or `RT,n` on newer circuits.
+The EZO-RTD links to the pH and EC circuits via a "read-then-write" loop. Atlas EZO circuits do not communicate with each other directly on the I2C bus; the microcontroller acts as the bridge by reading the temperature and forwarding it to the other sensors using `T,n` commands (or `RT,n` on newer circuits).
 
 Requirements:
 - Suited continuous immersion in a mineral-heavy nutrient solution (high salts/calcium).
@@ -554,7 +552,7 @@ Complexity   | Low to moderate                | High (complex wiring & timing)
 Accuracy     | Highest (no interference)      | Moderate (switching noise/latency)
 Cost         | ~$40–$60 for all channels      | ~$15 for all channels
 
-**✅Selected: Isolated I2C**, because chemical probes (especially pH) require a constant charge to remain stable. Turning them off/on frequently causes "reading drift" and significantly slows down your data refresh rate.
+**✅Selected: Isolated I2C**, because chemical probes (especially pH) require a constant charge to remain stable. Turning them off/on frequently causes "reading drift" and significantly slows down the data refresh rate.
 
 #### 1.8.2. Parts considered
 
@@ -574,7 +572,7 @@ Price              | \$8 per channel  | ❌\$32 per channel  | \$20 per channel
 
 ### 1.9. Microcontroller Selection
 
-To manage the hydroponic system with high-precision probes and dosing pumps, your microcontroller needs to handle multiple communication protocols simultaneously while maintaining timing for dosing.
+The microcontroller must handle multiple communication protocols simultaneously while maintaining precise timing for dosing events.
 
 #### 1.9.1. Requirements
 
@@ -585,11 +583,11 @@ To manage the hydroponic system with high-precision probes and dosing pumps, you
 
 2. **Processing and Memory**
    - Single-Core
-   - Non-Volatile Memory: Essential for storing calibration data for your pH/EC probes and your "steps-per-mL" pump values so they aren't lost during power outages.
+   - Non-Volatile Memory: Essential for storing calibration data for the pH/EC probes and steps-per-mL pump values so they are not lost during power outages.
 
 3. **Power and Logic Levels**
    - 3.3V Logic: The ESP32 operates at 3.3V.
-   - ADC Resolution: If you bypass Atlas Scientific and use analog sensors, you need a 12-bit or 16-bit ADC. The ESP32's internal ADC is 12-bit but notoriously non-linear; an external ADS1115 (16-bit) is highly recommended for stable analog readings.
+   - ADC Resolution: If analog sensors are used instead of Atlas Scientific, a 12-bit or 16-bit ADC is required. The ESP32's internal ADC is 12-bit but notoriously non-linear; an external ADS1115 (16-bit) is recommended for stable analog readings.
 
 4. **Connectivity Requirements**
    - WiFi: Enables push alerts to a dashboard (like Home Assistant, Blynk, or Grafana) via MQTT or HTTP.
@@ -630,7 +628,7 @@ The system must manage a peak draw of approximately 4.7A when the 1.2A main pump
 
 2. **Integration of High-Precision Dosing and EMI Mitigation**
 The system uses stepper-based pumps to achieve micro-dosing in the microliter (µL) range, which is necessary because as little as 0.2 mL of acid can shift the pH of 100L of soft water. However, these steppers generate significant Electromagnetic Interference (EMI) through high-speed PWM switching.
-   - *Sensor Power Gating:* The design utilizes the ADM3260 isolation chips, allowing the firmware to shut down isolated DC/DC converters during sensor reads (via STEP_PDIS) to create a "blackout" of switching noise for the sensitive pH and EC probes. Note that these circuits require a "constant charge to remain stable" and to avoid "reading drift". 
+   = *Silent Read:* The design utilizes TMC2209 drivers for the stepper pumps. Their `!EN`-pin should be used to shutdown the drivers before taking a sensor reading. We suggest creating a `STEP_PDIS` signal to allow firmware disable these drivers, before taking a probe reading.
 
 3. **Maintaining Signal Integrity via Isolation**
 In a conductive nutrient solution, multiple probes (pH, EC, RTD) can create ground loops, where small currents leak between probes and distort readings.

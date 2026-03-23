@@ -4,28 +4,145 @@ This document describes the circuit design for the OPNhydroponics controller PCB
 
 The key challange with this board is the mix of a **sensitive** MCU and sensors (pH/EC), and their **noisy neighbors** such as a buck converter, isolated DC/DC converter (ADM3260), and high-noise steppers (TMC2209).
 
-In the design, we will diver deeper into the **Power Architecture**:
-1. Stability Under High-Current Peak Loads
-2. Integration of High-Precision Dosing and EMI Mitigation
+This document starts with the most critical parts of the Schematic and PCB Layout:
+1. Stability Under Peak Loads
+2. Integration of Precision Dosing and EMI Mitigation
 3. Maintaining Signal Integrity via Isolation
+
+After that it continues to fill in the details for:
+4. Main Pump and OTA Solenoid Drivers
+5. Reservoir Level Circuits
+6. ESP32-C6 Hookup
+7. EZO Circuits for the Probes
+8. Hand-Soldering
 
 
 ---
 
 
-## 1. Stability Under High-Current Peak Loads
+## 1. Stability Under Peak Loads
 
-The system must manage a **peak draw of approximately 4.7A** when the 1.2A main pump and two 1.53A nutrient pumps are active simultaneously on top of the amperage demanded by the Reflected 5V Rail and Solenoid Valve.
+The system must manage a **peak draw of approximately 4.7A** when the 1.2A main pump, the Solenoid Valve and two 1.53A nutrient pumps are active on top of the typical current draw from the Reflected 5V Rail and .
 
 Stability is provided by:
 - Bulk Capacitance that supply instantaneous current surges, preventing "voltage sags".
 - PCB Specifications: a 4-layer PCB with 2oz copper outer layers.
 
+The **main pump**, **stepper motors**, the **solenoid** and **buck converter** turns the PCB into a high-noise environment. Stepper drivers are notorious for creating Electromagnetic Interference (EMI) and ground bounce that can "ghost" the I2C bus or cause pH readings to jump.
+
+**Topology:**
+
+```
+ [PSU]
+   │
+   ├──► 24V Rail ──┬──► MOSFET ───► Main Pump
+   │               ├──► MOSFET ───► Solenoid Valve
+   │               ├──► TMC2209 ──► Stepper pH Down
+   │               ├──► TMC2209 ──► Stepper Nutrient A
+   │               └──► TMC2209 ──► Stepper Nutrient B
+[Buck 24V─►5V]
+   │
+   ├──► 5V Rail ───┬──► ESP32-C6 (makes its own 3.3V rail)
+   │               └──► LiDAR
+   │
+ [LDO 5V─►3V3]
+   │
+   └──► 3V3 Rail ──┬──► ADM3260 ──► pH EZO (isolated 3.3V via isoPower)
+                   ├──► ADM3260 ──► EC EZO (isolated 3.3V via isoPower)
+                   ├──► RTD EZO circuit
+                   ├──► BME280
+                   └──► BH1750
+```
+
+
+### 1.1. Protection Gauntlet
+
+The 24V enters the board and passes through a "protection gauntlet" before it reaches the motor drivers or the sensitive sensor logic:
+
+1. **DC Input Jack:** (Terminal Block).
+2. **Main Fuse (F1):** 7A Fast-Acting. Not using PTC, because of Response Time and Voltage Drop. This provides a 32% headroom over the 5.3A peak, while still being close to 6.5A rating of the PSU.
+3. **TVS Diode (D1):** 28V (SMCJ30A). If a massive overvoltage event occurs, the TVS diode will shunt the excess current to ground, potentially blowing the fuse but saving the rest of the PCB.
+4. **Reverse Polarity Protection (T1):** If power is connected in reverse polarity, this stops current instantly, saving the TMC2209s.
+5. **Main Bulk Capacitor (C3):** 1000µF 50V Electrolytic. The "local battery" that provides the surge current for simultaneaous motor steps.
+
+**How the Reverse Polarity Protection works:**
+
+Normal polarity (+24V at Source):
+- 33kΩ pulls gate toward +24V
+- Zener clamps gate at +12V (conducts in reverse/Zener mode when Vgate > 12V)
+- Vgs = 12 − 24 = −12V → **FET fully ON** ✓
+- Current through Zener: (24−12) / 33k = 0.36mA → 4.3mW dissipation, trivial
+
+Reverse polarity (supply plugged backwards → Source at −24V):
+- 33kΩ pulls gate toward 0V
+- Zener anode is now at +24V → clamps gate at 24−12 = +12V
+- Vgs = 12 − 0 = +12V → **FET stays OFF** ✓
+- +12V is within the ±20V Vgs(max) rating — safe ✓
+
+
+Given the 5.3A peak current identified in the sources, standard electrical practices suggest the following for 24V DC systems:
+- **Main Power Input (from Supply to PCB):** 18 AWG is recommended for currents up to 10A to minimize voltage drop over short runs.
+
+
+### 1.3. Buck Converter
+
+**24V to 5V (Logic/USB)**
+The design is based on Figure 10.1 of the [TPS62933 Datasheet](https://www.ti.com/lit/ds/symlink/tps62933.pdf?ts=1773728788941) and their [WEBENCH Power Designer](https://webench.ti.com/power-designer/switching-regulator).
+
+```
+                                  TPS62933DRLR      
+                            ┌───────────────────────┐
+24V_SAFE ─┬─────────────────┤ VIN (2)       BST (1) ├────┐   
+          │                 │                       │    │   
+        [Cin]               │                       │  [Cbst]
+          │           3.3V──┤ EN (3)         SW (6) ├────┘──────[L1]───────┬──► 5V
+         GND                │                       │                      │
+                   [Rrt] ───┤ RT (4)        GND (5) ├── GND             [3× Cout]
+                     │      │                       │                      │
+                    GND     │                FB (7) ├──┬─[R_top]──► 5V    GND
+                            │                       │  │
+                   [Css] ───┤ SS (8)                │  └─[R_bot]── GND
+                     │      └───────────────────────┘
+                    GND     
+
+Vout = 0.8V × (1 + R_top/R_bot)  →  5V = 0.8 × (1 + 52.3k/10k) ≈ 4.98V ✓
+Fsw  = 17293 × RT(kΩ)^(−0.942)   →  RT = 21kΩ → Fsw = 17293 × 21^(−0.942) ≈ 982 kHz ✓
+```
+
+Component Selection:
+- IC:   TPS62933DRLR (SOT583, synchronous buck, 3.8–30V in, 3A, 200kHz–2.2MHz)
+- L1:   10µH, 3A, DCR < 50mΩ (e.g. BournsSDR1307-100ML)
+- Cin:  10µF / **50V** ceramic (X5R or X7R)
+- Cout: 3×10µF / 10V ceramic (X5R or X7R)
+- Cbst: 100nF / 10V ceramic (BST to SW)
+- Css:  33nF (soft-start ≈ 5ms; minimum 6.8nF, do not float)
+- Rrt:  21kΩ to GND → Fsw = 17293 * 21k^(-0.942) = ~1MHz
+- R_top: 52.3kΩ 1%
+- R_bot: 10kΩ 1% (E96 series)
+- No external compensation required (internal loop compensation)
+- No external diode required (synchronous rectification)
+
+
+### 1.4 Lineair Regulator LDO (3.3V)
+
+**Design Rationale — why a linear LDO for 5V→3.3V:**
+The ESP32-C6's RF (Wi-Fi 6, BLE 5) and 12-bit SAR ADC are sensitive to supply noise.
+A switching regulator on the 3.3V rail would inject switching ripple at its operating frequency (hundreds of kHz) directly into the ADC reference and RF supply — degrading ADC accuracy and potentially increasing Wi-Fi packet error rate. An LDO has no switching element; its output noise floor is limited only by its PSRR and output capacitance, typically <50µVrms. The 1.7V dropout (5V→3.3V) means only P = 1.7 × 0.35 = 0.6W worst case — manageable on a small SOT-223 package without a heatsink.
+
+```
+5V ──┬──[10µF]──┬──► VIN ┌─────────┐ VOUT ──┬──[10µF]──┬──► 3.3V
+     │          │        │ AMS1117 │        │          │
+    ─┴─        ─┴─       │  -3.3   │       ─┴─        ─┴─
+    GND        GND       └────┬────┘       GND        GND
+                              │
+                             ─┴─
+                             GND
+```
 
 ---
 
 
-### 1.1. Bulk Capacitors are Your Friend
+### 1.5. Bulk Caps are Your Friend
 
 The use of a hierarchical capacitance strategy — employing a global reservoir and multiple local reservoirs — is fundamental to maintaining the chemical and thermal stability required for this high-precision 100L systems. This approach ensures that peak loads stay as local as possible.
 
@@ -60,7 +177,7 @@ The Engineering:
 ---
 
 
-### 1.2. PCB guidelines
+### 1.6. PCB guidelines
 
 To safely handle the peak **4.7A** load, the architecture mandates a **4-layer PCB** with **2oz copper** outer layers. This copper weight is essential for managing the heat and resistance of the 24V power traces under continuous 24/7 operation.
 
@@ -70,9 +187,19 @@ To safely handle the peak **4.7A** load, the architecture mandates a **4-layer P
 Layer | Name | Function               | Components
 ------|------|------------------------|--------------------------
 L1    | Top  | Signal layer           | MCU, LiDAR, I2C, UART, EZO, BNC
-L2    | GND  | Solid Main GND Plane   | One uninterrupted copper pour. This is your shield.
+L2    | GND  | Solid Main GND Plane   | One uninterrupted copper pour. This is the EMI shield.
 L3    | PWR  | 3.3V / 5V / 24V Planes | Seperate copper pours for low resistance.
 L4    | Bot  | Steppers / MOSFETs     | So GND plane shields them from signal layer
+
+
+#### Enclusure et al
+- Recommended: IP65 rated ABS enclosure, ~150×100×70mm
+- Cable glands for all wiring
+- Panel-mount BNC connectors for pH/EC/RTD probes (3×)
+- Optional: Clear lid for status LED visibility
+
+- **Size:** 100mm × 80mm (fits common enclosures)
+- **Finish:** HASL or ENIG
 
 
 #### Trace Widths
@@ -115,11 +242,7 @@ Plane and Routing Guidelines
 
 
 
-## 2. Integration of High-Precision Dosing and EMI Mitigation
-
-The MCU communicates with the TMC2209 drivers over a single UART bus. The required wiring:
-- One TX/RX pair from the MCU to all three drivers.
-- MS1/MS2 hard-wired on the PCB to set addresses 0, 1, and 2.
+## 2. Integration of Precision Dosing and EMI Mitigation
 
 The high precission steppers generate significant **Electromagnetic Interference (EMI)** through high-speed PWM switching. To mitigate this:
 - A *"Silent Read" Strategy* protects sensitive probes from the electromagnetic interference (EMI) generated by stepper PWM switching. The firmware shuts down the stepper drivers during sensor reads (via ENA) to create a "blackout" of switching noise for the sensitive pH and EC probes
@@ -130,15 +253,180 @@ The high precission steppers generate significant **Electromagnetic Interference
 ---
 
 
-### 2.1. "Silent Read"
+### 2.1. Stepper Driver Circuit (TMC2209)
 
-Since you are using pH Down and Nutrients, your logic should be:
-1. Turn OFF the TMC2209 drivers (using the ENN or Enable pin) while reading the sensors to ensure 100% electrical silence
+> All currents in this section are RMS currents. 
+
+```
+                24V (VM)
+           ┌───┬──┴──────┐
+           │   │         │
+        100µF 100nF      │  ← 220µF bulk + 2x 100nF local bypass per driver
+          ─┴─ ─┴─     VM │
+              ┌──────────┴───────────┐
+ 3.3V ───────►│ VIO                  │
+ GND ────────►│ GND                  │
+              │                      │
+ STEP_xxx ───►│ STEP          OA1 ───┼──► coil A+
+ 3.3V ───────►│ DIR           OA2 ───┼──► coil A-
+  GND ───────►│ EN            OB1 ───┼──► coil B+
+              │               OB2 ───┼──► coil B-
+UART bus─────►│ PDN_UART             │
+  MS1* ──────►│ MS1           BRA ───┼──── 110mΩ ──── GND   ← RSENSE: 1%, 1/4W 0805
+  MS2* ──────►│ MS2           BRB ───┼──── 110mΩ ──── GND
+  GND ───────►│ SPREAD               │
+  GND ───────►│ STDBY                │
+              │                      │
+see below  ──►│ VREF                 │
+              │      TMC2209         │
+              └──────────────────────┘
+```
+
+The Standard Application Circuit in Fig. 3.1 of the [TMC2209 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/tmc2209_datasheet_rev1.09.pdf) and [TM2209 EVAL Schematics](https://www.analog.com/media/en/evaluation-documentation/evaluation-design-files/TMC2209-EVAL_Layout_Data_V1.1.zip) show a typical Stepper Driver using the TMC2209. The design follows their recommendations:
+
+To start with the **obvious pins**, per §2.2 of the datasheet:
+- `ENN` should be connected to signal `STEP_PDIS`, so that the firmware can disable the driver for a "Silent Read".
+- A 22nF / 50V cap should be connected between the charge pump pins `CP0` and `CP1`.
+- A 100nF cap should be placed between the charge pump voltage `VCP` and `VS`.
+- `SPREAD` should be connected to GND to select StealthChop mode, per architecture.
+- A 2.2μF cap should be connected to `5VOUT` stabilize the 5V.
+- `CLK` should be tied to GND to select the internal clock.
+- `STEP` input should be connected to a dedicated signal, e.g. `STEP_PH_DH`.
+- `DIR` may be left unconnected, because it has an internal pull-down. A step impulse during `DIR=0` increases the microstep counter, per §1.3.1.  **Or, it it: ??** DIR hardwired to 3.3V. Peristaltic pumps are self-sealing — the rollers pinch the tube closed when stopped, so backflow cannot occur and direction reversal is never needed. If a pump runs backwards on first install, swap the coil A wires (OA1 ↔ OA2) on the connector.
+- `STDBY` input can disable the internal supply regulator.  It has an internal pull-down, and may be left unconnected. `IHOLD=0` handles standstill power saving without the register-reset complication of STDBY.
+ - The motor supply voltage `VS` requires filtering with two parallel ceramic low-ESR 100nF caps to handle the transients, and a 220µF electrolytic local bulk cap to keep the current spikes from appearing as voltage transients on the VM rail, per §3.1.
+- Connect the `Exposed Die Pad` to a GND plane. Provide as many as possible vias for heat transfer to GND plane.
+- `DIAG` open-drain output. Goes high when StallGuard4 detects a motor stall or when a driver error occurs (overtemperature, short circuit). Leave unconnected, because in UART mode, stall detection is preferred via the `DRV_STATUS` register rather than the DIAG pin — this is more informative (gives a numeric stall load value, not just a binary flag). If we end up with a free GPIO, we can use this to allow interrupt-driven stall detection without polling.
+- `INDEX` pulse output — by default emits one pulse per electrical period (every 4 full steps at 1× microstepping). Can be reconfigured via UART `IOIN` register to signal other events (e.g. first microstep position, stepper index). For dosing pumps, step count is controlled directly by the ESP32 (counted steps = known volume), so `INDEX` adds no value in normal operation, leave the pin floating. Place a DNP 1kΩ series + test point footprint for debugging if needed.
+
+Using a **single UART bus** with the MS1 and MS2 pins for addressing is the most "EZO-like" way to handle the **TMC2209** drivers — it keeps the pin count low and control digital:
+- `AD1` and `AD0` assigns a driver an unique UART node address.  These pins have internal pull-down resistors.
+   - for pH Dn, set address 0b00 → `AD1` and `AD0` unconnected
+   - for NUT A, set address 0b10 → `AD1` to 3V3 and `AD0` unconnected
+   - for NUT B, set address 0b11 → `AD1` and `AD0` tied to 3V3
+- `PDN_UART`should connect to the `STEP_BUS` signal, that then connects to the `RXD` on the MCU, and via a 1kΩ resistor to its `TXD`.  PDN_UART is an open-drain bidirectional pin. When the ESP32 TX drives HIGH to send a command, and the TMC2209's open-drain output momentarily pulls the bus LOW to begin its response (a brief overlap before software tri-states TX), a low-impedance conflict occurs between TX driving HIGH and the open-drain pulling LOW. The 1kΩ on TX limits the fault current during this window to (3.3V / 1kΩ) = 3.3 mA — safe for both the ESP32 output driver and the TMC2209 PDN_UART. 
+- The firmware should set `SENDDELAY` to ≥2 for all nodes. Otherwise, a non-addressed node might detect a transmission error upon read access to a different node. 
+- The firmware should configure ESP32-C6 UART1 in **half-duplex / single-wire mode** so TX is tri-stated (high-impedance) during the receive window. The TMC2209 then pulls the bus LOW open-drain to transmit its response, with no conflict from TX.
+- Some suggest adding a 100Ω series resistor on each PDN_UART pinc reates a small voltage drop that decouples each driver's input from the bus during contention, and limits the current path between drivers if two open-drain outputs are momentarily both active. We're not doing that because it is not listed in the datasheet or used in the EVAL board.
+
+The **output current** is set by:
+- The **R<sub>SENSE</sub>** shunt resistors measure the output currents. The TMC2209 measures the voltage drop across this resistor to determine actual coil current, then adjusts its PWM chopper duty cycle to regulate current to the `IRUN/IHOLD target`. §8 suggests 120 mΩ low-inductance resistors. Instead we use a 110 mΩ 1/4W to ensure it will not exceed the full-scale voltage of 325mV.
+- Set a hard limit using the V<sub>REF</sub> input of the TMC2209. This linearly scales the maximum current. The value for voltage $V_{REF}$, follows from the architecture that specifies that $V_{REF}$ should be set for a current corresponding to 90% of the maximum stepper current of 1.7 A<sub>RMS</sub>. 
+The formula from chapter 9 of the data sheet, shows that the current depends on $CS$, $V_{FS}$ and $V_{REF}$ and can be calculated as: 
+$$
+    \begin{align}
+        I_{RMS}  &= \frac{CS+1}{32} \times \frac{V_{FS}}{R_{SENSE} + 20 \rm{\ mΩ}} \times \frac{1}{\sqrt 2} \times \frac{V_{VREF}}{2.5 \rm{\ V}} \\
+        \rm{where\ \ } 
+        CS  &= \rm{current\ scale\ setting\ as\ set\ by\ the\ IHOLD\ and\ IRUN\ (default=31)} \nonumber \\
+        V_{FS}  &= \rm{full\textnormal{-}scale\ voltage\ set\ by\ vsense\ control\ bit\ (default=325\ mV)} \nonumber \\
+        R_{SENSE}  &= \rm{resistance\ of\ the\ sense\ resistors} = 110\ m\Omega \nonumber \\
+        V_{VREF} &= \rm{linearly\ scales\ the\ output\ current\ to\ the\ motor\ (2.5\ V\ for\ 100\%) } \nonumber
+    \end{align}
+$$
+With register $CS=31$ and the default $\textnormal{vsense control bit}$, the required $V_{VREF}$ follows as:
+$$
+    \begin{align}
+        0.9 \times 1.7\rm{\ A}  &= \frac{32}{32} \times \frac{325 \rm{\ mV}}{120 \rm{\ m\Omega} + 20 \rm{\ mΩ}} \times \frac{1}{\sqrt 2} \times \frac{V_{VREF}}{2.5 \rm{\ V}} \nonumber \\
+        \Rightarrow
+        V_{VREF} &= 0.9 \times 1.7\rm{\ A} \times \frac{120 \rm{\ m\Omega} + 20 \rm{\ mΩ}}{325 \rm{\ mV}} \times \sqrt 2 \times 2.5 \rm{\ V} 
+        \approx 2.16 \rm{\ V} \nonumber
+    \end{align}
+$$
+To create this voltage, use the 5V<sub>OUT</sub> pin with a a R<sub>H</sub> and R<sub>L</sub> **voltage divider**. Taking into account a $R_{VREF}=240 \rm\ M\Omega$, the required resistors follow as $R_{H} = 14 \rm{\ k\Omega}$ and $R_{L} = 10.7 \rm{\ k\Omega}$:
+$$
+    \begin{align}
+        V^{'}_{VREF} &= \frac{R_{L}}{R_{L}+R_{H}} \times 5 \rm{\ V} = \frac{10.7 \rm{\ k\Omega}}{10.7 \rm{\ k\Omega} + 14 \rm{\ k\Omega}} \times 5 \rm{\ V} \approx 2.16 \rm{\ V} \nonumber
+    \end{align}
+$$
+- The firmware try to to use an operating range of 70% to 80% corresponding to setting the **CS to 24 or 27**. Increase to 85–90% only if stalling occurs on aged tubing.
+
+CS value | Current limit| Target range
+--------:|-------------:|-------------
+24       |      1.19A   | 70%
+25       |      1.24A   | 73%
+26       |      1.29A   | 76%
+27       |      1.34A   | 79%
+28       |      1.43A   | 81%
+29       |      1.39A   | 84%
+30       |      1.48A   | 87%
+31       |      1.53A   | 90%
+
+#### Firmware Considerations 
+
+Talking about firmware, use *[TMCStepper](https://github.com/teemuatlut/TMCStepper)** for all TMC2209 driver configuration and status monitoring. It provides full UART register access: write IRUN=18, IHOLD=0, IHOLDDELAY=6, TPWMTHRS=0 at startup; read DRV_STATUS.SG_RESULT and temperature flags during operation. No alternative library provides this capability.
+
+Key UART registers to configure at startup are:
+
+| Register     | Value | Purpose 
+|--------------|-------|---------
+| `IHOLD`      |     0 | Zero standstill current (EN tied to GND — this is essential)
+| `IRUN`       |    24 | Run current ≈ 70% (CS=24 → 1.19A; increase to 27 for ~79% if stalling occurs — see CS table above) |
+| `IHOLDDELAY` |     6 | Steps between IRUN→IHOLD transition after last STEP pulse
+| `TPWMTHRS`   |     0 | StealthChop2 active at all speeds
+| `SENDDELAY`  |    ≥2 | Required for multi-driver bus. See note above.
+
+STEP pulses must be generated by hardware peripherals, not software loops. If the ESP32 is busy with a Wi-Fi request, SSL/TLS handshake, a software-timed pulse loop can stall for tens of milliseconds. A single missed or late pulse causes the stepper to lose a step — and since dosing accuracy is derived from step count × tube displacement constant, one lost step per dose accumulates into measurable calibration error over time.
+
+The recommended ESP32-C6 hardware options is to use the **RMT (Remote Control Transceiver):** The RMT peripheral generates arbitrary pulse sequences from a preloaded buffer with nanosecond resolution, independent of the CPU. Configure it to output N pulses at the target step frequency, then trigger it once per dose. When the burst completes it fires
+a done interrupt; the CPU core is free throughout.
+```
+// Pseudocode — ESP-IDF RMT approach
+rmt_config_t cfg = { .gpio_num = STEP_PH_DN, .clk_src = RMT_CLK_SRC_DEFAULT };
+rmt_channel_handle_t ch;
+rmt_new_tx_channel(&cfg, &ch);
+// preload N symbols: 50% duty, period = 1/step_freq
+rmt_transmit(ch, encoder, symbols, n_steps, NULL);
+// CPU is free; RMT fires done callback when burst finishes
+```
+It supports up to 4 independent TX channels on ESP32-C6 → one per STEP pin with one spare.
+
+#### Connectors
+
+The A200SX motor cable carries coil wires only (4 pins). the TMC2209 H-bridge drives the coils directly.
+
+| Parameter | Specification |
+|-----------|---------------|
+| Motor body connector | JST PH 2.0mm 4-pin (female, on pump body) |
+| Cable free-end connector | JST XH 2.5mm 4-pin (female) — PCB side |
+| Source | [ankoproducts.com/products/a200sx](https://ankoproducts.com/products/a200sx) |
+
+According to the NEMA 17 convention — JST PH 2.0mm 4-pin on motor body; cable free end terminates in JST XH 2.5mm 4-pin (commonly mislabelled "XH2.54"); XH series is 2.5mm pitch, not 2.54mm DuPont). PCB footprint: B4B-XH-A; verify on receipt [ankoproducts.com](https://ankoproducts.com/products/a200sx)
+
+
+
+JST XH 2.5mm 4-pin Assignment (verify against A200SX datasheet on receipt):
+┌─────┬────────────────┬─────────────────────────────────────┐
+│ Pin │ Signal         │ PCB connection                      │
+├─────┼────────────────┼─────────────────────────────────────┤
+│  1  │ Coil A+  (OA1) │ TMC2209 OA1                         │
+│  2  │ Coil A−  (OA2) │ TMC2209 OA2                         │
+│  3  │ Coil B+  (OB1) │ TMC2209 OB1                         │
+│  4  │ Coil B−  (OB2) │ TMC2209 OB2                         │
+└─────┴────────────────┴─────────────────────────────────────┘
+⚠ Verify pin order from A200SX datasheet before PCB layout. Coil swap (A↔B or polarity) only affects rotation direction; the TMC2209 handles both.
+
+Dosing Pump Connector (×3, PCB side): JST B4B-XH-A (4-position XH male header, 2.5mm pitch, right-angle TH, PCB mount) ×3
+- Mates with: JST XH 2.5mm 4-pin female housing on pump cable free end
+- Pitch: 2.5mm
+- 4 pins: coil A+, coil A−, coil B+, coil B−  (no VCC/GND)
+- Silkscreen label: "pH DN", "NUT A", "NUT B"
+- Right-angle orientation: cable exits horizontally toward board edge
+- Alternative: B4B-XH-AM (vertical TH) if cables must exit upward
+- Verify exact part on receipt — ARCHITECTURE.md notes connector mislabelled "XH 2.54mm" in 3D printer community; XH series is 2.5mm pitch
+
+
+---
+
+
+### 2.2. "Silent Read"
+
+The dosing sequence is:
+1. Turn OFF the TMC2209 drivers (using the !EN pin) while reading the sensors to ensure 100% electrical silence
 2. Read pH/EC (EZO sensors) and calculate Dose.
 4. Enable Drivers and Step the motors.
 5. Wait for the reservoir to mix before reading again.
 
-The firmware should use Use **StealthChop2** for dosing. It’s not just quieter for your ears; it generates significantly less Electrical Noise (EMI) than the high-torque SpreadCycle mode, which is better for your EZO-EC data integrity.
+The schematic or firmware should use **StealthChop2** for dosing. It generates significantly less Electrical Noise (EMI) than the high-torque SpreadCycle mode, which improves EZO-EC data integrity.
 
 Engineering note: the firmware can use the **TeensyStep** or **TMCStepper** library (by Peter Polidoro/teemuatlut).
 
@@ -146,8 +434,7 @@ Engineering note: the firmware can use the **TeensyStep** or **TMCStepper** libr
 ---
 
 
-### 2.2. Capacitor are here to help
-
+### 2.3. Capacitor to the Rescue
 The existing 220µF bulk caps at VM also suppress the **medium-frequency** switching ripple by providing charge locally, within the short trace between cap and VM pin, before the inductance of the supply path has time to cause a voltage dip.
 
 Recommended MF capacitors:
@@ -164,7 +451,7 @@ Rail | Place               | Peak Current | Value / Voltage | Dielectric        
 
 Note that the Benewake TF-Luna LiDAR includes a 100nF capacitor to debounce signals and prevent EMI-induced false triggers on the safety interlock lines.
 
-For **high-frequency bypass** (decoupling), the goal is to present the lowest possible impedance at the frequencies we care about. The capacitor value sets the resonant frequency with its parasitic inductance (ESL).
+For **high-frequency bypass** (decoupling), the goal is to present the lowest possible impedance at the target frequencies. The capacitor value sets the resonant frequency with its parasitic inductance (ESL).
 
 Recommended HF/VHF bypass capacitors:
 
@@ -193,11 +480,11 @@ Long PCB traces or component leads add inductance, which reduces the SRF. The pl
 For added protection, use **ferrite beads** on power inputs to further reject high-frequency noise.
 
 
-### 2.3 PCB Layout Strategy
+### 2.4 PCB Layout Strategy
 
 At 1.0A RMS, the TMC2209 drivers generate only a 1/4 of the heat compared to their 2.0A limit.
 - **A "Thermal Chimney":** Use a large GND plane on the bottom layer as a heatsink. Use a 4×4 array of 16 thermal vias, 0.3mm diameter, spaced 1mm apart under the TMC2209 center pad connecting to the GND plane to pull heat away.
-- **EMI Shielding:** By keeping your high-speed switching (stepper drivers) **on the bottom** (L4) and your sensitive logic on the top (L1), the internal Ground and Power planes act as a Faraday shield, preventing motor noise from "leaking" into your pH and EC readings. 
+- **EMI Shielding:** By keeping high-speed switching (stepper drivers) **on the bottom** (L4) and sensitive logic on the top (L1), the internal Ground and Power planes act as a Faraday shield, preventing motor noise from "leaking" into the pH and EC readings. 
 
 
 ---
@@ -207,9 +494,9 @@ At 1.0A RMS, the TMC2209 drivers generate only a 1/4 of the heat compared to the
 
 In a conductive nutrient solution, multiple probes (pH, EC, RTD) can create ground loops, where small currents leak between probes and distort readings.  
 
-Our defenses:
-   - *Isolation:* Isolated DC and I2C via the ADM3260 chip, providing a physical air gap to eliminate ground loops.  
-   - *PCB Zone Map*: Physically separate Noisy and Sensitive neighbors.
+Mitigation strategy:
+   - *Isolation circuit:* Isolated DC and I2C via the ADM3260 chip, providing a physical air gap to eliminate ground loops.  
+   - *Physical distance*: Separate the Noisy and Sensitive neighbors.
    - *Pi-Filters:* Ensures noise of the isolation chip itself does not "leak" into the high-impedance analog front-end of the pH and EC circuits.
 
 To prevent Ground Loops, the architecture uses Isolated I2C via the ADM3260 chip, providing a physical air gap to eliminate these loops.  
@@ -218,9 +505,11 @@ To prevent Ground Loops, the architecture uses Isolated I2C via the ADM3260 chip
 ---
 
 
-### 3.1. Isolation (ADM3260)
+### 3.1. Isolation Circuit (ADM3260)
 
-The Typical Applcation Diagram in Figure 20 of the [ADM3260 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf) and [UG-724](https://www.analog.com/media/en/technical-documentation/user-guides/EVAL-ADM3260MEBZ_UG-724.pdf) show a typical Isolated I2C Interface using the ADM3260 and its suggested footprint. We follow their lead:
+The Typical Applcation Diagram in Fig. 20 of the [ADM3260 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf) and [UG-724](https://www.analog.com/media/en/technical-documentation/user-guides/EVAL-ADM3260MEBZ_UG-724.pdf) show a typical Isolated I2C Interface using the ADM3260. The design follows their recommendations[^MOREAMD3260] :
+
+[^MOREAMD3260]: See also, Analog Devices ADM3260 Datasheet: The definitive source for "Layout Guidelines" and "EMI Considerations" (See pages 16-18); Atlas Scientific USB Isolator Schematic: Their public hardware documentation shows the ADM3260 implementation for I2C isolation; AN-0971 Application Note: "Recommendations for Control of Radiated Emissions with isoPower Devices."
 
 - **V<sub>SEL</sub>** sets the isolated output voltage V<sub>ISO</sub>. For V<sub>ISO</sub>=3.3V, create a voltage divider matches so that V<sub>SEL</sub> matches the 1.25V reference voltage: 
 $$
@@ -228,36 +517,27 @@ $$
   = 3.3\rm{\,V} \cdot \frac{10\,kΩ}{10\,kΩ+16.9\,kΩ} = 1.23\rm{V}
 $$
 
-- **I2C pullups** are required on the isolated side, just like the main side. A "stiff" 2.2kΩ here is better for fighting the noise. Use 1% tolerance resistors. This ensures the I2C rise times are identical on SDA and SCL, preventing timing "jitter" that can occur in high-noise environments.
+- **I2C pullups** are required on the isolated side, just like the main side. A "stiff" 2.2kΩ here is better for fighting the noise. Use 1% tolerance resistors to ensures the I2C rise times are identical on SDA and SCL, preventing timing "jitter" that can occur in high-noise environments.
 
 - **Bypass capacitors** are mandatory for the device to function correctly and provide stable isolated power.
   - 10 μF // 100 nF from V<sub>IN</sub> to GND<sub>P</sub>.
   - 10 μF // 100 nF from V<sub>ISO</sub> to GND<sub>ISO</sub>.
-  - 10 μF // 100 nF from VDD<sub>P</sub> to GND<sub>P</sub>.
-  - 10 μF // 100 nF from VDD<sub>ISO</sub> to GND<sub>ISO</sub>.
-  - for 100 nF: use 0402 X7R capacitors within 1 or 2 mm of the pins (for noise)
+  - 100 nF // 10 nF from VDD<sub>P</sub> to GND<sub>P</sub>.
+  - 100 nF // 10 nF from VDD<sub>ISO</sub> to GND<sub>ISO</sub>.
   - for 10 μF: use 0805 X7R capacitors within 4 mm of the pins (for power stability)
+  - for 10 nF: use 0402 X7R capacitors within 1 or 2 mm of the pins (for noise suppression)
+  - for 100 nF: use 0402 X7R capacitors within 1 or 2 mm of the pins (for noise suppression)
+  - follow the suggested footprint (Fig. 23 in the [datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf)) for PCB placement
 
 - The signal **`EZO_PDIS`** is intended for powering down sensors between long monitoring intervals. Power to the sensors need to be restored and stabilized well before the measurement is taken.
-
-To visualize the ADM3260 on a 4-layer stack-up, imagine the chip sitting like a bridge over a **moat**. The goal is to ensure that no electrical path exists between the Mainland and the Island except through the silicon of the chip itself. Ensure the Moat is at least 6mm wide for high-voltage safety (creepage).
-
-Below is how the layers should be carved to maintain 2.5kV isolation:
-
-Layer    | Mainland               | The Moat      | The Island (pH or EC)
----------|------------------------|---------------|----------------------
-L1 (Top) | MCU, LiDAR             | No Copper     | EZO Socket, BNC
-L2 (GND) | Solid Main GND Plane   | Stitching Cap | Floating GND_ISO
-L3 (PWR) | 3.3V / 5V / 24V Planes | Stitching Cap | Floating V_ISO (3.3V)
-L4 (Bot) | Steppers and glue      | No Copper     | (Keep empty for signal)
 
 
 ---
 
 
-### 3.2. PCB Zone Map
+### 3.2. Physical distance
 
-Physical distance is your best friend to limit the effect of EMI. Separate the "Noisy" from the "Quiet."
+Physical distance is the most effective EMI mitigation. Separate the "Noisy" from the "Quiet."
 
 The gold standard for this "Multi-EZO" PCB layout is the [Atlas Scientific i4 InterLink](https://files.atlas-scientific.com/i4-interlink-datasheet.pdf) and the [Whitebox Labs T3 schematics](https://github.com/whitebox-labs/tentacle-raspi-oshw).
 
@@ -280,16 +560,31 @@ The gold standard for this "Multi-EZO" PCB layout is the [Atlas Scientific i4 In
    - Noise profile: zero tolerance
 
 
+To visualize the ADM3260 on a 4-layer stack-up, imagine the chip sitting like a bridge over a **Moat**. The goal is to ensure that no electrical path exists between the Mainland and the Island except through the silicon of the chip itself. Ensure the Moat is at least 6mm wide for high-voltage safety (creepage).
+
+Below is how the layers should be carved to maintain 2.5kV isolation:
+
+Layer    | Mainland               | The Moat                  | The Island (pH or EC)
+---------|------------------------|---------------------------|----------------------
+L1 (Top) | MCU, LiDAR             | No Copper                 | EZO Socket, BNC
+L2 (GND) | Solid Main GND Plane   | Stitching Cap[^STITCHCAP] | Floating GND_ISO
+L3 (PWR) | 3.3V / 5V / 24V Planes | Stitching Cap             | Floating V_ISO (3.3V)
+L4 (Bot) | Steppers and glue      | No Copper                 | (Keep empty for signal)
+
+
+[^STITCHCAP]: See the next paragraph.
+
+
 ---
 
 
 ### 3.3. Self Defense (π-filters)
 
-While we disable the stepper motors to stop external EMI, the ADM3260 itself is a switching power supply. A pi-filter at the V_ISO ensures that the internal noise of the isolation chip does not "leak" into the high-impedance analog front-end of the pH and EC circuits.
+Although disabling the stepper motors eliminates external EMI, the ADM3260 itself is a switching power supply. A pi-filter at the V_ISO ensures that the internal noise of the isolation chip does not "leak" into the high-impedance analog front-end of the pH and EC circuits.
 
 >The ADM3260 uses an internal isoPower transformer switching at ~180MHz, it can cause the "Island" to act like a radio antenna.
 
-To mitigate the EMI:
+To mitigate the Electromagnetic Interference (EMI):
 - Add footprints for **Ferrite beads** (but for now: populate with 0Ω)
   - FB from V<sub>ISO</sub> to the EZO mezzanine.
   - FB from GND<sub>ISO</sub> to the EZO mezzanine.
@@ -303,7 +598,7 @@ To mitigate the EMI:
         GND_ISO ───+───────+───────────────+─────
       ```
 
-- Use the **"Stitching Capacitance" trick**: Extend GND<sub>P</sub> and GND<sub>ISO</sub> on seperate inner layers into the moat. The capacitive coupling of the structure is calculated with the following basic relationships for parallel plate capacitors:[^A-0971]
+- Use the **"Stitching Capacitance" trick**: place a small amount of "stitching capacitance" across the isolation barrier. This is often achieved by overlapping internal PCB layers or using a dedicated Y-rated capacitor. Extend GND<sub>P</sub> and GND<sub>ISO</sub> on seperate inner layers into the moat. The capacitive coupling of the structure is calculated with the following basic relationships for parallel plate capacitors:[^A-0971]
 $$
     \begin{align}
       C  &= \frac{A\varepsilon}{d} \rm{\ and\ } \varepsilon=\varepsilon_0\times\varepsilon_r  \\
@@ -319,222 +614,596 @@ $$
 [^BLM18]: Murata EMI Guide: Recommends the BLM18 series ferrite beads for suppressing high-frequency noise in isolated DC/DC converters.
 [^A-0971]: [A-0971](https://www.analog.com/en/resources/app-notes/an-0971.html)
 
-- To futher mitigate EMI, consider using a **Via Fence and Guard Ring** to limit edge radiation.[^A-0971]
-
-
-
-
-
-
-
-
-
-
+- To reduce, consider using a **Via Fence and Guard Ring** to limit edge radiation.[^A-0971]
 
 
 ---
 
 
+## 4. Main Pump and OTA Solenoid Drivers
 
 
+All pumps and the ATO valve use the same 24V rail and identical driver circuits.
 
-## Block Diagram
-
-```
-                           ┌─────────────┐
-                           │  ESP32-C6   │
-                           │             │
-                           └──────┬──────┘
-                                  │
-         ┌──────────────────┬─────┴───────────────┐
-         │                  │                     │
-    ┌────┴────┐        ┌────┴────┐         ┌──────┴──────┐
-    │  I2C    │        │  GPIO   │         │    UART     │
-    │  Bus    │        │         │         │    Bus      │
-    └────┬────┘        └────┬────┘         └──────┬──────┘
-         │                  │──────────────┐      │
-    ┌────┴───────┐  ┌───────┴────────┐     │      │
-    │ pH EZO     │  │ LiDAR          │  ┌──┴──────┴───────┐
-    │ EC EZO     │  │ Float switches │  │ Dosing steppers │
-    │ RTD EZO    │  │ Main pump      │  └─────────────────┘
-    └────────────┘  │ OTA valve      │
-                    └────────────────┘
-```
-
-```
-                       ┌─────────────────────────────────────────────────────┐
-                       │                    CONNECTORS                       │
-                       │  ┌─────┐ ┌─────┐ ┌─────┐  ┌──────────┐ ┌─────────┐  │
-                       │  │ BNC │ │ BNC │ │ BNC │  │ Float SW │ │  LiDAR  │  │
-                       │  │ pH  │ │ EC  │ │ RTD │  │  2×JST2P │ │  JST4P  │  │
-                       │  └──┬──┘ └──┬──┘ └──┬──┘  └────┬─────┘ └────┬────┘  │
-                       └─────┼───────┼───────┼──────────┼────────────┼───────┘
-                             │       │       │          │            │
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                                    PCB                                          │
-│  ┌─────────────┐   ┌───────────────────────────────────────────────────────┐    │
-│  │   POWER     │   │                       SENSORS                         │    │
-│  │             │   │  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐       │    │
-│  │ 24V ──►5V   │   │  │ EZO-pH │  │ EZO-EC │  │EZO-RTD │  │ BME280 │       │    │
-│  │     ──►3.3V │   │  │  I2C   │  │  I2C   │  │  I2C   │  │  I2C   │       │    │
-│  │             │   │  └───┬────┘  └───┬────┘  └───┬────┘  └───┬────┘       │    │
-│  └──────┬──────┘   │      └───────────┴───────────┴───────────┘            │    │
-│         │          │                        │ I2C Bus                      │    │
-│         │          │  ┌──────────────────┐  ┌───────────────────────────┐  │    │
-│         │          │  │                  │  │    Float SW (×2)          │  │    │
-│         │          │  │                  │  │    LOW:  GPIO0            │  │    │
-│         │          │  │                  │  │    HIGH: GPIO1            │  │    │
-│         │          │  └──────────────────┘  └───────────────────────────┘  │    │
-│         │          └───────────────────────────────────────────────────────┘    │
-│         │                                   │                                   │
-│         │          ┌────────────────────────┴─────────────────────────────┐     │
-│         │          │               ESP32-C6-WROOM-1                       │     │
-│         │          │  ┌──────────────────────────────────────────────┐    │     │
-│         └─────────►│  │  GPIO4/5: I2C        GPIO2:  ATO_VALVE       │    │     │
-│                    │  │  GPIO7:   HC_TRIG    GPIO3:  HC_ECHO         │    │     │
-│                    │  │  GPIO0:   FLOAT_LOW  GPIO1:  FLOAT_HIGH      │    │     │
-│                    │  │  GPIO6:   EZO_PDIS   GPIO10: PUMP_MAIN       │    │     │
-│                    │  │  GPIO11:  STEP_PH_DN GPIO15: STEP_NUT_A      │    │     │
-│                    │  │  GPIO19:  STEP_NUT_B GPIO21/22: TMC_UART     │    │     │
-│                    │  └──────────────────────────────────────────────┘    │     │
-│                    └──────────────────────────────────────────────────────┘     │
-│                                            │                                    │
-│         ┌──────────────────────────────────┼──────────────────────────────┐     │
-│         │           PUMP/VALVE DRIVERS (all 24V)                          │     │
-│         │  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐     │     │
-│         │  │ 24V    │  │ 24V    │  │ 24V    │  │ 24V    │  │ 24V    │     │     │
-│         │  │ Main   │  │ pH Dn  │  │ Nut A  │  │ Nut B  │  │ ATO    │     │     │
-│         │  │ Pump   │  │ Dose   │  │ Dose   │  │ Dose   │  │ Valve  │     │     │
-│         │  └────────┘  └────────┘  └────────┘  └────────┘  └────────┘     │     │
-│         └─────────────────────────────────────────────────────────────────┘     │
-└─────────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 1. Power Supply Section
-
-The **main pump**, **stepper motors**, the **solenoid** and **buck converter** turns the PCB into a high-noise environment. Stepper drivers are notorious for creating Electromagnetic Interference (EMI) and ground bounce that can "ghost" your I2C bus or cause your pH readings to jump.
-
-**Topology:**
-
-```
- [PSU]
-   │
-   ├──► 24V Rail ──┬──► MOSFET ───► Main Pump
-   │               ├──► MOSFET ───► Solenoid Valve
-   │               ├──► TMC2209 ──► Stepper pH Down
-   │               ├──► TMC2209 ──► Stepper Nutrient A
-   │               └──► TMC2209 ──► Stepper Nutrient B
-[Buck 24V─►5V]
-   │
-   ├──► 5V Rail ───┬──► ESP32-C6 (makes its own 3.3V rail)
-   │               └──► LiDAR
-   │
- [LDO 5V─►3V3]
-   │
-   └──► 3V3 Rail ──┬──► ADM3260 ──► pH EZO (isolated 3.3V via isoPower)
-                   ├──► ADM3260 ──► EC EZO (isolated 3.3V via isoPower)
-                   ├──► RTD EZO circuit
-                   ├──► BME280
-                   └──► BH1750
-```
-
-
-
-### 1.1. Protection Gauntlet
-
-The 24V enters the board and passes through a "protection gauntlet" before it reaches the motor drivers or the sensitive sensor logic:
-
-1. **DC Input Jack:** (Terminal Block).
-2. **Main Fuse (F1):** 7A Fast-Acting. Not using PTC, because of Response Time and Voltage Drop. This provides a 32% headroom over the 5.3A peak, while still being close to 6.5A rating of the PSU.
-3. **TVS Diode (D1):** 28V (SMCJ30A). If a massive overvoltage event occurs, the TVS diode will shunt the excess current to ground, potentially blowing the fuse but saving the rest of the PCB.
-4. **Reverse Polarity Protection (T1):** If you plug the power in backward, this stops the current instantly, saving the TMC2209s.
-5. **Main Bulk Capacitor (C3):** 1000µF 50V Electrolytic. The "local battery" that provides the surge current for simultaneaous motor steps.
-
-**How the Reverse Polarity Protection works:**
-
-Normal polarity (+24V at Source):
-- 33kΩ pulls gate toward +24V
-- Zener clamps gate at +12V (conducts in reverse/Zener mode when Vgate > 12V)
-- Vgs = 12 − 24 = −12V → **FET fully ON** ✓
-- Current through Zener: (24−12) / 33k = 0.36mA → 4.3mW dissipation, trivial
-
-Reverse polarity (supply plugged backwards → Source at −24V):
-- 33kΩ pulls gate toward 0V
-- Zener anode is now at +24V → clamps gate at 24−12 = +12V
-- Vgs = 12 − 0 = +12V → **FET stays OFF** ✓
-- +12V is within the ±20V Vgs(max) rating — safe ✓
-
-
-### 1.2 Wire Gauges
-
-Given the 5.3A peak current identified in the sources, standard electrical practices suggest the following for 24V DC systems:
-- **Main Power Input (from Supply to PCB):** 18 AWG is recommended for currents up to 10A to minimize voltage drop over short runs.
+Standard electrical practices suggest the following for 24V DC systems:
 - **Individual Actuators (Pumps and Solenoids):** 20 AWG or 22 AWG is sufficient for the individual 1.2A to 1.5A loads of the pumps and valves.
 
 
-### 1.3 Buck Converter
+### 4.1. MOSFET Selection Summary
 
-**24V to 5V (Logic/USB)**
-The design is based on Figure 10.1 of the [TPS62933 Datasheet](https://www.ti.com/lit/ds/symlink/tps62933.pdf?ts=1773728788941) and their [WEBENCH Power Designer](https://webench.ti.com/power-designer/switching-regulator).
+Design Strategy: All-SMD design with appropriately-sized MOSFETs for each load type.
 
-```
-                                  TPS62933DRLR      
-                            ┌───────────────────────┐
-24V_SAFE ─┬─────────────────┤ VIN (2)       BST (1) ├────┐   
-          │                 │                       │    │   
-        [Cin]               │                       │  [Cbst]
-          │           3.3V──┤ EN (3)         SW (6) ├────┘──────[L1]───────┬──► 5V
-         GND                │                       │                      │
-                   [Rrt] ───┤ RT (4)        GND (5) ├── GND             [3× Cout]
-                     │      │                       │                      │
-                    GND     │                FB (7) ├──┬─[R_top]──► 5V    GND
-                            │                       │  │
-                   [Css] ───┤ SS (8)                │  └─[R_bot]── GND
-                     │      └───────────────────────┘
-                    GND     
+| Load | Current | MOSFET | Package | RDS(on) @ 4.5V | Margin | Rationale |
+|------|---------|--------|---------|----------------|--------|-----------|
+| **Main Pump (AUBIG DC40-1250)** | 1.2A | **IRLR2905** | DPAK | 40mΩ | 35× | PWM capable, SMD |
+| **ATO Solenoid** | 500mA | **AO3400A** | SOT-23 | 33mΩ | 11× | Low cost, efficient |
 
-Vout = 0.8V × (1 + R_top/R_bot)  →  5V = 0.8 × (1 + 52.3k/10k) ≈ 4.98V ✓
-Fsw  = 17293 × RT(kΩ)^(−0.942)   →  RT = 21kΩ → Fsw = 17293 × 21^(−0.942) ≈ 982 kHz ✓
-```
+Dosing pumps (A200SX) are driven by TMC2209 internal H-bridges — no discrete MOSFET required.
 
-Component Selection:
-- IC:   TPS62933DRLR (SOT583, synchronous buck, 3.8–30V in, 3A, 200kHz–2.2MHz)
-- L1:   10µH, 3A, DCR < 50mΩ (e.g. BournsSDR1307-100ML)
-- Cin:  10µF / **50V** ceramic (X5R or X7R)
-- Cout: 3×10µF / 10V ceramic (X5R or X7R)
-- Cbst: 100nF / 10V ceramic (BST to SW)
-- Css:  33nF (soft-start ≈ 5ms; minimum 6.8nF, do not float)
-- Rrt:  21kΩ to GND → Fsw = 17293 * 21k^(-0.942) = ~1MHz
-- R_top: 52.3kΩ 1%
-- R_bot: 10kΩ 1% (E96 series)
-- No external compensation required (internal loop compensation)
-- No external diode required (synchronous rectification)
+**Power Dissipation Analysis:**
+- IRLR2905 (Main pump): 1.2A² × 0.04Ω = **58mW** (DPAK handles easily)
+- AO3400A (ATO): 500mA² × 0.033Ω = **8mW** (very low for SOT-23)
+
+**Benefits:**
+- ✅ **100% SMD design** - entire board can use pick-and-place assembly
+- ✅ **Compact footprint** - DPAK + 5× SOT-23 (vs 6× TO-220 through-hole)
+- ✅ **Production-friendly** - no manual through-hole soldering required
+- ✅ **Lower assembly cost** - automated SMD assembly throughout
+- ✅ **Appropriate sizing** for each load (not overkill)
+- ✅ **All logic-level compatible** (work with 3.3V GPIO)
+- ✅ **Consistent design** - all MOSFETs are SMD packages
+- ✅ **AO3400A optimization** - Lower RDS(on) (33mΩ vs 100mΩ), lower cost ($0.10 vs $0.20)
+
+**Part Numbers:**
+- Q1 (Main Pump): **IRLR2905** or IRLR2905ZPBF (Infineon, DPAK/TO-252)
+- Q2 (ATO Solenoid): **AO3400A** (Alpha & Omega, SOT-23) - Primary choice
+- Alternative for Q2: BSS214N / BSS214NH6327XTSA1 (Infineon, 5A, SOT-23)
 
 
-### 1.4 LDO (3.3V)
+⚠️ **CRITICAL for Main Pump**: Brushless motor requires stable, low-ripple DC power supply.
 
-**Design Rationale — why a linear LDO for 5V→3.3V:**
-The ESP32-C6's RF (Wi-Fi 6, BLE 5) and 12-bit SAR ADC are sensitive to supply noise.
-A switching regulator on the 3.3V rail would inject switching ripple at its operating frequency (hundreds of kHz) directly into the ADC reference and RF supply — degrading ADC accuracy and potentially increasing Wi-Fi packet error rate. An LDO has no switching element; its output noise floor is limited only by its PSRR and output capacitance, typically <50µVrms. The 1.7V dropout (5V→3.3V) means only P = 1.7 × 0.35 = 0.6W worst case — manageable on a small SOT-223 package without a heatsink.
+| Specification | Minimum | Recommended | Ideal (Commercial) |
+|---------------|---------|-------------|-------------------|
+| **Voltage** | 12V DC ±5% | 12V DC ±2% | 12V DC ±1% |
+| **Current** | 3A (36W) | 5A (60W) | 10A (120W) |
+| **Ripple** | <200mV p-p | <100mV p-p | <50mV p-p |
+| **Regulation** | Line ±5% | Line/Load ±2% | Line/Load ±1% |
+| **Inrush Handling** | 2× rated | 2× rated | 3× rated |
+| **Use Case** | Budget (no PWM) | Standard (PWM OK) | Professional |
 
-```
-5V ──┬──[10µF]──┬──► VIN ┌─────────┐ VOUT ──┬──[10µF]──┬──► 3.3V
-     │          │        │ AMS1117 │        │          │
-    ─┴─        ─┴─       │  -3.3   │       ─┴─        ─┴─
-    GND        GND       └────┬────┘       GND        GND
-                              │
-                             ─┴─
-                             GND
-```
 
 ---
 
 
-## 2. ESP32-C6 Section
+### 4.2. Main Pump
 
-### 2.1 DevKit Pin Headers
+
+**Installation Notes:**
+1. Pump must be fully submerged in water before power-on (prevents dry-run damage)
+2. Mount pump vertically or horizontally, avoid inverted position
+3. Use 1/2" ID vinyl or silicone tubing on barbed fittings; secure with hose clamps
+4. Add inline strainer/filter to prevent debris clogging impeller
+5. Test PWM control at low duty cycles to find minimum stable speed
+6. Allow 10-15 second startup delay in software for motor initialization
+
+```
+                                    24V
+                                     │
+                        ┌────────────┼────┬──── 24V rail
+                        │            │    │
+                        │           C2  ─┴─
+                        │          100nF GND (local bypass)
+                        │            │
+                       D1          PUMP+
+                    (SS34)          │
+                        │          PUMP
+                        │         (1.2A)
+               ┌────────┴───────┐   │
+               │     DRAIN      │   │
+        ┌──────┤  Q1            ├───┴── PUMP-
+        │      │  IRLR2905      │
+        │      │  (DPAK)        │
+        │      └───────┬────────┘
+        │           SOURCE
+        │              │
+       R2             ─┴─
+      100Ω            GND
+        │
+        ├────────────────────────────────── Gate (Q1)
+        │                                       │
+GPIO10 ─┘                                      R1
+                                              10kΩ (pull-down)
+                                               │
+                                              ─┴─
+                                              GND
+
+Hardware cutoff — FLOAT_LOW (water-low) overrides GPIO10:
+
+GPIO0 ──── R_base (4.7kΩ) ──── Base ┐
+                                     │ Q9: MMBT3904 NPN
+                          Emitter ───┴─── GND
+                          Collector ─────────────────────────► Gate (Q1)
+
+When GPIO0 HIGH (water low): Q9 saturates → Gate clamped to ≤0.2V → Q1 OFF (hardware)
+When GPIO0 LOW  (water OK):  Q9 off      → Gate driven by GPIO10 normally
+
+C2: 100nF / 50V ceramic (X7R, 0805)
+- Local bypass capacitor for switching transients
+- Place within 5mm of Q1 DRAIN pin
+- Reduces high-frequency noise on 24V rail
+
+Q1: IRLR2905 (Logic-level N-MOSFET, DPAK/TO-252)
+- VDS = 55V, ID = 42A
+- RDS(on) = 40mΩ @ VGS=4.5V, 27mΩ @ VGS=10V
+- VGS(th) = 1.5V (works with 3.3V logic)
+- Power dissipation: 1.2A² × 0.04Ω = 58mW
+- Current margin: 35× (42A / 1.2A)
+- SMD package for automated assembly
+- PWM capable: ESP32 GPIO10 can output PWM for variable pump speed control
+
+D1: SS34 (3A Schottky flyback diode, SMC)
+- Handles main pump inductive kickback
+```
+
+#### Speed Control
+
+The main pump supports PWM speed control via the 24V power input. The ESP32-S3 can generate PWM on GPIO10 to modulate the MOSFET gate, providing variable pump speed:
+
+```
+PWM Duty Cycle vs Flow Rate (typical):
+- 100% duty cycle: 500-510 L/H (full flow)
+- 75% duty cycle: ~375-380 L/H (75% flow)
+- 50% duty cycle: ~250-255 L/H (50% flow)
+- 25% duty cycle: ~125-130 L/H (25% flow, may stall)
+- Minimum: ~30-40% duty recommended to prevent stall
+
+ESP32-S3 PWM Configuration (suggested):
+- Frequency: 25 kHz (above audible range, smooth motor control)
+- Resolution: 10-bit (0-1023 values for fine control)
+- Channel: LEDC PWM channel 0
+- Pin: GPIO10 (same as pump control)
+
+Benefits of PWM Control:
+- Adjust circulation rate for different growth stages
+- Reduce power consumption during low-demand periods
+- Lower noise levels at reduced speeds
+- Fine-tune nutrient flow for optimal plant uptake
+- Extend pump lifespan with reduced wear
+```
+
+#### Power Connector
+
+```
+Phoenix Contact MSTB 2.5/2-ST-5.08 (2-position screw terminal)
+- Pitch: 5.08mm (0.2")
+- Wire size: 24-12 AWG (for 1.5A @ 12V)
+- PCB mount: Through-hole or SMD
+- Mating plug: MSTB 2.5/2-STF-5.08 (optional, can use direct wire)
+- Alternative: Phoenix Contact 1803280 (same as I2C) for consistency
+
+Pin Assignment:
+Pin 1: 24V_PUMP (switched via Q1)
+Pin 2: GND
+
+Pump Side Connection Options:
+1. Wire leads (most common) - strip and insert into screw terminal
+2. 5.5×2.1mm barrel jack - add PCB-mount jack in parallel
+3. Anderson Powerpole 15A - industrial alternative
+```
+
+PCB Layout Notes:
+- Place screw terminal at board edge for easy access
+- 24V trace width: 50 mil (1.27mm) minimum for main pump
+- Keep Q1 and screw terminal close to minimize trace resistance
+- Add test points for 24V_SWITCHED and GND for diagnostics
+- **C2 (100nF bypass)**: Place within 5mm of Q1 DRAIN pin for best performance
+
+
+---
+
+
+### 4.3. ATO Solenoid Valve Driver
+
+```
+Circuit topology using AO3400A MOSFET. Connected to 24V rail.
+Uses normally-closed (NC) solenoid valve for fail-safe operation.
+
+                                    24V
+                                     │
+                        ┌────────────┤
+                        │            │
+                       D1         VALVE+
+                   (1N5819)         │
+                        │         VALVE
+                        │        (NC, 500mA)
+               ┌────────┴───────┐   │
+               │     DRAIN      │   │
+        ┌──────┤  Q8            ├───┴── VALVE-
+        │      │  AO3400A       │
+        │      │  (SOT-23)      │
+        │      └───────┬────────┘
+        │           SOURCE
+        │              │
+       R2             ─┴─
+      100Ω            GND
+        │
+        ├────────────────────────────────── Gate (Q8)
+        │                                       │
+GPIO2 ──┘                                      R1
+                                              10kΩ (pull-down)
+                                               │
+                                              ─┴─
+                                              GND
+
+Hardware cutoff — FLOAT_HIGH (water-high) overrides GPIO7:
+
+GPIO1 ──── R_base (4.7kΩ) ──── Base ┐
+                                     │ Q10: MMBT3904 NPN
+                          Emitter ───┴─── GND
+                          Collector ─────────────────────────► Gate (Q8)
+
+When GPIO1 HIGH (water high): Q10 saturates → Gate clamped to ≤0.2V → Q8 OFF → valve closes (hardware)
+When GPIO1 LOW  (water OK):   Q10 off      → Gate driven by GPIO2 normally
+```
+
+Q8: AO3400A (Logic-level N-MOSFET, SOT-23)
+- VDS = 30V, ID = 5.8A
+- RDS(on) = 33mΩ @ VGS=4.5V
+- Handles 500mA solenoid load with margin
+- Power dissipation: ~8mW (very low)
+- Alternative: BSS214N (50V, 5A, 100mΩ)
+
+D1: 1N5819 (1A Schottky flyback diode, SOD-123)
+- Sufficient for solenoid valve inductive spike suppression
+
+
+#### Connector
+
+```
+Phoenix Contact MC 1.5/2-ST-3.5 (2-position pluggable screw terminal)
+- Pitch: 3.5mm — same family as dosing pump connectors
+- PCB header: MC 1.5/2-G-3.5
+- Wire size: 24-18 AWG (for 250mA @ 24V)
+- Label silkscreen: "ATO VALVE" or "WATER IN"
+
+Pin Assignment:
+Pin 1: 24V_VALVE (switched via Q8)
+Pin 2: GND
+
+Valve Side Connection:
+- Most solenoid valves have 2-wire leads (polarity doesn't matter for DC)
+- Some have wire connectors (DIN 43650A common)
+- Strip and insert into screw terminal, or add mating connector
+```
+
+**Safety Notes:**
+- ✅ NC valve ensures no water flow if controller loses power
+- ✅ Float switch (GPIO1 - FLOAT_HIGH) provides hardware backup cutoff
+- ✅ Float switch (GPIO0 - FLOAT_LOW) provides low-level alarm
+- ✅ Software timeout prevents flooding if level sensor fails
+- ✅ Recommend inline manual shutoff valve for maintenance
+- ✅ Consider water leak sensor near reservoir for additional protection
+
+
+Valve Installation:
+1. Install valve inline on water supply line (before reservoir)
+2. Arrow on valve body indicates flow direction
+3. Mount valve with coil vertical (prevents water ingress)
+4. Use thread sealant (Teflon tape or pipe dope) on NPT threads
+5. Test valve operation before connecting to reservoir
+
+
+---
+
+
+## 5. Reservoir Level Circuits
+
+
+---
+
+### 5.1. LiDAR Circuit
+
+
+---
+
+
+### 5.2 Float Switches
+
+```
+FLOAT_LOW  (GPIO0) — hole at LOW water mark:
+  Float arm UP   (water ≥ LOW mark):  NC CLOSED → switch pulls to GND → GPIO0 LOW  (water OK)
+  Float arm DOWN (water < LOW mark):  NC OPEN   → pull-up → GPIO0 HIGH (alarm — stop pump)
+  PCB wiring: switch wire → GND terminal
+
+FLOAT_HIGH  (GPIO1) — hole at HIGH water mark:
+  Float arm UP   (water ≥ HIGH mark): NC CLOSED → switch pulls to 3.3V → GPIO1 HIGH (stop ATO)
+  Float arm DOWN (water < HIGH mark): NC OPEN   → pull-down → GPIO1 LOW  (ATO OK)
+  PCB wiring: switch wire → 3.3V terminal
+```
+
+
+#### Circuit
+
+The two float switches use opposite pull directions so that both GPIO signals are
+**active-HIGH when their cutoff condition is triggered** — consistent logic for both
+software and the hardware NPN cutoff transistors (see section 6.4).
+
+**Both switches are mounted NC (hinge pointing DOWN).** Wiring to the PCB differs between the two so that both GPIO signals are active-HIGH on their cutoff condition.
+
+Require external debounce caps, such as:
+- 10kΩ to the 3V3 rail, and 100nF to GND to generate the FLOAT_LOW signal.
+- 100nF to the 3V3 rail, and 10kΩ to GND to generate the FLOAT_HIGH signal.
+
+
+
+
+```
+Float Switch - FLOW (low level alarm, GPIO0):
+Pull-UP to 3.3V, switch-to-GND, NC (hinge down)
+
+        3.3V
+         │
+        R1
+       10k (pullup)
+         │
+GPIO0 ───┼──────────────► LH25 FLOW (NC, hinge down) ──► GND
+         │
+        C1
+       100nF (debounce)
+         │
+        ─┴─
+        GND
+
+Float arm UP   (water at/above LOW mark): NC CLOSED → GPIO0 = LOW  (0) — water OK
+Float arm DOWN (water below LOW mark):    NC OPEN   → GPIO0 = HIGH (1) — ALARM, stop pump
+
+Float Switch - HIGH (high level cutoff, GPIO1):
+Pull-DOWN to GND, switch-to-3.3V, NC (hinge down)
+⚠ Reversed from FLOAT_LOW so GPIO1 is also active-HIGH on cutoff.
+
+        3.3V
+         │
+        LH25 HIGH (NC, hinge down)
+         │
+GPIO1 ───┼──────────────────────────────────────────────────
+         │
+        R1
+       10k (pulldown)
+         │
+        C1
+       100nF (debounce)
+         │
+        ─┴─
+        GND
+
+Float arm UP   (water at/above HIGH mark): NC CLOSES to 3.3V → GPIO1 = HIGH (1) — STOP ATO
+Float arm DOWN (water below HIGH mark):    NC OPEN → pull-down → GPIO1 = LOW  (0) — ATO OK
+```
+
+---
+
+**Hardware Cutoff via NPN Transistors**
+
+Each float switch drives a small NPN transistor that directly clamps the respective
+MOSFET gate to GND when the cutoff condition fires. This is independent of firmware —
+the pump and ATO valve shut down in hardware even if the MCU is hung or misbehaving.
+
+```
+FLOAT_LOW hardware cutoff (water-low → main pump off):
+
+GPIO0 (HIGH = water low) ────── R_base ──── Base  ┐
+                                4.7kΩ              │ MMBT3904 NPN
+                                         Emitter ──┴── GND
+                                         Collector ──────────────────────────► Q1 Gate
+                                                              (also driven by GPIO10 through 100Ω)
+
+FLOAT_HIGH hardware cutoff (water-high → ATO valve closes):
+
+GPIO1 (HIGH = water high) ───── R_base ──── Base  ┐
+                                4.7kΩ              │ MMBT3904 NPN
+                                         Emitter ──┴── GND
+                                         Collector ──────────────────────────► Q8 Gate
+                                                              (also driven by GPIO2 through 100Ω)
+```
+
+**Operation:**
+| Condition | GPIO state | NPN | MOSFET gate | Load |
+|-----------|-----------|-----|-------------|------|
+| Water OK / ATO OK | LOW (0) | OFF | Controlled by GPIO10/GPIO2 | Normal operation |
+| Water LOW / Water HIGH | HIGH (1) | ON (saturated) | Pulled to ≈GND | OFF (hardware) |
+
+**Component selection:**
+- MMBT3904 (SOT-23): β ≥ 100, I_C(max) = 200mA, V_CE(sat) ≈ 0.2V
+- Base resistor: 4.7kΩ → I_B = (3.3V − 0.7V) / 4.7kΩ = 0.55mA
+- Worst-case I_C when GPIO10/GPIO7 HIGH and NPN ON: (3.3V − 0.2V) / 100Ω = 31mA
+- Saturation overdrive: 0.55mA / 0.31mA = 1.8× → fully saturated ✓
+- Gate clamped to ≤ 0.2V, well below VGS(th) = 1.5V of both Q1 and Q8
+
+**Schematic note:** Two additional MMBT3904 transistors (Q9, Q10) and two 4.7kΩ
+resistors are required on the PCB. The 4.7kΩ value is already present in the BOM (R30).
+
+---
+
+**Normally Open vs Normally Closed** — Full Explanation
+
+A float switch contains a **reed switch** — a sealed glass capsule with two metal contacts
+that close when a magnet is brought near. The float arm holds a permanent magnet that moves
+closer to or farther from the reed switch as the water level changes.
+
+**Normally Closed (NC)** — contacts CLOSED in the resting state:
+
+```
+                ╔════════════╗
+                ║  Reed      ║
+                ║  Switch    ║  ← magnet near = contacts CLOSED
+    ┌───┤≈────╗ ║            ║
+    │  float  ╚═╗  ───────── ║
+    │   arm     ║  contacts  ║
+    └───────────╚════════════╝
+
+  Float UP (in water):  Magnet near reed → contacts CLOSED  → circuit CONDUCTING
+  Float DOWN (in air):  Magnet away      → contacts OPEN    → circuit BROKEN
+```
+
+**Normally Open (NO)** — contacts OPEN in the resting state:
+
+```
+  Same hardware as NC — just flip the float arm orientation on the LH25.
+  Float UP (in water):  Magnet near reed → contacts OPEN     → circuit BROKEN
+  Float DOWN (in air):  Magnet away      → contacts CLOSED   → circuit CONDUCTING
+```
+
+For the **Flowline LH25**, NO/NC is selected by the float hinge orientation:
+
+```
+  Hinge DOWN (arm hangs down by gravity in air):
+    → In air: arm DOWN, magnet away  = NC resting state = CLOSED
+    → In water: arm UP, magnet near  = NC actuated    = OPEN? ← confusing!
+```
+
+Wait — the LH25 spec states it the other way. Here is the correct behaviour:
+
+```
+  LH25, Hinge DOWN = NC wiring:
+    Float arm UP  (water present at switch level) → reed CLOSES → contacts CONDUCTING
+    Float arm DOWN (water below switch level)     → reed OPENS  → contacts BROKEN
+
+  LH25, Hinge UP = NO wiring:
+    Float arm UP  (water present at switch level) → reed OPENS  → contacts BROKEN
+    Float arm DOWN (water below switch level)     → reed CLOSES → contacts CONDUCTING
+```
+
+**OPNhydro uses NC (hinge DOWN) for both switches.**
+When water rises to the switch, the float arm lifts → reed closes → circuit makes.
+When water drops below the switch, the float arm falls → reed opens → circuit breaks.
+
+---
+
+**Decision: FLOAT_LOW and FLOAT_HIGH provide hardware-enforced cutoffs, not software-only.**
+
+To ensure fail-safe operation independent of MCU firmware, each float switch drives a small NPN transistor that directly pulls the respective MOSFET gate to GND when its cutoff condition is met. The MCU can still read the float state via GPIO for monitoring and alerting, but the hardware path acts regardless of software state.
+
+**FLOAT_LOW (GPIO0) → Main Pump (Q1) hardware cutoff:**
+- GPIO0 HIGH = water below LOW mark (switch open, pull-up active) = pump must stop
+- GPIO0 drives NPN transistor base; NPN collector tied to Q1 gate
+- When GPIO0 HIGH: NPN saturates → Q1 gate pulled to ≈GND → pump off (hardware)
+- When GPIO0 LOW: NPN off → Q1 gate controlled by GPIO10 normally
+
+**FLOAT_HIGH (GPIO1) → ATO Valve (Q8) hardware cutoff:**
+- FLOAT_HIGH is wired with pull-DOWN + switch-to-3.3V (reversed from FLOAT_LOW)
+  so that GPIO1 HIGH = water at/above HIGH mark = consistent active-HIGH logic
+- GPIO2 drives NPN transistor base; NPN collector tied to Q8 gate
+- When GPIO1 HIGH: NPN saturates → Q8 gate pulled to ≈GND → ATO valve closes (hardware)
+- When GPIO1 LOW: NPN off → Q8 gate controlled by GPIO7 normally
+
+**Additional components required (per channel):**
+- 1× MMBT3904 NPN transistor, SOT-23 (~$0.05)
+- 1× 4.7kΩ base resistor, 0805 (already in BOM)
+
+#### Mounting
+
+**Step 1 — Determine water levels:**
+```
+       ┌──────────────────────────┐
+       │                          │   ← tank top / lid
+       │       FLOAT_HIGH         │ ← HIGH mark: ATO stops here
+       │          ●               │   (e.g., 25mm below brim)
+       │                          │
+       │  [operating range]       │
+       │                          │
+       │       FLOAT_LOW          │ ← LOW mark: pump stops here
+       │          ●               │   (e.g., 50mm above bottom)
+       │                          │
+       └──────────────────────────┘
+```
+
+- **FLOAT_LOW (low mark):** Set high enough that the pump is never run dry.
+  Typically 50–75mm above the reservoir bottom.
+- **FLOAT_HIGH (high mark):** Set low enough to prevent overflow.
+  Typically 25–50mm below the top of the reservoir.
+- The vertical distance between them defines the ATO working range.
+
+**Step 2 — Drill the side-wall holes:**
+1. Mark the two hole positions on the reservoir side wall.
+2. Use an 18mm (23/32") step bit or hole saw to drill each hole.
+3. Tap each hole to 1/2" NPT using the NPT tap.
+   - Apply cutting oil if drilling into HDPE or polypropylene.
+   - Use a slow, steady hand — plastic cracks if rushed.
+4. Deburr the inside edge with a countersink or knife.
+
+**Step 3 — Install the switches:**
+1. Wrap 3–4 turns of PTFE tape on the LH25 NPT threads (clockwise wrap).
+2. Thread into the hole by hand until snug.
+3. Orient the float hinge **pointing DOWN** (NC mode) — the hinge end is marked on the body.
+4. Use a wrench to tighten 1–2 additional turns past hand-tight. Do not overtighten.
+5. The float arm should point **toward the inside of the reservoir** and swing freely.
+
+```
+   Outside of reservoir wall:     Inside of reservoir:
+
+     ┌────────────────┐             ┌─────────────────┐
+     │   NPT threads  │             │                 │
+     │ LLLLL LH25 body│═════════════│  ←arm swings    │
+     │  (hinge DOWN)  │             │   freely here   │
+     └────────────────┘             └─────────────────┘
+           ↑
+      Wire exits here
+      (2', 22 AWG,
+       2-conductor)
+```
+
+**Step 4 — Route and connect the wires:**
+
+Both switches come with 2' (61cm) bare wire leads. Terminate each wire with a
+JST-XH 2-pin crimp or strip and clamp into a 2-pin screw terminal on the PCB.
+
+| Switch | Wire to PCB pin 1 | Wire to PCB pin 2 | Notes |
+|--------|-------------------|-------------------|-------|
+| FLOAT_LOW (GPIO0) | GND | GND | Both wires to GND — polarity doesn't matter for dry reed |
+| FLOAT_HIGH (GPIO1) | 3.3V | 3.3V | Both wires to 3.3V |
+
+Wait — a reed switch is a 2-terminal device with no polarity. The PCB has a pull-up or
+pull-down resistor and the switch creates the signal. The actual connection is:
+
+```
+FLOAT_LOW (GPIO0):
+  PCB header Pin 1: → GPIO0 signal node (already has pull-up to 3.3V on PCB)
+  PCB header Pin 2: → GND
+  Wire one switch lead to each pin. No polarity.
+
+FLOAT_HIGH (GPIO1):
+  PCB header Pin 1: → GPIO1 signal node (already has pull-down to GND on PCB)
+  PCB header Pin 2: → 3.3V
+  Wire one switch lead to each pin. No polarity.
+```
+
+**Step 5 — Test before filling:**
+1. With the reservoir empty, both float arms should hang DOWN.
+   - GPIO0 should read HIGH (water low alarm, expected)
+   - GPIO1 should read LOW (ATO OK, expected)
+2. Lift FLOAT_LOW arm by hand — GPIO0 should go LOW (arm up = water OK).
+3. Lift FLOAT_HIGH arm by hand — GPIO1 should go HIGH (arm up = water at HIGH mark → ATO stops).
+
+
+---
+
+
+## 6. ESP32-C6 Hookup
+
+The ESP32-C6-DevKitC-1 includes a built-in RGB LED (WS2812B) on GPIO8.
+No external status LED is needed on the OPNhydro PCB.
+
+Use GPIO8 in firmware for status indication (do not route GPIO8 to any PCB pad).
+
+### 6.1. DevKit Pin Headers
+
+
+???
+
+Net            | Value       | Role
+---------------|-------------|-----
+I2C Bus        | 0.1µF       | Scattered near pull-up resistors to keep the SDA/SCL lines quiet.
+
 
 The ESP32-C6-DevKitC-1-N8 mounts to the carrier PCB via 2×20 pin headers. USB-C, boot/reset buttons, antenna, and power regulation are on the DevKit.
 
@@ -581,7 +1250,7 @@ Signal Type Key:
   (bidirectional) = Bidirectional (I2C)
 ```
 
-### 2.2 Dual-Function Pin Considerations
+### 6.2 Dual-Function Pin Considerations
 
 #### GPIO8 — On-board RGB LED (reserved)
 The DevKitC drives an on-board WS2812B RGB LED from GPIO8 through a series resistor.
@@ -649,23 +1318,19 @@ No assignment. Leave unconnected on the carrier PCB.
 - **Do not drive HIGH externally** — the pin is already pulled HIGH internally
 - A LOW pulse ≥1µs resets the device; the DevKitC on-board RST button does the same
 
----
 
-### 2.3 Carrier PCB Headers
 
-```
-Use 2×20 female headers (2.54mm pitch) on carrier PCB.
-DevKit plugs in from above.
+- **Pull-up Resistors:** I2C requires pull-up resistors on both sides of the isolation barrier.
+  - Primary Side (SDA/SCL): 4.7k to 10k tied to the microcontroller's 3.3V/5V.
 
-Header spacing: 22.86mm (900 mils) between rows
-```
 
 ---
 
-## 3. I2C Sensor Interface
+
+## 7. EZO Circuits for the Probes
 
 
-### 3.3 EZO Circuit Connections
+### 7.1 EZO Circuit Connections
 
 ```
 Atlas Scientific EZO circuits use standard I2C.
@@ -720,10 +1385,10 @@ GPIO6 ──► ADM3260 PDIS (U3 and U4 tied together) — HIGH disables isoPowe
 ```
 
 
+---
 
 
-
-### 3.4 Switching EZO Circuits to I2C Mode (Manual, No UART Required)
+### 7.2 Switching EZO Circuits to I2C Mode (Manual, No UART Required)
 
 EZO circuits ship in **UART mode** (green LED). They must be switched to **I2C mode** (blue LED)
 before connecting to OPNhydro. This is done by briefly shorting two pins at power-on — no USB
@@ -793,7 +1458,7 @@ Blue  = I2C mode
 
 ---
 
-### 3.5 I2C Connector
+### 7.3 I2C Connector
 
 **OPNhydro uses Phoenix Contact 4-pin (3.5mm pitch) ✅**
 
@@ -865,7 +1530,7 @@ Ordering Information:
 
 ---
 
-### 3.6 EZO Circuit Calibration
+### 7.4 EZO Circuit Calibration
 
 All calibration is performed over I2C by sending ASCII command strings to each circuit's address.
 After sending a command, wait **300 ms** before reading the response.
@@ -1021,7 +1686,7 @@ I2C transaction for any calibration command:
 4. If status = 254, wait another 100 ms and retry read
 ```
 
-**Calibration frequency summary:**
+Calibration frequency summary:
 
 | Circuit | Method | Solutions | Frequency |
 |---------|--------|-----------|-----------|
@@ -1031,283 +1696,6 @@ I2C transaction for any calibration command:
 
 ---
 
-## 4. Temperature Sensor (1-Wire) — ⛔ NOT POPULATED
-
-> **Design decision:** The 1-Wire DS18B20 has been removed from the build.
-> Water temperature is measured by the EZO-RTD circuit (MEZZ1, I2C address 0x66).
-> Ambient temperature is measured by the BME280 (I2C).
-> GPIO2 is now used for ATO_VALVE (output). R30 (4.7kΩ 1-Wire pullup) is DNP.
->
-> The technical documentation below is retained for reference only.
-
-### 4.1 Basic Circuit
-
-```
-1-Wire Bus Connection:
-
-    3.3V ───┬────────────────────────────► VDD to DS18B20 (Pin 3, Red)
-            │
-           [R1] 4.7kΩ pullup resistor
-            │
-            └──┬─────────────────────────► DQ to DS18B20 (Pin 2, White)
-               │
-    GPIO2 ─────┘
-
-    GND ────────────────────────────────► GND to DS18B20 (Pin 1, Black)
-
-
-IMPORTANT: R1 connects between 3.3V and DQ (NOT to GND!)
-           The pullup resistor pulls the 1-wire data line HIGH
-
-
-Complete DS18B20 Wiring:
-
-         3.3V rail
-            │
-            ├──────────────────────► Pin 3: VDD (Red wire)
-            │
-           [R1]
-           4.7kΩ
-            │
-            ├─────┬────────────────► Pin 2: DQ (White wire)  [SEN-11050]
-            │     │
-    GPIO2 ────────┘
-            │
-    GND rail│
-            └──────────────────────► Pin 1: GND (Black wire)
-```
-
-### 4.2 Component Selection
-
-| Component | Value/Type | Purpose | Package |
-|-----------|------------|---------|---------|
-| **R1** | 4.7kΩ ±5% | 1-wire data line pullup | 0805 SMD |
-| **C1** (optional) | 100nF | VDD decoupling near sensor | 0805 SMD |
-| **D1** (optional) | 5.6V TVS | ESD protection for long cables | SOD-123 |
-| **R2** (optional) | 100Ω | Series protection with TVS | 0805 SMD |
-
-### 4.3 PCB Connector
-
-**3-pin JST-XH connector (2.5mm pitch) for waterproof probe:**
-```
-┌─────────────────────┐
-│ Pin 1: GND (Black)  │ ◄── To system GND
-│ Pin 2: DQ (White)   │ ◄── To GPIO2 via 4.7kΩ pullup to 3.3V  [SEN-11050 uses White]
-│ Pin 3: VDD (Red)    │ ◄── To 3.3V rail
-└─────────────────────┘
-
-Connector: JST-XH 3-pin S3B-XH-A (Right-angle, through-hole PCB mount)
-Housing: JST XHP-3 (3-pin for cable assembly)
-Contacts: JST SXH-001T-P0.6 (crimp terminals, 30-26 AWG)
-
-Probe: SparkFun SEN-11050 bare wire ends → crimp SXH-001T-P0.6 contacts onto wires
-```
-
-### 4.4 How the 1-Wire Protocol Works
-
-**Open-Drain Bidirectional Communication:**
-- Both ESP32 and DS18B20 can only pull the line **LOW** (to GND)
-- Neither device drives the line HIGH - the pullup resistor does this
-- This allows bidirectional communication on a single wire
-- Multiple devices can share the bus without conflict
-
-**Why 4.7kΩ Pullup?**
-```
-Bus Capacitance: C_bus ≈ 200-400pF (typical 1-3m cable + sensor)
-Pullup Resistor: R_pullup = 4.7kΩ
-Time Constant: τ = R × C = 4.7kΩ × 400pF = 1.88µs
-Rise Time (10-90%): t_rise = 2.2 × τ = 4.1µs
-
-1-Wire Standard Speed Requirement: t_rise < 15µs ✓
-Fast: 4.7kΩ works for cables up to 100m
-```
-
-**For longer cables or noisy environments:**
-- Use 3.3kΩ pullup (faster rise time)
-- Add 100Ω series resistor + TVS diode for ESD protection
-
-### 4.5 Multiple Sensors on Same Bus
-
-The 1-wire protocol supports **multiple DS18B20 sensors** on GPIO2:
-
-```
-         3.3V
-          │
-         R1
-        4.7kΩ (single pullup for entire bus)
-          │
-GPIO2 ────┼──────┬──────────┬──────────┬──────────► (More sensors...)
-                 │          │          │
-               ┌─┴─┐      ┌─┴─┐      ┌─┴─┐
-         GND   │DS1│      │DS2│      │DS3│
-               └───┘      └───┘      └───┘
-            Water Temp  Nutrient   Air Temp
-                        Stock
-
-Each sensor has unique 64-bit ROM ID for addressing:
-- Sensor 1: 28-FF-64-1D-33-17-03-8C
-- Sensor 2: 28-AA-12-5E-44-19-01-F3
-- Sensor 3: 28-BB-34-6F-55-20-02-A1
-```
-
-**Important Notes:**
-- Use **normal powered mode** (VDD connected to 3.3V) for multiple sensors
-- Parasite power mode (VDD to GND) only works reliably with single sensor
-- Firmware must address each sensor by its unique ROM ID
-
-### 4.6 Typical OPNhydro Configuration
-
-**Primary Use Case:**
-- **Waterproof DS18B20 probe** in nutrient solution (required)
-- Measures water temperature for EZO pH/EC/DO temperature compensation
-- 3-wire cable: Red (VDD), Yellow (DQ), Black (GND)
-
-**Optional Additional Sensors:**
-- Ambient air temperature near grow area
-- Nutrient stock solution temperature
-- Root zone temperature (DWC systems)
-
-### 4.7 Waterproof Probe Specifications
-
-**Selected part: SparkFun SEN-11050** (Waterproof DS18B20, ~$10)
-
-```
-SparkFun SEN-11050 specifications:
-- Part number: SEN-11050
-- Sensor IC: Maxim DS18B20
-- Cable: ~1.8m (6 ft), PVC jacketed, bare wire ends (no connector)
-- Wire colors: Red (VDD), White (DQ/SIG), Black (GND)
-- Probe tip: Stainless steel, 6mm diameter
-- Temperature range: -55°C to +125°C
-- Accuracy: ±0.5°C (-10°C to +85°C)
-- Operating voltage: 3.0V to 5.5V (use 3.3V rail)
-- Interface: 1-Wire
-- Waterproof: Yes (sealed epoxy probe tip)
-```
-
-**PCB connector wiring for SEN-11050:**
-```
-JST-XH 3-pin on PCB        SEN-11050 wire
-─────────────────────────────────────────
-Pin 1: GND (to GND rail) ◄── Black wire
-Pin 2: DQ  (to GPIO2)    ◄── White wire  ← NOTE: White, not Yellow
-Pin 3: VDD (to 3.3V)     ◄── Red wire
-```
-
-> **Note:** The bare wire ends of the SEN-11050 require termination.
-> Crimp JST-XH contacts (SXH-001T-P0.6) onto each wire to plug directly
-> into the PCB's JST-XH 3-pin header, or use a screw terminal adapter.
-
-### 4.8 Temperature Conversion Timing
-
-**Resolution vs Speed Trade-off:**
-| Resolution | Conversion Time | Temperature Step | Use Case |
-|------------|-----------------|------------------|----------|
-| 9-bit | 93.75ms | 0.5°C | Fast updates |
-| 10-bit | 187.5ms | 0.25°C | Standard |
-| 11-bit | 375ms | 0.125°C | Good accuracy |
-| **12-bit** | **750ms** | **0.0625°C** | **Default (best accuracy)** ✅ |
-
-**Firmware Timing Example:**
-```c
-// Request temperature conversion
-ds18b20_trigger_conversion(GPIO2);
-
-// Wait for conversion (12-bit resolution = 750ms)
-vTaskDelay(pdMS_TO_TICKS(750));
-
-// Read temperature
-float water_temp = ds18b20_read_temp(GPIO2);
-
-// Send to EZO circuits for automatic compensation
-char cmd[16];
-snprintf(cmd, sizeof(cmd), "T,%.1f", water_temp);
-ezo_send_command(I2C_EZO_PH, cmd);  // pH compensation
-ezo_send_command(I2C_EZO_EC, cmd);  // EC compensation
-ezo_send_command(I2C_EZO_DO, cmd);  // DO compensation
-```
-
-### 4.9 Optional ESD Protection (Long Cables)
-
-For cables **>3 meters** or **harsh EMI environments**:
-
-```
-         3.3V
-          │
-         R1
-        4.7kΩ
-          │
-GPIO2 ────┼──────[R2 100Ω]────┬────► To DS18B20 DQ
-          │                   │
-         D1                 ──┴──
-      (5.6V TVS)           ─ ─ ─  D2: 5.6V TVS diode
-         │                 ──┬──
-        ─┴─                  │
-        GND                 ─┴─
-                            GND
-
-Component Selection:
-- D1: TVS diode 5.6V bidirectional (e.g., SMAJ5.0CA)
-- D2: TVS diode 5.6V bidirectional (at sensor end if possible)
-- R2: 100Ω current-limiting resistor
-```
-
-### 4.10 Power Modes
-
-**Normal (Powered) Mode** ✅ **Recommended for OPNhydro**
-```
-VDD (Pin 3) ──► 3.3V
-DQ (Pin 2)  ──► GPIO2 + 4.7kΩ pullup
-GND (Pin 1) ──► GND
-
-Advantages:
-- Reliable operation with multiple sensors
-- Faster conversion times
-- Recommended for permanent installations
-```
-
-**Parasite Power Mode** (Alternative)
-```
-VDD (Pin 3) ──► GND (tied to ground)
-DQ (Pin 2)  ──► GPIO2 + 4.7kΩ pullup
-GND (Pin 1) ──► GND
-
-Power "stolen" from DQ line via internal capacitor
-
-Use only when:
-- Cable has only 2 wires available
-- Single sensor only
-- Temporary/portable applications
-
-Note: OPNhydro uses normal powered mode for reliability
-```
-
-### 4.11 Troubleshooting
-
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| No sensor detected | Incorrect wiring | Verify VDD, GND, DQ connections with multimeter |
-| Intermittent readings | Weak pullup for cable length | Reduce R1 to 3.3kΩ or 2.2kΩ |
-| CRC errors | Bus capacitance too high | Shorten cable or reduce pullup resistance |
-| Multiple sensors conflict | Parasite power with >1 sensor | Use normal powered mode (VDD to 3.3V) |
-| Slow thermal response | Large thermal mass | Use thin-wall stainless probe |
-| Erratic readings | EMI/RFI interference | Add 100Ω series + TVS protection |
-| Reading stuck at 85°C | Power-on reset default | Check power supply, add decoupling cap |
-
-### 4.12 Why GPIO2 Was Selected
-
-From ESP32-C6 pinout:
-- **GPIO2**: Bidirectional, suitable for 1-wire protocol
-- No boot strapping requirements (safe to use)
-- Not shared with USB (D+/D-), UART, or SPI
-- Located near I2C pins (GPIO4/5) for logical grouping on PCB
-- Can be configured as input/output via software
-
-### 4.13 Integration with EZO Sensors
-
-**Temperature compensation is critical** for accurate pH/EC/DO measurements:
-
-```
 Temperature Effect on Sensors:
 - pH: ±0.003 pH per °C (Nernst equation)
 - EC: ±2% per °C (ion mobility changes)
@@ -1338,971 +1726,8 @@ Update Frequency:
 
 ---
 
-## 6. Float Switch Interface
 
-```
-FLOAT_LOW  (GPIO0) — hole at LOW water mark:
-  Float arm UP   (water ≥ LOW mark):  NC CLOSED → switch pulls to GND → GPIO0 LOW  (water OK)
-  Float arm DOWN (water < LOW mark):  NC OPEN   → pull-up → GPIO0 HIGH (alarm — stop pump)
-  PCB wiring: switch wire → GND terminal
-
-FLOAT_HIGH  (GPIO1) — hole at HIGH water mark:
-  Float arm UP   (water ≥ HIGH mark): NC CLOSED → switch pulls to 3.3V → GPIO1 HIGH (stop ATO)
-  Float arm DOWN (water < HIGH mark): NC OPEN   → pull-down → GPIO1 LOW  (ATO OK)
-  PCB wiring: switch wire → 3.3V terminal
-```
-
-
-### 6.3 Circuit
-
-The two float switches use opposite pull directions so that both GPIO signals are
-**active-HIGH when their cutoff condition is triggered** — consistent logic for both
-software and the hardware NPN cutoff transistors (see section 6.4).
-
-```
-Float Switch - FLOW (low level alarm, GPIO0):
-Pull-UP to 3.3V, switch-to-GND, NC (hinge down)
-
-        3.3V
-         │
-        R1
-       10k (pullup)
-         │
-GPIO0 ───┼──────────────► LH25 FLOW (NC, hinge down) ──► GND
-         │
-        C1
-       100nF (debounce)
-         │
-        ─┴─
-        GND
-
-Float arm UP   (water at/above LOW mark): NC CLOSED → GPIO0 = LOW  (0) — water OK
-Float arm DOWN (water below LOW mark):    NC OPEN   → GPIO0 = HIGH (1) — ALARM, stop pump
-
-Float Switch - HIGH (high level cutoff, GPIO1):
-Pull-DOWN to GND, switch-to-3.3V, NC (hinge down)
-⚠ Reversed from FLOAT_LOW so GPIO1 is also active-HIGH on cutoff.
-
-        3.3V
-         │
-        LH25 HIGH (NC, hinge down)
-         │
-GPIO1 ───┼──────────────────────────────────────────────────
-         │
-        R1
-       10k (pulldown)
-         │
-        C1
-       100nF (debounce)
-         │
-        ─┴─
-        GND
-
-Float arm UP   (water at/above HIGH mark): NC CLOSES to 3.3V → GPIO1 = HIGH (1) — STOP ATO
-Float arm DOWN (water below HIGH mark):    NC OPEN → pull-down → GPIO1 = LOW  (0) — ATO OK
-```
-
----
-
-### 6.4 Hardware Cutoff via NPN Transistors
-
-Each float switch drives a small NPN transistor that directly clamps the respective
-MOSFET gate to GND when the cutoff condition fires. This is independent of firmware —
-the pump and ATO valve shut down in hardware even if the MCU is hung or misbehaving.
-
-```
-FLOAT_LOW hardware cutoff (water-low → main pump off):
-
-GPIO0 (HIGH = water low) ────── R_base ──── Base  ┐
-                                4.7kΩ              │ MMBT3904 NPN
-                                         Emitter ──┴── GND
-                                         Collector ──────────────────────────► Q1 Gate
-                                                              (also driven by GPIO10 through 100Ω)
-
-FLOAT_HIGH hardware cutoff (water-high → ATO valve closes):
-
-GPIO1 (HIGH = water high) ───── R_base ──── Base  ┐
-                                4.7kΩ              │ MMBT3904 NPN
-                                         Emitter ──┴── GND
-                                         Collector ──────────────────────────► Q8 Gate
-                                                              (also driven by GPIO2 through 100Ω)
-```
-
-**Operation:**
-| Condition | GPIO state | NPN | MOSFET gate | Load |
-|-----------|-----------|-----|-------------|------|
-| Water OK / ATO OK | LOW (0) | OFF | Controlled by GPIO10/GPIO2 | Normal operation |
-| Water LOW / Water HIGH | HIGH (1) | ON (saturated) | Pulled to ≈GND | OFF (hardware) |
-
-**Component selection:**
-- MMBT3904 (SOT-23): β ≥ 100, I_C(max) = 200mA, V_CE(sat) ≈ 0.2V
-- Base resistor: 4.7kΩ → I_B = (3.3V − 0.7V) / 4.7kΩ = 0.55mA
-- Worst-case I_C when GPIO10/GPIO7 HIGH and NPN ON: (3.3V − 0.2V) / 100Ω = 31mA
-- Saturation overdrive: 0.55mA / 0.31mA = 1.8× → fully saturated ✓
-- Gate clamped to ≤ 0.2V, well below VGS(th) = 1.5V of both Q1 and Q8
-
-**Schematic note:** Two additional MMBT3904 transistors (Q9, Q10) and two 4.7kΩ
-resistors are required on the PCB. The 4.7kΩ value is already present in the BOM (R30).
-
----
-
-### 6.5 Normally Open vs Normally Closed — Full Explanation
-
-A float switch contains a **reed switch** — a sealed glass capsule with two metal contacts
-that close when a magnet is brought near. The float arm holds a permanent magnet that moves
-closer to or farther from the reed switch as the water level changes.
-
-**Normally Closed (NC)** — contacts CLOSED in the resting state:
-
-```
-                ╔════════════╗
-                ║  Reed      ║
-                ║  Switch    ║  ← magnet near = contacts CLOSED
-    ┌───┤≈────╗ ║            ║
-    │  float  ╚═╗  ───────── ║
-    │   arm     ║  contacts  ║
-    └───────────╚════════════╝
-
-  Float UP (in water):  Magnet near reed → contacts CLOSED  → circuit CONDUCTING
-  Float DOWN (in air):  Magnet away      → contacts OPEN    → circuit BROKEN
-```
-
-**Normally Open (NO)** — contacts OPEN in the resting state:
-
-```
-  Same hardware as NC — just flip the float arm orientation on the LH25.
-  Float UP (in water):  Magnet near reed → contacts OPEN     → circuit BROKEN
-  Float DOWN (in air):  Magnet away      → contacts CLOSED   → circuit CONDUCTING
-```
-
-For the **Flowline LH25**, NO/NC is selected by the float hinge orientation:
-
-```
-  Hinge DOWN (arm hangs down by gravity in air):
-    → In air: arm DOWN, magnet away  = NC resting state = CLOSED
-    → In water: arm UP, magnet near  = NC actuated    = OPEN? ← confusing!
-```
-
-Wait — the LH25 spec states it the other way. Here is the correct behaviour:
-
-```
-  LH25, Hinge DOWN = NC wiring:
-    Float arm UP  (water present at switch level) → reed CLOSES → contacts CONDUCTING
-    Float arm DOWN (water below switch level)     → reed OPENS  → contacts BROKEN
-
-  LH25, Hinge UP = NO wiring:
-    Float arm UP  (water present at switch level) → reed OPENS  → contacts BROKEN
-    Float arm DOWN (water below switch level)     → reed CLOSES → contacts CONDUCTING
-```
-
-**OPNhydro uses NC (hinge DOWN) for both switches.**
-When water rises to the switch, the float arm lifts → reed closes → circuit makes.
-When water drops below the switch, the float arm falls → reed opens → circuit breaks.
-
-
-
----
-
-
-
-**Decision: FLOAT_LOW and FLOAT_HIGH provide hardware-enforced cutoffs, not software-only.**
-
-To ensure fail-safe operation independent of MCU firmware, each float switch drives a small NPN transistor that directly pulls the respective MOSFET gate to GND when its cutoff condition is met. The MCU can still read the float state via GPIO for monitoring and alerting, but the hardware path acts regardless of software state.
-
-**FLOAT_LOW (GPIO0) → Main Pump (Q1) hardware cutoff:**
-- GPIO0 HIGH = water below LOW mark (switch open, pull-up active) = pump must stop
-- GPIO0 drives NPN transistor base; NPN collector tied to Q1 gate
-- When GPIO0 HIGH: NPN saturates → Q1 gate pulled to ≈GND → pump off (hardware)
-- When GPIO0 LOW: NPN off → Q1 gate controlled by GPIO10 normally
-
-**FLOAT_HIGH (GPIO1) → ATO Valve (Q8) hardware cutoff:**
-- FLOAT_HIGH is wired with pull-DOWN + switch-to-3.3V (reversed from FLOAT_LOW)
-  so that GPIO1 HIGH = water at/above HIGH mark = consistent active-HIGH logic
-- GPIO2 drives NPN transistor base; NPN collector tied to Q8 gate
-- When GPIO1 HIGH: NPN saturates → Q8 gate pulled to ≈GND → ATO valve closes (hardware)
-- When GPIO1 LOW: NPN off → Q8 gate controlled by GPIO7 normally
-
-**Additional components required (per channel):**
-- 1× MMBT3904 NPN transistor, SOT-23 (~$0.05)
-- 1× 4.7kΩ base resistor, 0805 (already in BOM)
-
-
-
-
----
-
-### 6.6 Mounting the Float Switches
-
-**Tools required:**
-- Step drill bit or hole saw: 18mm (23/32") for 1/2" NPT tap drill
-- 1/2" NPT tap + tap handle
-- Adjustable wrench or pipe wrench
-- PTFE thread tape
-
-**Step 1 — Determine water levels:**
-```
-       ┌──────────────────────────┐
-       │                          │   ← tank top / lid
-       │       FLOAT_HIGH         │ ← HIGH mark: ATO stops here
-       │          ●               │   (e.g., 25mm below brim)
-       │                          │
-       │  [operating range]       │
-       │                          │
-       │       FLOAT_LOW          │ ← LOW mark: pump stops here
-       │          ●               │   (e.g., 50mm above bottom)
-       │                          │
-       └──────────────────────────┘
-```
-
-- **FLOAT_LOW (low mark):** Set high enough that the pump is never run dry.
-  Typically 50–75mm above the reservoir bottom.
-- **FLOAT_HIGH (high mark):** Set low enough to prevent overflow.
-  Typically 25–50mm below the top of the reservoir.
-- The vertical distance between them defines the ATO working range.
-
-**Step 2 — Drill the side-wall holes:**
-1. Mark the two hole positions on the reservoir side wall.
-2. Use an 18mm (23/32") step bit or hole saw to drill each hole.
-3. Tap each hole to 1/2" NPT using the NPT tap.
-   - Apply cutting oil if drilling into HDPE or polypropylene.
-   - Use a slow, steady hand — plastic cracks if rushed.
-4. Deburr the inside edge with a countersink or knife.
-
-**Step 3 — Install the switches:**
-1. Wrap 3–4 turns of PTFE tape on the LH25 NPT threads (clockwise wrap).
-2. Thread into the hole by hand until snug.
-3. Orient the float hinge **pointing DOWN** (NC mode) — the hinge end is marked on the body.
-4. Use a wrench to tighten 1–2 additional turns past hand-tight. Do not overtighten.
-5. The float arm should point **toward the inside of the reservoir** and swing freely.
-
-```
-   Outside of reservoir wall:     Inside of reservoir:
-
-     ┌────────────────┐             ┌─────────────────┐
-     │   NPT threads  │             │                 │
-     │ LLLLL LH25 body│═════════════│  ←arm swings    │
-     │  (hinge DOWN)  │             │   freely here   │
-     └────────────────┘             └─────────────────┘
-           ↑
-      Wire exits here
-      (2', 22 AWG,
-       2-conductor)
-```
-
-**Step 4 — Route and connect the wires:**
-
-Both switches come with 2' (61cm) bare wire leads. Terminate each wire with a
-JST-XH 2-pin crimp or strip and clamp into a 2-pin screw terminal on the PCB.
-
-| Switch | Wire to PCB pin 1 | Wire to PCB pin 2 | Notes |
-|--------|-------------------|-------------------|-------|
-| FLOAT_LOW (GPIO0) | GND | GND | Both wires to GND — polarity doesn't matter for dry reed |
-| FLOAT_HIGH (GPIO1) | 3.3V | 3.3V | Both wires to 3.3V |
-
-Wait — a reed switch is a 2-terminal device with no polarity. The PCB has a pull-up or
-pull-down resistor and the switch creates the signal. The actual connection is:
-
-```
-FLOAT_LOW (GPIO0):
-  PCB header Pin 1: → GPIO0 signal node (already has pull-up to 3.3V on PCB)
-  PCB header Pin 2: → GND
-  Wire one switch lead to each pin. No polarity.
-
-FLOAT_HIGH (GPIO1):
-  PCB header Pin 1: → GPIO1 signal node (already has pull-down to GND on PCB)
-  PCB header Pin 2: → 3.3V
-  Wire one switch lead to each pin. No polarity.
-```
-
-**Step 5 — Test before filling:**
-1. With the reservoir empty, both float arms should hang DOWN.
-   - GPIO0 should read HIGH (water low alarm, expected)
-   - GPIO1 should read LOW (ATO OK, expected)
-2. Lift FLOAT_LOW arm by hand — GPIO0 should go LOW (arm up = water OK).
-3. Lift FLOAT_HIGH arm by hand — GPIO1 should go HIGH (arm up = water at HIGH mark → ATO stops).
-
----
-
-## 7. Pump Driver Circuits
-
-> ⚠️ **PENDING SELECTION:** Main circulation pump — **24V DC required** (system rail is 24V).
-> The AUBIG DC40-1250 (12V) is no longer suitable.
->
-> **Requirements for replacement:**
-> - Voltage: **24V DC**
-> - Flow: ≥500 L/H at operating head
-> - Head: ≥4m
-> - Brushless preferred (reliability)
-> - PWM-capable preferred for variable flow via Q1 MOSFET gate
-> - Barbed fittings preferred
-
-All pumps and the ATO valve use the same 24V rail and identical driver circuits.
-
-### Main Pump
-
-**Installation Notes:**
-1. Pump must be fully submerged in water before power-on (prevents dry-run damage)
-2. Mount pump vertically or horizontally, avoid inverted position
-3. Use 1/2" ID vinyl or silicone tubing on barbed fittings; secure with hose clamps
-4. Add inline strainer/filter to prevent debris clogging impeller
-5. Test PWM control at low duty cycles to find minimum stable speed
-6. Allow 10-15 second startup delay in software for motor initialization
-
-
-
-
-### 7.1 24V Main Pump Driver
-
-```
-                                    24V
-                                     │
-                        ┌────────────┼────┬──── 24V rail
-                        │            │    │
-                        │           C2  ─┴─
-                        │          100nF GND (local bypass)
-                        │            │
-                       D1          PUMP+
-                    (SS34)          │
-                        │          PUMP
-                        │         (1.2A)
-               ┌────────┴───────┐   │
-               │     DRAIN      │   │
-        ┌──────┤  Q1            ├───┴── PUMP-
-        │      │  IRLR2905      │
-        │      │  (DPAK)        │
-        │      └───────┬────────┘
-        │           SOURCE
-        │              │
-       R2             ─┴─
-      100Ω            GND
-        │
-        ├────────────────────────────────── Gate (Q1)
-        │                                       │
-GPIO10 ─┘                                      R1
-                                              10kΩ (pull-down)
-                                               │
-                                              ─┴─
-                                              GND
-
-Hardware cutoff — FLOAT_LOW (water-low) overrides GPIO10:
-
-GPIO0 ──── R_base (4.7kΩ) ──── Base ┐
-                                     │ Q9: MMBT3904 NPN
-                          Emitter ───┴─── GND
-                          Collector ─────────────────────────► Gate (Q1)
-
-When GPIO0 HIGH (water low): Q9 saturates → Gate clamped to ≤0.2V → Q1 OFF (hardware)
-When GPIO0 LOW  (water OK):  Q9 off      → Gate driven by GPIO10 normally
-
-C2: 100nF / 50V ceramic (X7R, 0805)
-- Local bypass capacitor for switching transients
-- Place within 5mm of Q1 DRAIN pin
-- Reduces high-frequency noise on 24V rail
-
-Q1: IRLR2905 (Logic-level N-MOSFET, DPAK/TO-252)
-- VDS = 55V, ID = 42A
-- RDS(on) = 40mΩ @ VGS=4.5V, 27mΩ @ VGS=10V
-- VGS(th) = 1.5V (works with 3.3V logic)
-- Power dissipation: 1.2A² × 0.04Ω = 58mW
-- Current margin: 35× (42A / 1.2A)
-- SMD package for automated assembly
-- PWM capable: ESP32 GPIO10 can output PWM for variable pump speed control
-
-D1: SS34 (3A Schottky flyback diode, SMC)
-- Handles main pump inductive kickback
-```
-
-
-**AUBIG DC40-1250 PWM Speed Control Implementation:**
-
-The main pump supports PWM speed control via the 24V power input. The ESP32-S3 can generate PWM on GPIO10 to modulate the MOSFET gate, providing variable pump speed:
-
-```
-PWM Duty Cycle vs Flow Rate (typical):
-- 100% duty cycle: 500-510 L/H (full flow)
-- 75% duty cycle: ~375-380 L/H (75% flow)
-- 50% duty cycle: ~250-255 L/H (50% flow)
-- 25% duty cycle: ~125-130 L/H (25% flow, may stall)
-- Minimum: ~30-40% duty recommended to prevent stall
-
-ESP32-S3 PWM Configuration (suggested):
-- Frequency: 25 kHz (above audible range, smooth motor control)
-- Resolution: 10-bit (0-1023 values for fine control)
-- Channel: LEDC PWM channel 0
-- Pin: GPIO10 (same as pump control)
-
-Benefits of PWM Control:
-- Adjust circulation rate for different growth stages
-- Reduce power consumption during low-demand periods
-- Lower noise levels at reduced speeds
-- Fine-tune nutrient flow for optimal plant uptake
-- Extend pump lifespan with reduced wear
-```
-
-
-```
-Recommended Power Supplies:
-- For main pump only: 12V 3A regulated DC
-- For full system (pump + dosing + ATO): 12V 5-10A regulated DC
-- Quality: Mean Well, TDK-Lambda, or equivalent (low ripple essential)
-```
-
-
-
-**Pump Power Connector:**
-
-According to the NEMA 17 convention — JST PH 2.0mm 4-pin on motor body; cable free end terminates in JST XH 2.5mm 4-pin (commonly mislabelled "XH2.54"); XH series is 2.5mm pitch, not 2.54mm DuPont). PCB footprint: B4B-XH-A; verify on receipt [ankoproducts.com](https://ankoproducts.com/products/a200sx)
-
-
-```
-Phoenix Contact MSTB 2.5/2-ST-5.08 (2-position screw terminal)
-- Pitch: 5.08mm (0.2")
-- Wire size: 24-12 AWG (for 1.5A @ 12V)
-- PCB mount: Through-hole or SMD
-- Mating plug: MSTB 2.5/2-STF-5.08 (optional, can use direct wire)
-- Alternative: Phoenix Contact 1803280 (same as I2C) for consistency
-
-Pin Assignment:
-Pin 1: 12V_PUMP (switched via Q1)
-Pin 2: GND
-
-Pump Side Connection Options:
-1. Wire leads (most common) - strip and insert into screw terminal
-2. 5.5×2.1mm barrel jack - add PCB-mount jack in parallel
-3. Anderson Powerpole 15A - industrial alternative
-```
-
-**PCB Layout Notes:**
-- Place screw terminal at board edge for easy access
-- 24V trace width: 50 mil (1.27mm) minimum for main pump
-- Keep Q1 and screw terminal close to minimize trace resistance
-- Add test points for 24V_SWITCHED and GND for diagnostics
-- **C2 (100nF bypass)**: Place within 5mm of Q1 DRAIN pin for best performance
-
-### 7.2 24V Dosing Pump Drivers — TMC2209 Stepper (×3)
-
-
-Using a **single UART bus** with the MS1 and MS2 pins for addressing is the most "EZO-like" way to handle your **TMC2209** drivers—it keeps your pin count low and your control digital.
-
-By hard-wiring the MS1 and MS2 pins to different logic levels (GND or VCC), you assign each driver a unique **Node Address** (0 to 3). This allows you to send commands like VACTUAL (speed) or IRUN (current) to specific pumps using only one TX/RX pair from your microcontroller.
-
-**The "One-Wire" UART Schematic**
-TMC2209s use a single-wire UART. Since your MCU likely has separate TX and RX pins, you must merge them:
-- Connect **MCU TX** to a 1k  resistor, then to the PDN_UART pins of all three drivers.
-- Connect **MCU RX** directly to the PDN_UART pins of all three drivers.
-- Add a **10k pull-up resistor** from the UART line to your 3.3V logic rail to ensure the bus stays high during idle.
-
-
-
-
-Three TMC2209 stepper drivers (QFN-28) each drive one ANKO A200SX bipolar stepper peristaltic pump. All drivers operate in **UART mode** via GPIO21/22 (ESP32-C6 UART1).
-StealthChop2 is active by default at the low step rates used for dosing.
-
-TMC2209 thermal at 1.7A: copper pour + thermal vias on PCB (standard practice) keeps Tj ~73°C at 30°C ambient; very low dosing duty cycle (seconds/day) keeps this transient.
-
-
-**TMC2209 UART Configuration:**
-- PDN_UART: 100Ω series resistor to shared UART bus. GPIO22 TX → bus via 1kΩ; GPIO21 RX → bus direct
-- MS1/MS2: set UART address per driver (see address table below)
-- EN: tied to GND — drivers permanently enabled; standstill current eliminated via `IHOLD=0`
-- DIR: hardwired to 3.3V — peristaltic pumps never need reversal
-- SPREAD: GND → StealthChop2 mode (silent)
-- RSENSE: 120mΩ (per TMC2209 datasheet Ch. 8 recommendation for 1.7A motor) — see RSENSE section below
-- VREF: resistor divider from 3.3V → 2.161V → hard 90% current cap (1.53A); IRUN register sets operating point
-- STDBY (pin 20): HIGH = standby (internal regulator off, all UART registers reset to defaults);
-  LOW = normal operation. **Tied to GND** — OPNhydro runs continuously; IHOLD=0 handles
-  standstill power saving without the register-reset complication of STDBY.
-  ⚠ If STDBY is ever asserted, all UART registers (IRUN, IHOLD, IHOLDDELAY, TPWMTHRS…)
-  must be re-written by firmware after wake-up. EN must be HIGH and VREF driven to 0V
-  before asserting STDBY.
-- DIAG: active-HIGH output; asserts when StallGuard4 detects a stall or a driver error; see below
-- INDEX: pulse output; see below
-
-**UART address wiring (MS1/MS2 per driver):**
-
-| Driver | MS1 | MS2 | Address |
-|--------|-----|-----|---------|
-| U5 pH Down | GND | GND | 0 |
-| U6 Nut A | 3.3V | GND | 1 |
-| U7 Nut B | GND | 3.3V | 2 |
-
-**UART bus wiring:**
-
-```
-ESP32 GPIO22 (TX) ──── 1kΩ ──┐
-                              ├── shared bus node
-ESP32 GPIO21 (RX) ────────────┘        │
-                                  100Ω ├──── U5 PDN_UART
-                                  100Ω ├──── U6 PDN_UART
-                                  100Ω └──── U7 PDN_UART
-```
-
-> **⚠ Critical Wiring Detail — The UART Resistor (per TMC2209 datasheet §4.3)**
-> Connect ESP32 TX to the TMC2209 PDN_UART bus through a **1kΩ series resistor**.
-> Connect ESP32 RX **directly** to the same PDN_UART bus node — no resistor on RX.
-> The 1kΩ goes on the **TX line**, not the RX line.
-> Source: [TMC2209 Datasheet Rev 1.09, §4.3 UART Signals](https://www.analog.com/media/en/technical-documentation/data-sheets/tmc2209_datasheet_rev1.09.pdf)
-
-**1kΩ on GPIO22 TX:**
-PDN_UART is an open-drain bidirectional pin. When the ESP32 TX drives HIGH to send a command, and the TMC2209's open-drain output momentarily pulls the bus LOW to begin its response (a brief overlap before software tri-states TX), a low-impedance conflict occurs between TX driving HIGH and the open-drain pulling LOW. The 1kΩ on TX limits the fault current during this window to (3.3V / 1kΩ) = 3.3 mA — safe for both the ESP32 output driver and the TMC2209 PDN_UART. RX is connected directly because it is a high-impedance input that only monitors the bus voltage; no protection is needed.
-
-Configure ESP32-C6 UART1 in **half-duplex / single-wire mode** so TX is tri-stated (high-impedance) during the receive window. The TMC2209 then pulls the bus LOW open-drain to transmit its response, with no conflict from TX.
-
-**100Ω on each PDN_UART pin:**
-All three drivers share the same bus node. When one driver responds, its open-drain output pulls that driver's PDN_UART pin LOW. Without isolation, this LOW would also be seen at the PDN_UART pin of the other two non-responding drivers, which could
-corrupt their internal UART state (treating the bus activity as addressed to them). 
-The 100Ω series resistor on each PDN_UART pin creates a small voltage drop that decouples each driver's input from the bus during contention, and limits the current path between drivers if two open-drain outputs are momentarily both active.
-
-**Circuit (same topology for U5/U6/U7 — MS1/MS2 differ per address table):**
-
-```
-                24V (VM)
-                  │
-           ┌───┬──┴──────┐
-           │   │         │
-        100µF 100nF      │  ← 100µF bulk + 100nF local bypass per driver
-          ─┴─ ─┴─     VM │
-              ┌──────────┴───────────┐
- 3.3V ───────►│ VIO                  │
- GND ────────►│ GND                  │
-              │                      │
- STEP_xxx ───►│ STEP          OA1 ───┼──► coil A+   ← U5: GPIO11, U6: GPIO15, U7: GPIO19
- 3.3V ───────►│ DIR           OA2 ───┼──► coil A-
-  GND ───────►│ EN            OB1 ───┼──► coil B+
-              │               OB2 ───┼──► coil B-
-UART bus─100Ω►│ PDN_UART             │   ← bus: GPIO22─1kΩ─┤; GPIO21 direct; 100Ω isolates each driver
-  MS1* ──────►│ MS1           BRA ───┼──── 220mΩ ──── GND   ← RSENSE: 1%, 1/4W 0805
-  MS2* ──────►│ MS2           BRB ───┼──── 220mΩ ──── GND   ← 1/8W insufficient at full scale
-  GND ───────►│ SPREAD               │
-  GND ───────►│ STDBY                │   ← tied LOW; STDBY resets all UART regs if pulsed
-              │                      │
-see below  ──►│ VREF                 │   ← ~0.58V, full-scale ~1.32A
-              │      TMC2209         │
-              └──────────────────────┘
-  * MS1/MS2 per address table: U5=GND/GND, U6=3.3V/GND, U7=GND/3.3V
-```
-
-**GPIO Assignments:**
-```
-GPIO11 ──► STEP_PH_DN  (U5 pH Down driver STEP)
-GPIO15 ──► STEP_NUT_A  (U6 Nutrient A driver STEP)
-GPIO19 ──► STEP_NUT_B  (U7 Nutrient B driver STEP)
-GPIO21 ──► TMC2209_UART_RX  (UART1 RX — shared bus listen, direct connection)
-GPIO22 ──► TMC2209_UART_TX  (UART1 TX — shared bus drive, 1kΩ series to bus)
-GPIO20 ──  (available — STEPPER_EN not needed; EN tied to GND)
-```
-
-**DIR hardwired to 3.3V** on all three drivers. Peristaltic pumps are self-sealing — the rollers pinch the tube closed when stopped, so backflow cannot occur and direction reversal is never needed. If a pump runs backwards on first install, swap the coil A wires (OA1 ↔ OA2) on the connector.
-
-**SENSE resistors (R<sub>sa</sub> and R<sub>sb</sub>):**
-BRA and BRB are the low-side current sense points of the H-bridge for coil A and coil B respectively. A shunt resistor connects each pin to GND. The TMC2209 measures the voltage drop across this resistor to determine actual coil current, then adjusts its PWM chopper duty cycle to regulate current to the IRUN/IHOLD target.
-
-> All currents in this section are RMS currents. 
-
-Following the TMC2209 datasheet Ch. 8 recommendation for the A200SX 1.7A motor.
-> **R<sub>s</sub> = 120mΩ**
-
-Based on the formula from chapter 9 of the datasheet:
-> **I<sub>max</sub> = V<sub>fs</sub> / (R<sub>s</sub>+20mΩ) * 1 / √2**, where V<sub>fs</sub> is the full-scale voltage as determined by the `vsense control bit`. Default is 325mV.
-
-So with a R<sub>s</sub> = 120mΩ and V<sub>fs</sub> = 325mV
-> **I<sub>max</sub>** = 325mV / (120mΩ+20mΩ) * 1 / √2 = **1.77A**,
-
-Set a hard limit using the V<sub>REF</sub> input of the TMC2209. This linearly scales the maximum current. To cap the operating range in hardware at 90%, apply a 
-> **V<sub>REF</sub>** = (0.9 * 1.7A) / 1.77A * 2.5V = **2.161V**
-
-Too create this voltage, use the 3.3V rail with a R<sub>H</sub> and R<sub>L</sub> voltage divider. Taking into account a R<sub>VREF</sub>=240MΩ, the required resistors follow as:
-> **R<sub>H</sub> = 3.92kΩ**
-> **R<sub>L</sub> = 7.68kΩ** (both E96 Series, 1%)
-
-At 90% of I<sub>max</sub>, the sense resistor R<sub>s</sub> will dissipate:
->  **P<sub>d</sub> = I<sub>rms</sub><sup>2</sup> × R<sub>s</sub>** = (0.9 * 1.7A)<sup>2</sup> * 0.12Ω = 0.28W ⇒ choose **1/2W**
-
-With the current capped at 90% of 1.7A, we lower the current futher with the current scale specified by the `IHOLD_IRUN` register:
-> I<sub>rms</sub> = V<sub>REF</sub>/2.5V * (CS + 1)/32 * V<sub>fs</sub> / (R<sub>s</sub>+20mΩ) * 1 / sqrt(2), where V<sub>fs</sub> is the full-scale voltage as determined by the `vsense control bit`. Default is 325mV.
-
-Try an initial **70% or 80%** operating range by setting the **CS to 24 or 27**. Increase to 85–90% only if stalling occurs on aged tubing.
-
-CS value | Current limit| Target range
----------|---------|-------------
-24       | 1.19A   | 70%
-25       | 1.24A   | 73%
-26       | 1.29A   | 76%
-27       | 1.34A   | 79%
-28       | 1.43A   | 81%
-29       | 1.39A   | 84%
-30       | 1.48A   | 87%
-31       | 1.53A   | 90%
-
-The sense voltage is also used by StealthChop2 (current-mode PWM feedback) and StallGuard4 (coil current deviation from expected pattern signals a stall).
-
-**Key UART registers to configure at startup:**
-
-| Register | Value | Purpose |
-|----------|-------|---------|
-| `IHOLD` | 0 | Zero standstill current (EN tied to GND — this is essential) |
-| `IRUN` | 24 | Run current ≈ 70% (CS=24 → 1.19A; increase to 27 for ~79% if stalling occurs — see CS table above) |
-| `IHOLDDELAY` | 6 | Steps between IRUN→IHOLD transition after last STEP pulse |
-| `TPWMTHRS` | 0 | StealthChop2 active at all speeds |
-| `SENDDELAY` | ≥2 | **Required for multi-driver bus.** Reply delay before TMC2209 begins its UART response. Default (0) can cause a non-addressed chip to detect a transmission error when a different chip responds. Set to 2 or higher on all drivers. See note below. |
-
-> **⚠ Multi-driver SENDDELAY note**
-> When multiple TMC2209 chips share the same serial line with different addresses, the
-> `SENDDELAY` register must be increased from its default value, otherwise a non-addressed
-> chip may detect a transmission error when it sees the response from the addressed chip.
-> Set `SENDDELAY` ≥ 2 on every driver at firmware init.
-> Source: [janelia-arduino/TMC2209 library README](https://github.com/janelia-arduino/TMC2209)
-
-**DIAG pin:**
-Active-HIGH open-drain output. Asserts (goes HIGH) when StallGuard4 detects a motor
-stall or when a driver error occurs (overtemperature, short circuit). In UART mode,
-stall detection is preferred via the `DRV_STATUS` register (read `SG_RESULT` field)
-rather than the DIAG pin — this avoids spending a GPIO and is more informative
-(gives a numeric stall load value, not just a binary flag).
-
-PCB connection options:
-- **v1 (recommended):** leave DIAG floating — no GPIO required; poll `DRV_STATUS` via
-  UART instead. Place a DNP 10kΩ pullup footprint to 3.3V for future use.
-- **v2 (optional):** connect each DIAG to a free GPIO (GPIO18, GPIO20, GPIO23) via
-  10kΩ pullup; allows interrupt-driven stall detection without polling.
-
-**INDEX pin:**
-Pulse output — by default emits one pulse per electrical period (every 4 full steps at
-1× microstepping). Can be reconfigured via UART `IOIN` register to signal other events
-(e.g. first microstep position, stepper index).
-
-For dosing pumps, step count is controlled directly by the ESP32 (counted steps = known
-volume), so INDEX adds no value in normal operation. **Leave INDEX floating** (high-Z
-output, no harm). Place a DNP 1kΩ series + test point footprint for debugging if needed.
-
-**Standalone fallback (no firmware UART):** replace each 100Ω PDN_UART series resistor
-with 100kΩ to 3.3V; set MS1/MS2 both to 3.3V (1/16 microstep, addr unused); connect
-EN to GPIO20. Current then set by VREF divider only. StealthChop2 remains active.
-
-**VM Bulk Capacitance:**
-Place at least one **100µF electrolytic capacitor** (≥35V, low-ESR) close to each
-driver's VM pin. The TMC2209 chopper switches coil current rapidly — each switching
-event draws a brief spike from the VM supply. Without local bulk capacitance these
-spikes appear as voltage transients on the VM rail, which can corrupt UART communication
-(if the supply dips below the VIO logic threshold briefly) and degrade StallGuard4
-accuracy (coil current measurement depends on a stable VM). A 100nF ceramic (already
-in the circuit) handles high-frequency transients; the 100µF electrolytic handles the
-lower-frequency, higher-energy spikes from step-rate switching. Place the 100µF within
-5mm of the VM pin, with a short direct trace to GND.
-
-**Firmware — TMCStepper Library:**
-
-Use **[TMCStepper](https://github.com/teemuatlut/TMCStepper)** for all TMC2209 driver
-configuration and status monitoring. It provides full UART register access: write
-IRUN=18, IHOLD=0, IHOLDDELAY=6, TPWMTHRS=0 at startup; read DRV_STATUS.SG_RESULT and
-temperature flags during operation. No alternative library provides this capability.
-
-**Firmware — STEP Pulse Generation (RMT / LEDC / ISR Timer):**
-
-STEP pulses must be generated by hardware peripherals, not software loops.
-
-If the ESP32 is busy with a Wi-Fi request, SSL/TLS handshake, or MQTT reconnect, a
-software-timed pulse loop can stall for tens of milliseconds. A single missed or late
-pulse causes the stepper to lose a step — and since dosing accuracy is derived from
-step count × tube displacement constant, one lost step per dose accumulates into
-measurable calibration error over time.
-
-The ESP32-C6 provides three suitable hardware options:
-
-**Option 1 — RMT (Remote Control Transceiver) — recommended:**
-The RMT peripheral generates arbitrary pulse sequences from a preloaded buffer with
-nanosecond resolution, independent of the CPU. Configure it to output N pulses at the
-target step frequency, then trigger it once per dose. When the burst completes it fires
-a done interrupt; the CPU core is free throughout.
-
-```
-// Pseudocode — ESP-IDF RMT approach
-rmt_config_t cfg = { .gpio_num = STEP_PH_DN, .clk_src = RMT_CLK_SRC_DEFAULT };
-rmt_channel_handle_t ch;
-rmt_new_tx_channel(&cfg, &ch);
-// preload N symbols: 50% duty, period = 1/step_freq
-rmt_transmit(ch, encoder, symbols, n_steps, NULL);
-// CPU is free; RMT fires done callback when burst finishes
-```
-
-Supports up to 4 independent TX channels on ESP32-C6 → one per STEP pin (GPIO11,
-GPIO15, GPIO19) with one spare.
-
-**Option 2 — LEDC (LED PWM Controller):**
-LEDC generates continuous PWM at hardware level. For dosing, drive LEDC at the target
-step frequency and disable it after counting the required pulses via a GPIO interrupt
-on the STEP line, or use a one-shot approach: enable LEDC, start a hardware timer for
-N/freq seconds, disable LEDC in the timer callback. Less precise step count than RMT
-(off-by-one at stop edge possible) but simpler to configure.
-
-**Option 3 — ESP32_ISR_Stepper / ESP32TimerInterrupt:**
-The [ESP32TimerInterrupt](https://github.com/khoih-prog/ESP32TimerInterrupt) library
-configures hardware timer ISRs that run independently of the main loop and Wi-Fi
-stack. Use with `ESP32_ISR_Timer` in non-blocking mode: the ISR toggles the STEP GPIO
-at the target rate and decrements a step counter; when it reaches zero the ISR
-disables itself. All three pump channels require separate hardware timer instances
-(ESP32-C6 has 2 hardware timer groups × 2 timers each = 4 timers available).
-
-**Recommendation for OPNhydro:**
-Use **RMT** as the primary approach. It is the most deterministic, requires no ISR
-management, and the burst-complete callback integrates cleanly with an ESPHome custom
-component or FreeRTOS task. Use `ESP32TimerInterrupt` as a fallback if the RMT
-peripheral is needed for other functions (e.g. WS2812B LED strip).
-
-**Dosing Pump — ANKO A200SX:**
-
-| Parameter | Specification |
-|-----------|---------------|
-| Motor body connector | JST PH 2.0mm 4-pin (female, on pump body) |
-| Cable free-end connector | JST XH 2.5mm 4-pin (female) — PCB side |
-| Source | [ankoproducts.com/products/a200sx](https://ankoproducts.com/products/a200sx) |
-
-The A200SX motor cable carries coil wires only (4 pins). VCC/GND are not in this connector — the TMC2209 H-bridge drives the coils directly.
-
-```
-JST XH 2.5mm 4-pin Assignment (verify against A200SX datasheet on receipt):
-┌─────┬────────────────┬─────────────────────────────────────┐
-│ Pin │ Signal         │ PCB connection                      │
-├─────┼────────────────┼─────────────────────────────────────┤
-│  1  │ Coil A+  (OA1) │ TMC2209 OA1                         │
-│  2  │ Coil A−  (OA2) │ TMC2209 OA2                         │
-│  3  │ Coil B+  (OB1) │ TMC2209 OB1                         │
-│  4  │ Coil B−  (OB2) │ TMC2209 OB2                         │
-└─────┴────────────────┴─────────────────────────────────────┘
-⚠ Verify pin order from A200SX datasheet before PCB layout. Coil swap (A↔B or polarity)
-  only affects rotation direction; the TMC2209 handles both.
-```
-
-**Dosing Pump Connector (×3, PCB side):**
-
-```
-JST B4B-XH-A (4-position XH male header, 2.5mm pitch, right-angle TH, PCB mount) ×3
-- Mates with: JST XH 2.5mm 4-pin female housing on pump cable free end
-- Pitch: 2.5mm
-- 4 pins: coil A+, coil A−, coil B+, coil B−  (no VCC/GND)
-- Silkscreen label: "pH DN", "NUT A", "NUT B"
-- Right-angle orientation: cable exits horizontally toward board edge
-- Alternative: B4B-XH-AM (vertical TH) if cables must exit upward
-- Verify exact part on receipt — ARCHITECTURE.md notes connector mislabelled "XH 2.54mm"
-  in 3D printer community; XH series is 2.5mm pitch
-```
-
-### 7.3 ATO Solenoid Valve Driver
-
-```
-Same circuit topology as dosing pumps, using AO3400A MOSFET.
-Connected to 24V rail.
-Uses normally-closed (NC) solenoid valve for fail-safe operation.
-
-                                    24V
-                                     │
-                        ┌────────────┤
-                        │            │
-                       D1         VALVE+
-                   (1N5819)         │
-                        │         VALVE
-                        │        (NC, 500mA)
-               ┌────────┴───────┐   │
-               │     DRAIN      │   │
-        ┌──────┤  Q8            ├───┴── VALVE-
-        │      │  AO3400A       │
-        │      │  (SOT-23)      │
-        │      └───────┬────────┘
-        │           SOURCE
-        │              │
-       R2             ─┴─
-      100Ω            GND
-        │
-        ├────────────────────────────────── Gate (Q8)
-        │                                       │
-GPIO2 ──┘                                      R1
-                                              10kΩ (pull-down)
-                                               │
-                                              ─┴─
-                                              GND
-
-Hardware cutoff — FLOAT_HIGH (water-high) overrides GPIO7:
-
-GPIO1 ──── R_base (4.7kΩ) ──── Base ┐
-                                     │ Q10: MMBT3904 NPN
-                          Emitter ───┴─── GND
-                          Collector ─────────────────────────► Gate (Q8)
-
-When GPIO1 HIGH (water high): Q10 saturates → Gate clamped to ≤0.2V → Q8 OFF → valve closes (hardware)
-When GPIO1 LOW  (water OK):   Q10 off      → Gate driven by GPIO2 normally
-```
-
-Q8: AO3400A (Logic-level N-MOSFET, SOT-23)
-- VDS = 30V, ID = 5.8A
-- RDS(on) = 33mΩ @ VGS=4.5V
-- Handles 500mA solenoid load with margin
-- Power dissipation: ~8mW (very low)
-- Alternative: BSS214N (50V, 5A, 100mΩ)
-
-D1: 1N5819 (1A Schottky flyback diode, SOD-123)
-- Sufficient for solenoid valve inductive spike suppression
-
-
-**ATO Valve Connector:**
-
-```
-Phoenix Contact MC 1.5/2-ST-3.5 (2-position pluggable screw terminal)
-- Pitch: 3.5mm — same family as dosing pump connectors
-- PCB header: MC 1.5/2-G-3.5
-- Wire size: 24-18 AWG (for 250mA @ 24V)
-- Label silkscreen: "ATO VALVE" or "WATER IN"
-
-Pin Assignment:
-Pin 1: 24V_VALVE (switched via Q8)
-Pin 2: GND
-
-Valve Side Connection:
-- Most solenoid valves have 2-wire leads (polarity doesn't matter for DC)
-- Some have wire connectors (DIN 43650A common)
-- Strip and insert into screw terminal, or add mating connector
-```
-
-**Safety Notes:**
-- ✅ NC valve ensures no water flow if controller loses power
-- ✅ Float switch (GPIO1 - FLOAT_HIGH) provides hardware backup cutoff
-- ✅ Float switch (GPIO0 - FLOAT_LOW) provides low-level alarm
-- ✅ Software timeout prevents flooding if level sensor fails
-- ✅ Recommend inline manual shutoff valve for maintenance
-- ✅ Consider water leak sensor near reservoir for additional protection
-
-**Both switches are mounted NC (hinge pointing DOWN).** Wiring to the PCB differs
-between the two so that both GPIO signals are active-HIGH on their cutoff condition
-
-
-
-**Valve Installation:**
-1. Install valve inline on water supply line (before reservoir)
-2. Arrow on valve body indicates flow direction
-3. Mount valve with coil vertical (prevents water ingress)
-4. Use thread sealant (Teflon tape or pipe dope) on NPT threads
-5. Test valve operation before connecting to reservoir
-
-### 7.4 MOSFET Selection Summary
-
-**Design Strategy:** All-SMD design with appropriately-sized MOSFETs for each load type.
-
-| Load | Current | MOSFET | Package | RDS(on) @ 4.5V | Margin | Rationale |
-|------|---------|--------|---------|----------------|--------|-----------|
-| **Main Pump (AUBIG DC40-1250)** | 1.2A | **IRLR2905** | DPAK | 40mΩ | 35× | PWM capable, SMD |
-| **ATO Solenoid** | 500mA | **AO3400A** | SOT-23 | 33mΩ | 11× | Low cost, efficient |
-
-Dosing pumps (A200SX) are driven by TMC2209 internal H-bridges — no discrete MOSFET required.
-
-**Power Dissipation Analysis:**
-- IRLR2905 (Main pump): 1.2A² × 0.04Ω = **58mW** (DPAK handles easily)
-- AO3400A (ATO): 500mA² × 0.033Ω = **8mW** (very low for SOT-23)
-
-**Benefits:**
-- ✅ **100% SMD design** - entire board can use pick-and-place assembly
-- ✅ **Compact footprint** - DPAK + 5× SOT-23 (vs 6× TO-220 through-hole)
-- ✅ **Production-friendly** - no manual through-hole soldering required
-- ✅ **Lower assembly cost** - automated SMD assembly throughout
-- ✅ **Appropriate sizing** for each load (not overkill)
-- ✅ **All logic-level compatible** (work with 3.3V GPIO)
-- ✅ **Consistent design** - all MOSFETs are SMD packages
-- ✅ **AO3400A optimization** - Lower RDS(on) (33mΩ vs 100mΩ), lower cost ($0.10 vs $0.20)
-
-**Part Numbers:**
-- Q1 (Main Pump): **IRLR2905** or IRLR2905ZPBF (Infineon, DPAK/TO-252)
-- Q2 (ATO Solenoid): **AO3400A** (Alpha & Omega, SOT-23) - Primary choice
-- Alternative for Q2: BSS214N / BSS214NH6327XTSA1 (Infineon, 5A, SOT-23)
-
-
-⚠️ **CRITICAL for AUBIG DC40-1250**: Brushless motor requires stable, low-ripple DC power supply.
-
-| Specification | Minimum | Recommended | Ideal (Commercial) |
-|---------------|---------|-------------|-------------------|
-| **Voltage** | 12V DC ±5% | 12V DC ±2% | 12V DC ±1% |
-| **Current** | 3A (36W) | 5A (60W) | 10A (120W) |
-| **Ripple** | <200mV p-p | <100mV p-p | <50mV p-p |
-| **Regulation** | Line ±5% | Line/Load ±2% | Line/Load ±1% |
-| **Inrush Handling** | 2× rated | 2× rated | 3× rated |
-| **Use Case** | Budget (no PWM) | Standard (PWM OK) | Professional |
-
-
-
-## 8. Status LED
-
-The ESP32-C6-DevKitC-1 includes a built-in RGB LED (WS2812B) on GPIO8.
-No external status LED is needed on the OPNhydro PCB.
-
-Use GPIO8 in firmware for status indication (do not route GPIO8 to any PCB pad).
-
----
-
-
-----
-
-# ADM3260 Specifics
-
-- **Stitching Capacitance:** To reduce Electromagnetic Interference (EMI) caused by the internal DC-DC converter, place a small amount of "stitching capacitance" across the isolation barrier. This is often achieved by overlapping internal PCB layers (if using a 4-layer board) or using a dedicated Y-rated capacitor. [1, 5, 12]
-
-- **Bypass Capacitors:** Place a 0.1µF ceramic capacitor as close as possible to the VCC and VISO pins. For the ADM3260, a 10µF tantalum or ceramic capacitor is also required on both the input and output power pins to handle the switching currents of the internal transformer. [5, 8, 12]
-
-- **Pull-up Resistors:** I2C requires pull-up resistors on both sides of the isolation barrier.
-  - Primary Side (SDA/SCL): 4.7k to 10k tied to the microcontroller's 3.3V/5V.
-  - Secondary Side (SDA_ISO/SCL_ISO): 1k to 4.7k tied to VISO. Using lower values (like 2.2k) on the isolated side helps maintain signal integrity in mineral-heavy environments where cable capacitance might be higher. [1, 5]
-
-- **Trace Lengths:** Keep the I2C traces between the ADM3260 and the EZO socket as short as possible to prevent picking up noise from your 24V solenoid or pump. [1, 8]
-
-Sources and Documentation:
-- **Analog Devices ADM3260 Datasheet:** The definitive source for "Layout Guidelines" and "EMI Considerations" (See pages 16-18). [5, 8]
-- **Atlas Scientific USB Isolator Schematic:** Their public hardware documentation shows the ADM3260 implementation for I2C isolation. [1, 10]
-- **AN-0971 Application Note:** "Recommendations for Control of Radiated Emissions with isoPower Devices." [12]
-
-
-
-
-
-## 3. PCB Layout and EMI
-
-
-Recommended: IP65 rated ABS enclosure, ~150×100×70mm
-- Cable glands for all wiring
-- Panel-mount BNC connectors for pH/EC/RTD probes (3×)
-- Optional: Clear lid for status LED visibility
-
-- **Size:** 100mm × 80mm (fits common enclosures)
-- **Finish:** HASL or ENIG
-
-----
-
-### 3.6. Float Switches Specifics
-
-Require external debounce caps, such as:
-- 10kΩ to the 3V3 rail, and 100nF to GND to generate the FLOAT_LOW signal.
-- 100nF to the 3V3 rail, and 10kΩ to GND to generate the FLOAT_HIGH signal.
-
-
----
-
-
-### 3.7. Digital Core Specifics (MCU & LiDAR)
-
-Since the TF-Luna LiDAR and MCU share the 3.3V/5V mainland rail, they need protection from the 24V "noise floor."
-
-Net            | Value       | Role
----------------|-------------|-----
-TF-Luna Header | 100µF / 10V | Electrolytic/Tantalum near the header to prevent "brownouts" during laser pulses.
-I2C Bus        | 0.1µF       | Scattered near pull-up resistors to keep the SDA/SCL lines quiet.
-
-Keep-out area PCB around antenna.  
-
-
----
-
-
-
-
----
-
-
-### 3.3. Hand-Soldering
+## 8. Hand-Soldering
 
 Hand-soldering a 4-layer PCB with an ADM3260 (SSOP package) and EZO modules is a fun challenge, but the internal copper planes act like a giant heat sink. If you aren't careful, you'll get "cold solder joints" where the solder balls up instead of flowing into the hole.
 
@@ -2352,3 +1777,81 @@ Via Pad Diameter     | 24 mils (0.6 mm)
 
 If your software allows, add a **"Route Keep-Out"** area over the moats. This prevents the "Auto-Router" from trying to be "helpful" by running a 24V line across your isolation gap!
 
+
+
+
+
+
+## Block Diagram
+
+```
+                           ┌─────────────┐
+                           │  ESP32-C6   │
+                           │             │
+                           └──────┬──────┘
+                                  │
+         ┌──────────────────┬─────┴───────────────┐
+         │                  │                     │
+    ┌────┴────┐        ┌────┴────┐         ┌──────┴──────┐
+    │  I2C    │        │  GPIO   │         │    UART     │
+    │  Bus    │        │         │         │    Bus      │
+    └────┬────┘        └────┬────┘         └──────┬──────┘
+         │                  │──────────────┐      │
+    ┌────┴───────┐  ┌───────┴────────┐     │      │
+    │ pH EZO     │  │ LiDAR          │  ┌──┴──────┴───────┐
+    │ EC EZO     │  │ Float switches │  │ Dosing steppers │
+    │ RTD EZO    │  │ Main pump      │  └─────────────────┘
+    └────────────┘  │ OTA valve      │
+                    └────────────────┘
+```
+
+```
+                       ┌─────────────────────────────────────────────────────┐
+                       │                    CONNECTORS                       │
+                       │  ┌─────┐ ┌─────┐ ┌─────┐  ┌──────────┐ ┌─────────┐  │
+                       │  │ BNC │ │ BNC │ │ BNC │  │ Float SW │ │  LiDAR  │  │
+                       │  │ pH  │ │ EC  │ │ RTD │  │  2×JST2P │ │  JST4P  │  │
+                       │  └──┬──┘ └──┬──┘ └──┬──┘  └────┬─────┘ └────┬────┘  │
+                       └─────┼───────┼───────┼──────────┼────────────┼───────┘
+                             │       │       │          │            │
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                                    PCB                                          │
+│  ┌─────────────┐   ┌───────────────────────────────────────────────────────┐    │
+│  │   POWER     │   │                       SENSORS                         │    │
+│  │             │   │  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐       │    │
+│  │ 24V ──►5V   │   │  │ EZO-pH │  │ EZO-EC │  │EZO-RTD │  │ BME280 │       │    │
+│  │     ──►3.3V │   │  │  I2C   │  │  I2C   │  │  I2C   │  │  I2C   │       │    │
+│  │             │   │  └───┬────┘  └───┬────┘  └───┬────┘  └───┬────┘       │    │
+│  └──────┬──────┘   │      └───────────┴───────────┴───────────┘            │    │
+│         │          │                        │ I2C Bus                      │    │
+│         │          │  ┌──────────────────┐  ┌───────────────────────────┐  │    │
+│         │          │  │                  │  │    Float SW (×2)          │  │    │
+│         │          │  │                  │  │    LOW:  GPIO0            │  │    │
+│         │          │  │                  │  │    HIGH: GPIO1            │  │    │
+│         │          │  └──────────────────┘  └───────────────────────────┘  │    │
+│         │          └───────────────────────────────────────────────────────┘    │
+│         │                                   │                                   │
+│         │          ┌────────────────────────┴─────────────────────────────┐     │
+│         │          │               ESP32-C6-WROOM-1                       │     │
+│         │          │  ┌──────────────────────────────────────────────┐    │     │
+│         └─────────►│  │  GPIO4/5: I2C        GPIO2:  ATO_VALVE       │    │     │
+│                    │  │  GPIO7:   HC_TRIG    GPIO3:  HC_ECHO         │    │     │
+│                    │  │  GPIO0:   FLOAT_LOW  GPIO1:  FLOAT_HIGH      │    │     │
+│                    │  │  GPIO6:   EZO_PDIS   GPIO10: PUMP_MAIN       │    │     │
+│                    │  │  GPIO11:  STEP_PH_DN GPIO15: STEP_NUT_A      │    │     │
+│                    │  │  GPIO19:  STEP_NUT_B GPIO21/22: TMC_UART     │    │     │
+│                    │  └──────────────────────────────────────────────┘    │     │
+│                    └──────────────────────────────────────────────────────┘     │
+│                                            │                                    │
+│         ┌──────────────────────────────────┼──────────────────────────────┐     │
+│         │           PUMP/VALVE DRIVERS (all 24V)                          │     │
+│         │  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐     │     │
+│         │  │ 24V    │  │ 24V    │  │ 24V    │  │ 24V    │  │ 24V    │     │     │
+│         │  │ Main   │  │ pH Dn  │  │ Nut A  │  │ Nut B  │  │ ATO    │     │     │
+│         │  │ Pump   │  │ Dose   │  │ Dose   │  │ Dose   │  │ Valve  │     │     │
+│         │  └────────┘  └────────┘  └────────┘  └────────┘  └────────┘     │     │
+│         └─────────────────────────────────────────────────────────────────┘     │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
