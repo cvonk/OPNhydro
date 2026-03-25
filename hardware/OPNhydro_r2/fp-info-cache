@@ -1,4 +1,4 @@
-27514892312383601
+27559239784751091
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -6776,7 +6776,35 @@ CAP ALUM 100μF ±20 25V
 2
 2
 Coert-Vonk
+CAP ALUM 100μF ±20 50V Panasonic
+
+
+0
+2
+2
+Coert-Vonk
+CAP ALUM 220μF ±20 50V Panasonic
+
+
+0
+2
+2
+Coert-Vonk
+CAP ALUM 470μF ±20 50V Panasonic
+
+
+0
+2
+2
+Coert-Vonk
 CAP ALUM 1000μF ±20 10V
+
+
+0
+2
+2
+Coert-Vonk
+CAP ALUM 1000μF ±20 50V Panasonic
 
 
 0
@@ -6797,6 +6825,13 @@ CAP ALUM POLY 1000μF ±20 6.3V
 2
 2
 Coert-Vonk
+CAP ALUM-POLY 220μF ±20 16V Panasonic
+
+
+0
+2
+2
+Coert-Vonk
 CAP MLCC 22μF 10V 0805
 
 CL21A226MAYNNNE 
@@ -6807,6 +6842,20 @@ Coert-Vonk
 CAP TANT 10μF ±20 16V 0805
 
 TCTP1C106M8R 
+0
+2
+2
+Coert-Vonk
+CAP X5R 10μF ±10 10V 0805 Kemet
+
+
+0
+2
+2
+Coert-Vonk
+CAP X5R 10μF ±10 16V 0805 Murata GRM
+
+
 0
 2
 2
@@ -6832,6 +6881,20 @@ C0805C225K8RACTU
 2
 2
 Coert-Vonk
+CAP X7R 2.2μF ±10 10V 0603 Murata
+
+
+0
+2
+2
+Coert-Vonk
+CAP X7R 10nF ±10 16V 0402 Murata
+
+
+0
+2
+2
+Coert-Vonk
 CAP X7R 10nF ±10% 50V 0805
 
 
@@ -6846,7 +6909,28 @@ CAP X7R 10μF ±10 16V 0805
 2
 2
 Coert-Vonk
+CAP X7R 10μF ±10 50V 1206 Murata GRT
+
+
+0
+2
+2
+Coert-Vonk
+CAP X7R 10μF ±10 50V 1210 Kemet
+
+
+0
+2
+2
+Coert-Vonk
 CAP X7R 22nF ±10 50V 0805
+
+
+0
+2
+2
+Coert-Vonk
+CAP X7R 22nF ±10 100V 0603 Murata
 
 
 0
@@ -6867,7 +6951,35 @@ CAP X7R 33nF ±10 25V 0805
 2
 2
 Coert-Vonk
+CAP X7R 33nF ±10 50V 0805 Kemet
+
+
+0
+2
+2
+Coert-Vonk
 CAP X7R 100nF ±10 25V 0805
+
+
+0
+2
+2
+Coert-Vonk
+CAP X7R 100nF ±10 50V 0402 Murata
+
+
+0
+2
+2
+Coert-Vonk
+CAP X7R 100nF ±10 50V 0603 Murata
+
+
+0
+2
+2
+Coert-Vonk
+CAP X7R 100nF ±10 50V 0805 Kemet
 
 
 0
@@ -7042,6 +7154,20 @@ Buttons approximate size and position
 32
 32
 Coert-Vonk
+FERRITE BEAD 12A 1.6mΩ 50Ω 1206 Murata
+
+
+0
+2
+2
+Coert-Vonk
+FERRITE BEAD 20mΩ 60Ω 0603 TDK
+
+MPZ1608S600ATDH5 
+0
+2
+2
+Coert-Vonk
 FERRITE BEAD 330Ω 0805
 
 
@@ -7049,7 +7175,7 @@ FERRITE BEAD 330Ω 0805
 2
 2
 Coert-Vonk
-FUSE 4A 125V 2-SMD
+FUSE 2-SMD
 
 0451004.MRL 
 0
@@ -7164,6 +7290,13 @@ Coert-Vonk
 IND 7.8µH 10A 20.5mΩ
 
 IHLP5050EZER7R8M01 
+0
+2
+2
+Coert-Vonk
+IND 10µH 5.6A 21mΩ
+
+SDR1307-100ML 
 0
 2
 2
@@ -7300,6 +7433,13 @@ MOSFET N-CH 60V 320MA SOT23
 0
 3
 3
+Coert-Vonk
+MOSFET P-CH 30V 32A 10mΩ AON6407
+
+
+0
+5
+5
 Coert-Vonk
 MOTOR HAPTIC 13000RPM 3V 10mm
 
@@ -7553,6 +7693,13 @@ Small Outline Package SOIC 150 mil
 8
 8
 Coert-Vonk
+SOD323_DIO
+
+BZT52C12S-7-F 
+0
+2
+2
+Coert-Vonk
 SOIC8
 
 
@@ -7700,6 +7847,13 @@ TERM BLK HDR 4POS 5.08mm
 4
 4
 Coert-Vonk
+TERM BLK HDR 4POS JST-XH 2.5mm
+
+
+0
+4
+4
+Coert-Vonk
 TERM BLK HDR 4POS MSTBA 5.08mm
 
 
@@ -7728,6 +7882,13 @@ TERM BLK HDR 6POS MSTBA 5.08mm
 6
 6
 Coert-Vonk
+TERM BLK HDR 6POS PB 1.25mm Molex
+
+
+0
+8
+8
+Coert-Vonk
 TERM BLK HDR 6POS PH 2mm
 
 S6B-PH-K-S 
@@ -7743,6 +7904,20 @@ TERM BLK PLG 2POS MSTB 5.08mm
 0
 Coert-Vonk
 TERM BLK PLG 4POS MSTB 5.08mm
+
+
+0
+0
+0
+Coert-Vonk
+TERM BLK PLG 4POS XH 2.5mm
+
+
+0
+0
+0
+Coert-Vonk
+TERM BLK PLG 6POS MOLEX-PB 1.25mm
 
 
 0

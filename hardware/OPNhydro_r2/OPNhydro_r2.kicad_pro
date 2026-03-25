@@ -590,6 +590,12 @@
     },
     "net_colors": null,
     "netclass_assignments": {
+      "/GND_ATO_VALVE": [
+        "Power"
+      ],
+      "/GND_PUMP_MAIN": [
+        "Power"
+      ],
       "/V_{ISO,EC}": [
         "Power"
       ],

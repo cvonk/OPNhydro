@@ -1,4 +1,4 @@
-(footprint "MOSFET P-CH 20V 3.1A SI2301CDS SOT23-3"
+(footprint "SOT23-3"
 	(version 20241229)
 	(generator "pcbnew")
 	(generator_version "9.0")
@@ -16,7 +16,7 @@
 			)
 		)
 	)
-	(property "Value" "MOSFET P-CH 20V 3.1A SI2301CDS SOT23-3"
+	(property "Value" "SOT23-3"
 		(at 0 4 0)
 		(unlocked yes)
 		(layer "F.Fab")

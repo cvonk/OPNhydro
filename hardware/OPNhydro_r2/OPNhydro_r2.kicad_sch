@@ -8046,7 +8046,7 @@
 			(in_bom yes)
 			(on_board no)
 			(property "Reference" "PR"
-				(at 0 10.16 0)
+				(at -2.54 6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -8055,7 +8055,7 @@
 				)
 			)
 			(property "Value" "BME280"
-				(at 0 7.62 0)
+				(at -2.54 3.81 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -8102,8 +8102,8 @@
 			)
 			(symbol "PROBE BOSCH BME280_0_1"
 				(rectangle
-					(start -5.334 -2.54)
-					(end -3.81 -4.572)
+					(start -7.874 -7.62)
+					(end -6.35 -9.652)
 					(stroke
 						(width 0)
 						(type default)
@@ -8113,8 +8113,8 @@
 					)
 				)
 				(rectangle
-					(start -5.08 7.62)
-					(end -4.064 -2.54)
+					(start -7.62 2.54)
+					(end -6.604 -7.62)
 					(stroke
 						(width 0)
 						(type default)
@@ -8125,7 +8125,7 @@
 				)
 				(polyline
 					(pts
-						(xy -5.08 -4.572) (xy -4.826 -6.604) (xy -4.318 -6.604) (xy -4.064 -4.572) (xy -5.08 -4.572)
+						(xy -7.62 -9.652) (xy -7.366 -11.684) (xy -6.858 -11.684) (xy -6.604 -9.652) (xy -7.62 -9.652)
 					)
 					(stroke
 						(width 0)
@@ -8136,9 +8136,9 @@
 					)
 				)
 				(arc
-					(start 0.0002 -6.6042)
-					(mid -0.6694 -8.2206)
-					(end -2.2858 -8.8902)
+					(start -2.5398 -11.6842)
+					(mid -3.2094 -13.3006)
+					(end -4.8258 -13.9702)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -8148,9 +8148,9 @@
 					)
 				)
 				(arc
-					(start -2.286 -8.89)
-					(mid -3.9024 -8.2204)
-					(end -4.572 -6.604)
+					(start -4.826 -13.97)
+					(mid -6.4424 -13.3004)
+					(end -7.112 -11.684)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -8161,7 +8161,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 -6.604) (xy 0 5.08)
+						(xy -2.54 -11.684) (xy -2.54 0)
 					)
 					(stroke
 						(width 0.254)
@@ -8174,12 +8174,12 @@
 			)
 			(symbol "PROBE BOSCH BME280_1_0"
 				(pin passive line
-					(at 2.54 5.08 180)
+					(at 0 0 180)
 					(length 2.54)
-					(name ""
+					(name "GND"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -8192,12 +8192,12 @@
 					)
 				)
 				(pin passive line
-					(at 2.54 2.54 180)
+					(at 0 -2.54 180)
 					(length 2.54)
-					(name ""
+					(name "VCC"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -8210,12 +8210,12 @@
 					)
 				)
 				(pin passive line
-					(at 2.54 0 180)
+					(at 0 -5.08 180)
 					(length 2.54)
-					(name ""
+					(name "SCL"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -8228,12 +8228,222 @@
 					)
 				)
 				(pin passive line
-					(at 2.54 -2.54 180)
+					(at 0 -7.62 180)
 					(length 2.54)
-					(name ""
+					(name "SDA"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 0.762 0.762)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Coert-Vonk:PROBE LIGHT"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim yes)
+			(in_bom yes)
+			(on_board no)
+			(property "Reference" "PR"
+				(at -4.572 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Value" "LIGHT"
+				(at -4.572 4.318 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "DKPN" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "PROBE LIGHT_0_1"
+				(rectangle
+					(start -7.874 -7.62)
+					(end -6.35 -9.652)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -7.62 2.54)
+					(end -6.604 -7.62)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -7.62 -9.652) (xy -7.366 -11.684) (xy -6.858 -11.684) (xy -6.604 -9.652) (xy -7.62 -9.652)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(arc
+					(start -2.5398 -11.6842)
+					(mid -3.2094 -13.3006)
+					(end -4.8258 -13.9702)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -4.826 -13.97)
+					(mid -6.4424 -13.3004)
+					(end -7.112 -11.684)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 -11.684) (xy -2.54 0)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "PROBE LIGHT_1_0"
+				(pin passive line
+					(at 0 0 180)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 0.762 0.762)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 180)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 0.762 0.762)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -5.08 180)
+					(length 2.54)
+					(name "SCL"
+						(effects
+							(font
+								(size 0.762 0.762)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 180)
+					(length 2.54)
+					(name "SDA"
+						(effects
+							(font
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -8481,7 +8691,7 @@
 				(pin free line
 					(at 2.54 5.08 180)
 					(length 2.54)
-					(name "5V"
+					(name "VCC"
 						(effects
 							(font
 								(size 0.762 0.762)
@@ -8550,155 +8760,17 @@
 						)
 					)
 				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Coert-Vonk:PROBE_LIGHT"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim yes)
-			(in_bom yes)
-			(on_board no)
-			(property "Reference" "PR"
-				(at 0 10.16 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-				)
-			)
-			(property "Value" "LIGHT"
-				(at 0 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "DKPN" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "PROBE_LIGHT_0_1"
-				(rectangle
-					(start -5.334 -2.54)
-					(end -3.81 -4.572)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start -5.08 7.62)
-					(end -4.064 -2.54)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.08 -4.572) (xy -4.826 -6.604) (xy -4.318 -6.604) (xy -4.064 -4.572) (xy -5.08 -4.572)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 0.0002 -6.6042)
-					(mid -0.6694 -8.2206)
-					(end -2.2858 -8.8902)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -2.286 -8.89)
-					(mid -3.9024 -8.2204)
-					(end -4.572 -6.604)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -6.604) (xy 0 5.08)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "PROBE_LIGHT_1_0"
-				(pin passive line
-					(at 2.54 5.08 180)
+				(pin free line
+					(at 2.54 -5.08 180)
 					(length 2.54)
-					(name ""
+					(name "~{I2C}"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 0.762 0.762)
 							)
 						)
 					)
-					(number "1"
+					(number "4"
 						(effects
 							(font
 								(size 0 0)
@@ -8706,49 +8778,13 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 2.54 2.54 180)
+				(pin free line
+					(at 2.54 -7.62 180)
 					(length 2.54)
-					(name ""
+					(name "RDY"
 						(effects
 							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 0 180)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 -2.54 180)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -12392,13 +12428,13 @@
 		)
 		(symbol "Coert-Vonk:TERM BLK HDR 4POS JST-PH 2mm"
 			(pin_names
-				(offset 3.048)
+				(offset 2.54)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "H"
-				(at 0 5.08 0)
+				(at 0 4.318 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -12406,7 +12442,7 @@
 				)
 			)
 			(property "Value" "JST_PH"
-				(at 0 2.54 0)
+				(at 0 1.778 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -12451,7 +12487,16 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "i2c header jst S04B-PASK-2"
+			(property "MFR" "JST"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "S4B-PH-K-S"
 				(at 0 0 0)
 				(effects
 					(font
@@ -12467,6 +12512,56 @@
 						(size 1.27 1.27)
 					)
 					(hide yes)
+				)
+			)
+			(symbol "TERM BLK HDR 4POS JST-PH 2mm_0_1"
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -5.08) (xy 0 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -7.62) (xy 0 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -10.16) (xy 0 -10.16)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
 				)
 			)
 			(symbol "TERM BLK HDR 4POS JST-PH 2mm_1_0"
@@ -12515,12 +12610,12 @@
 					)
 				)
 				(pin power_in line
-					(at 7.62 -2.54 180)
-					(length 7.62)
+					(at 3.81 -2.54 180)
+					(length 2.54)
 					(name "GND"
 						(effects
 							(font
-								(size 0 0)
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -12533,12 +12628,12 @@
 					)
 				)
 				(pin power_in line
-					(at 7.62 -5.08 180)
-					(length 7.62)
-					(name "3V3"
+					(at 3.81 -5.08 180)
+					(length 2.54)
+					(name "VCC"
 						(effects
 							(font
-								(size 0 0)
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -12551,12 +12646,12 @@
 					)
 				)
 				(pin bidirectional line
-					(at 7.62 -7.62 180)
-					(length 7.62)
-					(name "I2C_SDA"
+					(at 3.81 -7.62 180)
+					(length 2.54)
+					(name "SCL"
 						(effects
 							(font
-								(size 0 0)
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -12569,12 +12664,12 @@
 					)
 				)
 				(pin bidirectional line
-					(at 7.62 -10.16 180)
-					(length 7.62)
-					(name "I2C_SCL"
+					(at 3.81 -10.16 180)
+					(length 2.54)
+					(name "SDA"
 						(effects
 							(font
-								(size 0 0)
+								(size 0.762 0.762)
 							)
 						)
 					)
@@ -12589,8 +12684,8 @@
 			)
 			(symbol "TERM BLK HDR 4POS JST-PH 2mm_1_1"
 				(rectangle
-					(start -2.54 0)
-					(end 2.54 -12.7)
+					(start -1.27 0)
+					(end 1.27 -12.7)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -13025,6 +13120,395 @@
 				(rectangle
 					(start -2.54 0)
 					(end 2.54 -12.7)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Coert-Vonk:TERM BLK HDR 6POS MOLEX-PB 1.25mm"
+			(pin_names
+				(offset 2.54)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 2.54 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Value" "PB_1.25mm"
+				(at 2.54 0.635 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Footprint" "Coert-Vonk:TERM BLK HDR 6POS PB 1.25mm Molex"
+				(at -2.54 -17.526 0)
+				(effects
+					(font
+						(size 0.762 0.762)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.molex.com/pdm_docs/sd/532610671_sd.pdf"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Connector Header Surface Mount, Right Angle 6 position 0.049\" (1.25mm)"
+				(at -1.778 -8.89 0)
+				(effects
+					(font
+						(size 0.762 0.762)
+					)
+					(hide yes)
+				)
+			)
+			(property "DKPN" "WM7624CT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Molex"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MPN" "0532610671"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Phoenix Contact COMBICON MC 1803316"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TERM BLK HDR 6POS MOLEX-PB 1.25mm_0_1"
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 2.54 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -5.08) (xy 2.54 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -7.62) (xy 2.54 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -10.16) (xy 2.54 -10.16)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -12.7) (xy 2.54 -12.7)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -15.24) (xy 2.54 -15.24)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TERM BLK HDR 6POS MOLEX-PB 1.25mm_1_0"
+				(rectangle
+					(start 0.7112 -1.9812)
+					(end 1.8288 -3.0988)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 1.27 -5.08)
+					(radius 0.3175)
+					(stroke
+						(width 0.508)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -7.62)
+					(radius 0.3175)
+					(stroke
+						(width 0.508)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -10.16)
+					(radius 0.3175)
+					(stroke
+						(width 0.508)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -12.7)
+					(radius 0.3175)
+					(stroke
+						(width 0.508)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -15.24)
+					(radius 0.3175)
+					(stroke
+						(width 0.508)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -5.08 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -7.62 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -10.16 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -12.7 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -15.24 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -17.78 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "S"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -17.78 180)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "S2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+			)
+			(symbol "TERM BLK HDR 6POS MOLEX-PB 1.25mm_1_1"
+				(rectangle
+					(start 0 0)
+					(end 2.54 -17.78)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -14052,21 +14536,21 @@
 		)
 		(symbol "Coert-Vonk:TERM BLK PLG 4POS JST-PH 2mm"
 			(pin_names
-				(offset 0.254)
+				(offset 2.54)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board no)
 			(property "Reference" "P"
-				(at 0 4.445 0)
+				(at 3.81 6.096 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "PHR-4"
-				(at 0 1.905 0)
+			(property "Value" "PHR_4"
+				(at 3.81 4.064 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -14131,7 +14615,7 @@
 			)
 			(symbol "TERM BLK PLG 4POS JST-PH 2mm_0_1"
 				(circle
-					(center 0 -5.08)
+					(center 3.81 -2.54)
 					(radius 0.635)
 					(stroke
 						(width 0.254)
@@ -14142,7 +14626,7 @@
 					)
 				)
 				(circle
-					(center 0 -7.62)
+					(center 3.81 -5.08)
 					(radius 0.635)
 					(stroke
 						(width 0.254)
@@ -14153,7 +14637,7 @@
 					)
 				)
 				(circle
-					(center 0 -10.16)
+					(center 3.81 -7.62)
 					(radius 0.635)
 					(stroke
 						(width 0.254)
@@ -14164,8 +14648,8 @@
 					)
 				)
 				(rectangle
-					(start 0.635 -1.905)
-					(end -0.635 -3.175)
+					(start 4.445 0.635)
+					(end 3.175 -0.635)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -14178,7 +14662,7 @@
 			(symbol "TERM BLK PLG 4POS JST-PH 2mm_1_0"
 				(polyline
 					(pts
-						(xy -2.54 -2.54) (xy -0.635 -2.54)
+						(xy 2.54 0) (xy 3.175 0)
 					)
 					(stroke
 						(width 0.1778)
@@ -14190,7 +14674,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.54 -5.08) (xy -0.635 -5.08)
+						(xy 2.54 -2.54) (xy 3.175 -2.54)
 					)
 					(stroke
 						(width 0.1778)
@@ -14202,7 +14686,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.54 -7.62) (xy -0.635 -7.62)
+						(xy 2.54 -5.08) (xy 3.175 -5.08)
 					)
 					(stroke
 						(width 0.1778)
@@ -14214,7 +14698,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.54 -10.16) (xy -0.635 -10.16)
+						(xy 2.54 -7.62) (xy 3.175 -7.62)
 					)
 					(stroke
 						(width 0.1778)
@@ -14225,7 +14709,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -2.54 0)
+					(at 0 0 0)
 					(length 2.54)
 					(name ""
 						(effects
@@ -14243,7 +14727,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -5.08 0)
+					(at 0 -2.54 0)
 					(length 2.54)
 					(name ""
 						(effects
@@ -14261,7 +14745,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -7.62 0)
+					(at 0 -5.08 0)
 					(length 2.54)
 					(name ""
 						(effects
@@ -14279,7 +14763,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -10.16 0)
+					(at 0 -7.62 0)
 					(length 2.54)
 					(name ""
 						(effects
@@ -14299,8 +14783,8 @@
 			)
 			(symbol "TERM BLK PLG 4POS JST-PH 2mm_1_1"
 				(rectangle
-					(start -2.54 0)
-					(end 2.54 -12.7)
+					(start 2.54 2.54)
+					(end 5.08 -10.16)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -14885,6 +15369,571 @@
 					)
 					(fill
 						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Coert-Vonk:TERM BLK PLG 6POS MOLEX-PB 1.25mm"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim yes)
+			(in_bom yes)
+			(on_board no)
+			(property "Reference" "P"
+				(at 0 4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PB_1.25mm"
+				(at 0 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Coert-Vonk:TERM BLK PLG 6POS MOLEX-PB 1.25mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.molex.com/en-us/products/part-detail-pdf/510210600?display=pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "6 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "DKPN" "WM1724-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Molex"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MPN" "0510210600"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "CONN_PPPC031LFBN-RC_SUL"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TERM BLK PLG 6POS MOLEX-PB 1.25mm_0_1"
+				(circle
+					(center 1.27 -5.08)
+					(radius 0.635)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -7.62)
+					(radius 0.635)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -10.16)
+					(radius 0.635)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -12.7)
+					(radius 0.635)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -15.24)
+					(radius 0.635)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 1.905 -1.905)
+					(end 0.635 -3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TERM BLK PLG 6POS MOLEX-PB 1.25mm_1_0"
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy 0.635 -2.54)
+					)
+					(stroke
+						(width 0.1778)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -5.08) (xy 0.635 -5.08)
+					)
+					(stroke
+						(width 0.1778)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -7.62) (xy 0.635 -7.62)
+					)
+					(stroke
+						(width 0.1778)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -10.16) (xy 0.635 -10.16)
+					)
+					(stroke
+						(width 0.1778)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -12.7) (xy 0.635 -12.7)
+					)
+					(stroke
+						(width 0.1778)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -15.24) (xy 0.635 -15.24)
+					)
+					(stroke
+						(width 0.1778)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -3.81 -2.54 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -3.81 -5.08 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -3.81 -7.62 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -3.81 -10.16 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -3.81 -12.7 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -3.81 -15.24 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "TERM BLK PLG 6POS MOLEX-PB 1.25mm_1_1"
+				(rectangle
+					(start 0 0)
+					(end 2.54 -17.78)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "TERM BLK PLG 6POS MOLEX-PB 1.25mm_1_2"
+				(polyline
+					(pts
+						(xy 5.08 2.54) (xy 5.08 -7.62)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 -7.62) (xy 12.7 -7.62)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 0) (xy 5.08 0)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 0) (xy 8.89 0.8467)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 0) (xy 8.89 -0.8467)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -2.54) (xy 5.08 -2.54)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -2.54) (xy 8.89 -1.6933)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -2.54) (xy 8.89 -3.3867)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -5.08) (xy 5.08 -5.08)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -5.08) (xy 8.89 -4.2333)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -5.08) (xy 8.89 -5.9267)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 2.54) (xy 5.08 2.54)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 -7.62) (xy 12.7 2.54)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin unspecified line
+					(at -2.54 -2.54 0)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -2.54 -5.08 0)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 0 0)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -16394,7 +17443,7 @@
 	)
 	(text "Safety Switches"
 		(exclude_from_sim no)
-		(at 62.23 164.846 0)
+		(at 62.738 164.846 0)
 		(effects
 			(font
 				(size 1.905 1.905)
@@ -16438,16 +17487,6 @@
 			(justify left)
 		)
 		(uuid "3ee1ba40-23af-46fb-bb9d-9dfe0bda33b1")
-	)
-	(text "Stay off \nduring\nSoC reset"
-		(exclude_from_sim no)
-		(at 59.944 270.764 0)
-		(effects
-			(font
-				(size 0.762 0.762)
-			)
-		)
-		(uuid "40fea7c8-7af6-4c47-b868-3249b081911e")
 	)
 	(text "f_{SW}=1MHz"
 		(exclude_from_sim no)
@@ -16634,7 +17673,7 @@
 	)
 	(text "Light Sensor (optional)"
 		(exclude_from_sim no)
-		(at 193.04 178.054 0)
+		(at 193.04 175.768 0)
 		(effects
 			(font
 				(size 1.905 1.905)
@@ -16680,16 +17719,6 @@
 		)
 		(uuid "ba41414c-39b8-4db7-b540-4414e2141d84")
 	)
-	(text "Prevent\nhigh-frequency\noscillation"
-		(exclude_from_sim no)
-		(at 39.624 251.46 0)
-		(effects
-			(font
-				(size 0.762 0.762)
-			)
-		)
-		(uuid "c8bcf2b2-02e4-4773-a480-841a0bd02d8d")
-	)
 	(text "Noise\nmitigation"
 		(exclude_from_sim no)
 		(at 178.816 89.662 0)
@@ -16724,16 +17753,6 @@
 		)
 		(uuid "dc62d4c0-2b8a-4d00-8d9e-5e8c3f8fba55")
 	)
-	(text "Flyback"
-		(exclude_from_sim no)
-		(at 54.356 242.57 0)
-		(effects
-			(font
-				(size 0.762 0.762)
-			)
-		)
-		(uuid "de4b1ed0-5f19-42e3-906f-f9fcb8ac3e28")
-	)
 	(text "addr=11"
 		(exclude_from_sim no)
 		(at 296.418 205.994 0)
@@ -16752,7 +17771,7 @@
 		(uuid "054e8b72-37f6-436a-a577-ba57266d15c9")
 	)
 	(junction
-		(at 50.8 260.35)
+		(at 50.8 261.62)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "05e8985d-8602-41d1-a483-4ebec8db0fed")
@@ -16764,7 +17783,7 @@
 		(uuid "07e21c80-23d0-47df-91b0-c6329f203eda")
 	)
 	(junction
-		(at 138.43 250.19)
+		(at 138.43 251.46)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "08c8a979-03de-44d9-96ed-fc5169500ce7")
@@ -16780,6 +17799,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0a5b1302-75ee-42fe-b945-b24751c9fb8e")
+	)
+	(junction
+		(at 220.98 227.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0acf0da8-a938-49c2-afa4-3b54ba08c49b")
 	)
 	(junction
 		(at 138.43 245.11)
@@ -16830,6 +17855,12 @@
 		(uuid "15a2b6b1-d2dd-4c2c-9a41-c822d08d8ccc")
 	)
 	(junction
+		(at 49.53 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "168ffba2-b08a-4f9d-87f3-c38fdebbb580")
+	)
+	(junction
 		(at 238.76 105.41)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -16842,7 +17873,7 @@
 		(uuid "172af53c-b016-4f80-b34b-6f44e6222083")
 	)
 	(junction
-		(at 72.39 250.19)
+		(at 72.39 251.46)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1a703b9e-ce5a-45a5-9b55-cdaa3ed9290f")
@@ -16998,7 +18029,7 @@
 		(uuid "4b4cdd6d-19af-4de2-ac34-8f594e746757")
 	)
 	(junction
-		(at 91.44 187.96)
+		(at 92.71 187.96)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4bb601e2-b5b0-47ef-8dca-3a6ff955ea61")
@@ -17008,6 +18039,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4e5c1bdf-2d18-4fab-8861-d1c897cd5fef")
+	)
+	(junction
+		(at 227.33 191.77)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "53e5b59c-62fb-47e6-b5b7-898c55e9f4a3")
 	)
 	(junction
 		(at 161.29 195.58)
@@ -17052,7 +18089,7 @@
 		(uuid "5c44854e-4c83-4e98-9bdf-16dd54db6912")
 	)
 	(junction
-		(at 64.77 250.19)
+		(at 64.77 251.46)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5d6783d7-8e85-41f5-bee3-943f4b57b294")
@@ -17118,6 +18155,12 @@
 		(uuid "6f707ac1-a340-4cce-bb01-6b3579544b6d")
 	)
 	(junction
+		(at 227.33 227.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "707601e3-8f41-4377-8f41-cc893ff7db86")
+	)
+	(junction
 		(at 39.37 101.6)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -17136,7 +18179,7 @@
 		(uuid "762bb9e5-4220-4530-9c50-de85ae8233d7")
 	)
 	(junction
-		(at 124.46 260.35)
+		(at 124.46 261.62)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7777efe7-5bd0-497c-bbe7-f3c9ddcff0e5")
@@ -17172,7 +18215,7 @@
 		(uuid "823bdd8a-5c83-44ab-b6aa-08e585699b06")
 	)
 	(junction
-		(at 82.55 190.5)
+		(at 83.82 190.5)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "85bdb410-07f8-4dd2-a427-b35e95ff1085")
@@ -17190,6 +18233,12 @@
 		(uuid "91da90be-f1d5-437e-81dd-b7a65e5c9426")
 	)
 	(junction
+		(at 220.98 191.77)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "924ddae5-488c-4296-b131-6f0a078680d7")
+	)
+	(junction
 		(at 297.18 229.87)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -17200,12 +18249,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9b99020c-886e-400d-b2d4-aa9dd4a0de44")
-	)
-	(junction
-		(at 44.45 185.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9c8fa1f4-fa7d-49f9-82b5-dfb45f9cf63d")
 	)
 	(junction
 		(at 349.25 121.92)
@@ -17232,6 +18275,12 @@
 		(uuid "a397637c-463d-477c-9eb6-af572f8d69ea")
 	)
 	(junction
+		(at 45.72 195.58)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a63af2c8-7a11-42d8-8d0d-5ca1e226ff4c")
+	)
+	(junction
 		(at 189.23 140.97)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -17248,6 +18297,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ab519506-31da-4c17-bfb6-79c7d09dd76a")
+	)
+	(junction
+		(at 45.72 200.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ace4dbaa-3c5e-4da9-9298-98b3794ece7b")
 	)
 	(junction
 		(at 64.77 38.1)
@@ -17272,12 +18327,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b2455e94-3a9a-4cfc-8618-5dcff0161731")
-	)
-	(junction
-		(at 55.88 260.35)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b5883129-ce3d-4b11-b95d-af0b572c8bff")
 	)
 	(junction
 		(at 171.45 161.29)
@@ -17364,13 +18413,19 @@
 		(uuid "d63e12a1-31e4-480e-963c-2a6e22b7e8fb")
 	)
 	(junction
+		(at 54.61 261.62)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d8668c7b-9842-40a5-92f6-41826f59d55a")
+	)
+	(junction
 		(at 175.26 140.97)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dab4b960-acab-44fa-ab2e-955c96a96074")
 	)
 	(junction
-		(at 129.54 260.35)
+		(at 129.54 261.62)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dcda4c8e-7f27-44ff-9b5b-56a2221645b7")
@@ -17468,6 +18523,10 @@
 	(no_connect
 		(at 299.72 59.69)
 		(uuid "293bf219-488e-42c9-852e-ab591129dd5f")
+	)
+	(no_connect
+		(at 43.18 198.12)
+		(uuid "34242400-461c-4710-8d07-1911f8f8c9ef")
 	)
 	(no_connect
 		(at 299.72 217.17)
@@ -17596,16 +18655,6 @@
 			(type default)
 		)
 		(uuid "0107e10e-8a80-4b67-95d3-eb85761466ec")
-	)
-	(wire
-		(pts
-			(xy 138.43 245.11) (xy 138.43 250.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "015ee23e-8fe3-4f2f-a58c-19525dc9dad5")
 	)
 	(wire
 		(pts
@@ -17779,13 +18828,23 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 175.26) (xy 77.47 185.42)
+			(xy 78.74 175.26) (xy 78.74 185.42)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "0f9bec44-4b58-4f18-a43f-cfd6f100b9e0")
+	)
+	(wire
+		(pts
+			(xy 64.77 266.7) (xy 64.77 271.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0faa51dd-2353-4734-b51a-1409d4338863")
 	)
 	(wire
 		(pts
@@ -17799,7 +18858,7 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 201.93) (xy 82.55 203.2)
+			(xy 83.82 201.93) (xy 83.82 203.2)
 		)
 		(stroke
 			(width 0)
@@ -17909,13 +18968,33 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 185.42) (xy 44.45 194.31)
+			(xy 49.53 175.26) (xy 49.53 185.42)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "14dc9ded-91a0-428f-bca9-4ba6a070980f")
+	)
+	(wire
+		(pts
+			(xy 215.9 189.23) (xy 217.17 189.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1570e54c-6e92-4cc6-bd34-9439074517fd")
+	)
+	(wire
+		(pts
+			(xy 45.72 200.66) (xy 45.72 203.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "170c4b33-ebb9-44b4-8402-f3cd58f62378")
 	)
 	(wire
 		(pts
@@ -17989,7 +19068,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 255.27) (xy 77.47 250.19)
+			(xy 77.47 256.54) (xy 77.47 251.46)
 		)
 		(stroke
 			(width 0)
@@ -18019,13 +19098,13 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 260.35) (xy 55.88 260.35)
+			(xy 43.18 185.42) (xy 49.53 185.42)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "204ee016-be03-4d41-8d86-bea0ab2c87a1")
+		(uuid "2097261c-082b-4cce-bc6d-f4666d36eb65")
 	)
 	(wire
 		(pts
@@ -18059,7 +19138,7 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 260.35) (xy 124.46 260.35)
+			(xy 116.84 261.62) (xy 124.46 261.62)
 		)
 		(stroke
 			(width 0)
@@ -18099,7 +19178,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 260.35) (xy 50.8 260.35)
+			(xy 43.18 261.62) (xy 50.8 261.62)
 		)
 		(stroke
 			(width 0)
@@ -18109,7 +19188,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 190.5) (xy 82.55 190.5)
+			(xy 78.74 190.5) (xy 83.82 190.5)
 		)
 		(stroke
 			(width 0)
@@ -18126,6 +19205,16 @@
 			(type default)
 		)
 		(uuid "28e43e1f-fe8d-48a5-b471-5fc79d136ade")
+	)
+	(wire
+		(pts
+			(xy 43.18 190.5) (xy 50.8 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "293057fb-ef64-4cb0-9a8d-109dc56c43d7")
 	)
 	(wire
 		(pts
@@ -18169,7 +19258,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 250.19) (xy 147.32 250.19)
+			(xy 138.43 251.46) (xy 147.32 251.46)
 		)
 		(stroke
 			(width 0)
@@ -18259,6 +19348,16 @@
 	)
 	(wire
 		(pts
+			(xy 227.33 184.15) (xy 227.33 191.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e48ca01-fd73-4e88-b1b9-f6eb95c65014")
+	)
+	(wire
+		(pts
 			(xy 39.37 88.9) (xy 39.37 91.44)
 		)
 		(stroke
@@ -18306,16 +19405,6 @@
 			(type default)
 		)
 		(uuid "30ad4dce-66e9-43bd-9f64-fefb68dc5723")
-	)
-	(wire
-		(pts
-			(xy 40.64 187.96) (xy 46.99 187.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "30beb862-b611-4dbc-b325-03499f2832b5")
 	)
 	(wire
 		(pts
@@ -18399,6 +19488,16 @@
 	)
 	(wire
 		(pts
+			(xy 215.9 194.31) (xy 232.41 194.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38e420de-d9a3-4d3e-acf8-c8d25a369906")
+	)
+	(wire
+		(pts
 			(xy 290.83 67.31) (xy 299.72 67.31)
 		)
 		(stroke
@@ -18439,16 +19538,6 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 190.5) (xy 228.6 203.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3a115923-50cc-46e1-8bf8-2f6c6b25685d")
-	)
-	(wire
-		(pts
 			(xy 227.33 105.41) (xy 233.68 105.41)
 		)
 		(stroke
@@ -18469,13 +19558,13 @@
 	)
 	(wire
 		(pts
-			(xy 226.06 198.12) (xy 236.22 198.12)
+			(xy 220.98 191.77) (xy 220.98 198.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3bcab776-53e7-4981-ae9e-43b5edf9da94")
+		(uuid "3bd83501-8037-473c-bfc0-fc2ddbd257d9")
 	)
 	(wire
 		(pts
@@ -18497,6 +19586,16 @@
 			(type default)
 		)
 		(uuid "3c1f8a93-c56e-47ed-a0af-f7c2344fbee5")
+	)
+	(wire
+		(pts
+			(xy 227.33 227.33) (xy 227.33 233.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c98a23f-bf26-4792-8f58-0b6500d79309")
 	)
 	(wire
 		(pts
@@ -18567,6 +19666,16 @@
 			(type default)
 		)
 		(uuid "3f89e76b-d105-4eed-8fea-49a51ddfcbba")
+	)
+	(wire
+		(pts
+			(xy 227.33 219.71) (xy 227.33 227.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3fa24f1d-2e54-4085-bd75-2ca627957317")
 	)
 	(wire
 		(pts
@@ -18680,6 +19789,16 @@
 	)
 	(wire
 		(pts
+			(xy 72.39 261.62) (xy 72.39 271.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "470ef6bb-fa33-4847-9564-3610f0ea75c8")
+	)
+	(wire
+		(pts
 			(xy 227.33 161.29) (xy 231.14 161.29)
 		)
 		(stroke
@@ -18730,16 +19849,6 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 224.79) (xy 229.87 224.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4b605d99-2541-41c0-a0e4-bd06a45b4b04")
-	)
-	(wire
-		(pts
 			(xy 354.33 198.12) (xy 354.33 196.85)
 		)
 		(stroke
@@ -18780,6 +19889,16 @@
 	)
 	(wire
 		(pts
+			(xy 43.18 195.58) (xy 45.72 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "504dff1e-7373-4972-9353-50a7d0aabf42")
+	)
+	(wire
+		(pts
 			(xy 229.87 266.7) (xy 233.68 266.7)
 		)
 		(stroke
@@ -18787,6 +19906,26 @@
 			(type default)
 		)
 		(uuid "50b80e51-b40d-4fb7-962b-0cf9be5bdefa")
+	)
+	(wire
+		(pts
+			(xy 215.9 227.33) (xy 220.98 227.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50f61d62-c881-403e-925e-d1366e59c4c9")
+	)
+	(wire
+		(pts
+			(xy 49.53 185.42) (xy 49.53 194.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "52370cf5-1de2-4029-9f73-339e660ece2a")
 	)
 	(wire
 		(pts
@@ -18810,7 +19949,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 260.35) (xy 57.15 260.35)
+			(xy 50.8 261.62) (xy 54.61 261.62)
 		)
 		(stroke
 			(width 0)
@@ -18847,16 +19986,6 @@
 			(type default)
 		)
 		(uuid "546ca17c-056a-48df-8421-ee694d23e781")
-	)
-	(wire
-		(pts
-			(xy 55.88 260.35) (xy 55.88 261.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "54915b8d-ff70-41a1-9771-fc08ed9530c7")
 	)
 	(wire
 		(pts
@@ -19030,16 +20159,6 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 270.51) (xy 124.46 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5a9fc7ac-7d2e-484d-98e9-7ff51c918438")
-	)
-	(wire
-		(pts
 			(xy 337.82 64.77) (xy 354.33 64.77)
 		)
 		(stroke
@@ -19080,6 +20199,16 @@
 	)
 	(wire
 		(pts
+			(xy 138.43 245.11) (xy 138.43 251.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5dc91300-c664-4880-8d5d-9e8a669ec97d")
+	)
+	(wire
+		(pts
 			(xy 322.58 160.02) (xy 322.58 161.29)
 		)
 		(stroke
@@ -19097,6 +20226,16 @@
 			(type default)
 		)
 		(uuid "5ed46d5d-197f-4c40-b099-c46313357415")
+	)
+	(wire
+		(pts
+			(xy 215.9 224.79) (xy 217.17 224.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5eef28f7-ec7b-4787-89ce-20ced1137ecd")
 	)
 	(wire
 		(pts
@@ -19150,6 +20289,16 @@
 	)
 	(wire
 		(pts
+			(xy 215.9 232.41) (xy 232.41 232.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "64096ac3-6f54-4bfd-818e-7d4fe1684311")
+	)
+	(wire
+		(pts
 			(xy 189.23 171.45) (xy 193.04 171.45)
 		)
 		(stroke
@@ -19157,16 +20306,6 @@
 			(type default)
 		)
 		(uuid "64b32078-1bc4-46dc-a100-264f6ab665cb")
-	)
-	(wire
-		(pts
-			(xy 129.54 269.24) (xy 129.54 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "652b4d5f-5abc-4f5f-88f0-6d29ee69b36d")
 	)
 	(wire
 		(pts
@@ -19301,6 +20440,16 @@
 	)
 	(wire
 		(pts
+			(xy 43.18 193.04) (xy 45.72 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6de8e94a-ef65-4a41-8116-29430603d499")
+	)
+	(wire
+		(pts
 			(xy 154.94 38.1) (xy 156.21 38.1)
 		)
 		(stroke
@@ -19361,6 +20510,16 @@
 	)
 	(wire
 		(pts
+			(xy 45.72 195.58) (xy 45.72 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70c729ca-94b5-4fda-9738-585fbf822529")
+	)
+	(wire
+		(pts
 			(xy 59.69 234.95) (xy 64.77 234.95)
 		)
 		(stroke
@@ -19371,16 +20530,6 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 227.33) (xy 232.41 227.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "722df1b0-290c-4271-9b73-df7c33325e7b")
-	)
-	(wire
-		(pts
 			(xy 312.42 180.34) (xy 312.42 184.15)
 		)
 		(stroke
@@ -19388,16 +20537,6 @@
 			(type default)
 		)
 		(uuid "729ca5f6-19fe-4083-b90a-5c01f730dcfa")
-	)
-	(wire
-		(pts
-			(xy 226.06 193.04) (xy 231.14 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7317a00c-43c0-4312-96fe-8a8ee8af0cec")
 	)
 	(wire
 		(pts
@@ -19583,6 +20722,16 @@
 	)
 	(wire
 		(pts
+			(xy 215.9 196.85) (xy 232.41 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7aef924d-e784-4592-9021-e73a7777c327")
+	)
+	(wire
+		(pts
 			(xy 256.54 76.2) (xy 256.54 243.84)
 		)
 		(stroke
@@ -19611,6 +20760,16 @@
 			(type default)
 		)
 		(uuid "7bbb260c-9755-46cd-b5ba-859873c13699")
+	)
+	(wire
+		(pts
+			(xy 147.32 261.62) (xy 147.32 271.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d0ef8ee-b132-4e83-9b2f-939451d4b7b5")
 	)
 	(wire
 		(pts
@@ -19654,17 +20813,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 265.43) (xy 138.43 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7e837756-6d92-4daa-b0a6-542e2dc6adb6")
-	)
-	(wire
-		(pts
-			(xy 77.47 187.96) (xy 91.44 187.96)
+			(xy 78.74 187.96) (xy 92.71 187.96)
 		)
 		(stroke
 			(width 0)
@@ -19795,16 +20944,6 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 229.87) (xy 237.49 229.87)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "86759dac-ae54-4c66-9df5-0956aedcd18a")
-	)
-	(wire
-		(pts
 			(xy 354.33 142.24) (xy 358.14 142.24)
 		)
 		(stroke
@@ -19812,6 +20951,26 @@
 			(type default)
 		)
 		(uuid "86b23453-49ca-4f24-bc55-87935de71afb")
+	)
+	(wire
+		(pts
+			(xy 138.43 266.7) (xy 138.43 271.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86e45733-d36d-4f35-9976-aef090b2f900")
+	)
+	(wire
+		(pts
+			(xy 217.17 189.23) (xy 217.17 203.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86f992ce-b68e-455f-90bd-97bd31c908a3")
 	)
 	(wire
 		(pts
@@ -19842,6 +21001,16 @@
 			(type default)
 		)
 		(uuid "87ce9ba2-18a4-441f-a585-b51188439993")
+	)
+	(wire
+		(pts
+			(xy 220.98 227.33) (xy 220.98 233.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "885d234e-ce74-48b6-8f8f-ecc36e6f6b88")
 	)
 	(wire
 		(pts
@@ -19905,16 +21074,6 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 270.51) (xy 50.8 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8c77db06-9a0e-4566-bcdd-c282b8ccbb90")
-	)
-	(wire
-		(pts
 			(xy 337.82 74.93) (xy 358.14 74.93)
 		)
 		(stroke
@@ -19965,13 +21124,23 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 255.27) (xy 147.32 250.19)
+			(xy 147.32 256.54) (xy 147.32 251.46)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "903a90b1-3f21-4ef3-b999-705cab451ac5")
+	)
+	(wire
+		(pts
+			(xy 215.9 229.87) (xy 232.41 229.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "910c0660-aa8f-40cd-8c7b-8f365604059a")
 	)
 	(wire
 		(pts
@@ -20035,6 +21204,16 @@
 	)
 	(wire
 		(pts
+			(xy 220.98 227.33) (xy 227.33 227.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92ea28cb-0b6d-41ab-b08c-19ab89400556")
+	)
+	(wire
+		(pts
 			(xy 290.83 86.36) (xy 290.83 88.9)
 		)
 		(stroke
@@ -20065,6 +21244,16 @@
 	)
 	(wire
 		(pts
+			(xy 64.77 245.11) (xy 64.77 251.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "936cb93b-7ac4-4e4f-9d49-26b590a1ad64")
+	)
+	(wire
+		(pts
 			(xy 245.11 162.56) (xy 245.11 146.05)
 		)
 		(stroke
@@ -20092,16 +21281,6 @@
 			(type default)
 		)
 		(uuid "942393b9-f9e6-4439-b227-cf7ed024a654")
-	)
-	(wire
-		(pts
-			(xy 40.64 185.42) (xy 44.45 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "951ee6f3-92a0-4ab0-a668-e235fa985a56")
 	)
 	(wire
 		(pts
@@ -20175,7 +21354,7 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 190.5) (xy 95.25 190.5)
+			(xy 83.82 190.5) (xy 96.52 190.5)
 		)
 		(stroke
 			(width 0)
@@ -20212,16 +21391,6 @@
 			(type default)
 		)
 		(uuid "9a493ce4-f715-4577-aec4-a8a9aff9efdd")
-	)
-	(wire
-		(pts
-			(xy 44.45 175.26) (xy 44.45 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9a6f5043-24e5-496a-ae80-b89efb13e8c5")
 	)
 	(wire
 		(pts
@@ -20355,7 +21524,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 182.88) (xy 91.44 187.96)
+			(xy 92.71 182.88) (xy 92.71 187.96)
 		)
 		(stroke
 			(width 0)
@@ -20442,6 +21611,16 @@
 			(type default)
 		)
 		(uuid "a6d8f1fb-4ab5-41d4-bf9e-f25e4c8cb5dd")
+	)
+	(wire
+		(pts
+			(xy 54.61 259.08) (xy 54.61 261.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a73a1ed0-7943-4136-91d1-f5e458768366")
 	)
 	(wire
 		(pts
@@ -20535,7 +21714,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 199.39) (xy 44.45 203.2)
+			(xy 49.53 199.39) (xy 49.53 203.2)
 		)
 		(stroke
 			(width 0)
@@ -20565,16 +21744,6 @@
 	)
 	(wire
 		(pts
-			(xy 229.87 224.79) (xy 229.87 237.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ae8319f9-d047-43a8-ad16-2326a84f031d")
-	)
-	(wire
-		(pts
 			(xy 322.58 234.95) (xy 322.58 236.22)
 		)
 		(stroke
@@ -20595,26 +21764,6 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 219.71) (xy 232.41 227.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b00815bf-f8a9-4a09-ac81-83d75173d81a")
-	)
-	(wire
-		(pts
-			(xy 77.47 260.35) (xy 77.47 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b0941dac-add3-45dd-a98c-d33810717782")
-	)
-	(wire
-		(pts
 			(xy 114.3 38.1) (xy 119.38 38.1)
 		)
 		(stroke
@@ -20622,6 +21771,16 @@
 			(type default)
 		)
 		(uuid "b0ff924b-4779-404a-ab81-83025bbd5682")
+	)
+	(wire
+		(pts
+			(xy 77.47 261.62) (xy 77.47 271.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b13d9161-6f6e-47d3-a619-bcd742322d5c")
 	)
 	(wire
 		(pts
@@ -20685,7 +21844,7 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 184.15) (xy 82.55 190.5)
+			(xy 83.82 184.15) (xy 83.82 190.5)
 		)
 		(stroke
 			(width 0)
@@ -20785,13 +21944,13 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 203.2) (xy 40.64 193.04)
+			(xy 43.18 200.66) (xy 45.72 200.66)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b89d0758-325c-4d41-b76b-7c9878f13eaf")
+		(uuid "b88c0d87-538a-4099-906b-8c1d2d96b2a9")
 	)
 	(wire
 		(pts
@@ -20835,7 +21994,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 250.19) (xy 77.47 250.19)
+			(xy 72.39 251.46) (xy 77.47 251.46)
 		)
 		(stroke
 			(width 0)
@@ -20855,6 +22014,16 @@
 	)
 	(wire
 		(pts
+			(xy 217.17 224.79) (xy 217.17 238.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba2d672d-4d42-4d6f-a2e0-869212b3aac4")
+	)
+	(wire
+		(pts
 			(xy 322.58 187.96) (xy 322.58 191.77)
 		)
 		(stroke
@@ -20865,27 +22034,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 190.5) (xy 46.99 190.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba872ebc-4020-4ccc-8b0a-82aaef8e876b")
-	)
-	(wire
-		(pts
-			(xy 226.06 190.5) (xy 228.6 190.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba9c87ad-f91e-4f71-a790-6107539dc697")
-	)
-	(wire
-		(pts
-			(xy 124.46 260.35) (xy 129.54 260.35)
+			(xy 124.46 261.62) (xy 129.54 261.62)
 		)
 		(stroke
 			(width 0)
@@ -20965,6 +22114,16 @@
 	)
 	(wire
 		(pts
+			(xy 129.54 270.51) (xy 129.54 271.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be11e1fd-2d9b-4cc9-9678-bafa96373acf")
+	)
+	(wire
+		(pts
 			(xy 82.55 38.1) (xy 85.09 38.1)
 		)
 		(stroke
@@ -21035,7 +22194,7 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 190.5) (xy 82.55 196.85)
+			(xy 83.82 190.5) (xy 83.82 196.85)
 		)
 		(stroke
 			(width 0)
@@ -21115,7 +22274,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 260.35) (xy 129.54 261.62)
+			(xy 129.54 261.62) (xy 129.54 262.89)
 		)
 		(stroke
 			(width 0)
@@ -21155,7 +22314,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 195.58) (xy 91.44 187.96)
+			(xy 92.71 195.58) (xy 92.71 187.96)
 		)
 		(stroke
 			(width 0)
@@ -21215,17 +22374,17 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 260.35) (xy 72.39 271.78)
+			(xy 43.18 187.96) (xy 50.8 187.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ca125fa7-90f5-4b66-8a4a-b91dddf09bd0")
+		(uuid "cada60b9-f4ba-419b-ad98-0f570db4e78f")
 	)
 	(wire
 		(pts
-			(xy 77.47 193.04) (xy 77.47 203.2)
+			(xy 78.74 193.04) (xy 78.74 203.2)
 		)
 		(stroke
 			(width 0)
@@ -21385,16 +22544,6 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 260.35) (xy 147.32 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d4ab9327-2f8e-4bb2-90e2-05b804aa6ae0")
-	)
-	(wire
-		(pts
 			(xy 181.61 43.18) (xy 181.61 48.26)
 		)
 		(stroke
@@ -21452,6 +22601,16 @@
 			(type default)
 		)
 		(uuid "d6ef3342-eae4-4674-8125-99107c08e31b")
+	)
+	(wire
+		(pts
+			(xy 215.9 191.77) (xy 220.98 191.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d741f8e3-2eea-4402-811c-df7b780eb4dc")
 	)
 	(wire
 		(pts
@@ -21525,17 +22684,7 @@
 	)
 	(wire
 		(pts
-			(xy 226.06 195.58) (xy 236.22 195.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "da701c4a-9e0a-421c-a943-5cf5f70f68fe")
-	)
-	(wire
-		(pts
-			(xy 72.39 250.19) (xy 64.77 250.19)
+			(xy 72.39 251.46) (xy 64.77 251.46)
 		)
 		(stroke
 			(width 0)
@@ -21555,7 +22704,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 255.27) (xy 72.39 250.19)
+			(xy 72.39 256.54) (xy 72.39 251.46)
 		)
 		(stroke
 			(width 0)
@@ -21625,13 +22774,23 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 175.26) (xy 91.44 177.8)
+			(xy 92.71 175.26) (xy 92.71 177.8)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "e22db405-b2cf-498a-9e2c-1315703bb5d4")
+	)
+	(wire
+		(pts
+			(xy 227.33 191.77) (xy 227.33 198.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e283d357-4e7f-46ce-9291-c3fc81071f93")
 	)
 	(wire
 		(pts
@@ -21645,7 +22804,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 187.96) (xy 95.25 187.96)
+			(xy 92.71 187.96) (xy 96.52 187.96)
 		)
 		(stroke
 			(width 0)
@@ -21715,16 +22874,6 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 232.41) (xy 237.49 232.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e88bc91c-504d-43c7-8f4c-783423a2bd02")
-	)
-	(wire
-		(pts
 			(xy 189.23 116.84) (xy 189.23 110.49)
 		)
 		(stroke
@@ -21752,6 +22901,16 @@
 			(type default)
 		)
 		(uuid "e9a5d526-9041-4407-ac97-8f55b51eba86")
+	)
+	(wire
+		(pts
+			(xy 54.61 261.62) (xy 57.15 261.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea0fb769-b72d-4fa4-9eed-1fb1f14e3164")
 	)
 	(wire
 		(pts
@@ -21792,16 +22951,6 @@
 			(type default)
 		)
 		(uuid "ed420622-c2a5-4690-8f47-299706540215")
-	)
-	(wire
-		(pts
-			(xy 64.77 265.43) (xy 64.77 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ed56c223-215e-48a6-9098-8951a18aa7a0")
 	)
 	(wire
 		(pts
@@ -21862,6 +23011,16 @@
 			(type default)
 		)
 		(uuid "eee96929-b8ad-457f-b280-32707fef0d95")
+	)
+	(wire
+		(pts
+			(xy 220.98 191.77) (xy 227.33 191.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef63241c-4769-4767-876d-bb36f70c678e")
 	)
 	(wire
 		(pts
@@ -21935,16 +23094,6 @@
 	)
 	(wire
 		(pts
-			(xy 231.14 185.42) (xy 231.14 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f1e7b9cd-ba63-4770-8086-b5d12176116a")
-	)
-	(wire
-		(pts
 			(xy 299.72 227.33) (xy 297.18 227.33)
 		)
 		(stroke
@@ -21972,6 +23121,16 @@
 			(type default)
 		)
 		(uuid "f37e369d-a18a-41f9-a76b-afaac43fb156")
+	)
+	(wire
+		(pts
+			(xy 45.72 193.04) (xy 45.72 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3f7be26-6442-4120-b8df-8737df0b672e")
 	)
 	(wire
 		(pts
@@ -22015,23 +23174,13 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 260.35) (xy 130.81 260.35)
+			(xy 129.54 261.62) (xy 130.81 261.62)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "f6d177fb-f888-4213-8302-65449cea6b82")
-	)
-	(wire
-		(pts
-			(xy 55.88 269.24) (xy 55.88 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f82a97a8-c4e9-42a8-99c1-597f5aa134aa")
 	)
 	(wire
 		(pts
@@ -22115,7 +23264,7 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 175.26) (xy 82.55 176.53)
+			(xy 83.82 175.26) (xy 83.82 176.53)
 		)
 		(stroke
 			(width 0)
@@ -22195,16 +23344,6 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 245.11) (xy 64.77 250.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff2313ac-484a-45ee-a09a-7040c618cdf9")
-	)
-	(wire
-		(pts
 			(xy 59.69 245.11) (xy 64.77 245.11)
 		)
 		(stroke
@@ -22222,6 +23361,16 @@
 			(type default)
 		)
 		(uuid "ff6155c9-8935-4f31-8c46-daee4a67f80b")
+	)
+	(label "GND_PUMP_MAIN"
+		(at 66.04 251.46 0)
+		(effects
+			(font
+				(size 0.762 0.762)
+			)
+			(justify left bottom)
+		)
+		(uuid "28177383-393e-4492-bddc-0bd31f376bf2")
 	)
 	(label "V_{ISO,pH}"
 		(at 161.29 95.25 0)
@@ -22243,6 +23392,16 @@
 		)
 		(uuid "6b304cba-18f5-4ea2-9405-2b4ad52887fe")
 	)
+	(label "GND_ATO_VALVE"
+		(at 139.7 251.46 0)
+		(effects
+			(font
+				(size 0.762 0.762)
+			)
+			(justify left bottom)
+		)
+		(uuid "8e49767c-d2d4-42c8-afe4-49f1f9c19f81")
+	)
 	(label "V_{ISO,EC}"
 		(at 161.29 140.97 0)
 		(effects
@@ -22252,28 +23411,6 @@
 			(justify left bottom)
 		)
 		(uuid "ed57600b-af3f-4133-ba74-bb3bd042a73e")
-	)
-	(global_label "I2C_SDA"
-		(shape bidirectional)
-		(at 237.49 229.87 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "041309ee-4b6e-41d2-987d-081494a62af5")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 249.2065 229.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 	)
 	(global_label "EZO_PDIS"
 		(shape input)
@@ -22321,7 +23458,7 @@
 	)
 	(global_label "FLOAT_LOW"
 		(shape output)
-		(at 95.25 190.5 0)
+		(at 96.52 190.5 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22331,7 +23468,29 @@
 		)
 		(uuid "07dba202-0878-46ee-9aab-7b13d535e3e7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 108.5162 190.5 0)
+			(at 109.7862 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "I2C_SCL"
+		(shape bidirectional)
+		(at 232.41 229.87 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "145865db-76dd-4bf7-89e2-08988b96bf57")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 244.066 229.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22475,7 +23634,7 @@
 	)
 	(global_label "ATO_VALVE"
 		(shape input)
-		(at 109.22 260.35 180)
+		(at 109.22 261.62 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22485,7 +23644,7 @@
 		)
 		(uuid "4153be04-b2f0-4120-aa63-1ba939a89919")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.4376 260.35 0)
+			(at 96.4376 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22673,7 +23832,7 @@
 	)
 	(global_label "PUMP_MAIN"
 		(shape input)
-		(at 35.56 260.35 180)
+		(at 35.56 261.62 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22683,7 +23842,7 @@
 		)
 		(uuid "7825076f-715a-4e5d-9985-59ee70cd754c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 21.81 260.35 0)
+			(at 21.81 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22717,7 +23876,7 @@
 	)
 	(global_label "FLOAT_HIGH"
 		(shape output)
-		(at 95.25 187.96 0)
+		(at 96.52 187.96 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22727,7 +23886,7 @@
 		)
 		(uuid "7b217373-6309-4311-a362-0ff49a604906")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 109.242 187.96 0)
+			(at 110.512 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22803,6 +23962,28 @@
 			)
 		)
 	)
+	(global_label "I2C_SDA"
+		(shape bidirectional)
+		(at 232.41 232.41 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8b4e046a-ae20-4b21-95cc-d7ebbf17758f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 244.1265 232.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "I2C_SCL"
 		(shape bidirectional)
 		(at 36.83 104.14 180)
@@ -22869,9 +24050,9 @@
 			)
 		)
 	)
-	(global_label "FLOAT_HIGH"
+	(global_label "FLOAT_LOW"
 		(shape input)
-		(at 35.56 265.43 180)
+		(at 35.56 266.7 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22881,7 +24062,7 @@
 		)
 		(uuid "b084b22b-a996-4866-ac34-c1ef01a01678")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 21.568 265.43 0)
+			(at 22.2938 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22913,9 +24094,9 @@
 			)
 		)
 	)
-	(global_label "FLOAT_LOW"
+	(global_label "FLOAT_HIGH"
 		(shape input)
-		(at 109.22 265.43 180)
+		(at 109.22 266.7 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22925,7 +24106,7 @@
 		)
 		(uuid "b3b1f764-fc62-4e0a-b5ba-f076d2eede01")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 95.9538 265.43 0)
+			(at 95.228 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22937,7 +24118,7 @@
 	)
 	(global_label "I2C_SDA"
 		(shape bidirectional)
-		(at 46.99 187.96 0)
+		(at 50.8 187.96 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22947,7 +24128,7 @@
 		)
 		(uuid "b4f9160d-d4eb-4e80-ad99-007a16561953")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 57.5952 187.96 0)
+			(at 61.4052 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22959,7 +24140,7 @@
 	)
 	(global_label "I2C_SCL"
 		(shape bidirectional)
-		(at 46.99 190.5 0)
+		(at 50.8 190.5 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22969,7 +24150,7 @@
 		)
 		(uuid "bf040e49-6349-4f05-913d-10b590d61f99")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 58.5628 190.5 0)
+			(at 62.3728 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23047,7 +24228,7 @@
 	)
 	(global_label "I2C_SCL"
 		(shape bidirectional)
-		(at 236.22 198.12 0)
+		(at 232.41 194.31 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23057,7 +24238,7 @@
 		)
 		(uuid "cf561325-c0b2-467c-84b1-89b1d4648f37")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 247.876 198.12 0)
+			(at 244.066 194.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23113,7 +24294,7 @@
 	)
 	(global_label "I2C_SDA"
 		(shape bidirectional)
-		(at 236.22 195.58 0)
+		(at 232.41 196.85 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23123,7 +24304,7 @@
 		)
 		(uuid "edda9433-71c5-4e66-95a8-2b3337f07c6d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 247.9365 195.58 0)
+			(at 244.1265 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23168,28 +24349,6 @@
 		(uuid "f9bfa29a-c583-40cc-9fd7-01f2bb7a0a76")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 242.796 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "I2C_SCL"
-		(shape bidirectional)
-		(at 237.49 232.41 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "fd3dbba8-ea11-480d-82ee-08b18d166aff")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 249.146 232.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24104,8 +25263,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:RES 4.7kΩ ±1% 1/8W 0805 Yageo")
+		(at 35.56 266.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0452c622-3859-4658-a873-e515e78d9b43")
+		(property "Reference" "R9"
+			(at 39.37 269.748 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4k7"
+			(at 39.37 272.034 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
+			(at 33.782 266.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
+			(at 35.56 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "4.7 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
+			(at 35.56 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "311-4.70KCRCT-ND"
+			(at 35.56 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d267bf1d-4e43-47e6-a8c4-84b912c1e2e4")
+		)
+		(pin "2"
+			(uuid "4b66d63e-d062-485c-9b63-cc1c41cbd7a3")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3V3")
-		(at 44.45 175.26 0)
+		(at 49.53 175.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24113,7 +25348,7 @@
 		(dnp no)
 		(uuid "04732e0e-d58b-4d71-a1b7-af1c6c91cee8")
 		(property "Reference" "#PWR04"
-			(at 44.45 175.26 0)
+			(at 49.53 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24122,7 +25357,7 @@
 			)
 		)
 		(property "Value" "3V3"
-			(at 44.45 171.272 0)
+			(at 49.53 171.272 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24130,7 +25365,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 44.45 175.26 0)
+			(at 49.53 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24139,7 +25374,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 44.45 175.26 0)
+			(at 49.53 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24148,7 +25383,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 44.45 175.26 0)
+			(at 49.53 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24380,7 +25615,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 77.47 203.2 0)
+		(at 78.74 203.2 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -24389,7 +25624,7 @@
 		(dnp no)
 		(uuid "06fa746d-e4fe-4b75-aa2a-94c5a9393ce9")
 		(property "Reference" "#PWR13"
-			(at 77.47 209.55 0)
+			(at 78.74 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24398,7 +25633,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 77.47 207.01 0)
+			(at 78.74 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24407,7 +25642,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 77.47 203.2 0)
+			(at 78.74 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24416,7 +25651,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 77.47 203.2 0)
+			(at 78.74 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24425,7 +25660,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 77.47 203.2 0)
+			(at 78.74 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24589,7 +25824,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:SWITCH FLOAT HIGH")
-		(at 67.31 185.42 0)
+		(at 68.58 185.42 0)
 		(unit 1)
 		(exclude_from_sim yes)
 		(in_bom yes)
@@ -24597,7 +25832,7 @@
 		(dnp no)
 		(uuid "08ef41e7-d2ab-409f-b828-90a4d979951a")
 		(property "Reference" "SW1"
-			(at 64.77 175.26 0)
+			(at 66.04 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24606,7 +25841,7 @@
 			)
 		)
 		(property "Value" "FLOAT"
-			(at 64.77 177.8 0)
+			(at 66.04 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24615,7 +25850,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 67.31 185.42 0)
+			(at 68.58 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24625,7 +25860,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 67.31 185.42 0)
+			(at 68.58 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24634,7 +25869,7 @@
 			)
 		)
 		(property "Description" "Flowline LH25-1101 Float Switch"
-			(at 67.31 185.42 0)
+			(at 68.58 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24643,7 +25878,7 @@
 			)
 		)
 		(property "DKPN" ""
-			(at 67.31 185.42 0)
+			(at 68.58 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24864,7 +26099,7 @@
 			(uuid "ad579c37-5b14-41a2-a51b-0faf42e96565")
 		)
 		(instances
-			(project "OPNhydro_r1"
+			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR44")
 					(unit 1)
@@ -25072,7 +26307,7 @@
 			(uuid "b89bba8f-ab00-4889-85e4-2e63e2e3dbe2")
 		)
 		(instances
-			(project "OPNhydro_r1"
+			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR48")
 					(unit 1)
@@ -25564,7 +26799,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 40.64 203.2 0)
+		(at 45.72 203.2 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -25573,7 +26808,7 @@
 		(dnp no)
 		(uuid "1535404a-bac7-4dba-82ea-cd1d5c425c3b")
 		(property "Reference" "#PWR8"
-			(at 40.64 209.55 0)
+			(at 45.72 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25582,7 +26817,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 40.64 207.01 0)
+			(at 45.72 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25591,7 +26826,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 40.64 203.2 0)
+			(at 45.72 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25600,7 +26835,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 203.2 0)
+			(at 45.72 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25609,7 +26844,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 40.64 203.2 0)
+			(at 45.72 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25631,7 +26866,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
-		(at 91.44 180.34 90)
+		(at 92.71 180.34 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25639,7 +26874,7 @@
 		(dnp no)
 		(uuid "16ed5d2d-444f-46f2-a5aa-8b08a13fa0f0")
 		(property "Reference" "C3"
-			(at 92.456 175.514 90)
+			(at 93.726 175.514 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25648,7 +26883,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 92.456 178.054 90)
+			(at 93.726 178.054 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25657,7 +26892,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
-			(at 105.41 180.086 0)
+			(at 106.68 180.086 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25666,7 +26901,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
-			(at 102.87 180.34 0)
+			(at 104.14 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25675,7 +26910,7 @@
 			)
 		)
 		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
-			(at 100.838 180.594 0)
+			(at 102.108 180.594 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25684,7 +26919,7 @@
 			)
 		)
 		(property "DKPN" "490-10700-1-ND"
-			(at 91.44 180.34 0)
+			(at 92.71 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25709,7 +26944,7 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 77.47 175.26 0)
+		(at 78.74 175.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25717,7 +26952,7 @@
 		(dnp no)
 		(uuid "176df036-9379-4561-8f68-bd4a69250bb4")
 		(property "Reference" "#PWR012"
-			(at 77.47 175.26 0)
+			(at 78.74 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25726,7 +26961,7 @@
 			)
 		)
 		(property "Value" "3V3"
-			(at 77.47 171.272 0)
+			(at 78.74 171.272 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25734,7 +26969,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 77.47 175.26 0)
+			(at 78.74 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25743,7 +26978,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 77.47 175.26 0)
+			(at 78.74 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25752,7 +26987,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 77.47 175.26 0)
+			(at 78.74 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26000,7 +27235,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:TERM BLK SCREW 4POS MKDS 3.5mm")
-		(at 72.39 187.96 0)
+		(at 73.66 187.96 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -26010,7 +27245,7 @@
 		(fields_autoplaced yes)
 		(uuid "1abe7a43-549b-45a2-a78e-b0c2043214fc")
 		(property "Reference" "J2"
-			(at 72.39 179.07 0)
+			(at 73.66 179.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26018,7 +27253,7 @@
 			)
 		)
 		(property "Value" "MKDS"
-			(at 72.39 181.61 0)
+			(at 73.66 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26026,7 +27261,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:TERM BLK 4POS SCREW 3.5mm"
-			(at 72.39 187.96 0)
+			(at 73.66 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26035,7 +27270,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/640/1751264.pdf"
-			(at 72.39 187.96 0)
+			(at 73.66 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26044,7 +27279,7 @@
 			)
 		)
 		(property "Description" "4 Position Wire to Board Terminal Block Horizontal with Board 0.138\" (3.50mm) Through Hole"
-			(at 72.39 187.96 0)
+			(at 73.66 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26053,7 +27288,25 @@
 			)
 		)
 		(property "DKPN" "277-5744-ND"
-			(at 72.39 187.96 0)
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Contact"
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "1751264"
+			(at 73.66 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26542,6 +27795,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 217.17 238.76 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "207c8d50-8803-41c8-b5aa-d25740eef2ab")
+		(property "Reference" "#PWR042"
+			(at 217.17 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 217.17 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 217.17 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 217.17 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 217.17 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "221dc373-3f1f-4f1c-9a9b-fe4fca6c3e16")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR042")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:24V")
 		(at 189.23 264.16 0)
 		(unit 1)
@@ -26739,90 +28059,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:PROBE_LIGHT")
-		(at 204.47 195.58 0)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board no)
-		(dnp yes)
-		(fields_autoplaced yes)
-		(uuid "2989559e-325f-44a1-8f1e-9da4e86b5f39")
-		(property "Reference" "PR2"
-			(at 201.8666 182.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LIGHT"
-			(at 201.8666 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 204.47 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 204.47 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 204.47 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" ""
-			(at 204.47 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3571667b-e5e1-4831-83eb-d3a1e2809c79")
-		)
-		(pin "2"
-			(uuid "865907dc-6bfb-4231-816f-5b5f26e5c90f")
-		)
-		(pin "3"
-			(uuid "b92e93b1-2efa-4580-af33-04de4ec2db81")
-		)
-		(pin "4"
-			(uuid "f98d9f09-b482-4dec-93e1-225c103e9022")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "PR2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:GND")
 		(at 322.58 236.22 0)
 		(unit 1)
@@ -26948,6 +28184,84 @@
 			(project "OPNhydro_r1"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR07")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(at 220.98 200.66 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2b6353e1-2ef5-4ffc-ac9f-38fcbb9d7b48")
+		(property "Reference" "C56"
+			(at 221.234 198.882 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "100nF"
+			(at 221.234 202.438 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+			(at 234.95 200.406 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+			(at 232.41 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+			(at 230.378 200.914 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "490-10700-1-ND"
+			(at 220.98 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f7c82509-e35c-4df8-b3ee-ec950c6aaefe")
+		)
+		(pin "2"
+			(uuid "cf85aebc-8321-427c-a4e9-5aadf35af6e9")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "C56")
 					(unit 1)
 				)
 			)
@@ -27409,7 +28723,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
-		(at 82.55 199.39 90)
+		(at 83.82 199.39 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -27417,7 +28731,7 @@
 		(dnp no)
 		(uuid "319b6070-97ff-42c0-9a9d-564e0d8a89ac")
 		(property "Reference" "C2"
-			(at 83.566 194.564 90)
+			(at 84.836 194.564 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27426,7 +28740,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 83.566 197.104 90)
+			(at 84.836 197.104 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27435,7 +28749,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
-			(at 96.52 199.136 0)
+			(at 97.79 199.136 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27444,7 +28758,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
-			(at 93.98 199.39 0)
+			(at 95.25 199.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27453,7 +28767,7 @@
 			)
 		)
 		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
-			(at 91.948 199.644 0)
+			(at 93.218 199.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27462,7 +28776,7 @@
 			)
 		)
 		(property "DKPN" "490-10700-1-ND"
-			(at 82.55 199.39 0)
+			(at 83.82 199.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27623,6 +28937,108 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR061")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:TERM BLK HDR 4POS JST-PH 2mm")
+		(at 212.09 186.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3309371b-2dce-4528-9769-e9eb8870f97a")
+		(property "Reference" "H2"
+			(at 212.09 182.118 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "JST_PH"
+			(at 212.09 184.658 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:HEADER MALE 4POS 2mm JST-PA"
+			(at 212.09 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+			(at 212.09 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector Header Through Hole, Right Angle 4 position 0.079\" (2.00mm)"
+			(at 212.09 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "455-1721-ND"
+			(at 212.09 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "JST"
+			(at 212.09 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "S4B-PH-K-S"
+			(at 212.09 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ac677b2c-4785-4979-aac2-cbc839187e4e")
+		)
+		(pin "2"
+			(uuid "a48b2828-87e3-4ddf-b2cc-dc4e85d9f411")
+		)
+		(pin "3"
+			(uuid "c37efb55-91b7-4306-98db-5369e2bf51fc")
+		)
+		(pin "4"
+			(uuid "20362def-08ea-4c28-9b4d-f62bdf2217e2")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -28060,7 +29476,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:MOSFET N-CH 30V 5.7A AO3400A SOT23-3L")
-		(at 138.43 257.81 0)
+		(at 138.43 259.08 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -28068,7 +29484,7 @@
 		(dnp no)
 		(uuid "3e0d6f36-8e5f-462b-a4c1-c7cb0194322b")
 		(property "Reference" "T5"
-			(at 134.112 250.19 0)
+			(at 134.112 251.714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28077,7 +29493,7 @@
 			)
 		)
 		(property "Value" "AO3400A"
-			(at 134.112 252.73 0)
+			(at 134.112 254 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28086,7 +29502,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:MOSFET N-CH 30V 5.7A AO3400A SOT23-3L"
-			(at 143.51 259.715 0)
+			(at 143.51 260.985 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28097,7 +29513,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/1133/AO3400A_ds.pdf"
-			(at 143.51 261.62 0)
+			(at 143.51 262.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28107,7 +29523,7 @@
 			)
 		)
 		(property "Description" "N-Channel 30 V 5.7A (Ta) 1.4W (Ta) Surface Mount SOT-23-3"
-			(at 138.43 257.81 0)
+			(at 138.43 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28116,7 +29532,7 @@
 			)
 		)
 		(property "DKPN" "785-1000-1-ND"
-			(at 138.43 257.81 0)
+			(at 138.43 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28665,15 +30081,15 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:PROBE BOSCH BME280")
-		(at 205.74 229.87 0)
+		(at 201.93 224.79 0)
 		(unit 1)
-		(exclude_from_sim no)
+		(exclude_from_sim yes)
 		(in_bom yes)
 		(on_board no)
 		(dnp yes)
 		(uuid "43f432ed-99df-4efe-a26b-f3c5aec91bf8")
 		(property "Reference" "PR6"
-			(at 200.914 217.424 0)
+			(at 197.104 217.424 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28681,7 +30097,7 @@
 			)
 		)
 		(property "Value" "BME280"
-			(at 200.914 219.964 0)
+			(at 197.104 219.964 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28689,7 +30105,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 205.74 229.87 0)
+			(at 201.93 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28699,7 +30115,7 @@
 			)
 		)
 		(property "Datasheet" "https://7semi.com/7semi-bme280-pressure-humidity-temperature-sensor-probe/?srsltid=AfmBOoo0M0YKUkh5_x4d4BUS7Gb6TGHH3b26bamkNUaszJLqGicsZQ4m"
-			(at 205.74 229.87 0)
+			(at 201.93 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28708,7 +30124,7 @@
 			)
 		)
 		(property "Description" "CONDUCTIVITY PROBE K 1.0"
-			(at 205.74 229.87 0)
+			(at 201.93 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28717,7 +30133,7 @@
 			)
 		)
 		(property "DKPN" "4152-ENV-40-PH-ND"
-			(at 205.74 229.87 0)
+			(at 201.93 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29085,7 +30501,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:MOSFET N-CH 55V 42A IRLR2905 DPAK")
-		(at 64.77 257.81 0)
+		(at 64.77 259.08 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -29093,7 +30509,7 @@
 		(dnp no)
 		(uuid "4a76bc78-422a-4fb5-9c7b-04b2672dd080")
 		(property "Reference" "T3"
-			(at 60.96 249.936 0)
+			(at 62.484 264.922 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29102,7 +30518,7 @@
 			)
 		)
 		(property "Value" "IRLR2905"
-			(at 60.96 252.476 0)
+			(at 62.484 266.954 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29111,7 +30527,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:MOSFET N-CH 55V 42A IRLR2905TRPBF DPAK"
-			(at 69.85 259.715 0)
+			(at 69.85 260.985 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29122,7 +30538,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.infineon.com/dgdl/irlr2905pbf.pdf?fileId=5546d462533600a40153566cc2bb2679"
-			(at 69.85 261.62 0)
+			(at 69.85 262.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29132,7 +30548,7 @@
 			)
 		)
 		(property "Description" "N-Channel 55 V 42A (Tc) 110W (Tc) Surface Mount TO-252AA (DPAK)"
-			(at 64.77 257.81 0)
+			(at 64.77 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29141,7 +30557,7 @@
 			)
 		)
 		(property "DKPN" "IRLR2905PBFCT-ND"
-			(at 64.77 257.81 0)
+			(at 64.77 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29247,73 +30663,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "P9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:GND")
-		(at 229.87 237.49 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4bf11eb2-0b47-4e95-a0c7-e829ce8b91b4")
-		(property "Reference" "#PWR42"
-			(at 229.87 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 229.87 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 229.87 237.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 229.87 237.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 229.87 237.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "625cb2f7-6d6f-4d5f-8662-65aa898afefc")
-		)
-		(instances
-			(project "OPNhydro_r1"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "#PWR42")
 					(unit 1)
 				)
 			)
@@ -29619,6 +30968,90 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:PROBE LIGHT")
+		(at 201.93 189.23 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom yes)
+		(on_board no)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "4ec815ca-88dc-470a-b73c-555ec1819aa4")
+		(property "Reference" "PR2"
+			(at 196.7866 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LIGHT"
+			(at 196.7866 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 201.93 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 201.93 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 201.93 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" ""
+			(at 201.93 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "37ea3324-f2ef-444d-b843-f600f17464b2")
+		)
+		(pin "2"
+			(uuid "9ee1c332-ea38-4065-a2c4-9cf3675ed49f")
+		)
+		(pin "1"
+			(uuid "de38cad8-0154-426a-9fdb-ea90ffb2eb98")
+		)
+		(pin "4"
+			(uuid "f0ad135a-0cd7-4220-bba5-34b982038a42")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "PR2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:24V")
 		(at 106.68 30.48 0)
 		(unit 1)
@@ -29837,7 +31270,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 91.44 203.2 0)
+		(at 92.71 203.2 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -29846,7 +31279,7 @@
 		(dnp no)
 		(uuid "50db47ce-868f-4962-ab49-d669cc2d6211")
 		(property "Reference" "#PWR18"
-			(at 91.44 209.55 0)
+			(at 92.71 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29855,7 +31288,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 91.44 207.01 0)
+			(at 92.71 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29864,7 +31297,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 91.44 203.2 0)
+			(at 92.71 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29873,7 +31306,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 91.44 203.2 0)
+			(at 92.71 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29882,7 +31315,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 91.44 203.2 0)
+			(at 92.71 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30199,6 +31632,118 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:TERM BLK HDR 6POS MOLEX-PB 1.25mm")
+		(at 38.1 182.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "57301935-130c-45a0-9433-b6f058a59f7d")
+		(property "Reference" "H9"
+			(at 39.37 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PB_1.25mm"
+			(at 39.37 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK HDR 6POS PB 1.25mm Molex"
+			(at 35.56 200.406 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.molex.com/pdm_docs/sd/532610671_sd.pdf"
+			(at 33.02 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector Header Surface Mount, Right Angle 6 position 0.049\" (1.25mm)"
+			(at 36.322 191.77 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "WM7624CT-ND"
+			(at 38.1 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Molex"
+			(at 38.1 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "0532610671"
+			(at 38.1 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "4"
+			(uuid "4d3afde8-5d0a-4617-b677-599fec93591d")
+		)
+		(pin "S2"
+			(uuid "709e73eb-da96-453c-9af2-0e1166867cf5")
+		)
+		(pin "5"
+			(uuid "a6e5cfae-fb6b-41f4-8b54-f575cbe6e0f8")
+		)
+		(pin "6"
+			(uuid "d6a6220d-4238-4803-88b8-07158b8523a6")
+		)
+		(pin "1"
+			(uuid "ac4adebd-7a35-4285-a170-41e083b35abe")
+		)
+		(pin "2"
+			(uuid "2cc277d1-6479-4aef-9171-00df42a2d08a")
+		)
+		(pin "3"
+			(uuid "e6f2b7ea-3287-4e73-92a2-cf0134d150bc")
+		)
+		(pin "S"
+			(uuid "349aa281-0e01-48f2-8cca-2d8f7fb94f63")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "H9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:GND")
 		(at 297.18 158.75 0)
 		(unit 1)
@@ -30440,7 +31985,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 10kΩ ±1% 1/8W 0805 Yageo")
-		(at 82.55 184.15 90)
+		(at 83.82 184.15 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -30448,7 +31993,7 @@
 		(dnp no)
 		(uuid "5a4e2d58-8b6f-48d9-90ed-040686716ff8")
 		(property "Reference" "R3"
-			(at 84.582 179.07 90)
+			(at 85.852 179.07 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30457,7 +32002,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 84.582 181.61 90)
+			(at 85.852 181.61 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30466,7 +32011,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 82.55 185.928 90)
+			(at 83.82 185.928 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30475,7 +32020,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 82.55 184.15 0)
+			(at 83.82 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30484,7 +32029,7 @@
 			)
 		)
 		(property "Description" "10 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 82.55 184.15 0)
+			(at 83.82 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30493,7 +32038,7 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
-			(at 82.55 184.15 0)
+			(at 83.82 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30590,90 +32135,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C54")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:TERM BLK SCREW 4POS MKDS 3.5mm")
-		(at 35.56 187.96 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "60c0c3ae-7379-4b2f-aac9-8907be960ecb")
-		(property "Reference" "J1"
-			(at 35.56 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MKDS"
-			(at 35.56 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLK 4POS SCREW 3.5mm"
-			(at 35.56 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/640/1751264.pdf"
-			(at 35.56 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "4 Position Wire to Board Terminal Block Horizontal with Board 0.138\" (3.50mm) Through Hole"
-			(at 35.56 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-5744-ND"
-			(at 35.56 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "15f24b20-2e7a-46d5-92df-5002d28dcaa0")
-		)
-		(pin "4"
-			(uuid "2bc0d723-ff06-4360-a0c8-a94ce4db4568")
-		)
-		(pin "3"
-			(uuid "5b868554-1daa-4465-871c-a5633de48a39")
-		)
-		(pin "2"
-			(uuid "d2acbda5-2db1-477c-8378-84d727003231")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -30916,7 +32377,7 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 91.44 175.26 0)
+		(at 92.71 175.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -30924,7 +32385,7 @@
 		(dnp no)
 		(uuid "654896d2-2810-4eab-a4da-f038388f0f07")
 		(property "Reference" "#PWR017"
-			(at 91.44 175.26 0)
+			(at 92.71 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30933,7 +32394,7 @@
 			)
 		)
 		(property "Value" "3V3"
-			(at 91.44 171.272 0)
+			(at 92.71 171.272 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30941,7 +32402,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 91.44 175.26 0)
+			(at 92.71 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30950,7 +32411,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 91.44 175.26 0)
+			(at 92.71 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30959,7 +32420,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 91.44 175.26 0)
+			(at 92.71 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31941,6 +33402,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Phoenix Connect"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "1803578"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f11582f8-9451-495f-97c6-6c2f5a0872c3")
 		)
@@ -31951,91 +33430,6 @@
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "P6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:TERM BLK HDR 4POS JST-PH 2mm")
-		(at 218.44 187.96 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6fbc143f-c945-4b43-aebc-132b677a9299")
-		(property "Reference" "H2"
-			(at 218.44 182.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "JST_PH"
-			(at 218.44 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:HEADER MALE 4POS 2mm JST-PA"
-			(at 218.44 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
-			(at 218.44 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector Header Through Hole, Right Angle 4 position 0.079\" (2.00mm)"
-			(at 218.44 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "455-1721-ND"
-			(at 218.44 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "d7bc78f0-416f-4a99-83af-42345334f7b0")
-		)
-		(pin "3"
-			(uuid "7f72ed12-a192-4f1b-beb0-d2c52b112983")
-		)
-		(pin "1"
-			(uuid "213fc95c-4580-46b1-aa7e-ffad03756288")
-		)
-		(pin "4"
-			(uuid "a91c616e-ec72-4586-af47-4a5efb7cc1ad")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -32347,72 +33741,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:GND")
-		(at 55.88 271.78 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "75f4ce97-9ea0-414f-aca0-f59409c5ef20")
-		(property "Reference" "#PWR28"
-			(at 55.88 278.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 55.88 275.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 55.88 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 55.88 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 55.88 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "34a4c769-d8cf-40b4-97a5-b11b6b4b4c74")
-		)
-		(instances
-			(project "OPNhydro_r1"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "#PWR28")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:TERM BLK PLG 4POS JST-XH 2.5mm")
 		(at 372.11 67.31 0)
 		(mirror y)
@@ -32581,7 +33909,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP ALUM-ELEC 100μF ±20% 25V Panasonic")
-		(at 44.45 196.85 0)
+		(at 49.53 196.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -32589,7 +33917,7 @@
 		(dnp no)
 		(uuid "782152ef-199d-415d-be59-d010a0e43dcb")
 		(property "Reference" "C1"
-			(at 46.736 195.58 0)
+			(at 51.816 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32598,7 +33926,7 @@
 			)
 		)
 		(property "Value" "100μF"
-			(at 46.736 198.12 0)
+			(at 51.816 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32607,7 +33935,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP ALUM 100μF ±20 25V"
-			(at 44.45 196.85 0)
+			(at 49.53 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32616,7 +33944,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDE0000/RDE0000C1259.pdf"
-			(at 44.45 196.85 0)
+			(at 49.53 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32625,7 +33953,7 @@
 			)
 		)
 		(property "Description" "100 µF 25 V Aluminum Electrolytic Capacitors Radial, Can - SMD 360mOhm @ 100kHz 2000 Hrs @ 105°C"
-			(at 44.45 196.85 0)
+			(at 49.53 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32634,7 +33962,7 @@
 			)
 		)
 		(property "DKPN" "10-EEE-FN1E101UPCT-ND"
-			(at 44.45 196.85 0)
+			(at 49.53 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32658,8 +33986,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 220.98 238.76 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "78b02d1d-b8cb-4036-a50e-a1f212f1ccae")
+		(property "Reference" "#PWR043"
+			(at 220.98 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 220.98 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 220.98 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 220.98 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 220.98 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1364f060-048b-4a07-94e5-cfafdc918784")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR043")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:SWITCH FLOAT LOW")
-		(at 67.31 190.5 0)
+		(at 68.58 190.5 0)
 		(unit 1)
 		(exclude_from_sim yes)
 		(in_bom yes)
@@ -32667,7 +34062,7 @@
 		(dnp no)
 		(uuid "797022a7-3c6c-456c-9a79-2f369470d7db")
 		(property "Reference" "SW2"
-			(at 64.008 201.93 0)
+			(at 65.278 201.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32675,7 +34070,7 @@
 			)
 		)
 		(property "Value" "FLOAT"
-			(at 64.008 204.47 0)
+			(at 65.278 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32683,7 +34078,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 67.31 190.5 0)
+			(at 68.58 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32693,7 +34088,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 67.31 190.5 0)
+			(at 68.58 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32702,7 +34097,7 @@
 			)
 		)
 		(property "Description" "Flowline LH25-1101 Float Switch"
-			(at 67.31 190.5 0)
+			(at 68.58 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32711,7 +34106,7 @@
 			)
 		)
 		(property "DKPN" ""
-			(at 67.31 190.5 0)
+			(at 68.58 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33253,6 +34648,138 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 54.61 251.46 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7f402ac2-bfec-418f-aade-5f22e9984338")
+		(property "Reference" "#PWR028"
+			(at 54.61 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3V3"
+			(at 54.61 247.472 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 54.61 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 54.61 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 54.61 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a54416dd-c06d-4af6-a042-b15bdc4c9511")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR028")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 227.33 203.2 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "81fdb88d-7c72-4fa7-a081-9d488208f18a")
+		(property "Reference" "#PWR056"
+			(at 227.33 209.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 227.33 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 227.33 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 227.33 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 227.33 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e36d92ec-cf81-4916-868e-777d08e411a2")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR056")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:CAP X5R 10μF ±10% 16V 0805 Murata GRM")
 		(at 238.76 143.51 90)
 		(unit 1)
@@ -33406,7 +34933,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
-		(at 72.39 257.81 90)
+		(at 72.39 259.08 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -33414,7 +34941,7 @@
 		(dnp no)
 		(uuid "835ae735-67ef-499e-b9a3-2ae86fc9701c")
 		(property "Reference" "C9"
-			(at 72.898 260.35 90)
+			(at 72.898 261.62 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33423,7 +34950,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 72.898 262.89 90)
+			(at 72.898 264.16 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33432,7 +34959,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
-			(at 86.36 257.556 0)
+			(at 86.36 258.826 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33441,7 +34968,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
-			(at 83.82 257.81 0)
+			(at 83.82 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33450,7 +34977,7 @@
 			)
 		)
 		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
-			(at 81.788 258.064 0)
+			(at 81.788 259.334 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33459,7 +34986,7 @@
 			)
 		)
 		(property "DKPN" "490-10700-1-ND"
-			(at 72.39 257.81 0)
+			(at 72.39 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33925,7 +35452,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 44.45 203.2 0)
+		(at 49.53 203.2 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -33934,7 +35461,7 @@
 		(dnp no)
 		(uuid "88b8bb0d-d60d-4a25-86b6-8007f5c1bbae")
 		(property "Reference" "#PWR5"
-			(at 44.45 209.55 0)
+			(at 49.53 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33943,7 +35470,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 44.45 207.01 0)
+			(at 49.53 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33952,7 +35479,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 44.45 203.2 0)
+			(at 49.53 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33961,7 +35488,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 44.45 203.2 0)
+			(at 49.53 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33970,7 +35497,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 44.45 203.2 0)
+			(at 49.53 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34070,7 +35597,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 10kΩ ±1% 1/8W 0805 Yageo")
-		(at 55.88 269.24 90)
+		(at 54.61 259.08 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -34078,7 +35605,7 @@
 		(dnp no)
 		(uuid "8ca35466-b3d3-494b-8519-5b0bc5931cff")
 		(property "Reference" "R10"
-			(at 57.658 264.16 90)
+			(at 56.388 254 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34087,7 +35614,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 57.658 266.7 90)
+			(at 56.388 256.032 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34096,7 +35623,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 55.88 271.018 90)
+			(at 54.61 260.858 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34105,7 +35632,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 55.88 269.24 0)
+			(at 54.61 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34114,7 +35641,7 @@
 			)
 		)
 		(property "Description" "10 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 55.88 269.24 0)
+			(at 54.61 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34123,7 +35650,7 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
-			(at 55.88 269.24 0)
+			(at 54.61 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34430,7 +35957,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3")
-		(at 121.92 265.43 0)
+		(at 121.92 266.7 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -34438,7 +35965,7 @@
 		(dnp no)
 		(uuid "8fac9736-655c-41da-b43e-d82977baf42f")
 		(property "Reference" "T4"
-			(at 123.444 255.016 0)
+			(at 123.444 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34446,7 +35973,7 @@
 			)
 		)
 		(property "Value" "BT3904"
-			(at 123.444 257.556 0)
+			(at 123.444 258.826 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34454,7 +35981,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3"
-			(at 127 262.89 0)
+			(at 127 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34463,7 +35990,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/mmbt3904lt1-d.pdf"
-			(at 121.92 265.43 0)
+			(at 121.92 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34472,7 +35999,7 @@
 			)
 		)
 		(property "Description" "Bipolar (BJT) Transistor NPN 40 V 200 mA 300MHz 300 mW Surface Mount SOT-23-3 (TO-236)"
-			(at 121.92 265.43 0)
+			(at 121.92 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34481,7 +36008,7 @@
 			)
 		)
 		(property "Sim.Device" "NPN"
-			(at 121.92 265.43 0)
+			(at 121.92 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34490,7 +36017,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=B 2=E 3=C"
-			(at 121.92 265.43 0)
+			(at 121.92 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34499,7 +36026,7 @@
 			)
 		)
 		(property "DKPN" "MMBT3904LT1GOSCT-ND"
-			(at 121.92 265.43 0)
+			(at 121.92 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34592,7 +36119,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 4.7kΩ ±1% 1/8W 0805 Yageo")
-		(at 109.22 265.43 0)
+		(at 109.22 266.7 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -34600,7 +36127,7 @@
 		(dnp no)
 		(uuid "906ea3ba-8a20-47d5-952b-95839dd5370a")
 		(property "Reference" "R22"
-			(at 113.03 268.478 0)
+			(at 113.03 269.748 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34608,7 +36135,7 @@
 			)
 		)
 		(property "Value" "4k7"
-			(at 113.03 271.018 0)
+			(at 113.03 272.034 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34616,7 +36143,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 107.442 265.43 90)
+			(at 107.442 266.7 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34625,7 +36152,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 109.22 265.43 0)
+			(at 109.22 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34634,7 +36161,7 @@
 			)
 		)
 		(property "Description" "4.7 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 109.22 265.43 0)
+			(at 109.22 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34643,7 +36170,7 @@
 			)
 		)
 		(property "DKPN" "311-4.70KCRCT-ND"
-			(at 109.22 265.43 0)
+			(at 109.22 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34984,6 +36511,24 @@
 			)
 		)
 		(property "DKPN" "277-6377-ND"
+			(at 74.93 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Connect"
+			(at 74.93 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "1836189"
 			(at 74.93 236.22 0)
 			(effects
 				(font
@@ -35532,6 +37077,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Phoenix Connect"
+			(at 148.59 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "1803277"
+			(at 148.59 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "8b544621-e85d-41cf-a798-92f7ae6fabbb")
 		)
@@ -35978,6 +37541,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 227.33 238.76 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a3b7beee-74f3-4a06-ab4f-b501a2f058b1")
+		(property "Reference" "#PWR094"
+			(at 227.33 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 227.33 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 227.33 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 227.33 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 227.33 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f17d1059-ac47-4911-ad06-08853e42381a")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR094")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 2.2μF ±10% 10V 0603 Murata")
 		(at 285.75 222.25 90)
 		(unit 1)
@@ -36383,6 +38013,24 @@
 			)
 		)
 		(property "DKPN" "277-6146-ND"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Connect"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "1836079"
 			(at 78.74 236.22 0)
 			(effects
 				(font
@@ -37020,7 +38668,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:PROBE LiDAR BENEWAKE TF-LUNA")
-		(at 31.75 190.5 0)
+		(at 27.94 190.5 0)
 		(unit 1)
 		(exclude_from_sim yes)
 		(in_bom yes)
@@ -37029,7 +38677,7 @@
 		(fields_autoplaced yes)
 		(uuid "b22baafb-4121-4b2e-84f8-b7a7d589455b")
 		(property "Reference" "PR1"
-			(at 28.6386 180.34 0)
+			(at 24.8286 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37037,7 +38685,7 @@
 			)
 		)
 		(property "Value" "LiDAR"
-			(at 28.6386 182.88 0)
+			(at 24.8286 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37045,7 +38693,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 31.75 190.5 0)
+			(at 27.94 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37055,7 +38703,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.amazon.com/Benewake-TF-Luna-Single-Point-Ranging-Interface/dp/B086MJQSLR/ref=sr_1_1?adgrpid=187079572715&dib=eyJ2IjoiMSJ9._lgnvbduDCJi6uRMhBAbd3P5aNsvtEO14TmlHJE5lgx16w-cWQNfRGQTL6Z3CmcqZCWj8hsHm0tHQflHHS4FOGjqyBEX8XIgC5yHBMtuPhl6fZ1ISSYHi7u2WNWWu0S4WO18Vfr7fUKkw9aqzBAFUfGmOsnxVIfzJAhP65WM0rE.SzKMhSozuAQhmxdfP0jlZDnu7qgifDU4vb8xH8o8Ns4&dib_tag=se&hvadid=779574276400&hvdev=c&hvexpln=0&hvlocphy=9031913&hvnetw=g&hvocijid=2033117049772814251--&hvqmt=e&hvrand=2033117049772814251&hvtargid=kwd-2434086726621&hydadcr=8432_13831408_19006&keywords=benewake+tf-luna&mcid=0570d4bb216835f08555da8dcfd97195&qid=1773722059&sr=8-1"
-			(at 31.75 190.5 0)
+			(at 27.94 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37064,7 +38712,7 @@
 			)
 		)
 		(property "Description" "LiDAR Module Range Finder Sensor Single-Point Micro Ranging Module for Arduino Pixhawk 5V UART IIC Interface"
-			(at 31.75 190.5 0)
+			(at 27.94 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37073,7 +38721,7 @@
 			)
 		)
 		(property "ASIN" "B086MJQSLR"
-			(at 31.75 190.5 0)
+			(at 27.94 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37092,6 +38740,12 @@
 		)
 		(pin "3"
 			(uuid "7fa70883-ae7b-4e88-acbe-f157843f1c82")
+		)
+		(pin "4"
+			(uuid "1f90d495-fad4-4b07-a0bd-f9532a0645b8")
+		)
+		(pin "4"
+			(uuid "89ae4158-9361-49e6-bb05-6dff7832de91")
 		)
 		(instances
 			(project ""
@@ -37784,72 +39438,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 232.41 219.71 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b72e1f0c-93a4-4920-aca5-7477d7d6d93a")
-		(property "Reference" "#PWR043"
-			(at 232.41 223.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "3V3"
-			(at 232.664 215.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 232.41 219.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 232.41 219.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 232.41 219.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3ecb3779-3fd0-4815-9877-cbc777619bc7")
-		)
-		(instances
-			(project "OPNhydro_r1"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "#PWR043")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 62.23 50.8 270)
 		(unit 1)
@@ -38338,7 +39926,7 @@
 			(uuid "3e38c966-8a16-40ed-8de7-dfed5dcac290")
 		)
 		(instances
-			(project "OPNhydro_r1"
+			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR31")
 					(unit 1)
@@ -38491,7 +40079,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Panasonic")
-		(at 77.47 257.81 0)
+		(at 77.47 259.08 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -38499,7 +40087,7 @@
 		(dnp no)
 		(uuid "be6f1a77-22ee-4e5b-bae7-050e508885b0")
 		(property "Reference" "C12"
-			(at 79.248 252.984 0)
+			(at 79.248 254.254 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38508,7 +40096,7 @@
 			)
 		)
 		(property "Value" "220μF/50V"
-			(at 79.248 255.524 0)
+			(at 79.248 256.794 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38517,7 +40105,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Panasonic"
-			(at 77.47 257.81 0)
+			(at 77.47 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38526,7 +40114,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
-			(at 77.47 257.81 0)
+			(at 77.47 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38535,7 +40123,7 @@
 			)
 		)
 		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
-			(at 77.47 257.81 0)
+			(at 77.47 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38544,7 +40132,7 @@
 			)
 		)
 		(property "DKPN" "10-ECA-1HM221BCT-ND"
-			(at 77.47 257.81 0)
+			(at 77.47 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38569,7 +40157,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
-		(at 147.32 257.81 90)
+		(at 147.32 259.08 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -38577,7 +40165,7 @@
 		(dnp no)
 		(uuid "bea157c9-4b11-4d2b-97ad-9382a9507197")
 		(property "Reference" "C30"
-			(at 148.59 260.35 90)
+			(at 148.59 261.62 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38586,7 +40174,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 148.59 262.89 90)
+			(at 148.59 264.16 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38595,7 +40183,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
-			(at 161.29 257.556 0)
+			(at 161.29 258.826 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38604,7 +40192,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
-			(at 158.75 257.81 0)
+			(at 158.75 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38613,7 +40201,7 @@
 			)
 		)
 		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
-			(at 156.718 258.064 0)
+			(at 156.718 259.334 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38622,7 +40210,7 @@
 			)
 		)
 		(property "DKPN" "490-10700-1-ND"
-			(at 147.32 257.81 0)
+			(at 147.32 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38802,7 +40390,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 10kΩ ±1% 1/8W 0805 Yageo")
-		(at 91.44 203.2 90)
+		(at 92.71 203.2 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -38810,7 +40398,7 @@
 		(dnp no)
 		(uuid "c12aa2c2-352c-4802-8c0b-dde168e0e82b")
 		(property "Reference" "R6"
-			(at 93.472 198.12 90)
+			(at 94.742 198.12 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38819,7 +40407,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 93.472 200.66 90)
+			(at 94.742 200.66 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38828,7 +40416,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 91.44 204.978 90)
+			(at 92.71 204.978 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38837,7 +40425,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 91.44 203.2 0)
+			(at 92.71 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38846,7 +40434,7 @@
 			)
 		)
 		(property "Description" "10 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 91.44 203.2 0)
+			(at 92.71 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38855,7 +40443,7 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
-			(at 91.44 203.2 0)
+			(at 92.71 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38873,91 +40461,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "R6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:TERM BLK HDR 4POS JST-PH 2mm")
-		(at 219.71 222.25 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c37e6317-81dd-4f8a-84ca-bbf924d1b4c0")
-		(property "Reference" "H4"
-			(at 219.71 217.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "JST_PH"
-			(at 219.71 219.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:HEADER MALE 4POS 2mm JST-PA"
-			(at 219.71 222.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
-			(at 219.71 222.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector Header Through Hole, Right Angle 4 position 0.079\" (2.00mm)"
-			(at 219.71 222.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "455-1721-ND"
-			(at 219.71 222.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "d30afc64-5755-4f5a-9cae-fa97f5fa55a2")
-		)
-		(pin "3"
-			(uuid "4179f225-36a5-4aa0-a0a0-c241c66d9c87")
-		)
-		(pin "1"
-			(uuid "aec61106-2703-4500-960c-cb8b2658cd89")
-		)
-		(pin "4"
-			(uuid "b86b671d-d0c9-49df-93bb-c4cc2a07a118")
-		)
-		(instances
-			(project "OPNhydro_r1"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H4")
 					(unit 1)
 				)
 			)
@@ -39395,8 +40898,110 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:TERM BLK HDR 4POS JST-PH 2mm")
+		(at 212.09 222.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cc33ec8a-61c7-462c-811f-e359d163b11e")
+		(property "Reference" "H4"
+			(at 212.09 217.678 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "JST_PH"
+			(at 212.09 220.218 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:HEADER MALE 4POS 2mm JST-PA"
+			(at 212.09 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+			(at 212.09 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector Header Through Hole, Right Angle 4 position 0.079\" (2.00mm)"
+			(at 212.09 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "455-1721-ND"
+			(at 212.09 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "JST"
+			(at 212.09 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "S4B-PH-K-S"
+			(at 212.09 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "68b65f24-acd5-4a63-99c9-a256eb9cf061")
+		)
+		(pin "2"
+			(uuid "3c635bab-c288-434c-a14d-d65a74bd4c0e")
+		)
+		(pin "3"
+			(uuid "c6130fd0-3fb2-4c83-b63b-a7706d71147d")
+		)
+		(pin "4"
+			(uuid "5f902a56-d440-4fd4-af13-b9fd11a98a3b")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "H4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 82.55 203.2 0)
+		(at 83.82 203.2 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -39405,7 +41010,7 @@
 		(dnp no)
 		(uuid "ccf85860-23d7-4a4b-8378-8005c1a7b082")
 		(property "Reference" "#PWR15"
-			(at 82.55 209.55 0)
+			(at 83.82 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39414,7 +41019,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 82.55 207.01 0)
+			(at 83.82 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39423,7 +41028,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 82.55 203.2 0)
+			(at 83.82 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39432,7 +41037,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 82.55 203.2 0)
+			(at 83.82 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39441,7 +41046,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 82.55 203.2 0)
+			(at 83.82 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39456,6 +41061,73 @@
 			(project "OPNhydro_r1"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 220.98 203.2 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cdb07436-5eb3-4a4b-bf9f-6665f92ce896")
+		(property "Reference" "#PWR092"
+			(at 220.98 209.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 220.98 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 220.98 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 220.98 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 220.98 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "64751f07-e1ca-474a-a92e-fa28e9f86e29")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR092")
 					(unit 1)
 				)
 			)
@@ -39695,7 +41367,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 231.14 185.42 0)
+		(at 227.33 184.15 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -39704,7 +41376,7 @@
 		(dnp no)
 		(uuid "d04751f4-09f9-497e-807c-8dfa8e6edebb")
 		(property "Reference" "#PWR029"
-			(at 231.14 189.23 0)
+			(at 227.33 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39713,7 +41385,7 @@
 			)
 		)
 		(property "Value" "3V3"
-			(at 231.394 181.61 0)
+			(at 227.584 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39721,7 +41393,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 231.14 185.42 0)
+			(at 227.33 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39730,7 +41402,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 231.14 185.42 0)
+			(at 227.33 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39739,7 +41411,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 231.14 185.42 0)
+			(at 227.33 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39761,7 +41433,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 228.6 203.2 0)
+		(at 217.17 203.2 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -39770,7 +41442,7 @@
 		(dnp no)
 		(uuid "d11f1a16-eada-426a-89d6-86c2918ac3a4")
 		(property "Reference" "#PWR27"
-			(at 228.6 209.55 0)
+			(at 217.17 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39779,7 +41451,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 228.6 207.01 0)
+			(at 217.17 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39788,7 +41460,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 228.6 203.2 0)
+			(at 217.17 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39797,7 +41469,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 228.6 203.2 0)
+			(at 217.17 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39806,7 +41478,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 228.6 203.2 0)
+			(at 217.17 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40394,6 +42066,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:CAP X5R 10μF ±10% 16V 0805 Murata GRM")
+		(at 227.33 236.22 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d6257210-2fba-4d5c-af1b-e7f65ef90b3d")
+		(property "Reference" "C59"
+			(at 231.902 235.458 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10μF"
+			(at 231.902 237.998 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:CAP X5R 10μF ±10 16V 0805 Murata GRM"
+			(at 241.3 235.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM21BR61C106KE15-01.pdf"
+			(at 238.76 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "10 µF ±10% 16V Ceramic Capacitor X5R 0805 (2012 Metric)"
+			(at 236.728 236.474 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "490-3886-1-ND"
+			(at 227.33 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "89bdd567-3577-4ff9-88a5-c62676a8134c")
+		)
+		(pin "2"
+			(uuid "131ee12e-daf9-4c4f-9744-c692d5613b9e")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "C59")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
 		(at 307.34 43.18 270)
 		(mirror x)
@@ -40467,6 +42215,72 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C35")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 227.33 219.71 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d82a64f4-9783-4f9b-92b3-d34b162e2ba4")
+		(property "Reference" "#PWR093"
+			(at 227.33 223.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3V3"
+			(at 227.584 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 227.33 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 227.33 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 227.33 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a63dcb1a-ae2b-47ab-81bf-b1b8f262f265")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR093")
 					(unit 1)
 				)
 			)
@@ -40549,6 +42363,114 @@
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "P10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:TERM BLK PLG 6POS MOLEX-PB 1.25mm")
+		(at 34.29 182.88 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom yes)
+		(on_board no)
+		(dnp no)
+		(uuid "da8fcfef-2e25-41df-a6e6-423957622d4b")
+		(property "Reference" "P13"
+			(at 35.306 203.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PB_1.25mm"
+			(at 35.306 205.994 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK PLG 6POS MOLEX-PB 1.25mm"
+			(at 34.29 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail-pdf/510210600?display=pdf"
+			(at 34.29 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "6 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
+			(at 34.29 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "WM1724-ND"
+			(at 34.29 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Molex"
+			(at 34.29 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "0510210600"
+			(at 34.29 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "ad475fb9-1444-4964-a80c-34754088d3a0")
+		)
+		(pin "4"
+			(uuid "c700dd95-0975-4219-aadf-e03ef14fd8b9")
+		)
+		(pin "3"
+			(uuid "59d2fe83-a76a-419b-aaba-b28c7da9df49")
+		)
+		(pin "5"
+			(uuid "52a7cd28-0cb1-4bc8-b0d7-9b4a75c4935c")
+		)
+		(pin "1"
+			(uuid "228764b3-bfe7-4248-af9d-605adeb9a976")
+		)
+		(pin "6"
+			(uuid "e5f3eed1-7b1c-4d5e-b003-8c819606a501")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "P13")
 					(unit 1)
 				)
 			)
@@ -41028,7 +42950,7 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 82.55 175.26 0)
+		(at 83.82 175.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -41036,7 +42958,7 @@
 		(dnp no)
 		(uuid "e45e6587-b425-4cba-9632-c36e9fb8a446")
 		(property "Reference" "#PWR014"
-			(at 82.55 175.26 0)
+			(at 83.82 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41045,7 +42967,7 @@
 			)
 		)
 		(property "Value" "3V3"
-			(at 82.55 171.272 0)
+			(at 83.82 171.272 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41053,7 +42975,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 82.55 175.26 0)
+			(at 83.82 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41062,7 +42984,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 82.55 175.26 0)
+			(at 83.82 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41071,7 +42993,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 82.55 175.26 0)
+			(at 83.82 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41385,6 +43307,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Phoenix Connect"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "1757019"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c68db757-2fab-49b7-8ff6-998393a75a07")
 		)
@@ -41402,7 +43342,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3")
-		(at 48.26 265.43 0)
+		(at 48.26 266.7 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -41410,7 +43350,7 @@
 		(dnp no)
 		(uuid "ea4b7dbd-f179-49ac-8d4a-7c5914a1c950")
 		(property "Reference" "T2"
-			(at 49.784 255.016 0)
+			(at 49.784 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41418,7 +43358,7 @@
 			)
 		)
 		(property "Value" "BT3904"
-			(at 49.784 257.556 0)
+			(at 49.784 258.826 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41426,7 +43366,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3"
-			(at 53.34 262.89 0)
+			(at 53.34 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41435,7 +43375,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/mmbt3904lt1-d.pdf"
-			(at 48.26 265.43 0)
+			(at 48.26 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41444,7 +43384,7 @@
 			)
 		)
 		(property "Description" "Bipolar (BJT) Transistor NPN 40 V 200 mA 300MHz 300 mW Surface Mount SOT-23-3 (TO-236)"
-			(at 48.26 265.43 0)
+			(at 48.26 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41453,7 +43393,7 @@
 			)
 		)
 		(property "Sim.Device" "NPN"
-			(at 48.26 265.43 0)
+			(at 48.26 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41462,7 +43402,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=B 2=E 3=C"
-			(at 48.26 265.43 0)
+			(at 48.26 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41471,7 +43411,7 @@
 			)
 		)
 		(property "DKPN" "MMBT3904LT1GOSCT-ND"
-			(at 48.26 265.43 0)
+			(at 48.26 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41499,7 +43439,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:TERM BLK PLG 4POS JST-PH 2mm")
-		(at 212.09 187.96 0)
+		(at 201.93 189.23 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -41507,15 +43447,15 @@
 		(dnp yes)
 		(uuid "ea8da737-3b5c-4784-a113-bb0d9fe6b9b8")
 		(property "Reference" "P2"
-			(at 212.344 202.692 0)
+			(at 205.994 201.676 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "PHR-4"
-			(at 212.344 205.232 0)
+		(property "Value" "PHR_4"
+			(at 205.994 204.216 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41523,7 +43463,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 212.09 187.96 0)
+			(at 201.93 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41533,7 +43473,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
-			(at 212.09 187.96 0)
+			(at 201.93 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41543,7 +43483,7 @@
 			)
 		)
 		(property "Description" "4 Rectangular Connectors - Housings Receptacle Natural 0.079\" (2.00mm)"
-			(at 212.09 187.96 0)
+			(at 201.93 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41552,7 +43492,7 @@
 			)
 		)
 		(property "DKPN" "455-1164-ND"
-			(at 212.09 187.96 0)
+			(at 201.93 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41726,52 +43666,34 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:RES 100Ω ±1% 1/8W 0805 Yageo")
-		(at 35.56 265.43 0)
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(at 220.98 236.22 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ebc2f3db-0392-4c31-b5b1-98ebb0055866")
-		(property "Reference" "R9"
-			(at 39.37 268.478 0)
+		(uuid "eb9df67f-651b-47df-94ce-6cfcead2c8fe")
+		(property "Reference" "C58"
+			(at 221.234 234.442 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Value" "100Ω"
-			(at 39.37 271.018 0)
+		(property "Value" "100nF"
+			(at 221.234 237.998 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:RES 100Ω ±1 18W Yageo 0805"
-			(at 35.56 265.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 35.56 265.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 35.56 265.43 0)
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+			(at 234.95 235.966 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41779,8 +43701,8 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 35.56 265.43 0)
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+			(at 232.41 236.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41788,16 +43710,34 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
-			(uuid "b3d0e463-cd59-4f10-9e62-66f1879b4e40")
+		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+			(at 230.378 236.474 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "490-10700-1-ND"
+			(at 220.98 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "a4114749-dbb1-4f9f-94b0-5be22b053f81")
+			(uuid "32c41e26-a200-4dff-8b06-554df95aa4b5")
+		)
+		(pin "2"
+			(uuid "7c6e5ad8-c83d-4164-a284-f4c06afebaaf")
 		)
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R9")
+					(reference "C58")
 					(unit 1)
 				)
 			)
@@ -42073,6 +44013,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Phoenix Connect"
+			(at 44.45 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "1757242"
+			(at 44.45 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fe1acd14-11a4-40f3-b4d8-8f99c185dcd1")
 		)
@@ -42156,7 +44114,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 100Ω ±1% 1/8W 0805 Yageo")
-		(at 109.22 260.35 0)
+		(at 109.22 261.62 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -42164,7 +44122,7 @@
 		(dnp no)
 		(uuid "eeab3dc1-1907-477a-8d25-c79d35e12143")
 		(property "Reference" "R21"
-			(at 113.03 254.762 0)
+			(at 113.03 256.286 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42172,7 +44130,7 @@
 			)
 		)
 		(property "Value" "100Ω"
-			(at 113.03 257.302 0)
+			(at 113.03 258.572 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42180,7 +44138,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 100Ω ±1 18W Yageo 0805"
-			(at 109.22 260.35 0)
+			(at 109.22 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42190,7 +44148,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 109.22 260.35 0)
+			(at 109.22 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42200,7 +44158,7 @@
 			)
 		)
 		(property "Description" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 109.22 260.35 0)
+			(at 109.22 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42209,7 +44167,7 @@
 			)
 		)
 		(property "DKPN" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 109.22 260.35 0)
+			(at 109.22 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42400,8 +44358,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:CAP X5R 10μF ±10% 16V 0805 Murata GRM")
+		(at 227.33 200.66 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f172edd1-e1bf-4ace-b025-6e60f805f473")
+		(property "Reference" "C57"
+			(at 231.902 199.898 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10μF"
+			(at 231.902 202.438 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:CAP X5R 10μF ±10 16V 0805 Murata GRM"
+			(at 241.3 200.406 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM21BR61C106KE15-01.pdf"
+			(at 238.76 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "10 µF ±10% 16V Ceramic Capacitor X5R 0805 (2012 Metric)"
+			(at 236.728 200.914 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "490-3886-1-ND"
+			(at 227.33 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "847ac21d-1110-45c4-b1e3-518fac687e5a")
+		)
+		(pin "2"
+			(uuid "7a1b3abb-77b4-4cb4-9902-821b705aaccd")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "C57")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:RES 10kΩ ±1% 1/8W 0805 Yageo")
-		(at 129.54 269.24 90)
+		(at 129.54 270.51 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -42409,7 +44443,7 @@
 		(dnp no)
 		(uuid "f2fad0f2-6c8f-4828-94ee-f364136d9058")
 		(property "Reference" "R23"
-			(at 131.318 264.16 90)
+			(at 131.318 265.43 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42418,7 +44452,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 131.318 266.7 90)
+			(at 131.318 267.97 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42427,7 +44461,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 129.54 271.018 90)
+			(at 129.54 272.288 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42436,7 +44470,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 129.54 269.24 0)
+			(at 129.54 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42445,7 +44479,7 @@
 			)
 		)
 		(property "Description" "10 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 129.54 269.24 0)
+			(at 129.54 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42454,7 +44488,7 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
-			(at 129.54 269.24 0)
+			(at 129.54 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42600,7 +44634,7 @@
 			(uuid "7c180a0d-0ae4-4255-8330-d54c70744b45")
 		)
 		(instances
-			(project "OPNhydro_r1"
+			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR41")
 					(unit 1)
@@ -42676,7 +44710,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:TERM BLK PLG 4POS JST-PH 2mm")
-		(at 213.36 222.25 0)
+		(at 201.93 224.79 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -42684,15 +44718,15 @@
 		(dnp yes)
 		(uuid "f4ca19f2-befa-4063-afce-6bd863f2a2ad")
 		(property "Reference" "P5"
-			(at 213.614 236.982 0)
+			(at 205.994 237.236 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "PHR-4"
-			(at 213.614 239.522 0)
+		(property "Value" "PHR_4"
+			(at 205.994 239.776 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42700,7 +44734,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 213.36 222.25 0)
+			(at 201.93 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42710,7 +44744,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
-			(at 213.36 222.25 0)
+			(at 201.93 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42720,7 +44754,7 @@
 			)
 		)
 		(property "Description" "4 Rectangular Connectors - Housings Receptacle Natural 0.079\" (2.00mm)"
-			(at 213.36 222.25 0)
+			(at 201.93 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42729,7 +44763,7 @@
 			)
 		)
 		(property "DKPN" "455-1164-ND"
-			(at 213.36 222.25 0)
+			(at 201.93 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42971,7 +45005,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 100Ω ±1% 1/8W 0805 Yageo")
-		(at 35.56 260.35 0)
+		(at 35.56 261.62 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -42979,7 +45013,7 @@
 		(dnp no)
 		(uuid "fc2f8590-aae7-457f-8953-6094259f84b9")
 		(property "Reference" "R8"
-			(at 39.37 255.016 0)
+			(at 39.37 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42987,7 +45021,7 @@
 			)
 		)
 		(property "Value" "100Ω"
-			(at 39.37 257.556 0)
+			(at 39.37 258.826 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42995,7 +45029,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 100Ω ±1 18W Yageo 0805"
-			(at 35.56 260.35 0)
+			(at 35.56 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43005,7 +45039,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 35.56 260.35 0)
+			(at 35.56 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43015,7 +45049,7 @@
 			)
 		)
 		(property "Description" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 35.56 260.35 0)
+			(at 35.56 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43024,7 +45058,7 @@
 			)
 		)
 		(property "DKPN" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 35.56 260.35 0)
+			(at 35.56 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)

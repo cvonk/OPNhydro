@@ -30,7 +30,14 @@
       "WebFetch(domain:learn.watterott.com)",
       "WebFetch(domain:wiki.fysetc.com)",
       "WebFetch(domain:klipper.discourse.group)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:bldcpump.com)",
+      "WebFetch(domain:www.bldcpump.com)",
+      "WebFetch(domain:community.robotshop.com)",
+      "WebFetch(domain:files.seeedstudio.com)",
+      "WebFetch(domain:www.mybotshop.de)",
+      "WebFetch(domain:www.youyeetoo.com)",
+      "WebFetch(domain:www.waveshare.com)"
     ]
   }
 }

@@ -1,4 +1,4 @@
-(footprint "DIODE TVS 15VWM 24.4VC SMBJ15A DO214AA"
+(footprint "DO-214AA"
 	(version 20241229)
 	(generator "pcbnew")
 	(generator_version "9.0")
@@ -16,7 +16,7 @@
 			)
 		)
 	)
-	(property "Value" "DIODE TVS 15VWM 24.4VC SMBJ15A DO214AA"
+	(property "Value" "DO-214AA"
 		(at 0 4 0)
 		(unlocked yes)
 		(layer "F.Fab")
