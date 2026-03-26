@@ -653,6 +653,195 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Coert-Vonk:CAP ALUM-ELEC 47μF ±20% 50V Panasonic"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "47μF"
+				(at 0.635 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 47μF ±20 50V Panasonic"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "47 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "DKPN" "10-ECA-1HM470ICT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Panasonic"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "ECA-1HM470I"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "CP_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "CAP ALUM-ELEC 47μF ±20% 50V Panasonic_0_1"
+				(rectangle
+					(start -1.524 0.6858)
+					(end 1.524 0.3048)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.524 -0.3048)
+					(end 1.524 -0.6858)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 1.524) (xy -0.762 1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.016 1.27) (xy -1.016 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "CAP ALUM-ELEC 47μF ±20% 50V Panasonic_1_1"
+				(pin passive line
+					(at 0 2.54 270)
+					(length 1.8542)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 1.8542)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Coert-Vonk:CAP ALUM-POLY 220μF ±20% 16V Panasonic"
 			(pin_numbers
 				(hide yes)
@@ -17697,7 +17886,7 @@
 	)
 	(text "ATO Valve"
 		(exclude_from_sim no)
-		(at 113.538 230.886 0)
+		(at 106.172 226.314 0)
 		(effects
 			(font
 				(size 1.905 1.905)
@@ -17731,7 +17920,7 @@
 	)
 	(text "Main Pump"
 		(exclude_from_sim no)
-		(at 23.114 230.378 0)
+		(at 22.098 229.362 0)
 		(effects
 			(font
 				(size 1.905 1.905)
@@ -17771,7 +17960,7 @@
 		(uuid "054e8b72-37f6-436a-a577-ba57266d15c9")
 	)
 	(junction
-		(at 50.8 261.62)
+		(at 50.8 264.16)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "05e8985d-8602-41d1-a483-4ebec8db0fed")
@@ -17781,12 +17970,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "07e21c80-23d0-47df-91b0-c6329f203eda")
-	)
-	(junction
-		(at 138.43 251.46)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "08c8a979-03de-44d9-96ed-fc5169500ce7")
 	)
 	(junction
 		(at 184.15 151.13)
@@ -17805,12 +17988,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0acf0da8-a938-49c2-afa4-3b54ba08c49b")
-	)
-	(junction
-		(at 138.43 245.11)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0bf502ca-9191-4ede-9706-0c3ed7fcec7f")
 	)
 	(junction
 		(at 64.77 234.95)
@@ -17871,12 +18048,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "172af53c-b016-4f80-b34b-6f44e6222083")
-	)
-	(junction
-		(at 72.39 251.46)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1a703b9e-ce5a-45a5-9b55-cdaa3ed9290f")
 	)
 	(junction
 		(at 167.64 190.5)
@@ -18089,12 +18260,6 @@
 		(uuid "5c44854e-4c83-4e98-9bdf-16dd54db6912")
 	)
 	(junction
-		(at 64.77 251.46)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5d6783d7-8e85-41f5-bee3-943f4b57b294")
-	)
-	(junction
 		(at 350.52 80.01)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -18179,7 +18344,13 @@
 		(uuid "762bb9e5-4220-4530-9c50-de85ae8233d7")
 	)
 	(junction
-		(at 124.46 261.62)
+		(at 128.27 234.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "76d5f48f-4db4-4662-8d69-37f27970e48c")
+	)
+	(junction
+		(at 124.46 264.16)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7777efe7-5bd0-497c-bbe7-f3c9ddcff0e5")
@@ -18269,6 +18440,12 @@
 		(uuid "a268c911-8075-487c-ab27-83387c61becf")
 	)
 	(junction
+		(at 138.43 245.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a28be816-b65e-402a-933d-9237fb091d81")
+	)
+	(junction
 		(at 110.49 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -18333,6 +18510,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b6923a98-e77a-4259-909b-9bd9a44f6501")
+	)
+	(junction
+		(at 59.69 234.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b7386076-4cd8-4fe4-9235-964cedf9b447")
 	)
 	(junction
 		(at 297.18 85.09)
@@ -18413,7 +18596,7 @@
 		(uuid "d63e12a1-31e4-480e-963c-2a6e22b7e8fb")
 	)
 	(junction
-		(at 54.61 261.62)
+		(at 54.61 264.16)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d8668c7b-9842-40a5-92f6-41826f59d55a")
@@ -18425,7 +18608,7 @@
 		(uuid "dab4b960-acab-44fa-ab2e-955c96a96074")
 	)
 	(junction
-		(at 129.54 261.62)
+		(at 129.54 264.16)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dcda4c8e-7f27-44ff-9b5b-56a2221645b7")
@@ -18435,6 +18618,24 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dd5edc39-7e70-4e39-8844-2e5908d2319a")
+	)
+	(junction
+		(at 138.43 234.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ddd4c88c-a04e-4095-afb9-4212c1021904")
+	)
+	(junction
+		(at 54.61 234.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e2778f53-5878-4089-ab81-541413d9fc1f")
+	)
+	(junction
+		(at 133.35 234.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e2ec6f1c-e43d-44e0-a01f-cce869e550ac")
 	)
 	(junction
 		(at 344.17 52.07)
@@ -18495,12 +18696,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f964e1a8-36c6-492a-93ab-fefb5df9260c")
-	)
-	(junction
-		(at 138.43 234.95)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "fc6b297f-be27-4252-a5e2-6ae94bbab975")
 	)
 	(junction
 		(at 171.45 38.1)
@@ -18698,6 +18893,26 @@
 	)
 	(wire
 		(pts
+			(xy 49.53 242.57) (xy 49.53 245.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02e66d9f-c1c0-4d2a-8844-4c360372c6c1")
+	)
+	(wire
+		(pts
+			(xy 133.35 245.11) (xy 138.43 245.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03ad52f1-f427-4083-812b-80ea29b333fe")
+	)
+	(wire
+		(pts
 			(xy 125.73 48.26) (xy 125.73 53.34)
 		)
 		(stroke
@@ -18705,6 +18920,16 @@
 			(type default)
 		)
 		(uuid "03b40579-c47b-4a40-a466-c512aaf813aa")
+	)
+	(wire
+		(pts
+			(xy 133.35 242.57) (xy 133.35 245.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "048650e3-a7d9-418f-927d-627a72951f3b")
 	)
 	(wire
 		(pts
@@ -18838,7 +19063,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 266.7) (xy 64.77 271.78)
+			(xy 64.77 269.24) (xy 64.77 274.32)
 		)
 		(stroke
 			(width 0)
@@ -19068,16 +19293,6 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 256.54) (xy 77.47 251.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1e87ca3a-9a5d-404e-a28b-2a8f2488a9a8")
-	)
-	(wire
-		(pts
 			(xy 290.83 222.25) (xy 299.72 222.25)
 		)
 		(stroke
@@ -19138,7 +19353,7 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 261.62) (xy 124.46 261.62)
+			(xy 116.84 264.16) (xy 124.46 264.16)
 		)
 		(stroke
 			(width 0)
@@ -19178,7 +19393,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 261.62) (xy 50.8 261.62)
+			(xy 43.18 264.16) (xy 50.8 264.16)
 		)
 		(stroke
 			(width 0)
@@ -19258,16 +19473,6 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 251.46) (xy 147.32 251.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2bec2d20-7cd6-4fbc-976d-48fc183b357c")
-	)
-	(wire
-		(pts
 			(xy 297.18 82.55) (xy 297.18 85.09)
 		)
 		(stroke
@@ -19335,6 +19540,16 @@
 			(type default)
 		)
 		(uuid "2d70f0d6-06fa-45f9-b81a-31610357964a")
+	)
+	(wire
+		(pts
+			(xy 123.19 234.95) (xy 128.27 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2df060b4-4ddb-4ba2-a025-15916df5f3fb")
 	)
 	(wire
 		(pts
@@ -19428,16 +19643,6 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 234.95) (xy 138.43 238.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "333c3e7f-b51f-412e-8f39-4df18d4b5c28")
-	)
-	(wire
-		(pts
 			(xy 347.98 224.79) (xy 350.52 224.79)
 		)
 		(stroke
@@ -19475,16 +19680,6 @@
 			(type default)
 		)
 		(uuid "35ed0dd7-600c-42aa-82a7-a0a0c5dbbd29")
-	)
-	(wire
-		(pts
-			(xy 133.35 234.95) (xy 138.43 234.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "38d96ab1-22dc-4e04-bdf1-ddda85201da2")
 	)
 	(wire
 		(pts
@@ -19739,16 +19934,6 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 245.11) (xy 138.43 245.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4433fdcb-a92b-48b5-8f84-acbed7c761cd")
-	)
-	(wire
-		(pts
 			(xy 39.37 99.06) (xy 39.37 101.6)
 		)
 		(stroke
@@ -19786,16 +19971,6 @@
 			(type default)
 		)
 		(uuid "45bc3e90-5d41-4937-be6d-9589afd3a81f")
-	)
-	(wire
-		(pts
-			(xy 72.39 261.62) (xy 72.39 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "470ef6bb-fa33-4847-9564-3610f0ea75c8")
 	)
 	(wire
 		(pts
@@ -19846,6 +20021,16 @@
 			(type default)
 		)
 		(uuid "4a0da802-1997-447f-8235-6425973d49cc")
+	)
+	(wire
+		(pts
+			(xy 123.19 242.57) (xy 123.19 245.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b7c2f69-9db7-42c1-b53d-15201ce1181d")
 	)
 	(wire
 		(pts
@@ -19949,7 +20134,7 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 261.62) (xy 54.61 261.62)
+			(xy 50.8 264.16) (xy 54.61 264.16)
 		)
 		(stroke
 			(width 0)
@@ -20199,16 +20384,6 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 245.11) (xy 138.43 251.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5dc91300-c664-4880-8d5d-9e8a669ec97d")
-	)
-	(wire
-		(pts
 			(xy 322.58 160.02) (xy 322.58 161.29)
 		)
 		(stroke
@@ -20236,6 +20411,16 @@
 			(type default)
 		)
 		(uuid "5eef28f7-ec7b-4787-89ce-20ced1137ecd")
+	)
+	(wire
+		(pts
+			(xy 133.35 234.95) (xy 138.43 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fb7dba9-d623-42fd-a2f3-cac9e40b0227")
 	)
 	(wire
 		(pts
@@ -20480,6 +20665,16 @@
 	)
 	(wire
 		(pts
+			(xy 54.61 242.57) (xy 54.61 245.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6fd38d70-4666-4b43-ad41-8efd1998afb9")
+	)
+	(wire
+		(pts
 			(xy 337.82 121.92) (xy 339.09 121.92)
 		)
 		(stroke
@@ -20517,6 +20712,16 @@
 			(type default)
 		)
 		(uuid "70c729ca-94b5-4fda-9738-585fbf822529")
+	)
+	(wire
+		(pts
+			(xy 49.53 237.49) (xy 49.53 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70fc79ca-8c1a-412a-86e0-692117ae384a")
 	)
 	(wire
 		(pts
@@ -20702,6 +20907,16 @@
 	)
 	(wire
 		(pts
+			(xy 138.43 245.11) (xy 138.43 254)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78f5cf3a-584f-4799-b522-51de2ac1b1bd")
+	)
+	(wire
+		(pts
 			(xy 316.23 163.83) (xy 317.5 163.83)
 		)
 		(stroke
@@ -20760,16 +20975,6 @@
 			(type default)
 		)
 		(uuid "7bbb260c-9755-46cd-b5ba-859873c13699")
-	)
-	(wire
-		(pts
-			(xy 147.32 261.62) (xy 147.32 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7d0ef8ee-b132-4e83-9b2f-939451d4b7b5")
 	)
 	(wire
 		(pts
@@ -20954,7 +21159,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 266.7) (xy 138.43 271.78)
+			(xy 138.43 269.24) (xy 138.43 274.32)
 		)
 		(stroke
 			(width 0)
@@ -21074,6 +21279,16 @@
 	)
 	(wire
 		(pts
+			(xy 128.27 234.95) (xy 133.35 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8ca2a12d-6611-4d8f-8a3c-b4f9cf915313")
+	)
+	(wire
+		(pts
 			(xy 337.82 74.93) (xy 358.14 74.93)
 		)
 		(stroke
@@ -21121,16 +21336,6 @@
 			(type default)
 		)
 		(uuid "8fbe1c85-548e-4248-9e8e-b1a1a713db50")
-	)
-	(wire
-		(pts
-			(xy 147.32 256.54) (xy 147.32 251.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "903a90b1-3f21-4ef3-b999-705cab451ac5")
 	)
 	(wire
 		(pts
@@ -21244,7 +21449,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 245.11) (xy 64.77 251.46)
+			(xy 64.77 245.11) (xy 64.77 254)
 		)
 		(stroke
 			(width 0)
@@ -21271,6 +21476,16 @@
 			(type default)
 		)
 		(uuid "93a86e39-721e-4999-b4b8-9b033d28da2c")
+	)
+	(wire
+		(pts
+			(xy 49.53 234.95) (xy 54.61 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "93fb1026-7b55-4484-8f24-faaaa4f58de0")
 	)
 	(wire
 		(pts
@@ -21394,16 +21609,6 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 241.3) (xy 138.43 245.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9ac23eaf-6119-4da3-9cd6-dbeb6b536089")
-	)
-	(wire
-		(pts
 			(xy 171.45 161.29) (xy 199.39 161.29)
 		)
 		(stroke
@@ -21481,6 +21686,26 @@
 			(type default)
 		)
 		(uuid "9ef6fd49-eac2-4a77-a4ed-cfd4969ea388")
+	)
+	(wire
+		(pts
+			(xy 128.27 234.95) (xy 128.27 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9f31481e-e380-4c11-b62a-500ef3b9022e")
+	)
+	(wire
+		(pts
+			(xy 138.43 234.95) (xy 138.43 238.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a039c8cf-12d1-402e-be9f-58aade1cceab")
 	)
 	(wire
 		(pts
@@ -21614,7 +21839,7 @@
 	)
 	(wire
 		(pts
-			(xy 54.61 259.08) (xy 54.61 261.62)
+			(xy 54.61 261.62) (xy 54.61 264.16)
 		)
 		(stroke
 			(width 0)
@@ -21771,16 +21996,6 @@
 			(type default)
 		)
 		(uuid "b0ff924b-4779-404a-ab81-83025bbd5682")
-	)
-	(wire
-		(pts
-			(xy 77.47 261.62) (xy 77.47 271.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b13d9161-6f6e-47d3-a619-bcd742322d5c")
 	)
 	(wire
 		(pts
@@ -21994,16 +22209,6 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 251.46) (xy 77.47 251.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b9a30cf6-cb51-4f2e-a528-64a7ae481af3")
-	)
-	(wire
-		(pts
 			(xy 317.5 43.18) (xy 317.5 46.99)
 		)
 		(stroke
@@ -22034,7 +22239,17 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 261.62) (xy 129.54 261.62)
+			(xy 123.19 237.49) (xy 123.19 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bae765b8-84b5-4dcd-a4c7-1db4edb3eebc")
+	)
+	(wire
+		(pts
+			(xy 124.46 264.16) (xy 129.54 264.16)
 		)
 		(stroke
 			(width 0)
@@ -22114,7 +22329,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 270.51) (xy 129.54 271.78)
+			(xy 129.54 273.05) (xy 129.54 274.32)
 		)
 		(stroke
 			(width 0)
@@ -22141,6 +22356,16 @@
 			(type default)
 		)
 		(uuid "bf4efd0f-810e-46e8-8072-5bf87d4f408d")
+	)
+	(wire
+		(pts
+			(xy 128.27 242.57) (xy 128.27 245.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf5d0cfe-b497-464d-b584-75f6db746818")
 	)
 	(wire
 		(pts
@@ -22274,7 +22499,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 261.62) (xy 129.54 262.89)
+			(xy 129.54 264.16) (xy 129.54 265.43)
 		)
 		(stroke
 			(width 0)
@@ -22391,16 +22616,6 @@
 			(type default)
 		)
 		(uuid "cb870fa5-93ec-4fca-95f2-9468cb5ceca1")
-	)
-	(wire
-		(pts
-			(xy 133.35 237.49) (xy 133.35 234.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cb92aa13-9b0a-45b7-b5b6-554ae3f8f78c")
 	)
 	(wire
 		(pts
@@ -22684,13 +22899,13 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 251.46) (xy 64.77 251.46)
+			(xy 138.43 241.3) (xy 138.43 245.11)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "dbf54730-9be6-47ab-8864-6d38d038667e")
+		(uuid "dbd2fe22-3081-4c5d-a066-de45393d942b")
 	)
 	(wire
 		(pts
@@ -22701,16 +22916,6 @@
 			(type default)
 		)
 		(uuid "dc74e7ae-4ba8-40b5-844c-bb5c54f6a79d")
-	)
-	(wire
-		(pts
-			(xy 72.39 256.54) (xy 72.39 251.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "de866fef-4356-493c-a054-36f87be1872a")
 	)
 	(wire
 		(pts
@@ -22834,6 +23039,26 @@
 	)
 	(wire
 		(pts
+			(xy 54.61 234.95) (xy 59.69 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e51dea3d-5b0d-46cd-95a0-1136de96e90d")
+	)
+	(wire
+		(pts
+			(xy 54.61 234.95) (xy 54.61 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5646b27-e3d3-406c-8b6b-6148d0689fbe")
+	)
+	(wire
+		(pts
 			(xy 85.09 99.06) (xy 87.63 99.06)
 		)
 		(stroke
@@ -22904,7 +23129,7 @@
 	)
 	(wire
 		(pts
-			(xy 54.61 261.62) (xy 57.15 261.62)
+			(xy 54.61 264.16) (xy 57.15 264.16)
 		)
 		(stroke
 			(width 0)
@@ -23174,7 +23399,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 261.62) (xy 130.81 261.62)
+			(xy 129.54 264.16) (xy 130.81 264.16)
 		)
 		(stroke
 			(width 0)
@@ -23201,16 +23426,6 @@
 			(type default)
 		)
 		(uuid "f8981729-f731-46cf-a430-f23d9c1e795d")
-	)
-	(wire
-		(pts
-			(xy 133.35 242.57) (xy 133.35 245.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f914accf-7c1c-44cc-a8cf-26f8bbe79dc7")
 	)
 	(wire
 		(pts
@@ -23334,6 +23549,16 @@
 	)
 	(wire
 		(pts
+			(xy 133.35 237.49) (xy 133.35 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc8fa6b1-6027-40ea-95db-6d93d6603135")
+	)
+	(wire
+		(pts
 			(xy 204.47 264.16) (xy 204.47 265.43)
 		)
 		(stroke
@@ -23362,16 +23587,6 @@
 		)
 		(uuid "ff6155c9-8935-4f31-8c46-daee4a67f80b")
 	)
-	(label "GND_PUMP_MAIN"
-		(at 66.04 251.46 0)
-		(effects
-			(font
-				(size 0.762 0.762)
-			)
-			(justify left bottom)
-		)
-		(uuid "28177383-393e-4492-bddc-0bd31f376bf2")
-	)
 	(label "V_{ISO,pH}"
 		(at 161.29 95.25 0)
 		(effects
@@ -23391,16 +23606,6 @@
 			(justify left bottom)
 		)
 		(uuid "6b304cba-18f5-4ea2-9405-2b4ad52887fe")
-	)
-	(label "GND_ATO_VALVE"
-		(at 139.7 251.46 0)
-		(effects
-			(font
-				(size 0.762 0.762)
-			)
-			(justify left bottom)
-		)
-		(uuid "8e49767c-d2d4-42c8-afe4-49f1f9c19f81")
 	)
 	(label "V_{ISO,EC}"
 		(at 161.29 140.97 0)
@@ -23634,7 +23839,7 @@
 	)
 	(global_label "ATO_VALVE"
 		(shape input)
-		(at 109.22 261.62 180)
+		(at 109.22 264.16 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23644,7 +23849,7 @@
 		)
 		(uuid "4153be04-b2f0-4120-aa63-1ba939a89919")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.4376 261.62 0)
+			(at 96.4376 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23832,7 +24037,7 @@
 	)
 	(global_label "PUMP_MAIN"
 		(shape input)
-		(at 35.56 261.62 180)
+		(at 35.56 264.16 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23842,7 +24047,7 @@
 		)
 		(uuid "7825076f-715a-4e5d-9985-59ee70cd754c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 21.81 261.62 0)
+			(at 21.81 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24052,7 +24257,7 @@
 	)
 	(global_label "FLOAT_LOW"
 		(shape input)
-		(at 35.56 266.7 180)
+		(at 35.56 269.24 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24062,7 +24267,7 @@
 		)
 		(uuid "b084b22b-a996-4866-ac34-c1ef01a01678")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 22.2938 266.7 0)
+			(at 22.2938 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24096,7 +24301,7 @@
 	)
 	(global_label "FLOAT_HIGH"
 		(shape input)
-		(at 109.22 266.7 180)
+		(at 109.22 269.24 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24106,7 +24311,7 @@
 		)
 		(uuid "b3b1f764-fc62-4e0a-b5ba-f076d2eede01")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 95.228 266.7 0)
+			(at 95.228 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24361,7 +24566,7 @@
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
-		(at 64.77 247.65 270)
+		(at 64.77 252.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24371,7 +24576,7 @@
 		)
 		(uuid "10f25e11-4d56-402d-bd56-cfa7b67e657f")
 		(property "Netclass" "Power"
-			(at 67.31 246.9515 90)
+			(at 67.31 252.0315 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24381,7 +24586,7 @@
 			)
 		)
 		(property "Component Class" ""
-			(at -137.16 212.09 0)
+			(at -137.16 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24394,7 +24599,7 @@
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
-		(at 138.43 247.65 270)
+		(at 138.43 252.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24404,7 +24609,7 @@
 		)
 		(uuid "168e5479-1e8e-4d50-a430-713262112f20")
 		(property "Netclass" "Power"
-			(at 140.97 246.9515 90)
+			(at 140.97 252.0315 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24414,7 +24619,7 @@
 			)
 		)
 		(property "Component Class" ""
-			(at -63.5 212.09 0)
+			(at -63.5 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25264,7 +25469,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 4.7kΩ ±1% 1/8W 0805 Yageo")
-		(at 35.56 266.7 0)
+		(at 35.56 269.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25272,7 +25477,7 @@
 		(dnp no)
 		(uuid "0452c622-3859-4658-a873-e515e78d9b43")
 		(property "Reference" "R9"
-			(at 39.37 269.748 0)
+			(at 39.37 272.288 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25280,7 +25485,7 @@
 			)
 		)
 		(property "Value" "4k7"
-			(at 39.37 272.034 0)
+			(at 39.37 274.574 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25288,7 +25493,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 33.782 266.7 90)
+			(at 33.782 269.24 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25297,7 +25502,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 35.56 266.7 0)
+			(at 35.56 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25306,7 +25511,7 @@
 			)
 		)
 		(property "Description" "4.7 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 35.56 266.7 0)
+			(at 35.56 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25315,7 +25520,7 @@
 			)
 		)
 		(property "DKPN" "311-4.70KCRCT-ND"
-			(at 35.56 266.7 0)
+			(at 35.56 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25356,7 +25561,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "3V3"
+		(property "Value" "5V"
 			(at 49.53 171.272 0)
 			(effects
 				(font
@@ -25972,21 +26177,21 @@
 		(dnp no)
 		(uuid "0a15ce9a-e2ce-41f4-883c-362e517b6f27")
 		(property "Reference" "D3"
-			(at 56.642 237.744 90)
+			(at 58.928 230.886 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Value" "SS34"
-			(at 56.642 240.284 90)
+			(at 58.928 233.426 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Coert-Vonk:DIODE SCHOTTKY 40V 3A DIOM7959X265N DO214AB"
@@ -26043,7 +26248,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 129.54 271.78 0)
+		(at 129.54 274.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -26051,7 +26256,7 @@
 		(dnp no)
 		(uuid "0b40c457-508f-449c-9d0a-3f4e46429395")
 		(property "Reference" "#PWR44"
-			(at 129.54 278.13 0)
+			(at 129.54 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26060,7 +26265,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 129.54 275.59 0)
+			(at 129.54 278.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26069,7 +26274,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 129.54 271.78 0)
+			(at 129.54 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26078,7 +26283,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 129.54 271.78 0)
+			(at 129.54 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26087,7 +26292,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 129.54 271.78 0)
+			(at 129.54 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26251,7 +26456,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 138.43 271.78 0)
+		(at 138.43 274.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -26259,7 +26464,7 @@
 		(dnp no)
 		(uuid "0d3dcd83-6d60-48ca-868b-0abd1aec9750")
 		(property "Reference" "#PWR48"
-			(at 138.43 278.13 0)
+			(at 138.43 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26268,7 +26473,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 138.43 275.59 0)
+			(at 138.43 278.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26277,7 +26482,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 138.43 271.78 0)
+			(at 138.43 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26286,7 +26491,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 138.43 271.78 0)
+			(at 138.43 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26295,7 +26500,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 138.43 271.78 0)
+			(at 138.43 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27146,6 +27351,102 @@
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "R11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 47μF ±20% 50V Panasonic")
+		(at 123.19 240.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "196ed134-5c7b-4709-8d39-9598e329981f")
+		(property "Reference" "C30"
+			(at 124.46 230.886 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "47μF"
+			(at 124.46 233.426 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 47μF ±20 50V Panasonic"
+			(at 123.19 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+			(at 123.19 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "47 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+			(at 123.19 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "10-ECA-1HM470ICT-ND"
+			(at 123.19 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Panasonic"
+			(at 123.19 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "ECA-1HM470I"
+			(at 123.19 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "0241dcf1-6172-4c90-8be0-6a0e37ce25bf")
+		)
+		(pin "1"
+			(uuid "5519b245-40cc-4157-b338-b40d869e37e5")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "C30")
 					(unit 1)
 				)
 			)
@@ -28334,6 +28635,72 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 123.19 245.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2c2c07e2-6c9d-458e-8c86-f7dd11ad7258")
+		(property "Reference" "#PWR035"
+			(at 123.19 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 123.19 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 123.19 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 123.19 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 123.19 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cde0a538-608d-415f-a26f-60c10bc7d08a")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR035")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:TestPoint")
 		(at 212.09 271.78 0)
 		(unit 1)
@@ -29476,7 +29843,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:MOSFET N-CH 30V 5.7A AO3400A SOT23-3L")
-		(at 138.43 259.08 0)
+		(at 138.43 261.62 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -29484,7 +29851,7 @@
 		(dnp no)
 		(uuid "3e0d6f36-8e5f-462b-a4c1-c7cb0194322b")
 		(property "Reference" "T5"
-			(at 134.112 251.714 0)
+			(at 134.112 254.254 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29493,7 +29860,7 @@
 			)
 		)
 		(property "Value" "AO3400A"
-			(at 134.112 254 0)
+			(at 134.112 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29502,7 +29869,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:MOSFET N-CH 30V 5.7A AO3400A SOT23-3L"
-			(at 143.51 260.985 0)
+			(at 143.51 263.525 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29513,7 +29880,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/1133/AO3400A_ds.pdf"
-			(at 143.51 262.89 0)
+			(at 143.51 265.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29523,7 +29890,7 @@
 			)
 		)
 		(property "Description" "N-Channel 30 V 5.7A (Ta) 1.4W (Ta) Surface Mount SOT-23-3"
-			(at 138.43 259.08 0)
+			(at 138.43 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29532,7 +29899,7 @@
 			)
 		)
 		(property "DKPN" "785-1000-1-ND"
-			(at 138.43 259.08 0)
+			(at 138.43 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30501,7 +30868,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:MOSFET N-CH 55V 42A IRLR2905 DPAK")
-		(at 64.77 259.08 0)
+		(at 64.77 261.62 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -30509,7 +30876,7 @@
 		(dnp no)
 		(uuid "4a76bc78-422a-4fb5-9c7b-04b2672dd080")
 		(property "Reference" "T3"
-			(at 62.484 264.922 0)
+			(at 62.484 267.462 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30518,7 +30885,7 @@
 			)
 		)
 		(property "Value" "IRLR2905"
-			(at 62.484 266.954 0)
+			(at 62.484 269.494 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30527,7 +30894,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:MOSFET N-CH 55V 42A IRLR2905TRPBF DPAK"
-			(at 69.85 260.985 0)
+			(at 69.85 263.525 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30538,7 +30905,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.infineon.com/dgdl/irlr2905pbf.pdf?fileId=5546d462533600a40153566cc2bb2679"
-			(at 69.85 262.89 0)
+			(at 69.85 265.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30548,7 +30915,7 @@
 			)
 		)
 		(property "Description" "N-Channel 55 V 42A (Tc) 110W (Tc) Surface Mount TO-252AA (DPAK)"
-			(at 64.77 259.08 0)
+			(at 64.77 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30557,7 +30924,7 @@
 			)
 		)
 		(property "DKPN" "IRLR2905PBFCT-ND"
-			(at 64.77 259.08 0)
+			(at 64.77 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31810,6 +32177,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:DIODE SCHOTTKY 40V 3A DIOM7959X265N DO214AB")
+		(at 133.35 240.03 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "59422785-aee0-4e4c-9907-b774fd6aeb7d")
+		(property "Reference" "D4"
+			(at 132.588 230.886 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SS34"
+			(at 132.588 233.426 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:DIODE SCHOTTKY 40V 3A DIOM7959X265N DO214AB"
+			(at 125.222 239.776 0)
+			(effects
+				(font
+					(size 0.508 0.508)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.onsemi.com/download/data-sheet/pdf/ss39-d.pdf"
+			(at 133.35 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode 40 V 3A Surface Mount DO-214AB (SMC)"
+			(at 129.286 240.03 0)
+			(effects
+				(font
+					(size 0.508 0.508)
+				)
+				(justify top)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "SS34FSCT-ND"
+			(at 133.35 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "C"
+			(uuid "ad416540-c9e2-40de-aaaf-630ff3a81edf")
+		)
+		(pin "A"
+			(uuid "eb4678e9-c380-40de-9418-5857def54c62")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "D4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:RES 110mΩ ±1% 1/8W 0805 Susumu")
 		(at 340.36 80.01 0)
 		(unit 1)
@@ -32954,7 +33401,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 50.8 271.78 0)
+		(at 50.8 274.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -32962,7 +33409,7 @@
 		(dnp no)
 		(uuid "69bb056e-b8c6-4f3e-9bd7-aebadba5cae7")
 		(property "Reference" "#PWR26"
-			(at 50.8 278.13 0)
+			(at 50.8 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32971,7 +33418,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 50.8 275.59 0)
+			(at 50.8 278.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32980,7 +33427,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 50.8 271.78 0)
+			(at 50.8 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32989,7 +33436,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 50.8 271.78 0)
+			(at 50.8 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32998,7 +33445,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 50.8 271.78 0)
+			(at 50.8 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33430,6 +33877,72 @@
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "P6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 54.61 245.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "70f043b6-55f3-4f6c-841b-a9ff40009856")
+		(property "Reference" "#PWR050"
+			(at 54.61 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 54.61 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 54.61 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 54.61 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 54.61 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "476d1029-cf7b-4bea-b681-99a8a53e3043")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR050")
 					(unit 1)
 				)
 			)
@@ -34053,6 +34566,83 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(at 128.27 240.03 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "78dc76ea-25e0-4627-81e0-bfdfec5863fb")
+		(property "Reference" "C61"
+			(at 128.27 230.886 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 128.27 233.426 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+			(at 114.3 239.776 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+			(at 116.84 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+			(at 118.872 240.284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "490-10700-1-ND"
+			(at 128.27 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8c052001-f8af-4e44-a0c6-8e199bebbb68")
+		)
+		(pin "2"
+			(uuid "98534682-f202-4c26-9fb2-3109bea95681")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "C61")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:SWITCH FLOAT LOW")
 		(at 68.58 190.5 0)
 		(unit 1)
@@ -34649,7 +35239,7 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 54.61 251.46 0)
+		(at 54.61 254 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -34657,7 +35247,7 @@
 		(dnp no)
 		(uuid "7f402ac2-bfec-418f-aade-5f22e9984338")
 		(property "Reference" "#PWR028"
-			(at 54.61 251.46 0)
+			(at 54.61 254 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34666,7 +35256,7 @@
 			)
 		)
 		(property "Value" "3V3"
-			(at 54.61 247.472 0)
+			(at 54.61 250.012 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34674,7 +35264,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 54.61 251.46 0)
+			(at 54.61 254 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34683,7 +35273,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 54.61 251.46 0)
+			(at 54.61 254 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34692,7 +35282,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 54.61 251.46 0)
+			(at 54.61 254 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34933,7 +35523,8 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
-		(at 72.39 259.08 90)
+		(at 54.61 240.03 270)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -34941,25 +35532,23 @@
 		(dnp no)
 		(uuid "835ae735-67ef-499e-b9a3-2ae86fc9701c")
 		(property "Reference" "C9"
-			(at 72.898 261.62 90)
+			(at 54.61 230.886 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Value" "100nF"
-			(at 72.898 264.16 90)
+			(at 54.61 233.426 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
-			(at 86.36 258.826 0)
+			(at 40.64 239.776 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34968,7 +35557,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
-			(at 83.82 259.08 0)
+			(at 43.18 240.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34977,7 +35566,7 @@
 			)
 		)
 		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
-			(at 81.788 259.334 0)
+			(at 45.212 240.284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34986,7 +35575,7 @@
 			)
 		)
 		(property "DKPN" "490-10700-1-ND"
-			(at 72.39 259.08 0)
+			(at 54.61 240.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35080,72 +35669,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C47")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:GND")
-		(at 147.32 271.78 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "841ad45e-4e5c-4a51-8b3a-2dca2e2b1fa5")
-		(property "Reference" "#PWR50"
-			(at 147.32 278.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 147.32 275.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 147.32 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 147.32 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 147.32 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d322d37a-cb46-4f07-a921-a2cc9a2a1ac4")
-		)
-		(instances
-			(project "OPNhydro_r2"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "#PWR50")
 					(unit 1)
 				)
 			)
@@ -35371,86 +35894,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:DIODE SCHOTTKY 40V 3A DIOM7959X265N DO214AB")
-		(at 133.35 240.03 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "871a1929-dbb4-4272-aaa0-15504bd0df09")
-		(property "Reference" "D4"
-			(at 130.81 237.236 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SS34"
-			(at 130.81 239.776 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:DIODE SCHOTTKY 40V 3A DIOM7959X265N DO214AB"
-			(at 125.222 239.776 0)
-			(effects
-				(font
-					(size 0.508 0.508)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.onsemi.com/download/data-sheet/pdf/ss39-d.pdf"
-			(at 133.35 240.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Diode 40 V 3A Surface Mount DO-214AB (SMC)"
-			(at 129.286 240.03 0)
-			(effects
-				(font
-					(size 0.508 0.508)
-				)
-				(justify top)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "SS34FSCT-ND"
-			(at 133.35 240.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "C"
-			(uuid "d0ea7a1a-5d49-4689-ac79-c7d4b5a9f0fe")
-		)
-		(pin "A"
-			(uuid "2f4cbad7-93fa-444b-be42-1f05ae7749e8")
-		)
-		(instances
-			(project "OPNhydro_r1"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "D4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:GND")
 		(at 49.53 203.2 0)
 		(mirror y)
@@ -35597,7 +36040,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 10kΩ ±1% 1/8W 0805 Yageo")
-		(at 54.61 259.08 90)
+		(at 54.61 261.62 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -35605,7 +36048,7 @@
 		(dnp no)
 		(uuid "8ca35466-b3d3-494b-8519-5b0bc5931cff")
 		(property "Reference" "R10"
-			(at 56.388 254 90)
+			(at 56.388 256.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35614,7 +36057,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 56.388 256.032 90)
+			(at 56.388 258.572 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35623,7 +36066,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 54.61 260.858 90)
+			(at 54.61 263.398 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35632,7 +36075,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 54.61 259.08 0)
+			(at 54.61 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35641,7 +36084,7 @@
 			)
 		)
 		(property "Description" "10 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 54.61 259.08 0)
+			(at 54.61 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35650,7 +36093,7 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
-			(at 54.61 259.08 0)
+			(at 54.61 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35957,7 +36400,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3")
-		(at 121.92 266.7 0)
+		(at 121.92 269.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -35965,7 +36408,7 @@
 		(dnp no)
 		(uuid "8fac9736-655c-41da-b43e-d82977baf42f")
 		(property "Reference" "T4"
-			(at 123.444 256.54 0)
+			(at 123.444 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35973,7 +36416,7 @@
 			)
 		)
 		(property "Value" "BT3904"
-			(at 123.444 258.826 0)
+			(at 123.444 261.366 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35981,7 +36424,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3"
-			(at 127 264.16 0)
+			(at 127 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35990,7 +36433,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/mmbt3904lt1-d.pdf"
-			(at 121.92 266.7 0)
+			(at 121.92 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35999,7 +36442,7 @@
 			)
 		)
 		(property "Description" "Bipolar (BJT) Transistor NPN 40 V 200 mA 300MHz 300 mW Surface Mount SOT-23-3 (TO-236)"
-			(at 121.92 266.7 0)
+			(at 121.92 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36008,7 +36451,7 @@
 			)
 		)
 		(property "Sim.Device" "NPN"
-			(at 121.92 266.7 0)
+			(at 121.92 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36017,7 +36460,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=B 2=E 3=C"
-			(at 121.92 266.7 0)
+			(at 121.92 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36026,7 +36469,7 @@
 			)
 		)
 		(property "DKPN" "MMBT3904LT1GOSCT-ND"
-			(at 121.92 266.7 0)
+			(at 121.92 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36119,7 +36562,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 4.7kΩ ±1% 1/8W 0805 Yageo")
-		(at 109.22 266.7 0)
+		(at 109.22 269.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -36127,7 +36570,7 @@
 		(dnp no)
 		(uuid "906ea3ba-8a20-47d5-952b-95839dd5370a")
 		(property "Reference" "R22"
-			(at 113.03 269.748 0)
+			(at 113.03 272.288 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36135,7 +36578,7 @@
 			)
 		)
 		(property "Value" "4k7"
-			(at 113.03 272.034 0)
+			(at 113.03 274.574 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36143,7 +36586,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 107.442 266.7 90)
+			(at 107.442 269.24 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36152,7 +36595,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 109.22 266.7 0)
+			(at 109.22 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36161,7 +36604,7 @@
 			)
 		)
 		(property "Description" "4.7 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 109.22 266.7 0)
+			(at 109.22 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36170,7 +36613,7 @@
 			)
 		)
 		(property "DKPN" "311-4.70KCRCT-ND"
-			(at 109.22 266.7 0)
+			(at 109.22 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36386,72 +36829,6 @@
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "R4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:GND")
-		(at 72.39 271.78 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "95c893d3-e57d-4894-bce8-d7711ea85f44")
-		(property "Reference" "#PWR33"
-			(at 72.39 278.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 72.39 275.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 72.39 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 72.39 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 72.39 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "45d8ec6a-6601-4d2a-99dc-1ab12d9160cd")
-		)
-		(instances
-			(project "OPNhydro_r2"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "#PWR33")
 					(unit 1)
 				)
 			)
@@ -36800,72 +37177,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "R35")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:GND")
-		(at 77.47 271.78 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "99758e87-c080-44ca-958a-a789b8b1a65a")
-		(property "Reference" "#PWR35"
-			(at 77.47 278.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 77.47 275.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 77.47 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 77.47 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 77.47 271.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c238c983-4d43-42be-9881-375f619ea74c")
-		)
-		(instances
-			(project "OPNhydro_r2"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "#PWR35")
 					(unit 1)
 				)
 			)
@@ -39032,6 +39343,72 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 128.27 245.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b6219913-4592-4752-8803-74faf02e89a8")
+		(property "Reference" "#PWR095"
+			(at 128.27 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 128.27 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 128.27 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 128.27 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "434ee508-7d24-4b9b-93d7-e41dbee5eb75")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR095")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:PUMP ANKO A200SX")
 		(at 384.81 214.63 0)
 		(unit 1)
@@ -39870,7 +40247,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 64.77 271.78 0)
+		(at 64.77 274.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -39878,7 +40255,7 @@
 		(dnp no)
 		(uuid "bce65d2a-aade-4b0a-af2a-aea2ea1cb1ad")
 		(property "Reference" "#PWR31"
-			(at 64.77 278.13 0)
+			(at 64.77 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39887,7 +40264,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 64.77 275.59 0)
+			(at 64.77 278.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39896,7 +40273,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 64.77 271.78 0)
+			(at 64.77 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39905,7 +40282,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 64.77 271.78 0)
+			(at 64.77 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39914,7 +40291,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 64.77 271.78 0)
+			(at 64.77 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40079,7 +40456,8 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Panasonic")
-		(at 77.47 259.08 0)
+		(at 49.53 240.03 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -40087,7 +40465,7 @@
 		(dnp no)
 		(uuid "be6f1a77-22ee-4e5b-bae7-050e508885b0")
 		(property "Reference" "C12"
-			(at 79.248 254.254 0)
+			(at 50.546 230.886 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40096,7 +40474,7 @@
 			)
 		)
 		(property "Value" "220μF/50V"
-			(at 79.248 256.794 0)
+			(at 50.546 233.426 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40105,7 +40483,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Panasonic"
-			(at 77.47 259.08 0)
+			(at 49.53 240.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40114,7 +40492,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
-			(at 77.47 259.08 0)
+			(at 49.53 240.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40123,7 +40501,7 @@
 			)
 		)
 		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
-			(at 77.47 259.08 0)
+			(at 49.53 240.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40132,7 +40510,7 @@
 			)
 		)
 		(property "DKPN" "10-ECA-1HM221BCT-ND"
-			(at 77.47 259.08 0)
+			(at 49.53 240.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40150,84 +40528,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C12")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
-		(at 147.32 259.08 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "bea157c9-4b11-4d2b-97ad-9382a9507197")
-		(property "Reference" "C30"
-			(at 148.59 261.62 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "100nF"
-			(at 148.59 264.16 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
-			(at 161.29 258.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
-			(at 158.75 259.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
-			(at 156.718 259.334 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "490-10700-1-ND"
-			(at 147.32 259.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "62f76814-1fdb-4302-b439-94dad446fbf1")
-		)
-		(pin "2"
-			(uuid "fd99b7d6-5751-4683-92b8-11014e5f5e44")
-		)
-		(instances
-			(project "OPNhydro_r2"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C30")
 					(unit 1)
 				)
 			)
@@ -40759,6 +41059,72 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 49.53 245.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c48eff26-21e7-470e-8e70-c6b88ada1679")
+		(property "Reference" "#PWR033"
+			(at 49.53 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 49.53 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 49.53 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 49.53 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 49.53 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3de6d7ec-1622-46c8-9419-e0bf6139cdac")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -43342,7 +43708,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3")
-		(at 48.26 266.7 0)
+		(at 48.26 269.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -43350,7 +43716,7 @@
 		(dnp no)
 		(uuid "ea4b7dbd-f179-49ac-8d4a-7c5914a1c950")
 		(property "Reference" "T2"
-			(at 49.784 256.54 0)
+			(at 49.784 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43358,7 +43724,7 @@
 			)
 		)
 		(property "Value" "BT3904"
-			(at 49.784 258.826 0)
+			(at 49.784 261.366 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43366,7 +43732,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3"
-			(at 53.34 264.16 0)
+			(at 53.34 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43375,7 +43741,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/mmbt3904lt1-d.pdf"
-			(at 48.26 266.7 0)
+			(at 48.26 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43384,7 +43750,7 @@
 			)
 		)
 		(property "Description" "Bipolar (BJT) Transistor NPN 40 V 200 mA 300MHz 300 mW Surface Mount SOT-23-3 (TO-236)"
-			(at 48.26 266.7 0)
+			(at 48.26 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43393,7 +43759,7 @@
 			)
 		)
 		(property "Sim.Device" "NPN"
-			(at 48.26 266.7 0)
+			(at 48.26 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43402,7 +43768,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=B 2=E 3=C"
-			(at 48.26 266.7 0)
+			(at 48.26 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43411,7 +43777,7 @@
 			)
 		)
 		(property "DKPN" "MMBT3904LT1GOSCT-ND"
-			(at 48.26 266.7 0)
+			(at 48.26 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44114,7 +44480,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 100Ω ±1% 1/8W 0805 Yageo")
-		(at 109.22 261.62 0)
+		(at 109.22 264.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -44122,7 +44488,7 @@
 		(dnp no)
 		(uuid "eeab3dc1-1907-477a-8d25-c79d35e12143")
 		(property "Reference" "R21"
-			(at 113.03 256.286 0)
+			(at 113.03 258.826 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44130,7 +44496,7 @@
 			)
 		)
 		(property "Value" "100Ω"
-			(at 113.03 258.572 0)
+			(at 113.03 261.112 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44138,7 +44504,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 100Ω ±1 18W Yageo 0805"
-			(at 109.22 261.62 0)
+			(at 109.22 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44148,7 +44514,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 109.22 261.62 0)
+			(at 109.22 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44158,7 +44524,7 @@
 			)
 		)
 		(property "Description" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 109.22 261.62 0)
+			(at 109.22 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44167,7 +44533,7 @@
 			)
 		)
 		(property "DKPN" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 109.22 261.62 0)
+			(at 109.22 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44435,7 +44801,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 10kΩ ±1% 1/8W 0805 Yageo")
-		(at 129.54 270.51 90)
+		(at 129.54 273.05 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -44443,15 +44809,6 @@
 		(dnp no)
 		(uuid "f2fad0f2-6c8f-4828-94ee-f364136d9058")
 		(property "Reference" "R23"
-			(at 131.318 265.43 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "10k"
 			(at 131.318 267.97 90)
 			(effects
 				(font
@@ -44460,8 +44817,17 @@
 				(justify right)
 			)
 		)
+		(property "Value" "10k"
+			(at 131.318 270.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 129.54 272.288 90)
+			(at 129.54 274.828 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44470,7 +44836,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 129.54 270.51 0)
+			(at 129.54 273.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44479,7 +44845,7 @@
 			)
 		)
 		(property "Description" "10 kOhms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 129.54 270.51 0)
+			(at 129.54 273.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44488,7 +44854,7 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
-			(at 129.54 270.51 0)
+			(at 129.54 273.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44578,7 +44944,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 124.46 271.78 0)
+		(at 124.46 274.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -44586,7 +44952,7 @@
 		(dnp no)
 		(uuid "f4654e63-f748-4ea2-a4a7-5c573add7db4")
 		(property "Reference" "#PWR41"
-			(at 124.46 278.13 0)
+			(at 124.46 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44595,7 +44961,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 124.46 275.59 0)
+			(at 124.46 278.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44604,7 +44970,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 124.46 271.78 0)
+			(at 124.46 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44613,7 +44979,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 271.78 0)
+			(at 124.46 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44622,7 +44988,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 124.46 271.78 0)
+			(at 124.46 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45005,7 +45371,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:RES 100Ω ±1% 1/8W 0805 Yageo")
-		(at 35.56 261.62 0)
+		(at 35.56 264.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -45013,7 +45379,7 @@
 		(dnp no)
 		(uuid "fc2f8590-aae7-457f-8953-6094259f84b9")
 		(property "Reference" "R8"
-			(at 39.37 256.54 0)
+			(at 39.37 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45021,7 +45387,7 @@
 			)
 		)
 		(property "Value" "100Ω"
-			(at 39.37 258.826 0)
+			(at 39.37 261.366 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45029,7 +45395,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:RES 100Ω ±1 18W Yageo 0805"
-			(at 35.56 261.62 0)
+			(at 35.56 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45039,7 +45405,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 35.56 261.62 0)
+			(at 35.56 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45049,7 +45415,7 @@
 			)
 		)
 		(property "Description" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 35.56 261.62 0)
+			(at 35.56 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45058,7 +45424,7 @@
 			)
 		)
 		(property "DKPN" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
-			(at 35.56 261.62 0)
+			(at 35.56 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)

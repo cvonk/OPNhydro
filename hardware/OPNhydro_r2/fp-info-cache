@@ -1,4 +1,4 @@
-27559239784751091
+27561014275441581
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -6819,6 +6819,13 @@ Capacitor Polarised
 2
 Coert-Vonk
 CAP ALUM POLY 1000μF ±20 6.3V
+
+
+0
+2
+2
+Coert-Vonk
+CAP ALUM-ELEC 47μF ±20 50V Panasonic
 
 
 0
