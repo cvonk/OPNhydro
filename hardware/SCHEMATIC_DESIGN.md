@@ -1,8 +1,8 @@
 # Schematic Design Guide
 
-This document describes the circuit design for the OPNhydroponics controller PCB.  It **answers how:** to implement the architecture.  As such it covers the schematics including the glue around the ICs, trace widths and placement rules.
+This document describes the design trade-offs for the **OPNhydro** architecture. It answers **"How?"** questions, explaining the schematics including the glue around the ICs, trace widths and placement rules.
 
-The key challenge with this board is the mix of a **sensitive** MCU and sensors (pH/EC), and their **noisy neighbors** such as a buck converter, isolated DC/DC converter (ADM3260), and high-noise steppers (TMC2209).
+The key challenge with this board is the mix of a **sensitive** ESP32 and sensors (pH/EC), and their **noisy neighbors** such as a buck converter, isolated DC/DC converter (ADM3260), and high-noise steppers (TMC2209).
 
 This document starts with the most critical parts of the Schematic and PCB Layout:
 1. Stability Under Peak Loads
@@ -17,19 +17,17 @@ It then continues to fill in the details:
 8. EZO Circuits and Probe Calibration
 9. Hand-Soldering
 
+---
+
+[TOC]
+
 
 ---
 
 
 ## 1. Stability Under Peak Loads
 
-The system must manage a **peak draw of approximately 4.7A** when the 1.2A main pump, the Solenoid Valve and two 1.53A nutrient pumps are active on top of the typical current draw from the Reflected 5V Rail and .
-
-Stability is provided by:
-- Bulk Capacitance that supply instantaneous current surges, preventing "voltage sags".
-- PCB Specifications: a 4-layer PCB with 2oz copper outer layers.
-
-The **main pump**, **stepper motors**, the **solenoid** and **buck converter** turns the PCB into a high-noise environment. Stepper drivers are notorious for creating Electromagnetic Interference (EMI) and ground bounce that can "ghost" the I2C bus or cause pH readings to jump.
+The system must manage a **peak draw of approximately 4.7A** when the 1.2A main pump, the Solenoid Valve and two 1.53A nutrient pumps are active on top of the typical current draw from the Reflected 5V rail.
 
 **Topology:**
 
@@ -55,100 +53,36 @@ The **main pump**, **stepper motors**, the **solenoid** and **buck converter** t
                    └──► BH1750
 ```
 
-
-### 1.1. Connector
-
-- Phoenix Contact, Series MSTBA (P/N 1757242)
-- 2 Position Header
-- Pitch 0.2" (5.08mm)
-- Pin 1 to 24V, pin 2 to GND
-- Mating plug: Phoenix Contact P/N 1757019
+---
 
 
-### 1.2. Protection Gauntlet
+### 1.1. Protection Gauntlet
 
-The 24V enters the board and passes through a "protection gauntlet" before it reaches the motor drivers or the sensitive sensor logic:
+The 24V enters the board and passes through a "protection gauntlet" before it reaches the motor drivers and the sensitive sensor logic:
 
-1. **Main Fuse (F1):** 7A Fast-Acting. Not using PTC, because of Response Time and Voltage Drop. This provides a 50% headroom over the 4.7A peak, while still being close to 6.5A rating of the PSU.
-2. **TVS Diode (D1):** 28V (SMCJ30A). If a massive overvoltage event occurs, the TVS diode will shunt the excess current to ground, potentially blowing the fuse but saving the rest of the PCB.
-3. **Reverse Polarity Protection (T1):** If power is connected in reverse polarity, this stops current instantly, saving the TMC2209s.
+1. **18 AWG Wire** for the Main Power Input (from PSU to PCB), according to standard electrical practices suggesting 18 AWG for currents up to 10A over short runs.
+2. **Pluggable Header** for the Main Power Input: Two position header, 0.2" pitch, 12A / 400V, 12-30 AWG (Phoenix Contact 1757242). Mating plug is Phoenix Contact P/N 1757019.
+3. **Main Fuse (F1):** 7A Fast-Acting (SMD). This provides a 50% headroom over the 4.7A peak, while still being close to 6.5A rating of the PSU. Not using PTC, because of its slow response time and voltage drop. 
+4. **TVS Diode (D1):** 28V (SMCJ30A). If a massive overvoltage event occurs, the TVS diode will shunt the excess current to ground, potentially blowing the fuse but saving the rest of the PCB.
+5. **Reverse Polarity Protection (T1):** If power is connected in reverse polarity, this stops current instantly, saving the TMC2209s.
 
-**How the Reverse Polarity Protection works:**
-
-Normal polarity (+24V at Source):
-- 33kΩ pulls gate toward +24V
-- Zener clamps gate at +12V (conducts in reverse/Zener mode when Vgate > 12V)
-- Vgs = 12 − 24 = −12V → **FET fully ON** ✓
-- Current through Zener: (24−12) / 33k = 0.36mA → 4.3mW dissipation, trivial
-
-Reverse polarity (supply plugged backwards → Source at −24V):
-- 33kΩ pulls gate toward 0V
-- Zener anode is now at +24V → clamps gate at 24−12 = +12V
-- Vgs = 12 − 0 = +12V → **FET stays OFF** ✓
-- +12V is within the ±20V Vgs(max) rating — safe ✓
-
-
-Given the 4.7A peak current identified in the sources, standard electrical practices suggest the following for 24V DC systems:
-- **Main Power Input (from Supply to PCB):** 18 AWG is recommended for currents up to 10A to minimize voltage drop over short runs.
-
-
-### 1.3. Buck Converter
-
-**24V to 5V (Logic/USB)**
-The design is based on Figure 10.1 of the [TPS62933 Datasheet](https://www.ti.com/lit/ds/symlink/tps62933.pdf?ts=1773728788941) and their [WEBENCH Power Designer](https://webench.ti.com/power-designer/switching-regulator).
-
-```
-                                  TPS62933DRLR      
-                            ┌───────────────────────┐
-24V_SAFE ─┬─────────────────┤ VIN (2)       BST (1) ├────┐   
-          │                 │                       │    │   
-        [Cin]               │                       │  [Cbst]
-          │           3.3V──┤ EN (3)         SW (6) ├────┘──────[L1]───────┬──► 5V
-         GND                │                       │                      │
-                   [Rrt] ───┤ RT (4)        GND (5) ├── GND             [3× Cout]
-                     │      │                       │                      │
-                    GND     │                FB (7) ├──┬─[R_top]──► 5V    GND
-                            │                       │  │
-                   [Css] ───┤ SS (8)                │  └─[R_bot]── GND
-                     │      └───────────────────────┘
-                    GND     
-
-Vout = 0.8V × (1 + R_top/R_bot)  →  5V = 0.8 × (1 + 52.3k/10k) ≈ 4.98V ✓
-Fsw  = 17293 × RT(kΩ)^(−0.942)   →  RT = 21kΩ → Fsw = 17293 × 21^(−0.942) ≈ 982 kHz ✓
-```
-
-Component Selection:
-- IC:   TPS62933DRLR (SOT583, synchronous buck, 3.8–30V in, 3A, 200kHz–2.2MHz)
-- L1:   10µH, 3A, DCR < 50mΩ (e.g. BournsSDR1307-100ML)
-- Cin:  10µF / **50V** ceramic (X5R or X7R)
-- Cout: 3×10µF / 10V ceramic (X5R or X7R)
-- Cbst: 100nF / 10V ceramic (BST to SW)
-- Css:  33nF (soft-start ≈ 5ms; minimum 6.8nF, do not float)
-- Rrt:  21kΩ to GND → Fsw = 17293 * 21k^(-0.942) = ~1MHz
-- R_top: 52.3kΩ 1%
-- R_bot: 10kΩ 1% (E96 series)
-- No external compensation required (internal loop compensation)
-- No external diode required (synchronous rectification)
+How the Reverse Polarity Protection works:
+1. Normal polarity (+24V at Source):
+   - 33kΩ pulls gate toward +24V
+   - Zener clamps gate at +12V
+   - V<sub>gs</sub> = 12 − 24 = −12V → **FET fully ON** ✓
+   - Current through Zener: (24−12) / 33k = 0.36mA → 4.3mW dissipation, trivial
+2. Reverse polarity (supply plugged backwards → Source at −24V):
+   - 33kΩ pulls gate toward 0V
+   - Zener anode is now at +24V → clamps gate at 24−12 = +12V
+   - V<sub>gs</sub> = 12 − 0 = +12V → **FET stays OFF** ✓
+   - +12V is within the ±20V V<sub>gs</sub>(max) rating — safe ✓
 
 
 ---
 
 
-### 1.4 Linear Regulator LDO (3.3V)
-
-```
-5V ───────┬──► VIN ┌─────────┐ VOUT ──┬──[10µF]────► 3.3V
-          │        │ AMS1117 │        │          
-       [10µF]      │  -3.3   │     [10µF]
-          │        └────┬────┘        │
-          │             │             │
-         ─┴─           ─┴─           ─┴─
-```
-
----
-
-
-### 1.5. Bulk Caps are Your Friend
+### 1.2. Bulk Caps are Your Friend
 
 The use of a hierarchical capacitance strategy — employing a global reservoir and multiple local reservoirs — is fundamental to maintaining the chemical and thermal stability required for this high-precision 100L systems. This approach ensures that peak loads stay as local as possible.
 
@@ -180,38 +114,122 @@ The Engineering:
 - Place local bulk capacitance directly at the Voltage Supply (VS) pins of the three TMC2209 drivers and MOSFETs.
 
 
+### 1.3. Buck Converter
+
+The buck converter converts 24V to 5V for the TTL logic.  For the design we follow Figure 10.1 of the [TPS62933 Datasheet](https://www.ti.com/lit/ds/symlink/tps62933.pdf?ts=1773728788941) and their [WEBENCH Power Designer](https://webench.ti.com/power-designer/switching-regulator). We add bulk caps on the input and output, per previous section.
+
+```
+                               TPS62933DRLR
+                            ┌───────────────┐
+24V_SAFE ─┬─────┬───────────┤ VIN       BST ├────┐   
+          │     │           │               │    │   
+        [Cbi] [Cin]         │               │  [Cbst]
+          │     │     3.3V──┤ EN         SW ├────┘──────[L]──────┬──────┬──► 5V
+         GND   GND          │               │                    │      │
+                   [Rrt] ───┤ RT        GND ├── GND          [3× Cout] [Cbo]
+                     │      │               │                    │      │
+                    GND     │            FB ├──┬─[R_t]──► 5V    GND    GND
+                            │               │  │
+                   [Css] ───┤ SS            │  └─[R_b]── GND
+                     │      └───────────────┘
+                    GND     
+```
+
+Given the internal reference voltage $V_{r} = 0.8 \rm{\ V}$, we selected $R_{b}=10 \rm{\ k\Omega}$ and $R_{t}=52.3 \rm{\ k\Omega}$ for the voltage divider. The output voltage $V_o$ follows, per §9.3.4 of the datasheet:
+$$
+  \begin{align}
+    V_o &= V_r \times \frac{R_b + R_t}{R_b} \\
+        &= 0.8 \rm{\ V} \times \frac{10\rm{\ k\Omega} + 52.3\rm{\ k\Omega}}{10\rm{\ k\Omega}} \approx 5 \rm{\ V} \nonumber
+  \end{align}
+$$
+
+For a switching frequency $f_{s} \approx 1 \rm{\ MHz}$, we select $R_{rt} = 21 \rm{\ kΩ}$, per per §9.3.5:
+$$
+  \begin{align}
+  f_{s} &= 17.293 \times 10^6 \times \left(\frac{R_{rt}}{10^3}\right)^{-0.942} \\
+  &= 17.293 \times 10^6 × 21^{-0.942} \approx 1 \rm{\ MHz} \nonumber
+  \end{align}
+$$
+
+We use the soft-start feature to minimize inrush current for driving capacitive load. For a soft-start $t_{ss} = 5 \rm{\ ms}$, where $V_{r} = 0.8 \rm{\ V}$ and a typical $I_{ss}=5.5 \rm{\ \mu A}$, the required $C_{ss}$ follows per §9.3.6:
+$$
+  \begin{align}
+    C_{ss} &= \frac{t_{ss} \times I_{ss}}{V_r} \\
+    &= \frac{5 \rm{\ ms} \times 5.5 \rm{\ \mu A}}{0.8 \rm{\ V}} \approx 33 \rm{\ nF} \nonumber
+  \end{align}
+$$
+
+**Part Selection:**
+
+Reference | Specs | Part
+----------|-------|-----
+TPS62933DRLR    | Synchronous, Internal loop, 3.8–30V in, 3A | T.I. TPS62933DRLR
+L               | 10µH / 3A, R<sub>DC</sub> < 50mΩ    | Bourns SDR1307-series
+C<sub>bi</sub>  | 1000µF / 50V alum. (see bulk)       | Panasonic M-A-series Elec.
+C<sub>in</sub>  | 10µF / 50V ceramic (X5R or X7R)     | Murata GRT-series X7R
+C<sub>out</sub> | 3× 10µF / 10V ceramic (X5R or X7R)  | Murata GRM-series X7R
+C<sub>bo</sub>  | 220µF / 10V alum. (see bulk)        | Panasonic SVPK-series Poly.
+C<sub>bst</sub> | 100nF / 10V ceramic                 | Murata GRM-series X7R
+C<sub>ss</sub>  | 33nF / 50V ceramic (see above)      | Murata GRM-series X7R
+R<sub>rt</sub>  | 21kΩ (see above)                    | Yageo RC_L-series
+R<sub>t</sub>   | 52.3kΩ 1% (see above)               | Yageo RC_L-series
+R<sub>b</sub>   | 10kΩ 1% (see above)                 | Yageo RC_L-series
+
+
 ---
 
 
-### 1.6. PCB guidelines
+### 1.4. Linear Regulator LDO (3.3V)
 
-To safely handle the peak **4.7A** load, the architecture mandates a **4-layer PCB** with **2oz copper** outer layers. This copper weight is essential for managing the heat and resistance of the 24V power traces under continuous 24/7 operation.
+The linear voltage regulator converts 5V to 3V3 for the LVTTL logic.  For the design, we follow the typical applications circuit in the [AMS1117-3.3 Datasheet](https://www.diodes.com/assets/Datasheets/AZ1117I.pdf):
 
 
-#### Layer Stack-Up
+```
+5V ───────┬──► VIN ┌─────────┐ VOUT ──┬──[10µF]────► 3.3V
+          │        │ AMS1117 │        │          
+       [C_in]      │  -3.3   │     [C_out]
+          │        └────┬────┘        │
+          │             │             │
+         ─┴─           ─┴─           ─┴─
+```
+
+**Part Selection:**
+
+Reference | Specs | Part
+----------|-------|-----
+AMS1117-3.3     | Linear Regulator 3.3V / 1A      | Diodes AZ1117IH-3.3TRG1
+C<sub>in</sub>  | Not needed (already part of buck converter) | 
+C<sub>out</sub> | 22µF / 10V polymer              | Murata GRM-Series X75
+
+
+---
+
+
+### 1.5. PCB Guidelines
+
+To safely handle the peak 4.7A load, the architecture mandates a **4-layer PCB** with **2oz copper** outer layers. This copper weight is essential for managing the heat and resistance of the 24V power traces under continuous 24/7 operation.
+
+**Layer Stack-Up**
 
 Layer | Name | Function               | Components
 ------|------|------------------------|--------------------------
-L1    | Top  | Signal layer           | MCU, LiDAR, I2C, UART, EZO, BNC
+L1    | Top  | Signal layer           | ESP32, LiDAR, I2C, UART, EZO, BNC
 L2    | GND  | Solid Main GND Plane   | One uninterrupted copper pour. This is the EMI shield.
 L3    | PWR  | 3.3V / 5V / 24V Planes | Seperate copper pours for low resistance.
 L4    | Bot  | Steppers / MOSFETs     | So GND plane shields them from signal layer
 
-
-#### Enclosure et al
+**Notes**
 
 - Recommended: IP65 rated ABS enclosure, ~150×100×70mm
-- Cable glands for all wiring
+- Cable glands for all wiring (to keep water and insects out)
 - Panel-mount BNC connectors for pH/EC/RTD probes (3×)
 - Optional: Clear lid for status LED visibility
+- PCB Size: about 100mm × 80mm (fits common enclosures)
+- PCB Finish: Hot Air Solder Leveling (HASL), or Electroless Nickel Immersion Gold (ENIG)
 
-- **Size:** 100mm × 80mm (fits common enclosures)
-- **Finish:** HASL or ENIG
+**Trace Widths**
 
-
-#### Trace Widths
-
-Trace width is calculated using the IPC-2221 empirical formula for external conductors.[^1]
+The trace widths can be calculated using the IPC-2221 empirical formula for external conductors.[^1]
 [^1]: [IPC-2221 Trace Width Calculator, Altium PCB Design Guide](https://resources.altium.com/p/ipc-2221-calculator-pcb-trace-current-and-heating).
 
 $$
@@ -237,16 +255,15 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 3.3V rail (post-LDO)    | 0.15 (Peak)       | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
 
 
-Plane and Routing Guidelines
+**Plane and Routing Guidelines:**
+
 - **Star Power**: Run a dedicated pair of 24V wires from your main power input connector directly to the stepper section, and a separate pair to the logic regulator. Do not "daisy chain" the power from the motors to the sensors.
 - **Via Stitching:** If you must switch the 24V rail between layers, use multiple vias (at least 3–4 vias per 2A connection). A single standard 10-mil via is only rated for about 0.5A–1A before it acts like a fuse.
-- **Antenna Support:** The ground plane should not extend under the **ESP32-C6 antenna** keep-out area to ensure proper wireless performance.
-- **Analog/Digital Isolation:** The layout must keep **analog traces physically isolated** from switching power supplies (like the TPS62933) and high-current motor traces.
-
+- **Antenna Support:** The ground plane should not extend under the ESP32-C6 antenna keep-out area to ensure proper wireless performance.
+- **Analog/Digital Isolation:** The layout must keep analog traces physically isolated from switching power supplies and high-current motor traces.
 
 
 ---
-
 
 
 ## 2. Integration of Precision Dosing and EMI Mitigation
@@ -256,6 +273,8 @@ The high precision steppers generate significant **Electromagnetic Interference 
 - *Bypass Capacitors* suppress the middle and high frequency noise.
 - *PCB Layout Strategy*, thermal relief and EMI shielding.
 
+The **main pump**, **stepper motors**, the **solenoid** and **buck converter** turns the PCB into a high-noise environment. Stepper drivers are notorious for creating Electromagnetic Interference (EMI) and ground bounce that can "ghost" the I2C bus or cause pH readings to jump.
+
 
 ---
 
@@ -264,62 +283,62 @@ The high precision steppers generate significant **Electromagnetic Interference 
 
 > All currents in this section are RMS currents. 
 
-```
-                24V (VM)
-           ┌───┬──┴──────┐
-           │   │         │
-        100µF 100nF      │  ← 220µF bulk + 2x 100nF local bypass per driver
-          ─┴─ ─┴─     VM │
-              ┌──────────┴───────────┐
- 3.3V ───────►│ VIO                  │
- GND ────────►│ GND                  │
-              │                      │
- STEP_xxx ───►│ STEP          OA1 ───┼──► coil A+
- 3.3V ───────►│ DIR           OA2 ───┼──► coil A-
-  GND ───────►│ EN            OB1 ───┼──► coil B+
-              │               OB2 ───┼──► coil B-
-UART bus─────►│ PDN_UART             │
-  MS1* ──────►│ MS1           BRA ───┼──── 110mΩ ──── GND   ← RSENSE: 1%, 1/4W 0805
-  MS2* ──────►│ MS2           BRB ───┼──── 110mΩ ──── GND
-  GND ───────►│ SPREAD               │
-  GND ───────►│ STDBY                │
-              │                      │
-see below  ──►│ VREF                 │
-              │      TMC2209         │
-              └──────────────────────┘
-```
-
 The Standard Application Circuit in Fig. 3.1 of the [TMC2209 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/tmc2209_datasheet_rev1.09.pdf) and [TM2209 EVAL Schematics](https://www.analog.com/media/en/evaluation-documentation/evaluation-design-files/TMC2209-EVAL_Layout_Data_V1.1.zip) show a typical Stepper Driver using the TMC2209. The design follows their recommendations:
 
-To start with the **obvious pins**, per §2.2 of the datasheet:
-- `ENN` should be connected to signal `STEP_PDIS`, so that the firmware can disable the driver for a "Silent Read".
-- A 22nF / 50V cap should be connected between the charge pump pins `CP0` and `CP1`.
-- A 100nF cap should be placed between the charge pump voltage `VCP` and `VS`.
-- `SPREAD` should be connected to GND to select StealthChop mode, per architecture.
-- A 2.2μF cap should be connected to `5VOUT` stabilize the 5V.
-- `CLK` should be tied to GND to select the internal clock.
-- `STEP` input should be connected to a dedicated signal, e.g. `STEP_PH_DH`.
-- `DIR` may be left unconnected, because it has an internal pull-down. A step impulse during `DIR=0` increases the microstep counter, per §1.3.1.  **Or, it it: ??** DIR hardwired to 3.3V. Peristaltic pumps are self-sealing — the rollers pinch the tube closed when stopped, so backflow cannot occur and direction reversal is never needed. If a pump runs backwards on first install, swap the coil A wires (OA1 ↔ OA2) on the connector.
-- `STDBY` input can disable the internal supply regulator.  It has an internal pull-down, and may be left unconnected. `IHOLD=0` handles standstill power saving without the register-reset complication of STDBY.
- - The motor supply voltage `VS` requires filtering with two parallel ceramic low-ESR 100nF caps to handle the transients, and a 220µF electrolytic local bulk cap to keep the current spikes from appearing as voltage transients on the VM rail, per §3.1.
-- Connect the `Exposed Die Pad` to a GND plane. Provide as many as possible vias for heat transfer to GND plane.
-- `DIAG` open-drain output. Goes high when StallGuard4 detects a motor stall or when a driver error occurs (overtemperature, short circuit). Leave unconnected, because in UART mode, stall detection is preferred via the `DRV_STATUS` register rather than the DIAG pin — this is more informative (gives a numeric stall load value, not just a binary flag). If we end up with a free GPIO, we can use this to allow interrupt-driven stall detection without polling.
-- `INDEX` pulse output — by default emits one pulse per electrical period (every 4 full steps at 1× microstepping). Can be reconfigured via UART `IOIN` register to signal other events (e.g. first microstep position, stepper index). For dosing pumps, step count is controlled directly by the ESP32 (counted steps = known volume), so `INDEX` adds no value in normal operation, leave the pin floating. Place a DNP 1kΩ series + test point footprint for debugging if needed.
+To start with the **obvious pins**, per Signal Descriptions (§2.2) in the datasheet:
 
-Using a **single UART bus** with the MS1 and MS2 pins for addressing is the most "EZO-like" way to handle the **TMC2209** drivers — it keeps the pin count low and control digital:
-- `AD1` and `AD0` assigns a driver an unique UART node address.  These pins have internal pull-down resistors.
-   - for pH Dn, set address 0b00 → `AD1` and `AD0` unconnected
-   - for NUT A, set address 0b10 → `AD1` to 3V3 and `AD0` unconnected
-   - for NUT B, set address 0b11 → `AD1` and `AD0` tied to 3V3
-- `PDN_UART`should connect to the `STEP_BUS` signal, that then connects to the `RXD` on the MCU, and via a 1kΩ resistor to its `TXD`.  PDN_UART is an open-drain bidirectional pin. When the ESP32 TX drives HIGH to send a command, and the TMC2209's open-drain output momentarily pulls the bus LOW to begin its response (a brief overlap before software tri-states TX), a low-impedance conflict occurs between TX driving HIGH and the open-drain pulling LOW. The 1kΩ on TX limits the fault current during this window to (3.3V / 1kΩ) = 3.3 mA — safe for both the ESP32 output driver and the TMC2209 PDN_UART. 
+Pin          | Connection | Function
+-------------|------------|---------
+`ENN`        | Wire to signal `STEP_PDIS` | Allows the firmware to disable the driver for a "Silent Read".
+`CP0`, `CP1` | Place a 22nF / 50V cap between these pins. | Charge pump  .
+`VCP`, `VS`  | Place a 100nF cap between these pins.      | Charge pump voltage.
+`SPREAD`     | Wire to GND.              | Selects StealthChop mode, per architecture.
+`5VOUT`      | Place a 2.2μF cap to GND. | Stabilize the 5V.
+`CLK`        | Tie to GND.               | Selects the internal clock.
+`STEP`       | Tie to dedicated input signal, e.g. `STEP_PH_DH`. | STEP input.
+`DIR`        | Leave unconnected (int. pull-down). | DIR=LOW to increase.
+`STDBY`      | Leave unconnected (int. pull-down). | Enables the internal supply regulator.
+`VS`         | Place 2 low-ESR 100nF caps, and a 220µF local bulk cap in parallel to GND. | Reduce Motor Supply Voltage transients, per §3.1.
+`DIAG`       | Leave unconnected. | Stall detection is preferred via the `DRV_STATUS` register.
+`INDEX`      | Leave unconnected. | Adds no value in normal operation.
+`OA1`        | Wire to header for `A+` on Stepper Motor | Motor coil A output 1
+`OA2`        | Wire to header for `A-` on Stepper Motor | Motor coil A output 2
+`OB1`        | Wire to header for `B+` on Stepper Motor | Motor coil B output 1
+`OB2`        | Wire to header for `B-` on Stepper Motor | Motor coil B output 2
+Die Pad      | Wire to GND plane. | Provide as many as possible vias for heat transfer.
+
+**Notes:**
+- Peristaltic pumps are self-sealing — the rollers pinch the tube closed when stopped, so backflow cannot occur and direction reversal is never needed. If a pump runs backwards on first install, swap the coil A wires (OA1 ↔ OA2) on the connector.
+- `IHOLD=0` handles standstill power saving without the register-reset complication of STDBY.
+- If we end up with a free GPIO, we can use this to allow interrupt-driven stall detection using the `DIAG`-pin without polling.
+
+
+Using a **Single Wire UART Bus** with the MS1 and MS2 pins for addressing is the most "EZO-like" way to handle the TMC2209 drivers — it keeps the pin count low and control digital.
+
+The TMC2209 Device Address is set using pins `AD1` and `AD0`. These pins have internal pull-down resistors:
+   - for pH Dn, set address 0b00 → leave `AD1` and `AD0` floating
+   - for NUT A, set address 0b10 → tie `AD1` to 3V3 and leave `AD0` floating
+   - for NUT B, set address 0b11 → tie `AD1` and `AD0` to 3V3
+
+The connections:
+
+Pin             | Connection | Function
+----------------|------------|---------
+`AD1` and `AD0` | See above | Assign the driver an unique UART node address.
+`PDN_UART`      | Connect to the `STEP_BUS` signal.
+
+The ESP32 connects to this Single Wire UART Bus as:
+- `RXD` from the ESP32 connects directly to the `STEP_BUS` signal.
+- `TXD` from the ESP32 connects via a 1kΩ resistor to the `STEP_BUS` signal.
+
+Notes on conflicts:
+- When the ESP32 `TXD` drives HIGH to send a command, and the TMC2209's open-drain output momentarily pulls the bus LOW to begin its response (a brief overlap before software tri-states TX) → A low-impedance conflict occurs. The 1kΩ on TX limits the fault current to a safe level of 3.3V / 1kΩ = 3.3 mA. 
+- Along the same lines: the firmware should configure ESP32 UART1 in **half-duplex / single-wire mode**, so TX is tri-stated (high-impedance) during the receive window. The TMC2209 then pulls the bus LOW open-drain to transmit its response, with no conflict from TX.
 - The firmware should set `SENDDELAY` to ≥2 for all nodes. Otherwise, a non-addressed node might detect a transmission error upon read access to a different node. 
-- The firmware should configure ESP32-C6 UART1 in **half-duplex / single-wire mode** so TX is tri-stated (high-impedance) during the receive window. The TMC2209 then pulls the bus LOW open-drain to transmit its response, with no conflict from TX.
-- Some suggest adding a 100Ω series resistor on each PDN_UART pin creates a small voltage drop that decouples each driver's input from the bus during contention, and limits the current path between drivers if two open-drain outputs are momentarily both active. We're not doing that because it is not listed in the datasheet or used in the EVAL board.
 
-The **output current** is set by:
-- The **R<sub>SENSE</sub>** shunt resistors measure the output currents. The TMC2209 measures the voltage drop across this resistor to determine actual coil current, then adjusts its PWM chopper duty cycle to regulate current to the `IRUN/IHOLD target`. §8 suggests 120 mΩ low-inductance resistors. Instead we use a 110 mΩ 1/4W to ensure it will not exceed the full-scale voltage of 325mV.
-- Set a hard limit using the V<sub>REF</sub> input of the TMC2209. This linearly scales the maximum current. The value for voltage $V_{REF}$, follows from the architecture that specifies that $V_{REF}$ should be set for a current corresponding to 90% of the maximum stepper current of 1.7 A<sub>RMS</sub>. 
-The formula from chapter 9 of the data sheet, shows that the current depends on $CS$, $V_{FS}$ and $V_{REF}$ and can be calculated as: 
+The **Output Current** is limited by:
+1. The **R<sub>SENSE</sub>** shunt resistors measure the output currents. The TMC2209 measures the voltage drop across this resistor to determine actual coil current, then adjusts its PWM chopper duty cycle to regulate current to the `IRUN/IHOLD target`. §8 suggests 120 mΩ low-inductance resistors. Instead we use a 110 mΩ 1/4W to ensure it will not exceed the full-scale voltage of 325mV.
+2. Set a hard limit using the **V<sub>REF</sub>** input of the TMC2209. This linearly scales the maximum current. The value for voltage $V_{REF}$, follows from the architecture that specifies that $V_{REF}$ should be set for a current corresponding to 90% of the maximum stepper current of 1.7 A<sub>RMS</sub>.  The formula from the Motor Current Control chapter (§9) of the data sheet, shows that the current depends on $CS$, $V_{FS}$ and $V_{REF}$ and can be calculated as: 
 $$
     \begin{align}
         I_{RMS}  &= \frac{CS+1}{32} \times \frac{V_{FS}}{R_{SENSE} + 20 \rm{\ mΩ}} \times \frac{1}{\sqrt 2} \times \frac{V_{VREF}}{2.5 \rm{\ V}} \\
@@ -339,16 +358,19 @@ $$
         \approx 2.16 \rm{\ V} \nonumber
     \end{align}
 $$
-To create this voltage, use the 5V<sub>OUT</sub> pin with a a R<sub>H</sub> and R<sub>L</sub> **voltage divider**. Taking into account a $R_{VREF}=240 \rm\ M\Omega$, the required resistors follow as $R_{H} = 14 \rm{\ k\Omega}$ and $R_{L} = 10.7 \rm{\ k\Omega}$:
+To create this voltage, use the 5V<sub>OUT</sub> pin with a a R<sub>H</sub> and R<sub>L</sub> Voltage Divider. Ignoring the $R_{VREF}=240 \rm\ M\Omega$, the required resistors follow as $R_{H} = 14 \rm{\ k\Omega}$ and $R_{L} = 10.7 \rm{\ k\Omega}$:
 $$
     \begin{align}
         V^{'}_{VREF} &= \frac{R_{L}}{R_{L}+R_{H}} \times 5 \rm{\ V} = \frac{10.7 \rm{\ k\Omega}}{10.7 \rm{\ k\Omega} + 14 \rm{\ k\Omega}} \times 5 \rm{\ V} \approx 2.16 \rm{\ V} \nonumber
     \end{align}
 $$
-- The firmware try to to use an operating range of 70% to 80% corresponding to setting the **CS to 24 or 27**. Increase to 85–90% only if stalling occurs on aged tubing.
+3. The firmware **CS Register** (see below).
+
+
+The **firmware** should aim for an **operating range of 70% to 80%** corresponding to setting the CS to 24 or 27. Increase to 85–90% only if stalling occurs on aged tubing.
 
 CS value | Current limit| Target range
---------:|-------------:|-------------
+:-------:|:------------:|:-----------:
 24       |      1.19A   | 70%
 25       |      1.24A   | 73%
 26       |      1.29A   | 76%
@@ -358,9 +380,27 @@ CS value | Current limit| Target range
 30       |      1.48A   | 87%
 31       |      1.53A   | 90%
 
-#### Firmware Considerations 
+**Connectors**
 
-Talking about firmware, use *[TMCStepper](https://github.com/teemuatlut/TMCStepper)** for all TMC2209 driver configuration and status monitoring. It provides full UART register access: write IRUN=18, IHOLD=0, IHOLDDELAY=6, TPWMTHRS=0 at startup; read DRV_STATUS.SG_RESULT and temperature flags during operation. No alternative library provides this capability.
+The A200SX motor cable carries coil wires only (4 pins). According to the NEMA 17 convention, the stepper uses a cable with:
+- Motor Body End has a JST PH 2.0mm 4-pin female plug;
+- Free PCB End has a JST XH 2.5mm 4-pin female plug.[^NEMA17], compatible with Molex KK 0.1".
+
+[^NEMA17]: Commonly mislabelled "XH2.54"); XH series is 2.5mm pitch, not 2.54mm DuPont. [nkoproducts.com](https://ankoproducts.com/products/a200sx)
+
+The PCB Header should use follow the NEMA 17 convention:[^STEPPERHEADER]
+[^STEPPERHEADER]: ⚠ Verify pin order from A200SX datasheet before PCB layout. Coil swap (A↔B or polarity) only affects rotation direction; the TMC2209 handles both.
+
+Pin | Function
+----|-----------
+1   | Coil A+   
+2   | Coil A-  
+3   | Coil B+  
+4   | Coil B-  
+
+**Firmware Considerations**
+
+We suggest using the [TeensyStep](https://github.com/luni64/TeensyStep) to define when and how fast to generate the steps, and [TMCStepper](https://github.com/teemuatlut/TMCStepper) to tell the driver how to interpret those steps (e.g., silent mode, current limits, microstepping).
 
 Key UART registers to configure at startup are:
 
@@ -372,60 +412,19 @@ Key UART registers to configure at startup are:
 | `TPWMTHRS`   |     0 | StealthChop2 active at all speeds
 | `SENDDELAY`  |    ≥2 | Required for multi-driver bus. See note above.
 
-STEP pulses must be generated by hardware peripherals, not software loops. If the ESP32 is busy with a Wi-Fi request, SSL/TLS handshake, a software-timed pulse loop can stall for tens of milliseconds. A single missed or late pulse causes the stepper to lose a step — and since dosing accuracy is derived from step count × tube displacement constant, one lost step per dose accumulates into measurable calibration error over time.
+STEP pulses must be generated by hardware peripherals, not software loops. If the ESP32 is busy with a Wi-Fi request, SSL/TLS handshake, a software-timed pulse loop can stall for tens of milliseconds. A single missed or late pulse causes the stepper to lose a step — and since dosing accuracy is derived from step count × tube displacement, one lost step per dose accumulates into measurable calibration error over time.
 
-The recommended ESP32-C6 hardware options is to use the **RMT (Remote Control Transceiver):** The RMT peripheral generates arbitrary pulse sequences from a preloaded buffer with nanosecond resolution, independent of the CPU. Configure it to output N pulses at the target step frequency, then trigger it once per dose. When the burst completes it fires
-a done interrupt; the CPU core is free throughout.
-```
-// Pseudocode — ESP-IDF RMT approach
-rmt_config_t cfg = { .gpio_num = STEP_PH_DN, .clk_src = RMT_CLK_SRC_DEFAULT };
-rmt_channel_handle_t ch;
-rmt_new_tx_channel(&cfg, &ch);
-// preload N symbols: 50% duty, period = 1/step_freq
-rmt_transmit(ch, encoder, symbols, n_steps, NULL);
-// CPU is free; RMT fires done callback when burst finishes
-```
-It supports up to 4 independent TX channels on ESP32-C6 → one per STEP pin with one spare.
+The recommended ESP32-C6 hardware options is to use the **Remote Control Transceiver (RMT)**. This  generates arbitrary pulse sequences from a preloaded buffer with nanosecond resolution, independent of the CPU. Configure it to output N pulses at the target step frequency, then trigger it once per dose. When the burst completes it fires a interrupt; the CPU core is free throughout.
 
-#### Connectors
-
-The A200SX motor cable carries coil wires only (4 pins). the TMC2209 H-bridge drives the coils directly.
-
-| Parameter | Specification |
-|-----------|---------------|
-| Motor body connector | JST PH 2.0mm 4-pin (female, on pump body) |
-| Cable free-end connector | JST XH 2.5mm 4-pin (female) — PCB side |
-| Source | [ankoproducts.com/products/a200sx](https://ankoproducts.com/products/a200sx) |
-
-According to the NEMA 17 convention — JST PH 2.0mm 4-pin on motor body; cable free end terminates in JST XH 2.5mm 4-pin (commonly mislabelled "XH2.54"); XH series is 2.5mm pitch, not 2.54mm DuPont). PCB footprint: B4B-XH-A; verify on receipt [ankoproducts.com](https://ankoproducts.com/products/a200sx)
-
-
-
-JST XH 2.5mm 4-pin Assignment (verify against A200SX datasheet on receipt):
-┌─────┬────────────────┬─────────────────────────────────────┐
-│ Pin │ Signal         │ PCB connection                      │
-├─────┼────────────────┼─────────────────────────────────────┤
-│  1  │ Coil A+  (OA1) │ TMC2209 OA1                         │
-│  2  │ Coil A−  (OA2) │ TMC2209 OA2                         │
-│  3  │ Coil B+  (OB1) │ TMC2209 OB1                         │
-│  4  │ Coil B−  (OB2) │ TMC2209 OB2                         │
-└─────┴────────────────┴─────────────────────────────────────┘
-⚠ Verify pin order from A200SX datasheet before PCB layout. Coil swap (A↔B or polarity) only affects rotation direction; the TMC2209 handles both.
-
-Dosing Pump Connector (×3, PCB side): JST B4B-XH-A (4-position XH male header, 2.5mm pitch, right-angle TH, PCB mount) ×3
-- Mates with: JST XH 2.5mm 4-pin female housing on pump cable free end
-- Pitch: 2.5mm
-- 4 pins: coil A+, coil A−, coil B+, coil B−  (no VCC/GND)
-- Silkscreen label: "pH DN", "NUT A", "NUT B"
-- Right-angle orientation: cable exits horizontally toward board edge
-- Alternative: B4B-XH-AM (vertical TH) if cables must exit upward
-- Verify exact part on receipt — ARCHITECTURE.md notes connector mislabelled "XH 2.54mm" in 3D printer community; XH series is 2.5mm pitch
+The ESP32-C6 supports up to 4 independent RMT TX channels on ESP32-C6 → one per STEP pin with one spare.
 
 
 ---
 
 
 ### 2.2. "Silent Read"
+
+The "Silent Read" strategy is a fundamental coordination technique in the OPNhydro architecture designed to ensure the highest possible data integrity for sensitive electrochemical sensors. Its importance is rooted in the need to manage the conflicting requirements of high-precision dosing and high-accuracy monitoring within the same electrical environmen
 
 The dosing sequence is:
 1. Turn OFF the TMC2209 drivers (using the !EN pin) while reading the sensors to ensure 100% electrical silence
@@ -435,13 +434,13 @@ The dosing sequence is:
 
 The schematic or firmware should use **StealthChop2** for dosing. It generates significantly less Electrical Noise (EMI) than the high-torque SpreadCycle mode, which improves EZO-EC data integrity.
 
-Engineering note: the firmware can use the **TeensyStep** or **TMCStepper** library (by Peter Polidoro/teemuatlut).
 
 
 ---
 
 
-### 2.3. Capacitor to the Rescue
+### 2.3. Capacitors to the Rescue
+
 The existing 220µF bulk caps at VM also suppress the **medium-frequency** switching ripple by providing charge locally, within the short trace between cap and VM pin, before the inductance of the supply path has time to cause a voltage dip.
 
 Recommended MF capacitors:
@@ -487,7 +486,7 @@ Long PCB traces or component leads add inductance, which reduces the SRF. The pl
 For added protection, use **ferrite beads** on power inputs to further reject high-frequency noise.
 
 
-### 2.4 PCB Layout Strategy
+### 2.4. PCB Layout Strategy
 
 At 1.0A RMS, the TMC2209 drivers generate only a 1/4 of the heat compared to their 2.0A limit.
 - **A "Thermal Chimney":** Use a large GND plane on the bottom layer as a heatsink. Use a 4×4 array of 16 thermal vias, 0.3mm diameter, spaced 1mm apart under the TMC2209 center pad connecting to the GND plane to pull heat away.
@@ -518,26 +517,40 @@ The Typical Applcation Diagram in Fig. 20 of the [ADM3260 Datasheet](https://www
 
 [^MOREAMD3260]: See also, Analog Devices ADM3260 Datasheet: The definitive source for "Layout Guidelines" and "EMI Considerations" (See pages 16-18); Atlas Scientific USB Isolator Schematic: Their public hardware documentation shows the ADM3260 implementation for I2C isolation; AN-0971 Application Note: "Recommendations for Control of Radiated Emissions with isoPower Devices."
 
-- **V<sub>SEL</sub>** sets the isolated output voltage V<sub>ISO</sub>. For V<sub>ISO</sub>=3.3V, create a voltage divider matches so that V<sub>SEL</sub> matches the 1.25V reference voltage: 
-$$
-  V_{SEL} = V_{ISO} \cdot \frac{\rm{R_{19}}}{\rm{R_{17}}+\rm{R_{19}}}
-  = 3.3\rm{\,V} \cdot \frac{10\,kΩ}{10\,kΩ+16.9\,kΩ} = 1.23\rm{V}
-$$
+![ADM3260 Schematic](../media/schematics/ADM3260.svg)
 
-- **I2C pullups** are required on the isolated side, just like the main side. A "stiff" 2.2kΩ here is better for fighting the noise. Use 1% tolerance resistors to ensures the I2C rise times are identical on SDA and SCL, preventing timing "jitter" that can occur in high-noise environments.
+**The parts:**
 
+Reference | Specs | Part
+----------|-------|-----
+U         | Isolator 2.5kV I2C   | Analog Devices ADM3260ARSZ
+FB        | Ferrite Bead R<sub>DC</sub>=20mΩ Z=60Ω(100MHz)     | TDK MPZ-series
+C<sub>blk</sub> | cer.  10μF 16V | Murata GRM-series X5R 0805
+C<sub>mf</sub>  | cer. 100nF 16V | Murata GRM-series X7R 0402
+C<sub>hf</sub>  | cer.  10nF 16V | Murata GRM-series X7R 0502
+R<sub>h</sub>   | 16.9kΩ 1/8W (see below) | Yageo RC_L-series
+R<sub>l</sub>   | 10kΩ 1/8W (see below)   | Yageo RC_L-series
+R<sub>pu</sub>  | 2.2kΩ 1/8W (see below)  | Yageo RC_L-series
+
+
+**Engineering Notes:**
+
+- **V<sub>SEL</sub>** sets the isolated output voltage V<sub>ISO</sub>. For V<sub>ISO</sub>=3.3V, create a voltage divider so that V<sub>SEL</sub> matches the 1.25V reference voltage: 
+$$
+  \begin{align}
+    V_{SEL} &= V_{ISO} \cdot \frac{\rm{R_{l}}}{\rm{R_{l}}+\rm{R_{h}}}
+    \\
+    & = 3.3\rm{\,V} \cdot \frac{10\,kΩ}{10\,kΩ+16.9\,kΩ} \approx 1.25\rm{V} \nonumber
+  \end{align}
+$$
+- **I2C pullups** are required on the isolated side, just like the main side. A "stiff" 2.2kΩ here is better for fighting the noise. Use 1% tolerance resistors to ensures the I2C rise times are identical on SDA and SCL.
 - **Bypass capacitors** are mandatory for the device to function correctly and provide stable isolated power.
-  - 10 μF // 100 nF from V<sub>IN</sub> to GND<sub>P</sub>.
-  - 10 μF // 100 nF from V<sub>ISO</sub> to GND<sub>ISO</sub>.
-  - 100 nF // 10 nF from VDD<sub>P</sub> to GND<sub>P</sub>.
-  - 100 nF // 10 nF from VDD<sub>ISO</sub> to GND<sub>ISO</sub>.
-  - for 10 μF: use 0805 X7R capacitors within 4 mm of the pins (for power stability)
-  - for 10 nF: use 0402 X7R capacitors within 1 or 2 mm of the pins (for noise suppression)
-  - for 100 nF: use 0402 X7R capacitors within 1 or 2 mm of the pins (for noise suppression)
-  - follow the suggested footprint (Fig. 23 in the [datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf)) for PCB placement
+  - for 10 nF: place cap within 1 or 2 mm of the pins
+  - for 100 nF: place cap within 1 or 2 mm of the pins
+- For caps and resistors, follow the the footprint from Fig. 23 in the [Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf).
+- The signal **`EZO_PDIS`** is intended for powering down sensors between long monitoring intervals. Power to the sensors need to be restored and stabilized well before the measurement is taken.[^FAULTRECOVERY] 
 
-- The signal **`EZO_PDIS`** is intended for powering down sensors between long monitoring intervals. Power to the sensors need to be restored and stabilized well before the measurement is taken. It can also be used for fault recovery: pulse HIGH 100ms then LOW; wait ≥1.2s before sending I2C commands.
-
+[^FAULTRECOVERY]: It can also be used for fault recovery: pulse HIGH 100ms then LOW; wait ≥1.2s before sending I2C commands.
 
 ---
 
@@ -559,7 +572,7 @@ The gold standard for this "Multi-EZO" PCB layout is the [Atlas Scientific i4 In
    - Thermal: Place the drivers here to utilize the L2 GND plane as a heatsink.   
    - Noise profile: Extreme (source)
 3. **Zone C: Digital Logic (Top Center)**
-   - Components: MCU, LiDAR header, 5V/3.3V Regulators, EZO-RTD (Non-isolated).
+   - Components: ESP32, LiDAR header, 5V/3.3V Regulators, EZO-RTD (Non-isolated).
    - Routing: Keep I2C/UART on L1 (Top), shielded by the L2 GND Plane.
    - Noise profile: Moderate (sensitive)
 4. **Zone D: Isolated Islands (Top Corners)**
@@ -573,7 +586,7 @@ Below is how the layers should be carved to maintain 2.5kV isolation:
 
 Layer    | Mainland               | The Moat                  | The Island (pH or EC)
 ---------|------------------------|---------------------------|----------------------
-L1 (Top) | MCU, LiDAR             | No Copper                 | EZO Socket, BNC
+L1 (Top) | ESP32, LiDAR             | No Copper                 | EZO Socket, BNC
 L2 (GND) | Solid Main GND Plane   | Stitching Cap[^STITCHCAP] | Floating GND_ISO
 L3 (PWR) | 3.3V / 5V / 24V Planes | Stitching Cap             | Floating V_ISO (3.3V)
 L4 (Bot) | Steppers and glue      | No Copper                 | (Keep empty for signal)
@@ -634,7 +647,7 @@ $$
 
 ### 4.1. LiDAR Circuit
 
-#### Circuit
+**Circuit**
 
 Follow the guidance from the [Datasheet](https://github.com/May-DFRobot/DFRobot/blob/master/TF-Luna%20LiDAR%EF%BC%888m%EF%BC%89%20Datasheet.pdf)
 
@@ -646,7 +659,7 @@ Follow the guidance from the [Datasheet](https://github.com/May-DFRobot/DFRobot/
 - LiDAR `RDY` left floating
 - LiDAR 100μF electrolytic local bulk cap between 3V3 and GND
 
-#### Connector
+**Connector**
 
 - 6-pin Molex picoblade connector (1.25mm), P/N 0532610671 [^LiDARCONN]
 - Pin 1: VCC (5V &pm;0.1V)
@@ -666,7 +679,7 @@ Follow the guidance from the [Datasheet](https://github.com/May-DFRobot/DFRobot/
 
 The two float switches use opposite pull directions so that both GPIO signals are *active-HIGH when their cutoff condition is triggered* — consistent logic for both software and the hardware NPN cutoff transistors.
 
-#### Circuit
+**Circuit**
 
 OPNhydro uses normally-open (hinge DOWN) for both switches.
 - When water rises to the switch, the float arm lifts → magnet nears the reed switch → circuit closes.
@@ -684,7 +697,7 @@ For Low-Level Float:
 - Pull-down the `FLOAT_HIGH` signal with a 10kΩ resistor to GND.
 - Debounce the `FLOAT_HIGH` signal with a 100nF cap to 3V3.
 
-#### Connector
+**Connector**
 
 Both switches come with 2' (61cm) bare wire leads. Terminate each wire into the screw terminal on the PCB.
 - Phoenix Contact, Series COMBICON MKDS (P/N 1751264)
@@ -701,39 +714,80 @@ Both switches come with 2' (61cm) bare wire leads. Terminate each wire into the 
 
 All pumps and the ATO valve use the same 24V rail and identical driver circuits.
 
-Standard electrical practices suggest the following for 24V DC systems:
-- **Individual Actuators (Pumps and Solenoids):** 20 AWG or 22 AWG is sufficient for the individual 1.2A to 1.5A loads of the pumps and valves.
+Standard electrical practices suggest 20 AWG or 22 AWG wires are sufficient for the individual 1.2A to 1.5A loads of the pumps and valves.
+
+Notes about the Main Pump:
+- Pump must be fully submerged in water before power-on (prevents dry-run damage)
+- Mount pump vertically or horizontally, avoid inverted position
+- Add inline strainer/filter to prevent debris clogging impeller
+- Test PWM control at low duty cycles to find minimum stable speed
+- Allow 10-15 second startup delay in software for motor initialization
+
+Notes about the ATO valve:
+- Most solenoid valves have 2-wire leads (polarity doesn't matter for DC)
+- Arrow on valve body indicates flow direction
+- Use thread sealant (Teflon tape or pipe dope) on NPT threads
+- Mount valve with coil vertical (prevents water ingress)
+- Recommend: inline manual shutoff valve for maintenance
+- Recommend: firmware timeout prevents flooding if all level sensors fail
 
 
-### 5.1. Main Pump
-
-1. Pump must be fully submerged in water before power-on (prevents dry-run damage)
-2. Mount pump vertically or horizontally, avoid inverted position
-4. Add inline strainer/filter to prevent debris clogging impeller
-5. Test PWM control at low duty cycles to find minimum stable speed
-6. Allow 10-15 second startup delay in software for motor initialization
-
-#### Driver
-
-The obvious:
-- Place the IRLR2905 MOSFET between the pumps's GND terminal and GND. (The IRLR3636 remains a valid drop-in efficiency upgrade if desired.)
-- Add a 10kΩ pull-up resistor to the MOSFET gate to ensure the motor stays on during MCU reset.
-- Add a low-ESR 100nF / 50V cap between source and drain to handle the transients.
-- Add a 220µF / 50V electrolytic bulk over the 24V rails to help with inrush, which for a 200mA solenoid is modest — maybe 600mA for 1–2ms.
+---
 
 
-The main pump supports PWM speed control via the 24V power input. For PWM Drive and Signal Integrity:
-- Place a 100Ω gate resistor between `PUMP_MAIN` signal and the gate to help manage the inrush current to the MOSFET's gate capacitor. This protects the ESP32-C6 while allowing for the fast switching speeds required for variable pump control.
-- Add a SS34 Schottky diode (3A) as Flyback Protection across the pump terminals.The SHYSKY DC40F-2460 pump is said to have internal BLDC electronics limiting the inductive kickback, but still..
-- Firmware suggestions:
-  - Minimum: ~30-40% duty recommended to prevent stall.
-  - Frequency: 25 kHz (above audible range, smooth motor control)
+### 5.1. Main Pump Driver
 
-The float switch drives a small NPN transistor that directly clamps the MOSFET gate to GND when the cutoff condition fires. This is independent of firmware — the pump shut down in hardware even if the MCU is hung or misbehaving.
-- Place a BT3904 PNP transistor between gate and ground.
-- Place a 4k7 resistor between `FLOAT_HIGH` signal to limit the current.
+The main pump supports PWM speed control via the 24V power input.
 
-#### Connector
+The float switch drives a small NPN transistor that directly clamps the MOSFET gate to GND when the cutoff condition fires. This is independent of firmware — the pump shut down in hardware even if the ESP32 is hung or misbehaving.
+
+```
+                                24V
+                                 │
+                          ┌──────┤──────┬─────┐
+                          │c     │      │     │
+                         [D]  [Pump]  [Ch]  [Cl]
+                          │a     │      │     │
+                          └──────┤      └──┬──┘
+                         3V3     │         │
+                          │      │        GND
+                        [Rup]    │
+                          │     (d)
+PUMP_MAIN ──[Rg]───────┬──┴──(g) N-CH
+                       │        (s)
+                      (c)        │
+FLOAT_LOW ──[Rb]──(b) NPN        │
+                      (e)        │
+                       │         │
+                      GND       GND
+```
+
+**Parts**
+
+Reference      | Specs                 | Part
+---------------|-----------------------|---------
+N-CH           | N-CH MOSFET 55V 42A   | Infeneon IRLR2905TRPBF
+NPN            | NPN TRANS 40V 0.2A    | Onsemi MMBT3904LT1G
+D              | SCHOTTKY DIODE 40V 3A | Onsemi SS34
+R<sub>g</sub>  | 100Ω 1/8W             | Yageo RC_L-series
+R<sub>b</sub>  | 4.7kΩ 1/8W            | Yageo RC_L-series
+R<sub>up</sub> | 10kΩ 1/8W             | Yageo RC_L-series
+C<sub>h</sub>  | 100nF / 50V, low-ESR  | Murata GRM-series X7R
+C<sub>l</sub>  | 220µF / 50V           | Panasonic ME-series Elec.
+
+Engineering notes:
+- The IRLR3636 remains a valid drop-in efficiency upgrade if desired.
+- R<sub>up</sub> ensures the motor stays on during ESP32 reset.
+- C<sub>l</sub> for bulk over the 24V rails to help with inrush, which for a 200mA solenoid is modest — maybe 600mA for 1–2ms.
+- R<sub>g</sub> helps manage the inrush current to the MOSFET's gate capacitor. This protects the ESP32-C6 while allowing for the fast switching speeds required for PWM speed control.
+
+**Firmware suggestions:**
+- Minimum: ~30-40% duty recommended to prevent stall.
+- Frequency: 25 kHz (above audible range, smooth motor control)
+
+
+
+**Connector**
 
 - Phoenix Contact, Series COMBICON MC (P/N 1836189), avoid compatibility with 24V PSU.
 - 2 Position Header
@@ -745,31 +799,43 @@ The float switch drives a small NPN transistor that directly clamps the MOSFET g
 ---
 
 
-### 5.2. ATO Solenoid Valve
+### 5.2. ATO Solenoid Valve Driver
 
-Notes:
-- Most solenoid valves have 2-wire leads (polarity doesn't matter for DC)
-- Arrow on valve body indicates flow direction
-- Use thread sealant (Teflon tape or pipe dope) on NPT threads
-- Mount valve with coil vertical (prevents water ingress)
-- Recommend: inline manual shutoff valve for maintenance
-- Recommend: firmware timeout prevents flooding if all level sensors fail
+```
+                                  24V
+                                   │
+                            ┌──────┤──────┬─────┐
+                            │c     │      │     │
+                           [D]  [Valve]  [Ch]  [Cl]
+                            │a     │      │     │
+                            └──────┤      └──┬──┘
+                                   │         │
+                                   │        GND
+                                  (d)
+ATO_VALVE ───[Rg]─────────┬────(g) N-CH
+                         │       (s)
+                         (c)       │
+FLOAT_HIGH ──[Rb]──┬──(b) NPN      │
+                   │     (e)       │
+                 [Rdn]    │        │
+                   │      │        │
+                  GND    GND      GND
+```
 
-#### Driver
+**Parts:**
 
-The obvious:
-- Place the AO3400A MOSFET between the valve's GND terminal and GND.
-- Place a 100Ω gate resistor between `ATO_VALVE` signal and the gate to manage the inrush current to the MOSFET's gate capacitor.
-- Add a 10kΩ pull-down resistor to the gate to ensure the valve stays closed during MCU reset.
-- Add a low-ESR 100nF / 50V cap over the 24V rails to handle the transients.
-- Add a 47µF / 50V electrolytic bulk over the 24V rails to help with inrush, which for a 200mA solenoid is modest — maybe 600mA for 1–2ms.
-- Add a SS34 (3A) or 1N5819 (1A) Schottky diode as Flyback Protection across the valve terminals.
+Reference      | Specs                 | Part
+---------------|-----------------------|---------
+N-CH           | N-CH MOSFET 30V 5.7A  | Alpha & Omega AO3400A
+NPN            | NPN TRANS 40V 0.2A    | Onsemi MMBT3904LT1G
+D              | SCHOTTKY DIODE 40V 3A | Onsemi SS34
+R<sub>g</sub>  | 100Ω 1/8W             | Yageo RC_L-series
+R<sub>b</sub>  | 4.7kΩ 1/8W            | Yageo RC_L-series
+R<sub>dn</sub> | 10kΩ 1/8W             | Yageo RC_L-series
+C<sub>h</sub>  | 100nF / 50V, low-ESR  | Murata GRM-series X7R
+C<sub>l</sub>  | 47µF / 50V            | Panasonic MA-series Elec.
 
-The safety interlock:
-- Place a BT3904 PNP transistor between gate and ground.
-- Place a 4k7 resistor between `FLOAT_HIGH` signal and the base to limit the current.
-
-#### Connector
+**Connector:**
 
 - Phoenix Contact, Series COMBICON MC (P/N 1803277)
 - 2 Position Header
