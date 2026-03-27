@@ -66,6 +66,13 @@ The 24V enters the board and passes through a "protection gauntlet" before it re
 4. **TVS Diode (D1):** 28V (SMCJ30A). If a massive overvoltage event occurs, the TVS diode will shunt the excess current to ground, potentially blowing the fuse but saving the rest of the PCB.
 5. **Reverse Polarity Protection (T1):** If power is connected in reverse polarity, this stops current instantly, saving the TMC2209s.
 
+**Circuit:**
+
+![Protection Gauntlet Schematic](../media/schematics/Protection-Gauntlet.svg)
+
+**Parts:**
+
+
 How the Reverse Polarity Protection works:
 1. Normal polarity (+24V at Source):
    - 33kΩ pulls gate toward +24V
@@ -118,22 +125,11 @@ The Engineering:
 
 The buck converter converts 24V to 5V for the TTL logic.  For the design we follow Figure 10.1 of the [TPS62933 Datasheet](https://www.ti.com/lit/ds/symlink/tps62933.pdf?ts=1773728788941) and their [WEBENCH Power Designer](https://webench.ti.com/power-designer/switching-regulator). We add bulk caps on the input and output, per previous section.
 
-```
-                               TPS62933DRLR
-                            ┌───────────────┐
-24V_SAFE ─┬─────┬───────────┤ VIN       BST ├────┐   
-          │     │           │               │    │   
-        [Cbi] [Cin]         │               │  [Cbst]
-          │     │     3.3V──┤ EN         SW ├────┘──────[L]──────┬──────┬──► 5V
-         GND   GND          │               │                    │      │
-                   [Rrt] ───┤ RT        GND ├── GND          [3× Cout] [Cbo]
-                     │      │               │                    │      │
-                    GND     │            FB ├──┬─[R_t]──► 5V    GND    GND
-                            │               │  │
-                   [Css] ───┤ SS            │  └─[R_b]── GND
-                     │      └───────────────┘
-                    GND     
-```
+**Circuit:**
+
+![Buck Converter Schematic](../media/schematics/Buck-Converter.svg)
+
+**Parts:**
 
 Given the internal reference voltage $V_{r} = 0.8 \rm{\ V}$, we selected $R_{b}=10 \rm{\ k\Omega}$ and $R_{t}=52.3 \rm{\ k\Omega}$ for the voltage divider. The output voltage $V_o$ follows, per §9.3.4 of the datasheet:
 $$
@@ -183,17 +179,11 @@ R<sub>b</sub>   | 10kΩ 1% (see above)                 | Yageo RC_L-series
 
 The linear voltage regulator converts 5V to 3V3 for the LVTTL logic.  For the design, we follow the typical applications circuit in the [AMS1117-3.3 Datasheet](https://www.diodes.com/assets/Datasheets/AZ1117I.pdf):
 
+**Circuit:**
 
-```
-5V ───────┬──► VIN ┌─────────┐ VOUT ──┬──[10µF]────► 3.3V
-          │        │ AMS1117 │        │          
-       [C_in]      │  -3.3   │     [C_out]
-          │        └────┬────┘        │
-          │             │             │
-         ─┴─           ─┴─           ─┴─
-```
+![Linear Regulator Schematic](../media/schematics/Linear-Regulator.svg)
 
-**Part Selection:**
+**Parts:**
 
 Reference | Specs | Part
 ----------|-------|-----
@@ -284,6 +274,13 @@ The **main pump**, **stepper motors**, the **solenoid** and **buck converter** t
 > All currents in this section are RMS currents. 
 
 The Standard Application Circuit in Fig. 3.1 of the [TMC2209 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/tmc2209_datasheet_rev1.09.pdf) and [TM2209 EVAL Schematics](https://www.analog.com/media/en/evaluation-documentation/evaluation-design-files/TMC2209-EVAL_Layout_Data_V1.1.zip) show a typical Stepper Driver using the TMC2209. The design follows their recommendations:
+
+**Circuit:**
+
+![Stepper Driver Schematic](../media/schematics/Stepper-Driver.svg)
+
+**Parts:**
+
 
 To start with the **obvious pins**, per Signal Descriptions (§2.2) in the datasheet:
 
@@ -517,9 +514,11 @@ The Typical Applcation Diagram in Fig. 20 of the [ADM3260 Datasheet](https://www
 
 [^MOREAMD3260]: See also, Analog Devices ADM3260 Datasheet: The definitive source for "Layout Guidelines" and "EMI Considerations" (See pages 16-18); Atlas Scientific USB Isolator Schematic: Their public hardware documentation shows the ADM3260 implementation for I2C isolation; AN-0971 Application Note: "Recommendations for Control of Radiated Emissions with isoPower Devices."
 
+**Circuit:**
+
 ![ADM3260 Schematic](../media/schematics/ADM3260.svg)
 
-**The parts:**
+**Parts:**
 
 Reference | Specs | Part
 ----------|-------|-----
@@ -527,10 +526,10 @@ U         | Isolator 2.5kV I2C   | Analog Devices ADM3260ARSZ
 FB        | Ferrite Bead R<sub>DC</sub>=20mΩ Z=60Ω(100MHz)     | TDK MPZ-series
 C<sub>blk</sub> | cer.  10μF 16V | Murata GRM-series X5R 0805
 C<sub>mf</sub>  | cer. 100nF 16V | Murata GRM-series X7R 0402
-C<sub>hf</sub>  | cer.  10nF 16V | Murata GRM-series X7R 0502
+C<sub>hf</sub>  | cer.  10nF 16V | Murata GRM-series X7R 0402
 R<sub>h</sub>   | 16.9kΩ 1/8W (see below) | Yageo RC_L-series
 R<sub>l</sub>   | 10kΩ 1/8W (see below)   | Yageo RC_L-series
-R<sub>pu</sub>  | 2.2kΩ 1/8W (see below)  | Yageo RC_L-series
+R<sub>up</sub>  | 2.2kΩ 1/8W (see below)  | Yageo RC_L-series
 
 
 **Engineering Notes:**
@@ -649,6 +648,8 @@ $$
 
 **Circuit**
 
+![ADM3260 Schematic](../media/schematics/LiDAR.svg)
+
 Follow the guidance from the [Datasheet](https://github.com/May-DFRobot/DFRobot/blob/master/TF-Luna%20LiDAR%EF%BC%888m%EF%BC%89%20Datasheet.pdf)
 
 - LiDAR `5V` to 5V rail
@@ -680,6 +681,10 @@ Follow the guidance from the [Datasheet](https://github.com/May-DFRobot/DFRobot/
 The two float switches use opposite pull directions so that both GPIO signals are *active-HIGH when their cutoff condition is triggered* — consistent logic for both software and the hardware NPN cutoff transistors.
 
 **Circuit**
+
+![ADM3260 Schematic](../media/schematics/Float-Switches.svg)
+
+
 
 OPNhydro uses normally-open (hinge DOWN) for both switches.
 - When water rises to the switch, the float arm lifts → magnet nears the reed switch → circuit closes.
@@ -741,26 +746,10 @@ The main pump supports PWM speed control via the 24V power input.
 
 The float switch drives a small NPN transistor that directly clamps the MOSFET gate to GND when the cutoff condition fires. This is independent of firmware — the pump shut down in hardware even if the ESP32 is hung or misbehaving.
 
-```
-                                24V
-                                 │
-                          ┌──────┤──────┬─────┐
-                          │c     │      │     │
-                         [D]  [Pump]  [Ch]  [Cl]
-                          │a     │      │     │
-                          └──────┤      └──┬──┘
-                         3V3     │         │
-                          │      │        GND
-                        [Rup]    │
-                          │     (d)
-PUMP_MAIN ──[Rg]───────┬──┴──(g) N-CH
-                       │        (s)
-                      (c)        │
-FLOAT_LOW ──[Rb]──(b) NPN        │
-                      (e)        │
-                       │         │
-                      GND       GND
-```
+**Circuit**
+
+![Main Pump Circuit](../media/schematics/Main-Pump.svg)
+
 
 **Parts**
 
@@ -799,28 +788,12 @@ Engineering notes:
 ---
 
 
-### 5.2. ATO Solenoid Valve Driver
+### 5.2. ATO Valve Valve Driver
 
-```
-                                  24V
-                                   │
-                            ┌──────┤──────┬─────┐
-                            │c     │      │     │
-                           [D]  [Valve]  [Ch]  [Cl]
-                            │a     │      │     │
-                            └──────┤      └──┬──┘
-                                   │         │
-                                   │        GND
-                                  (d)
-ATO_VALVE ───[Rg]─────────┬────(g) N-CH
-                         │       (s)
-                         (c)       │
-FLOAT_HIGH ──[Rb]──┬──(b) NPN      │
-                   │     (e)       │
-                 [Rdn]    │        │
-                   │      │        │
-                  GND    GND      GND
-```
+**Circuit**
+
+![ATO Valve Circuit](../media/schematics/ATO-Valve.svg)
+
 
 **Parts:**
 
@@ -878,6 +851,9 @@ Included are two I2C headers for future expansion with e.g. a air temp/humidity 
 
 #### Circuit
 
+![Optional I2C Circuits](../media/schematics/Optional-I2C.svg)
+
+
 -  Add a low-ESR 100nF ceramic cap between 3V3 and GND to handle the transients.
  - Add a low-ESR 10µF ceramic cap between 3V3 and GND has a bulk cap and MF bypass.
 
@@ -899,6 +875,13 @@ There is no standard for I2C connectors.  Follow the Grove (Seeed Studio) and ST
 
 
 The ESP32-C6-DevKitC-1-N8 mounts to the carrier PCB via 2×20 pin headers. USB-C, boot/reset buttons, antenna, RGB LED (WS2812B) and power regulation are on the DevKit.
+
+**Circuit**
+
+![ESP32-C6 Circuit](../media/schematics/ESP32-C6.svg)
+
+
+**Parts**
 
 
 ### 7.1 Pin Assignments
@@ -945,6 +928,26 @@ Other General Purpose I/O pins:
 
 
 ## 8. EZO Circuits and Probe Calibration
+
+
+**Circuit**
+
+![EZO pH/EC Circuit](../media/schematics/EZO-pH-EC.svg)
+
+
+**Parts**
+
+
+
+
+**Circuit**
+
+![Water Temperature Circuit](../media/schematics/Water-Temperature.svg)
+
+
+**Parts**
+
+
 
 
 ### 8.1 Switching to I2C Mode
