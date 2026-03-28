@@ -1,4 +1,4 @@
-27561014275441581
+27562788940475100
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -7904,6 +7904,13 @@ S6B-PH-K-S
 6
 Coert-Vonk
 TERM BLK PLG 2POS MSTB 5.08mm
+
+
+0
+0
+0
+Coert-Vonk
+TERM BLK PLG 2POS PC-MC 0.2
 
 
 0

@@ -60,30 +60,42 @@ The system must manage a **peak draw of approximately 4.7A** when the 1.2A main 
 
 The 24V enters the board and passes through a "protection gauntlet" before it reaches the motor drivers and the sensitive sensor logic:
 
-1. **18 AWG Wire** for the Main Power Input (from PSU to PCB), according to standard electrical practices suggesting 18 AWG for currents up to 10A over short runs.
-2. **Pluggable Header** for the Main Power Input: Two position header, 0.2" pitch, 12A / 400V, 12-30 AWG (Phoenix Contact 1757242). Mating plug is Phoenix Contact P/N 1757019.
-3. **Main Fuse (F1):** 7A Fast-Acting (SMD). This provides a 50% headroom over the 4.7A peak, while still being close to 6.5A rating of the PSU. Not using PTC, because of its slow response time and voltage drop. 
-4. **TVS Diode (D1):** 28V (SMCJ30A). If a massive overvoltage event occurs, the TVS diode will shunt the excess current to ground, potentially blowing the fuse but saving the rest of the PCB.
-5. **Reverse Polarity Protection (T1):** If power is connected in reverse polarity, this stops current instantly, saving the TMC2209s.
+1. **18 AWG Wire** for the Main Power Input (from PSU to PCB), according to standard electrical practices for currents up to 10A over short runs.
+2. **Main Fuse (F):** 7A Fast-Acting Fuse provides a 50% headroom over the 4.7A peak, while still being close to 6.5A rating of the PSU. Not using PTC, because of its slow response time and voltage drop. 
+3. **TVS Diode (D<sub>tvs</sub>):** If a massive overvoltage event occurs, the TVS diode will shunt the excess current to ground, potentially blowing the fuse but saving the rest of the PCB.
+4. **Reverse Polarity Protection (P-CH):** If power is connected in reverse polarity, this stops current instantly, saving the remainder of the board.
 
 **Circuit:**
 
 ![Protection Gauntlet Schematic](../media/schematics/Protection-Gauntlet.svg)
 
-**Parts:**
+**Part Selection:**
 
+Reference       | Specs                                   | Manufacturer / Details
+----------------|-----------------------------------------|-----------------------
+Wire            | 18 AWG / 10A over short runs            |
+H               | 12A 400V Header, 0.2" pitch             | Phoenix Contact MSTA-series 2P 0.2" 
+P               | 12A 630V Plug, 0.2" pitch, 12-30 AWG    | Phoenix Contact MSTB-series 2P 0.2" 
+FB              | 50Ω(100Mhz) 12A Ferrite bead            | Murata BLM31-series 1206
+F               | 7A 125VAC Fast Fuse                     | Littelfuse NANO451-series
+P-CH            | 30V 32A P-CH MOSFET                     | Alpha & Omega AON6407 
+D<sub>tvs</sub> | 28V<sub>rs</sub> TVS                    | Diodes SMBJ-series SMBJ28A-13-F 
+D<sub>z</sub>   | 12V / 200mW zener                       | Diodes BZT52C12S-7-F 
+R<sub>gs</sub>  | 33kΩ 1/8W 1%                            | Yageo RC_L-series 0805
+C<sub>blk</sub> | 1000µF 50V 20% Elec. (see §1.2)         | Panasonic M-A-series Radial
 
-How the Reverse Polarity Protection works:
-1. Normal polarity (+24V at Source):
-   - 33kΩ pulls gate toward +24V
-   - Zener clamps gate at +12V
-   - V<sub>gs</sub> = 12 − 24 = −12V → **FET fully ON** ✓
-   - Current through Zener: (24−12) / 33k = 0.36mA → 4.3mW dissipation, trivial
-2. Reverse polarity (supply plugged backwards → Source at −24V):
-   - 33kΩ pulls gate toward 0V
-   - Zener anode is now at +24V → clamps gate at 24−12 = +12V
-   - V<sub>gs</sub> = 12 − 0 = +12V → **FET stays OFF** ✓
-   - +12V is within the ±20V V<sub>gs</sub>(max) rating — safe ✓
+**Engineering Notes:**
+- Reverse Polarity Protection explained:
+    1. Normal polarity (+24V at Source):
+      - 33kΩ pulls gate toward +24V
+      - Zener clamps gate at +12V
+      - V<sub>gs</sub> = 12 − 24 = −12V → **FET fully ON** ✓
+      - Current through Zener: (24−12) / 33k = 0.36mA → 4.3mW dissipation, trivial
+    2. Reverse polarity (supply plugged backwards → Source at −24V):
+      - 33kΩ pulls gate toward 0V
+      - Zener anode is now at +24V → clamps gate at 24−12 = +12V
+      - V<sub>gs</sub> = 12 − 0 = +12V → **FET stays OFF** ✓
+      - +12V is within the ±20V V<sub>gs</sub>(max) rating — safe ✓
 
 
 ---
@@ -129,47 +141,44 @@ The buck converter converts 24V to 5V for the TTL logic.  For the design we foll
 
 ![Buck Converter Schematic](../media/schematics/Buck-Converter.svg)
 
-**Parts:**
+**Part Selection:**
 
-Given the internal reference voltage $V_{r} = 0.8 \rm{\ V}$, we selected $R_{b}=10 \rm{\ k\Omega}$ and $R_{t}=52.3 \rm{\ k\Omega}$ for the voltage divider. The output voltage $V_o$ follows, per §9.3.4 of the datasheet:
+Reference       | Specs                                   | Manufacturer / Details
+----------------|-----------------------------------------|-----------------------
+U               | 3.8–30V 3A Buck Converter               | T.I. TPS62933DRLR
+L               | 10µH 3A ±20% R<sub>DC</sub><50mΩ        | Bourns SDR1307-series
+R<sub>rt</sub>  | 21kΩ 1/8W ±1% (calc. below)             | Yageo RC_L-series 0805
+R<sub>t</sub>   | 52.3kΩ 1/8W ±1% (calc. below)           | Yageo RC_L-series 0805
+R<sub>b</sub>   | 10kΩ 1/8W ±1% (calc. below)             | Yageo RC_L-series 0805
+C<sub>mf</sub>  | 10µF 50V ±10% ceramic (X5R or X7R)      | Murata GRT-series X5R 1206
+C<sub>bst</sub> | 100nF 10V ±10% ceramic                  | Murata GRM-series X7R 0402
+C<sub>ss</sub>  | 33nF 50V ±10% ceramic (calc. below)     | Murata GRM-series X7R 0402
+C<sub>b1</sub>  | 1000µF 50V ±20% elec. (see §1.2)        | Panasonic M-A-series Elec.
+C<sub>b2</sub>  | 3× 10µF 10V ±10% ceramic                | Murata GRM-series X5R 0805
+C<sub>b3</sub>  | 220µF 10V ±20% poly. (see §1.2)         | Panasonic SVPK-series Poly.
+
+**Engineering Notes:**
+- Given the internal reference voltage $V_{r} = 0.8 \rm{\ V}$, we selected $R_{b}=10 \rm{\ k\Omega}$ and $R_{t}=52.3 \rm{\ k\Omega}$ for the voltage divider. The output voltage $V_o$ follows, per §9.3.4 of the datasheet:
 $$
   \begin{align}
     V_o &= V_r \times \frac{R_b + R_t}{R_b} \\
         &= 0.8 \rm{\ V} \times \frac{10\rm{\ k\Omega} + 52.3\rm{\ k\Omega}}{10\rm{\ k\Omega}} \approx 5 \rm{\ V} \nonumber
   \end{align}
 $$
-
-For a switching frequency $f_{s} \approx 1 \rm{\ MHz}$, we select $R_{rt} = 21 \rm{\ kΩ}$, per per §9.3.5:
+- For a switching frequency $f_{s} \approx 1 \rm{\ MHz}$, we select $R_{rt} = 21 \rm{\ kΩ}$, per per §9.3.5:
 $$
   \begin{align}
   f_{s} &= 17.293 \times 10^6 \times \left(\frac{R_{rt}}{10^3}\right)^{-0.942} \\
   &= 17.293 \times 10^6 × 21^{-0.942} \approx 1 \rm{\ MHz} \nonumber
   \end{align}
 $$
-
-We use the soft-start feature to minimize inrush current for driving capacitive load. For a soft-start $t_{ss} = 5 \rm{\ ms}$, where $V_{r} = 0.8 \rm{\ V}$ and a typical $I_{ss}=5.5 \rm{\ \mu A}$, the required $C_{ss}$ follows per §9.3.6:
+- We use the soft-start feature to minimize inrush current for driving capacitive load. For a soft-start $t_{ss} = 5 \rm{\ ms}$, where $V_{r} = 0.8 \rm{\ V}$ and a typical $I_{ss}=5.5 \rm{\ \mu A}$, the required $C_{ss}$ follows per §9.3.6:
 $$
   \begin{align}
     C_{ss} &= \frac{t_{ss} \times I_{ss}}{V_r} \\
     &= \frac{5 \rm{\ ms} \times 5.5 \rm{\ \mu A}}{0.8 \rm{\ V}} \approx 33 \rm{\ nF} \nonumber
   \end{align}
 $$
-
-**Part Selection:**
-
-Reference | Specs | Part
-----------|-------|-----
-TPS62933DRLR    | Synchronous, Internal loop, 3.8–30V in, 3A | T.I. TPS62933DRLR
-L               | 10µH / 3A, R<sub>DC</sub> < 50mΩ    | Bourns SDR1307-series
-C<sub>bi</sub>  | 1000µF / 50V alum. (see bulk)       | Panasonic M-A-series Elec.
-C<sub>in</sub>  | 10µF / 50V ceramic (X5R or X7R)     | Murata GRT-series X7R
-C<sub>out</sub> | 3× 10µF / 10V ceramic (X5R or X7R)  | Murata GRM-series X7R
-C<sub>bo</sub>  | 220µF / 10V alum. (see bulk)        | Panasonic SVPK-series Poly.
-C<sub>bst</sub> | 100nF / 10V ceramic                 | Murata GRM-series X7R
-C<sub>ss</sub>  | 33nF / 50V ceramic (see above)      | Murata GRM-series X7R
-R<sub>rt</sub>  | 21kΩ (see above)                    | Yageo RC_L-series
-R<sub>t</sub>   | 52.3kΩ 1% (see above)               | Yageo RC_L-series
-R<sub>b</sub>   | 10kΩ 1% (see above)                 | Yageo RC_L-series
 
 
 ---
@@ -183,13 +192,13 @@ The linear voltage regulator converts 5V to 3V3 for the LVTTL logic.  For the de
 
 ![Linear Regulator Schematic](../media/schematics/Linear-Regulator.svg)
 
-**Parts:**
+**Part Selection:**
 
-Reference | Specs | Part
-----------|-------|-----
-AMS1117-3.3     | Linear Regulator 3.3V / 1A      | Diodes AZ1117IH-3.3TRG1
-C<sub>in</sub>  | Not needed (already part of buck converter) | 
-C<sub>out</sub> | 22µF / 10V polymer              | Murata GRM-Series X75
+Reference       | Specs                                   | Manufacturer / Details
+----------------|-----------------------------------------|-----------------------
+U               | 3.3V 1A Linear Regulator                | Diodes AZ1117IH-3.3TRG1
+C<sub>b1</sub>  | Not needed (already part of buck converter) | 
+C<sub>b2</sub>  | 22µF 10V Polymer                        | Murata GRM-Series X75 1206
 
 
 ---
@@ -273,48 +282,57 @@ The **main pump**, **stepper motors**, the **solenoid** and **buck converter** t
 
 > All currents in this section are RMS currents. 
 
-The Standard Application Circuit in Fig. 3.1 of the [TMC2209 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/tmc2209_datasheet_rev1.09.pdf) and [TM2209 EVAL Schematics](https://www.analog.com/media/en/evaluation-documentation/evaluation-design-files/TMC2209-EVAL_Layout_Data_V1.1.zip) show a typical Stepper Driver using the TMC2209. The design follows their recommendations:
-
 **Circuit:**
+
+The Standard Application Circuit in Fig. 3.1 of the [TMC2209 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/tmc2209_datasheet_rev1.09.pdf) and [TM2209 EVAL Schematics](https://www.analog.com/media/en/evaluation-documentation/evaluation-design-files/TMC2209-EVAL_Layout_Data_V1.1.zip) show a typical Stepper Driver using the TMC2209. The design follows their recommendations:
 
 ![Stepper Driver Schematic](../media/schematics/Stepper-Driver.svg)
 
-**Parts:**
+**Part Selection:**
 
+Reference       | Specs                                   | Manufacturer / Details
+----------------|-----------------------------------------|-----------------------
+U               | 4.75-28V 2A TMC2209 Motor Driver        | Analog Devices stallGuard-series TMC2209-LA-T
+R<sub>t</sub>   | 14kΩ 1/8W ±1% (calc. below)             | Yageo RC_L-series 0805
+R<sub>b</sub>   | 10.7kΩ 1/8W ±1% (calc. below)           | Yageo RC_L-series 0805
+R<sub>s</sub>   | 2× 110Ω 1/3W ±1% (calc. below)          | Susumu RL-series 0805
+C<sub>cp</sub>  | 22nF 100V ±10% cer.                     | Murata GRM-series X7R 0603
+C<sub>vcp</sub> | 100nF 50V ±10% cer.                     | Murata GRM-series X7R 0402
+C<sub>mf1</sub> | 100nF 50V ±10% cer.                     | Murata GRM-series X7R 0402
+C<sub>mf2</sub> | 2× 100nF 10V ±10%  X5R/X7R (per §3.1)   | Murata GRM-series X7R 0402
+C<sub>b1</sub>  | 2.2μF 10V ±10% X7R                      | Murata GRM-series X7R 0603
+C<sub>b2</sub>  | 220µF 50V ±20% (per §3.1)               | Panasonic M-A-series Elec.
+HDR             | 3A 250V 4-pin XH 2.5mm Male Header          | JST XH-series XHP-4
+PLG             | 3A 250V 4-pin XH 2.5mm Female Plug[^NEMA17] | JST XH-series S4B-XH-A[^JSTXHCONTACT]
 
-To start with the **obvious pins**, per Signal Descriptions (§2.2) in the datasheet:
+[^NEMA17]: Commonly mislabelled "XH2.54"); XH series is 2.5mm pitch, not 2.54mm DuPont. [nkoproducts.com](https://ankoproducts.com/products/a200sx). Compatible with Molex KK 0.1"
+[^JSTXHCONTACT]: Contacts Sold Separately
 
-Pin          | Connection | Function
--------------|------------|---------
-`ENN`        | Wire to signal `STEP_PDIS` | Allows the firmware to disable the driver for a "Silent Read".
-`CP0`, `CP1` | Place a 22nF / 50V cap between these pins. | Charge pump  .
-`VCP`, `VS`  | Place a 100nF cap between these pins.      | Charge pump voltage.
-`SPREAD`     | Wire to GND.              | Selects StealthChop mode, per architecture.
-`5VOUT`      | Place a 2.2μF cap to GND. | Stabilize the 5V.
-`CLK`        | Tie to GND.               | Selects the internal clock.
-`STEP`       | Tie to dedicated input signal, e.g. `STEP_PH_DH`. | STEP input.
-`DIR`        | Leave unconnected (int. pull-down). | DIR=LOW to increase.
-`STDBY`      | Leave unconnected (int. pull-down). | Enables the internal supply regulator.
-`VS`         | Place 2 low-ESR 100nF caps, and a 220µF local bulk cap in parallel to GND. | Reduce Motor Supply Voltage transients, per §3.1.
-`DIAG`       | Leave unconnected. | Stall detection is preferred via the `DRV_STATUS` register.
-`INDEX`      | Leave unconnected. | Adds no value in normal operation.
-`OA1`        | Wire to header for `A+` on Stepper Motor | Motor coil A output 1
-`OA2`        | Wire to header for `A-` on Stepper Motor | Motor coil A output 2
-`OB1`        | Wire to header for `B+` on Stepper Motor | Motor coil B output 1
-`OB2`        | Wire to header for `B-` on Stepper Motor | Motor coil B output 2
-Die Pad      | Wire to GND plane. | Provide as many as possible vias for heat transfer.
-
-**Notes:**
-- Peristaltic pumps are self-sealing — the rollers pinch the tube closed when stopped, so backflow cannot occur and direction reversal is never needed. If a pump runs backwards on first install, swap the coil A wires (OA1 ↔ OA2) on the connector.
-- `IHOLD=0` handles standstill power saving without the register-reset complication of STDBY.
+**Engineering Notes:**
+- The Header follows the NEMA 17 convention. The pins are Coil A+, Coil A-, Coil B+, Coil B-[^STEPPERHEADER]
+- `SPREAD` tied to GND to selects StealthChop mode, per architecture.
+- `CLK` tied to GND, to select the internal clock.
+- `STEP` tied tie to dedicated input signal, e.g. `STEP_PH_DH`.
+- `DIR` left unconnected (int. pull-down) to select increasing count
+- `STDBY` left unconnected (int. pull-down) to enables the internal supply regulator.
+- `INDEX` left unconnected. Adds no value in normal operation.
+- **Die Pad** must be wire to GND plane; Provide as many as possible vias for heat transfer.
+- Peristaltic pumps are self-sealing — the rollers pinch the tube closed when stopped, so backflow cannot occur and direction reversal is never needed.
+- `STEP_PDIS` allows the firmware to disable the driver for a "Silent Read".
+- Register `IHOLD=0` handles standstill power saving without the register-reset complication of STDBY.
+- `DIAG` left unconnected. Stall detection is preferred via the `DRV_STATUS` register.
 - If we end up with a free GPIO, we can use this to allow interrupt-driven stall detection using the `DIAG`-pin without polling.
 
+[^STEPPERHEADER]: ⚠ Verify pin order from A200SX datasheet before PCB layout. Coil swap (A↔B or polarity) only affects rotation direction; the TMC2209 handles both.
+
+
+### 2.1.1. Single Wire UART Bus
 
 Using a **Single Wire UART Bus** with the MS1 and MS2 pins for addressing is the most "EZO-like" way to handle the TMC2209 drivers — it keeps the pin count low and control digital.
 
 The TMC2209 Device Address is set using pins `AD1` and `AD0`. These pins have internal pull-down resistors:
-   - for pH Dn, set address 0b00 → leave `AD1` and `AD0` floating
-   - for NUT A, set address 0b10 → tie `AD1` to 3V3 and leave `AD0` floating
+   - for pH Dn, set address 0b00 → leave `AD1` and `AD0` unconnected
+   - for NUT A, set address 0b10 → tie `AD1` to 3V3 and leave `AD0` unconnected
    - for NUT B, set address 0b11 → tie `AD1` and `AD0` to 3V3
 
 The connections:
@@ -324,14 +342,12 @@ Pin             | Connection | Function
 `AD1` and `AD0` | See above | Assign the driver an unique UART node address.
 `PDN_UART`      | Connect to the `STEP_BUS` signal.
 
-The ESP32 connects to this Single Wire UART Bus as:
-- `RXD` from the ESP32 connects directly to the `STEP_BUS` signal.
-- `TXD` from the ESP32 connects via a 1kΩ resistor to the `STEP_BUS` signal.
-
 Notes on conflicts:
 - When the ESP32 `TXD` drives HIGH to send a command, and the TMC2209's open-drain output momentarily pulls the bus LOW to begin its response (a brief overlap before software tri-states TX) → A low-impedance conflict occurs. The 1kΩ on TX limits the fault current to a safe level of 3.3V / 1kΩ = 3.3 mA. 
 - Along the same lines: the firmware should configure ESP32 UART1 in **half-duplex / single-wire mode**, so TX is tri-stated (high-impedance) during the receive window. The TMC2209 then pulls the bus LOW open-drain to transmit its response, with no conflict from TX.
 - The firmware should set `SENDDELAY` to ≥2 for all nodes. Otherwise, a non-addressed node might detect a transmission error upon read access to a different node. 
+
+### 2.1.2. Output Current
 
 The **Output Current** is limited by:
 1. The **R<sub>SENSE</sub>** shunt resistors measure the output currents. The TMC2209 measures the voltage drop across this resistor to determine actual coil current, then adjusts its PWM chopper duty cycle to regulate current to the `IRUN/IHOLD target`. §8 suggests 120 mΩ low-inductance resistors. Instead we use a 110 mΩ 1/4W to ensure it will not exceed the full-scale voltage of 325mV.
@@ -377,23 +393,7 @@ CS value | Current limit| Target range
 30       |      1.48A   | 87%
 31       |      1.53A   | 90%
 
-**Connectors**
 
-The A200SX motor cable carries coil wires only (4 pins). According to the NEMA 17 convention, the stepper uses a cable with:
-- Motor Body End has a JST PH 2.0mm 4-pin female plug;
-- Free PCB End has a JST XH 2.5mm 4-pin female plug.[^NEMA17], compatible with Molex KK 0.1".
-
-[^NEMA17]: Commonly mislabelled "XH2.54"); XH series is 2.5mm pitch, not 2.54mm DuPont. [nkoproducts.com](https://ankoproducts.com/products/a200sx)
-
-The PCB Header should use follow the NEMA 17 convention:[^STEPPERHEADER]
-[^STEPPERHEADER]: ⚠ Verify pin order from A200SX datasheet before PCB layout. Coil swap (A↔B or polarity) only affects rotation direction; the TMC2209 handles both.
-
-Pin | Function
-----|-----------
-1   | Coil A+   
-2   | Coil A-  
-3   | Coil B+  
-4   | Coil B-  
 
 **Firmware Considerations**
 
@@ -510,27 +510,26 @@ To prevent Ground Loops, the architecture uses Isolated I2C via the ADM3260 chip
 
 ### 3.1. Isolation Circuit (ADM3260)
 
+**Circuit:**
+
 The Typical Applcation Diagram in Fig. 20 of the [ADM3260 Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf) and [UG-724](https://www.analog.com/media/en/technical-documentation/user-guides/EVAL-ADM3260MEBZ_UG-724.pdf) show a typical Isolated I2C Interface using the ADM3260. The design follows their recommendations[^MOREAMD3260] :
 
 [^MOREAMD3260]: See also, Analog Devices ADM3260 Datasheet: The definitive source for "Layout Guidelines" and "EMI Considerations" (See pages 16-18); Atlas Scientific USB Isolator Schematic: Their public hardware documentation shows the ADM3260 implementation for I2C isolation; AN-0971 Application Note: "Recommendations for Control of Radiated Emissions with isoPower Devices."
 
-**Circuit:**
+![Isolation-Circuit Schematic](../media/schematics/Isolation-Circuit.svg)
 
-![ADM3260 Schematic](../media/schematics/ADM3260.svg)
+**Part Selection:**
 
-**Parts:**
-
-Reference | Specs | Part
-----------|-------|-----
-U         | Isolator 2.5kV I2C   | Analog Devices ADM3260ARSZ
-FB        | Ferrite Bead R<sub>DC</sub>=20mΩ Z=60Ω(100MHz)     | TDK MPZ-series
-C<sub>blk</sub> | cer.  10μF 16V | Murata GRM-series X5R 0805
-C<sub>mf</sub>  | cer. 100nF 16V | Murata GRM-series X7R 0402
-C<sub>hf</sub>  | cer.  10nF 16V | Murata GRM-series X7R 0402
-R<sub>h</sub>   | 16.9kΩ 1/8W (see below) | Yageo RC_L-series
-R<sub>l</sub>   | 10kΩ 1/8W (see below)   | Yageo RC_L-series
-R<sub>up</sub>  | 2.2kΩ 1/8W (see below)  | Yageo RC_L-series
-
+Reference       | Specs                         | Manufacturer / Details
+----------------|-------------------------------|-----------------------
+U               | 2.5kV I2C Isolator            | Analog Devices ADM3260ARSZ
+FB              | R<sub>DC</sub>=20mΩ Z=60Ω(100MHz) Ferrite Bead | TDK MPZ-series MPZ1608S600ATDH5
+C<sub>blk</sub> | 10μF 16V ±10% cer.            | Murata GRM-series X5R 0805
+C<sub>mf</sub>  | 100nF 16V 10% cer             | Murata GRM-series X7R 0402
+C<sub>hf</sub>  | 10nF 16V 10% cer.             | Murata GRM-series X7R 0402
+R<sub>t</sub>   | 16.9kΩ 1/8W ±1% (calc. below) | Yageo RC_L-series 0805
+R<sub>b</sub>   | 10kΩ 1/8W ±1% (calc. below)   | Yageo RC_L-series 0805
+R<sub>up</sub>  | 2.2kΩ 1/8W ±1% (calc. below)  | Yageo RC_L-series 0805
 
 **Engineering Notes:**
 
@@ -648,29 +647,25 @@ $$
 
 **Circuit**
 
+Follow the guidance from the [Datasheet](https://github.com/May-DFRobot/DFRobot/blob/master/TF-Luna%20LiDAR%EF%BC%888m%EF%BC%89%20Datasheet.pdf).
+
 ![ADM3260 Schematic](../media/schematics/LiDAR.svg)
 
-Follow the guidance from the [Datasheet](https://github.com/May-DFRobot/DFRobot/blob/master/TF-Luna%20LiDAR%EF%BC%888m%EF%BC%89%20Datasheet.pdf)
+**Part Selection:**
 
-- LiDAR `5V` to 5V rail
-- LiDAR `RX/SDA` to signal I2C_SDA
-- LiDAR `TX/SCL` to signal I2C_SCL
-- LiDAR `GND` to GND
-- LiDAR `!I2C` to GND
-- LiDAR `RDY` left floating
-- LiDAR 100μF electrolytic local bulk cap between 3V3 and GND
-
-**Connector**
-
-- 6-pin Molex picoblade connector (1.25mm), P/N 0532610671 [^LiDARCONN]
-- Pin 1: VCC (5V &pm;0.1V)
-- Pin 2: RX/SDA
-- Pin 3: TX/SCL
-- Pin 4: GND
-- Pin 5: Configuration (floating/high for UART; GND for I2C)
-- Pin 6: Data Ready (I2C mode)
+Reference       | Specs                                     | Manufacturer / Details
+----------------|-------------------------------------------|-----------------------
+C<sub>b</sub>   | 100μF 25V ±20% elec.                      | Panasonic FN-series 
+HDR             | 6-pin Molex 1.25mm, male header           | Molex PicoBlade-51021-series 0532610671 [^LiDARCONN]
+PLG housing     | 6-pin Molex 1.25mm, female plug housing   | Molex PicoBlade-51021-series 0510210600
+PLG contacts    | 6× 26-28 AWG Molex 1.25mm, female plug contacts | Molex PicoBlade-50079-series 0500798000
 
 [^LiDARCONN]: See [RobotShop Community](https://community.robotshop.com/forum/t/whats-the-electrical-connector-on-the-tf-luna-lidar-sensor/99629)
+
+
+**Engineering notes:**
+
+- Connector pins: VCC, RX/SDA, TX/SCL, GND, Config, (unconnected for UART; GND for I2C), Data Ready (I2C mode).
 
 
 ---
@@ -684,31 +679,20 @@ The two float switches use opposite pull directions so that both GPIO signals ar
 
 ![ADM3260 Schematic](../media/schematics/Float-Switches.svg)
 
+**Part Selection:**
 
+Reference | Specs                                     | Manufacturer / Details
+----------|-------------------------------------------|-----------------------
+J         | 4-pin 3.5mm, side-entry screw terminal    | Same Sky TB0011-350-series 2223-TB0011-350-04BE-ND
+R         | 2× 10kΩ 1/8W ±1%                          | Yageo RC_L-series 0805
+C         | 2× 100nF 50V ±10% cer.                    | Murata GRM-series X7R 0402
 
-OPNhydro uses normally-open (hinge DOWN) for both switches.
-- When water rises to the switch, the float arm lifts → magnet nears the reed switch → circuit closes.
-- When water drops below the switch, the float arm falls → magnet nears the reed switch → circuit opens.
+**Engineering notes:**
 
-For Low-Level Float:
-- Mount so that it triggers at the 10% of the 100L fill mark.
-- Connect one lead to the `FLOAT_LOW` signal, and the other lead to GND.
-- Pull-up the `FLOAT_LOW` signal with a 10kΩ resistor to 3V3.
-- Debounce the `FLOAT_LOW` signal with a 100nF cap to ground.
-
-For Low-Level Float:
-- Mount so that it triggers at the 100L fill mark.
-- Connect one lead to the `FLOAT_HIGH` signal, and the other lead to 3V3.
-- Pull-down the `FLOAT_HIGH` signal with a 10kΩ resistor to GND.
-- Debounce the `FLOAT_HIGH` signal with a 100nF cap to 3V3.
-
-**Connector**
-
-Both switches come with 2' (61cm) bare wire leads. Terminate each wire into the screw terminal on the PCB.
-- Phoenix Contact, Series COMBICON MKDS (P/N 1751264)
-- 4 Position Header
-- Pitch 3.5mm
-- Pin 1 to 3V3, pin 2 to high-level float, pin 3 to low level float, pin 4 to GND
+- Pins 3V3, high-level float, low level float, GND
+- Mount both float switches in with the hinge DOWN.
+    - When water rises to the switch, the float arm lifts → magnet nears the reed switch → circuit closes.
+    - When water drops below the switch, the float arm falls → magnet nears the reed switch → circuit opens.
 
 
 ---
@@ -750,21 +734,24 @@ The float switch drives a small NPN transistor that directly clamps the MOSFET g
 
 ![Main Pump Circuit](../media/schematics/Main-Pump.svg)
 
+**Part Selection**
 
-**Parts**
+Reference       | Specs                   | Manufacturer / Details
+----------------|-------------------------|---------
+N-CH            | 55V 42A N-CH MOSFET     | Infeneon IRLR2905TRPBF
+NPN             | 40V 0.2A NPN Transistor | Onsemi MMBT3904LT1G
+D               | 40V 3A Schottky Diode   | Onsemi SS34
+R<sub>g</sub>   | 100Ω 1/8W ±1%           | Yageo RC_L-series 0805
+R<sub>b</sub>   | 4.7kΩ 1/8W ±1%          | Yageo RC_L-series 0805
+R<sub>h</sub>   | 10kΩ 1/8W ±1%           | Yageo RC_L-series 0805
+C<sub>mf</sub>  | 100nF 50V ±10% X5R/X7R  | Murata GRM-series X7R 0402
+C<sub>b</sub>   | 220µF 50V ±20% Elec.    | Panasonic ME-series Elec.
+HDR             | 2-pos MC 0.2" header    | Phoenix Contact MC-series 1836189
+PLG             | 2-pos MC 0.2" plug      | Phoenix Contact MC-series 1836079
 
-Reference      | Specs                 | Part
----------------|-----------------------|---------
-N-CH           | N-CH MOSFET 55V 42A   | Infeneon IRLR2905TRPBF
-NPN            | NPN TRANS 40V 0.2A    | Onsemi MMBT3904LT1G
-D              | SCHOTTKY DIODE 40V 3A | Onsemi SS34
-R<sub>g</sub>  | 100Ω 1/8W             | Yageo RC_L-series
-R<sub>b</sub>  | 4.7kΩ 1/8W            | Yageo RC_L-series
-R<sub>up</sub> | 10kΩ 1/8W             | Yageo RC_L-series
-C<sub>h</sub>  | 100nF / 50V, low-ESR  | Murata GRM-series X7R
-C<sub>l</sub>  | 220µF / 50V           | Panasonic ME-series Elec.
-
-Engineering notes:
+**Engineering notes:**
+- Header chosen to avoid compatibility with 24V PSU header.
+- Header pins: 24V, switched GND
 - The IRLR3636 remains a valid drop-in efficiency upgrade if desired.
 - R<sub>up</sub> ensures the motor stays on during ESP32 reset.
 - C<sub>l</sub> for bulk over the 24V rails to help with inrush, which for a 200mA solenoid is modest — maybe 600mA for 1–2ms.
@@ -773,16 +760,6 @@ Engineering notes:
 **Firmware suggestions:**
 - Minimum: ~30-40% duty recommended to prevent stall.
 - Frequency: 25 kHz (above audible range, smooth motor control)
-
-
-
-**Connector**
-
-- Phoenix Contact, Series COMBICON MC (P/N 1836189), avoid compatibility with 24V PSU.
-- 2 Position Header
-- Pitch 0.2" (5.08mm)
-- Pin 1 to 24V, pin 2 to switched GND
-- Mating plug: Phoenix Contact P/N 1836079
 
 
 ---
@@ -794,27 +771,24 @@ Engineering notes:
 
 ![ATO Valve Circuit](../media/schematics/ATO-Valve.svg)
 
+**Part Selection**
 
-**Parts:**
+Reference       | Specs                   | Manufacturer / Details
+----------------|-------------------------|---------
+N-CH            | 30V 5.7A N-CH MOSFET    | Alpha & Omega AO3400A
+NPN             | 40V 0.2A NPN Transistor | Onsemi MMBT3904LT1G
+D               | 40V 3A Schottky Diode   | Onsemi SS34
+R<sub>g</sub>   | 100Ω 1/8W ±1%           | Yageo RC_L-series 0805
+R<sub>b</sub>   | 4.7kΩ 1/8W ±1%          | Yageo RC_L-series 0805
+R<sub>h</sub>   | 10kΩ 1/8W ±1%           | Yageo RC_L-series 0805
+C<sub>mf</sub>  | 100nF 50V ±10% X5R/X7R  | Murata GRM-series X7R 0402
+C<sub>b</sub>   | 47µF / 50V              | Panasonic MA-series Elec.
+HDR             | 2-pos MC 0.2" header    | Phoenix Contact MC-series 1836189
+PLG             | 2-pos MC 0.2" plug      | Phoenix Contact MC-series 1836079
 
-Reference      | Specs                 | Part
----------------|-----------------------|---------
-N-CH           | N-CH MOSFET 30V 5.7A  | Alpha & Omega AO3400A
-NPN            | NPN TRANS 40V 0.2A    | Onsemi MMBT3904LT1G
-D              | SCHOTTKY DIODE 40V 3A | Onsemi SS34
-R<sub>g</sub>  | 100Ω 1/8W             | Yageo RC_L-series
-R<sub>b</sub>  | 4.7kΩ 1/8W            | Yageo RC_L-series
-R<sub>dn</sub> | 10kΩ 1/8W             | Yageo RC_L-series
-C<sub>h</sub>  | 100nF / 50V, low-ESR  | Murata GRM-series X7R
-C<sub>l</sub>  | 47µF / 50V            | Panasonic MA-series Elec.
-
-**Connector:**
-
-- Phoenix Contact, Series COMBICON MC (P/N 1803277)
-- 2 Position Header
-- Pitch 0.15" (3.81mm), to make it incompatible with the Main Pump header
-- Pin 1 to 24V, pin 2 to switched GND
-- Mating plug: Phoenix Contact P/N 1803578
+**Engineering notes:**
+- Header chosen to avoid compatibility with 24V PSU header.
+- Header pins: 24V, switched GND
 
 
 ---
@@ -845,7 +819,7 @@ To fix noisy SDA/SCL lines, use one or more of these methods:[^I2CNOISE]
 ---
 
 
-### 6.2. Optional Sensors
+### 6.2. Optional I2C Sensors
 
 Included are two I2C headers for future expansion with e.g. a air temp/humidity sensor (BME200), light sensor (BH1750) or OLED display (SSD1306).
 
@@ -853,19 +827,20 @@ Included are two I2C headers for future expansion with e.g. a air temp/humidity 
 
 ![Optional I2C Circuits](../media/schematics/Optional-I2C.svg)
 
+**Part Selection**
 
--  Add a low-ESR 100nF ceramic cap between 3V3 and GND to handle the transients.
- - Add a low-ESR 10µF ceramic cap between 3V3 and GND has a bulk cap and MF bypass.
+Reference       | Specs                             | Manufacturer / Details
+----------------|-----------------------------------|-----------------------
+C<sub>mf</sub>  | 100nF 50V ±10% cer.               | Murata GRM-series X7R 0402
+C<sub>b</sub>   | 10µF 16V ±10% cer.                | Murata GRM-series X5R 0805
+HDR             | 2A 100V 4-Pos PH header           | JST PH-Series S4B-PH-K-S
+PLG housing     | 2A 100V 4-Pos PH housing          | JST PH-Series PHR-4
+PLG contacts    | 2A 100V 4-Pos PH contact 24-30AWG | JST PH-Series SPH-002T-P0.5S
 
-#### Connector
+**Engineering Notes**
 
-There is no standard for I2C connectors.  Follow the Grove (Seeed Studio) and STEMMA (Adafruit):
-- Phoenix Contact, Series JST PH (P/N 1751264)
-- 4-Position Header, 3.5mm Pitch
-   - Pin 1: GND
-   - Pin 2: VCC
-   - Pin 3: SCL
-   - Pin 4: SDA
+- There is no standard for I2C connectors.  Follow the Grove (Seeed Studio) and STEMMA (Adafruit).
+- Header pins: GND, VCC, SCL, SDA
 
 
 ---
@@ -881,76 +856,114 @@ The ESP32-C6-DevKitC-1-N8 mounts to the carrier PCB via 2×20 pin headers. USB-C
 ![ESP32-C6 Circuit](../media/schematics/ESP32-C6.svg)
 
 
-**Parts**
+**Part Selection**
 
+Reference       | Specs                             | Manufacturer / Details
+----------------|-----------------------------------|-----------------------
+M*              | ESP32-C6 Development Board        | Espressif Systems ESP32-C6-DEVKITC-1-N8
+R<sub>h</sub>   | 2× 2.2kΩ ±1% 1/8W (see I2C)       | Yageo RC_L-series 0805
+R<sub>tx</sub>  | 2× 1kΩ ±1% 1/8W (see below)       | Yageo RC_L-series 0805
 
-### 7.1 Pin Assignments
+**Engineering Nodes**
 
-Power:
-- `5V0` — Power in. → Connect to 5V rail.
-- `3V3` — Regulated power out. Not needed → Leave floating.
-- `GND` — Ground. → Connect to GND.
-- `~RST` — Reset input (internal pull-up). → Leave floating.
+- Power/reset pins:
+   - `3V3` — Regulated power out. Not needed → Leave unconnected.
+   - `~RST` — Reset input (internal pull-up). → Leave unconnected.
 
-The ESP32-C6 chip provides for JTAG debugging using the following pins:
-- `GPIO4` — Ensure no low-impedance devices pull it low during startup to avoid booting issues. → Connect to bidirectional `I2C_SDA` signal.
-- `GPIO5` — Ensure no low-impedance devices pull it low during startup to avoid booting issues. → Connect to bidirectional `I2C_SCL` signal.
+- The ESP32-C6 chip provides for JTAG debugging using the following pins:
+    - `GPIO4` — Ensure no low-impedance devices pull it low during startup to avoid booting issues. → Used as bidirectional I2C pin.
+    - `GPIO5` — Ensure no low-impedance devices pull it low during startup to avoid booting issues. → Used as bidirectional I2C pin.
 
-The chip allows for configuring boot parameters through strapping pins. At Chip Reset, latches sample the values:
-- `GPIO8` — Controls the boot mode. It is also used for the on-board RGB LED. → Do not connect to an external load.  → Leave floating.
-- `GPIO9` — Controls the boot mode. Ensure no low-impedance devices pull it low during startup to avoid booting issues. → Leave floating.
-- `GPIO15` — Controls peripheral voltage or JTAG. Ensure no low-impedance devices pull it low during startup to avoid booting issues. Used as output. → Connect to `STEP_NUT_A` signal.
+- The chip allows for configuring boot parameters through strapping pins. At Chip Reset, latches the values:
+    - `GPIO8` — Controls the boot mode. It is also used for the on-board RGB LED. → Do not connect to an external load.
+    - `GPIO9` — Controls the boot mode. Ensure no low-impedance devices pull it low during startup to avoid booting issues.
+    - `GPIO15` — Controls peripheral voltage or JTAG. Ensure no low-impedance devices pull it low during startup to avoid booting issues. → Used as output.
 
-USB-C ports:
-- `GPIO16` — Connects UART0 TX to the CP2102N USB-UART Bridge RX (reserved): 
-UART0 may transmit ROM boot messages and other serial data. → Leave floating.
-- `GPIO17` — Connects CP2102N USB-UART Bridge TX to UART0 RX (reserved). Any external connection would fight the CP2102N output. → Leave floating. 
-- `GPIO12`/`GPIO13` — USB `D−`/`D+` (reserved). These pins are used for Serial logging, code upload, JTAG. → Leave floating.
+- USB-C ports:
+    - `GPIO16` — Connects UART0 TX to the CP2102N USB-UART Bridge RX (reserved). UART0 may transmit ROM boot messages and other serial data. → Leave unconnected.
+    - `GPIO17` — Connects CP2102N USB-UART Bridge TX to UART0 RX (reserved). Any external connection would fight the CP2102N output. → Leave unconnected. 
+    - `GPIO12`/`GPIO13` — USB `D−`/`D+` (reserved). These pins are used for Serial logging, code upload, JTAG. → Leave unconnected.
 
-Other General Purpose I/O pins:
-- `GPIO0` — Used as input. → Connect to `FLOAT_LOW` signal.
-- `GPIO1` — Used as input. → Connect to `FLOAT_HIGH` signal.
-- `GPIO2` — Used as output. → Connect to `ATO_VALVE` signal.
-- `GPIO3` — Not used. → Leave floating.
-- `GPIO6` — Used as output. → Connect to `EZO_PDIS` signal.
-- `GPIO7` — Not used. → Leave floating.
-- `GPIO10` — Used as output. → Connect to `PUMP_MAIN` signal.
-- `GPIO11` — Used as output. → Connect to `STEP_PH_DN` signal.
-- `GPIO18` — Not used. → Leave floating.
-- `GPIO19` — Used as output. → Connect to `STEP_NUT_B` signal.
-- `GPIO20` — Used as output. → Connect to `STEP_PDIS` signal.
-- `GPIO21` —  UART1 RX. Receives responses from the addressed TMC2209 over the one-wire shared UART bus. → Connect directly to the `STEP_BUS` signal.
-- `GPIO22` —  UART1 TX. Drives the one-wire shared UART bus. → Connect with 1kΩ resistor to the `STEP_BUS` signal.
-- `GPIO23` — Not used. → Leave floating.
+- General Purpose I/O pins with no restrictions:
+    - `GPIO0` → Used as input.
+    - `GPIO1` → Used as input.
+    - `GPIO2` → Used as output.
+    - `GPIO3` → Not used.
+    - `GPIO6` → Used as output.
+    - `GPIO7` → Not used.
+    - `GPIO10` → Used as output.
+    - `GPIO11` → Used as output.
+    - `GPIO18` → Not used.
+    - `GPIO19` → Used as output.
+    - `GPIO20` → Used as output.
+    - `GPIO21` → Used as input. See §2.1.1.
+    - `GPIO22` → Used as tri-state output. See §2.1.1.
+    - `GPIO23` → Not used.
 
 
 ---
 
 
-## 8. EZO Circuits and Probe Calibration
+## 8. EZO Circuits and Calibration
 
+Atlas Scientific EZO circuits are modules designed to interface with and process data from specific sensors, such as pH, Electrical Conductivity (EC), and Temperature (RTD). They serve as the bridge between raw probe signals and the microcontroller, converting electrochemical potentials into digital data.
+
+### 8.1 EZO Circuits
+
+### 8.1.1. pH Level
+
+In a mineral-heavy reservoir, ground loops are the hidden enemy of probe accuracy. Because water is conductive, multiple probes (pH, EC) in the same tank each develop their own electrochemical potential relative to the nutrient solution. When multiple probes share a common reference ground, small currents circulate between them, biasing readings.
+
+The pH Probe connects to a dedicated electrical isolation circuit.
 
 **Circuit**
 
-![EZO pH/EC Circuit](../media/schematics/EZO-pH-EC.svg)
+![EZO pH Circuit](../media/schematics/EZO-pH-EC.svg)
+
+**Part Selection**
+
+Reference | Specs                                         | Manufacturer / Details
+----------|-----------------------------------------------|-----------------------
+M         | EZO Evaluation Expansion Board for pH Circuit | Atlas Scientific EZO-PH
+J         | BNC Jack, Female 50Ω Panel Mount R/A          | TE Connectivity 5227161-6
 
 
-**Parts**
-
-
-
+### 8.1.2. Electro Connectivity
 
 **Circuit**
 
-![Water Temperature Circuit](../media/schematics/Water-Temperature.svg)
+Like the pH Probe, the Electro Connectivity Probe connects to a dedicated electrical isolation circuit.
+
+![EZO EC Circuit](../media/schematics/EZO-pH-EC.svg)
+
+**Part Selection**
+
+Reference | Specs                                         | Manufacturer / Details
+----------|-----------------------------------------------|-----------------------
+M         | EZO Evaluation Expansion Board for EC Circuit | Atlas Scientific EZO-EC
+J         | BNC Jack, Female 50Ω Panel Mount R/A          | TE Connectivity 5227161-6
 
 
-**Parts**
+### 8.1.1 Temperature
+
+The PT-1000 temperature probe is immune to the electrical noise that affects electrochemical probes, meaning it does not require the same isolation strategy as the pH and EC sensors.
+
+**Circuit**
+
+![EZO RTD Circuit](../media/schematics/Water-Temperature.svg)
+
+**Part Selection**
+
+Reference | Specs                                          | Manufacturer / Details
+----------|-----------------------------------------------|-----------------------
+M         | EZO Evaluation Expansion Board for RTD Circuit | Atlas Scientific EZO-RTD
+J         | BNC Jack, Female 50Ω Panel Mount R/A           | TE Connectivity 5227161-6
 
 
+---
 
 
-### 8.1 Switching to I2C Mode
+### 8.2 Switching to I2C Mode
 
 EZO circuits ship in **UART mode** (green LED). They must be switched to **I2C mode** (blue LED) before connecting to OPNhydro. This is done by briefly shorting two pins at power-on:[^ATLASI2C]
 - Short the TX against PGND to switch to I2C mode
@@ -973,7 +986,9 @@ EZO circuits ship in **UART mode** (green LED). They must be switched to **I2C m
 ---
 
 
-### 8.2 EZO Circuit Calibration
+### 8.3 Calibration
+
+Probe calibration is essential to maintain the chemical and thermal stability required for a 50-plant NFT setup. Accuracy is important because the system performs micro-dosing (as little as 0.2 mL of acid in 100L of water), and uncalibrated sensors would cause the PID control loop to become unstable, leading to "pH yo-yoing" or overshooting
 
 All calibration is performed over I2C by sending ASCII command strings to each circuit's address:
 1. Write command string to EZO address. E.g.,  `i2c_write(0x63, "Cal,mid,7")`.
@@ -987,7 +1002,7 @@ All calibration is performed over I2C by sending ASCII command strings to each c
 
 Calibration status can be queried at any time using `Cal,?` → returns `?Cal,<n>` where `n` = number of calibration points stored (`0` = uncalibrated).
 
-#### EZO-pH — 3-Point Calibration (address 0x63)
+#### 8.3.1. pH Level
 
 Calibration solutions needed: pH 4.00, 7.00 and 10.00 buffers.
 Order is mandatory: mid → low → high. Starting over with `Cal,mid` to clear all stored points.
@@ -1021,7 +1036,7 @@ Order is mandatory: mid → low → high. Starting over with `Cal,mid` to clear 
 Notes:
 - Recalibrate every 6–12 months, or when probe response drifts >0.1 pH.
 
-#### EZO-EC — 2-Point Calibration (address 0x64, K=1.0 probe)
+#### 8.3.2. Electro Conductivity
 
 Calibration solutions needed: 12,880 µS/cm and 80,000 µS/cm standards
 (Atlas Scientific COND-12880 and COND-80000, or equivalent NIST-traceable solutions)
@@ -1055,10 +1070,18 @@ Notes:
 - K value: Confirm probe is K=1.0 (`K,?` should return `?K,1.00`). If not, set with `K,1.0`.
 
 
+#### 8.3.3. Temperature
+
+The Atlas Scientific EZO RTD circuit should be calibrated to ensure accurate, long-term readings, although it is not strictly required for basic functionality. Atlas Scientific recommends a single-point calibration every 2–3 years.
+- Calibration Method: A simple single-point calibration is typically done using boiling water (100°C) or another known temperature source.
+- Process: The device can be calibrated in its default state (UART mode, continuous readings). The calibration is stored in memory.
+- Accuracy: Proper calibration ensures the sensor maintains its 0.001 resolution and high accuracy. 
+
+
 ---
 
 
-### 8.3 Temperature Effect on Sensors
+### 8.4. Temperature Effect on Sensors
 
 Temperature Effect on Sensors:
 - pH: ±0.003 pH per °C (Nernst equation)
@@ -1078,7 +1101,7 @@ void update_ezo_temperature_compensation(void) {
     ezo_send_command(I2C_EZO_PH, temp_cmd);  // Address 0x63
     ezo_send_command(I2C_EZO_EC, temp_cmd);  // Address 0x64
 
-    // EZO circuits now automatically compensate all readings
+    // EZO circuits will now automatically compensates all readings
 }
 ```
 
@@ -1124,7 +1147,7 @@ Since you are soldering by hand, the tip of your iron (usually 1.5mm–2.4mm wid
 #### Moat Integrity Checklist
 
 Before you hit "Generate Gerbers," run these three manual checks in your PCB software:
-   - **The "Ghost" Check:** Turn off all layers except Layer 2 (GND) and Layer 3 (PWR). Ensure the "canyon" is completely empty of copper. No floating traces, no vias, no text.
+   - **The "Ghost" Check:** Turn off all layers except Layer 2 (GND) and Layer 3 (PWR). Ensure the "canyon" is completely empty of copper. No unconnected traces, no vias, no text.
    - **The "Stitching" Check:** Ensure your internal Ground (Mainland) and Isolated Ground (Island) overlap slightly on different layers (e.g., L2 Mainland overlaps L3 Island) to create that EMI-filtering capacitance, but check that they are separated by the board substrate.
    - **The Silkscreen Labels:** Since we have three dosing pumps and three sensors, label the "Island" side clearly on the silkscreen (e.g., "ISO-PH" and "ISO-EC"). This prevents you from accidentally plugging a non-isolated sensor into an isolated port during assembly.
 

@@ -2514,7 +2514,7 @@
 		(uuid "cb108c85-4d9e-4990-a132-857a684c81e0")
 	)
 	(no_connect
-		(at 154.94 46.99)
+		(at 148.59 46.99)
 		(uuid "d2009216-359d-4b14-9437-630b86e4e707")
 	)
 	(no_connect
@@ -2563,7 +2563,7 @@
 	)
 	(wire
 		(pts
-			(xy 134.62 46.99) (xy 133.35 46.99)
+			(xy 128.27 46.99) (xy 127 46.99)
 		)
 		(stroke
 			(width 0)
@@ -2593,7 +2593,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 57.15) (xy 144.78 58.42)
+			(xy 138.43 57.15) (xy 138.43 58.42)
 		)
 		(stroke
 			(width 0)
@@ -2613,7 +2613,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 39.37) (xy 133.35 46.99)
+			(xy 127 41.91) (xy 127 46.99)
 		)
 		(stroke
 			(width 0)
@@ -3038,7 +3038,7 @@
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
-		(at 133.35 46.99 90)
+		(at 127 46.99 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3048,7 +3048,7 @@
 		)
 		(uuid "c31c691c-e917-4fee-8450-0386efa9071e")
 		(property "Netclass" "Power"
-			(at 130.81 46.2915 90)
+			(at 124.46 46.2915 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3058,7 +3058,7 @@
 			)
 		)
 		(property "Component Class" ""
-			(at -82.55 11.43 0)
+			(at -88.9 11.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3070,7 +3070,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 144.78 58.42 0)
+		(at 138.43 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3078,7 +3078,7 @@
 		(dnp no)
 		(uuid "17d41831-7ad0-40ca-a748-f8709f84e3ea")
 		(property "Reference" "#PWR51"
-			(at 144.78 64.77 0)
+			(at 138.43 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3087,7 +3087,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 144.78 62.23 0)
+			(at 138.43 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3096,7 +3096,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 144.78 58.42 0)
+			(at 138.43 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3105,7 +3105,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 144.78 58.42 0)
+			(at 138.43 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3114,7 +3114,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 144.78 58.42 0)
+			(at 138.43 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3286,7 +3286,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6299147e-6fd2-4e9f-873d-4c0a03d178ec")
-		(property "Reference" "R_{up}"
+		(property "Reference" "R_{h}"
 			(at 53.34 48.006 90)
 			(effects
 				(font
@@ -3350,7 +3350,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R_{up}")
+					(reference "R_{h}")
 					(unit 1)
 				)
 			)
@@ -3358,7 +3358,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:EVAL ESP32-C6-DEVKITC-1-N8")
-		(at 139.7 44.45 0)
+		(at 133.35 44.45 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3366,7 +3366,7 @@
 		(dnp no)
 		(uuid "6aa303c8-a6bd-48e5-b52e-a6f77384efe7")
 		(property "Reference" "M"
-			(at 144.78 41.91 0)
+			(at 138.43 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3374,7 +3374,7 @@
 			)
 		)
 		(property "Value" "ESP32-C6-DEVKIT"
-			(at 144.78 41.91 0)
+			(at 138.43 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3383,7 +3383,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:EVAL ESP32-C6-DEVKITC"
-			(at 139.7 44.45 0)
+			(at 133.35 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3392,7 +3392,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/5528/ESP32-C6-DEVKITC-1-N8.pdf"
-			(at 139.7 44.45 0)
+			(at 133.35 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3401,7 +3401,7 @@
 			)
 		)
 		(property "Description" "The ESP32-C6-DEVKITC-1-N8 from Espressif Systems is a development board designed for RF, RFID, and wireless applications. Built around the ESP32-C6-WROOM-1 module, it supports multiple connectivity options including 802.11 b/g/n/ax Wi-Fi, Bluetooth® (BLE), and 802.15.4 for Thread and Zigbee® protocols. The board is powered by the ESP32-C6 chip with 8MB SPI flash, offering advanced processing power and efficient memory management. It features GPIO ports for extensive interfacing, along with a USB Type-C™ to UART port for power and communication. The board also includes a USB-to-UART bridge, pin header, and boot/reset buttons, operating at 3.3V with a 5V to 3.3V power regulator. This development board is ideal for exploring a wide range of wireless applications, including IoT, smart home devices, and RF communication projects."
-			(at 139.7 44.45 0)
+			(at 133.35 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3410,7 +3410,7 @@
 			)
 		)
 		(property "DKPN" "ESP32-C6-DEVKITC-1-N8"
-			(at 139.7 44.45 0)
+			(at 133.35 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3519,7 +3519,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 133.35 39.37 0)
+		(at 127 41.91 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3527,7 +3527,7 @@
 		(dnp no)
 		(uuid "84507923-1297-4851-a0c5-4601060d0615")
 		(property "Reference" "#PWR049"
-			(at 133.35 43.18 0)
+			(at 127 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3536,7 +3536,7 @@
 			)
 		)
 		(property "Value" "5V"
-			(at 133.35 35.306 0)
+			(at 127 37.846 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3544,7 +3544,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 133.35 39.37 0)
+			(at 127 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3553,7 +3553,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 39.37 0)
+			(at 127 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3562,7 +3562,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 133.35 39.37 0)
+			(at 127 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3818,7 +3818,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bc2390b6-780a-41ad-9069-2966e2b5ad4d")
-		(property "Reference" "R_{up}"
+		(property "Reference" "R_{h}"
 			(at 63.246 48.006 90)
 			(effects
 				(font
@@ -3882,7 +3882,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R_{up}")
+					(reference "R_{h}")
 					(unit 1)
 				)
 			)

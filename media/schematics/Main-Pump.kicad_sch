@@ -3872,7 +3872,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8ca35466-b3d3-494b-8519-5b0bc5931cff")
-		(property "Reference" "R_{up}"
+		(property "Reference" "R_{h}"
 			(at 104.648 71.12 90)
 			(effects
 				(font
@@ -3963,7 +3963,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R_{up}")
+					(reference "R_{h}")
 					(unit 1)
 				)
 			)
@@ -3979,7 +3979,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "969b7304-9097-415f-9085-1e5273e1c717")
-		(property "Reference" "H"
+		(property "Reference" "HDR"
 			(at 120.65 46.736 0)
 			(effects
 				(font
@@ -4059,7 +4059,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H")
+					(reference "HDR")
 					(unit 1)
 				)
 			)
@@ -4075,7 +4075,7 @@
 		(on_board no)
 		(dnp no)
 		(uuid "a8411e05-190c-4ce3-a6ae-34543d0f9c79")
-		(property "Reference" "P"
+		(property "Reference" "PLG"
 			(at 127 59.182 0)
 			(effects
 				(font
@@ -4157,7 +4157,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P")
+					(reference "PLG")
 					(unit 1)
 				)
 			)
@@ -4239,7 +4239,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "be6f1a77-22ee-4e5b-bae7-050e508885b0")
-		(property "Reference" "C_{blk}"
+		(property "Reference" "C_{b}"
 			(at 98.806 45.72 0)
 			(effects
 				(font
@@ -4330,7 +4330,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b}")
 					(unit 1)
 				)
 			)

@@ -2175,8 +2175,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "57301935-130c-45a0-9433-b6f058a59f7d")
-		(property "Reference" "H"
-			(at 105.41 58.674 0)
+		(property "Reference" "HDR"
+			(at 106.172 58.674 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2273,7 +2273,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H")
+					(reference "HDR")
 					(unit 1)
 				)
 			)
@@ -2288,7 +2288,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "782152ef-199d-415d-be59-d010a0e43dcb")
-		(property "Reference" "C_{blk}"
+		(property "Reference" "C_{b}"
 			(at 117.856 73.66 0)
 			(effects
 				(font
@@ -2352,7 +2352,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b}")
 					(unit 1)
 				)
 			)
@@ -2524,8 +2524,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "da8fcfef-2e25-41df-a6e6-423957622d4b")
-		(property "Reference" "P"
-			(at 101.6 81.026 0)
+		(property "Reference" "PLG"
+			(at 100.838 58.674 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2618,7 +2618,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P")
+					(reference "PLG")
 					(unit 1)
 				)
 			)

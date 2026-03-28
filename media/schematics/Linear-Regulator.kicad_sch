@@ -684,14 +684,20 @@
 		)
 	)
 	(junction
-		(at 123.19 53.34)
+		(at 124.46 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8e6baaf4-755d-414f-b180-21fe45c394e6")
 	)
+	(junction
+		(at 95.25 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "90802299-046b-4282-80e1-6d40a2997057")
+	)
 	(wire
 		(pts
-			(xy 90.17 53.34) (xy 100.33 53.34)
+			(xy 90.17 53.34) (xy 95.25 53.34)
 		)
 		(stroke
 			(width 0)
@@ -701,7 +707,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 45.72) (xy 123.19 53.34)
+			(xy 124.46 45.72) (xy 124.46 53.34)
 		)
 		(stroke
 			(width 0)
@@ -711,7 +717,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 53.34) (xy 123.19 57.15)
+			(xy 124.46 53.34) (xy 124.46 57.15)
 		)
 		(stroke
 			(width 0)
@@ -721,7 +727,7 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 53.34) (xy 123.19 53.34)
+			(xy 116.84 53.34) (xy 124.46 53.34)
 		)
 		(stroke
 			(width 0)
@@ -731,7 +737,17 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 62.23) (xy 123.19 66.04)
+			(xy 95.25 53.34) (xy 101.6 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8fb61fd0-c40d-446f-9736-9ca6b5d7f71b")
+	)
+	(wire
+		(pts
+			(xy 124.46 62.23) (xy 124.46 66.04)
 		)
 		(stroke
 			(width 0)
@@ -741,7 +757,27 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 60.96) (xy 107.95 66.04)
+			(xy 95.25 62.23) (xy 95.25 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9807f5c5-5721-4671-9612-7c4c9ed6b4e0")
+	)
+	(wire
+		(pts
+			(xy 95.25 53.34) (xy 95.25 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb3bd30a-516a-4914-8cd4-851a8bf089e1")
+	)
+	(wire
+		(pts
+			(xy 109.22 60.96) (xy 109.22 66.04)
 		)
 		(stroke
 			(width 0)
@@ -761,7 +797,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 123.19 66.04 0)
+		(at 124.46 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -769,7 +805,7 @@
 		(dnp no)
 		(uuid "0588199e-7d03-4a9a-aed8-ac2fbab72120")
 		(property "Reference" "#PWR46"
-			(at 123.19 72.39 0)
+			(at 124.46 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -778,7 +814,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 123.19 69.85 0)
+			(at 124.46 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -787,7 +823,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 123.19 66.04 0)
+			(at 124.46 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -796,7 +832,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 66.04 0)
+			(at 124.46 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -805,7 +841,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 123.19 66.04 0)
+			(at 124.46 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -827,7 +863,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:REG 3.3V 1A LDO AZ1117-3.3")
-		(at 102.87 50.8 0)
+		(at 104.14 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -835,7 +871,7 @@
 		(dnp no)
 		(uuid "207518fc-f12d-4ea8-aa8a-ea9fa7825015")
 		(property "Reference" "U"
-			(at 107.95 48.26 0)
+			(at 109.22 48.768 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -843,7 +879,7 @@
 			)
 		)
 		(property "Value" "AZ1117-3.3"
-			(at 107.95 48.26 0)
+			(at 109.22 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -852,7 +888,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:REG 3.3V 1A LDO AZ1117-3.3"
-			(at 102.87 44.45 0)
+			(at 104.14 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -862,7 +898,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AZ1117I.pdf"
-			(at 102.87 50.8 0)
+			(at 104.14 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -871,7 +907,7 @@
 			)
 		)
 		(property "Description" "Linear Voltage Regulator IC Positive Fixed 1 Output 1A SOT-223-3"
-			(at 102.87 50.8 0)
+			(at 104.14 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -880,7 +916,7 @@
 			)
 		)
 		(property "DKPN" "AZ1117IH-3.3TRG1DICT-ND"
-			(at 102.87 50.8 0)
+			(at 104.14 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -889,7 +925,7 @@
 			)
 		)
 		(property "MFR" "Diodes"
-			(at 102.87 50.8 0)
+			(at 104.14 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -898,7 +934,7 @@
 			)
 		)
 		(property "PN" "AZ1117IH-3.3TRG1"
-			(at 102.87 50.8 0)
+			(at 104.14 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -926,7 +962,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 123.19 45.72 0)
+		(at 124.46 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -934,7 +970,7 @@
 		(dnp no)
 		(uuid "2f8b15b7-1947-43fc-8cad-9bcbec3479e5")
 		(property "Reference" "#PWR045"
-			(at 123.19 49.53 0)
+			(at 124.46 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -943,7 +979,7 @@
 			)
 		)
 		(property "Value" "3V3"
-			(at 122.936 41.91 0)
+			(at 124.206 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -951,7 +987,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 123.19 45.72 0)
+			(at 124.46 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -960,7 +996,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 45.72 0)
+			(at 124.46 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -969,7 +1005,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 123.19 45.72 0)
+			(at 124.46 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -991,7 +1027,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 22μF ±10% 10V 1206 Murata GRM")
-		(at 123.19 59.69 90)
+		(at 124.46 59.69 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -999,8 +1035,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "48e8ac37-7b32-4185-b26d-3f2e11763b38")
-		(property "Reference" "C_{blk}"
-			(at 125.73 58.35 90)
+		(property "Reference" "C_{b2}"
+			(at 127 59.62 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1009,7 +1045,7 @@
 			)
 		)
 		(property "Value" "22μF"
-			(at 125.73 60.89 90)
+			(at 127 60.89 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1019,7 +1055,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 22μF ±10 10V 1206"
-			(at 133.858 59.182 0)
+			(at 135.128 59.182 0)
 			(effects
 				(font
 					(size 0.762 0.762)
@@ -1028,7 +1064,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM31CR71A226KE15-01.pdf"
-			(at 132.334 59.436 0)
+			(at 133.604 59.436 0)
 			(effects
 				(font
 					(size 0.762 0.762)
@@ -1037,7 +1073,7 @@
 			)
 		)
 		(property "Description" "22 µF ±10% 10V Ceramic Capacitor X7R 1206 (3216 Metric)"
-			(at 130.81 59.69 0)
+			(at 132.08 59.69 0)
 			(effects
 				(font
 					(size 0.762 0.762)
@@ -1046,7 +1082,7 @@
 			)
 		)
 		(property "DKPN" "490-5309-1-ND"
-			(at 135.382 58.928 0)
+			(at 136.652 58.928 0)
 			(effects
 				(font
 					(size 0.762 0.762)
@@ -1063,7 +1099,7 @@
 		(instances
 			(project "Power-Train"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b2}")
 					(unit 1)
 				)
 			)
@@ -1071,15 +1107,15 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 107.95 66.04 0)
+		(at 95.25 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d1b9022a-56af-4dcd-8373-017609c81768")
-		(property "Reference" "#PWR40"
-			(at 107.95 72.39 0)
+		(uuid "a5ceec21-882b-4ad6-88fb-c1d9a1ebd4d2")
+		(property "Reference" "#PWR01"
+			(at 95.25 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1088,7 +1124,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 107.95 69.85 0)
+			(at 95.25 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1097,7 +1133,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 107.95 66.04 0)
+			(at 95.25 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1106,7 +1142,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 107.95 66.04 0)
+			(at 95.25 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1115,7 +1151,153 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 107.95 66.04 0)
+			(at 95.25 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a081c09d-6d2e-46f8-85d0-a86704cc1d7e")
+		)
+		(instances
+			(project "Linear-Regulator"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:CAP X7R 22μF ±10% 10V 1206 Murata GRM")
+		(at 95.25 59.69 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c7238cb1-37c0-49b8-9b29-e695dc359b3a")
+		(property "Reference" "C_{b1}"
+			(at 97.79 59.62 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "22μF"
+			(at 97.79 60.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:CAP X7R 22μF ±10 10V 1206"
+			(at 105.918 59.182 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM31CR71A226KE15-01.pdf"
+			(at 104.394 59.436 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "22 µF ±10% 10V Ceramic Capacitor X7R 1206 (3216 Metric)"
+			(at 102.87 59.69 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "490-5309-1-ND"
+			(at 107.442 58.928 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5d8775fe-311e-4125-8c5c-e699cbc5f618")
+		)
+		(pin "2"
+			(uuid "6816a6d9-8966-4318-a710-aad7e2b58777")
+		)
+		(instances
+			(project "Linear-Regulator"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "C_{b1}")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:GND")
+		(at 109.22 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d1b9022a-56af-4dcd-8373-017609c81768")
+		(property "Reference" "#PWR40"
+			(at 109.22 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 109.22 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 109.22 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 109.22 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 109.22 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)

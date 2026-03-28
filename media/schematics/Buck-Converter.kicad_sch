@@ -1992,7 +1992,7 @@
 		(uuid "6bfae121-f249-4988-a4fb-016052f864b2")
 	)
 	(junction
-		(at 111.76 38.1)
+		(at 110.49 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "762bb9e5-4220-4530-9c50-de85ae8233d7")
@@ -2022,7 +2022,7 @@
 		(uuid "c549fc49-2577-4eb9-b86d-8ede836b6384")
 	)
 	(junction
-		(at 118.11 38.1)
+		(at 116.84 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f348f5d2-e762-45c3-993d-72780358fb0f")
@@ -2033,7 +2033,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 48.26) (xy 124.46 53.34)
+			(xy 123.19 48.26) (xy 123.19 53.34)
 		)
 		(stroke
 			(width 0)
@@ -2093,7 +2093,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 38.1) (xy 118.11 45.72)
+			(xy 116.84 38.1) (xy 116.84 45.72)
 		)
 		(stroke
 			(width 0)
@@ -2123,7 +2123,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 58.42) (xy 124.46 62.23)
+			(xy 123.19 58.42) (xy 123.19 62.23)
 		)
 		(stroke
 			(width 0)
@@ -2153,7 +2153,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 38.1) (xy 132.08 38.1)
+			(xy 116.84 38.1) (xy 132.08 38.1)
 		)
 		(stroke
 			(width 0)
@@ -2193,7 +2193,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 58.42) (xy 111.76 62.23)
+			(xy 110.49 58.42) (xy 110.49 62.23)
 		)
 		(stroke
 			(width 0)
@@ -2223,7 +2223,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 38.1) (xy 111.76 53.34)
+			(xy 110.49 38.1) (xy 110.49 53.34)
 		)
 		(stroke
 			(width 0)
@@ -2253,7 +2253,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 38.1) (xy 118.11 38.1)
+			(xy 110.49 38.1) (xy 116.84 38.1)
 		)
 		(stroke
 			(width 0)
@@ -2273,7 +2273,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 38.1) (xy 111.76 38.1)
+			(xy 104.14 38.1) (xy 110.49 38.1)
 		)
 		(stroke
 			(width 0)
@@ -2353,7 +2353,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 50.8) (xy 118.11 62.23)
+			(xy 116.84 50.8) (xy 116.84 62.23)
 		)
 		(stroke
 			(width 0)
@@ -2363,7 +2363,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 48.26) (xy 132.08 48.26)
+			(xy 123.19 48.26) (xy 132.08 48.26)
 		)
 		(stroke
 			(width 0)
@@ -2442,7 +2442,7 @@
 		(uuid "6b304cba-18f5-4ea2-9405-2b4ad52887fe")
 	)
 	(label "24V"
-		(at 105.41 38.1 0)
+		(at 104.14 38.1 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2526,7 +2526,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "18c1b117-2218-4833-aab8-b05129ed410a")
-		(property "Reference" "R_{h}"
+		(property "Reference" "R_{t}"
 			(at 169.418 45.974 90)
 			(effects
 				(font
@@ -2590,7 +2590,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R_{h}")
+					(reference "R_{t}")
 					(unit 1)
 				)
 			)
@@ -2675,7 +2675,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 124.46 62.23 0)
+		(at 123.19 62.23 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2683,7 +2683,7 @@
 		(dnp no)
 		(uuid "3fef817e-1df4-402a-b53f-70161cd4f5a2")
 		(property "Reference" "#PWR23"
-			(at 124.46 68.58 0)
+			(at 123.19 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2692,7 +2692,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 124.46 66.04 0)
+			(at 123.19 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2701,7 +2701,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 124.46 62.23 0)
+			(at 123.19 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2710,7 +2710,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 62.23 0)
+			(at 123.19 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2719,7 +2719,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 124.46 62.23 0)
+			(at 123.19 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2807,7 +2807,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 10μF ±10% 50V 1206 Murata GRT")
-		(at 111.76 55.88 270)
+		(at 110.49 55.88 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2815,8 +2815,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "565304bf-2755-4ced-9d35-51488c008a76")
-		(property "Reference" "C_{blk1}"
-			(at 112.522 53.086 90)
+		(property "Reference" "C_{b1}"
+			(at 111.252 53.086 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2825,7 +2825,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 112.014 53.594 90)
+			(at 110.744 53.594 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2835,7 +2835,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 10μF ±10 50V 1206 Murata GRT"
-			(at 97.79 55.626 0)
+			(at 96.52 55.626 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2844,7 +2844,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRT31CR61H106KE01-01.pdf"
-			(at 100.33 55.88 0)
+			(at 99.06 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2853,7 +2853,7 @@
 			)
 		)
 		(property "Description" "10 µF ±10% 50V Ceramic Capacitor X5R 1206 (3216 Metric)"
-			(at 102.362 56.134 0)
+			(at 101.092 56.134 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2862,7 +2862,7 @@
 			)
 		)
 		(property "DKPN" "490-12456-1-ND"
-			(at 111.76 55.88 0)
+			(at 110.49 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2871,7 +2871,7 @@
 			)
 		)
 		(property "MFR" "Murata"
-			(at 111.76 55.88 90)
+			(at 110.49 55.88 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2880,7 +2880,7 @@
 			)
 		)
 		(property "PN" "GRT31CR61H106KE01L"
-			(at 111.76 55.88 90)
+			(at 110.49 55.88 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2897,7 +2897,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk1}")
+					(reference "C_{b1}")
 					(unit 1)
 				)
 			)
@@ -2977,7 +2977,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "65ea2621-8b3c-4c05-aece-33ba84552955")
-		(property "Reference" "C_{blk2}"
+		(property "Reference" "C_{b2}"
 			(at 188.722 47.498 90)
 			(effects
 				(font
@@ -3041,7 +3041,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk2}")
+					(reference "C_{b2}")
 					(unit 1)
 				)
 			)
@@ -3049,7 +3049,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 111.76 62.23 0)
+		(at 110.49 62.23 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3057,7 +3057,7 @@
 		(dnp no)
 		(uuid "68a9d729-1890-438d-abb8-44bb0077e7b0")
 		(property "Reference" "#PWR21"
-			(at 111.76 68.58 0)
+			(at 110.49 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3066,7 +3066,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 111.76 66.04 0)
+			(at 110.49 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3075,7 +3075,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 111.76 62.23 0)
+			(at 110.49 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3084,7 +3084,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 111.76 62.23 0)
+			(at 110.49 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3093,7 +3093,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 111.76 62.23 0)
+			(at 110.49 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3219,7 +3219,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "85f8951e-8ee0-4352-b940-0cc9eb09acf0")
-		(property "Reference" "C_{blk2}"
+		(property "Reference" "C_{b2}"
 			(at 176.022 47.498 90)
 			(effects
 				(font
@@ -3301,7 +3301,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk2}")
+					(reference "C_{b2}")
 					(unit 1)
 				)
 			)
@@ -3309,7 +3309,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 33nF ±10% 50V 0805 Kemet")
-		(at 124.46 55.88 270)
+		(at 123.19 55.88 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3318,7 +3318,7 @@
 		(dnp no)
 		(uuid "97301876-f4dc-428e-855d-148816ea8482")
 		(property "Reference" "C_{ss}"
-			(at 128.524 52.578 90)
+			(at 127.254 52.578 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3327,7 +3327,7 @@
 			)
 		)
 		(property "Value" "33nF"
-			(at 123.952 60.706 90)
+			(at 122.682 60.706 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3337,7 +3337,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 33nF ±10 50V 0805 Kemet"
-			(at 110.49 55.626 0)
+			(at 109.22 55.626 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3346,7 +3346,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H333KE14-01.pdf"
-			(at 113.03 55.88 0)
+			(at 111.76 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3355,7 +3355,7 @@
 			)
 		)
 		(property "Description" "0.033 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
-			(at 115.062 56.134 0)
+			(at 113.792 56.134 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3364,7 +3364,7 @@
 			)
 		)
 		(property "DKPN" "490-GRM155R71H333KE14JCT-ND"
-			(at 110.49 55.118 0)
+			(at 109.22 55.118 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3373,7 +3373,7 @@
 			)
 		)
 		(property "MFR" "Murata"
-			(at 124.46 55.88 90)
+			(at 123.19 55.88 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3382,7 +3382,7 @@
 			)
 		)
 		(property "PN" "GRM155R71H333KE14J"
-			(at 124.46 55.88 90)
+			(at 123.19 55.88 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3414,7 +3414,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9b6bd215-555f-48b5-9874-e67595ea97a1")
-		(property "Reference" "R_{l}"
+		(property "Reference" "R_{b}"
 			(at 169.418 58.674 90)
 			(effects
 				(font
@@ -3478,7 +3478,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R_{l}")
+					(reference "R_{b}")
 					(unit 1)
 				)
 			)
@@ -3494,7 +3494,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9dc1fc38-d02f-4be1-8c1a-64d6ad4930d4")
-		(property "Reference" "C_{blk3}"
+		(property "Reference" "C_{b3}"
 			(at 196.85 50.2538 0)
 			(effects
 				(font
@@ -3576,7 +3576,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk3}")
+					(reference "C_{b3}")
 					(unit 1)
 				)
 			)
@@ -3772,7 +3772,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bd662b7c-93e9-4503-8645-e4effce50502")
-		(property "Reference" "C_{blk2}"
+		(property "Reference" "C_{b2}"
 			(at 182.372 47.498 90)
 			(effects
 				(font
@@ -3836,7 +3836,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk2}")
+					(reference "C_{b2}")
 					(unit 1)
 				)
 			)
@@ -4007,7 +4007,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
-		(at 118.11 48.26 90)
+		(at 116.84 48.26 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4015,7 +4015,7 @@
 		(dnp no)
 		(uuid "ea972068-e252-425b-beca-1d94cf966f4c")
 		(property "Reference" "C_{mf}"
-			(at 119.38 45.466 90)
+			(at 118.11 45.466 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4024,7 +4024,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 118.872 45.974 90)
+			(at 117.602 45.974 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4034,7 +4034,7 @@
 			)
 		)
 		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
-			(at 132.08 48.006 0)
+			(at 130.81 48.006 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4043,7 +4043,7 @@
 			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
-			(at 129.54 48.26 0)
+			(at 128.27 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4052,7 +4052,7 @@
 			)
 		)
 		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
-			(at 127.508 48.514 0)
+			(at 126.238 48.514 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4061,7 +4061,7 @@
 			)
 		)
 		(property "DKPN" "490-10700-1-ND"
-			(at 118.11 48.26 0)
+			(at 116.84 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4086,7 +4086,7 @@
 	)
 	(symbol
 		(lib_id "Coert-Vonk:GND")
-		(at 118.11 62.23 0)
+		(at 116.84 62.23 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4094,7 +4094,7 @@
 		(dnp no)
 		(uuid "ed7b471c-30b9-46ec-82c9-b76350dc34db")
 		(property "Reference" "#PWR22"
-			(at 118.11 68.58 0)
+			(at 116.84 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4103,7 +4103,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 118.11 66.04 0)
+			(at 116.84 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4112,7 +4112,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 118.11 62.23 0)
+			(at 116.84 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4121,7 +4121,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 118.11 62.23 0)
+			(at 116.84 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4130,7 +4130,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 118.11 62.23 0)
+			(at 116.84 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)

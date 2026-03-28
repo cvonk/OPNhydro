@@ -2350,7 +2350,7 @@
 		(dnp no)
 		(uuid "2b6353e1-2ef5-4ffc-ac9f-38fcbb9d7b48")
 		(property "Reference" "C_{mf}"
-			(at 80.264 71.882 90)
+			(at 80.772 71.882 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2428,8 +2428,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3309371b-2dce-4528-9769-e9eb8870f97a")
-		(property "Reference" "H"
-			(at 71.12 56.642 0)
+		(property "Reference" "HDR"
+			(at 71.12 57.658 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2516,7 +2516,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H")
+					(reference "HDR")
 					(unit 1)
 				)
 			)
@@ -2901,8 +2901,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cc33ec8a-61c7-462c-811f-e359d163b11e")
-		(property "Reference" "H"
-			(at 125.73 56.642 0)
+		(property "Reference" "HDR"
+			(at 125.73 57.658 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2989,7 +2989,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H")
+					(reference "HDR")
 					(unit 1)
 				)
 			)
@@ -3204,8 +3204,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d6257210-2fba-4d5c-af1b-e7f65ef90b3d")
-		(property "Reference" "C_{blk}"
-			(at 145.542 72.898 90)
+		(property "Reference" "C_{b}"
+			(at 143.764 71.882 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3266,7 +3266,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b}")
 					(unit 1)
 				)
 			)
@@ -3347,7 +3347,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "ea8da737-3b5c-4784-a113-bb0d9fe6b9b8")
-		(property "Reference" "P"
+		(property "Reference" "PLG"
 			(at 65.024 74.676 0)
 			(effects
 				(font
@@ -3417,7 +3417,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P")
+					(reference "PLG")
 					(unit 1)
 				)
 			)
@@ -3433,7 +3433,7 @@
 		(dnp no)
 		(uuid "eb9df67f-651b-47df-94ce-6cfcead2c8fe")
 		(property "Reference" "C_{mf}"
-			(at 134.874 71.882 90)
+			(at 135.382 71.882 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3511,8 +3511,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f172edd1-e1bf-4ace-b025-6e60f805f473")
-		(property "Reference" "C_{blk}"
-			(at 90.932 72.898 90)
+		(property "Reference" "C_{b}"
+			(at 89.154 71.882 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3573,7 +3573,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b}")
 					(unit 1)
 				)
 			)
@@ -3588,7 +3588,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "f4ca19f2-befa-4063-afce-6bd863f2a2ad")
-		(property "Reference" "P"
+		(property "Reference" "PLG"
 			(at 119.634 74.676 0)
 			(effects
 				(font
@@ -3658,7 +3658,7 @@
 		(instances
 			(project "OPNhydro_r1"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P")
+					(reference "PLG")
 					(unit 1)
 				)
 			)

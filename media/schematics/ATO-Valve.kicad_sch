@@ -1737,7 +1737,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:TERM BLK HDR 2POS MC 3.81mm"
+		(symbol "Coert-Vonk:TERM BLK HDR 2POS PC-MC 0.2{dblquote}"
 			(pin_names
 				(offset 2.54)
 			)
@@ -1753,7 +1753,7 @@
 					(justify bottom)
 				)
 			)
-			(property "Value" "MC_0.15\""
+			(property "Value" "MC_0.2\""
 				(at 2.54 0.635 0)
 				(effects
 					(font
@@ -1762,7 +1762,7 @@
 					(justify bottom)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 3.81mm"
+			(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 5.08mm"
 				(at -2.54 -17.526 0)
 				(effects
 					(font
@@ -1771,7 +1771,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://www.phoenixcontact.com/us/products/1803277/pdf"
+			(property "Datasheet" "https://www.phoenixcontact.com/us/products/1836189/pdf"
 				(at -5.08 0 0)
 				(effects
 					(font
@@ -1780,7 +1780,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.150\" (3.81mm) 90°, Right Angle Through Hole"
+			(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.200\" (5.08mm) 90°, Right Angle Through Hole"
 				(at -1.778 -8.89 0)
 				(effects
 					(font
@@ -1789,7 +1789,7 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "277-1206-ND"
+			(property "DKPN" "277-6377-ND"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1798,7 +1798,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Phoenix Contact COMBICON MC"
+			(property "MFR" "Phoenix Contact"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1807,7 +1807,25 @@
 					(hide yes)
 				)
 			)
-			(symbol "TERM BLK HDR 2POS MC 3.81mm_1_0"
+			(property "PN" "1836189"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "COMBICON MC"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TERM BLK HDR 2POS PC-MC 0.2{dblquote}_1_0"
 				(circle
 					(center 2.54 -5.08)
 					(radius 0.3175)
@@ -1867,7 +1885,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK HDR 2POS MC 3.81mm_1_1"
+			(symbol "TERM BLK HDR 2POS PC-MC 0.2{dblquote}_1_1"
 				(rectangle
 					(start 0 0)
 					(end 5.08 -7.62)
@@ -1882,7 +1900,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:TERM BLK PLG 2POS MC 3.81mm"
+		(symbol "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2{dblquote}"
 			(pin_names
 				(offset 0.254)
 			)
@@ -1897,7 +1915,7 @@
 					)
 				)
 			)
-			(property "Value" "MC_0.15\""
+			(property "Value" "MC_0.2\""
 				(at 0 1.905 0)
 				(effects
 					(font
@@ -1905,7 +1923,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:TERM BLOCK PLUG 2POS 3.81mm 1803578"
+			(property "Footprint" "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1915,7 +1933,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2411/1840zzz%2C%201803zzz.pdf"
+			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/540/1836079.pdf"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1925,7 +1943,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.150\" (3.81mm) 180° Free Hanging (In-Line)"
+			(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1934,7 +1952,7 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "277-1161-ND"
+			(property "DKPN" "277-6146-ND"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1943,7 +1961,25 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Phoenix Connect COMBICON MC 0.15\" 1803578"
+			(property "MFR" "Phoenix Connect"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "1836079"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "MC"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1961,7 +1997,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MC 3.81mm_0_1"
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_0_1"
 				(circle
 					(center 0 -5.08)
 					(radius 0.635)
@@ -1985,7 +2021,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MC 3.81mm_1_0"
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_0"
 				(polyline
 					(pts
 						(xy -2.54 -2.54) (xy -0.635 -2.54)
@@ -2028,7 +2064,7 @@
 						)
 					)
 				)
-				(pin passive line
+				(pin unspecified line
 					(at -5.08 -5.08 0)
 					(length 2.54)
 					(name ""
@@ -2047,7 +2083,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MC 3.81mm_1_1"
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_1"
 				(rectangle
 					(start -2.54 0)
 					(end 2.54 -7.62)
@@ -2060,7 +2096,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MC 3.81mm_1_2"
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_2"
 				(polyline
 					(pts
 						(xy 5.08 2.54) (xy 5.08 -7.62)
@@ -2215,6 +2251,60 @@
 					)
 					(fill
 						(type none)
+					)
+				)
+				(pin unspecified line
+					(at 0 0 0)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -3153,7 +3243,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "196ed134-5c7b-4709-8d39-9598e329981f")
-		(property "Reference" "C_{blk}"
+		(property "Reference" "C_{b}"
 			(at 101.6 51.054 0)
 			(effects
 				(font
@@ -3235,7 +3325,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b}")
 					(unit 1)
 				)
 			)
@@ -3560,104 +3650,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:TERM BLK PLG 2POS MC 3.81mm")
-		(at 129.54 54.61 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp no)
-		(uuid "6d21c555-eaf6-4afa-8fa7-fb5983f9b2c5")
-		(property "Reference" "P"
-			(at 129.54 64.262 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MC_0.15\""
-			(at 129.54 66.548 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLOCK PLUG 2POS 3.81mm 1803578"
-			(at 129.54 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2411/1840zzz%2C%201803zzz.pdf"
-			(at 129.54 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.150\" (3.81mm) 180° Free Hanging (In-Line)"
-			(at 129.54 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-1161-ND"
-			(at 129.54 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Phoenix Connect"
-			(at 129.54 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "1803578"
-			(at 129.54 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f11582f8-9451-495f-97c6-6c2f5a0872c3")
-		)
-		(pin "2"
-			(uuid "d52980e5-9550-469e-8edd-276a886df57b")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
 		(at 105.41 58.42 270)
 		(mirror x)
@@ -3730,6 +3722,102 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C_{mf}")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:TERM BLK HDR 2POS PC-MC 0.2{dblquote}")
+		(at 125.73 54.61 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8325183b-9de5-4af8-adce-a5adde515e8f")
+		(property "Reference" "HDR"
+			(at 123.19 52.324 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MC_0.2\""
+			(at 123.19 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 5.08mm"
+			(at 128.27 72.136 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.phoenixcontact.com/us/products/1836189/pdf"
+			(at 130.81 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.200\" (5.08mm) 90°, Right Angle Through Hole"
+			(at 127.508 63.5 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "277-6377-ND"
+			(at 125.73 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Contact"
+			(at 125.73 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "1836189"
+			(at 125.73 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7a9a6f89-89af-4b6a-9d6a-09dc8f3f4ed4")
+		)
+		(pin "2"
+			(uuid "1b6b139f-73f8-4388-bf9b-962c05555721")
+		)
+		(instances
+			(project "ATO-Valve"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "HDR")
 					(unit 1)
 				)
 			)
@@ -3911,43 +3999,25 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:TERM BLK HDR 2POS MC 3.81mm")
-		(at 125.73 54.61 0)
+		(lib_id "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2{dblquote}")
+		(at 129.54 54.61 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(dnp no)
-		(uuid "9d39323f-12d3-44a0-8398-3e54e55f617a")
-		(property "Reference" "H"
-			(at 123.19 52.578 0)
+		(uuid "a28e38c8-3956-4946-971a-ed275bd51dcd")
+		(property "Reference" "PLG"
+			(at 129.286 52.324 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "MC_0.15\""
-			(at 122.682 52.578 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 3.81mm"
-			(at 128.27 72.136 0)
-			(effects
-				(font
-					(size 0.762 0.762)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.phoenixcontact.com/us/products/1803277/pdf"
-			(at 130.81 54.61 0)
+		(property "Value" "MC_0.2\""
+			(at 129.54 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3955,17 +4025,37 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.150\" (3.81mm) 90°, Right Angle Through Hole"
-			(at 127.508 63.5 0)
+		(property "Footprint" "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2"
+			(at 129.54 54.61 0)
 			(effects
 				(font
-					(size 0.762 0.762)
+					(size 1.27 1.27)
+					(italic yes)
 				)
 				(hide yes)
 			)
 		)
-		(property "DKPN" "277-1206-ND"
-			(at 125.73 54.61 0)
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/540/1836079.pdf"
+			(at 129.54 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
+			(at 129.54 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "277-6146-ND"
+			(at 129.54 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3974,7 +4064,7 @@
 			)
 		)
 		(property "MFR" "Phoenix Connect"
-			(at 125.73 54.61 0)
+			(at 129.54 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3982,8 +4072,17 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "1803277"
-			(at 125.73 54.61 0)
+		(property "PN" "1836079"
+			(at 129.54 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "MC"
+			(at 129.54 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3992,15 +4091,15 @@
 			)
 		)
 		(pin "2"
-			(uuid "8b544621-e85d-41cf-a798-92f7ae6fabbb")
+			(uuid "8ad07ecf-944b-4a8a-aeab-6a2d0e846e75")
 		)
 		(pin "1"
-			(uuid "da54c471-4cd3-40b9-9037-c6203ae18aea")
+			(uuid "65d7488c-b4fe-4aa9-aa95-7dd8559ee507")
 		)
 		(instances
-			(project ""
+			(project "ATO-Valve"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H")
+					(reference "PLG")
 					(unit 1)
 				)
 			)
@@ -4160,7 +4259,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f2fad0f2-6c8f-4828-94ee-f364136d9058")
-		(property "Reference" "R_{dn}"
+		(property "Reference" "R_{l}"
 			(at 108.458 82.296 90)
 			(effects
 				(font
@@ -4224,7 +4323,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R_{dn}")
+					(reference "R_{l}")
 					(unit 1)
 				)
 			)
