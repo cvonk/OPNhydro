@@ -1,4 +1,4 @@
-27562788940475100
+27573437363120157
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -6769,6 +6769,13 @@ Coert-Vonk
 2
 2
 Coert-Vonk
+CAP ALUM 100μF ±20 10V Kemet
+
+
+0
+2
+2
+Coert-Vonk
 CAP ALUM 100μF ±20 25V
 
 
@@ -6777,6 +6784,13 @@ CAP ALUM 100μF ±20 25V
 2
 Coert-Vonk
 CAP ALUM 100μF ±20 50V Panasonic
+
+
+0
+2
+2
+Coert-Vonk
+CAP ALUM 220μF ±20 50V Kemet
 
 
 0
@@ -6825,7 +6839,21 @@ CAP ALUM POLY 1000μF ±20 6.3V
 2
 2
 Coert-Vonk
+CAP ALUM-ELEC 47μF ±20 50V Kemet
+
+
+0
+2
+2
+Coert-Vonk
 CAP ALUM-ELEC 47μF ±20 50V Panasonic
+
+
+0
+2
+2
+Coert-Vonk
+CAP ALUM-ELEC 1000μF ±20 50V TDK
 
 
 0
@@ -6902,6 +6930,13 @@ CAP X7R 10nF ±10 16V 0402 Murata
 2
 2
 Coert-Vonk
+CAP X7R 10nF ±10 100V 0603 Murata
+
+
+0
+2
+2
+Coert-Vonk
 CAP X7R 10nF ±10% 50V 0805
 
 
@@ -6952,6 +6987,13 @@ CAP X7R 22μF ±10 10V 1206
 2
 Coert-Vonk
 CAP X7R 33nF ±10 25V 0805
+
+
+0
+2
+2
+Coert-Vonk
+CAP X7R 33nF ±10 50V 0603 Kemet
 
 
 0

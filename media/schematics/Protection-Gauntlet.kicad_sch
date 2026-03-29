@@ -3334,7 +3334,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "aa2c0dd9-3b08-48fa-8f76-ad758db75bd6")
-		(property "Reference" "C_{blk}"
+		(property "Reference" "C_{b}"
 			(at 138.684 60.96 0)
 			(effects
 				(font
@@ -3398,7 +3398,7 @@
 		(instances
 			(project "Protection-Gauntlet"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b}")
 					(unit 1)
 				)
 			)
@@ -3578,8 +3578,8 @@
 		(on_board no)
 		(dnp no)
 		(uuid "e9907b53-db21-4418-9715-5f3add0a57f2")
-		(property "Reference" "P"
-			(at 74.93 61.722 0)
+		(property "Reference" "PLG"
+			(at 74.93 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3660,7 +3660,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P")
+					(reference "PLG")
 					(unit 1)
 				)
 			)
@@ -3818,7 +3818,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "edd1a0e2-d964-4ecc-84fa-ca25b595dee0")
-		(property "Reference" "H"
+		(property "Reference" "HDR"
 			(at 81.28 49.53 0)
 			(effects
 				(font
@@ -3898,7 +3898,7 @@
 		(instances
 			(project "Protection-Gauntlet"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H")
+					(reference "HDR")
 					(unit 1)
 				)
 			)

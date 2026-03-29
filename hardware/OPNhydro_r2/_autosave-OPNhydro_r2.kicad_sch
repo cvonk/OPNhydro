@@ -15,180 +15,6 @@
 		(comment 4 "Autonomous, data-rich hydroponics irrigation automation with precision control and")
 	)
 	(lib_symbols
-		(symbol "CAP X5R 10μF ±10% 16V 0805 Murata GRM_1"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.254)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "C57"
-				(at 0.762 -4.572 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "10μF"
-				(at -1.778 -4.572 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Coert-Vonk:CAP X5R 10μF ±10 16V 0805 Murata GRM"
-				(at 0.254 -13.97 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM21BR61C106KE15-01.pdf"
-				(at 0 -11.43 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "10 µF ±10% 16V Ceramic Capacitor X5R 0805 (2012 Metric)"
-				(at -0.254 -9.398 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "DKPN" "490-3886-1-ND"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "MFR" "Murata"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "PN" "GRM21BR61C106KE15L"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "SERIES" "GRM"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "capacitor cap"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "C_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "CAP X5R 10μF ±10% 16V 0805 Murata GRM_1_0_1"
-				(polyline
-					(pts
-						(xy -0.381 -1.524) (xy -0.381 1.524)
-					)
-					(stroke
-						(width 0.3048)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.508 1.524) (xy 0.508 -1.524)
-					)
-					(stroke
-						(width 0.3302)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "CAP X5R 10μF ±10% 16V 0805 Murata GRM_1_1_1"
-				(pin passive line
-					(at -2.54 0 0)
-					(length 2.032)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 0 180)
-					(length 2.032)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Coert-Vonk:24V"
 			(power)
 			(pin_numbers
@@ -314,7 +140,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20% 50V Panasonic"
+		(symbol "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20% 50V TDK"
 			(pin_numbers
 				(hide yes)
 			)
@@ -343,7 +169,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:CAP ALUM 1000μF ±20 50V Panasonic"
+			(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20 50V TDK"
 				(at 0 0 0)
 				(effects
 					(font
@@ -352,7 +178,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+			(property "Datasheet" "https://www.tdk-electronics.tdk.com/inf/20/30/db/aec/B41866.pdf?ref_disty=digikey"
 				(at 0 0 0)
 				(effects
 					(font
@@ -361,7 +187,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "1000 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+			(property "Description" "1000 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 39mOhm @ 100kHz 5000 Hrs @ 125°C"
 				(at 0 0 0)
 				(effects
 					(font
@@ -370,7 +196,34 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "P19529CT-ND"
+			(property "DKPN" "B41866D6108M000"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "TDK"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "B41866D6108M000"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "B41866"
 				(at 0 0 0)
 				(effects
 					(font
@@ -397,7 +250,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "CAP ALUM-ELEC 1000μF ±20% 50V Panasonic_0_1"
+			(symbol "CAP ALUM-ELEC 1000μF ±20% 50V TDK_0_1"
 				(rectangle
 					(start -1.524 0.6858)
 					(end 1.524 0.3048)
@@ -445,7 +298,7 @@
 					)
 				)
 			)
-			(symbol "CAP ALUM-ELEC 1000μF ±20% 50V Panasonic_1_1"
+			(symbol "CAP ALUM-ELEC 1000μF ±20% 50V TDK_1_1"
 				(pin passive line
 					(at 0 2.54 270)
 					(length 1.8542)
@@ -485,7 +338,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:CAP ALUM-ELEC 100μF ±20% 25V Panasonic"
+		(symbol "Coert-Vonk:CAP ALUM-ELEC 100μF ±20% 10V Kemet"
 			(pin_numbers
 				(hide yes)
 			)
@@ -514,7 +367,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:CAP ALUM 100μF ±20 25V"
+			(property "Footprint" "Coert-Vonk:CAP ALUM 100μF ±20 10V Kemet"
 				(at 0 0 0)
 				(effects
 					(font
@@ -523,7 +376,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDE0000/RDE0000C1259.pdf"
+			(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_A4067_A750"
 				(at 0 0 0)
 				(effects
 					(font
@@ -532,7 +385,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "100 µF 25 V Aluminum Electrolytic Capacitors Radial, Can - SMD 360mOhm @ 100kHz 2000 Hrs @ 105°C"
+			(property "Description" "100 µF 10 V Aluminum - Polymer Capacitors Radial, Can 24mOhm 2000 Hrs @ 105°C"
 				(at 0 0 0)
 				(effects
 					(font
@@ -541,7 +394,43 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "10-EEE-FN1E101UPCT-ND"
+			(property "DKPN" "399-A750BK107M1AAAE024-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Kemet"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "A750BK107M1AAAE024"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "A750"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MOUNT" "Radial"
 				(at 0 0 0)
 				(effects
 					(font
@@ -568,7 +457,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "CAP ALUM-ELEC 100μF ±20% 25V Panasonic_0_1"
+			(symbol "CAP ALUM-ELEC 100μF ±20% 10V Kemet_0_1"
 				(rectangle
 					(start -1.524 0.6858)
 					(end 1.524 0.3048)
@@ -616,7 +505,7 @@
 					)
 				)
 			)
-			(symbol "CAP ALUM-ELEC 100μF ±20% 25V Panasonic_1_1"
+			(symbol "CAP ALUM-ELEC 100μF ±20% 10V Kemet_1_1"
 				(pin passive line
 					(at 0 2.54 270)
 					(length 1.8542)
@@ -656,7 +545,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Panasonic"
+		(symbol "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Kemet"
 			(pin_numbers
 				(hide yes)
 			)
@@ -676,7 +565,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "220μF/50V"
+			(property "Value" "220μF"
 				(at 0.635 -1.905 0)
 				(effects
 					(font
@@ -685,7 +574,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Panasonic"
+			(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Kemet"
 				(at 0 0 0)
 				(effects
 					(font
@@ -694,7 +583,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+			(property "Datasheet" "https://search.kemet.com/download/specsheet/ESY227M050AH2AA"
 				(at 0 0 0)
 				(effects
 					(font
@@ -703,7 +592,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+			(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 42mOhm @ 100kHz 4000 Hrs @ 105°C"
 				(at 0 0 0)
 				(effects
 					(font
@@ -712,7 +601,43 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "10-ECA-1HM221BCT-ND"
+			(property "DKPN" "399-6123-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Kemet"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "ESY227M050AH2AA"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "ESY"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MOUNT" "Radial"
 				(at 0 0 0)
 				(effects
 					(font
@@ -739,7 +664,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "CAP ALUM-ELEC 220μF ±20% 50V Panasonic_0_1"
+			(symbol "CAP ALUM-ELEC 220μF ±20% 50V Kemet_0_1"
 				(rectangle
 					(start -1.524 0.6858)
 					(end 1.524 0.3048)
@@ -787,7 +712,7 @@
 					)
 				)
 			)
-			(symbol "CAP ALUM-ELEC 220μF ±20% 50V Panasonic_1_1"
+			(symbol "CAP ALUM-ELEC 220μF ±20% 50V Kemet_1_1"
 				(pin passive line
 					(at 0 2.54 270)
 					(length 1.8542)
@@ -827,7 +752,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:CAP ALUM-ELEC 47μF ±20% 50V Panasonic"
+		(symbol "Coert-Vonk:CAP ALUM-ELEC 47μF ±20% 50V Kemet"
 			(pin_numbers
 				(hide yes)
 			)
@@ -856,7 +781,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 47μF ±20 50V Panasonic"
+			(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 47μF ±20 50V Kemet"
 				(at 0 0 0)
 				(effects
 					(font
@@ -865,7 +790,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+			(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_A4007_ESY"
 				(at 0 0 0)
 				(effects
 					(font
@@ -874,7 +799,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "47 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+			(property "Description" "47 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 150mOhm @ 100kHz 2000 Hrs @ 105°C"
 				(at 0 0 0)
 				(effects
 					(font
@@ -883,7 +808,7 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "10-ECA-1HM470ICT-ND"
+			(property "DKPN" "399-ESY476M050AE3AA-ND"
 				(at 0 0 0)
 				(effects
 					(font
@@ -892,7 +817,7 @@
 					(hide yes)
 				)
 			)
-			(property "MFR" "Panasonic"
+			(property "MFR" "KEMET"
 				(at 0 0 0)
 				(effects
 					(font
@@ -901,7 +826,25 @@
 					(hide yes)
 				)
 			)
-			(property "PN" "ECA-1HM470I"
+			(property "PN" "ESY476M050AE3AA"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "ESY"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MOUNT" "Radial"
 				(at 0 0 0)
 				(effects
 					(font
@@ -928,7 +871,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "CAP ALUM-ELEC 47μF ±20% 50V Panasonic_0_1"
+			(symbol "CAP ALUM-ELEC 47μF ±20% 50V Kemet_0_1"
 				(rectangle
 					(start -1.524 0.6858)
 					(end 1.524 0.3048)
@@ -976,7 +919,7 @@
 					)
 				)
 			)
-			(symbol "CAP ALUM-ELEC 47μF ±20% 50V Panasonic_1_1"
+			(symbol "CAP ALUM-ELEC 47μF ±20% 50V Kemet_1_1"
 				(pin passive line
 					(at 0 2.54 270)
 					(length 1.8542)
@@ -1073,6 +1016,42 @@
 				)
 			)
 			(property "DKPN" "P124158CT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Panasonic"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "16SVPK220M"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "OS-CON, SVPK"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MOUNT" "SMD"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1250,6 +1229,33 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "GRM21BR61C106KE15L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "GRM"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "capacitor cap"
 				(at 0 0 0)
 				(effects
@@ -1334,7 +1340,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata"
+		(symbol "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata"
 			(pin_numbers
 				(hide yes)
 			)
@@ -1361,7 +1367,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+			(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 				(at 0.254 -13.97 0)
 				(effects
 					(font
@@ -1370,7 +1376,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+			(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 				(at 0 -11.43 0)
 				(effects
 					(font
@@ -1379,7 +1385,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+			(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 				(at -0.254 -9.398 0)
 				(effects
 					(font
@@ -1388,7 +1394,43 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "490-10700-1-ND"
+			(property "DKPN" "490-3285-1-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "GRM188R72A104KA35D"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "GRM"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MOUNT" "0603"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1415,7 +1457,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "CAP X7R 100nF ±10% 50V 0402 Murata_0_1"
+			(symbol "CAP X7R 100nF ±10% 100V 0603 Murata_0_1"
 				(polyline
 					(pts
 						(xy -0.381 -1.524) (xy -0.381 1.524)
@@ -1441,7 +1483,7 @@
 					)
 				)
 			)
-			(symbol "CAP X7R 100nF ±10% 50V 0402 Murata_1_1"
+			(symbol "CAP X7R 100nF ±10% 100V 0603 Murata_1_1"
 				(pin passive line
 					(at -2.54 0 0)
 					(length 2.032)
@@ -1481,7 +1523,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:CAP X7R 10nF ±10% 16V 0402 Murata"
+		(symbol "Coert-Vonk:CAP X7R 10nF ±10% 100V 0603 Murata"
 			(pin_numbers
 				(hide yes)
 			)
@@ -1508,7 +1550,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 16V 0402 Murata"
+			(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 100V 0603 Murata"
 				(at 0.254 -13.97 0)
 				(effects
 					(font
@@ -1517,7 +1559,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71C103KA01-01.pdf"
+			(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A103KA01-02.pdf"
 				(at 0 -11.43 0)
 				(effects
 					(font
@@ -1526,7 +1568,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "10000 pF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"
+			(property "Description" "10000 pF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 				(at -0.254 -9.398 0)
 				(effects
 					(font
@@ -1535,7 +1577,7 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "490-1313-1-ND"
+			(property "DKPN" "490-GRM188R72A103KA01JCT-ND"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1544,7 +1586,25 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "capacitor cap"
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "GRM188R72A103KA01J"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "GRM"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1562,7 +1622,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "CAP X7R 10nF ±10% 16V 0402 Murata_0_1"
+			(symbol "CAP X7R 10nF ±10% 100V 0603 Murata_0_1"
 				(polyline
 					(pts
 						(xy -0.381 -1.524) (xy -0.381 1.524)
@@ -1588,7 +1648,7 @@
 					)
 				)
 			)
-			(symbol "CAP X7R 10nF ±10% 16V 0402 Murata_1_1"
+			(symbol "CAP X7R 10nF ±10% 100V 0603 Murata_1_1"
 				(pin passive line
 					(at -2.54 0 0)
 					(length 2.032)
@@ -1683,6 +1743,24 @@
 				)
 			)
 			(property "DKPN" "490-12456-1-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "GRT31CR61H106KE01L"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1838,6 +1916,33 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "GRM188R71A225KE15J"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "GRM"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "capacitor cap "
 				(at 0 0 0)
 				(effects
@@ -1977,6 +2082,42 @@
 				)
 			)
 			(property "DKPN" "490-3284-1-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "GRM188R72A223KAC4D"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "GRM"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MOUNT" "0603"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2132,6 +2273,24 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "GRM31CR71A226KE15L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "capacitor cap"
 				(at 0 0 0)
 				(effects
@@ -2216,7 +2375,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:CAP X7R 33nF ±10% 50V 0805 Kemet"
+		(symbol "Coert-Vonk:CAP X7R 33nF ±10% 50V 0603 Kemet"
 			(pin_numbers
 				(hide yes)
 			)
@@ -2243,7 +2402,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:CAP X7R 33nF ±10 50V 0805 Kemet"
+			(property "Footprint" "Coert-Vonk:CAP X7R 33nF ±10 50V 0603 Kemet"
 				(at 0.254 -13.97 0)
 				(effects
 					(font
@@ -2270,8 +2429,44 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "399-C0805C333K5RACTUCT-ND"
+			(property "DKPN" "399-C0603C333K5RACTUCT-ND"
 				(at 0.762 -13.97 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Kemet"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "C0603C333K5RACTU"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "SMD Comm X7R"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MOUNT" "0603"
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2297,7 +2492,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "CAP X7R 33nF ±10% 50V 0805 Kemet_0_1"
+			(symbol "CAP X7R 33nF ±10% 50V 0603 Kemet_0_1"
 				(polyline
 					(pts
 						(xy -0.381 -1.524) (xy -0.381 1.524)
@@ -2323,7 +2518,7 @@
 					)
 				)
 			)
-			(symbol "CAP X7R 33nF ±10% 50V 0805 Kemet_1_1"
+			(symbol "CAP X7R 33nF ±10% 50V 0603 Kemet_1_1"
 				(pin passive line
 					(at -2.54 0 0)
 					(length 2.032)
@@ -2416,47 +2611,26 @@
 					(hide yes)
 				)
 			)
-			(property "PARTREV" "B3"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "STANDARD" "Manufacturer Recommendations"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "MAXIMUM_PACKAGE_HEIGHT" "16.13 mm"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "MANUFACTURER" "TE Connectivity"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
 			(property "DKPN" "A32259-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "TE Connectivity"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "PN" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -2605,6 +2779,24 @@
 				)
 			)
 			(property "DKPN" "SS34FSCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Onsemi"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "SS34"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2800,7 +2992,25 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "SMBJ28A-13-F"
+			(property "MFR" "Diodes"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "SMBJ28A-13-F"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "SMBJ"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3007,6 +3217,24 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Diodes"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "BZT52C12S-7-F"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
 				(at 0 0 0)
 				(effects
@@ -3144,6 +3372,33 @@
 				)
 			)
 			(property "DKPN" "ESP32-C6-DEVKITC-1-N8"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Espressif Systems"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "ESP32-C6-DEVKITC-1-N8"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "ESP32-C"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3950,7 +4205,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "50Ω@100Mhz/12A"
+			(property "Value" "50Ω@100Mhz"
 				(at 1.905 -1.27 0)
 				(effects
 					(font
@@ -3987,6 +4242,33 @@
 				)
 			)
 			(property "DKPN" "490-13269-1-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "BLM31SN500SN1L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "BLM31"
 				(at 0 0 0)
 				(effects
 					(font
@@ -4120,7 +4402,7 @@
 					(hide yes)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Coert-Vonk:FERRITE BEAD 20mΩ 60Ω 0603 TDK"
 				(at -1.778 0 90)
 				(effects
 					(font
@@ -4328,6 +4610,33 @@
 			)
 			(property "DKPN" "F2589CT-ND"
 				(at -0.254 -12.954 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Littelfuse"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "0451007.MRL"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "NANO 451"
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -4633,6 +4942,33 @@
 				)
 			)
 			(property "DKPN" "505-ADM3260ARSZ-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Analog Devices"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "ADM3260ARSZ"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "IsoPower"
 				(at 0 0 0)
 				(effects
 					(font
@@ -5100,6 +5436,33 @@
 				)
 			)
 			(property "DKPN" "175-TMC2209-LA-TCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Analog Devices"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "TMC2209-LA-T"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "stallGuard"
 				(at 0 0 0)
 				(effects
 					(font
@@ -5731,6 +6094,24 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Bourns"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "SDR1307-100ML"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "inductor choke coil reactor magnetic"
 				(at 0 0 0)
 				(effects
@@ -6285,6 +6666,24 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Atlas Scientific"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "EZO-PH"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "Atlas Scientific"
 				(at 0 0 0)
 				(effects
@@ -6477,6 +6876,24 @@
 				)
 			)
 			(property "DKPN" "785-1000-1-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Alpha & Omega"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "AO3400A"
 				(at 0 0 0)
 				(effects
 					(font
@@ -6938,6 +7355,33 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Infineon"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "IRLR2905TRPBF"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "HEXFET"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "P-Channel MOSFET"
 				(at 0 0 0)
 				(effects
@@ -7380,6 +7824,24 @@
 				)
 			)
 			(property "DKPN" "785-1421-1-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Alpha & Omega"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "AON6407"
 				(at 0 0 0)
 				(effects
 					(font
@@ -10276,7 +10738,34 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
+			(property "DKPN" "311-100CRCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MGR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-07100RL"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RC_L"
 				(at 0 0 0)
 				(effects
 					(font
@@ -10541,6 +11030,33 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-0710KL"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RC_L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "Yageo RC_L"
 				(at 0 0 0)
 				(effects
@@ -10668,6 +11184,33 @@
 				)
 			)
 			(property "DKPN" "RL12S.11FCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Susumu"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RL1220S-R11-F"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RL"
 				(at 0 0 0)
 				(effects
 					(font
@@ -10909,6 +11452,33 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-1014KL"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RC_L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "Yageo RC_L"
 				(at 0 0 0)
 				(effects
@@ -11035,6 +11605,33 @@
 				)
 			)
 			(property "DKPN" "311-16.9KCRCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-0716K9L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RC_L"
 				(at 0 0 0)
 				(effects
 					(font
@@ -11177,6 +11774,33 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-071KL"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RC_L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "Yageo RC_L"
 				(at 0 0 0)
 				(effects
@@ -11303,6 +11927,33 @@
 				)
 			)
 			(property "DKPN" "311-2.20KCRCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-072K2L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RC_L"
 				(at 0 0 0)
 				(effects
 					(font
@@ -11579,6 +12230,33 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-1333KL"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RC_L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "Yageo RC_L"
 				(at 0 0 0)
 				(effects
@@ -11713,6 +12391,33 @@
 					(hide yes)
 				)
 			)
+			(property "MFR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-074K7L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "RC_L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "Yageo RC_L"
 				(at 0 0 0)
 				(effects
@@ -11838,6 +12543,24 @@
 				)
 			)
 			(property "DKPN" "311-52.3KCRCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Yageo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "RC0805FR-0752K3L"
 				(at 0 0 0)
 				(effects
 					(font
@@ -13355,7 +14078,16 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "header jst JST_S3B-XH-A"
+			(property "MFR" "JST"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "S4B-XH-A"
 				(at 0 0 0)
 				(effects
 					(font
@@ -14749,7 +15481,25 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "JST PHR-4"
+			(property "MFR" "JST"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "PHR-4"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "PH"
 				(at 0 0 0)
 				(effects
 					(font
@@ -15131,7 +15881,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:TERM BLK PLG 4POS XH 2.5mm"
+			(property "Footprint" "Coert-Vonk:TERM BLK PLG 4POS JST-XH 2.5mm"
 				(at 0 0 0)
 				(effects
 					(font
@@ -15169,7 +15919,16 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Phoenix Connect XH"
+			(property "MFR" "JST"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "XHP-4"
 				(at 0 0 0)
 				(effects
 					(font
@@ -16171,6 +16930,15 @@
 					(hide yes)
 				)
 			)
+			(property "SERIES" "TB0011-350"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "TB0011-350"
 				(at 0 0 0)
 				(effects
@@ -17008,499 +17776,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260_1"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U3"
-				(at 8.89 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "ADM3260"
-				(at 8.89 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Coert-Vonk:IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260"
-				(at 0 -34.29 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(italic yes)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADM3260.pdf"
-				(at 0 -36.83 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "I2C Digital Isolator 2500Vrms 2 Channel 25kV/µs CMTI 20-SSOP (0.209\", 5.30mm Width)"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "DKPN" "505-ADM3260ARSZ-ND"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "MFR" "Analog Devices"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "PN" "ADM3260ARSZ"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "SERIES" "IsoPower"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "SOIC*7.5x12.8mm*P1.27mm*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260_1_1_1"
-				(unit_name "IO")
-				(rectangle
-					(start 0 0)
-					(end 17.78 -25.4)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 6.985 -20.32) (xy 8.255 -19.685) (xy 8.255 -20.955) (xy 6.985 -20.32)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 6.985 -22.86) (xy 8.255 -22.225) (xy 8.255 -23.495) (xy 6.985 -22.86)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 0) (xy 8.89 -25.4)
-					)
-					(stroke
-						(width 0)
-						(type dash)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 9.525 -19.685) (xy 9.525 -20.955) (xy 10.795 -20.32) (xy 9.525 -19.685)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 9.525 -22.225) (xy 9.525 -23.495) (xy 10.795 -22.86) (xy 9.525 -22.225)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin power_in line
-					(at -5.08 -2.54 0)
-					(length 5.08)
-					(name "V_{IN}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -5.08 -7.62 0)
-					(length 5.08)
-					(name "GND_{P}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -5.08 -7.62 0)
-					(length 5.08)
-					(name "GND_{P}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -5.08 -7.62 0)
-					(length 5.08)
-					(name "GND_{P}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -5.08 -7.62 0)
-					(length 5.08)
-					(name "GND_{P}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -10.16 0)
-					(length 5.08)
-					(name "PDIS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -5.08 -12.7 0)
-					(length 5.08)
-					(name "VDD_{P}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -5.08 -20.32 0)
-					(length 5.08)
-					(name "SDA_{2}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -5.08 -22.86 0)
-					(length 5.08)
-					(name "SCL_{2}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 22.86 -2.54 180)
-					(length 5.08)
-					(name "V_{ISO}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 22.86 -7.62 180)
-					(length 5.08)
-					(name "GND_{ISO}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 22.86 -7.62 180)
-					(length 5.08)
-					(name "GND_{ISO}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 22.86 -7.62 180)
-					(length 5.08)
-					(name "GND_{ISO}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 22.86 -7.62 180)
-					(length 5.08)
-					(name "GND_{ISO}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 22.86 -10.16 180)
-					(length 5.08)
-					(name "VSEL"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 22.86 -12.7 180)
-					(length 5.08)
-					(name "VDD_{ISO}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at 22.86 -20.32 180)
-					(length 5.08)
-					(name "SDA_{1}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at 22.86 -22.86 180)
-					(length 5.08)
-					(name "SCL_{1}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -26120,6 +26395,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Analog Devices"
+			(at 314.96 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "TMC2209-LA-T"
+			(at 314.96 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "stallGuard"
+			(at 314.96 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "9"
 			(uuid "e8f5c7b0-ba51-45fa-989b-11230e48d4da")
 		)
@@ -26358,6 +26660,33 @@
 			)
 		)
 		(property "DKPN" "311-4.70KCRCT-ND"
+			(at 35.56 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 35.56 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-074K7L"
+			(at 35.56 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 35.56 269.24 0)
 			(effects
 				(font
@@ -26784,6 +27113,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 285.75 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R71A225KE15J"
+			(at 285.75 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 285.75 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "568fa94b-d35b-41bb-8e37-d4988bee57f2")
 		)
@@ -27075,6 +27431,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Onsemi"
+			(at 59.69 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "SS34"
+			(at 59.69 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "C"
 			(uuid "0565adf2-674c-4f6a-befd-7707991b4f0b")
 		)
@@ -27223,7 +27597,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 344.17 125.73 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -27247,7 +27621,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 358.14 125.476 0)
 			(effects
 				(font
@@ -27256,7 +27630,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 355.6 125.73 0)
 			(effects
 				(font
@@ -27265,7 +27639,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 353.568 125.984 0)
 			(effects
 				(font
@@ -27274,7 +27648,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 344.17 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 344.17 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 344.17 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 344.17 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 344.17 125.73 0)
 			(effects
 				(font
@@ -27365,7 +27775,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 10nF ±10% 16V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 10nF ±10% 100V 0603 Murata")
 		(at 233.68 102.87 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -27391,7 +27801,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 16V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 100V 0603 Murata"
 			(at 247.65 102.616 0)
 			(effects
 				(font
@@ -27400,7 +27810,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71C103KA01-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A103KA01-02.pdf"
 			(at 245.11 102.87 0)
 			(effects
 				(font
@@ -27409,7 +27819,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10000 pF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "10000 pF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 243.078 103.124 0)
 			(effects
 				(font
@@ -27418,7 +27828,34 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-1313-1-ND"
+		(property "DKPN" "490-GRM188R72A103KA01JCT-ND"
+			(at 233.68 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 233.68 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A103KA01J"
+			(at 233.68 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
 			(at 233.68 102.87 0)
 			(effects
 				(font
@@ -27639,7 +28076,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 349.25 125.73 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -27663,7 +28100,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 363.22 125.476 0)
 			(effects
 				(font
@@ -27672,7 +28109,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 360.68 125.73 0)
 			(effects
 				(font
@@ -27681,7 +28118,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 358.648 125.984 0)
 			(effects
 				(font
@@ -27690,7 +28127,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 349.25 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 349.25 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 349.25 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 349.25 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 349.25 125.73 0)
 			(effects
 				(font
@@ -27914,7 +28387,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 92.71 180.34 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -27940,7 +28413,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 106.68 180.086 0)
 			(effects
 				(font
@@ -27949,7 +28422,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 104.14 180.34 0)
 			(effects
 				(font
@@ -27958,7 +28431,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 102.108 180.594 0)
 			(effects
 				(font
@@ -27967,7 +28440,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 92.71 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 92.71 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 92.71 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 92.71 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 92.71 180.34 0)
 			(effects
 				(font
@@ -28185,6 +28694,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 167.64 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0752K3L"
+			(at 167.64 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5d4c8f3e-bc41-46e0-a9cd-b318e40efb76")
 		)
@@ -28201,7 +28728,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP ALUM-ELEC 47μF ±20% 50V Panasonic")
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 47μF ±20% 50V Kemet")
 		(at 123.19 240.03 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -28227,7 +28754,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 47μF ±20 50V Panasonic"
+		(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 47μF ±20 50V Kemet"
 			(at 123.19 240.03 0)
 			(effects
 				(font
@@ -28236,7 +28763,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_A4007_ESY"
 			(at 123.19 240.03 0)
 			(effects
 				(font
@@ -28245,7 +28772,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "47 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+		(property "Description" "47 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 150mOhm @ 100kHz 2000 Hrs @ 105°C"
 			(at 123.19 240.03 0)
 			(effects
 				(font
@@ -28254,7 +28781,7 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "10-ECA-1HM470ICT-ND"
+		(property "DKPN" "399-ESY476M050AE3AA-ND"
 			(at 123.19 240.03 0)
 			(effects
 				(font
@@ -28263,7 +28790,7 @@
 				(hide yes)
 			)
 		)
-		(property "MFR" "Panasonic"
+		(property "MFR" "KEMET"
 			(at 123.19 240.03 0)
 			(effects
 				(font
@@ -28272,7 +28799,25 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "ECA-1HM470I"
+		(property "PN" "ESY476M050AE3AA"
+			(at 123.19 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "ESY"
+			(at 123.19 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "Radial"
 			(at 123.19 240.03 0)
 			(effects
 				(font
@@ -28441,6 +28986,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "JST"
+			(at 365.76 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "S4B-XH-A"
+			(at 365.76 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "99cddce9-a304-42b9-bf0e-86e3c52098ee")
 		)
@@ -28488,7 +29051,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:TERM BLK PLG 4POS XH 2.5mm"
+		(property "Footprint" "Coert-Vonk:TERM BLK PLG 4POS JST-XH 2.5mm"
 			(at 372.11 137.16 0)
 			(effects
 				(font
@@ -28518,6 +29081,24 @@
 			)
 		)
 		(property "DKPN" "455-2267-ND"
+			(at 372.11 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "JST"
+			(at 372.11 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "XHP-4"
 			(at 372.11 137.16 0)
 			(effects
 				(font
@@ -28737,6 +29318,24 @@
 			(effects
 				(font
 					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Bourns"
+			(at 161.29 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "SDR1307-100ML"
+			(at 161.29 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
@@ -29251,7 +29850,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 220.98 200.66 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -29277,7 +29876,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 234.95 200.406 0)
 			(effects
 				(font
@@ -29286,7 +29885,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 232.41 200.66 0)
 			(effects
 				(font
@@ -29295,7 +29894,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 230.378 200.914 0)
 			(effects
 				(font
@@ -29304,7 +29903,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 220.98 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 220.98 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 220.98 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 220.98 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 220.98 200.66 0)
 			(effects
 				(font
@@ -29785,6 +30420,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Analog Devices"
+			(at 222.25 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "ADM3260ARSZ"
+			(at 222.25 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "IsoPower"
+			(at 222.25 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "4"
 			(uuid "d8dacd75-67f4-41df-981d-ffb7246e1cb8")
 		)
@@ -29849,7 +30511,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 83.82 199.39 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -29875,7 +30537,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 97.79 199.136 0)
 			(effects
 				(font
@@ -29884,7 +30546,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 95.25 199.39 0)
 			(effects
 				(font
@@ -29893,7 +30555,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 93.218 199.644 0)
 			(effects
 				(font
@@ -29902,7 +30564,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 83.82 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 83.82 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 83.82 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 83.82 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 83.82 199.39 0)
 			(effects
 				(font
@@ -29980,6 +30678,33 @@
 			)
 		)
 		(property "DKPN" "311-2.20KCRCT-ND"
+			(at 171.45 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 171.45 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-072K2L"
+			(at 171.45 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 171.45 156.21 0)
 			(effects
 				(font
@@ -30234,6 +30959,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 290.83 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-1014KL"
+			(at 290.83 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 290.83 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e3eccf89-ab9b-4358-b4bc-a3e865740345")
 		)
@@ -30311,6 +31063,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 171.45 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-072K2L"
+			(at 171.45 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 171.45 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "761f0d06-2dd5-482b-8cfd-a1b6bdfa52b7")
 		)
@@ -30327,7 +31106,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 349.25 200.66 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -30351,7 +31130,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 363.22 200.406 0)
 			(effects
 				(font
@@ -30360,7 +31139,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 360.68 200.66 0)
 			(effects
 				(font
@@ -30369,7 +31148,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 358.648 200.914 0)
 			(effects
 				(font
@@ -30378,7 +31157,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 349.25 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 349.25 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 349.25 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 349.25 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 349.25 200.66 0)
 			(effects
 				(font
@@ -30667,6 +31482,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Alpha & Omega"
+			(at 138.43 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "AO3400A"
+			(at 138.43 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b4aad1af-226b-4534-9e80-b47f7c2a45b7")
 		)
@@ -30740,6 +31573,33 @@
 			)
 		)
 		(property "DKPN" "13-RC0805FR-1014KLCT-ND"
+			(at 290.83 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 290.83 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-1014KL"
+			(at 290.83 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 290.83 220.98 0)
 			(effects
 				(font
@@ -30890,6 +31750,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 86.36 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-071KL"
+			(at 86.36 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 86.36 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "70b42572-c844-4340-b9bc-b11e0eaaa83a")
 		)
@@ -30960,6 +31847,33 @@
 			)
 		)
 		(property "DKPN" "175-TMC2209-LA-TCT-ND"
+			(at 314.96 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Analog Devices"
+			(at 314.96 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "TMC2209-LA-T"
+			(at 314.96 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "stallGuard"
 			(at 314.96 74.93 0)
 			(effects
 				(font
@@ -31065,7 +31979,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 344.17 200.66 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -31089,7 +32003,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 358.14 200.406 0)
 			(effects
 				(font
@@ -31098,7 +32012,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 355.6 200.66 0)
 			(effects
 				(font
@@ -31107,7 +32021,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 353.568 200.914 0)
 			(effects
 				(font
@@ -31116,7 +32030,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 344.17 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 344.17 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 344.17 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 344.17 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 344.17 200.66 0)
 			(effects
 				(font
@@ -31351,6 +32301,42 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 320.04 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A223KAC4D"
+			(at 320.04 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 320.04 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
+			(at 320.04 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e5caab22-454e-4e2d-955e-9ff6ae357252")
 		)
@@ -31393,7 +32379,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Coert-Vonk:FERRITE BEAD 20mΩ 60Ω 0603 TDK"
 			(at 179.07 97.028 90)
 			(effects
 				(font
@@ -31449,6 +32435,15 @@
 		)
 		(property "SERIES" "MPZ"
 			(at 179.07 95.25 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MPZ1608S600ATDH5"
+			(at 179.07 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31620,6 +32615,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 219.71 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM31CR71A226KE15L"
+			(at 219.71 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0b850ad5-3ead-4271-8066-5864de8ec65d")
 		)
@@ -31701,6 +32714,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Infineon"
+			(at 64.77 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "IRLR2905TRPBF"
+			(at 64.77 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "HEXFET"
+			(at 64.77 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "90cbfd9c-52e6-4ecc-aa83-fb3c29874336")
 		)
@@ -31745,7 +32785,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:TERM BLK PLG 4POS XH 2.5mm"
+		(property "Footprint" "Coert-Vonk:TERM BLK PLG 4POS JST-XH 2.5mm"
 			(at 372.11 212.09 0)
 			(effects
 				(font
@@ -31775,6 +32815,24 @@
 			)
 		)
 		(property "DKPN" "455-2267-ND"
+			(at 372.11 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "JST"
+			(at 372.11 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "XHP-4"
 			(at 372.11 212.09 0)
 			(effects
 				(font
@@ -31860,6 +32918,42 @@
 		)
 		(property "DKPN" "F2589CT-ND"
 			(at 69.596 51.054 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Littelfuse"
+			(at 69.85 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "0451007.MRL"
+			(at 69.85 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "NANO 451"
+			(at 69.85 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" ""
+			(at 69.85 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32068,6 +33162,24 @@
 			)
 		)
 		(property "DKPN" "5016-EZO-PH-ND"
+			(at 143.51 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Atlas Scientific"
+			(at 143.51 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "EZO-PH"
 			(at 143.51 105.41 0)
 			(effects
 				(font
@@ -32472,7 +33584,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 167.64 193.04 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -32496,7 +33608,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 181.61 192.786 0)
 			(effects
 				(font
@@ -32505,7 +33617,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 179.07 193.04 0)
 			(effects
 				(font
@@ -32514,7 +33626,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 177.038 193.294 0)
 			(effects
 				(font
@@ -32523,7 +33635,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 167.64 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 167.64 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 167.64 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 167.64 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 167.64 193.04 0)
 			(effects
 				(font
@@ -32548,7 +33696,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 349.25 55.88 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -32572,7 +33720,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 363.22 55.626 0)
 			(effects
 				(font
@@ -32581,7 +33729,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 360.68 55.88 0)
 			(effects
 				(font
@@ -32590,7 +33738,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 358.648 56.134 0)
 			(effects
 				(font
@@ -32599,7 +33747,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 349.25 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 349.25 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 349.25 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 349.25 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 349.25 55.88 0)
 			(effects
 				(font
@@ -33028,6 +34212,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Onsemi"
+			(at 133.35 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "SS34"
+			(at 133.35 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "C"
 			(uuid "ad416540-c9e2-40de-aaaf-630ff3a81edf")
 		)
@@ -33070,7 +34272,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Coert-Vonk:FERRITE BEAD 20mΩ 60Ω 0603 TDK"
 			(at 179.07 147.828 90)
 			(effects
 				(font
@@ -33202,6 +34404,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 83.82 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0710KL"
+			(at 83.82 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 83.82 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d0b58c43-f74e-42c2-ba17-b54131f14c16")
 		)
@@ -33218,7 +34447,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Panasonic")
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Kemet")
 		(at 354.33 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -33245,7 +34474,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Panasonic"
+		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Kemet"
 			(at 354.33 125.73 0)
 			(effects
 				(font
@@ -33254,7 +34483,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+		(property "Datasheet" "https://search.kemet.com/download/specsheet/ESY227M050AH2AA"
 			(at 354.33 125.73 0)
 			(effects
 				(font
@@ -33263,7 +34492,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 42mOhm @ 100kHz 4000 Hrs @ 105°C"
 			(at 354.33 125.73 0)
 			(effects
 				(font
@@ -33272,7 +34501,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "10-ECA-1HM221BCT-ND"
+		(property "DKPN" "399-6123-ND"
+			(at 354.33 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Kemet"
+			(at 354.33 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "ESY227M050AH2AA"
+			(at 354.33 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "ESY"
+			(at 354.33 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "Radial"
 			(at 354.33 125.73 0)
 			(effects
 				(font
@@ -33352,6 +34617,33 @@
 			)
 		)
 		(property "DKPN" "311-2.20KCRCT-ND"
+			(at 39.37 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 39.37 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-072K2L"
+			(at 39.37 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 39.37 99.06 0)
 			(effects
 				(font
@@ -33725,6 +35017,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 187.96 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 187.96 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 187.96 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7c125588-7886-4f4b-b85a-f983a2d32a66")
 		)
@@ -33803,6 +35122,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "JST"
+			(at 365.76 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "S4B-XH-A"
+			(at 365.76 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b0482134-0f04-4e86-b0d9-955a434ba657")
 		)
@@ -33825,7 +35162,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 189.23 97.79 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -33849,7 +35186,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 203.2 97.536 0)
 			(effects
 				(font
@@ -33858,7 +35195,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 200.66 97.79 0)
 			(effects
 				(font
@@ -33867,7 +35204,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 198.628 98.044 0)
 			(effects
 				(font
@@ -33876,7 +35213,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 189.23 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 189.23 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 189.23 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 189.23 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 189.23 97.79 0)
 			(effects
 				(font
@@ -34033,7 +35406,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 238.76 102.87 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -34057,7 +35430,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 252.73 102.616 0)
 			(effects
 				(font
@@ -34066,7 +35439,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 250.19 102.87 0)
 			(effects
 				(font
@@ -34075,7 +35448,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 248.158 103.124 0)
 			(effects
 				(font
@@ -34084,7 +35457,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 238.76 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 238.76 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 238.76 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 238.76 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 238.76 102.87 0)
 			(effects
 				(font
@@ -34228,6 +35637,33 @@
 			)
 		)
 		(property "DKPN" "ESP32-C6-DEVKITC-1-N8"
+			(at 236.22 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Espressif Systems"
+			(at 236.22 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "ESP32-C6-DEVKITC-1-N8"
+			(at 236.22 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "ESP32-C"
 			(at 236.22 35.56 0)
 			(effects
 				(font
@@ -34398,6 +35834,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Analog Devices"
+			(at 314.96 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "TMC2209-LA-T"
+			(at 314.96 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "stallGuard"
+			(at 314.96 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "9"
 			(uuid "c340ca91-d8ee-4e3f-ac70-b9a85eb210a9")
 		)
@@ -34489,6 +35952,120 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "U6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20% 50V TDK")
+		(at 110.49 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6ec8a9c2-09d2-4f9a-8026-04886f50b961")
+		(property "Reference" "C4"
+			(at 109.474 42.672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1000μF"
+			(at 109.474 45.212 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20 50V TDK"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.tdk-electronics.tdk.com/inf/20/30/db/aec/B41866.pdf?ref_disty=digikey"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "1000 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 39mOhm @ 100kHz 5000 Hrs @ 125°C"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "B41866D6108M000"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "TDK"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "B41866D6108M000"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "B41866"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "Radial"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fa44f55b-1ca9-40a9-9091-cb17bcd2375b")
+		)
+		(pin "2"
+			(uuid "6270c1f8-8a89-4a45-b217-d329067f372a")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -34793,6 +36370,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Diodes"
+			(at 85.09 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "BZT52C12S-7-F"
+			(at 85.09 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "2285d864-b8ab-4fbe-b69a-63bb8eb952b5")
 		)
@@ -34871,6 +36466,24 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "JST"
+			(at 365.76 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "S4B-XH-A"
+			(at 365.76 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "bbd6c00a-2fa4-4d93-add2-330435c974ce")
 		)
@@ -34918,7 +36531,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:TERM BLK PLG 4POS XH 2.5mm"
+		(property "Footprint" "Coert-Vonk:TERM BLK PLG 4POS JST-XH 2.5mm"
 			(at 372.11 67.31 0)
 			(effects
 				(font
@@ -34948,6 +36561,24 @@
 			)
 		)
 		(property "DKPN" "455-2267-ND"
+			(at 372.11 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "JST"
+			(at 372.11 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "XHP-4"
 			(at 372.11 67.31 0)
 			(effects
 				(font
@@ -35060,7 +36691,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP ALUM-ELEC 100μF ±20% 25V Panasonic")
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 100μF ±20% 10V Kemet")
 		(at 49.53 196.85 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -35086,7 +36717,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP ALUM 100μF ±20 25V"
+		(property "Footprint" "Coert-Vonk:CAP ALUM 100μF ±20 10V Kemet"
 			(at 49.53 196.85 0)
 			(effects
 				(font
@@ -35095,7 +36726,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDE0000/RDE0000C1259.pdf"
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_A4067_A750"
 			(at 49.53 196.85 0)
 			(effects
 				(font
@@ -35104,7 +36735,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "100 µF 25 V Aluminum Electrolytic Capacitors Radial, Can - SMD 360mOhm @ 100kHz 2000 Hrs @ 105°C"
+		(property "Description" "100 µF 10 V Aluminum - Polymer Capacitors Radial, Can 24mOhm 2000 Hrs @ 105°C"
 			(at 49.53 196.85 0)
 			(effects
 				(font
@@ -35113,7 +36744,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "10-EEE-FN1E101UPCT-ND"
+		(property "DKPN" "399-A750BK107M1AAAE024-ND"
+			(at 49.53 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Kemet"
+			(at 49.53 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "A750BK107M1AAAE024"
+			(at 49.53 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "A750"
+			(at 49.53 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "Radial"
 			(at 49.53 196.85 0)
 			(effects
 				(font
@@ -35205,7 +36872,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 128.27 240.03 270)
 		(mirror x)
 		(unit 1)
@@ -35230,7 +36897,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 114.3 239.776 0)
 			(effects
 				(font
@@ -35239,7 +36906,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 116.84 240.03 0)
 			(effects
 				(font
@@ -35248,7 +36915,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 118.872 240.284 0)
 			(effects
 				(font
@@ -35257,7 +36924,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 128.27 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 128.27 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 128.27 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 128.27 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 128.27 240.03 0)
 			(effects
 				(font
@@ -35425,7 +37128,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 154.94 41.91 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -35451,7 +37154,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 168.91 41.656 0)
 			(effects
 				(font
@@ -35460,7 +37163,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 166.37 41.91 0)
 			(effects
 				(font
@@ -35469,7 +37172,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 164.338 42.164 0)
 			(effects
 				(font
@@ -35478,7 +37181,7 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
 			(at 154.94 41.91 0)
 			(effects
 				(font
@@ -35488,7 +37191,7 @@
 			)
 		)
 		(property "MFR" "Murata"
-			(at 154.94 41.91 90)
+			(at 154.94 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35496,8 +37199,26 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "GRM155R71H104KE14D"
-			(at 154.94 41.91 90)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 154.94 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 154.94 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
+			(at 154.94 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35521,7 +37242,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 233.68 97.79 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -35545,7 +37266,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 247.65 97.536 0)
 			(effects
 				(font
@@ -35554,7 +37275,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 245.11 97.79 0)
 			(effects
 				(font
@@ -35563,7 +37284,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 243.078 98.044 0)
 			(effects
 				(font
@@ -35572,7 +37293,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 233.68 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 233.68 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 233.68 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 233.68 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 233.68 97.79 0)
 			(effects
 				(font
@@ -35658,6 +37415,42 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 320.04 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A223KAC4D"
+			(at 320.04 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 320.04 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
+			(at 320.04 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ea5d6be7-3f46-4130-96d7-e36193b2a560")
 		)
@@ -35674,7 +37467,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Panasonic")
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Kemet")
 		(at 354.33 200.66 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -35701,7 +37494,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Panasonic"
+		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Kemet"
 			(at 354.33 200.66 0)
 			(effects
 				(font
@@ -35710,7 +37503,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+		(property "Datasheet" "https://search.kemet.com/download/specsheet/ESY227M050AH2AA"
 			(at 354.33 200.66 0)
 			(effects
 				(font
@@ -35719,7 +37512,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 42mOhm @ 100kHz 4000 Hrs @ 105°C"
 			(at 354.33 200.66 0)
 			(effects
 				(font
@@ -35728,7 +37521,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "10-ECA-1HM221BCT-ND"
+		(property "DKPN" "399-6123-ND"
+			(at 354.33 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Kemet"
+			(at 354.33 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "ESY227M050AH2AA"
+			(at 354.33 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "ESY"
+			(at 354.33 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "Radial"
 			(at 354.33 200.66 0)
 			(effects
 				(font
@@ -35753,7 +37582,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 332.74 43.18 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -35778,7 +37607,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 332.994 57.15 0)
 			(effects
 				(font
@@ -35787,7 +37616,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 332.74 54.61 0)
 			(effects
 				(font
@@ -35796,7 +37625,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 332.486 52.578 0)
 			(effects
 				(font
@@ -35805,7 +37634,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 332.74 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 332.74 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 332.74 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 332.74 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 332.74 43.18 0)
 			(effects
 				(font
@@ -36093,6 +37958,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 238.76 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 238.76 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 238.76 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5c580ba5-44eb-41ee-85a6-ff2d2fc6e863")
 		)
@@ -36264,6 +38156,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 285.75 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R71A225KE15J"
+			(at 285.75 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 285.75 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3f4c4a78-74fb-425f-928d-e22048cd7b55")
 		)
@@ -36280,7 +38199,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 54.61 240.03 270)
 		(mirror x)
 		(unit 1)
@@ -36305,7 +38224,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 40.64 239.776 0)
 			(effects
 				(font
@@ -36314,7 +38233,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 43.18 240.03 0)
 			(effects
 				(font
@@ -36323,7 +38242,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 45.212 240.284 0)
 			(effects
 				(font
@@ -36332,7 +38251,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 54.61 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 54.61 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 54.61 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 54.61 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 54.61 240.03 0)
 			(effects
 				(font
@@ -36417,6 +38372,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Susumu"
+			(at 340.36 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RL1220S-R11-F"
+			(at 340.36 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RL"
+			(at 340.36 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3b48afa9-5278-4512-b1a8-b461376e1b40")
 		)
@@ -36433,7 +38415,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 344.17 55.88 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -36457,7 +38439,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 358.14 55.626 0)
 			(effects
 				(font
@@ -36466,7 +38448,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 355.6 55.88 0)
 			(effects
 				(font
@@ -36475,7 +38457,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 353.568 56.134 0)
 			(effects
 				(font
@@ -36484,7 +38466,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 344.17 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 344.17 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 344.17 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 344.17 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 344.17 55.88 0)
 			(effects
 				(font
@@ -36574,7 +38592,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 184.15 148.59 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -36598,7 +38616,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 198.12 148.336 0)
 			(effects
 				(font
@@ -36607,7 +38625,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 195.58 148.59 0)
 			(effects
 				(font
@@ -36616,7 +38634,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 193.548 148.844 0)
 			(effects
 				(font
@@ -36625,7 +38643,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 184.15 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 184.15 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 184.15 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 184.15 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 184.15 148.59 0)
 			(effects
 				(font
@@ -36730,6 +38784,15 @@
 				(hide yes)
 			)
 		)
+		(property "SERIES" "GRM"
+			(at 175.26 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "20c17413-a56f-47b7-9f44-716c16173153")
 		)
@@ -36813,7 +38876,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 10nF ±10% 16V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 10nF ±10% 100V 0603 Murata")
 		(at 233.68 148.59 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -36839,7 +38902,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 16V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 100V 0603 Murata"
 			(at 247.65 148.336 0)
 			(effects
 				(font
@@ -36848,7 +38911,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71C103KA01-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A103KA01-02.pdf"
 			(at 245.11 148.59 0)
 			(effects
 				(font
@@ -36857,7 +38920,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10000 pF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "10000 pF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 243.078 148.844 0)
 			(effects
 				(font
@@ -36866,7 +38929,34 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-1313-1-ND"
+		(property "DKPN" "490-GRM188R72A103KA01JCT-ND"
+			(at 233.68 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 233.68 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A103KA01J"
+			(at 233.68 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
 			(at 233.68 148.59 0)
 			(effects
 				(font
@@ -37088,7 +39178,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Coert-Vonk:FERRITE BEAD 20mΩ 60Ω 0603 TDK"
 			(at 179.07 102.108 90)
 			(effects
 				(font
@@ -37254,6 +39344,25 @@
 			)
 		)
 		(property "DKPN" "A32259-ND"
+			(at 134.62 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "TE Connectivity"
+			(at 134.62 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PN" ""
 			(at 134.62 111.76 0)
 			(effects
 				(font
@@ -37500,6 +39609,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 109.22 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-074K7L"
+			(at 109.22 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 109.22 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "84a5edec-d712-4008-b957-b48e3a64e302")
 		)
@@ -37620,6 +39756,25 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "TE Connectivity"
+			(at 134.62 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PN" ""
+			(at 134.62 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "G"
 			(uuid "feecf204-3516-46b8-999d-448e43c8eb96")
 		)
@@ -37698,6 +39853,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 85.09 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-1333KL"
+			(at 85.09 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 85.09 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "02c738a5-f63d-4136-a6ea-fc723acd2722")
 		)
@@ -37714,7 +39896,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 33nF ±10% 50V 0805 Kemet")
+		(lib_id "Coert-Vonk:CAP X7R 33nF ±10% 50V 0603 Kemet")
 		(at 125.73 55.88 270)
 		(mirror x)
 		(unit 1)
@@ -37741,7 +39923,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 33nF ±10 50V 0805 Kemet"
+		(property "Footprint" "Coert-Vonk:CAP X7R 33nF ±10 50V 0603 Kemet"
 			(at 111.76 55.626 0)
 			(effects
 				(font
@@ -37750,7 +39932,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H333KE14-01.pdf"
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 114.3 55.88 0)
 			(effects
 				(font
@@ -37759,7 +39941,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.033 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.033 µF ±10% 50V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 116.332 56.134 0)
 			(effects
 				(font
@@ -37768,7 +39950,7 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-GRM155R71H333KE14JCT-ND"
+		(property "DKPN" "399-C0603C333K5RACTUCT-ND"
 			(at 111.76 55.118 0)
 			(effects
 				(font
@@ -37777,8 +39959,8 @@
 				(hide yes)
 			)
 		)
-		(property "MFR" "Murata"
-			(at 125.73 55.88 90)
+		(property "MFR" "Kemet"
+			(at 125.73 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37786,8 +39968,26 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "GRM155R71H333KE14J"
-			(at 125.73 55.88 90)
+		(property "PN" "C0603C333K5RACTU"
+			(at 125.73 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "SMD Comm X7R"
+			(at 125.73 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
+			(at 125.73 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37837,7 +40037,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Coert-Vonk:FERRITE BEAD 20mΩ 60Ω 0603 TDK"
 			(at 179.07 142.748 90)
 			(effects
 				(font
@@ -38113,6 +40313,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 167.64 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0710KL"
+			(at 167.64 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 167.64 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "050a1a40-b2a1-4f39-9277-c77a53d478e6")
 		)
@@ -38210,6 +40437,24 @@
 				(hide yes)
 			)
 		)
+		(property "SERIES" "OS-CON, SVPK"
+			(at 196.85 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "SMD"
+			(at 196.85 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ceb23b84-13e4-4f50-9eed-5a7bcc8685aa")
 		)
@@ -38280,6 +40525,33 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
+			(at 193.04 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 193.04 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0710KL"
+			(at 193.04 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 193.04 124.46 0)
 			(effects
 				(font
@@ -38501,7 +40773,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 189.23 143.51 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -38525,7 +40797,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 203.2 143.256 0)
 			(effects
 				(font
@@ -38534,7 +40806,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 200.66 143.51 0)
 			(effects
 				(font
@@ -38543,7 +40815,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 198.628 143.764 0)
 			(effects
 				(font
@@ -38552,7 +40824,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 189.23 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 189.23 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 189.23 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 189.23 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 189.23 143.51 0)
 			(effects
 				(font
@@ -38806,6 +41114,33 @@
 			(effects
 				(font
 					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 285.75 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R71A225KE15J"
+			(at 285.75 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 285.75 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
@@ -39084,6 +41419,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 184.15 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 184.15 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 184.15 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "26d2e29b-2e6e-48bd-8573-6c9766904b13")
 		)
@@ -39226,6 +41588,42 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 320.04 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A223KAC4D"
+			(at 320.04 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 320.04 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
+			(at 320.04 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "2c574157-b7f7-4af5-bf61-f06e6ed40cd6")
 		)
@@ -39236,85 +41634,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C42")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20% 50V Panasonic")
-		(at 110.49 48.26 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "aa2c0dd9-3b08-48fa-8f76-ad758db75bd6")
-		(property "Reference" "C4"
-			(at 109.982 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1000μF"
-			(at 109.982 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:CAP ALUM 1000μF ±20 50V Panasonic"
-			(at 110.49 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
-			(at 110.49 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "1000 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
-			(at 110.49 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "P19529CT-ND"
-			(at 110.49 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "ef0f306c-8189-4b34-8868-59244c81ab63")
-		)
-		(pin "1"
-			(uuid "8c6b27ff-f973-4f76-80ef-ad4f8ec04989")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -39387,7 +41706,6 @@
 		)
 	)
 	(symbol
-		(lib_name "IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260_1")
 		(lib_id "Coert-Vonk:IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260")
 		(at 222.25 92.71 0)
 		(mirror y)
@@ -39645,6 +41963,25 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "TE Connectivity"
+			(at 134.62 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PN" ""
+			(at 134.62 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "G"
 			(uuid "65a2e15a-51e6-4e94-915e-65180ffa2efa")
 		)
@@ -39716,6 +42053,33 @@
 			)
 		)
 		(property "DKPN" "311-16.9KCRCT-ND"
+			(at 189.23 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 189.23 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0716K9L"
+			(at 189.23 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 189.23 124.46 0)
 			(effects
 				(font
@@ -39884,6 +42248,33 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
+			(at 193.04 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 193.04 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0710KL"
+			(at 193.04 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 193.04 170.18 0)
 			(effects
 				(font
@@ -40380,6 +42771,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Espressif Systems"
+			(at 52.07 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "ESP32-C6-DEVKITC-1-N8"
+			(at 52.07 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "ESP32-C"
+			(at 52.07 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "J3_11"
 			(uuid "80ce1d7d-bd41-4825-b41e-bd8e6fa4aed7")
 		)
@@ -40727,7 +43145,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 233.68 143.51 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -40751,7 +43169,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 247.65 143.256 0)
 			(effects
 				(font
@@ -40760,7 +43178,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 245.11 143.51 0)
 			(effects
 				(font
@@ -40769,7 +43187,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 243.078 143.764 0)
 			(effects
 				(font
@@ -40778,7 +43196,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 233.68 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 233.68 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 233.68 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 233.68 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 233.68 143.51 0)
 			(effects
 				(font
@@ -40858,6 +43312,33 @@
 			)
 		)
 		(property "DKPN" "311-2.20KCRCT-ND"
+			(at 44.45 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 44.45 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-072K2L"
+			(at 44.45 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 44.45 99.06 0)
 			(effects
 				(font
@@ -41219,6 +43700,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 181.61 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 181.61 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 181.61 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "37de3cd6-6994-46ed-8e15-04fdc5ae2671")
 		)
@@ -41235,7 +43743,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Panasonic")
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Kemet")
 		(at 49.53 240.03 0)
 		(mirror y)
 		(unit 1)
@@ -41262,7 +43770,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Panasonic"
+		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Kemet"
 			(at 49.53 240.03 0)
 			(effects
 				(font
@@ -41271,7 +43779,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+		(property "Datasheet" "https://search.kemet.com/download/specsheet/ESY227M050AH2AA"
 			(at 49.53 240.03 0)
 			(effects
 				(font
@@ -41280,7 +43788,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 42mOhm @ 100kHz 4000 Hrs @ 105°C"
 			(at 49.53 240.03 0)
 			(effects
 				(font
@@ -41289,7 +43797,7 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "10-ECA-1HM221BCT-ND"
+		(property "DKPN" "399-6123-ND"
 			(at 49.53 240.03 0)
 			(effects
 				(font
@@ -41298,7 +43806,7 @@
 				(hide yes)
 			)
 		)
-		(property "MFR" "Panasonic"
+		(property "MFR" "Kemet"
 			(at 49.53 240.03 0)
 			(effects
 				(font
@@ -41307,7 +43815,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "ECA-1HM221B"
+		(property "PN" "ESY227M050AH2AA"
 			(at 49.53 240.03 0)
 			(effects
 				(font
@@ -41317,6 +43825,24 @@
 			)
 		)
 		(property "Series" "M-A"
+			(at 49.53 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "ESY"
+			(at 49.53 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "Radial"
 			(at 49.53 240.03 0)
 			(effects
 				(font
@@ -41498,6 +44024,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 167.64 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-072K2L"
+			(at 167.64 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 167.64 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ff9fdb8a-7b6a-4f8d-a8d9-e8dfccd2f16d")
 		)
@@ -41568,6 +44121,33 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
+			(at 92.71 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 92.71 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0710KL"
+			(at 92.71 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 92.71 203.2 0)
 			(effects
 				(font
@@ -41721,6 +44301,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 189.23 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0716K9L"
+			(at 189.23 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 189.23 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ba88e1a7-7189-4ad9-a79d-090732a47a63")
 		)
@@ -41807,7 +44414,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" ""
+		(property "PN" "RC0805FR-072K2L"
 			(at 167.64 110.49 90)
 			(effects
 				(font
@@ -41841,7 +44448,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 238.76 148.59 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -41865,7 +44472,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 252.73 148.336 0)
 			(effects
 				(font
@@ -41874,7 +44481,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 250.19 148.59 0)
 			(effects
 				(font
@@ -41883,7 +44490,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 248.158 148.844 0)
 			(effects
 				(font
@@ -41892,7 +44499,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 238.76 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 238.76 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 238.76 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 238.76 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 238.76 148.59 0)
 			(effects
 				(font
@@ -42561,7 +45204,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 332.74 187.96 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -42586,7 +45229,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 332.994 201.93 0)
 			(effects
 				(font
@@ -42595,7 +45238,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 332.74 199.39 0)
 			(effects
 				(font
@@ -42604,7 +45247,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 332.486 197.358 0)
 			(effects
 				(font
@@ -42613,7 +45256,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 332.74 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 332.74 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 332.74 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 332.74 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 332.74 187.96 0)
 			(effects
 				(font
@@ -42698,6 +45377,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 173.99 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 173.99 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 173.99 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7ad63bfb-5924-480b-b647-de618bf0b7fc")
 		)
@@ -42714,7 +45420,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 307.34 187.96 270)
 		(mirror x)
 		(unit 1)
@@ -42741,7 +45447,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 293.37 187.706 0)
 			(effects
 				(font
@@ -42750,7 +45456,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 295.91 187.96 0)
 			(effects
 				(font
@@ -42759,7 +45465,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 297.942 188.214 0)
 			(effects
 				(font
@@ -42768,7 +45474,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 307.34 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 307.34 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 307.34 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 307.34 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 307.34 187.96 0)
 			(effects
 				(font
@@ -43189,6 +45931,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 238.76 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 238.76 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 238.76 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "95cb8160-2b17-4990-b446-706b6c863039")
 		)
@@ -43336,7 +46105,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 307.34 113.03 270)
 		(mirror x)
 		(unit 1)
@@ -43363,7 +46132,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 293.37 112.776 0)
 			(effects
 				(font
@@ -43372,7 +46141,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 295.91 113.03 0)
 			(effects
 				(font
@@ -43381,7 +46150,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 297.942 113.284 0)
 			(effects
 				(font
@@ -43390,7 +46159,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 307.34 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 307.34 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 307.34 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 307.34 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 307.34 113.03 0)
 			(effects
 				(font
@@ -43553,6 +46358,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 227.33 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 227.33 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 227.33 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "89bdd567-3577-4ff9-88a5-c62676a8134c")
 		)
@@ -43569,7 +46401,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 307.34 43.18 270)
 		(mirror x)
 		(unit 1)
@@ -43596,7 +46428,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 293.37 42.926 0)
 			(effects
 				(font
@@ -43605,7 +46437,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 295.91 43.18 0)
 			(effects
 				(font
@@ -43614,7 +46446,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 297.942 43.434 0)
 			(effects
 				(font
@@ -43623,7 +46455,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 307.34 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 307.34 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 307.34 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 307.34 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 307.34 43.18 0)
 			(effects
 				(font
@@ -43984,6 +46852,15 @@
 				(hide yes)
 			)
 		)
+		(property "SERIES" "TB0011-350"
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "4"
 			(uuid "9182edb8-ee0e-46cc-86fd-dc72a613cbf9")
 		)
@@ -44006,7 +46883,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 184.15 102.87 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -44030,7 +46907,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 198.12 102.616 0)
 			(effects
 				(font
@@ -44039,7 +46916,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 195.58 102.87 0)
 			(effects
 				(font
@@ -44048,7 +46925,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 193.548 103.124 0)
 			(effects
 				(font
@@ -44057,7 +46934,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 184.15 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 184.15 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 184.15 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 184.15 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 184.15 102.87 0)
 			(effects
 				(font
@@ -44328,6 +47241,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Diodes"
+			(at 77.47 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "SMBJ28A-13-F"
+			(at 77.47 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "SMBJ"
+			(at 77.47 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "4d28a81d-ad11-4863-8645-f37a1d1e8879")
 		)
@@ -44435,6 +47375,15 @@
 				(hide yes)
 			)
 		)
+		(property "MOUNT" ""
+			(at 95.25 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "3"
 			(uuid "976c0707-1739-4045-b158-2895b14c1794")
 		)
@@ -44519,7 +47468,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 10nF ±10% 16V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 10nF ±10% 100V 0603 Murata")
 		(at 189.23 102.87 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -44545,7 +47494,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 16V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 100V 0603 Murata"
 			(at 203.2 102.616 0)
 			(effects
 				(font
@@ -44554,7 +47503,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71C103KA01-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A103KA01-02.pdf"
 			(at 200.66 102.87 0)
 			(effects
 				(font
@@ -44563,7 +47512,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10000 pF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "10000 pF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 198.628 103.124 0)
 			(effects
 				(font
@@ -44572,7 +47521,7 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-1313-1-ND"
+		(property "DKPN" "490-GRM188R72A103KA01JCT-ND"
 			(at 189.23 102.87 0)
 			(effects
 				(font
@@ -44581,8 +47530,26 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "GRM155R71C103KA01D"
-			(at 189.23 102.87 90)
+		(property "PN" "GRM188R72A103KA01J"
+			(at 189.23 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 189.23 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 189.23 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44660,6 +47627,33 @@
 			)
 		)
 		(property "DKPN" "13-RC0805FR-1014KLCT-ND"
+			(at 290.83 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 290.83 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-1014KL"
+			(at 290.83 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 290.83 146.05 0)
 			(effects
 				(font
@@ -44828,6 +47822,24 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" "NPN"
+			(at 48.26 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=B 2=E 3=C"
+			(at 48.26 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "3"
 			(uuid "58acf34b-bbba-4776-abfe-41a95607b5af")
 		)
@@ -44909,6 +47921,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "JST"
+			(at 201.93 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "PHR-4"
+			(at 201.93 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "PH"
+			(at 201.93 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "6d1e3a3c-b26b-4ccf-896e-b53e4255cdd9")
 		)
@@ -44931,7 +47970,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 119.38 48.26 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -44957,7 +47996,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 133.35 48.006 0)
 			(effects
 				(font
@@ -44966,7 +48005,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 130.81 48.26 0)
 			(effects
 				(font
@@ -44975,7 +48014,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 128.778 48.514 0)
 			(effects
 				(font
@@ -44984,7 +48023,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 119.38 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 119.38 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 119.38 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 119.38 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 119.38 48.26 0)
 			(effects
 				(font
@@ -45075,7 +48150,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 220.98 236.22 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -45101,7 +48176,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 234.95 235.966 0)
 			(effects
 				(font
@@ -45110,7 +48185,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 232.41 236.22 0)
 			(effects
 				(font
@@ -45119,7 +48194,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 230.378 236.474 0)
 			(effects
 				(font
@@ -45128,7 +48203,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 220.98 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 220.98 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 220.98 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 220.98 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 220.98 236.22 0)
 			(effects
 				(font
@@ -45480,7 +48591,34 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "100 Ohms ±1% 0.125W, 1/8W Chip Resistor 0805 (2012 Metric) Moisture Resistant Thick Film"
+		(property "DKPN" "311-100CRCT-ND"
+			(at 109.22 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MGR" "Yageo"
+			(at 109.22 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-07100RL"
+			(at 109.22 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 109.22 264.16 0)
 			(effects
 				(font
@@ -45505,7 +48643,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 10nF ±10% 16V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 10nF ±10% 100V 0603 Murata")
 		(at 189.23 148.59 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -45531,7 +48669,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 16V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 10nF ±10 100V 0603 Murata"
 			(at 203.2 148.336 0)
 			(effects
 				(font
@@ -45540,7 +48678,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71C103KA01-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A103KA01-02.pdf"
 			(at 200.66 148.59 0)
 			(effects
 				(font
@@ -45549,7 +48687,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10000 pF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "10000 pF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 198.628 148.844 0)
 			(effects
 				(font
@@ -45558,7 +48696,34 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-1313-1-ND"
+		(property "DKPN" "490-GRM188R72A103KA01JCT-ND"
+			(at 189.23 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 189.23 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A103KA01J"
+			(at 189.23 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
 			(at 189.23 148.59 0)
 			(effects
 				(font
@@ -45672,7 +48837,6 @@
 		)
 	)
 	(symbol
-		(lib_name "CAP X5R 10μF ±10% 16V 0805 Murata GRM_1")
 		(lib_id "Coert-Vonk:CAP X5R 10μF ±10% 16V 0805 Murata GRM")
 		(at 227.33 200.66 90)
 		(unit 1)
@@ -45828,6 +48992,33 @@
 			)
 		)
 		(property "DKPN" "RL12S.11FCT-ND"
+			(at 340.36 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Susumu"
+			(at 340.36 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RL1220S-R11-F"
+			(at 340.36 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RL"
 			(at 340.36 67.31 0)
 			(effects
 				(font
@@ -46001,6 +49192,33 @@
 			)
 		)
 		(property "DKPN" "311-10.0KCRCT-ND"
+			(at 129.54 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Yageo"
+			(at 129.54 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "RC0805FR-0710KL"
+			(at 129.54 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 129.54 273.05 0)
 			(effects
 				(font
@@ -46391,6 +49609,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "JST"
+			(at 201.93 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "PHR-4"
+			(at 201.93 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "PH"
+			(at 201.93 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "0f279b38-5c0c-4683-8b5e-eafb449b2a73")
 		)
@@ -46545,7 +49790,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Panasonic")
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 220μF ±20% 50V Kemet")
 		(at 354.33 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -46572,7 +49817,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Panasonic"
+		(property "Footprint" "Coert-Vonk:CAP ALUM 220μF ±20 50V Kemet"
 			(at 354.33 55.88 0)
 			(effects
 				(font
@@ -46581,7 +49826,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2452/ECA-xxM%20Series%2CTypeA.pdf"
+		(property "Datasheet" "https://search.kemet.com/download/specsheet/ESY227M050AH2AA"
 			(at 354.33 55.88 0)
 			(effects
 				(font
@@ -46590,7 +49835,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 2000 Hrs @ 85°C"
+		(property "Description" "220 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 42mOhm @ 100kHz 4000 Hrs @ 105°C"
 			(at 354.33 55.88 0)
 			(effects
 				(font
@@ -46599,7 +49844,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "10-ECA-1HM221BCT-ND"
+		(property "DKPN" "399-6123-ND"
+			(at 354.33 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Kemet"
+			(at 354.33 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "ESY227M050AH2AA"
+			(at 354.33 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "ESY"
+			(at 354.33 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "Radial"
 			(at 354.33 55.88 0)
 			(effects
 				(font
@@ -46677,7 +49958,7 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" ""
+		(property "DKPN" "311-100CRCT-ND"
 			(at 35.56 264.16 0)
 			(effects
 				(font
@@ -46695,7 +49976,25 @@
 				(hide yes)
 			)
 		)
-		(property "PN" ""
+		(property "PN" "RC0805FR-07100RL"
+			(at 35.56 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MGR" "Yageo"
+			(at 35.56 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
 			(at 35.56 264.16 0)
 			(effects
 				(font
@@ -46851,7 +50150,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
+		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 100V 0603 Murata")
 		(at 332.74 113.03 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -46876,7 +50175,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0402 Murata"
+		(property "Footprint" "Coert-Vonk:CAP X7R 100nF ±10 50V 0603 Murata"
 			(at 332.994 127 0)
 			(effects
 				(font
@@ -46885,7 +50184,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H104KE14-01.pdf"
+		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R72A104KA35-01.pdf"
 			(at 332.74 124.46 0)
 			(effects
 				(font
@@ -46894,7 +50193,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.1 µF ±10% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"
+		(property "Description" "0.1 µF ±10% 100V Ceramic Capacitor X7R 0603 (1608 Metric)"
 			(at 332.486 122.428 0)
 			(effects
 				(font
@@ -46903,7 +50202,43 @@
 				(hide yes)
 			)
 		)
-		(property "DKPN" "490-10700-1-ND"
+		(property "DKPN" "490-3285-1-ND"
+			(at 332.74 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 332.74 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM188R72A104KA35D"
+			(at 332.74 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 332.74 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MOUNT" "0603"
 			(at 332.74 113.03 0)
 			(effects
 				(font

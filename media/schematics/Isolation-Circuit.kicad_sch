@@ -3693,7 +3693,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d215bc20-e591-4889-8d0c-136d1659b588")
-		(property "Reference" "C_{blk}"
+		(property "Reference" "C_{b}"
 			(at 133.858 52.324 90)
 			(effects
 				(font
@@ -3755,7 +3755,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b}")
 					(unit 1)
 				)
 			)
@@ -3847,7 +3847,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e1b59d72-2424-464c-a2a6-d33436840f56")
-		(property "Reference" "C_{blk}"
+		(property "Reference" "C_{b}"
 			(at 80.772 52.324 90)
 			(effects
 				(font
@@ -3909,7 +3909,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{blk}")
+					(reference "C_{b}")
 					(unit 1)
 				)
 			)

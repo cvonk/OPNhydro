@@ -15,7 +15,7 @@
 		(comment 4 "Autonomous, data-rich hydroponics irrigation automation with precision control and")
 	)
 	(lib_symbols
-		(symbol "Coert-Vonk:CAP ALUM-POLY 220μF ±20% 16V Panasonic"
+		(symbol "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20% 50V TDK"
 			(pin_numbers
 				(hide yes)
 			)
@@ -35,7 +35,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "220μF"
+			(property "Value" "1000μF"
 				(at 0.635 -1.905 0)
 				(effects
 					(font
@@ -44,7 +44,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:CAP ALUM-POLY 220μF ±20 16V Panasonic"
+			(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20 50V TDK"
 				(at 0 0 0)
 				(effects
 					(font
@@ -53,7 +53,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/AAB8000/AAB8000C226.pdf"
+			(property "Datasheet" "https://www.tdk-electronics.tdk.com/inf/20/30/db/aec/B41866.pdf?ref_disty=digikey"
 				(at 0 0 0)
 				(effects
 					(font
@@ -62,7 +62,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "220 µF 16 V Aluminum - Polymer Capacitors Radial, Can - SMD 22mOhm 1000 Hrs @ 125°C"
+			(property "Description" "1000 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 39mOhm @ 100kHz 5000 Hrs @ 125°C"
 				(at 0 0 0)
 				(effects
 					(font
@@ -71,7 +71,34 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "P124158CT-ND"
+			(property "DKPN" "B41866D6108M000"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "TDK"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "B41866D6108M000"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "B41866"
 				(at 0 0 0)
 				(effects
 					(font
@@ -98,7 +125,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "CAP ALUM-POLY 220μF ±20% 16V Panasonic_0_1"
+			(symbol "CAP ALUM-ELEC 1000μF ±20% 50V TDK_0_1"
 				(rectangle
 					(start -1.524 0.6858)
 					(end 1.524 0.3048)
@@ -146,7 +173,7 @@
 					)
 				)
 			)
-			(symbol "CAP ALUM-POLY 220μF ±20% 16V Panasonic_1_1"
+			(symbol "CAP ALUM-ELEC 1000μF ±20% 50V TDK_1_1"
 				(pin passive line
 					(at 0 2.54 270)
 					(length 1.8542)
@@ -2977,7 +3004,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "65ea2621-8b3c-4c05-aece-33ba84552955")
-		(property "Reference" "C_{b2}"
+		(property "Reference" "C_{mf2}"
 			(at 188.722 47.498 90)
 			(effects
 				(font
@@ -3041,7 +3068,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{b2}")
+					(reference "C_{mf2}")
 					(unit 1)
 				)
 			)
@@ -3108,6 +3135,112 @@
 			(project "OPNhydro_r1"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20% 50V TDK")
+		(at 194.31 50.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6ec8a9c2-09d2-4f9a-8026-04886f50b961")
+		(property "Reference" "C_{b2}"
+			(at 195.834 47.752 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1000μF"
+			(at 197.612 48.514 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:CAP ALUM-ELEC 1000μF ±20 50V TDK"
+			(at 194.31 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.tdk-electronics.tdk.com/inf/20/30/db/aec/B41866.pdf?ref_disty=digikey"
+			(at 194.31 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "1000 µF 50 V Aluminum Electrolytic Capacitors Radial, Can 39mOhm @ 100kHz 5000 Hrs @ 125°C"
+			(at 194.31 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "B41866D6108M000"
+			(at 194.31 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "TDK"
+			(at 194.31 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "B41866D6108M000"
+			(at 194.31 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "B41866"
+			(at 194.31 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fa44f55b-1ca9-40a9-9091-cb17bcd2375b")
+		)
+		(pin "2"
+			(uuid "6270c1f8-8a89-4a45-b217-d329067f372a")
+		)
+		(instances
+			(project "Buck-Converter"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "C_{b2}")
 					(unit 1)
 				)
 			)
@@ -3219,7 +3352,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "85f8951e-8ee0-4352-b940-0cc9eb09acf0")
-		(property "Reference" "C_{b2}"
+		(property "Reference" "C_{mf2}"
 			(at 176.022 47.498 90)
 			(effects
 				(font
@@ -3301,7 +3434,7 @@
 		(instances
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{b2}")
+					(reference "C_{mf2}")
 					(unit 1)
 				)
 			)
@@ -3479,104 +3612,6 @@
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "R_{b}")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:CAP ALUM-POLY 220μF ±20% 16V Panasonic")
-		(at 194.31 50.8 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9dc1fc38-d02f-4be1-8c1a-64d6ad4930d4")
-		(property "Reference" "C_{b3}"
-			(at 196.85 50.2538 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "220μF"
-			(at 196.85 51.5238 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:CAP ALUM-POLY 220μF ±20 16V Panasonic"
-			(at 194.31 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/AAB8000/AAB8000C226.pdf"
-			(at 194.31 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "220 µF 16 V Aluminum - Polymer Capacitors Radial, Can - SMD 22mOhm 1000 Hrs @ 125°C"
-			(at 194.31 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "P124158CT-ND"
-			(at 194.31 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Panasonic"
-			(at 194.31 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PN" "16SVPK220M"
-			(at 194.31 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ceb23b84-13e4-4f50-9eed-5a7bcc8685aa")
-		)
-		(pin "2"
-			(uuid "d59bfd74-e4f7-4909-b48f-42760aed88a1")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{b3}")
 					(unit 1)
 				)
 			)
@@ -3772,7 +3807,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bd662b7c-93e9-4503-8645-e4effce50502")
-		(property "Reference" "C_{b2}"
+		(property "Reference" "C_{mf2}"
 			(at 182.372 47.498 90)
 			(effects
 				(font
@@ -3836,7 +3871,7 @@
 		(instances
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "C_{b2}")
+					(reference "C_{mf2}")
 					(unit 1)
 				)
 			)

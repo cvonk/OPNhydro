@@ -15,6 +15,180 @@
 		(comment 4 "Autonomous, data-rich hydroponics irrigation automation with precision control and")
 	)
 	(lib_symbols
+		(symbol "CAP X5R 10μF ±10% 16V 0805 Murata GRM_1"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C57"
+				(at 0.762 -4.572 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "10μF"
+				(at -1.778 -4.572 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Coert-Vonk:CAP X5R 10μF ±10 16V 0805 Murata GRM"
+				(at 0.254 -13.97 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM21BR61C106KE15-01.pdf"
+				(at 0 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "10 µF ±10% 16V Ceramic Capacitor X5R 0805 (2012 Metric)"
+				(at -0.254 -9.398 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "DKPN" "490-3886-1-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Murata"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "GRM21BR61C106KE15L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "GRM"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "capacitor cap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "CAP X5R 10μF ±10% 16V 0805 Murata GRM_1_0_1"
+				(polyline
+					(pts
+						(xy -0.381 -1.524) (xy -0.381 1.524)
+					)
+					(stroke
+						(width 0.3048)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 1.524) (xy 0.508 -1.524)
+					)
+					(stroke
+						(width 0.3302)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "CAP X5R 10μF ±10% 16V 0805 Murata GRM_1_1_1"
+				(pin passive line
+					(at -2.54 0 0)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 0 180)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Coert-Vonk:24V"
 			(power)
 			(pin_numbers
@@ -9226,7 +9400,7 @@
 				(pin passive line
 					(at -7.62 0 0)
 					(length 2.54)
-					(name "A1"
+					(name "A+"
 						(effects
 							(font
 								(size 0.762 0.762)
@@ -9244,7 +9418,7 @@
 				(pin passive line
 					(at -7.62 -2.54 0)
 					(length 2.54)
-					(name "A2"
+					(name "A-"
 						(effects
 							(font
 								(size 0.762 0.762)
@@ -9262,7 +9436,7 @@
 				(pin passive line
 					(at -7.62 -5.08 0)
 					(length 2.54)
-					(name "B1"
+					(name "B+"
 						(effects
 							(font
 								(size 0.762 0.762)
@@ -9280,7 +9454,7 @@
 				(pin passive line
 					(at -7.62 -7.62 0)
 					(length 2.54)
-					(name "B2"
+					(name "B-"
 						(effects
 							(font
 								(size 0.762 0.762)
@@ -10399,6 +10573,123 @@
 				)
 			)
 			(symbol "RES 10kΩ ±1% 1/8W 0805 Yageo_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Coert-Vonk:RES 110mΩ ±1% 1/4W 0805 Susumu"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 3.81 1.524 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Value" "110mΩ"
+				(at 3.81 -3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.susumu.co.jp/common/pdf/n_catalog_partition08_en.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "110 mOhms ±1% 0.333W, 1/3W Chip Resistor 0805 (2012 Metric) Current Sense Thin Film"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "DKPN" "RL12S.11FCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "RES 110mΩ ±1% 1/4W 0805 Susumu_0_1"
+				(rectangle
+					(start 1.27 1.016)
+					(end 6.35 -1.016)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "RES 110mΩ ±1% 1/4W 0805 Susumu_1_1"
 				(pin passive line
 					(at 0 0 0)
 					(length 1.27)
@@ -11865,9 +12156,6 @@
 			(embedded_fonts no)
 		)
 		(symbol "Coert-Vonk:SWITCH FLOAT HIGH"
-			(pin_names
-				(offset 1.016)
-			)
 			(exclude_from_sim yes)
 			(in_bom yes)
 			(on_board no)
@@ -11995,37 +12283,48 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 2.54 0)
+			)
+			(symbol "SWITCH FLOAT HIGH_1_1"
+				(pin free line
+					(at 2.54 0 180)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 0.762 0.762)
+							)
+						)
 					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
-				(polyline
-					(pts
-						(xy 0 -2.54) (xy 2.54 -2.54)
+				(pin free line
+					(at 2.54 -2.54 180)
+					(length 2.54)
+					(name "HIGH"
+						(effects
+							(font
+								(size 0.762 0.762)
+							)
+						)
 					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
 			(embedded_fonts no)
 		)
 		(symbol "Coert-Vonk:SWITCH FLOAT LOW"
-			(pin_names
-				(offset 1.016)
-			)
 			(exclude_from_sim yes)
 			(in_bom yes)
 			(on_board no)
@@ -12153,179 +12452,48 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 2.54 0)
+			)
+			(symbol "SWITCH FLOAT LOW_1_1"
+				(pin free line
+					(at 2.54 0 180)
+					(length 2.54)
+					(name "LOW"
+						(effects
+							(font
+								(size 0.762 0.762)
+							)
+						)
 					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
-				(polyline
-					(pts
-						(xy 0 -2.54) (xy 2.54 -2.54)
+				(pin free line
+					(at 2.54 -2.54 180)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 0.762 0.762)
+							)
+						)
 					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:TERM BLK HDR 2POS MC 3.81mm"
-			(pin_names
-				(offset 2.54)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "H"
-				(at 2.54 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-				)
-			)
-			(property "Value" "MC_0.15\""
-				(at 2.54 0.635 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-				)
-			)
-			(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 3.81mm"
-				(at -2.54 -17.526 0)
-				(effects
-					(font
-						(size 0.762 0.762)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.phoenixcontact.com/us/products/1803277/pdf"
-				(at -5.08 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.150\" (3.81mm) 90°, Right Angle Through Hole"
-				(at -1.778 -8.89 0)
-				(effects
-					(font
-						(size 0.762 0.762)
-					)
-					(hide yes)
-				)
-			)
-			(property "DKPN" "277-1206-ND"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Phoenix Contact COMBICON MC"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "TERM BLK HDR 2POS MC 3.81mm_1_0"
-				(circle
-					(center 2.54 -5.08)
-					(radius 0.3175)
-					(stroke
-						(width 0.508)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 3.0988 -3.0988)
-					(end 1.9812 -1.9812)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(pin passive line
-					(at 10.16 -2.54 180)
-					(length 7.62)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 10.16 -5.08 180)
-					(length 7.62)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "TERM BLK HDR 2POS MC 3.81mm_1_1"
-				(rectangle
-					(start 0 0)
-					(end 5.08 -7.62)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Coert-Vonk:TERM BLK HDR 2POS MC 5.08mm"
+		(symbol "Coert-Vonk:TERM BLK HDR 2POS PC-MC 0.2{dblquote}"
 			(pin_names
 				(offset 2.54)
 			)
@@ -12386,7 +12554,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Phoenix Contact COMBICON MC"
+			(property "MFR" "Phoenix Contact"
 				(at 0 0 0)
 				(effects
 					(font
@@ -12395,7 +12563,25 @@
 					(hide yes)
 				)
 			)
-			(symbol "TERM BLK HDR 2POS MC 5.08mm_1_0"
+			(property "PN" "1836189"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "COMBICON MC"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TERM BLK HDR 2POS PC-MC 0.2{dblquote}_1_0"
 				(circle
 					(center 2.54 -5.08)
 					(radius 0.3175)
@@ -12455,7 +12641,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK HDR 2POS MC 5.08mm_1_1"
+			(symbol "TERM BLK HDR 2POS PC-MC 0.2{dblquote}_1_1"
 				(rectangle
 					(start 0 0)
 					(end 5.08 -7.62)
@@ -12470,7 +12656,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:TERM BLK HDR 2POS MSTBA 5.08mm"
+		(symbol "Coert-Vonk:TERM BLK HDR 2POS PC-MSTBA 0.2{dblquote}"
 			(pin_names
 				(offset 2.54)
 			)
@@ -12531,7 +12717,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Phoenix Contact COMBICON MSTBA 1757242"
+			(property "MFR" "Phoenix Contact"
 				(at 0 0 0)
 				(effects
 					(font
@@ -12540,7 +12726,34 @@
 					(hide yes)
 				)
 			)
-			(symbol "TERM BLK HDR 2POS MSTBA 5.08mm_1_0"
+			(property "PN" "1757242"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "COMBICON MSTBA"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "COMBICON MSTBA"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TERM BLK HDR 2POS PC-MSTBA 0.2{dblquote}_1_0"
 				(circle
 					(center 2.54 -5.08)
 					(radius 0.3175)
@@ -12600,7 +12813,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK HDR 2POS MSTBA 5.08mm_1_1"
+			(symbol "TERM BLK HDR 2POS PC-MSTBA 0.2{dblquote}_1_1"
 				(rectangle
 					(start 0 0)
 					(end 5.08 -7.62)
@@ -13709,345 +13922,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:TERM BLK PLG 2POS MC 3.81mm"
-			(pin_names
-				(offset 0.254)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board no)
-			(property "Reference" "P"
-				(at 0 4.445 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "MC_0.15\""
-				(at 0 1.905 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Coert-Vonk:TERM BLOCK PLUG 2POS 3.81mm 1803578"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(italic yes)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2411/1840zzz%2C%201803zzz.pdf"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(italic yes)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.150\" (3.81mm) 180° Free Hanging (In-Line)"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "DKPN" "277-1161-ND"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Phoenix Connect COMBICON MC 0.15\" 1803578"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "CONN_PPPC031LFBN-RC_SUL"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "TERM BLK PLG 2POS MC 3.81mm_0_1"
-				(circle
-					(center 0 -5.08)
-					(radius 0.635)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 0.635 -1.905)
-					(end -0.635 -3.175)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "TERM BLK PLG 2POS MC 3.81mm_1_0"
-				(polyline
-					(pts
-						(xy -2.54 -2.54) (xy -0.635 -2.54)
-					)
-					(stroke
-						(width 0.1778)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.54 -5.08) (xy -0.635 -5.08)
-					)
-					(stroke
-						(width 0.1778)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -5.08 0)
-					(length 2.54)
-					(name ""
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "TERM BLK PLG 2POS MC 3.81mm_1_1"
-				(rectangle
-					(start -2.54 0)
-					(end 2.54 -7.62)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "TERM BLK PLG 2POS MC 3.81mm_1_2"
-				(polyline
-					(pts
-						(xy 5.08 2.54) (xy 5.08 -7.62)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 -7.62) (xy 12.7 -7.62)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 0) (xy 5.08 0)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 0) (xy 8.89 0.8467)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 0) (xy 8.89 -0.8467)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 -2.54) (xy 5.08 -2.54)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 -2.54) (xy 8.89 -1.6933)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 -2.54) (xy 8.89 -3.3867)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 -5.08) (xy 5.08 -5.08)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 -5.08) (xy 8.89 -4.2333)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 7.62 -5.08) (xy 8.89 -5.9267)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.7 2.54) (xy 5.08 2.54)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.7 -7.62) (xy 12.7 2.54)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Coert-Vonk:TERM BLK PLG 2POS MC 5.08mm"
+		(symbol "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2{dblquote}"
 			(pin_names
 				(offset 0.254)
 			)
@@ -14070,7 +13945,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Coert-Vonk:TERM BLK PLUG 2POS 5.08mm"
+			(property "Footprint" "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2"
 				(at 0 0 0)
 				(effects
 					(font
@@ -14108,7 +13983,25 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Phoenix Connect COMBICON MC 0.2\" 1836079"
+			(property "MFR" "Phoenix Connect"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "1836079"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "MC"
 				(at 0 0 0)
 				(effects
 					(font
@@ -14126,7 +14019,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MC 5.08mm_0_1"
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_0_1"
 				(circle
 					(center 0 -5.08)
 					(radius 0.635)
@@ -14150,7 +14043,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MC 5.08mm_1_0"
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_0"
 				(polyline
 					(pts
 						(xy -2.54 -2.54) (xy -0.635 -2.54)
@@ -14193,7 +14086,7 @@
 						)
 					)
 				)
-				(pin passive line
+				(pin unspecified line
 					(at -5.08 -5.08 0)
 					(length 2.54)
 					(name ""
@@ -14212,7 +14105,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MC 5.08mm_1_1"
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_1"
 				(rectangle
 					(start -2.54 0)
 					(end 2.54 -7.62)
@@ -14225,7 +14118,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MC 5.08mm_1_2"
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_2"
 				(polyline
 					(pts
 						(xy 5.08 2.54) (xy 5.08 -7.62)
@@ -14382,10 +14275,64 @@
 						(type none)
 					)
 				)
+				(pin unspecified line
+					(at 0 0 0)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:TERM BLK PLG 2POS MSTB 5.08mm"
+		(symbol "Coert-Vonk:TERM BLK PLG 2POS PC-MSTB 0.2{dblquote}"
 			(pin_names
 				(offset 0.254)
 			)
@@ -14446,7 +14393,25 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Phoenix Connect COMBICON MC 0.2\" 1757019"
+			(property "MFR" "Phoenix Contact"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "1757019"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "COMBICON MSTB"
 				(at 0 0 0)
 				(effects
 					(font
@@ -14464,7 +14429,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MSTB 5.08mm_0_1"
+			(symbol "TERM BLK PLG 2POS PC-MSTB 0.2{dblquote}_0_1"
 				(circle
 					(center 0 -5.08)
 					(radius 0.635)
@@ -14488,7 +14453,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MSTB 5.08mm_1_0"
+			(symbol "TERM BLK PLG 2POS PC-MSTB 0.2{dblquote}_1_0"
 				(polyline
 					(pts
 						(xy -2.54 -2.54) (xy -0.635 -2.54)
@@ -14550,7 +14515,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MSTB 5.08mm_1_1"
+			(symbol "TERM BLK PLG 2POS PC-MSTB 0.2{dblquote}_1_1"
 				(rectangle
 					(start -2.54 0)
 					(end 2.54 -7.62)
@@ -14563,7 +14528,7 @@
 					)
 				)
 			)
-			(symbol "TERM BLK PLG 2POS MSTB 5.08mm_1_2"
+			(symbol "TERM BLK PLG 2POS PC-MSTB 0.2{dblquote}_1_2"
 				(polyline
 					(pts
 						(xy 5.08 2.54) (xy 5.08 -7.62)
@@ -16128,7 +16093,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Coert-Vonk:TERM BLK SCREW 4POS MKDS 3.5mm"
+		(symbol "Coert-Vonk:TERM BLK SCREW 4POS SS-MKDS 3.5mm"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -16144,7 +16109,7 @@
 					)
 				)
 			)
-			(property "Value" "MKDS"
+			(property "Value" "SS-3.5mm"
 				(at 0 5.08 0)
 				(effects
 					(font
@@ -16161,7 +16126,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/640/1751264.pdf"
+			(property "Datasheet" "https://www.sameskydevices.com/product/resource/tb0011-350.pdf"
 				(at 0 0 0)
 				(effects
 					(font
@@ -16179,7 +16144,7 @@
 					(hide yes)
 				)
 			)
-			(property "DKPN" "277-5744-ND"
+			(property "DKPN" "2223-TB0011-350-04BE-ND"
 				(at 0 0 0)
 				(effects
 					(font
@@ -16188,7 +16153,25 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Phoenix Contact COMBICON MKDS 1751264"
+			(property "MFR" "Same Sky"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "TB0011-350-04BE"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "TB0011-350"
 				(at 0 0 0)
 				(effects
 					(font
@@ -16206,7 +16189,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "TERM BLK SCREW 4POS MKDS 3.5mm_1_1"
+			(symbol "TERM BLK SCREW 4POS SS-MKDS 3.5mm_1_1"
 				(rectangle
 					(start -1.27 3.81)
 					(end 1.27 -6.35)
@@ -17025,6 +17008,909 @@
 						)
 					)
 					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260_1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U3"
+				(at 8.89 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "ADM3260"
+				(at 8.89 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Coert-Vonk:IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260"
+				(at 0 -34.29 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADM3260.pdf"
+				(at 0 -36.83 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "I2C Digital Isolator 2500Vrms 2 Channel 25kV/µs CMTI 20-SSOP (0.209\", 5.30mm Width)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "DKPN" "505-ADM3260ARSZ-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Analog Devices"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "ADM3260ARSZ"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "IsoPower"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOIC*7.5x12.8mm*P1.27mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260_1_1_1"
+				(unit_name "IO")
+				(rectangle
+					(start 0 0)
+					(end 17.78 -25.4)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 6.985 -20.32) (xy 8.255 -19.685) (xy 8.255 -20.955) (xy 6.985 -20.32)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 6.985 -22.86) (xy 8.255 -22.225) (xy 8.255 -23.495) (xy 6.985 -22.86)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 8.89 0) (xy 8.89 -25.4)
+					)
+					(stroke
+						(width 0)
+						(type dash)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 9.525 -19.685) (xy 9.525 -20.955) (xy 10.795 -20.32) (xy 9.525 -19.685)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 9.525 -22.225) (xy 9.525 -23.495) (xy 10.795 -22.86) (xy 9.525 -22.225)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -2.54 0)
+					(length 5.08)
+					(name "V_{IN}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -7.62 0)
+					(length 5.08)
+					(name "GND_{P}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -7.62 0)
+					(length 5.08)
+					(name "GND_{P}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -7.62 0)
+					(length 5.08)
+					(name "GND_{P}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -7.62 0)
+					(length 5.08)
+					(name "GND_{P}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -5.08 -10.16 0)
+					(length 5.08)
+					(name "PDIS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -12.7 0)
+					(length 5.08)
+					(name "VDD_{P}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -5.08 -20.32 0)
+					(length 5.08)
+					(name "SDA_{2}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -5.08 -22.86 0)
+					(length 5.08)
+					(name "SCL_{2}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 22.86 -2.54 180)
+					(length 5.08)
+					(name "V_{ISO}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 22.86 -7.62 180)
+					(length 5.08)
+					(name "GND_{ISO}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 22.86 -7.62 180)
+					(length 5.08)
+					(name "GND_{ISO}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 22.86 -7.62 180)
+					(length 5.08)
+					(name "GND_{ISO}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 22.86 -7.62 180)
+					(length 5.08)
+					(name "GND_{ISO}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 22.86 -10.16 180)
+					(length 5.08)
+					(name "VSEL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 22.86 -12.7 180)
+					(length 5.08)
+					(name "VDD_{ISO}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 22.86 -20.32 180)
+					(length 5.08)
+					(name "SDA_{1}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 22.86 -22.86 180)
+					(length 5.08)
+					(name "SCL_{1}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board no)
+			(property "Reference" "P"
+				(at 0 4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MC_0.2\""
+				(at 0 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/540/1836079.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "DKPN" "277-6146-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MFR" "Phoenix Connect"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "PN" "1836079"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "SERIES" "MC"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "CONN_PPPC031LFBN-RC_SUL"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_0_1"
+				(circle
+					(center 0 -5.08)
+					(radius 0.635)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 0.635 -1.905)
+					(end -0.635 -3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_1_0"
+				(polyline
+					(pts
+						(xy -2.54 -2.54) (xy -0.635 -2.54)
+					)
+					(stroke
+						(width 0.1778)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 -5.08) (xy -0.635 -5.08)
+					)
+					(stroke
+						(width 0.1778)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -5.08 -5.08 0)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_1_1"
+				(rectangle
+					(start -2.54 0)
+					(end 2.54 -7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1_1_2"
+				(polyline
+					(pts
+						(xy 5.08 2.54) (xy 5.08 -7.62)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 -7.62) (xy 12.7 -7.62)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 0) (xy 5.08 0)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 0) (xy 8.89 0.8467)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 0) (xy 8.89 -0.8467)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -2.54) (xy 5.08 -2.54)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -2.54) (xy 8.89 -1.6933)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -2.54) (xy 8.89 -3.3867)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -5.08) (xy 5.08 -5.08)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -5.08) (xy 8.89 -4.2333)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -5.08) (xy 8.89 -5.9267)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 2.54) (xy 5.08 2.54)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 -7.62) (xy 12.7 2.54)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin unspecified line
+					(at 0 0 0)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -18218,12 +19104,6 @@
 		(uuid "53e5b59c-62fb-47e6-b5b7-898c55e9f4a3")
 	)
 	(junction
-		(at 161.29 195.58)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "55cb07d2-852f-4279-9dd5-52ddbf4871b0")
-	)
-	(junction
 		(at 290.83 212.09)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -18560,6 +19440,12 @@
 		(uuid "c6bee78d-3bf6-40ea-9d3b-5b7d1ebe9c4f")
 	)
 	(junction
+		(at 167.64 195.58)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c9c28aa9-bd48-49b8-8b60-011b2f649c51")
+	)
+	(junction
 		(at 173.99 195.58)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -18650,18 +19536,6 @@
 		(uuid "e67f2895-550c-4cb4-9c73-2421268ea713")
 	)
 	(junction
-		(at 161.29 198.12)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e785e78b-67b3-46a8-b8fd-d483d06bedef")
-	)
-	(junction
-		(at 161.29 200.66)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ebc4a379-6520-42ca-aab2-173b8fe90e8b")
-	)
-	(junction
 		(at 189.23 95.25)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -18690,12 +19564,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f904b52f-ea9d-4cdd-8d34-0532650d1e37")
-	)
-	(junction
-		(at 167.64 195.58)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f964e1a8-36c6-492a-93ab-fefb5df9260c")
 	)
 	(junction
 		(at 171.45 38.1)
@@ -18830,16 +19698,6 @@
 	(no_connect
 		(at 132.08 43.18)
 		(uuid "fee1e096-5c9c-4909-8472-8e8c479acc90")
-	)
-	(wire
-		(pts
-			(xy 158.75 195.58) (xy 161.29 195.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "002e5315-9342-4250-a006-7d8da2c4cde5")
 	)
 	(wire
 		(pts
@@ -19093,6 +19951,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 198.12) (xy 166.37 198.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "11e24033-14ae-4a7f-9c59-730a3cc083f1")
+	)
+	(wire
+		(pts
 			(xy 290.83 223.52) (xy 290.83 222.25)
 		)
 		(stroke
@@ -19323,6 +20191,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 195.58) (xy 167.64 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20d5116e-b62d-4965-ba33-a8cf632cb109")
+	)
+	(wire
+		(pts
 			(xy 36.83 104.14) (xy 44.45 104.14)
 		)
 		(stroke
@@ -19483,16 +20361,6 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 195.58) (xy 167.64 195.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2c248c0d-0553-40f0-a978-f6a2e8446ac3")
-	)
-	(wire
-		(pts
 			(xy 176.53 95.25) (xy 175.26 95.25)
 		)
 		(stroke
@@ -19500,16 +20368,6 @@
 			(type default)
 		)
 		(uuid "2c4190cc-81d6-48cf-bc40-47f20b258d3c")
-	)
-	(wire
-		(pts
-			(xy 158.75 200.66) (xy 161.29 200.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2c948b42-9448-4dff-9dc0-c46b6a3ab1ca")
 	)
 	(wire
 		(pts
@@ -19791,16 +20649,6 @@
 			(type default)
 		)
 		(uuid "3c98a23f-bf26-4792-8f58-0b6500d79309")
-	)
-	(wire
-		(pts
-			(xy 161.29 200.66) (xy 166.37 200.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3d2b54a1-14da-4375-afe1-516b78051df6")
 	)
 	(wire
 		(pts
@@ -20494,6 +21342,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 200.66) (xy 166.37 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65b6e620-3cb8-427c-b796-496ba8a9eab0")
+	)
+	(wire
+		(pts
 			(xy 167.64 190.5) (xy 173.99 190.5)
 		)
 		(stroke
@@ -20652,16 +21510,6 @@
 			(type default)
 		)
 		(uuid "6fb7b451-c3bb-4df6-8e14-44c4131360f9")
-	)
-	(wire
-		(pts
-			(xy 161.29 198.12) (xy 166.37 198.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6fb9910d-752c-4e37-9537-895f1a3bc6ef")
 	)
 	(wire
 		(pts
@@ -23156,16 +24004,6 @@
 			(type default)
 		)
 		(uuid "ecf09dfb-bf49-4585-b550-89e14125f452")
-	)
-	(wire
-		(pts
-			(xy 158.75 198.12) (xy 161.29 198.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ed06162e-2c7a-45db-9dbc-8947422d9ee6")
 	)
 	(wire
 		(pts
@@ -26091,6 +26929,12 @@
 				(hide yes)
 			)
 		)
+		(pin ""
+			(uuid "6c0921ae-c53f-417c-8640-255f76f39b21")
+		)
+		(pin ""
+			(uuid "2bc40662-6429-42ec-aaa8-b54f01e919a4")
+		)
 		(instances
 			(project "OPNhydro_r1"
 				(path "/a0000000-0000-4000-8000-000000002687"
@@ -27529,108 +28373,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "P11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:TERM BLK SCREW 4POS MKDS 3.5mm")
-		(at 73.66 187.96 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1abe7a43-549b-45a2-a78e-b0c2043214fc")
-		(property "Reference" "J2"
-			(at 73.66 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MKDS"
-			(at 73.66 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLK 4POS SCREW 3.5mm"
-			(at 73.66 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/640/1751264.pdf"
-			(at 73.66 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "4 Position Wire to Board Terminal Block Horizontal with Board 0.138\" (3.50mm) Through Hole"
-			(at 73.66 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-5744-ND"
-			(at 73.66 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Phoenix Contact"
-			(at 73.66 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "1751264"
-			(at 73.66 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c815c1c8-6882-4d20-b7b7-447f2652c23c")
-		)
-		(pin "4"
-			(uuid "52b19a52-9e35-463d-a149-ec6e252718ab")
-		)
-		(pin "3"
-			(uuid "2838bf6c-0b81-4ae0-b7bb-50f507cf395a")
-		)
-		(pin "2"
-			(uuid "d23c2ed2-7dae-4016-97bf-d4ec47abe70f")
-		)
-		(instances
-			(project "OPNhydro_r1"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -30696,8 +31438,17 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "MPZ1608S600ATDH5"
+		(property "PN" "MPZ1608S600ATDH5"
 			(at 179.07 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "MPZ"
+			(at 179.07 95.25 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32293,84 +33044,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:RES 110mΩ ±1% 1/8W 0805 Susumu")
-		(at 340.36 80.01 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "599d0069-23e2-4fe6-b1fe-395406682985")
-		(property "Reference" "R24"
-			(at 344.17 83.312 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-			)
-		)
-		(property "Value" "110mΩ"
-			(at 344.17 85.344 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 340.36 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.susumu.co.jp/common/pdf/n_catalog_partition08_en.pdf"
-			(at 340.36 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "110 mOhms ±1% 0.333W, 1/3W Chip Resistor 0805 (2012 Metric) Current Sense Thin Film"
-			(at 340.36 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "RL12S.11FCT-ND"
-			(at 340.36 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "81381901-807d-40d0-aceb-9c6d502e450d")
-		)
-		(pin "1"
-			(uuid "8adf0000-6fc5-4a2e-b5db-d827ce4b95e8")
-		)
-		(instances
-			(project "OPNhydro_r2"
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R24")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:FERRITE BEAD 20mΩ 60Ω 0603 TDK")
 		(at 179.07 146.05 90)
 		(unit 1)
@@ -33822,103 +34495,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:TERM BLK PLG 2POS MC 3.81mm")
-		(at 152.4 236.22 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp no)
-		(uuid "6d21c555-eaf6-4afa-8fa7-fb5983f9b2c5")
-		(property "Reference" "P6"
-			(at 152.4 245.618 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MC_0.15\""
-			(at 152.4 248.158 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLOCK PLUG 2POS 3.81mm 1803578"
-			(at 152.4 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2411/1840zzz%2C%201803zzz.pdf"
-			(at 152.4 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.150\" (3.81mm) 180° Free Hanging (In-Line)"
-			(at 152.4 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-1161-ND"
-			(at 152.4 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Phoenix Connect"
-			(at 152.4 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "1803578"
-			(at 152.4 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f11582f8-9451-495f-97c6-6c2f5a0872c3")
-		)
-		(pin "2"
-			(uuid "d52980e5-9550-469e-8edd-276a886df57b")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:GND")
 		(at 54.61 245.11 0)
 		(unit 1)
@@ -34104,6 +34680,33 @@
 		)
 		(property "DKPN" "490-13269-1-ND"
 			(at 57.15 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Murata"
+			(at 57.15 38.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "BLM31SN500SN1L"
+			(at 57.15 38.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "BLM31"
+			(at 57.15 38.1 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34739,6 +35342,12 @@
 				)
 				(hide yes)
 			)
+		)
+		(pin ""
+			(uuid "c872de8d-bd14-4432-b6fb-79c731dd0313")
+		)
+		(pin ""
+			(uuid "b86da36b-f5c0-4317-9fef-b84ee9522143")
 		)
 		(instances
 			(project "OPNhydro_r1"
@@ -35500,6 +36109,101 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:TERM BLK HDR 2POS PC-MC 0.2{dblquote}")
+		(at 74.93 236.22 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8325183b-9de5-4af8-adce-a5adde515e8f")
+		(property "Reference" "H3"
+			(at 72.39 231.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MC_0.2\""
+			(at 72.39 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 5.08mm"
+			(at 77.47 253.746 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.phoenixcontact.com/us/products/1836189/pdf"
+			(at 80.01 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.200\" (5.08mm) 90°, Right Angle Through Hole"
+			(at 76.708 245.11 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "277-6377-ND"
+			(at 74.93 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Contact"
+			(at 74.93 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "1836189"
+			(at 74.93 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7a9a6f89-89af-4b6a-9d6a-09dc8f3f4ed4")
+		)
+		(pin "2"
+			(uuid "1b6b139f-73f8-4388-bf9b-962c05555721")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 2.2μF ±10% 10V 0603 Murata")
 		(at 285.75 147.32 90)
 		(unit 1)
@@ -35647,6 +36351,82 @@
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:RES 110mΩ ±1% 1/4W 0805 Susumu")
+		(at 340.36 80.01 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "83797238-0d8c-413c-8d45-71a854a48310")
+		(property "Reference" "R33"
+			(at 344.17 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "110mΩ"
+			(at 344.17 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
+			(at 340.36 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.susumu.co.jp/common/pdf/n_catalog_partition08_en.pdf"
+			(at 340.36 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "110 mOhms ±1% 0.333W, 1/3W Chip Resistor 0805 (2012 Metric) Current Sense Thin Film"
+			(at 340.36 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "RL12S.11FCT-ND"
+			(at 340.36 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "3b48afa9-5278-4512-b1a8-b461376e1b40")
+		)
+		(pin "1"
+			(uuid "72fd17a5-2dcf-44f2-9d43-e17ad147d77c")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "R33")
 					(unit 1)
 				)
 			)
@@ -36934,101 +37714,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:TERM BLK HDR 2POS MC 5.08mm")
-		(at 74.93 236.22 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "969b7304-9097-415f-9085-1e5273e1c717")
-		(property "Reference" "H3"
-			(at 72.39 231.648 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MC_0.2\""
-			(at 72.39 234.188 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 5.08mm"
-			(at 77.47 253.746 0)
-			(effects
-				(font
-					(size 0.762 0.762)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.phoenixcontact.com/us/products/1836189/pdf"
-			(at 80.01 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.200\" (5.08mm) 90°, Right Angle Through Hole"
-			(at 76.708 245.11 0)
-			(effects
-				(font
-					(size 0.762 0.762)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-6377-ND"
-			(at 74.93 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Phoenix Connect"
-			(at 74.93 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "1836189"
-			(at 74.93 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "10629160-5aee-4f72-bba7-a86192fed4e0")
-		)
-		(pin "2"
-			(uuid "00ab31a0-5d3c-431d-875b-c38ccb5494f9")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 33nF ±10% 50V 0805 Kemet")
 		(at 125.73 55.88 270)
 		(mirror x)
@@ -37438,101 +38123,6 @@
 			(project ""
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "R12")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:TERM BLK HDR 2POS MC 3.81mm")
-		(at 148.59 236.22 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9d39323f-12d3-44a0-8398-3e54e55f617a")
-		(property "Reference" "H5"
-			(at 145.542 231.648 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MC_0.15\""
-			(at 145.542 234.188 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 3.81mm"
-			(at 151.13 253.746 0)
-			(effects
-				(font
-					(size 0.762 0.762)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.phoenixcontact.com/us/products/1803277/pdf"
-			(at 153.67 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.150\" (3.81mm) 90°, Right Angle Through Hole"
-			(at 150.368 245.11 0)
-			(effects
-				(font
-					(size 0.762 0.762)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-1206-ND"
-			(at 148.59 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Phoenix Connect"
-			(at 148.59 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "1803277"
-			(at 148.59 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "8b544621-e85d-41cf-a798-92f7ae6fabbb")
-		)
-		(pin "1"
-			(uuid "da54c471-4cd3-40b9-9037-c6203ae18aea")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H5")
 					(unit 1)
 				)
 			)
@@ -37987,6 +38577,112 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2{dblquote}")
+		(at 78.74 236.22 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board no)
+		(dnp no)
+		(uuid "a28e38c8-3956-4946-971a-ed275bd51dcd")
+		(property "Reference" "P3"
+			(at 78.74 246.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MC_0.2\""
+			(at 78.74 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/540/1836079.pdf"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "277-6146-ND"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Connect"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "1836079"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "MC"
+			(at 78.74 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8ad07ecf-944b-4a8a-aeab-6a2d0e846e75")
+		)
+		(pin "1"
+			(uuid "65d7488c-b4fe-4aa9-aa95-7dd8559ee507")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "P3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:GND")
 		(at 227.33 238.76 0)
 		(mirror y)
@@ -38404,103 +39100,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:TERM BLK PLG 2POS MC 5.08mm")
-		(at 78.74 236.22 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp no)
-		(uuid "a8411e05-190c-4ce3-a6ae-34543d0f9c79")
-		(property "Reference" "P3"
-			(at 78.74 245.618 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MC_0.2\""
-			(at 78.74 248.158 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLK PLUG 2POS 5.08mm"
-			(at 78.74 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/540/1836079.pdf"
-			(at 78.74 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
-			(at 78.74 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-6146-ND"
-			(at 78.74 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Phoenix Connect"
-			(at 78.74 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "1836079"
-			(at 78.74 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "6cfce591-38bd-47e2-8f27-092fc6d1dcbc")
-		)
-		(pin "1"
-			(uuid "4862922f-3177-4af7-b7f0-6f2f47f50379")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3.3V")
 		(at 196.85 264.16 0)
 		(unit 1)
@@ -38788,6 +39387,7 @@
 		)
 	)
 	(symbol
+		(lib_name "IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260_1")
 		(lib_id "Coert-Vonk:IC ISOLTR 2.5KV 2CH I2C 20SSOP ADM3260")
 		(at 222.25 92.71 0)
 		(mirror y)
@@ -38842,6 +39442,33 @@
 			)
 		)
 		(property "DKPN" "505-ADM3260ARSZ-ND"
+			(at 222.25 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Analog Devices"
+			(at 222.25 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "ADM3260ARSZ"
+			(at 222.25 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "IsoPower"
 			(at 222.25 92.71 0)
 			(effects
 				(font
@@ -41171,6 +41798,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Yageo"
+			(at 167.64 110.49 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" ""
+			(at 167.64 110.49 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "RC_L"
+			(at 167.64 110.49 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ab434acc-5d7d-4d78-8224-0f6487abc33e")
 		)
@@ -41462,6 +42116,110 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:TERM BLK HDR 2POS PC-MSTBA 0.2{dblquote}")
+		(at 44.45 35.56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c89bbc6f-4481-41b6-ab79-fe4f9b1662fb")
+		(property "Reference" "H1"
+			(at 46.99 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MSTBA_0.2\""
+			(at 46.99 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS MSTBA 5.08mm"
+			(at 41.91 53.086 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.phoenixcontact.com/us/products/1757242/pdf"
+			(at 39.37 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.200\" (5.08mm) 90°, Right Angle Through Hole"
+			(at 42.672 44.45 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "277-1106-ND"
+			(at 44.45 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Contact"
+			(at 44.45 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "1757242"
+			(at 44.45 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "COMBICON MSTBA"
+			(at 44.45 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "684a0a25-315c-46cd-831f-4850f417d156")
+		)
+		(pin "2"
+			(uuid "b0b4647f-1b5d-466c-b8d9-3416f95b7110")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:TERM BLK HDR 4POS JST-PH 2mm")
 		(at 212.09 222.25 0)
 		(unit 1)
@@ -41625,6 +42383,111 @@
 			(project "OPNhydro_r1"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "#PWR15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:TERM BLK PLG 2POS PC-MSTB 0.2{dblquote}")
+		(at 40.64 35.56 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom yes)
+		(on_board no)
+		(dnp no)
+		(uuid "cd746c2d-9b0a-4aaa-85c8-cb52a873430e")
+		(property "Reference" "P1"
+			(at 40.64 45.466 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MSTB_0.2\""
+			(at 40.64 47.752 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK PLG 2POS MSTB 5.08mm"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/5784/MSTB%202%2C5_%202-ST-5%2C08.pdf"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "277-1011-ND"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Contact"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "1757019"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "COMBICON MSTB"
+			(at 40.64 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "24406d74-8eae-476e-8599-eb0d4cdf6aec")
+		)
+		(pin "2"
+			(uuid "3227b4d2-8e33-4b5e-a184-b7c920958f1b")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "P1")
 					(unit 1)
 				)
 			)
@@ -43041,6 +43904,108 @@
 		)
 	)
 	(symbol
+		(lib_id "Coert-Vonk:TERM BLK SCREW 4POS SS-MKDS 3.5mm")
+		(at 73.66 187.96 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "df36f7f8-4ea8-4198-a3bc-cb3b8cf35d12")
+		(property "Reference" "J1"
+			(at 73.66 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SS-3.5mm"
+			(at 73.66 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK 4POS SCREW 3.5mm"
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.sameskydevices.com/product/resource/tb0011-350.pdf"
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "4 Position Wire to Board Terminal Block Horizontal with Board 0.138\" (3.50mm) Through Hole"
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "2223-TB0011-350-04BE-ND"
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Same Sky"
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "TB0011-350-04BE"
+			(at 73.66 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "4"
+			(uuid "9182edb8-ee0e-46cc-86fd-dc72a613cbf9")
+		)
+		(pin "1"
+			(uuid "434cde5c-e35a-4421-b272-e5973b7c4bfb")
+		)
+		(pin "2"
+			(uuid "7143cb98-9ef2-432f-b34c-f17afffc9c69")
+		)
+		(pin "3"
+			(uuid "41099d04-2fa4-4d1e-8fca-c25e2167a71b")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Coert-Vonk:CAP X7R 100nF ±10% 50V 0402 Murata")
 		(at 184.15 102.87 90)
 		(unit 1)
@@ -43255,6 +44220,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 184.15 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 184.15 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 184.15 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "69f4084d-f8cb-40c9-a050-062a40686188")
 		)
@@ -43416,6 +44408,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Alpha & Omega"
+			(at 95.25 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "AON6407"
+			(at 95.25 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" ""
+			(at 95.25 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "3"
 			(uuid "976c0707-1739-4045-b158-2895b14c1794")
 		)
@@ -43429,84 +44448,6 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "T1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Coert-Vonk:RES 110mΩ ±1% 1/8W 0805 Susumu")
-		(at 340.36 67.31 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e30c563c-3704-44d9-baf4-28e2c03ead35")
-		(property "Reference" "R33"
-			(at 344.17 70.612 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-			)
-		)
-		(property "Value" "110mΩ"
-			(at 344.17 72.644 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
-			(at 340.36 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.susumu.co.jp/common/pdf/n_catalog_partition08_en.pdf"
-			(at 340.36 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "110 mOhms ±1% 0.333W, 1/3W Chip Resistor 0805 (2012 Metric) Current Sense Thin Film"
-			(at 340.36 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "RL12S.11FCT-ND"
-			(at 340.36 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "735d1ace-a6d5-437c-bc9c-52b38fd8b980")
-		)
-		(pin "1"
-			(uuid "9762ce92-7bfa-49a8-8b9f-68752ce9b69b")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "R33")
 					(unit 1)
 				)
 			)
@@ -43809,102 +44750,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:TERM BLK PLG 2POS MSTB 5.08mm")
-		(at 40.64 35.56 0)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board no)
-		(dnp no)
-		(uuid "e9907b53-db21-4418-9715-5f3add0a57f2")
-		(property "Reference" "P1"
-			(at 40.64 45.212 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MSTB_0.2\""
-			(at 40.64 47.752 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLK PLG 2POS MSTB 5.08mm"
-			(at 40.64 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/5784/MSTB%202%2C5_%202-ST-5%2C08.pdf"
-			(at 40.64 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
-			(at 40.64 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-1011-ND"
-			(at 40.64 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Phoenix Connect"
-			(at 40.64 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "1757019"
-			(at 40.64 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c68db757-2fab-49b7-8ff6-998393a75a07")
-		)
-		(pin "2"
-			(uuid "2b0d664b-4b0c-45d3-a7c2-cf020bdbf239")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "P1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:TRANS NPN 40V 0.2A SOT23-3")
 		(at 48.26 269.24 0)
 		(unit 1)
@@ -43956,25 +44801,25 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Device" "NPN"
-			(at 48.26 269.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=B 2=E 3=C"
-			(at 48.26 269.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DKPN" "MMBT3904LT1GOSCT-ND"
+			(at 48.26 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Onsemi"
+			(at 48.26 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "MMBT3904LT1G"
 			(at 48.26 269.24 0)
 			(effects
 				(font
@@ -44516,101 +45361,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Coert-Vonk:TERM BLK HDR 2POS MSTBA 5.08mm")
-		(at 44.45 35.56 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "edd1a0e2-d964-4ecc-84fa-ca25b595dee0")
-		(property "Reference" "H1"
-			(at 46.99 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MSTBA_0.2\""
-			(at 46.99 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS MSTBA 5.08mm"
-			(at 41.91 53.086 0)
-			(effects
-				(font
-					(size 0.762 0.762)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.phoenixcontact.com/us/products/1757242/pdf"
-			(at 39.37 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.200\" (5.08mm) 90°, Right Angle Through Hole"
-			(at 42.672 44.45 0)
-			(effects
-				(font
-					(size 0.762 0.762)
-				)
-				(hide yes)
-			)
-		)
-		(property "DKPN" "277-1106-ND"
-			(at 44.45 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR" "Phoenix Connect"
-			(at 44.45 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "1757242"
-			(at 44.45 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "fe1acd14-11a4-40f3-b4d8-8f99c185dcd1")
-		)
-		(pin "1"
-			(uuid "c6439a3f-6916-4b99-b313-eb7655e4a847")
-		)
-		(instances
-			(project ""
-				(path "/a0000000-0000-4000-8000-000000002687"
-					(reference "H1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Coert-Vonk:GND")
 		(at 285.75 233.68 0)
 		(unit 1)
@@ -44913,7 +45663,7 @@
 			(uuid "b78796bf-6370-4c17-a498-3b0d82398f11")
 		)
 		(instances
-			(project ""
+			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "M4")
 					(unit 1)
@@ -44922,6 +45672,7 @@
 		)
 	)
 	(symbol
+		(lib_name "CAP X5R 10μF ±10% 16V 0805 Murata GRM_1")
 		(lib_id "Coert-Vonk:CAP X5R 10μF ±10% 16V 0805 Murata GRM")
 		(at 227.33 200.66 90)
 		(unit 1)
@@ -44982,6 +45733,33 @@
 				(hide yes)
 			)
 		)
+		(property "MFR" "Murata"
+			(at 227.33 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "GRM21BR61C106KE15L"
+			(at 227.33 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "GRM"
+			(at 227.33 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "847ac21d-1110-45c4-b1e3-518fac687e5a")
 		)
@@ -44992,6 +45770,177 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "C57")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:RES 110mΩ ±1% 1/4W 0805 Susumu")
+		(at 340.36 67.31 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f1e367e3-a1f7-40b5-8cd8-989c9c052325")
+		(property "Reference" "R24"
+			(at 344.17 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "110mΩ"
+			(at 344.17 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:RES 0805 YAGEO"
+			(at 340.36 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.susumu.co.jp/common/pdf/n_catalog_partition08_en.pdf"
+			(at 340.36 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "110 mOhms ±1% 0.333W, 1/3W Chip Resistor 0805 (2012 Metric) Current Sense Thin Film"
+			(at 340.36 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "RL12S.11FCT-ND"
+			(at 340.36 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "da5ba503-4ebc-4125-9b90-0d5c3d80d52a")
+		)
+		(pin "1"
+			(uuid "17158ecf-6637-47a6-a5cc-e75874d24a80")
+		)
+		(instances
+			(project ""
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "R24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Coert-Vonk:TERM BLK HDR 2POS PC-MC 0.2{dblquote}")
+		(at 148.59 236.22 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f2f29c38-4eee-44a0-aa67-cad3478af579")
+		(property "Reference" "H5"
+			(at 146.05 231.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MC_0.2\""
+			(at 146.05 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK HDR 2POS 5.08mm"
+			(at 151.13 253.746 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.phoenixcontact.com/us/products/1836189/pdf"
+			(at 153.67 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.200\" (5.08mm) 90°, Right Angle Through Hole"
+			(at 150.368 245.11 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "277-6377-ND"
+			(at 148.59 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Contact"
+			(at 148.59 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "1836189"
+			(at 148.59 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6af26295-3b29-4a1d-99ee-cd638b50eb58")
+		)
+		(pin "2"
+			(uuid "a502c81b-731b-4a9b-8f40-43637263971f")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "H5")
 					(unit 1)
 				)
 			)
@@ -45070,6 +46019,113 @@
 			(project "OPNhydro_r2"
 				(path "/a0000000-0000-4000-8000-000000002687"
 					(reference "R23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "TERM BLK PLG 2POS PC-MC 0.2{dblquote}_1")
+		(lib_id "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2{dblquote}")
+		(at 152.4 236.22 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board no)
+		(dnp no)
+		(uuid "f39891ed-54e1-4592-a39e-a474df024ecc")
+		(property "Reference" "P6"
+			(at 152.4 246.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MC_0.2\""
+			(at 152.4 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Coert-Vonk:TERM BLK PLG 2POS PC-MC 0.2"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/540/1836079.pdf"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Plug, Female Sockets 0.200\" (5.08mm) 180° Free Hanging (In-Line)"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DKPN" "277-6146-ND"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR" "Phoenix Connect"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" "1836079"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SERIES" "MC"
+			(at 152.4 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a3fe9b9c-3ebe-434d-825e-059cb0a06605")
+		)
+		(pin "1"
+			(uuid "46b61c09-ec9d-4165-8cfc-f3ce6ce53b6c")
+		)
+		(instances
+			(project "OPNhydro_r2"
+				(path "/a0000000-0000-4000-8000-000000002687"
+					(reference "P6")
 					(unit 1)
 				)
 			)
