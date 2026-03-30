@@ -1,8 +1,8 @@
 # Schematic Design Guide
 
-This document describes the design trade-offs for the **OPNhydro** architecture. It answers **"How?"** questions, explaining the schematics including the glue around the ICs, trace widths and placement rules.
+This document answers **"How?"** — the companion to the Architecture document, which answers "Why?". It covers the schematics, component selection, and PCB layout rules for the **OPNhydro** board.
 
-The key challenge with this board is the mix of a **sensitive** ESP32 and sensors (pH/EC), and their **noisy neighbors** such as a buck converter, isolated DC/DC converter (ADM3260), and high-noise steppers (TMC2209).
+The central problem is coexistence. On one side: a pH probe measuring millivolt-level electrochemical potentials, an EC probe and an ESP32 that needs a clean analog reference. On the other: three stepper drivers chopping current at 20–50 kHz, a buck converter switching at 1 MHz, and a solenoid valve slamming on and off. Everything shares the same 100 mm × 80 mm board. The sections that follow explain how the design lets these worlds coexist.
 
 This document starts with the most critical parts of the Schematic and PCB Layout:
 1. Stability Under Peak Loads
@@ -18,7 +18,11 @@ It then continues to fill in the details:
 <li>Hand-Soldering
 </ol>
 
+![Protection Gauntlet Schematic](../media/infographics/electronic-noise.png)
+
+
 ---
+
 
 [TOC]
 
@@ -28,7 +32,9 @@ It then continues to fill in the details:
 
 ## 1. Stability Under Peak Loads
 
-The system must manage a **peak draw of approximately 4.7A** when the 1.2A main pump, the Solenoid Valve and two 1.53A nutrient pumps are active on top of the typical current draw from the Reflected 5V rail.
+The board runs from a single 24V DIN rail PSU rated at 6.5A. Under normal operation the load is modest, but worst-case — main pump, ATO solenoid, and two dosing pumps all active simultaneously — the peak draw reaches approximately **4.7A**. The PSU can handle this, but the board itself must be designed to tolerate it without rail sag, noise, or damage.
+
+Three concerns drive this section. First, the supply must be protected: against reverse polarity, overvoltage transients, and a fault that exceeds the PSU's rating. Second, the 24V rail must be converted cleanly to 5V and 3.3V for the logic and sensor circuits. Third, the sharp current pulses from the stepper drivers must be absorbed locally before they degrade the rail for everything else. Each of these is handled in a subsection below.
 
 **Topology**
 
@@ -78,15 +84,13 @@ Wire            | 18AWG, 10A over short runs                |                   
 
 ### 1.2. Bulk Caps are Your Friend
 
-The use of a hierarchical capacitance strategy — employing a global reservoir and multiple local reservoirs ensures that peak loads stay as local as possible.
+Every wire and PCB trace has inductance, and inductance resists instantaneous changes in current: $U = L \frac{dI}{dt}$. When a load demands a sudden surge of current, the inductance of the supply path creates a momentary voltage drop — the rail sags. The further the current has to travel, the worse the sag. The solution is to keep a local energy reservoir close to the load so it can deliver charge instantly when demand spikes, before the bulk supply can respond.
+
+The strategy is hierarchical: a large capacitor at the power entry handles slow, high-energy demands, while smaller capacitors placed directly at each load handle fast, local transients. This keeps peak currents as local as possible, reducing noise on the shared rail.
 
 **Theory**
 
-Every wire and PCB trace has inductance. Inductance resists instantaneous changes in current: $U = L \  \frac{dI}{dt}$.
-
-When a stepper driver or motor demands a sudden surge of current, the inductance of the supply path creates a voltage drop — the rail sags. The further the current has to travel from the supply, the worse the sag. Bulk capacitance acts as a local energy reservoir — storing charge close to the load so it can be delivered instantly when current demand spikes.
-
-For this board, the TMC2209 is of special concern, because it chops current to the stepper coils at 20–50kHz. Every switching cycle it draws a sharp current pulse from the VM pin. Without local capacitance, these pulses travel back through the trace inductance to the bulk cap at the power entry.
+The TMC2209 stepper driver is of special concern here. It chops current to the stepper coils at 20–50 kHz — every switching cycle draws a sharp current pulse from the VM pin. Without a local capacitor, these pulses propagate back through trace inductance all the way to the main bulk cap at the power entry, coupling switching noise onto the 24V rail. A local 220 µF cap at each VM pin absorbs these pulses before they leave the immediate area.
 
 **Recommended bulk capacitors**
 
@@ -109,7 +113,9 @@ Rail | Place               | Peak Current | Value / Voltage | Dielectric        
 
 ### 1.3. Buck Converter
 
-The buck converter converts 24V to 5V for the TTL logic.  For the design we follow Figure 10.1 of the [TPS62933 Datasheet](https://www.ti.com/lit/ds/symlink/tps62933.pdf?ts=1773728788941) and their [WEBENCH Power Designer](https://webench.ti.com/power-designer/switching-regulator). We add bulk caps on the input and output, per previous section.
+The system needs 5V for TTL logic, and the only available rail coming off the DIN PSU is 24V. A synchronous buck converter is the right tool: it steps the voltage down efficiently with minimal heat, unlike a linear regulator which would waste over 2W at the same load. The TPS62933 was chosen for its wide input range (3.8–30V), 3A continuous output, and compact SOT-583 package.
+
+The design follows Figure 10.1 of the [TPS62933 Datasheet](https://www.ti.com/lit/ds/symlink/tps62933.pdf?ts=1773728788941), with component values confirmed using the [WEBENCH Power Designer](https://webench.ti.com/power-designer/switching-regulator). Bulk capacitors on the input and output are sized per §1.2.
 
 **Circuit**
 
@@ -161,7 +167,9 @@ $$
 
 ### 1.4. Linear Regulator LDO (3.3V)
 
-The linear voltage regulator converts 5V to 3V3 for the LVTTL logic.  For the design, we follow the typical applications circuit in the [AMS1117-3.3 Datasheet](https://www.diodes.com/assets/Datasheets/AZ1117I.pdf):
+The 3.3V rail powers the ADM3260 isolation chips, the EZO-RTD circuit, and the optional expansion sensors (BME280, BH1750). The current draw on this rail is low — at most ~150 mA peak — so a linear regulator is the right choice here. Dropping 1.7V at 150 mA dissipates only ~250 mW, which is trivial. A second switching converter would add complexity and switching noise for no benefit.
+
+The input is taken from the 5V buck output rather than directly from 24V. A 5V→3.3V drop keeps the LDO dissipation low; a 24V→3.3V LDO at the same current would waste over 3W as heat. The design follows the typical application circuit from the [AZ1117 Datasheet](https://www.diodes.com/assets/Datasheets/AZ1117I.pdf).
 
 **Circuit**
 
@@ -171,7 +179,7 @@ The linear voltage regulator converts 5V to 3V3 for the LVTTL logic.  For the de
 
 Reference       | Specs                                       | Manufacturer / Details  | Package
 ----------------|---------------------------------------------|-------------------------|--------
-U               | 3.3V / 1A, Linear Regulator                 | Diodes AZ1117IH-3.3TRG1 | 
+U               | 3.3V / 1A, Linear Regulator                 | Diodes AZ1117IH-3.3TRG1 |
 C<sub>b1</sub>  | Not needed (already part of buck converter) |                         |
 C<sub>b2</sub>  | 22µF ±20% / 10V, cer. X7R                   | Murata GRM-Series       | 1206
 
@@ -181,25 +189,30 @@ C<sub>b2</sub>  | 22µF ±20% / 10V, cer. X7R                   | Murata GRM-Ser
 
 ### 1.5. PCB Guidelines
 
-To safely handle the peak 4.7A load, the architecture mandates a **4-layer PCB** with **2oz copper** outer layers. This copper weight is essential for managing the heat and resistance of the 24V power traces under continuous 24/7 operation.
+The PCB has two hard constraints that drive most of the other design decisions. First, the 4.7A peak current on the 24V rail requires copper heavy enough to carry that current continuously without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
 
-**Layer Stack-Up**
+The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The heavier copper on L1 and L4 keeps resistance and heat low on the high-current 24V traces. The two inner layers (L2 and L3) use standard 1 oz copper, which is sufficient for the ground and power planes they carry.
 
-Layer | Name   | Function               | Components
-------|--------|------------------------|--------------------------
-L1    | Top    | Signal layer           | ESP32, LiDAR, I2C, UART, EZO, BNC
-L2    | GND    | Solid Main GND Plane   | One uninterrupted copper pour. This is the EMI shield.
-L3    | PWR    | 3.3V / 5V / 24V Planes | Seperate copper pours for low resistance.
-L4    | Bottom  | Steppers / MOSFETs     | So GND plane shields them from signal layer
+**Layer stack-up**
 
-**Notes**
+The layer assignment is not arbitrary — L2 is the EMI shield that separates the noisy switching circuits on L4 from the sensitive signal traces on L1.
 
-- Recommended: IP65 rated ABS enclosure, ~150×100×70mm
-- Cable glands for all wiring (to keep water and insects out)
-- Panel-mount BNC connectors for pH/EC/RTD probes (3×)
-- Optional: Clear lid for status LED visibility
-- PCB Size: about 100mm × 80mm (fits common enclosures)
-- PCB Finish: Hot Air Solder Leveling (HASL), or Electroless Nickel Immersion Gold (ENIG)
+Layer | Name   | Function                | Components
+------|--------|-------------------------|--------------------------
+L1    | Top    | Signal layer            | ESP32, LiDAR, I2C, UART, EZO, BNC
+L2    | GND    | Solid ground plane      | One uninterrupted copper pour — the EMI shield
+L3    | PWR    | Power planes            | Separate copper pours for 3.3V, 5V, and 24V
+L4    | Bottom | High-current switching  | Stepper drivers, MOSFETs, 24V power traces
+
+**Enclosure and mechanical**
+
+The board targets a ~100 mm × 80 mm footprint, which fits standard off-the-shelf enclosures. Recommended specifications:
+
+- **Enclosure:** IP65-rated ABS, approximately 150 × 100 × 70 mm. The IP65 rating keeps moisture and insects out of the electronics.
+- **Cable glands:** Use glands for every wire entering the enclosure — probe cables, pump leads, and the PSU input.
+- **BNC connectors:** Mount three panel-mount BNC connectors on the enclosure face for the pH, EC, and RTD probes. Panel-mount rather than PCB-mount prevents mechanical stress on the isolation islands if a probe cable is tugged.
+- **PCB finish:** HASL (Hot Air Solder Leveling) is sufficient and lowest cost. ENIG (Electroless Nickel Immersion Gold) is a worthwhile upgrade for the fine-pitch SSOP-20 pads of the ADM3260.
+- **Optional:** A clear lid panel allows status LED visibility without opening the enclosure.
 
 ### 1.5.1. Trace Widths
 
@@ -222,11 +235,11 @@ The table below uses a conservative $ΔT = 10°\rm{C}$ (IPC-2221 permits 20°C f
 Net                     | Target Current    | Internal Trace Width | External Trace Width | Rationale
 ------------------------|-------------------|----------------------|----------------------|----------
 24V input (PSU→TVS→RPP) | 6.5A (Peak)       | 5.0mm (200mil)       |  2.0mm (80mil)       | Reduce sag
-24V main pump           | 1.2A (Continous)  | 1.0mm  (40mil)       |  0.4mm (15mil)       | Manage heat
+24V main pump           | 1.2A (Continuous) | 1.0mm  (40mil)       |  0.4mm (15mil)       | Manage heat
 24V each dosing pump    | 1.53A (Peak)      | 1.0mm  (40mil)       |  0.4mm (15mil)       | Lower inductance
-24V ATO valve           | 0.3 (Peak)        | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
+24V ATO valve           | 0.3A (Peak)       | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
 5V rail (post-buck)     | 0.75A (Peak)      | 0.5mm  (20mil)       |  0.2mm  (8mil)       | Stable power
-3.3V rail (post-LDO)    | 0.15 (Peak)       | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
+3.3V rail (post-LDO)    | 0.15A (Peak)      | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
 
 
 ### 1.5.2. PCB Layout Strategy
@@ -243,9 +256,9 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 ## 2. Integration of Precision Dosing and EMI Mitigation
 
 The high precision steppers generate significant **Electromagnetic Interference (EMI)** through high-speed PWM switching. To mitigate this:
-- A *"Silent Read" Strategy* protects sensitive probes from the electromagnetic interference (EMI) generated by stepper PWM switching. The firmware shuts down the stepper drivers during sensor reads (via ENA) to create a "blackout" of switching noise for the sensitive pH and EC probes
-- *Bypass Capacitors* suppress the middle and high frequency noise.
-- *PCB Layout Strategy*, thermal relief and EMI shielding.
+- A **"Silent Read" Strategy** protects sensitive probes from the electromagnetic interference (EMI) generated by stepper PWM switching. The firmware shuts down the stepper drivers during sensor reads (via STEP_PDIS) to create a "blackout" of switching noise for the sensitive pH and EC probes
+- **Bypass Capacitors** suppress the middle and high frequency noise.
+- **PCB Layout Strategy**, thermal relief and EMI shielding.
 
 The **main pump**, **stepper motors**, the **solenoid** and **buck converter** turn the PCB into a high-noise environment. Stepper drivers are notorious for creating Electromagnetic Interference (EMI) and ground bounce that can "ghost" the I2C bus or cause pH readings to jump.
 
@@ -290,11 +303,11 @@ PLG contacts    | (4×) 22-28 AWG / 3A / 250V XH, plug contact     | JST XH-seri
 
 **Engineering Notes**
 - The header follows the NEMA 17 convention. The pin convention is: Coil A+, Coil A-, Coil B+, Coil B-[^STEPPERHEADER]
-- `SPREAD` tied to GND to selects StealthChop mode, per architecture.
+- `SPREAD` tied to GND to select StealthChop mode, per architecture.
 - `CLK` tied to GND, to select the internal clock.
-- `STEP` tied to dedicated input signal, e.g. `STEP_PH_DH`.
+- `STEP` tied to dedicated input signal, e.g. `STEP_PH_DN`.
 - `DIR` left unconnected (int. pull-down) to select increasing count
-- `STDBY` left unconnected (int. pull-down) to enables the internal supply regulator.
+- `STDBY` left unconnected (int. pull-down) to enable the internal supply regulator.
 - `INDEX` left unconnected. Adds no value in normal operation.
 - **Die Pad** must be wired to GND plane; provide as many vias as possible for heat transfer.
 - Peristaltic pumps are self-sealing — the rollers pinch the tube closed when stopped, so backflow cannot occur and direction reversal is never needed.
@@ -348,7 +361,7 @@ $$
 3. The firmware **CS Register** (see below).
 
 
-The **firmware** should aim for an **operating range of 70% to 80%** corresponding to setting the CS to 24 or 27. Increase to 85–90% only if stalling occurs on aged tubing.
+The **firmware** should aim for an **operating range of 70% to 80%** corresponding to setting the CS register accordingly. Increase to 85–90% only if stalling occurs on aged tubing.
 
 CS value | Current limit| Target range
 :-------:|:------------:|:-----------:
@@ -364,11 +377,11 @@ CS value | Current limit| Target range
 
 ### 2.1.3. Firmware Considerations
 
-We suggest using the [TeensyStep](https://github.com/luni64/TeensyStep) to define when and how fast to generate the steps, and [TMCStepper](https://github.com/teemuatlut/TMCStepper) to tell the driver how to interpret those steps (e.g., silent mode, current limits, microstepping).
+Two libraries cover everything needed for the stepper drivers. [TMCStepper](https://github.com/teemuatlut/TMCStepper) configures the TMC2209 over UART — setting silent mode, current limits, and microstepping. [TeensyStep](https://github.com/luni64/TeensyStep) handles step generation — defining when and how fast to pulse the STEP pin. They operate independently: TMCStepper talks to the driver's registers, TeensyStep talks to the motor through timing.
 
 Key UART registers to configure at startup are:
 
-| Register     | Value | Purpose 
+| Register     | Value | Purpose
 |--------------|-------|---------
 | `IHOLD`      |     0 | Zero standstill current (EN tied to GND — this is essential)
 | `IRUN`       |    24 | Run current ≈ 70% (CS=24 → 1.19A; increase to 27 for ~79% if stalling occurs — see CS table above) |
@@ -376,11 +389,9 @@ Key UART registers to configure at startup are:
 | `TPWMTHRS`   |     0 | StealthChop2 active at all speeds
 | `SENDDELAY`  |    ≥2 | Required for multi-driver bus. See note above.
 
-STEP pulses must be generated by hardware peripherals, not software loops. If the ESP32 is busy with a Wi-Fi request, SSL/TLS handshake, a software-timed pulse loop can stall for tens of milliseconds. A single missed or late pulse causes the stepper to lose a step — and since dosing accuracy is derived from step count × tube displacement, one lost step per dose accumulates into measurable calibration error over time.
+STEP pulses must be generated by a hardware peripheral, not a software loop. If the ESP32 is busy with a Wi-Fi request or SSL handshake, a software-timed loop can stall for tens of milliseconds. A single missed or late pulse causes the stepper to lose a step — and since dosing accuracy is derived from step count × tube displacement, even occasional step loss accumulates into measurable calibration error over time.
 
-The recommended ESP32-C6 hardware option is to use the **Remote Control Transceiver (RMT)**. This generates arbitrary pulse sequences from a preloaded buffer with nanosecond resolution, independent of the CPU. Configure it to output N pulses at the target step frequency, then trigger it once per dose. When the burst completes it fires an interrupt; the CPU core is free throughout.
-
-The ESP32-C6 supports up to 4 independent RMT TX channels on ESP32-C6 → one per STEP pin with one spare.
+The recommended approach on the ESP32-C6 is the **Remote Control Transceiver (RMT)**. It generates arbitrary pulse sequences from a preloaded buffer with nanosecond resolution, entirely independent of the CPU. Configure it to output N pulses at the target step frequency and trigger it once per dose. When the burst completes it fires an interrupt; the CPU is free throughout. The ESP32-C6 provides up to 4 independent RMT TX channels — one per STEP pin with one spare.
 
 
 ---
@@ -405,9 +416,11 @@ The schematic or firmware should use **StealthChop2** for dosing. It generates s
 
 ### 2.3. Capacitors to the Rescue
 
-The existing 220µF bulk caps at VM also suppress the **medium-frequency** switching ripple by providing charge locally, within the short trace between cap and VM pin, before the inductance of the supply path has time to cause a voltage dip.
+Switching noise from the TMC2209 drivers and the buck converter spans a wide frequency range — from the fundamental chopping frequency (~20–50 kHz for the steppers, 1 MHz for the buck) up through many harmonics into the tens of MHz. No single capacitor type covers this entire range effectively. The strategy is to use two tiers of decoupling in parallel, each tuned to a different frequency band.
 
-**Recommended MF capacitors**
+**Medium-frequency bypass (10 µF and 220 µF)**
+
+The bulk electrolytic and ceramic caps from §1.2 serve a double duty here. At medium frequencies (roughly 40 kHz–1 MHz), the large-value caps at the VM pins provide charge locally — within the short trace between cap and load — before the inductance of the supply path has time to cause a voltage dip.
 
 Rail | Place               | Peak Current | Value / Voltage | Dielectric             | Purpose
 ----:|---------------------|--------------|----------------:|------------------------|--------
@@ -419,39 +432,51 @@ Rail | Place               | Peak Current | Value / Voltage | Dielectric        
 [^2]: e.g. Murata GRM31CR61H106KA12L (SMD Comm X7R). DC bias derating is better for 1206 package.
 [^3]: e.g. Murata GRM21BR61C106KE15L. Use 0805 package.
 
-Note that the Benewake TF-Luna LiDAR includes a 100nF capacitor to debounce signals and prevent EMI-induced false triggers on the safety interlock lines.
+Note: the Benewake TF-Luna LiDAR includes a 100 nF capacitor to debounce signals and prevent EMI-induced false triggers on the safety interlock lines.
 
-For **high-frequency bypass** (decoupling), the goal is to present the lowest possible impedance at the target frequencies. The capacitor value sets the resonant frequency with its parasitic inductance (ESL).
+**High-frequency bypass (100 nF and 10 nF)**
 
-**Recommended HF/VHF bypass capacitors**
+Above 1 MHz, the large electrolytics become inductive and stop helping. Small ceramic caps take over. A bypass cap is effective from the frequency at which its capacitive reactance drops to a few ohms, up to its self-resonant frequency[^MURATASRF] (SRF) — beyond the SRF it becomes inductive. The effective bypass range follows as:
 
-Rail | Value / Voltage | Dielectric | Package   | Purpose
-----:|----------------:|------------|-----------|---------
- 24V | 100nF / 50V     | MLCC X7R   | 0402/0603 | HF bypass
-  5V | 100nF / 16V     | MLCC X7R   | 0402/0603 | HF bypass per IC
-3.3V | 100nF / 10V     | MLCC X7R   | 0402/0603 | HF bypass per IC
-3.3V |  10nF / 10V     | MLCC X7R   | 0402      | VHF bypass for sensitive pins
+$$
+    \begin{align}
+        \Rightarrow f_{\rm{bypass}} &= \frac{1}{10\pi  C} \ \cdots\  f_{\rm{sr}}
+    \end{align}
+$$
 
-**The Engineering**
+Applying this to the selected Murata parts[^MURATASIMSURF]:
+- **100 nF 0603** X7R[^100NF]: effective ~300 kHz to 24 MHz — covers the HF switching harmonics.
+- **10 nF 0603** X7R[^10NF]: effective ~3 MHz to 70 MHz — covers the VHF end.
+- **10 nF 0402** X7R[^10NF]: effective ~3 MHz to 90 MHz — slightly wider due to lower parasitic inductance.
 
-- *Why 100nF:* Self-resonant frequency of a 100nF 0402 MLCC[^4] is SRF=~30MHz, while the equivalent series resistance ESR=~0.2mΩ at 1 MHz → it operates as an effective bypass to ground up from about ~1 Mhz to ~30MHz — covering the HF-part of the switching harmonics.
-- *Why 10nF:* a similar 10nF cap[^5] has SRF=~85MHz and ESR=~0.2mΩ at 1 MHz → it operates as bypass to ground up from ~1MHz to ~85MHz — covering the VHF-end of switching harmonics.
-- *Why X7R not X5R:* X7R holds capacitance better across temperature (−55°C to +125°C, ±15%). X5R is acceptable on low-voltage rails but degrades more with temperature and DC bias.
-- *Why those pesky small 0402/0603:* Smaller package = lower ESL = lower impedance at high frequency. 0805 and larger have noticeably higher ESL and are less effective as HF bypass caps.
+Rail | Value / Voltage | Dielectric | Package      | Purpose
+----:|----------------:|------------|--------------|---------
+ 24V | 100nF / 50V     | MLCC X7R   | 0603         | HF bypass
+  5V | 100nF / 16V     | MLCC X7R   | 0603         | HF bypass per IC
+3.3V | 100nF / 10V     | MLCC X7R   | 0603         | HF bypass per IC
+3.3V |  10nF / 10V     | MLCC X7R   | 0402 or 0603 | VHF bypass for sensitive pins
 
-[^4]: Such as the Murata GRM155R71C103KA01D
-[^5]: Such as the Murata GRM155R71C104KA88J
+[^MURATASRF]: [Murata: "What are impedance/ESR frequency characteristics in capacitors?"](https://article.murata.com/en-eu/article/impedance-esr-frequency-characteristics-in-capacitors)
+[^MURATASIMSURF]: [Murata SimSurfing Design Support Tool](https://www.murata.com/en-us/tool/simsurfing)
+[^100NF]: Such as the Murata GRM188R72A104KA35D
+[^10NF]: Such as the Murata GRM188R72A103KA01J (0603), or GRM155R71H103KA88D (0402)
 
-Long PCB traces or component leads add inductance, which reduces the SRF. The **placement priority order** should be:
+A few notes on part selection:
+- Use **X7R** dielectric, not X5R. X7R holds capacitance well across temperature (−55°C to +125°C, ±15%); X5R degrades more with temperature and DC bias.
+- Smaller package means lower parasitic inductance (ESL) and a higher SRF. 0603 strikes the best balance for this design — lower ESL than 0805, and more practical to hand-solder than 0402.
 
-Capacitor value  | Maximum distance
------------------|-----------------
-10nF ceramics    | 2mm from IC
-100nF ceramics   | 5mm from IC
-10-22µF ceramics | 10mm from IC
-Electrolytics    | 20mm from load
+**Placement**
 
-For added protection, use **ferrite beads** on power inputs to further reject high-frequency noise.
+A bypass cap only works if it is close to the load. Long traces add inductance that shifts the SRF down and reduces effectiveness. Place caps in this priority order:
+
+Capacitor value  | Maximum distance from IC
+-----------------|--------------------------
+10 nF ceramics   | 2 mm
+100 nF ceramics  | 5 mm
+10–22 µF ceramics| 10 mm
+Electrolytics    | 20 mm
+
+For additional high-frequency rejection, add **ferrite beads** on power inputs to the most sensitive ICs (see §3.1 for the ADM3260 pi-filter).
 
 
 ### 2.4. PCB Layout Strategy
@@ -466,11 +491,10 @@ At 1.0A RMS, the TMC2209 drivers generate only one quarter of the heat compared 
 
 ## 3. Maintaining Signal Integrity via Isolation
 
-In a conductive nutrient solution, multiple probes (pH, EC, RTD) can create **ground loops**: small currents that circulate between probes and distort their readings. The mitigation strategy has three layers:
+Water is conductive, so multiple probes immersed in the same reservoir can form **ground loops** — small currents that circulate between probes through the solution and distort their readings. The problem has an additional wrinkle: the isolation chip chosen to break those loops (the ADM3260) is itself a switching converter that generates its own high-frequency noise. The mitigation strategy therefore has three layers:
 
-   - *Isolation circuit:* Isolated DC and I2C via the ADM3260, providing a physical air gap to break the ground path between probes.
-   - *Physical distance*: Separate the "Noisy" and "Quiet" zones on the PCB.
-   - *Pi-Filters:* Prevent the ADM3260's own internal switching noise from leaking into the high-impedance analog front-end of the pH and EC circuits.  
+- **Isolation circuit:** The ADM3260 provides galvanic isolation on both the I2C signals and the power supply, inserting a physical air gap into every ground path between probes.
+- **Physical distance:** The PCB layout separates noisy circuits (stepper drivers, buck converter) from quiet ones (EZO circuits, BNC connectors) to minimise conducted and radiated coupling.
 
 
 ---
@@ -486,7 +510,7 @@ The Typical Application Diagram in Fig. 20 of the [ADM3260 Datasheet](https://ww
 
 >The ADM3260 uses an internal isoPower transformer switching at ~180MHz, it can cause the "Island" to act like a radio antenna.
 
-Although disabling the stepper motors eliminates external EMI, the ADM3260 itself is a switching power supply. A pi-filter at the V_ISO ensures that the internal noise of the isolation chip does not "leak" into the high-impedance analog front-end of the pH and EC circuits. 
+Although disabling the stepper motors eliminates external EMI, the ADM3260 itself is a switching power supply. A pi-filter at the V_ISO ensures that the internal noise of the isolation chip itself does not "leak" into the high-impedance analog front-end of the pH and EC circuits. 
 
 ![Isolation-Circuit Schematic](../media/schematics/Isolation-Circuit.svg)
 
@@ -519,7 +543,7 @@ $$
   - for 100 nF: place cap within 1 or 2 mm of the pins
 - For caps and resistors, follow the **footprint** from Fig. 23 in the [Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf).
 - The signal **`EZO_PDIS`** is intended for powering down sensors between long monitoring intervals. Power to the sensors need to be restored and stabilized well before the measurement is taken.[^FAULTRECOVERY] 
-- The **Ferrite beads** may help mitigating the Electromagnetic Interference (EMI). The bead surrounded by capacitors on both sides forms a π-Filter. 
+- The **Ferrite beads** may help mitigate the Electromagnetic Interference (EMI). The bead surrounded by capacitors on both sides forms a π-Filter. 
 - Use the **"Stitching Capacitance" trick** to reduce EMI: place a small amount of "stitching capacitance" across the isolation barrier. This is achieved by overlapping internal PCB layers or using a dedicated Y-rated capacitor. Extend GND<sub>P</sub> and GND<sub>ISO</sub> on separate inner layers into the moat. The capacitive coupling of the structure is calculated with the following basic relationships for parallel plate capacitors:[^A-0971]
     $$
         \begin{align}
@@ -543,29 +567,22 @@ $$
 
 ### 3.2. Physical distance
 
-Physical distance is the most effective EMI mitigation. Separate the "Noisy" from the "Quiet."
+After isolation and bypass capacitors, physical separation is the most effective remaining tool against EMI. The board is divided into four zones, arranged so that the noisiest circuits are as far as possible from the most sensitive ones. The gold standard for this kind of multi-EZO layout is the [Atlas Scientific i4 InterLink](https://files.atlas-scientific.com/i4-interlink-datasheet.pdf) and the [Whitebox Labs T3 schematics](https://github.com/whitebox-labs/tentacle-raspi-oshw).
 
-The gold standard for this "Multi-EZO" PCB layout is the [Atlas Scientific i4 InterLink](https://files.atlas-scientific.com/i4-interlink-datasheet.pdf) and the [Whitebox Labs T3 schematics](https://github.com/whitebox-labs/tentacle-raspi-oshw).
+**Zone A — Power Entry (board edge)**
+The DC jack, fuse, reverse-polarity protection, TVS diode, and main bulk capacitor sit at the board edge. Placing these components here means transients and inrush current are absorbed before they can propagate into the rest of the board.
 
-[^8]: Analog Devices AN-0971 (Recommendations for Control of Radiated Emissions with isoPower Devices). This document also details how to use PCB "Stitching Capacitance" to keep the board quiet.
+**Zone B — High-Power Drive (bottom half)**
+The three TMC2209 drivers, their local bulk caps, and the main pump MOSFET sit on the bottom half of the board. Keep the 24V VM traces on L4 so the L2 ground plane acts as an EMI shield between the stepper switching and the signal layer above. The L2 plane also serves as a heatsink for the driver die pads.
 
-1. **Zone A: Power Entry (Edge of Board)**
-   - Components: DC Jack, 7A Fast Fuse, RPP, TVS Diode, Bulk Cap.
-   - Goal: Kill spikes and provide bulk current immediately upon entry.
-2. **Zone B: High-Power Drive (Bottom Half)**
-   - Components: 3x TMC2209 drivers, 3x Bulk caps, Solenoid MOSFET.
-   - Routing: Keep the 24V "VM" traces on L4 (Bottom).
-   - Thermal: Place the drivers here to utilize the L2 GND plane as a heatsink.   
-   - Noise profile: Extreme (source)
-3. **Zone C: Digital Logic (Top Center)**
-   - Components: ESP32, LiDAR header, 5V/3.3V Regulators, EZO-RTD (Non-isolated).
-   - Routing: Keep I2C/UART on L1 (Top), shielded by the L2 GND Plane.
-   - Noise profile: Moderate (sensitive)
-4. **Zone D: Isolated Islands (Top Corners)**
-   - Components: 2x ADM3260, EZO-pH/EC sockets, BNC connectors.
-   - Noise profile: zero tolerance
+**Zone C — Digital Logic (top centre)**
+The ESP32, LiDAR header, 5V/3.3V regulators, and EZO-RTD circuit sit in the top centre. Route I2C and UART on L1 (Top), where they are shielded from the stepper zone below by the L2 ground plane. The EZO-RTD does not need galvanic isolation because the PT-1000 is a passive resistive element with no electrochemical potential.
 
-To visualize the ADM3260 on a 4-layer stack-up, imagine the chip sitting like a bridge over a **Moat**. The goal is to ensure that no electrical path exists between the Mainland and the Island except through the silicon of the chip itself. Ensure the Moat is at least 6mm wide for high-voltage safety (creepage).
+**Zone D — Isolated Islands (top corners)**
+The two ADM3260 chips, EZO-pH and EZO-EC sockets, and BNC connectors sit in the top corners, as far from Zone B as the board allows. These islands have zero tolerance for conducted noise — the isolation moat is the only permitted electrical path between mainland and island.
+
+**The isolation moat**
+Think of each ADM3260 as a bridge spanning a moat. The mainland and the island are electrically connected only through the silicon of the chip itself — no copper of any kind may cross the moat on any layer. Make the moat at least 6 mm wide to satisfy both the 2.5 kV creepage requirement and the practical hazards of hand soldering (solder splash, condensation).
 
 Below is how the layers should be carved to maintain 2.5kV isolation:
 
@@ -585,7 +602,7 @@ L4 (Bottom) | Steppers and glue      | No Copper                 | (Keep empty f
 
 ## 4. Reservoir Level Circuits
 
-Tight water level control is about chemical stability. A LiDAR circuit measures the water level, so that the firmware can add water to the reservoir when needed.  Two Float Switches function as alarms in the firmware fails to refill the reservoir.
+Tight water level control is about chemical stability. A LiDAR circuit measures the water level, so that the firmware can add water to the reservoir when needed.  Two Float Switches function as alarms if the firmware fails to refill the reservoir.
 
 
 ### 4.1. LiDAR Circuit
@@ -635,7 +652,7 @@ C         | (2×) 100nF ±10% / 100V, cer. X7R          | Murata GRM-series     
 **Engineering notes**
 
 - Connector pin assignments: 3V3, high-level float, low level float, GND
-- Mount both float switches in with the hinge DOWN.
+- Mount both float switches with the hinge DOWN.
     - When water rises to the switch, the float arm lifts → magnet nears the reed switch → circuit closes.
     - When water drops below the switch, the float arm falls → magnet nears the reed switch → circuit opens.
 
@@ -645,24 +662,24 @@ C         | (2×) 100nF ±10% / 100V, cer. X7R          | Murata GRM-series     
 
 ## 5. Main Pump and ATO Solenoid Drivers
 
-The main pump runs continuously to circulate the nutrient film, while the ATO valve fires only on demand to top off the reservoir. All pumps and the ATO valve use the same 24V rail and identical N-channel MOSFET driver circuits. Both include a hardware safety interlock — an NPN transistor wired to the relevant float switch — that clamps the MOSFET gate to ground regardless of ESP32 state.
+The main pump runs continuously to circulate the nutrient film, while the ATO valve fires only on demand to top off the reservoir. Both use the same 24V rail and the same N-channel MOSFET driver circuit, and both include a hardware safety interlock — an NPN transistor wired to the relevant float switch — that pulls the MOSFET gate to ground regardless of ESP32 state. Use 20 AWG or 22 AWG wire for the individual runs; the 1.2A–1.5A loads are well within their rating.
 
-Standard electrical practices suggest 20 AWG or 22 AWG wires are sufficient for the individual 1.2A to 1.5A loads of the pumps and valves.
+**Main pump installation**
 
-**Notes about the Main Pump**
-- Pump must be fully submerged in water before power-on (prevents dry-run damage)
-- Mount pump vertically or horizontally, avoid inverted position
-- Add inline strainer/filter to prevent debris clogging impeller
-- Test PWM control at low duty cycles to find minimum stable speed
-- Allow 10-15 second startup delay in software for motor initialization
+The SHYSKY DC40F-2460 is a brushless pump with internal motor electronics. It must be fully primed before running and requires a short initialization sequence at power-on.
 
-**Notes about the ATO valve**
-- Most solenoid valves have 2-wire leads (polarity doesn't matter for DC)
-- Arrow on valve body indicates flow direction
-- Use thread sealant (Teflon tape or pipe dope) on NPT threads
-- Mount valve with coil vertical (prevents water ingress)
-- Recommend: inline manual shutoff valve for maintenance
-- Recommend: firmware timeout prevents flooding if all level sensors fail
+- Mount the pump vertically or horizontally — not inverted. Ensure it is fully submerged before switching power on; the brushless motor is not designed to run dry.
+- Add an inline strainer upstream of the pump to prevent debris from reaching the impeller.
+- The pump accepts PWM speed control on its 24V supply line. Allow a 10–15 second delay in firmware at power-on for the internal motor controller to initialize before applying PWM commands. Test the minimum stable duty cycle on your specific unit — below roughly 30–40% most brushless pumps stall.
+
+**ATO valve installation**
+
+The DIGITEN solenoid valve is a standard 2-wire device — polarity does not matter for DC operation. Check the arrow cast into the valve body and install it in the correct flow direction.
+
+- Seal NPT threads with Teflon tape or pipe dope before tightening.
+- Mount the valve with its coil oriented vertically, so any condensation inside the coil housing drains out rather than pooling around the windings.
+- Install an inline manual shutoff valve upstream so the ATO line can be isolated without draining the supply plumbing.
+- Configure a firmware timeout on the valve open command. If both float switches fail simultaneously, the timeout is the last line of defence against flooding.
 
 
 ---
@@ -684,7 +701,7 @@ Reference       | Specs                                        | Manufacturer / 
 ----------------|----------------------------------------------|------------------------|--------
 N-CH            | 55V / 42A, N-CH MOSFET                       | Infineon HEXFET-series IRLR2905TRPBF | DPAK
 NPN             | 40V / 0.2A, NPN transistor                   | Onsemi MMBT3904LT1G    | SOT-23-3
-D               | 40V / 3A, schottky diode                     | Onsemi SS34            | DO-214AB
+D               | 40V / 3A, Schottky diode                     | Onsemi SS34            | DO-214AB
 R<sub>g</sub>   | 100Ω ±1% / 1/8W                              | Yageo RC_L-series      | 0805
 R<sub>b</sub>   | 4.7kΩ ±1% / 1/8W                             | Yageo RC_L-series      | 0805
 R<sub>h</sub>   | 10kΩ ±1% / 1/8W                              | Yageo RC_L-series      | 0805
@@ -693,15 +710,17 @@ C<sub>b</sub>   | 220µF ±20% / 50V, elec. ESR=22mΩ  (see §1.2) | Kemet ESY-s
 HDR             | 2-pos MC 0.2", R/A header                    | Phoenix Contact MC-series 1836189 |
 PLG             | 2-pos MC 0.2", plug                          | Phoenix Contact MC-series 1836079 |
 
-**Engineering notes**
+**Engineering Notes**
+
 - Connector pin assignments: 24V, switched GND
 - Header chosen to avoid compatibility with 24V PSU header.
 - The IRLR3636 remains a valid drop-in efficiency upgrade if desired.
 - R<sub>up</sub> ensures the motor stays on during ESP32 reset.
-- C<sub>l</sub> for bulk over the 24V rails to help with inrush, which for a 200mA solenoid is modest — maybe 600mA for 1–2ms.
+- C<sub>b</sub> for bulk over the 24V rails to help with inrush, which for a 200mA solenoid is modest — maybe 600mA for 1–2ms.
 - R<sub>g</sub> helps manage the inrush current to the MOSFET's gate capacitor. This protects the ESP32-C6 while allowing for the fast switching speeds required for PWM speed control.
 
-**Firmware suggestions**
+**Firmware Suggestions**
+
 - Minimum: ~30-40% duty recommended to prevent stall.
 - Frequency: 25 kHz (above audible range, smooth motor control)
 
@@ -724,7 +743,7 @@ NPN             | 40V / 0.2A, NPN transistor       | Onsemi MMBT3904LT1G    | SO
 D               | 40V 3A Schottky Diode            | Onsemi SS34            | DO-214AB
 R<sub>g</sub>   | 100Ω ±1% / 1/8W                  | Yageo RC_L-series      | 0805  
 R<sub>b</sub>   | 4.7kΩ ±1% / 1/8W                 | Yageo RC_L-series      | 0805
-R<sub>h</sub>   | 10kΩ ±1% / 1/8W                  | Yageo RC_L-series      | 0805
+R<sub>l</sub>   | 10kΩ ±1% / 1/8W                  | Yageo RC_L-series      | 0805
 C<sub>mf</sub>  | 100nF ±10% / 100V, cer. X7R      | Murata GRM-series      | 0603
 C<sub>b</sub>   | 47µF ±20% / 50V, elec. ESR=150mΩ | KEMET ESY-series       | Radial
 HDR             | 2-pos MC 0.2" R/A header         | Phoenix Contact MC-series 1836189 |
@@ -800,9 +819,7 @@ R<sub>tx</sub>  | (2×) 1kΩ ±1% 1/8W (see below) | Yageo RC_L-series          
 
 The TMC2209 supports a single-wire UART interface that shares the transmit and receive lines, similar to an RS-485 half-duplex bus. This allows full bidirectional control and diagnostics over a single signal.
 
-The bus is shared between all three stepper drivers, with one driver addressed at a time. Each driver's address is set using its `AD0` and `AD1` pins. These addresses are assigned using the `AD0` and `AD1` pins.[^JANELIA]
-
-[^JANELIA]: [github.com/janelia-arduino/TMC2209](https://github.com/janelia-arduino/TMC2209)
+The bus is shared between all three stepper drivers, with one driver addressed at a time. Each driver's address is set using its `AD0` and `AD1` pins. These addresses are assigned using the `AD0` and `AD1` pins.
 
 **Engineering Notes**
 
@@ -983,43 +1000,26 @@ EZO circuits ship in **UART mode** (green LED). They must be switched to **I2C m
 
 ## 8. Hand-Soldering
 
-Hand-soldering a 4-layer PCB with an ADM3260 (SSOP package) and EZO modules requires care, because the internal copper planes act like a giant heat sink. If you aren't careful, you'll get "cold solder joints" where the solder balls up instead of flowing into the hole.
+This board has two properties that make hand-soldering more demanding than a typical PCB. First, the 4-layer stackup uses solid copper planes on L2 and L3 that act as heat sinks — a standard iron tip loses heat rapidly and produces cold joints unless the design includes thermal reliefs. Second, the isolation moats around the ADM3260 islands must survive the physical hazards of hand assembly: solder splash, iron slippage, and tall component bodies near fine-pitch pads. The design guidelines in §3.2 already set the moat widths for this; the rules below translate those requirements into concrete PCB design settings and soldering technique.
 
-- **Thermal Reliefs:** Because your **Layer 2 (Ground Plane)** is a massive sheet of copper, it will "suck" the heat away from your soldering iron. Ensure your PCB design software uses Thermal Reliefs (spokes) for ground pads, or you will struggle to get the solder to melt.
-- **Flux is Mandatory:** When soldering the **ADM3260** (SSOP-20 package), use plenty of liquid flux. It prevents bridges between the tiny pins and makes the solder flow onto the pads instantly.
-- **The "Island" Connectors:** For your **pH/EC BNC connectors**, use Through-Hole versions. Surface-mount BNCs can easily tear off the board if you accidentally tug on a probe cable.
-- **Height Clearance:** Place tall **electrolytic caps** near the edges of the board so they don't block your iron when you try to solder the smaller components in the center.
-- **Soldering the ADM3260 (SSOP-20)**
-This is the hardest part. The pins are close together (0.65mm pitch). Use the "Tack and Drag" Method:
-Use a **"Hoof" or "Chisel" tip**, not a needle-point tip. Needle tips don't hold enough thermal mass for 4-layer boards.
-   1. Tack one corner pin to align the chip.
-   2. Flood all 10 pins on one side with Tacky Flux.
-   3. Put a small "blob" of solder on your iron tip.
-   4. Drag the iron across the pins. The flux will magically pull the solder onto the pads and off the green solder mask.
 
-For a 4-layer PCB that you are soldering by hand, you need to balance two competing needs: high-voltage safety (creepage) and the physical reality of a soldering iron tip. In a mineral-heavy reservoir environment, humidity can cause "tracking" (electricity jumping across the board surface), so your Moats must be wider than a standard digital gap.
+### 8.1. PCB Design for Hand-Soldering
 
-#### "Safety Moat" Clearance
+These settings should be applied in your PCB layout tool before generating Gerbers.
 
-Set your **Design Rule Check (DRC)** for the following minimums specifically around the **ADM3260** and the **pH/EC Islands**:
-   - **Minimum Moat Width: 6 mm:** While 2.5 mm is technically enough for 2.5kV isolation, a 6 mm gap ensures that a stray "solder splash" or a drop of nutrient-rich condensation won't bridge the gap.
-   - **Copper-to-Board-Edge: 1 mm:** This prevents the V-cut or router bit from smearing copper across the isolation boundary during manufacturing.
-   - **Solder Mask Expansion: 0.05 mm:** This ensures the green "paint" (solder mask) stays as close to the pad as possible, preventing solder from bridging between the tight SSOP-20 pins of the ADM3260.
+**Thermal reliefs**
 
-#### "Keep-Out" Zones
+Enable thermal relief spokes on all ground-connected through-hole and SMD pads. Without them, the L2 ground plane will sink heat faster than a standard iron tip can supply it, producing cold joints on every ground pin. Most tools default to thermal reliefs for through-hole pads but not SMD — check both.
 
-Since you are soldering by hand, the tip of your iron (usually 1.5mm–2.4mm wide) needs "elbow room."
-   - **The "Shadow" Zone:** Do not place the 1206 Bulk Capacitors (10µF) directly in front of the ADM3260 pins. Leave at least 3 mm of horizontal clearance. If they are too close: You won't be able to lay your iron flat enough to "drag solder" the chip pins without melting the plastic end of the capacitor.
-   - **The BNC Overhang:** Most through-hole BNC connectors have large metal legs. Ensure the "Moat" starts at least **2 mm** away from the BNC pads. If the BNC leg is right on the edge of the moat, it's very easy to accidentally bridge to the "Mainland" ground plane with a blob of solder.
+**Component placement rules**
 
-#### Moat Integrity Checklist
+- **Electrolytic capacitors:** Place tall electrolytics near the board edges, away from the center. A tall cap close to a fine-pitch IC blocks the iron angle needed for drag-soldering.
+- **ADM3260 clearance:** Leave at least 3 mm of horizontal clearance between the ADM3260 SSOP-20 pins and any neighbouring 1206 capacitors. A cap placed directly in front of the pins prevents the iron from lying flat enough to drag across them.
+- **BNC connectors:** Use through-hole BNC connectors for the pH, EC, and RTD probe connections. Surface-mount BNCs pull off the board if a probe cable is tugged. Keep the moat boundary at least 2 mm from any BNC pad to prevent a solder blob from bridging across the isolation gap.
 
-Before you hit "Generate Gerbers," run these three manual checks in your PCB software:
-   - **The "Ghost" Check:** Turn off all layers except Layer 2 (GND) and Layer 3 (PWR). Ensure the "canyon" is completely empty of copper. No unconnected traces, no vias, no text.
-   - **The "Stitching" Check:** Ensure your internal Ground (Mainland) and Isolated Ground (Island) overlap slightly on different layers (e.g., L2 Mainland overlaps L3 Island) to create that EMI-filtering capacitance, but check that they are separated by the board substrate.
-   - **The Silkscreen Labels:** Since we have three dosing pumps and three sensors, label the "Island" side clearly on the silkscreen (e.g., "ISO-PH" and "ISO-EC"). This prevents you from accidentally plugging a non-isolated sensor into an isolated port during assembly.
+**Isolation moat DRC settings**
 
-**Summary Table for DRC Settings**
+In a humid reservoir environment, moisture on the board surface can cause "tracking" — a small leakage current that creeps across the surface between conductors. The moat widths below are wider than the theoretical minimum for 2.5 kV isolation, specifically to survive a solder splash or a drop of condensation.
 
 Parameter            | Hand-Solder Value
 ---------------------|------------------
@@ -1029,7 +1029,43 @@ Moat (Isolation Gap) | 250 mils (6.35 mm)
 Minimum Via Drill    | 12 mils (0.3 mm)
 Via Pad Diameter     | 24 mils (0.6 mm)
 
-If your software allows, add a **"Route Keep-Out"** area over the moats. This prevents the "Auto-Router" from trying to be "helpful" by running a 24V line across your isolation gap!
+- Set the copper-to-board-edge clearance to **1 mm** to prevent the V-cut or router bit from smearing copper across the isolation boundary during fabrication.
+- Set the solder mask expansion to **0.05 mm** to keep the mask as close to the SSOP-20 pads as possible and reduce the risk of solder bridging across the 0.65 mm pitch.
+- Add a **Route Keep-Out** zone over every moat. This prevents an auto-router from routing a signal across the isolation gap.
+
+**Pre-Gerber moat checks**
+
+Before exporting Gerbers, run these three checks manually in your PCB tool:
+
+1. **Copper check:** Turn off all layers except L2 (GND) and L3 (PWR). The moat region must be completely empty — no traces, no vias, no copper pours, no text.
+2. **Stitching check:** Confirm that the mainland GND pour (L2) and the isolated GND pour overlap slightly on different layers to form the stitching capacitance (see §3.3). Verify the two pours are separated by the board substrate, not connected.
+3. **Silkscreen labels:** Label each isolated island on the silkscreen (e.g., `ISO-PH`, `ISO-EC`). This prevents plugging a non-isolated sensor into an isolated socket during assembly.
+
+
+### 8.2. Soldering Technique
+
+Solder the board in order from lowest to tallest component. This keeps the work surface flat and prevents tall caps from blocking access to shorter parts nearby.
+
+**General notes**
+
+- Use a **hoof or chisel tip**, not a conical needle tip. Needle tips lack the thermal mass to heat pads quickly on a 4-layer board, and the result is either a cold joint or an overheated IC.
+- Apply **tacky flux liberally**. On a 4-layer board, flux is not optional — it prevents bridges on fine-pitch pads and ensures the solder flows onto the pad rather than balling up on the pin.
+- Use **0.5 mm solder** or thinner. Thicker solder deposits too much material per touch on small pads.
+
+**Soldering the ADM3260 (SSOP-20, 0.65 mm pitch)**
+
+This is the most demanding component on the board. Use the drag-solder method:
+
+1. Apply a thin layer of tacky flux to all pads on one side before placing the chip.
+2. Place the chip and tack one corner pin to align it. Verify alignment under magnification before continuing.
+3. Tack the diagonally opposite corner to lock the chip in place.
+4. Flood all 10 pins on one side with additional tacky flux.
+5. Melt a small amount of solder onto the iron tip — enough to wet the tip but not a large blob.
+6. Draw the iron slowly and steadily across all 10 pins in one continuous pass. The flux draws the solder onto the pads and off the solder mask between pins.
+7. Inspect under magnification. Wick away any bridges with desoldering braid and reflux if needed.
+8. Repeat for the other side.
+
+Magnification is strongly recommended — at minimum a 10× loupe, ideally a stereo microscope or a USB camera. At 0.65 mm pitch, a bridge is difficult to see with the naked eye.
 
 
 ---
@@ -1120,7 +1156,20 @@ Notes:
 
 #### B.3. Temperature
 
-The Atlas Scientific EZO RTD circuit should be calibrated to ensure accurate, long-term readings, although it is not strictly required for basic functionality. Atlas Scientific recommends a single-point calibration every 2–3 years.
-- Calibration Method: A simple single-point calibration is typically done using boiling water (100°C) or another known temperature source.
-- Process: The device can be calibrated in its default state (UART mode, continuous readings). The calibration is stored in memory.
-- Accuracy: Proper calibration ensures the sensor maintains its 0.001 resolution and high accuracy. 
+Calibration reference needed: a known temperature source — boiling water (100.0°C at sea level) is the most practical option.
+
+Single-point calibration. Atlas Scientific recommends recalibrating every 2–3 years.
+
+1. Step 1 — Single-point (100.00°C)
+   - Place probe in vigorously boiling water.
+   - Wait for readings to stabilize (~1–2 min).
+   - Send:  `Cal,100`
+   - Wait:  300 ms
+   - Read:  response (should be `*OK`)
+
+2. Verify
+   - Send `Cal,?`  →  expect `?Cal,1`
+
+Notes:
+- Boiling point varies with altitude (~0.34°C per 100 m above sea level). At significant elevation, use a calibrated reference thermometer instead.
+- Recalibrate every 2–3 years, or when the probe is replaced.

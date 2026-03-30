@@ -255,7 +255,6 @@ The **high level float switch** provides a hardware guard against overfilling th
 **Requirements:**
 
 - The switches must disable the MOSFETs that control the ATO valve and main pump.
-- A normally closed switch is less likely to fail.
 - Horizontal side-mount, so the top of the reservoir can be opened for inspection. The sensing level is fixed by where the hole is drilled — no float travel calculation, no ambiguity.
 
 **Parts Considered:**
