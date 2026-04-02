@@ -735,14 +735,16 @@ Cost         | ~$40–$60 for all channels      | ~$15 for all channels
 
 The Atlas Scientific ISO-I2C Brand Isolator primarily uses the ADM3260 chip from Analog Devices. Older or USB versions of their isolated carrier boards previously utilized a Silicon Labs SI8600 bidirectional I2C isolator and an RFM-0505 or Mornsun B0505S isolated DC-DC converter.
 
-Feature            | ✅ADM3260        | Atlas ISO-I2C Board | uFire / DFRobot Isolators
--------------------|------------------|---------------------|--------------------------
-Footprint          | IC and glue      | Mezzanine board     | Mezzanine board
-Galvanic Isolation | 2.5kV            | unknown             | 2.5kV
-Difficulty         | Layout sensitive | Plug & play         | Plug & play
-Price              | \$8 per channel  | ❌\$32 per channel  | \$20 per channel
+Feature            | ✅ADM3260        | Atlas ISO-I2C Board | uFire / DFRobot Isolators | ISO1540 + B0505S
+-------------------|------------------|---------------------|----------------------------|-----------------
+Footprint          | IC and glue      | Mezzanine board     | Mezzanine board            | 2 ICs and glue
+Galvanic Isolation | 2.5kV            | unknown             | 2.5kV                      | 2.5kV
+Difficulty         | Layout sensitive | Plug & play         | Plug & play                | Layout sensitive
+Price              | \$12 per channel  | ❌\$32 per channel  | \$20 per channel          | ~\$7 per channel
 
-**✅Selected: ADM3260**
+**✅Selected: ADM3260** based on price. The ISO1540 was dropped because it is on the SDN List[^SDN].
+[^SDN]: USA Office of Foreign Assets Control's Specially Designated Nationals and Blocked Persons List.
+
 
 ---
 

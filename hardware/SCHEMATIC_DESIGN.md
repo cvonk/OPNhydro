@@ -205,8 +205,7 @@ C<sub>b2</sub>  | 22µF ±20% / 10V, cer. X7R                   | Murata GRM-Ser
 spx3819ms-l-3-3
 
 **AND???**
-Place TVS diodes on inputs for ESD protection
-Add https://www.lcsc.com/ part numbers?
+Place TVS diodes on all? inputs for ESD protection
 
 
 ---
