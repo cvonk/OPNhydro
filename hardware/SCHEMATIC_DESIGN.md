@@ -92,15 +92,22 @@ The strategy is hierarchical: a large capacitor at the power entry handles slow,
 
 The TMC2209 stepper driver is of special concern here. It chops current to the stepper coils at 20–50 kHz — every switching cycle draws a sharp current pulse from the VM pin. Without a local capacitor, these pulses propagate back through trace inductance all the way to the main bulk cap at the power entry, coupling switching noise onto the 24V rail. A local 220 µF cap at each VM pin absorbs these pulses before they leave the immediate area.
 
+Besides capacitance and voltage, Equivalent Series Resistance $R_s$ and maximum Ripple Current $I_{ac}$ are the key selection critea for bulk capacitors.
+
 **Recommended bulk capacitors**
 
-Rail | Place               | Peak Current | Value / Voltage | Dielectric             | Purpose
-----:|---------------------|--------------|----------------:|------------------------|--------
- 24V | Main power entry    | ~4.7A        | 1000µF / 50V    | Aluminium electrolytic | Primary reservoir
- 24V | Each TMC2209 VM pin | ~1.5A        |  220µF / 50V    | Aluminium electrolytic | Local reservoir
- 24V | Main Pump MOSFET    | ~1.2A        |  220µF / 50V    | Aluminium electrolytic | Local reservoir
-  5V | Buck output         | ~0.75A       |  220µF / 10V    | Aluminium polymer      | ESP32 WiFi Tx
-3.3V | LDO output          | ~0.15A       |   22µF / 10V    | MLCC X7R               | Low current
+Rail | Place               | Peak Current | Value               | Type  | Voltage | Package    | R<sub>s</sub> | I<sub>ac</sub> | Purpose
+----:|---------------------|--------------|--------------------:|-------|--------:|------------|---------------|----------------|--------
+ 24V | Main power entry    | ~4.7A        | 1000µF [^1000UF50V] | Elec. |  50V    | Radial TH  | 39mΩ(100kHz)  | 2.454(100kHz)  | Primary reservoir
+ 24V | Each TMC2209 VM pin | ~1.5A        |  220µF  [^220UF50V] | Elec. |  50V    | Radial TH  | 42mΩ(100kHz)  | 1.37A(100kHz)  | Local reservoir
+ 24V | Main Pump MOSFET    | ~1.2A        |  220µF  [^220UF50V] | Elec. |  50V    | Radial TH  | 42mΩ(100kHz)  | 1.37A(100kHz)  | Local reservoir
+  5V | Buck output         | ~0.75A       |  220µF  [^220UF10V] | Poly. |  10V    | Radial SMD | 22mΩ          | 1.04A(100kHz)  | ESP32 WiFi Tx
+3.3V | LDO output          | ~0.15A       |   22µF  [^22UF10V]  | X7R   |  16V    | 1206 SMD   | 90mΩ          | 1.06A(100kHz)  | Low current
+
+[^1000UF50V]: TDK B41866D6108M000
+[^220UF50V]: KEMET ESY227M050AH2AA
+[^220UF10V]: Panasonic 16SVPK220M
+[^22UF10V]: Murata GRM31CR71A226KE15L
 
 **Engineering Notes**
 
@@ -161,6 +168,16 @@ $$
   \end{align}
 $$
 
+**PCB Layout Notes** [^BUCKPCB]
+
+- **Minimize the switching loops.** The two critical loops are: the *on-loop* (C<sub>b1</sub> → TPS62933 → L → C<sub>b2</sub>) and the *off-loop* (L → C<sub>b2</sub> → internal N-CH diode). Keep both loops as small and tight as possible — loop area directly determines radiated EMI.
+- **Keep high-frequency components together.** Place C<sub>b1</sub>, C<sub>b2</sub>, L, and the TPS62933 on the same layer, close to each other.
+- **Use short, wide traces** for all high-current paths.
+- **Route the feedback line carefully.** The FB pin senses the output voltage with millivolt precision. Keep its trace short, away from the inductor, and away from any switching node, possibly even on the other side of the GND layer.
+- **Place a ground plane directly under the TPS62933** for thermal relief and a low-impedance return path.
+
+[^BUCKPCB]: [Switching Regulator PCB Design - Phil's Lab #60](https://youtu.be/AmfLhT5SntE?si=4bg8blk9iI0T82Y5&t=883)
+
 
 ---
 
@@ -182,6 +199,14 @@ Reference       | Specs                                       | Manufacturer / D
 U               | 3.3V / 1A, Linear Regulator                 | Diodes AZ1117IH-3.3TRG1 |
 C<sub>b1</sub>  | Not needed (already part of buck converter) |                         |
 C<sub>b2</sub>  | 22µF ±20% / 10V, cer. X7R                   | Murata GRM-Series       | 1206
+
+
+**OR???**
+spx3819ms-l-3-3
+
+**AND???**
+Place TVS diodes on inputs for ESD protection
+Add https://www.lcsc.com/ part numbers?
 
 
 ---
@@ -245,6 +270,8 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 ### 1.5.2. PCB Layout Strategy
 
 - **Star Power**: Run a dedicated pair of 24V wires from your main power input connector directly to the stepper section, and a separate pair to the logic regulator. Do not "daisy chain" the power from the motors to the sensors.
+- **Ground Plane:** Make sure you have an uninterrupted ground plane, to minimize current loops (inductance).
+- **Ground Vias:** Give each ground connection its own via to the ground plane, so the impedance of the via doesn't cause the a sag parts nearby. (and no common impedance crosstalk)
 - **Via Stitching:** If you must switch the 24V rail between layers, use multiple vias (at least 3–4 vias per 2A connection). A single standard 10-mil via is only rated for about 0.5A–1A before it acts like a fuse.
 - **Antenna Support:** The ground plane should not extend under the ESP32-C6 antenna keep-out area to ensure proper wireless performance.
 - **Analog/Digital Isolation:** The layout must keep analog traces physically isolated from switching power supplies and high-current motor traces.
@@ -436,7 +463,9 @@ Note: the Benewake TF-Luna LiDAR includes a 100 nF capacitor to debounce signals
 
 **High-frequency bypass (100 nF and 10 nF)**
 
-Above 1 MHz, the large electrolytics become inductive and stop helping. Small ceramic caps take over. A bypass cap is effective from the frequency at which its capacitive reactance drops to a few ohms, up to its self-resonant frequency[^MURATASRF] (SRF) — beyond the SRF it becomes inductive. The effective bypass range follows as:
+Above 1 MHz, the large electrolytics become inductive and stop helping. Small ceramic caps take over. A bypass cap is effective from the frequency at which its capacitive reactance drops to a few ohms, up to its self-resonant frequency[^MURATASRF] $f_{sr}$ — beyond the $f_{sr}$ it becomes inductive.
+
+The effective bypass range follows as:
 
 $$
     \begin{align}
@@ -445,29 +474,39 @@ $$
 $$
 
 Applying this to the selected Murata parts[^MURATASIMSURF]:
-- **100 nF 0603** X7R[^100NF]: effective ~300 kHz to 24 MHz — covers the HF switching harmonics.
-- **10 nF 0603** X7R[^10NF]: effective ~3 MHz to 70 MHz — covers the VHF end.
-- **10 nF 0402** X7R[^10NF]: effective ~3 MHz to 90 MHz — slightly wider due to lower parasitic inductance.
+- **100nF 0603** X7R[^100NF0603]: effective ~300 kHz to 24 MHz — covers the HF switching harmonics.
+- **10nF 0603** X7R[^10NF0603]: effective ~3 MHz to 69 MHz — covers the VHF end.
+- **10nF 0402** X7R[^10NF0402]: effective ~3 MHz to 89 MHz — slightly wider due to lower parasitic inductance $L_s$.
 
-Rail | Value / Voltage | Dielectric | Package      | Purpose
-----:|----------------:|------------|--------------|---------
- 24V | 100nF / 50V     | MLCC X7R   | 0603         | HF bypass
-  5V | 100nF / 16V     | MLCC X7R   | 0603         | HF bypass per IC
-3.3V | 100nF / 10V     | MLCC X7R   | 0603         | HF bypass per IC
-3.3V |  10nF / 10V     | MLCC X7R   | 0402 or 0603 | VHF bypass for sensitive pins
+
+
+Rail | C     | Type | Voltage  | Package | f<sub>sr</sub> | R<sub>s</sub> | L<sub>s</sub> | Purpose
+----:|-------|------|----------|---------|-------|--------|-------|-----------
+ 24V | 100nF | X7R  |     50V  | 0603    | 23MHz | 0.04mΩ | 480pH | HF bypass
+  5V | 100nF | X7R  |     50V  | 0603    | 23MHz | 0.04mΩ | 480pH | HF bypass per IC
+3.3V | 100nF | X7R  |     50V  | 0603    | 23MHz | 0.04mΩ | 480pH | HF bypass per IC
+3.3V |  10nF | X7R  |    100V  | 0603    | 68MHz | 0.08mΩ | 545pH | VHF bypass for sensitive pins
+3.3V |  10nF (alt.) | X7R  | 50V | 0402  | 89MHz | 0.06mΩ | 318pH | VHF bypass for sensitive pins
 
 [^MURATASRF]: [Murata: "What are impedance/ESR frequency characteristics in capacitors?"](https://article.murata.com/en-eu/article/impedance-esr-frequency-characteristics-in-capacitors)
 [^MURATASIMSURF]: [Murata SimSurfing Design Support Tool](https://www.murata.com/en-us/tool/simsurfing)
-[^100NF]: Such as the Murata GRM188R72A104KA35D
-[^10NF]: Such as the Murata GRM188R72A103KA01J (0603), or GRM155R71H103KA88D (0402)
+[^100NF0603]: Murata GRM188R72A104KA35D
+[^10NF0603]: Murata GRM188R72A103KA01J
+[^10NF0402]: Murata GRM155R71H103KA88D
 
 A few notes on part selection:
 - Use **X7R** dielectric, not X5R. X7R holds capacitance well across temperature (−55°C to +125°C, ±15%); X5R degrades more with temperature and DC bias.
-- Smaller package means lower parasitic inductance (ESL) and a higher SRF. 0603 strikes the best balance for this design — lower ESL than 0805, and more practical to hand-solder than 0402.
+- Smaller package means lower parasitic inductance (ESL) and a higher $f_{res}$. 0603 strikes the best balance for this design — lower ESL than 0805, and more practical to hand-solder than 0402.
+
+**Unknown???**
+Regarding the the 3.3V rail: what if the 100nF be in its inductive region (>23MHz), while the 10nF is in its capacitive region (<89MHz). Do you get resonance / ringing?  Would it be better to just use two 100nF caps instead?  Or, reduce the $Q$-factor (indicating of how good it is at resonating) by choosing a higher $R_s$?
+$$
+    Q = \frac{1}{R_s} \sqrt{\frac{L_s}{C}}
+$$
 
 **Placement**
 
-A bypass cap only works if it is close to the load. Long traces add inductance that shifts the SRF down and reduces effectiveness. Place caps in this priority order:
+A bypass cap only works if it is close to the load. Long traces add inductance that shifts the $f_{res}$ down and reduces effectiveness. Place caps in this priority order:
 
 Capacitor value  | Maximum distance from IC
 -----------------|--------------------------
@@ -544,7 +583,7 @@ $$
 - For caps and resistors, follow the **footprint** from Fig. 23 in the [Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adm3260.pdf).
 - The signal **`EZO_PDIS`** is intended for powering down sensors between long monitoring intervals. Power to the sensors need to be restored and stabilized well before the measurement is taken.[^FAULTRECOVERY] 
 - The **Ferrite beads** may help mitigate the Electromagnetic Interference (EMI). The bead surrounded by capacitors on both sides forms a π-Filter. 
-- Use the **"Stitching Capacitance" trick** to reduce EMI: place a small amount of "stitching capacitance" across the isolation barrier. This is achieved by overlapping internal PCB layers or using a dedicated Y-rated capacitor. Extend GND<sub>P</sub> and GND<sub>ISO</sub> on separate inner layers into the moat. The capacitive coupling of the structure is calculated with the following basic relationships for parallel plate capacitors:[^A-0971]
+- Limit the effect of the **floating isolated groundplane** by using the **"Stitching Capacitance" trick**: achieved by overlapping internal PCB layers or using a dedicated Y-rated capacitor. Extend GND<sub>P</sub> and GND<sub>ISO</sub> on separate inner layers into the moat. The capacitive coupling of the structure is calculated with the following basic relationships for parallel plate capacitors:[^A-0971]
     $$
         \begin{align}
           C  &= \frac{A\varepsilon}{d} \rm{\ and\ } \varepsilon=\varepsilon_0\times\varepsilon_r  \\
