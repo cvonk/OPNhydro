@@ -1,36 +1,49 @@
 # Board Layout Guide
 
-This is the second document that answers **"How?"** — the companion to the Architecture document, which answers "Why?". It covers the Printed Circuit Board (PCB) layout rules for the **OPNhydro** board.
+This is the second document that answers **"How?"** — the companion to the Architecture document, and follow up to the Schematic Design document. It covers the Printed Circuit Board (PCB) selection and layout rules for **OPNhydro**.
 
 As in the Schematic Design document, the central problem remains **coexistence**.
-- On one side: a pH probe measuring millivolt-level electrochemical potentials, an EC probe and an ESP32 that needs a clean analog reference. 
-- On the other: three stepper drivers chopping current at 20–50 kHz, a buck converter switching at 1 MHz, and a solenoid valve slamming on and off.
+- On one side: a pH probe measuring millivolt-level electrochemical potentials, an EC probe and an ESP32 that needs a clean analog supply. 
+- On the other: three stepper drivers chopping current at 20–50 kHz, a buck converter switching at 1 MHz, and a solenoid valve.
 
-Everything shares the same board. The sections that follow explain how the design lets these worlds coexist.
-
-This document starts with the most critical parts of the Schematic and PCB Layout:
-1. Stability Under Peak Loads
-2. Integration of Precision Dosing and EMI Mitigation
-3. Maintaining Signal Integrity via Isolation
-
-It then continues to fill in the details:
-<ol start="4">
-<li>Reservoir Level Circuits
-<li>Main Pump and ATO Solenoid Drivers
-<li>ESP32-C6, UART and I2C
-<li>EZO Circuits and Calibration
-<li>Hand-Soldering
-</ol>
+After the PCB selection and general layout rules, we'll cover the different sections of the schematic.
 
 
-## 1. Stability Under Peak Loads
+## 1. PCB Selection and General Rules
 
 ---
 
-## 2. Integration of Precision Dosing and EMI Mitigation
+
+
+Zl = 1 / j omega L
+Xl = 1 / 2 pi f L
+
+Z = ESR + Xc + Xl
+the dip in |Z| is ESR
+
+
+## 2. Power Train
 
 ---
 
-## 3. Maintaining Signal Integrity via Isolation
+## 3. I2C Sensors
+
+---
+
+## 4. Peristaltic Pump Drivers
+
+---
+
+## 5. Main Pump and Valve Drivers
+
+---
+
+## 6. Water Level Sensor and Switches
+
+---
+
+## 7. SoC, Test Points and Ficucials
+
+
 
 
