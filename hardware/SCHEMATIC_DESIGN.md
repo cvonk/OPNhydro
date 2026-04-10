@@ -82,15 +82,15 @@ Wire            | 18AWG, 10A over short runs                |                   
 ---
 
 
-### 1.2. Bulk Caps are Your Friend
+### 1.2. Bulk Caps are Your Friend (decoupling)
 
-Every wire and PCB trace has inductance, and inductance resists instantaneous changes in current: $U = L \frac{dI}{dt}$. When a load demands a sudden surge of current, the inductance of the supply path creates a momentary voltage drop — the rail sags. The further the current has to travel, the worse the sag. The solution is to keep a local energy reservoir close to the load so it can deliver charge instantly when demand spikes, before the bulk supply can respond.
+Every wire and PCB trace has inductance, and inductance resists instantaneous changes in current: $U = L \frac{dI}{dt}$. When a load demands a sudden surge of current, the inductance of the supply path creates a momentary voltage drop — the rail sags. The further the current has to travel, the worse the sag. The solution is to keep a local energy reservoir close to the load so it can deliver charge instantly when demand spikes, before the bulk supply can respond. They reduce the large $\frac{dI}{dt}$ transcients passing through the power rail, by providing local charge and thereby reduce EMI.  It decouples the rest of the inductance in the power rail.
 
-The strategy is hierarchical: a large capacitor at the power entry handles slow, high-energy demands, while smaller capacitors placed directly at each load handle fast, local transients. This keeps peak currents as local as possible, reducing noise on the shared rail.
+The strategy is hierarchical: a large capacitor at the power entry handles slow, high-energy demands, while smaller capacitors placed directly at each load handle fast, local transients. This keeps peak currents as local as possible, **reducing voltage drops** on the shared rail.
 
 **Theory**
 
-The TMC2209 stepper driver is of special concern here. It chops current to the stepper coils at 20–50 kHz — every switching cycle draws a sharp current pulse from the VM pin. Without a local capacitor, these pulses propagate back through trace inductance all the way to the main bulk cap at the power entry, coupling switching noise onto the 24V rail. A local 220 µF cap at each VM pin absorbs these pulses before they leave the immediate area.
+The TMC2209 stepper driver is of special concern here. It chops current to the stepper coils at 20–50 kHz — every switching cycle draws a sharp current pulse from the VM pin. Without a local capacitor, these pulses propagate back through trace inductance all the way to the main bulk cap at the power entry. A local 220 µF cap at each VM pin absorbs these pulses before they leave the immediate area.
 
 Besides capacitance and voltage, Equivalent Series Resistance $R_s$ and maximum Ripple Current $I_{ac}$ are the key selection critea for bulk capacitors.
 
@@ -206,74 +206,6 @@ spx3819ms-l-3-3
 
 **AND???**
 Place TVS diodes on all? inputs for ESD protection
-
-
----
-
-
-### 1.5. PCB Guidelines
-
-The PCB has two hard constraints that drive most of the other design decisions. First, the 4.7A peak current on the 24V rail requires copper heavy enough to carry that current continuously without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
-
-The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The heavier copper on L1 and L4 keeps resistance and heat low on the high-current 24V traces. The two inner layers (L2 and L3) use standard 1 oz copper, which is sufficient for the ground and power planes they carry.
-
-**Layer stack-up**
-
-The layer assignment is not arbitrary — L2 is the EMI shield that separates the noisy switching circuits on L4 from the sensitive signal traces on L1.
-
-Layer | Name   | Function                | Components
-------|--------|-------------------------|--------------------------
-L1    | Top    | Signal layer            | ESP32, LiDAR, I2C, UART, EZO, BNC
-L2    | GND    | Solid ground plane      | One uninterrupted copper pour — the EMI shield
-L3    | PWR    | Power planes            | Separate copper pours for 3.3V, 5V, and 24V
-L4    | Bottom | High-current switching  | Stepper drivers, MOSFETs, 24V power traces
-
-**Enclosure and mechanical**
-
-The board targets a ~100 mm × 80 mm footprint, which fits standard off-the-shelf enclosures. Recommended specifications:
-
-- **Enclosure:** IP65-rated ABS, approximately 150 × 100 × 70 mm. The IP65 rating keeps moisture and insects out of the electronics.
-- **Cable glands:** Use glands for every wire entering the enclosure — probe cables, pump leads, and the PSU input.
-- **BNC connectors:** Mount three panel-mount BNC connectors on the enclosure face for the pH, EC, and RTD probes. Panel-mount rather than PCB-mount prevents mechanical stress on the isolation islands if a probe cable is tugged.
-- **PCB finish:** HASL (Hot Air Solder Leveling) is sufficient and lowest cost. ENIG (Electroless Nickel Immersion Gold) is a worthwhile upgrade for the fine-pitch SSOP-20 pads of the ADM3260.
-- **Optional:** A clear lid panel allows status LED visibility without opening the enclosure.
-
-### 1.5.1. Trace Widths
-
-The trace widths can be calculated using the IPC-2221 empirical formula for external conductors.[^1]
-[^1]: [IPC-2221 Trace Width Calculator, Altium PCB Design Guide](https://resources.altium.com/p/ipc-2221-calculator-pcb-trace-current-and-heating).
-
-$$
-    \begin{align}
-    I  &= k × ΔT^{0.44} × A^{0.725} \\
-    \rm{where\ \ } I &= \rm{current\ [A]} \nonumber \\
-    k  &= 0.048 \rm{\ for\ outer\ layer,\ or\ } 0.024 \rm{\ for\ inner\ layer} \nonumber \\
-    ΔT &= \rm{allowable\ temperature\ increase\ [°C]} \nonumber \\
-    A  &= \rm{cross\ sectional\ area\ [mil²]} =  width_{mil} × thickness_{mil} \nonumber \\
-   \rm{thickness_{mil}} &= 1.37\rm{mil\ for\ 1oz\ Cu,\ or\ } 2.74\rm{mil}\rm{\ for\ 2oz\ Cu} \nonumber 
-\end{align}
-$$
-
-The table below uses a conservative $ΔT = 10°\rm{C}$ (IPC-2221 permits 20°C for most PCB classes). 
-
-Net                     | Target Current    | Internal Trace Width | External Trace Width | Rationale
-------------------------|-------------------|----------------------|----------------------|----------
-24V input (PSU→TVS→RPP) | 6.5A (Peak)       | 5.0mm (200mil)       |  2.0mm (80mil)       | Reduce sag
-24V main pump           | 1.2A (Continuous) | 1.0mm  (40mil)       |  0.4mm (15mil)       | Manage heat
-24V each dosing pump    | 1.53A (Peak)      | 1.0mm  (40mil)       |  0.4mm (15mil)       | Lower inductance
-24V ATO valve           | 0.3A (Peak)       | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
-5V rail (post-buck)     | 0.75A (Peak)      | 0.5mm  (20mil)       |  0.2mm  (8mil)       | Stable power
-3.3V rail (post-LDO)    | 0.15A (Peak)      | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
-
-
-### 1.5.2. PCB Layout Strategy
-
-- **Star Power**: Run a dedicated pair of 24V wires from your main power input connector directly to the stepper section, and a separate pair to the logic regulator. Do not "daisy chain" the power from the motors to the sensors.
-- **Ground Plane:** Make sure you have an uninterrupted ground plane, to minimize current loops (inductance).
-- **Ground Vias:** Give each ground connection its own via to the ground plane, so the impedance of the via doesn't cause the a sag parts nearby. (and no common impedance crosstalk)
-- **Via Stitching:** If you must switch the 24V rail between layers, use multiple vias (at least 3–4 vias per 2A connection). A single standard 10-mil via is only rated for about 0.5A–1A before it acts like a fuse.
-- **Antenna Support:** The ground plane should not extend under the ESP32-C6 antenna keep-out area to ensure proper wireless performance.
-- **Analog/Digital Isolation:** The layout must keep analog traces physically isolated from switching power supplies and high-current motor traces.
 
 
 ---
@@ -440,9 +372,48 @@ The schematic or firmware should use **StealthChop2** for dosing. It generates s
 ---
 
 
-### 2.3. Capacitors to the Rescue
+### 2.3. Capacitors to the Rescue (bypass)
 
-Switching noise from the TMC2209 drivers and the buck converter spans a wide frequency range — from the fundamental chopping frequency (~20–50 kHz for the steppers, 1 MHz for the buck) up through many harmonics into the tens of MHz. No single capacitor type covers this entire range effectively. The strategy is to use two tiers of decoupling in parallel, each tuned to a different frequency band.
+Switching **noise** from the TMC2209 drivers and the buck converter spans a wide frequency range — from the fundamental chopping frequency (~20–50 kHz for the steppers, 1 MHz for the buck) up through many harmonics into the tens of MHz. No single capacitor type covers this entire range effectively. The strategy is to use two tiers of decoupling in parallel, each tuned to a different frequency band.
+
+
+
+Inspired by Dr. Eric Bogatin[^Bogatin] 
+
+[^Bogatin]: https://www.signalintegrityjournal.com/articles/1589-the-myth-of-three-capacitor-values
+
+The history values for through hole components has been 100nF or 1 uF for bypass capacitors.  This changed with newer packaging and technologies. Dr. Eric Bogatin suggestsing to use up to 22 uF in the smallest package possible. 
+
+The main goal for effective bypass capacitors is to minimize the series inductance.
+
+Target impedance is about 1 Ohm.
+
+
+Guidelines fro Dr. Todd Hubing
+1. if power and return plane are 4 mils or closer
+    - all capacitors contribute to all devices .e.g., create a single structure.
+    - capacitor position is relatively unimportant as long as there is good distribution across the board
+2. if power and return plane are futher than 10 mills apart
+    - capacitor position is extremely important
+    - capacitors are didicated to specific devices
+    - sharing vias can make sense with QFP type devices
+    - cavity resonance at some frequency is a "given"
+3. No power / ground return plane, i.e., routed power
+    - at least 3 caps per power pin
+
+It is extremely important to minimize the series inductance and loop area connecting bypass capacitors to power and return pins of digital ICs. Best to have the vias close to the capacitor and close to each other.
+
+Normal MLCC have about 500 pH of series inductance. Newer IDC have <100pH inductance. 
+
+
+This connection between capacitance value and ESL dramatically affects the impedance profile of a large and a small value capacitor. At low frequency, the impedance of a real capacitor is about its capacitance. At high frequency, the impedance of a real capacitor is about its lead inductance.
+
+Often, a wide range of capacitance values can be obtained in exactly the same body size. It is just as easy to have 10 uF in an 0402 as a 0.01 uF. This means that the ESL of an MLCC capacitor, if optimally integrated into a board, will be independent of its capacitance value.
+
+Regardless of the application, lower mounting loop inductance is always of value. This is why the MLCC decoupling capacitors should always be the second components placed on the board, so they can be routed with the lowest mounting inductance practical.
+
+Power Delivery Network (PDN)
+
 
 **Medium-frequency bypass (10 µF and 220 µF)**
 
@@ -477,6 +448,8 @@ Applying this to the selected Murata parts[^MURATASIMSURF]:
 - **10nF 0603** X7R[^10NF0603]: effective ~3 MHz to 69 MHz — covers the VHF end.
 - **10nF 0402** X7R[^10NF0402]: effective ~3 MHz to 89 MHz — slightly wider due to lower parasitic inductance $L_s$.
 
+
+https://www.hans-rosenberg.com/products/electromagnetic-pcb-design-free-mini-course/categories/2158729202/posts/2192023860
 
 
 Rail | C     | Type | Voltage  | Package | f<sub>sr</sub> | R<sub>s</sub> | L<sub>s</sub> | Purpose
