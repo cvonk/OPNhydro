@@ -21,15 +21,16 @@ Let's start by setting something straight.
 
 As signal rise times decrease (faster edges dI/dt) and PCB frequencies increase, the simple circuit theory assumptions fail, and **Field theory** (or transmission line theory) is required to account for radiation, retardation, and wave propagation. PCB layout shifts from simply drawing paths for current to designing transmission lines that contain EM fields, managing parasitic inductance/capacitance, and controlling radiated emissions (EMI).  Suddenly those physics classes about EM fields physics and transmission lines in particular are no longer reserved for the RF engineers, but become actual for PCB design.
 
-### 1.2. The Energy travels through the Dielectric
+### 1.2. The Energy Travels through the Dielectric
 
 > "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
 
-In high-frequency PCB design, it is a common misconception that the signal "flows" inside the copper. In reality, the **copper traces and ground planes act as waveguides***, while **the energy** in the form of electromagnetic wave **travels through the dielectric material** (typically FR-4).
+Here is a puzzle. You flip a light switch, and the bulb at the far end of the wire lights up almost instantly. But if you could tag a single **electron** at the switch and watch it, you would find it drifting toward the bulb at roughly **1 meter per hour** — the speed of a slow snail. At that rate, it would take days to cross a long wire. So what actually turned the light on?
 
-We all know that Flicking a light switch produces near instant light.
-1. **Electrons** constantly move and collide with atoms at high speeds, but they are so tightly bound to the copper molecules, that their **drift velocity** (from source to destination) is about the speed of a snail — roughly **1 meter per hour**. At this speed, it would take hours for the light to turn on. 
-2. **EM waves** travel with a speed that is eight orders of magnitude higher, about **150,000,000 meters per second**
+Not the electrons. The **EM Field** did. The moment you close the switch, a disturbance in the electric and magnetic fields propagates outward from the switch at close to the speed of light. That field front is what reaches the bulb. The electrons just shuffle along locally in response to the field passing through them — they don't carry the energy, they react to it.
+
+On a PCB, the same physics applies. The signal energy travels as an EM wave through the **FR-4 dielectric** between the trace and the ground plane — not through the copper itself. The propagation speed is:
+
 $$
   \left.
     \begin{align*}
@@ -39,44 +40,26 @@ $$
   \right\} \Rightarrow v_p \approx \frac{c}{\sqrt{4.2}} \approx 15 \ \text{cm/ns}
 $$
 
-Since this is so counterintuitive, let's also look at an **analogy**:
+The copper trace and ground plane are not conductors of the signal — they are its **walls**. Think of a still pond. Drop a pebble in, and ripples spread outward in all directions, carrying the energy of your throw. The water molecules themselves barely move; they just bob in place as the wave passes through. Now lay two parallel planks on the surface and drop the pebble between them. The ripples are forced to travel along the channel between the planks — contained, directed, not spreading sideways into the rest of the pond.
 
-1. When you throw a pebble into a still pond, it provides the initial energy.
-2. The waves spread across the pond at ~8 km/h.  They carry the energy of your throw.
-3. The water molecules stay in the same general area, just "sloshing" or vibrating to allow the wave to pass through them. A leaf floating on the water, willl just bobs up and down as the wave passes. It doesn't travel to the shore with the wave.
-
-Now, imagine you have two parallel wooden planks floating on the surface of the pond. If you drop the pebble between them, the ripples are guided and forced to stay between the planks. The planks "contain" the energy and direct it.  Without the planks, the waves would spread out in every direction. 
+The trace is one plank. The ground plane is the other. The FR-4 between them is the water. The signal is the ripple. Remove one plank — cut a slot in the ground plane, reroute the return path — and the wave spreads out. That spreading is EMI.
 
 ### 1.2.1. EM fields are the Drivers
 
-It is important to understand how the EM-wave propagates through the circuit board.
-Signals and power transient **Fields** travel in the **Dielectric** at near light speed, while the conduction/displacement currents simultaneously flow back to the source at ~1cm/s.  The signal energy is in the fields, not in the copper!
+Here is the thing that surprises most people: the energy in a PCB trace is not *in* the copper. The copper is almost beside the point. The energy is in the space around it — in the electric and magnetic fields that exist between the trace and the ground plane below it. The copper's job is to guide those fields, the way a pipe guides water. [^FEYNMAN]
+[^FEYNMAN]: https://www.feynmanlectures.caltech.edu/II_13.html#:~:text=We%20have%20seen%20that%20there,then%2C%20produce%20a%20magnetic%20field.
 
 ![Courtesy: Patrick André](../media/infographics/microstrip-fields.png)
 
+Think about what happens when you send a signal down a trace. An **electric field** springs up between the trace (positive) and the ground plane (negative) — like the field between the plates of a capacitor. At the same time, a **magnetic field** curls around the current flowing through the trace. These two fields together form an electromagnetic wave, and that wave propagates forward through the FR4 dielectric at roughly 6 inches per nanosecond — about 60% of the speed of light.
 
-The **Electric Field** starts on a positive charge and ends on a negative charge.  On a PCB it would start at the trace and end at the reference (ground) plane below it.  The Electric Field (E) is mainly concentrated between the trace and the return (ground) plane below it. If you only had a "forward" trace, the field lines would have nowhere to land. They would spray out into space (becoming an antenna).
+The electrons in the copper are not carrying the energy. They are shuffling along at about 1 cm/s — far too slow to explain how a signal crosses your board in nanoseconds. What actually moves fast is the **field**. The electrons just react to it, shifting around to keep the field outside the metal and guide it forward. We measure that shuffling with an amp meter and call it "current," but the current is the consequence, not the cause.
 
-The **Magnetic Field** loops around a current.  For high frequencies, the return path is directly underneath the trace. The forward current through the trace produces a magnetic field, and the return current produces an opposite magnetic field around part of the reference plane right under the trace.  Seen from a a distance the two magnetic fields cancel each other out, keeping the energy tightly "trapped" between the trace and the return path right below it.
+Now here is why the ground plane matters so much. The electric field lines have to go somewhere — they start on the trace and must end on a conductor. Without a ground plane nearby, they spray outward in all directions. Your trace becomes an antenna. With a solid ground plane directly below, the field lines land right there, tightly confined to the space between trace and plane. The magnetic fields from the forward current and the return current cancel each other at a distance, so the energy stays trapped and contained rather than radiating.
 
-As the wave travels forward through the dielectric, it **"drags"** a bunch of electrons along the forward trace. At the exact same time, it **"pushes"** an equal number of electrons in the opposite direction along the return plane.
+This is why a broken or interrupted ground plane is so damaging. When a return path is forced to detour around a slot or a cutout, the field cannot follow the trace directly anymore — it has to find another way, the loop area grows, and that loop radiates. The signal arrives at the destination, but it has also broadcast itself across the board as noise.
 
-The only reason a signal follows a trace is that the electrons in the copper react to the EM field and cancel it inside the metal. This "push-back" from the electrons is what forces the EM field to stay outside the wire and follow its path. We call that push-back 'current,' and we measure it with meters, but the real 'action' — the actual energy being delivered to your chip — is the field outside the wire. [^FEYNMAN]  This "push-back" from the electrons is what forces the EM field to stay outside the wire and follow its path.
-
-[^FEYNMAN]: https://www.feynmanlectures.caltech.edu/II_13.html#:~:text=We%20have%20seen%20that%20there,then%2C%20produce%20a%20magnetic%20field.
-
-The signal in the form of an E/M wave travels through the dielectric space between the trace and the reference plane.  The trace meerly serves as a wave guide, and guides the path of the signal energy.
-
-
-
->> When noisy and quiet signals share the same dielectric space, you can expect EMI, crosstalk from noise coupling, resulting in EMI failures.
-
-Let me just say it again, and again, until it become more natural (to myself)
-> The energy in a transmission line is not in the voltage or current, but in the electric (E) and magnetic (H) fields. E and H fields travel through the dielectric of the board, not through the copper.
-The fields attach themselves to the copper trace and nearest plane and are steered (or guided) by that copper.  The the copper acts as a waveguide to move the energy from point A to point B. 
-
-The wave-front moves through the dielectric at about 6 inch/ns in FR4.
-
+> The trace is a waveguide. The dielectric is the medium. The ground plane is the other half of the transmission line. All three are equally necessary.
 
 
 
