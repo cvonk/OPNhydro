@@ -466,6 +466,12 @@ Rail | C     | Type | Voltage  | Package | f<sub>sr</sub> | R<sub>s</sub> | L<su
 [^10NF0603]: Murata GRM188R72A103KA01J
 [^10NF0402]: Murata GRM155R71H103KA88D
 
+TDK C1608X7R1H104K080AA
+100nF ±10%, 50VDC, X7R
+https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C1608X7R1H104K080AA
+20 MHz, 16.9 mOhm => series inductance 633pH
+
+
 A few notes on part selection:
 - Use **X7R** dielectric, not X5R. X7R holds capacitance well across temperature (−55°C to +125°C, ±15%); X5R degrades more with temperature and DC bias.
 - Smaller package means lower parasitic inductance (ESL) and a higher $f_{res}$. 0603 strikes the best balance for this design — lower ESL than 0805, and more practical to hand-solder than 0402.

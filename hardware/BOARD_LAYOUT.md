@@ -11,83 +11,77 @@ After the PCB selection and general layout rules, we'll cover the different sect
 
 ## 1. PCB Selection and General Rules
 
-> Inspired by Dr. Eric Bogatin [^Bogatin] and Kenneth Wyatts[^Wyatts]. 
+### 1.1. From Circuit Theory back to Field Theory
 
-Electromagnetic (EM) field theory based on Maxwell's equations, is the fundamental description of electrical phenomena (fields, waves, radiation).
+Let's start by setting something straight. 
 
-Circuit theory, as we leared as undergrads, is a simplified, low-frequency approximation. This model assumes that the physical size of the component is much smaller than the wavelength of the signal, allowing engineers to ignore wave propagation effects and use simple circuit laws, like Ohm's Law or Kirchhoff's laws.
+> "Electromagnetic (EM) field theory based on Maxwell's equations, is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^Bogatin] and Kenneth Wyatts[^Wyatts].
 
-With fast signal edges (dI/dt) in modern systems, simplified, idealized element assumptions fail, and field theory (or Transmission Line Theory) is required to account for radiation, retardation, and wave propagation.
+**Circuit theory**, as we leared as undergrads, is a simplified, low-frequency (<100kHz) approximation. This model assumes that the physical size of the component is much smaller than the wavelength of the signal, allowing us to ignore wave propagation effects and use simple circuit laws, like Ohm's Law or Kirchhoff's laws.  
 
-As signal rise times decrease (faster edges) and PCB frequencies increase, PCB design shifts from simply drawing paths for current to designing transmission lines that contain EM fields, managing parasitic inductance/capacitance, and controlling radiated emissions (EMI). 
+As signal rise times decrease (faster edges dI/dt) and PCB frequencies increase, the simple circuit theory assumptions fail, and **Field theory** (or transmission line theory) is required to account for radiation, retardation, and wave propagation. PCB layout shifts from simply drawing paths for current to designing transmission lines that contain EM fields, managing parasitic inductance/capacitance, and controlling radiated emissions (EMI).  Suddenly those physics classes about EM fields physics and transmission lines in particular are no longer reserved for the RF engineers, but become actual for PCB design.
 
-In high-frequency PCB design, it is a common misconception that the signal "flows" inside the copper. In reality, the copper traces and ground planes act as guides, while the actual energy (the electromagnetic wave) travels through the dielectric material (like FR-4 or Rogers) surrounding them.
+### 1.2. The Energy travels through the Dielectric
 
-In a vacuum, EM waves travel at the speed of light (
-). In a PCB, the dielectric material slows the signal down. The speed is determined by the Relative Permittivity ($\varepsilon_r$) of the board material:
+> "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
+
+In high-frequency PCB design, it is a common misconception that the signal "flows" inside the copper. In reality, the **copper traces and ground planes act as waveguides***, while **the energy** in the form of electromagnetic wave **travels through the dielectric material** (typically FR-4).
+
+We all know that Flicking a light switch produces near instant light.
+1. **Electrons** constantly move and collide with atoms at high speeds, but they are so tightly bound to the copper molecules, that their **drift velocity** (from source to destination) is about the speed of a snail — roughly **1 meter per hour**. At this speed, it would take hours for the light to turn on. 
+2. **EM waves** travel with a speed that is eight orders of magnitude higher, about **150,000,000 meters per second**
 $$
-  v_p = \frac{c}{\sqrt{\varepsilon_r}}
+  \left.
+    \begin{align*}
+      v_p &= \frac{c}{\sqrt{\varepsilon_r}} \nonumber \\
+      \rm{where\ } \varepsilon_r &\approx 4.2 \text{\ for\ FR-4}
+    \end{align*}
+  \right\} \Rightarrow v_p \approx \frac{c}{\sqrt{4.2}} \approx 15 \ \text{cm/ns}
 $$
-For standard FR-4 ($\varepsilon_r$\approx 4.2), the signal travels at about half the speed of light (roughly 6 inches per nanosecond).
 
-While the signal (the EM wave) travels at about 6 inches per nanosecond (half the speed of light), the actual electrons are drifting through the copper at about the speed of a snail—roughly 1 meter per hour.
+Since this is so counterintuitive, let's also look at an **analogy**:
 
-1. When you throw a pebble into a still pond, the pebble hitting the surface is like your Microcontroller or Driver IC switching a signal from 0 to 1. It provides the initial energy.
-2. The Ripples (The EM Fields)
-The ripples that spread across the pond are the Electromagnetic Fields.
-The energy of your throw is carried by the wave, not the water itself.
-In a PCB, the "pond" is the dielectric material (FR-4). The waves (fields) carry the actual signal to the other side of the board.
-3. The Water Molecules (The Electrons)
-If you watch a leaf floating on the water, it just bobs up and down as the ripple passes. It doesn't travel to the shore with the wave.
-   - The Water Molecules are the Electrons.
-   - They stay in the same general area, just "sloshing" or vibrating to allow the wave to pass through them.
-   - Just as the wave moves at 5 mph while the water stays put, the Signal moves at 300 million mph while the Electrons move at 1 inch per hour.
-4. The Shoreline (The Copper Traces)
-Now, imagine you have two parallel wooden planks floating on the surface of the pond. If you drop the pebble between them, the ripples are guided and forced to stay between the planks.
-   - The Planks are your Copper Trace and Ground Plane.
-   - Without the planks (copper), the ripples (fields) would spread out in every direction (Radio Interference/EMI).
-   - The planks "contain" the energy and direct it toward the "dock" (your Receiver IC).
+1. When you throw a pebble into a still pond, it provides the initial energy.
+2. The waves spread across the pond at ~8 km/h.  They carry the energy of your throw.
+3. The water molecules stay in the same general area, just "sloshing" or vibrating to allow the wave to pass through them. A leaf floating on the water, willl just bobs up and down as the wave passes. It doesn't travel to the shore with the wave.
 
-The big takeaway: You don't "pump" water (electrons) from one side of the pond to the other; you create a disturbance at one end that the water carries to the other.
+Now, imagine you have two parallel wooden planks floating on the surface of the pond. If you drop the pebble between them, the ripples are guided and forced to stay between the planks. The planks "contain" the energy and direct it.  Without the planks, the waves would spread out in every direction. 
 
-
-
-[^Bogatin]: https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20Simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf
-[^Wyatts]: https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now
-
-1. Choose a stack-up
-2. Partition circuit functons
-3. Layout power plane
-4. Place local decoupling caps
-5. Route (minimize) clock traces
-6. Route data & address
-7. Check return paths
-8. Route low-speed traces
-
-When noisy and quiet signals share the same dielectric space, you can expect EMI, crosstalk from noise coupling, resulting in EMI failures.
-
-
-
-
-Let's start by setting something straight. A pcb trace, will have an H-field that wraps around the trace, and E-field is mainly concentrated between the trace and the return (ground) plane below it.  The signal in the form of an E/M wave travels through the dielectric space between the trace and the reference plane.  The trace meerly serves as a wave guide, and guides the path of the signal energy.
-
-For low frequencies, the regurn signal follows the path of least resistance.
-For high frequencies (>50-100kHz), the return signals goes right under the signal trace.  The path of least impedance.
-
-
-Current is electrons flowing through copper wires for DC circuits. 
-The movement of electrons doesn't occur at near light speed. They are to tightly bound to the copper molecules, and only move at about 1 cm/sec.
-AC circuit, need to be moddeled as transmission lines. 
+### 1.2.1. EM fields are the Drivers
 
 It is important to understand how the EM-wave propagates through the circuit board.
-Signals and power transient **Fields** travel in the **Dielectric** at near light speed, while the conduction/displacement currentls simultaneously flow back to the source at ~1cm/s.  The signal energy is in the fields, not in the copper!
+Signals and power transient **Fields** travel in the **Dielectric** at near light speed, while the conduction/displacement currents simultaneously flow back to the source at ~1cm/s.  The signal energy is in the fields, not in the copper!
 
-"Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
+![Courtesy: Patrick André](../media/infographics/microstrip-fields.png)
 
-The energy in a transmission line is not in the voltage or current, but in the electric (E) and magnetic (H) fields. E and H fields travel through the dielectric of the board, not through the copper.
+
+The **Electric Field** starts on a positive charge and ends on a negative charge.  On a PCB it would start at the trace and end at the reference (ground) plane below it.  The Electric Field (E) is mainly concentrated between the trace and the return (ground) plane below it. If you only had a "forward" trace, the field lines would have nowhere to land. They would spray out into space (becoming an antenna).
+
+The **Magnetic Field** loops around a current.  For high frequencies, the return path is directly underneath the trace. The forward current through the trace produces a magnetic field, and the return current produces an opposite magnetic field around part of the reference plane right under the trace.  Seen from a a distance the two magnetic fields cancel each other out, keeping the energy tightly "trapped" between the trace and the return path right below it.
+
+As the wave travels forward through the dielectric, it **"drags"** a bunch of electrons along the forward trace. At the exact same time, it **"pushes"** an equal number of electrons in the opposite direction along the return plane.
+
+The only reason a signal follows a trace is that the electrons in the copper react to the EM field and cancel it inside the metal. This "push-back" from the electrons is what forces the EM field to stay outside the wire and follow its path. We call that push-back 'current,' and we measure it with meters, but the real 'action' — the actual energy being delivered to your chip — is the field outside the wire. [^FEYNMAN]  This "push-back" from the electrons is what forces the EM field to stay outside the wire and follow its path.
+
+[^FEYNMAN]: https://www.feynmanlectures.caltech.edu/II_13.html#:~:text=We%20have%20seen%20that%20there,then%2C%20produce%20a%20magnetic%20field.
+
+The signal in the form of an E/M wave travels through the dielectric space between the trace and the reference plane.  The trace meerly serves as a wave guide, and guides the path of the signal energy.
+
+
+
+>> When noisy and quiet signals share the same dielectric space, you can expect EMI, crosstalk from noise coupling, resulting in EMI failures.
+
+Let me just say it again, and again, until it become more natural (to myself)
+> The energy in a transmission line is not in the voltage or current, but in the electric (E) and magnetic (H) fields. E and H fields travel through the dielectric of the board, not through the copper.
 The fields attach themselves to the copper trace and nearest plane and are steered (or guided) by that copper.  The the copper acts as a waveguide to move the energy from point A to point B. 
 
 The wave-front moves through the dielectric at about 6 inch/ns in FR4.
+
+
+
+
+
+
 
 low EMI rules
 1. every signal trace needs an adjacent return plane (or trace)
@@ -137,6 +131,22 @@ Xl = 1 / 2 pi f L
 Z = ESR + Xc + Xl
 the dip in |Z| is ESR
 
+
+
+
+
+
+[^Bogatin]: https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20Simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf
+[^Wyatts]: https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now
+
+1. Choose a stack-up
+2. Partition circuit functons
+3. Layout power plane
+4. Place local decoupling caps
+5. Route (minimize) clock traces
+6. Route data & address
+7. Check return paths
+8. Route low-speed traces
 
 
 ### 1.5. PCB Guidelines
