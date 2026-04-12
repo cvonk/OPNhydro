@@ -57,7 +57,7 @@ $$
 
 So once you disturb the electric field, it creates a magnetic field. That changing magnetic field recreates an electric field slightly ahead of it. Which creates a magnetic field ahead of that. The two fields traverse through the dielectric, each one regenerating the other. That self-sustaining leapfrog is the electromagnetic wave — it needs no electrons to carry it forward.
 
-Each field regenerates the other. The wave is self-sustaining. The speed at which it propagates in a vacuum follows directly out of the constants $\mu_0$ and $\varepsilon_0$:
+Each field regenerates the other. The wave is self-sustaining. The speed at which it propagates in a vacuum follows directly out of the constants for permeability ($\mu_0$) and permittivity ($\varepsilon_0$).
 
 $$c = \frac{1}{\sqrt{\mu_0\, \varepsilon_0}}$$
 
