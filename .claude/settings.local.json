@@ -37,7 +37,9 @@
       "WebFetch(domain:files.seeedstudio.com)",
       "WebFetch(domain:www.mybotshop.de)",
       "WebFetch(domain:www.youyeetoo.com)",
-      "WebFetch(domain:www.waveshare.com)"
+      "WebFetch(domain:www.waveshare.com)",
+      "Bash(python3 -)",
+      "Bash(node -e ':*)"
     ]
   }
 }
