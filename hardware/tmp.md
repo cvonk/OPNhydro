@@ -1,6 +1,6 @@
-# Board Layout Guide
+# Board Design Guide
 
-This is the second document that answers **"How?"** — the companion to the Architecture document, and follow up to the Schematic Design document. It covers the Printed Circuit Board (PCB) selection and layout rules for **OPNhydro**.
+This is the second document that answers **"How?"** — the companion to the Architecture document, and follow-up to the Schematic Design document. It covers the Printed Circuit Board (PCB) selection and layout rules for **OPNhydro**.
 
 As in the Schematic Design document, the central problem remains **coexistence**.
 - On one side: a pH probe measuring millivolt-level electrochemical potentials, an EC probe and an ESP32 that needs a clean analog supply. 
@@ -11,115 +11,259 @@ After the PCB selection and general layout rules, we'll cover the different sect
 
 ## 1. PCB Selection and General Rules
 
-Here is a puzzle. You flip a light switch, and the bulb lights up almost instantly. But if you could tag a single electron at the switch and watch it, you would find it drifting toward the bulb at roughly one metre per hour — the speed of a snail. At that rate it would take days to arrive. So what turned the light on?
+Since I personally like to understand design rules, we start with a highly technical guide that transitions from abstract electromagnetic theory to practical PCB design rules. It serves as a bridge between the high-level Architecture goals and the specific Schematic Design requirements.
+
+Let's start with a puzzle. You flip a light switch, and the bulb lights up almost instantly. But if you could tag a single electron at the switch and watch it, you would find it drifting toward the bulb at roughly one metre per hour — the speed of a snail. At that rate it would take days to arrive. So what turned the light on?
 
 Not the electrons. The electromagnetic field did. And once you understand that, PCB layout stops being a set of rules to memorise and starts making intuitive sense.
 
 
 ### 1.1. Field Theory
 
-> "Electromagnetic (EM) field theory based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^Bogatin] and Kenneth Wyatts[^Wyatts].
+> "Electromagnetic (EM) field theory based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^BOGATIN] and Kenneth Wyatts [^WYATTS].
 
-[^Bogatin]: https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20Simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf
-[^Wyatts]: https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now
+[^BOGATIN]: [Signal and Power Ingegrity, simplified 2nd (2010) - Eric Bogatin](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)
+[^WYATTS]: [PCB Design for Low EMI - Kenneth Wyatts](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)
 
-**Circuit theory**, as we learned as undergrads, is a simplified, low-frequency (<100 kHz) approximation. It assumes the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws.
+**Circuit theory**, as we learned as undergrads, is a simplified, low-frequency (<100 kHz) approximation of field theory. It assumes that the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws.
 
-As signal rise times ($dI/dt$) shorten and PCB frequencies increase, those assumptions fail. **Field theory** (or transmission line theory) is required to account for radiation, retardation, and wave propagation. PCB design shifts from drawing paths for current to designing transmission lines that contain EM fields, manage parasitic inductance and capacitance, and control radiated emissions. Those physics classes about EM fields and transmission lines are no longer reserved for RF engineers — they become practical for anyone designing a fast PCB.
+As signal rise times shorten and PCB frequencies increase, those assumptions fail. **Field theory** is required to account for radiation, retardation, and wave propagation. PCB design shifts from drawing paths for current to designing transmission lines that contain EM fields, manage parasitic inductance and capacitance, and control radiated emissions.
 
-### 1.1.1. How the wave starts
+Those physics classes about Electromagnetic fields and transmission lines are no longer reserved for the few RF engineers — they become practical for anyone designing a fast PCB.
+
+#### 1.1.1. From Voltage to EM Wave
 
 Maxwell's equations tell the full story in four lines, but the key insight is in two of them.
 
 ![Courtesy: Patrick André](../media/infographics/microstrip-fields.png)
 
-Step by step, from voltage to wave:
-1. Apply a voltage creates an **Electric Field** between the trace and the ground plane.  The Potential-Field relation indicates that the field points in the direction of the steepest decrease in potential:
+**Step by step:**
+1. Applying a voltage between the trace and the ground plane creates an **Electric Field** $\vec{E}$ between them.  This vector $\vec{E}$ points in the direction of steepest voltage decrease:
 $$
-    \overrightarrow{E} = - \nabla V
-$$
-
-2. [Ampere's law](https://coertvonk.com/physics/electromagnetism/magnetism/amperes-law-30007) with [Maxwell's crucial addition](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269): says a changing electric field produces a magnetic field, even with no current $\mathbf{\overrightarrow{J}}$ present:
-$$
-    \nabla \times \mathbf{\overrightarrow{B}} = \mu_0 \mathbf{\overrightarrow{J}} + \mu_0\varepsilon_0 \frac{\partial \mathbf{\overrightarrow{E}}}{\partial t}
+    \vec{E} = - \nabla V
 $$
 
-3. [Faraday's law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) says a changing magnetic field produces a curling electric field:
+2. [Ampere's Law](https://coertvonk.com/physics/electromagnetism/magnetism/amperes-law-30007) with [Maxwell's crucial addition](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269): There are two contributions to the $\vec{B}$ field. From the conduction current at the conductor surface, and from the displacement current in the dielectric. Together they form one continuous field.  We will come back to the conduction current later.  What is important now, is that a changing electric field produces a curling magnetic field, even when no conduction current  is present:
 $$
-    \nabla \times \mathbf{\overrightarrow{E}} = -\frac{\partial \mathbf{\overrightarrow{B}}}{\partial t}
+    \nabla \times \vec B =
+    \underbrace{\mu_0 \ \vec J}_{\substack{\text{conduction} \\ \text{current}}} 
+    +\ 
+    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
+    \tag{\text{Ampère-Maxwell}}
 $$
 
-These last two statements form a feedback loop: changing $\mathbf{\overrightarrow{E}}$ produces $\mathbf{\overrightarrow{B}}$, changing $\mathbf{\overrightarrow{B}}$ produces $\mathbf{\overrightarrow{E}}$, and so on.  This wave is self-sustaining. It needs no medium, no electrons, nothing but the fields themselves.
 
-So once you disturb the electric field, it creates a magnetic field. That changing magnetic field recreates an electric field slightly ahead of it. Which creates a magnetic field ahead of that. The two fields traverse through the dielectric, each one regenerating the other. That self-sustaining leapfrog is the electromagnetic wave — it needs no electrons to carry it forward.
+3. [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) says a changing magnetic field produces a electric field:
+$$
+    \nabla \times \vec E = -\frac{\partial \vec B}{\partial t}
+    \tag{\text{Faraday}}
+$$
 
-Each field regenerates the other. The wave is self-sustaining. The speed at which it propagates falls directly out of the constants:
-
-$$c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}$$
-
-In FR-4, replace $\varepsilon_0$ with $\varepsilon_r \varepsilon_0$ and you get the ~15 cm/ns we saw earlier. Maxwell derived this speed theoretically in 1865, noticed it matched the measured speed of light, and concluded — correctly — that light is an electromagnetic wave.
-
-**Recap:**
-
-The copper trace and ground plane are not conductors of the signal — they are its **walls**. Think of a still pond. Drop a pebble in, and ripples spread outward in all directions, carrying the energy of your throw. The water molecules themselves barely move; they just bob in place as the wave passes through. Now lay two parallel planks on the surface and drop the pebble between them. The ripples are forced to travel along the channel between the planks — contained, directed, not spreading sideways into the rest of the pond.
-
-The trace is one plank. The ground plane is the other. The FR-4 between them is the water. The signal is the ripple. Remove one plank — cut a slot in the ground plane, reroute the return path — and the wave spreads out. That spreading is EMI.
+So, once you disturb the electric field, it creates a magnetic field. That changing magnetic field recreates an electric field slightly ahead of it. Which creates a magnetic field ahead of that. Each field regenerates the other. The wave is self-sustaining.  This self-sustaining propagation is the electromagnetic wave — it needs no electrons to carry it forward.
 
 
-
-### 1.1.3. Where the energy flows
+**Where the energy flows**
 
 > "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
 
-Maxwell's equations tell us the fields exist, but there is a more direct way to see where the energy is going. The Poynting vector $\mathbf{\overrightarrow{S}}$ points in the direction of the energy flow:
+Maxwell's equations tell us the fields exist, but there is a more direct way to see where the energy is going. The Poynting vector $\vec{S}$ points in the direction of the energy flow:
 $$
-    \mathbf{\overrightarrow{S}} = \frac{1}{\mu_0}\left(\mathbf{\overrightarrow{E}} \times \mathbf{\overrightarrow{B}}\right)
-$$
-
-Its magnitude is the power per unit area passing through any surface you choose to draw. Because it is a cross product, $\mathbf{\overrightarrow{E}}$, $\mathbf{\overrightarrow{B}}$, and the direction of propagation $\mathbf{\overrightarrow{S}}$ are always mutually perpendicular.
-
-On a PCB microstrip, the geometry is: $\mathbf{\overrightarrow{E}}$ points vertically from the trace down to the ground plane, $\mathbf{\overrightarrow{B}}$ points horizontally curling around the current in the trace, and $\mathbf{\overrightarrow{E}}\times\mathbf{\overrightarrow{E}}$ therefore points forward — in the dielectric between the trace and the ground plane, in the direction of propagation. The energy is flowing through the dielectric between the conductors, not through the copper.
-
-### 1.1.4.  What the conductors do
-
-So, electromagnetic fields carry energy and information: When you apply a voltage or change a circuit, the resulting change in the electric and magnetic fields propagates along the wire at a substantial fraction of the speed of light (typically 0.5–0.99 c, depending on geometry and dielectric). That field propagation behaves like a wave and is what transmits the signal and most of the energy rapidly.
-
-How they cooperate: The propagating electromagnetic wave sets up forces on electrons in the conductor. Electrons respond locally to those forces, producing the current. Energy flows in the fields (quantified by the Poynting vector) around and into the conductor; electrons provide the path and dissipate energy (resistance converts electrical energy to heat).
-
-
-**So if the field does the work, what are the electrons doing?**
-
-The electrons do not carry the energy — they react to the field passing through them. We measure that reaction with an amp-meter and call it current. The current is real, but it is the effect, not the cause.[^FEYNMAN]
-[^FEYNMAN]: https://www.feynmanlectures.caltech.edu/II_13.html#:~:text=We%20have%20seen%20that%20there,then%2C%20produce%20a%20magnetic%20field.
-
-1. The moving electric field exerts a force on the local free electrons in the copper.  The electrons accelerate in response to that force, and that net movement of charge is what we measure as **current**.
-
-2. This moving charge $\mathbf{\overrightarrow{J}}$ also creates a **magnetic field** curling around it and contributes to the [Ampere's law](https://coertvonk.com/physics/electromagnetism/magnetism/amperes-law-30007) with [Maxwell's addition](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) that we saw earlier:
-$$
-    \mu_0 \mathbf{\overrightarrow{J}}
+    \vec{S} = \frac{1}{\mu_0}\left( \vec{E} \times \vec{B} \right)
 $$
 
+On a PCB microstrip, the geometry is: $\vec{E}$ points vertically from the trace down to the ground plane, $\vec{B}$ points horizontally curling around the current in the trace, and $\vec{E} \times \vec{B}$ therefore points forward — in the dielectric between the trace and the ground plane, in the direction of propagation. The energy is flowing through the dielectric between the conductors, not through the copper.
 
 
-### 1.1.5.  On a PCB
+#### 1.1.2. Propagation
+
+Maxwell's two curl equations couple spatial variation to time variation — and that coupling is what makes propagation inevitable.
+
+In free space ($ρ = 0, \vec J = \vec 0$), the Ampère-Maxwell Law simplifies to:
+$$
+    \nabla \times \vec{B} = \mu_0\varepsilon_0 \frac{\partial \vec{E}}{\partial t}
+    \tag{\text{simplified Ampere-Maxwell}}
+$$
+So, if $\vec E$ is changing in time at some point, then $\vec B$ must have a spatial gradient at that same point. But spatial variation means the field value at the neighbouring point is different. 
+
+$$
+    \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} 
+    \tag{\text{Faraday}}
+$$
+That neighbouring point now has a changing $\vec B$, which by Faraday produces spatial variation in $\vec E$ there. Which means the next neighbouring point has a different $\vec E$. And so on.
+
+The key is the curl operator — it is a spatial derivative. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. It cannot stay put, because the equations link time derivatives to spatial derivatives at every point.
+
+No mechanism "pushes" the wave forward. The wave propagates because the mathematics forbid a localised disturbance from remaining localised. A changing field at one point necessarily implies a different field at the adjacent point — and that is propagation.
+
+<details>
+  <summary>Expand to see the math</summary>
+
+  Take the curl of Faraday's law
+  $$
+      \nabla \times (\nabla \times \vec E) = -\frac{\partial}{\partial t}(\nabla \times \vec B)
+  $$
+
+  Substitute the simplified Ampere–Maxwell into the right side
+  $$
+      \nabla \times (\nabla \times \vec E) = -\mu_0\varepsilon_0 \frac{\partial^2 \vec E}{\partial t^2}
+  $$
+
+  Recall the vector identity
+  $$
+      \nabla \times (\nabla \times \vec E) = \nabla(\nabla \cdot \vec E) - \nabla^2\vec E
+      \tag{\text{vector identity}}
+  $$
+
+  Expand the left side using this vector identity
+  $$
+      \nabla(\nabla \cdot \vec E) - \nabla^2\vec E = -\mu_0\varepsilon_0 \frac{\partial^2 \vec E}{\partial t^2}
+  $$
+
+  Apply Gauss' Law:
+  $$
+      \nabla \cdot \vec E = \frac{\rho}{\varepsilon_0}
+      \tag{\text{Gauss's law}}
+  $$
+
+  In free space there are no charges ($\rho$), so this becomes $\nabla \cdot \vec E = 0$. The first term vanishes:
+  $$
+      \nabla^2 \vec E = \underbrace{\mu_0\,\varepsilon_0} \frac{\partial^2 \vec E}{\partial t^2}
+  $$
+
+  Recognize the standard wave equation for any quantity propagating at speed $v$:
+  $$
+      \nabla^2 f = \underbrace{\frac{1}{v^2}} \frac{\partial^2 f}{\partial t^2}
+      \tag{\text{standard wave equation}}
+  $$
+
+  Comparing the two, term by term, gives the speed of the wave propagation:
+  $$
+      \frac{1}{v^2} = \mu_0 \varepsilon_0
+      \quad \Rightarrow \quad
+      v = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}
+  $$
+</details>
 
 
-On a PCB, the same physics applies. The signal energy travels as an EM wave through the **FR-4 dielectric** between the trace and the ground plane — not through the copper itself. The propagation speed is:
+The speed at which the EM wave propagates in free space (ρ = 0, J = 0) follows directly out of the constants for permeability ($\mu_0$) and permittivity ($\varepsilon_0$):
+$$
+    v = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}
+$$
+
+The constant $\mu_0$ and $\varepsilon_0$ follow from independent experiments with respectively magnetic and electric forces. Neither involves light.
 
 $$
   \left.
     \begin{align*}
-      v_p &= \frac{c}{\sqrt{\varepsilon_r}} \nonumber \\
-      \rm{where\ } \varepsilon_r &\approx 4.2 \text{\ for\ FR-4}
+      \mu_0 &= 4\pi \times 10^{-7} \text{ H/m} \\
+      \varepsilon_0 &= 8.854 \times 10^{-12} \text{ F/m}
     \end{align*}
-  \right\} \Rightarrow v_p \approx \frac{c}{\sqrt{4.2}} \approx 15 \ \text{cm/ns}
+  \right\}
 $$
+
+Entering in the constants:
+$$
+    v = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 8.854 \times 10^{-12}}} \approx 299.8 \times 10^6 \text{ m/s} \equiv c
+$$
+
+That is the speed of light $c$ — derived entirely from electric and magnetic constants, with no reference to optics.
+
+This was Maxwell's 1865 result.  He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
+
+For a typical PCB dielectric FR-4, we need to replace $\varepsilon_0$ with $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$
+$$
+    v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 4.2 \times 8.854 \times 10^{-12}}} \approx 146.3 \times 10^6 \text{ m/s}
+$$
+
+The **propagation speed in FR-4** dielectric follows as **~15 cm/ns**. 
+
+
+#### 1.1.3.  What the conductors do
+
+So far the story has been about the fields — how they sustain each other and where the energy flows. But the wave does not exist in free space; it propagates between two copper conductors. Those conductors are not passive bystanders. 
+
+The EM wave's electric field has two components — one vertical (across the gap) and one horizontal (along the trace) — and the free electrons in the copper respond to each one differently. The vertical component drives a transient surface-charge redistribution that *confines* the wave to the dielectric. The horizontal component drives a sustained current that we measure with instruments — and that converts a small fraction of the field energy into heat. Together, these two responses explain why trace geometry determines impedance, why copper has loss, and why the ground plane is not optional.
+
+##### 1.1.3.1. Electrical field
+
+The current flowing through the resistance of the metal converts some electric field energy to heat. This shows up as the electric field pointing slightly forward, rather than purely vertical. That forward component is the energy being absorbed by the conductor.
+
+The $\vec E$ field is not perfectly vertical:
+
+- The **horizontal component** $E_h$ comes from the fact that the wave is travelling. At the wave front, the trace ahead is still uncharged — the wave has not arrived there yet. The trace behind is charged. There is a voltage gradient along the trace ($x$-axis):
+$$
+    E_h = -\frac{\partial V}{\partial x}
+$$
+
+- The **dominant vertical component** $E_v$ comes from the charge separation between trace and ground plane ($y$-axis). The wave deposits positive charge on the trace and negative charge on the ground plane (or vice versa half a cycle later). These charges create an vertical electric field pointing from one conductor to the other — just like a capacitor. This is the dominant field. It stores energy.
+
+So, the total $\vec E$ field tilts slightly forward:
+$$
+    \vec E = E_\text{h}\hat x + E_\text{v}\hat y, \quad \text{where }E_v \gg E_h$$
+
+**Horizontal component → sustained current**
+
+> Note that physics uses the vector current density $\vec J$ instead of the scalar current $I$ to describe how charge moves through a specific area at a specific point in space, rather than just the total charge flow in a wire.
+
+As the $E_h$ wave front reaches a section of the conductor, the electric field there goes from zero to some value. The electrons, which were sitting still (thermally jiggling, but no net drift), suddenly feel a force and begin to move horizontally.
+$$
+  F_h = q \, E_h
+  \tag{\text{Lorentz force law}}
+$$
+
+In a conductor, the outer electrons are not bound to any particular atom. When $E_h$ appears, these free electrons move in response.  That net movement of charge is what we measure as current $\vec J$.  So, the field arrives first, and the **current is the electrons' response to the electric field changing**.
+$$
+    \vec J = \sigma \vec E
+$$
+
+where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This is Ohm's law in its field form. A larger $\vec E$ means more force, means more drift, means more current.
+
+This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector $\vec E \times \vec B$, which points from the source toward the load, through the dielectric space around the conductor.
+
+**Vertical component → transient redistribution of surface charge → confines the wave**
+
+As the $E_v$ wave front reaches a section of the conductor, the electric field there goes from zero to some value. On the trace, electrons are pushed to the bottom surface; on the ground plane, to the top surface — both facing the dielectric gap. By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the metal. 
+
+In other words, the electrons move vertically to rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that the $E_v$ field at the surface drops to nearly zero within a skin depth (~2 µm at 1 MHz).
+
+This cancellation is what **confines the wave**. The field cannot penetrate the copper, so it is forced to exist only in the dielectric between the trace and the ground plane. Without this electron response, the field would pass right through and keep going, like an antenna.
+
+
+##### 1.1.3.2. Magnetic field
+
+The logitudinal (horizontal) current in the trace creates its own $\vec B$ field curling around the conductor. This is not a separate, competing magnetic field — it is the same $\vec B$ field that is part of the wave. Together the $\vec B$ field in the dielectric (from $\partial\vec E/\partial t$, the displacement current) and the $\vec B$ field at the conductor surface (from $\vec J$, the conduction current) are the same continuous field, satisfying boundary conditions at the interface.
+$$
+    \nabla \times \vec B =
+    \underbrace{\mu_0 \ \vec J}_{\substack{\text{conduction current}\\ \text{at the surface}}} 
+    +
+    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement current} \\ \text{in the dielectric}}}
+$$
+
+Think of it this way: in the dielectric, changing $\vec E$ sustains $\vec B$. At the conductor surface, $\vec J$ sustains $\vec B$. The field does not care which source is providing it — it is one continuous magnetic field with two sources that hand off seamlessly at the boundary.
+
+**What the conduction current actually changes about the wave:**
+
+Two things:
+
+1. **Confinement.** The electron response forces the E field to zero at the conductor surface, which defines the geometry of the wave — the mode shape, the impedance, the propagation characteristics. This is why trace width and height above the ground plane matter: they set the boundary conditions that determine the field pattern.
+
+2. **Loss.** The electrons are not perfect — copper has finite conductivity. The current flowing through the resistance of the metal converts some field energy to heat. This shows up as the Poynting vector pointing slightly into the conductor at the surface, rather than purely forward. That inward component is the energy being absorbed. This is the dominant loss mechanism in PCB traces at high frequencies (skin-effect loss).
+
+**The key insight**
+
+The wave in the dielectric and the current in the conductor are not two separate phenomena that happen to coexist. They are one self-consistent electromagnetic solution. The wave requires the conduction current to exist — without it, the boundary condition that confines the field would not be satisfied, and you would not have a guided wave at all. And the conduction current requires the wave — without the propagating field, there is nothing to drive the electrons.
+
+
+
+
+### 1.2. Field Theory applied to PCB Design
+
 
 The trace and the ground plane are not pipes for the electrons. They are walls for the field. The electric field originates on the positive charge of the trace and terminates on the negative charge of the ground plane — confined to the dielectric between them. The magnetic field curls around the forward current in the trace and the return current in the plane; seen from a distance, these two fields are equal and opposite and cancel. The energy is trapped between the conductors and guided forward.
 
 Remove the ground plane — or cut a slot through it — and the field lines have nowhere to land. They spray outward. The cancellation of the magnetic fields breaks down. The energy that was supposed to travel from source to load instead radiates into space. That radiation is EMI, and it is the direct consequence of losing control of the fields.
 
-**What this means for layout**
+**What this means for PCB design**
 
 Every trace needs a return plane directly below it, not because current needs a path home (though it does), but because the field needs a wall on the other side. A via that crosses layers must have a ground via next to it for the same reason — the field transfers with the signal, and the return field must transfer too. A slot in a ground plane is not just an inconvenience for the return current; it is a gap in the wall that lets the field escape.
 
@@ -127,35 +271,10 @@ The energy is in the fields. The dielectric is the medium. The copper is just th
 
 
 
-
-### 1.1.3. How the Field and the Electrons Cooperate
-
-
-
-
-
-
-So for the EM field propagating cause the current
-Yes, exactly. The field arrives first, and the current is the electrons' response to it.
-
-When the EM wave propagates along the trace, its electric field exerts a force on the free electrons in the copper — F = qE. The electrons accelerate in response to that force, and that net movement of charge is what we measure as current. The field is the cause; the current is the effect.
-
-This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector (E × H), which points from the source toward the load, through the dielectric space around the conductor.
-
-A useful way to think about it: the field is the supervisor giving instructions, the electrons are the workers carrying them out. You measure the workers (current), but the supervisor (field) is running the operation.
-
-This is also why the return path matters so much. The forward field and the return field are two halves of the same wave. If the return path is interrupted or forced to detour, the field structure breaks down — the loop area grows, the fields no longer cancel at a distance, and the energy radiates instead of being delivered.
-
-
-
-
 **On the PCB specifically:**
 The forward current in the trace creates a magnetic field curling around the trace. The return current in the ground plane creates an equal and opposite magnetic field. Seen from a distance, these two fields cancel — the energy is "trapped" in the space between trace and plane rather than radiating outward. Interrupt the return path, and the cancellation breaks down. The fields no longer cancel. The loop radiates.
 
 The short version: the electric field drives the current, the current produces the magnetic field, and the two fields then sustain each other forward through space without needing the electrons to move anywhere.
-
-
-
 
 
 **Back to the PCB:**
@@ -169,20 +288,7 @@ Changing E → B → changing B → E, entirely through the field terms. This wo
 
 So, the wave propagates driven by the coupling between ∂E/∂t and ∂B/∂t. The conduction current J in the copper happens simultaneously — the electric field at the conductor surface drives electrons, which produce their own B — but this is a boundary effect that shapes and guides the wave, not what propagates it.
 
-Option 1 describes what is happening at the conductors. Option 2 describes what is happening in the dielectric. Since the energy travels in the dielectric, option 2 is the right mental model for understanding propagation.
-
-
----
-
-
-
-
-
-
-
-
-
-### 1.2.2. Low EMI Rules
+**Low EMI Rules**
 
 When different signals cross paths in the dielectric they interact and we experience this as interference, cross talk.
 
@@ -193,6 +299,20 @@ If we allow fields from one circuit section A (motor control) to crosscouple wit
 2. Every power trace (or plane) needs an adjacent return path (trace or plane)
 3. This includes return paths (vias) up/down through layers
 
+#### 1.2.1. Process
+
+
+1. Choose a stack-up
+2. Partition circuit functons
+3. Layout power plane
+4. Place local decoupling caps
+5. Route (minimize) clock traces
+6. Route data & address
+7. Check return paths
+8. Route low-speed traces
+
+
+#### 1.2.2. Stackup
 
 **The typical stackup**
 
@@ -217,9 +337,7 @@ Prevent discontinuous signal return paths
 
 Trace passing through two vias layers causes the wave to leak in between the reference planes.  May interfere with other signals in that space, and cause board edge radiation.  If the planes are the same potential, you can prevent this with nearby sticking vias between the ground planes.  If they are different potentials you can add stiching capacitance very close.
 
-
-
-
+#### 1.2.3. Segregating Functional Regions
 
 Segregating Functional Regions
 
@@ -237,20 +355,7 @@ the dip in |Z| is ESR
 
 
 
-
-
-
-1. Choose a stack-up
-2. Partition circuit functons
-3. Layout power plane
-4. Place local decoupling caps
-5. Route (minimize) clock traces
-6. Route data & address
-7. Check return paths
-8. Route low-speed traces
-
-
-### 1.5. PCB Guidelines
+#### 1.2.4. PCB Guidelines
 
 The PCB has two hard constraints that drive most of the other design decisions. First, the 4.7A peak current on the 24V rail requires copper heavy enough to carry that current continuously without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
 
@@ -282,7 +387,7 @@ The board targets a ~100 mm × 80 mm footprint, which fits standard off-the-shel
 
 
 
-### 1.5.1. Trace Widths
+#### 1.2.5. Trace Widths
 
 The trace widths can be calculated using the IPC-2221 empirical formula for external conductors.[^1]
 [^1]: [IPC-2221 Trace Width Calculator, Altium PCB Design Guide](https://resources.altium.com/p/ipc-2221-calculator-pcb-trace-current-and-heating).
@@ -310,7 +415,7 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 3.3V rail (post-LDO)    | 0.15A (Peak)      | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
 
 
-### 1.5.2. PCB Layout Strategy
+#### 1.2.6. PCB Layout Strategy
 
 - **Star Power**: Run a dedicated pair of 24V wires from your main power input connector directly to the stepper section, and a separate pair to the logic regulator. Do not "daisy chain" the power from the motors to the sensors.
 - **Ground Plane:** Make sure you have an uninterrupted ground plane, to minimize current loops (inductance).
