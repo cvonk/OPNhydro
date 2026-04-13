@@ -228,84 +228,63 @@ In other words, the electrons move vertically to rearrange themselves to **cance
 This cancellation is what **confines the wave**. The field cannot penetrate the copper, so it is forced to exist only in the dielectric between the trace and the ground plane. Without this electron response, the field would pass right through and keep going, like an antenna.
 
 
-#### 1.2.2. Magnetic field
+#### 1.2.2. The Magnetic Field — One Field, Two Sources
 
-The logitudinal (horizontal) current in the trace creates its own $\vec B$ field curling around the conductor. This is not a separate, competing magnetic field — it is the same $\vec B$ field that is part of the wave. Together the $\vec B$ field in the dielectric (from $\partial\vec E/\partial t$, the displacement current) and the $\vec B$ field at the conductor surface (from $\vec J$, the conduction current) are the same continuous field, satisfying boundary conditions at the interface.
+The horizontal current $\vec J$ in the trace creates a $\vec B$ field curling around the conductor. A natural question: is this a separate magnetic field competing with the wave's own $\vec B$? No — it is the *same* field. Ampere–Maxwell makes this explicit:
+
 $$
     \nabla \times \vec B =
-    \underbrace{\mu_0 \ \vec J}_{\substack{\text{conduction current}\\ \text{at the surface}}} 
-    +
+    \underbrace{\mu_0 \, \vec J}_{\substack{\text{conduction current}\\ \text{in the copper}}} 
+    \;+\;
     \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement current} \\ \text{in the dielectric}}}
 $$
 
-Think of it this way: in the dielectric, changing $\vec E$ sustains $\vec B$. At the conductor surface, $\vec J$ sustains $\vec B$. The field does not care which source is providing it — it is one continuous magnetic field with two sources that hand off seamlessly at the boundary.
+There is one continuous $\vec B$ field, but it has two sources depending on where you are. Inside the copper, $\vec J$ dominates — free electrons are moving, and their motion sustains $\vec B$. In the dielectric, there are no free electrons, so $\vec J = 0$ — but the changing $\vec E$ field acts as a displacement current that sustains $\vec B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\vec B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
 
+#### 1.2.3. The Key Insight — One Self-Consistent System
 
-#### 1.2.3. The key insight
+It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not. They are two views of a single electromagnetic solution, and neither can exist without the other.
 
-The wave in the dielectric and the current in the conductor are not two separate phenomena that happen to coexist. They are one self-consistent electromagnetic solution. The wave requires the conduction current to exist — without it, the boundary condition that confines the field would not be satisfied, and you would not have a guided wave at all. And the conduction current requires the wave — without the propagating field, there is nothing to drive the electrons.
+- Without the conduction current, the boundary condition that cancels $\vec E$ inside the metal would not be satisfied. The field would not be confined. There would be no guided wave — just radiation.
+- Without the propagating field, there would be nothing to drive the electrons. No $E_h$ means no $\vec J$. The current would not exist.
+
+The wave creates the current. The current shapes the wave. They are mutually dependent — one self-consistent system, seen from different sides of the copper surface.
 
 
 ---
 
 
-### 1.3. Field Theory applied to PCB Design
+### 1.3. From Field Theory to PCB Design Rules
 
+Everything in §1.1 and §1.2 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the ground plane is the other. The copper confines the field ($E_v$ cancellation), the dielectric carries it forward (displacement current), and the return current in the ground plane provides the equal-and-opposite $\vec B$ that prevents radiation (field cancellation at a distance).
 
-The trace and the ground plane are not pipes for the electrons. They are walls for the field. The electric field originates on the positive charge of the trace and terminates on the negative charge of the ground plane — confined to the dielectric between them. The magnetic field curls around the forward current in the trace and the return current in the plane; seen from a distance, these two fields are equal and opposite and cancel. The energy is trapped between the conductors and guided forward.
+Every PCB layout rule is a consequence of keeping that field structure intact. Break the structure — and the field escapes as EMI.
 
-Remove the ground plane — or cut a slot through it — and the field lines have nowhere to land. They spray outward. The cancellation of the magnetic fields breaks down. The energy that was supposed to travel from source to load instead radiates into space. That radiation is EMI, and it is the direct consequence of losing control of the fields.
+#### 1.3.1. The Return Path Is Not Optional
 
-**What this means for PCB design**
+The $\vec B$ field from the forward current in the trace and the $\vec B$ field from the return current in the ground plane are equal and opposite. At a distance, they cancel — the energy stays confined between the conductors. Gauss's law $\nabla \cdot \vec B = 0$ tells us magnetic field lines must always close. If the ground plane is continuous, they close tightly through the narrow gap between trace and plane. If the ground plane is interrupted — a slot, a cutout, a missing pour — the field lines must close through a larger loop. A larger loop means less cancellation at a distance, which means radiation.
 
-Every trace needs a return plane directly below it, not because current needs a path home (though it does), but because the field needs a wall on the other side. A via that crosses layers must have a ground via next to it for the same reason — the field transfers with the signal, and the return field must transfer too. A slot in a ground plane is not just an inconvenience for the return current; it is a gap in the wall that lets the field escape.
+**Rule 1:** Every signal trace needs an unbroken return plane directly below it — not because current needs a path home (though it does), but because the field needs a wall on the other side.
 
-The energy is in the fields. The dielectric is the medium. The copper is just the boundary condition that keeps it all in place.
+#### 1.3.2. Layer Transitions Need Return Vias
 
+When a trace passes through a via from one layer to another, the EM wave transfers between layers. But the wave is not just the trace — it is the field between the trace and its reference plane. If the reference plane changes (say, from L2 to L3), the return current must also transition. Without a nearby ground via, the return path detours around the edge of the plane, the loop area grows, and the field radiates.
 
+**Rule 2:** Every signal via needs a ground via alongside it, stitching the two reference planes together at the point of transition.
 
-**On the PCB specifically:**
-The forward current in the trace creates a magnetic field curling around the trace. The return current in the ground plane creates an equal and opposite magnetic field. Seen from a distance, these two fields cancel — the energy is "trapped" in the space between trace and plane rather than radiating outward. Interrupt the return path, and the cancellation breaks down. The fields no longer cancel. The loop radiates.
+#### 1.3.3. Fields Couple Through Shared Dielectric
 
-The short version: the electric field drives the current, the current produces the magnetic field, and the two fields then sustain each other forward through space without needing the electrons to move anywhere.
+The EM wave travels in the dielectric. If two signals share the same dielectric space — running parallel on the same layer, or overlapping on adjacent layers — their fields interact. The $\vec E$ field from one trace induces charge on the neighbouring trace (capacitive coupling). The $\vec B$ field from one trace's current induces current in the neighbouring trace (inductive coupling). This is crosstalk, and it is a direct consequence of overlapping field volumes.
 
+**Rule 3:** Keep fields from different functional domains separated — physically, by distance, or by interposing a ground plane between them. Motor control traces and analog sensor traces must not share the same dielectric space.
 
-**Back to the PCB:**
-- Gauss (eq. 1): the voltage on the trace creates E between trace and plane.
-- Ampere (eq. 4): the current in the trace creates B curling around it; the return current in the plane creates equal-and-opposite B below.
-- Faraday (eq. 3) + Ampere (eq. 4): E and B leapfrog forward through the FR-4.
-- Gauss for B (eq. 2): B loops are always closed — which is why the return path is not optional. The magnetic field loop must close somewhere; if the ground plane is interrupted, it closes through a large loop, and a large loop radiates.
+#### 1.3.4. Power Planes Need Return Paths Too
 
+A power plane carrying current creates its own $\vec B$ field, just like a signal trace. The same physics applies: that field must have a nearby return plane to cancel at a distance, or it radiates. A power plane separated from its ground plane by a thick core (>10 mil) is a poor high-frequency decoupling pair — the fields between them are weakly confined.
 
-Changing E → B → changing B → E, entirely through the field terms. This works in the dielectric, in free space, everywhere. It is what Maxwell's displacement current term was invented to capture, and it is why electromagnetic waves can propagate through a vacuum.
+**Rule 4:** Every power plane or routed power trace needs an adjacent return plane, tightly coupled (2–3 mil dielectric separation) for effective high-frequency decoupling.
 
-So, the wave propagates driven by the coupling between ∂E/∂t and ∂B/∂t. The conduction current J in the copper happens simultaneously — the electric field at the conductor surface drives electrons, which produce their own B — but this is a boundary effect that shapes and guides the wave, not what propagates it.
-
-**Low EMI Rules**
-
-When different signals cross paths in the dielectric they interact and we experience this as interference, cross talk.
-
-If we allow fields from one circuit section A (motor control) to crosscouple with fields from circuit section B (analog) - this will lead to EMI, crosstalk and poor circuit performance.
-
-
-1. every signal trace needs an adjacent return plane (or trace)
-2. Every power trace (or plane) needs an adjacent return path (trace or plane)
-3. This includes return paths (vias) up/down through layers
-
-#### 1.2.1. Process
-
-
-1. Choose a stack-up
-2. Partition circuit functons
-3. Layout power plane
-4. Place local decoupling caps
-5. Route (minimize) clock traces
-6. Route data & address
-7. Check return paths
-8. Route low-speed traces
-
-
-#### 1.2.2. Stackup
+#### 1.2.2. Stack-up
 
 **The typical stackup**
 
