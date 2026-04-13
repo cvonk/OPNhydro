@@ -254,29 +254,37 @@ The wave creates the current. The current shapes the wave. They are mutually dep
 ---
 
 
-### 1.3. From Field Theory to PCB Design Rules
+### 1.3. PCB Design Rules
 
 Everything in §1.1 and §1.2 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the ground plane is the other. The copper confines the field ($E_v$ cancellation), the dielectric carries it forward (displacement current), and the return current in the ground plane provides the equal-and-opposite $\vec B$ that prevents radiation (field cancellation at a distance).
 
 Every PCB layout rule is a consequence of keeping that field structure intact. Break the structure — and the field escapes as EMI.
 
-#### 1.3.1. The Return Path Is Not Optional
+#### 1.3.1. The Return Path
 
 The $\vec B$ field from the forward current in the trace and the $\vec B$ field from the return current in the ground plane are equal and opposite. At a distance, they cancel — the energy stays confined between the conductors. Gauss's law $\nabla \cdot \vec B = 0$ tells us magnetic field lines must always close. If the ground plane is continuous, they close tightly through the narrow gap between trace and plane. If the ground plane is interrupted — a slot, a cutout, a missing pour — the field lines must close through a larger loop. A larger loop means less cancellation at a distance, which means radiation.
 
 **Rule 1:** Every signal trace needs an unbroken return plane directly below it — not because current needs a path home (though it does), but because the field needs a wall on the other side.
 
-#### 1.3.2. Layer Transitions Need Return Vias
+![Courtesy: Kenneth Wyatts, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/trace-crossing-gap-in-return-plane.png)
+
+
+#### 1.3.2. Layer Transitions need Return Vias
 
 When a trace passes through a via from one layer to another, the EM wave transfers between layers. But the wave is not just the trace — it is the field between the trace and its reference plane. If the reference plane changes (say, from L2 to L3), the return current must also transition. Without a nearby ground via, the return path detours around the edge of the plane, the loop area grows, and the field radiates.
 
 **Rule 2:** Every signal via needs a ground via alongside it, stitching the two reference planes together at the point of transition.
 
-#### 1.3.3. Fields Couple Through Shared Dielectric
+![Courtesy: Kenneth Wyatts, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/trace-passing-through-two-planes-with-via.png)
+
+Trace passing through two vias layers causes the wave to leak in between the reference planes.  May interfere with other signals in that space, and cause board edge radiation.  If the planes are the same potential, you can prevent this with nearby sticking vias between the ground planes.  If they are different potentials you can add stiching capacitance very close.
+
+
+#### 1.3.3. Fields Couple through Shared Dielectric
 
 The EM wave travels in the dielectric. If two signals share the same dielectric space — running parallel on the same layer, or overlapping on adjacent layers — their fields interact. The $\vec E$ field from one trace induces charge on the neighbouring trace (capacitive coupling). The $\vec B$ field from one trace's current induces current in the neighbouring trace (inductive coupling). This is crosstalk, and it is a direct consequence of overlapping field volumes.
 
-**Rule 3:** Keep fields from different functional domains separated — physically, by distance, or by interposing a ground plane between them. Motor control traces and analog sensor traces must not share the same dielectric space.
+**Rule 3:** Keep fields from different functional domains separated — physically, by distance, or by interposing a ground plane between them. Moreover, provide at least $3W$ to $5W$ spacings between critical traces, where $W$ is the width of a trace. Keep traces on perpendicular to adjacent layers.  Motor control traces and analog sensor traces must not share the same dielectric space.
 
 #### 1.3.4. Power Planes Need Return Paths Too
 
@@ -284,32 +292,32 @@ A power plane carrying current creates its own $\vec B$ field, just like a signa
 
 **Rule 4:** Every power plane or routed power trace needs an adjacent return plane, tightly coupled (2–3 mil dielectric separation) for effective high-frequency decoupling.
 
-#### 1.2.2. Stack-up
 
-**The typical stackup**
+---
 
-L1 signals
-L2 Ground return plane
-L3 power plane
-L4 signals
 
-This is also very high EMI risk.
-- power and gnd are too far separated for good high frequency decoupling. Should be 2-3 mill max.
-- signals in layer 4 are ferenced to power, rather than signal return. That is OK, if and only if, the power and return planes are tightly coupled together and with adequate decoupling capacitors.  Still wouldn't recommend it.
-power and gnd separed by core distance
+#### 1.4. Stack-up
 
-**Lower EMI four layer board stack up**
+The PCB has two hard constraints that drive most of the other design decisions. First, the 4.7A peak current on the 24V rail requires copper heavy enough to carry that current continuously without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
 
-L1 Signals / Routed power
-L2 Ground return plane
-L3 Ground return plane
-L4 Signals / Routed power
+The **typical 4-layer stack-up** is SIG/GND/PWR/SIG as shown in the table below. We are not using this, because the Power and GND are too far separated (the core distance) for good high frequency decoupling. Should be 2-3 mill max.  Also, signals in Layer 4 are referenced to power, rather than GND. That is OK, if and only if, the power and return planes are tightly coupled together and with adequate decoupling capacitors.
 
-Prevent discontinuous signal return paths
+Instead, we opt for the **Low EMI 4-layer stack-up** as shown below.
 
-Trace passing through two vias layers causes the wave to leak in between the reference planes.  May interfere with other signals in that space, and cause board edge radiation.  If the planes are the same potential, you can prevent this with nearby sticking vias between the ground planes.  If they are different potentials you can add stiching capacitance very close.
+Layer | Name   | Function                         | Components
+------|--------|----------------------------------|--------------------------
+L1    | Top    | Sensitive signals / routed power | ESP32, LiDAR, I2C, UART, EZO, BNC, 3V3/5V power traces
+L2    | GND    | Ground return plane              | Return plane for Layer 1
+L3    | GND    | Ground return plane              | Return plane for Layer 4
+L4    | Bottom | Noisy signals / routed 24V power | Stepper drivers, MOSFETs, 24V power traces
 
-#### 1.2.3. Segregating Functional Regions
+![Courtesy: Kenneth Wyatts, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/lower-emi-4-layer-pcb.png)
+
+
+---
+
+
+#### 1.5. Segregating Functional Regions
 
 Segregating Functional Regions
 
@@ -329,7 +337,6 @@ the dip in |Z| is ESR
 
 #### 1.2.4. PCB Guidelines
 
-The PCB has two hard constraints that drive most of the other design decisions. First, the 4.7A peak current on the 24V rail requires copper heavy enough to carry that current continuously without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
 
 The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The heavier copper on L1 and L4 keeps resistance and heat low on the high-current 24V traces. The two inner layers (L2 and L3) use standard 1 oz copper, which is sufficient for the ground and power planes they carry.
 
