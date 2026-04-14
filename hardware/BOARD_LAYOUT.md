@@ -48,37 +48,30 @@ As we will see, Maxwell's equations tell the full story in four lines, but the k
 
 ![Courtesy: Patrick André](../media/infographics/microstrip-fields-2.png)
 
-**INSIGHT: The $\vec E$ field is from the trace to the ground return plane (vertical).  The spacial variation of that vertical field is in the direction the wire (the propagation direction).  So the field and its variation are in perpendicular directions: the field is vertical, but it varies horizontally. That perpendicularity is exactly what the cross product in $\nabla \times$ captures — it measures how a field component changes in an orthogonal direction. I should change the technical drawing above accordingly.**
+Imagine a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. When a voltage step is applied at one end, the following chain of events propagates down the line:
 
-Imagine a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. When a voltage step is applied at one end, the following **chain of events** propagates down the line:
-
-1. [Gradient of the Electric Potentials](https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electro-Optics/Book%3A_Electromagnetics_I_(Ellingson)/05%3A_Electrostatics/5.14%3A_Electric_Field_as_the_Gradient_of_Potential): The voltage difference between trace and ground plane creates an **electric field** $\vec{E}$ across the gap. This field points in the direction of steepest voltage decrease:
+1. The voltage difference between trace and ground plane creates an **electric field** $\vec{E}$ across the gap, pointing from the trace down to the ground plane:
 $$
     \vec{E} = - \nabla V
-    \tag{\text{gradient of the electric potentials}}
 $$
 
-> **A note on field lines.** Textbook diagrams often show electric and magnetic fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. This matters because the curl operator ($\nabla \times$) in Maxwell's equations describes how the field varies from one point to the next, not anything about lines. Where this document says "the $\vec E$ field points downward" or "the $\vec B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
+> **A note on field lines.** Textbook diagrams show fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. Where this document says "the $\vec E$ field points downward" or "the $\vec B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
 
-2. [Ampere's Law](https://coertvonk.com/physics/electromagnetism/magnetism/amperes-law-30007) with [Maxwell's crucial addition](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269): There are two contributions to the $\vec{B}$ field. From the conduction current (at the conductor surface), and from the displacement current (in the dielectric). Together they form one continuous field.  We will come back to the conduction current later.  What is important now is that **a changing electric field produces a spatially varying magnetic field**, even when no conduction current is present:
+2. [Ampere–Maxwell law](https://coertvonk.com/physics/electromagnetism/magnetism/amperes-law-30007): a **changing electric field produces a magnetic field**. As the $\vec E$ field between trace and ground plane builds up, it acts as a [displacement current](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — even though no charge is moving through the dielectric. In integral form:
 $$
-    \nabla \times \vec B =
-    \underbrace{\mu_0 \ \vec J}_{\substack{\text{conduction} \\ \text{current}}} 
-    +\ 
-    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
+    \oint \vec{B} \cdot d\vec{l} = \mu_0 I_{enc} + \mu_0\varepsilon_0 \frac{d\Phi_E}{dt}
     \tag{\text{Ampère-Maxwell}}
 $$
+The left side is the total $\vec B$ field accumulated around a closed loop. The right side has two sources: conduction current $I_{enc}$ through the loop (in the copper) and the rate of change of electric flux $\Phi_E$ through the loop (in the dielectric). Both contribute to the same $\vec B$ field. The conduction current matters at the conductor surface — the displacement current matters in the dielectric gap, and is what launches the wave.
 
-
-3. [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) says a **changing magnetic field produces a spatially varying electric field**:
+3. [Faraday's law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157): a **changing magnetic field produces an electric field**. The $\vec B$ field from step 2 is itself building up, and that changing magnetic flux through any loop induces a circulating $\vec E$ field:
 $$
-    \nabla \times \vec E = -\frac{\partial \vec B}{\partial t}
+    \oint \vec{E} \cdot d\vec{l} = -\frac{d\Phi_B}{dt}
     \tag{\text{Faraday}}
 $$
+The left side is the total $\vec E$ field accumulated around a closed loop. The right side is the rate of change of magnetic flux $\Phi_B$ through that loop — with the minus sign enforcing Lenz's law (the induced field opposes the change that caused it).
 
-> **What does "curl" mean here?** The curl operator $\nabla \times$ measures spatial variation — how much a field changes from one point to the next. It does not mean the field lines form visible circles. On a PCB, the $\vec E$ field between trace and ground plane points vertically (from trace down to ground plane). But at the wave front, that vertical field is at full strength just behind the front and zero just ahead of it. The field and its variation are perpendicular: $\vec E$ points vertically, but it varies horizontally along the propagation direction ($\frac{\partial E_v}{\partial x} \neq 0$). That perpendicularity is exactly what the cross product in $\nabla \times$ captures. It is this horizontal gradient of the vertical field that, through Faraday's law, drives the next $\vec B$ into existence.
-
-So, once you disturb the electric field, it creates a magnetic field. That changing magnetic field recreates an electric field slightly ahead of it, which creates a magnetic field ahead of that. Each field regenerates the other. The wave is self-sustaining — it needs no electrons to carry it forward.
+Once you disturb the electric field, it creates a magnetic field (step 2). That changing magnetic field recreates an electric field slightly ahead of it (step 3), which creates a magnetic field ahead of that (step 2 again). Each field regenerates the other. The wave is self-sustaining — it needs no electrons to carry it forward.
 
 
 #### Where the energy flows
@@ -95,27 +88,24 @@ On a PCB microstrip, the geometry is: $\vec{E}$ points vertically from the trace
 
 #### Propagation
 
-Maxwell's two curl equations couple spatial variation to time variation — and that coupling is what makes propagation inevitable.
+The integral forms above describe what happens around loops — they are good for intuition. To understand *propagation*, we need the differential forms, which describe what happens at a single point. The differential form of each law says the same thing as the integral form, but expressed locally: instead of "total field around a loop" it says "how the field varies spatially at this point" — written with the curl operator $\nabla \times$.
 
-In free space ($ρ = 0, \vec J = \vec 0$), the Ampère-Maxwell Law simplifies to:
+> **What is the curl operator?** The curl $\nabla \times$ is a spatial derivative. It measures how much a field changes from one point to the next — not in the same direction as the field, but in a perpendicular direction. On a PCB, $\vec E$ points vertically (trace to ground plane), but at the wave front it varies *horizontally* — full strength behind the front, zero ahead. That horizontal gradient of the vertical field is what $\nabla \times \vec E$ captures. It does not mean the field lines form circles.
+
+In free space ($\rho = 0, \vec J = \vec 0$), the two laws in differential form become:
+
 $$
     \nabla \times \vec{B} = \mu_0\varepsilon_0 \frac{\partial \vec{E}}{\partial t}
-    \tag{\text{simplified Ampere-Maxwell}}
+    \tag{\text{Ampere-Maxwell}}
 $$
-> **Reading the equation:** The right side ($\mu_0\varepsilon_0 \frac{\partial \vec E}{\partial t}$) is the cause — the electric field changing in time at a point. The left side ($\nabla \times \vec B$) is the effect — the magnetic field being forced to vary spatially at that same point. Wherever $\vec E$ is changing in time, $\vec B$ *cannot* be uniform — it must be slightly stronger on one side of that point than the other. That forced spatial variation is what the curl measures.
-
-So, if $\vec E$ is changing in time at some point, then $\vec B$ must have a spatial gradient at that same point. A spatial variation means the field value at the neighbouring point is different. 
-
 $$
-    \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} 
+    \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}
     \tag{\text{Faraday}}
 $$
 
-That neighbouring point now has a changing $\vec B$, which by Faraday produces spatial variation in $\vec E$ there — which means the next neighbouring point has a different $\vec E$. And so on.
+These two equations couple spatial variation to time variation — and that coupling is what makes propagation inevitable. If $\vec E$ is changing in time at some point, the first equation forces $\vec B$ to have a spatial gradient there — which means $\vec B$ at the neighbouring point is different. That neighbouring point now has a changing $\vec B$, which by the second equation forces spatial variation in $\vec E$ — which means $\vec E$ at the *next* point is different. And so on.
 
-The key is the curl operator — it is a spatial derivative. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. It cannot stay put, because the equations link time derivatives to spatial derivatives at every point.
-
-No mechanism "pushes" the wave forward. The wave propagates because the mathematics forbid a localised disturbance from remaining localised. A changing field at one point necessarily implies a different field at the adjacent point — and that is propagation.
+No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localised disturbance from remaining localised.
 
 <details>
   <summary>Expand to see the math</summary>
