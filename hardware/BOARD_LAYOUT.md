@@ -36,6 +36,7 @@ $$
 A 100 MHz clock demands 1 ns. At these short rise times, the wavelength of the signal's frequency content approaches the physical dimensions of the PCB traces, and the circuit-theory assumptions fail. **Field theory** is now required to account for radiation, retardation and wave propagation. 
 
 PCB design shifts from drawing paths for current to designing transmission lines that contain EM fields, manage parasitic inductance and capacitance, and control radiated emissions. Those physics classes about electromagnetic fields and transmission lines are no longer reserved for RF engineers — they become practical for anyone designing a fast PCB.
+<br />
 
 #### From Voltage to EM Wave
 
@@ -50,51 +51,40 @@ As we will see, Maxwell's equations tell the full story in four lines, but the k
 
 > **A note on field lines.** Textbook diagrams show fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. Where this document says "the $\vec E$ field points downward" or "the $\vec B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
 
-Imagine a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. When a voltage step is applied at one end, the following chain of events propagates down the line:
+**Microstrip geometry**
 
-1. At the **very first moment**, the voltage between trace and ground plane suddenly creates an **electric field** $\vec{E}$ between the trace and return plane at the place where the voltage is applied, pointing vertically (from trace down to ground plane).
+Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. The dielectric is a non-conducting medium ($\rho = 0, \vec J = \vec 0$). When a voltage step is applied at one end, the following chain of events unfolds:
+
+1. When the voltage is applied, an **electric field** $\vec{E}$ appears between trace and ground plane, pointing vertically (from trace down to ground plane). But this field cannot remain localised.
 [*Add some nifty graphic here, showing a sideview of the trace and return plane, with battery and initial E-field on the left*]
+<br />
 
-2. At this wavefront, the vertical electric field is at full strength just behind the front and zero just ahead of it. This means that there is **a variation of the electric field in the direction of the trace**. 
-[Ampere-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) states that a **change in electric field** acts as a [displacement current](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) [^DISPCURRENT] and **produces a spatially varying magnetic field**. (For now, we assume that $\vec J=\vec 0$, so the first term vanishes.)
+2. The moment $\vec E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\vec J = \vec 0$), [Ampere-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) reduces to the displacement-current term — a time-changing electric field **produces a spatially varying magnetic field**:
 $$    
     \nabla \times \vec B =
-    \cancel{\mu_0 \ \vec J}
+    \underbrace{\cancel{\mu_0 \ \vec J}}_{\substack{\text{conduction} \\ \text{current}}}
     +\ 
     \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
     \tag{\text{Ampère-Maxwell}}
 $$
-The time-changing $\vec E$ (right side) forces $\vec B$ to vary spatially (left side). The field and its variation are perpendicular: $\vec E$ points vertically, but it varies horizontally along the propagation direction ($\frac{\partial E_v}{\partial x} \neq 0$). That perpendicularity is exactly what the cross product in $\nabla \times$ captures.
+The time-changing $\vec E$ (right side) forces $\vec B$ to vary spatially (left side).
+<br />
 
-3. The $\vec B$ field created in step 2 is itself spatially varying. [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) says a **changing magnetic field produces a spatially varying electric field** — driving the next $\vec E$ into existence slightly ahead of the wave front:
+3. The $\vec B$ field created in step 2 is also rising from zero — i.e. **changing in time**. [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) says a time-changing magnetic field **produces a spatially varying electric field** — extending $\vec E$ slightly ahead of where it began:
 $$
     \nabla \times \vec E = -\frac{\partial \vec B}{\partial t}
     \tag{\text{Faraday}}
 $$
+The time-changing $\vec B$ (right side) forces $\vec E$ to vary spatially (left side). $\vec E$ points vertically (trace to ground), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wave front advancing.
 
-[^DISPCURRENT]: Even though no charge is moving through the dielectric
+Once the electric field appears, a magnetic field arises alongside it. That changing magnetic field extends the electric field slightly ahead, which in turn extends the magnetic field further still. **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
 
-Once you disturb the electric field, it creates a magnetic field (step 2). That changing magnetic field recreates an electric field slightly ahead of it (step 3), which creates a magnetic field ahead of that (step 2 again). **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
-
-#### Where the energy flows
-
-> "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
-
-Maxwell's equations tell us the fields exist, but there is a more direct way to see where the energy is going. The Poynting vector $\vec{S}$ points in the direction of the energy flow:
-$$
-    \vec{S} = \frac{1}{\mu_0}\left( \vec{E} \times \vec{B} \right)
-$$
-
-It is important to distinguish the **wave front** from the **fields themselves**. The wave front is the leading edge — the boundary between where the fields have arrived and where they have not. Behind that front, the $\vec E$ and $\vec B$ fields are fully established and steady (for a DC step) or oscillating (for an AC signal). The Poynting vector describes the energy flow in this established region, not just at the front.
-
-On a PCB microstrip, the geometry behind the wave front is: $\vec{E}$ points vertically from the trace down to the ground plane, $\vec{B}$ curls horizontally around the trace, and $\vec{E} \times \vec{B}$ therefore points forward — in the dielectric between the trace and the ground plane, in the direction of propagation. The energy flows continuously through the dielectric, not through the copper. The copper guides and confines the wave, but the energy is in the fields between the conductors.
-
+> **What is the curl operator?** The curl $\nabla \times$ is a spatial derivative — it measures how much a field changes from one point to the next in a perpendicular direction. It does not mean the field lines form circles. The perpendicularity between $\vec E$ (vertical) and its variation (horizontal) described in step 3 is exactly what $\nabla \times$ captures.
+<br />
 
 #### Propagation
 
-**What is the curl operator?** The curl $\nabla \times$ is a spatial derivative — it measures how much a field changes from one point to the next in a perpendicular direction. It does not mean the field lines form circles. The perpendicularity between $\vec E$ (vertical) and its variation (horizontal) described in step 2 is exactly what $\nabla \times$ captures.
-
-In free space ($\rho = 0, \vec J = \vec 0$), the two laws simplify to:
+Steps 1–3 showed the first cycle. The same coupling, applied repeatedly, guarantees indefinite propagation. In the source-free dielectric, the two laws simplify to:
 
 $$
     \nabla \times \vec{B} = \mu_0\varepsilon_0 \frac{\partial \vec{E}}{\partial t}
@@ -105,7 +95,7 @@ $$
     \tag{\text{Faraday}}
 $$
 
-These two equations couple spatial variation to time variation — and that coupling is what makes propagation inevitable. If $\vec E$ is changing in time at some point, the first equation forces $\vec B$ to have a spatial gradient there — which means $\vec B$ at the neighbouring point is different. That neighbouring point now has a changing $\vec B$, which by the second equation forces spatial variation in $\vec E$ — which means $\vec E$ at the *next* point is different. And so on.
+These two equations couple spatial variation to time variation — and that coupling is what makes propagation inevitable. If $\vec E$ is changing in time at some point, the first equation forces $\vec B$ to have a spatial gradient there — so $\vec B$ at the neighbouring point is different. At that neighbouring point, $\vec B$ is now changing in time, and by the second equation this forces spatial variation in $\vec E$ — so $\vec E$ at the *next* point is different. And so on.
 
 No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localised disturbance from remaining localised.
 
@@ -139,7 +129,7 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
       \tag{\text{Gauss's law}}
   $$
 
-  In free space there are no charges ($\rho$), so this becomes $\nabla \cdot \vec E = 0$. The first term vanishes:
+  In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \vec E = 0$. The first term vanishes:
   $$
       \nabla^2 \vec E = \underbrace{\mu_0\,\varepsilon_0}_{1/v^2} \frac{\partial^2 \vec E}{\partial t^2}
   $$
@@ -159,12 +149,12 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
 </details>
 
 
-The speed at which the EM wave propagates in free space (ρ = 0, J = 0) follows directly out of the constants for permeability ($\mu_0$) and permittivity ($\varepsilon_0$):
+The speed at which the EM wave propagates in a source-free medium follows directly from the constants for permeability ($\mu_0$) and permittivity ($\varepsilon_0$):
 $$
     v = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}
 $$
 
-The constants $\mu_0$ and $\varepsilon_0$ follow from independent experiments with respectively magnetic and electric forces. Neither involves light.
+The constants $\mu_0$ and $\varepsilon_0$ follow from independent magnetic and electric experiments, respectively — neither involving light.
 
 $$
   \left.
@@ -175,12 +165,12 @@ $$
   \right\}
 $$
 
-Entering in the constants:
+Substituting the constants:
 $$
-    v = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 8.854 \times 10^{-12}}} \approx 299.8 \times 10^6 \text{ m/s} \equiv c
+    v = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 8.854 \times 10^{-12}}} \approx 299.8 \times 10^6 \text{ m/s}
 $$
 
-That is the speed of light $c$ — derived entirely from electric and magnetic constants, with no reference to optics.
+That is the speed of light $c$ — derived entirely from electric and magnetic constants.
 
 This was Maxwell's 1865 result.  He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
 
@@ -189,8 +179,21 @@ $$
     v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 4.2 \times 8.854 \times 10^{-12}}} \approx 146.3 \times 10^6 \text{ m/s}
 $$
 
-The **propagation speed in FR-4** dielectric follows as **~15 cm/ns**. 
+The **propagation speed in FR-4** is therefore **~15 cm/ns**.
 
+
+#### Where the energy flows
+
+> "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
+
+Maxwell's equations describe the fields, but where does the energy actually flow? The Poynting vector $\vec{S}$ answers this directly — it points in the direction of energy flow:
+$$
+    \vec{S} = \frac{1}{\mu_0}\left( \vec{E} \times \vec{B} \right)
+$$
+
+Distinguish the **wave front** from the **fields themselves**. The wave front is the leading edge — the boundary between where the fields have arrived and where they have not. Behind that front, the $\vec E$ and $\vec B$ fields are fully established and steady (for a DC step) or oscillating (for an AC signal). The Poynting vector describes the energy flow in this established region, not just at the front.
+
+Behind the wave front on a PCB microstrip, $\vec{E}$ points vertically from trace to ground plane, $\vec{B}$ curls horizontally around the trace, and $\vec{E} \times \vec{B}$ therefore points forward — through the dielectric between trace and ground plane, in the direction of propagation. The energy flows through the dielectric, not through the copper. The copper guides and confines the wave, but the energy is in the fields between the conductors.
 
 ---
 
