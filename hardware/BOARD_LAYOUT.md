@@ -48,31 +48,33 @@ As we will see, Maxwell's equations tell the full story in four lines, but the k
 
 ![Courtesy: Patrick André](../media/infographics/microstrip-fields-2.png)
 
-Imagine a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. When a voltage step is applied at one end, the following chain of events propagates down the line:
-
-1. The voltage difference between trace and ground plane creates an **electric field** $\vec{E}$ across the gap, pointing from the trace down to the ground plane:
-$$
-    \vec{E} = - \nabla V
-$$
-
 > **A note on field lines.** Textbook diagrams show fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. Where this document says "the $\vec E$ field points downward" or "the $\vec B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
 
-2. [Ampere–Maxwell law](https://coertvonk.com/physics/electromagnetism/magnetism/amperes-law-30007): a **changing electric field produces a magnetic field**. As the $\vec E$ field between trace and ground plane builds up, it acts as a [displacement current](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — even though no charge is moving through the dielectric. In integral form:
-$$
-    \oint \vec{B} \cdot d\vec{l} = \mu_0 I_{enc} + \mu_0\varepsilon_0 \frac{d\Phi_E}{dt}
+Imagine a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. When a voltage step is applied at one end, the following chain of events propagates down the line:
+
+1. At the **very first moment**, the voltage between trace and ground plane suddenly creates an **electric field** $\vec{E}$ between the trace and return plane at the place where the voltage is applied, pointing vertically (from trace down to ground plane).
+[*Add some nifty graphic here, showing a sideview of the trace and return plane, with battery and initial E-field on the left*]
+
+2. At this wavefront, the vertical electric field is at full strength just behind the front and zero just ahead of it. This means that there is **a variation of the electric field in the direction of the trace**. 
+[Ampere-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) states that a **change in electric field** acts as a [displacement current](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) [^DISPCURRENT] and **produces a spatially varying magnetic field**. (For now, we assume that $\vec J=\vec 0$, so the first term vanishes.)
+$$    
+    \nabla \times \vec B =
+    \cancel{\mu_0 \ \vec J}
+    +\ 
+    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
     \tag{\text{Ampère-Maxwell}}
 $$
-The left side is the total $\vec B$ field accumulated around a closed loop. The right side has two sources: conduction current $I_{enc}$ through the loop (in the copper) and the rate of change of electric flux $\Phi_E$ through the loop (in the dielectric). Both contribute to the same $\vec B$ field. The conduction current matters at the conductor surface — the displacement current matters in the dielectric gap, and is what launches the wave.
+The time-changing $\vec E$ (right side) forces $\vec B$ to vary spatially (left side). The field and its variation are perpendicular: $\vec E$ points vertically, but it varies horizontally along the propagation direction ($\frac{\partial E_v}{\partial x} \neq 0$). That perpendicularity is exactly what the cross product in $\nabla \times$ captures.
 
-3. [Faraday's law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157): a **changing magnetic field produces an electric field**. The $\vec B$ field from step 2 is itself building up, and that changing magnetic flux through any loop induces a circulating $\vec E$ field:
+3. The $\vec B$ field created in step 2 is itself spatially varying. [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) says a **changing magnetic field produces a spatially varying electric field** — driving the next $\vec E$ into existence slightly ahead of the wave front:
 $$
-    \oint \vec{E} \cdot d\vec{l} = -\frac{d\Phi_B}{dt}
+    \nabla \times \vec E = -\frac{\partial \vec B}{\partial t}
     \tag{\text{Faraday}}
 $$
-The left side is the total $\vec E$ field accumulated around a closed loop. The right side is the rate of change of magnetic flux $\Phi_B$ through that loop — with the minus sign enforcing Lenz's law (the induced field opposes the change that caused it).
 
-Once you disturb the electric field, it creates a magnetic field (step 2). That changing magnetic field recreates an electric field slightly ahead of it (step 3), which creates a magnetic field ahead of that (step 2 again). Each field regenerates the other. The wave is self-sustaining — it needs no electrons to carry it forward.
+[^DISPCURRENT]: Even though no charge is moving through the dielectric
 
+Once you disturb the electric field, it creates a magnetic field (step 2). That changing magnetic field recreates an electric field slightly ahead of it (step 3), which creates a magnetic field ahead of that (step 2 again). **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
 
 #### Where the energy flows
 
@@ -83,16 +85,16 @@ $$
     \vec{S} = \frac{1}{\mu_0}\left( \vec{E} \times \vec{B} \right)
 $$
 
-On a PCB microstrip, the geometry is: $\vec{E}$ points vertically from the trace down to the ground plane, $\vec{B}$ points horizontally curling around the current in the trace, and $\vec{E} \times \vec{B}$ therefore points forward — in the dielectric between the trace and the ground plane, in the direction of propagation. On other words: the energy is flowing through the dielectric between the conductors, not through the copper.
+It is important to distinguish the **wave front** from the **fields themselves**. The wave front is the leading edge — the boundary between where the fields have arrived and where they have not. Behind that front, the $\vec E$ and $\vec B$ fields are fully established and steady (for a DC step) or oscillating (for an AC signal). The Poynting vector describes the energy flow in this established region, not just at the front.
+
+On a PCB microstrip, the geometry behind the wave front is: $\vec{E}$ points vertically from the trace down to the ground plane, $\vec{B}$ curls horizontally around the trace, and $\vec{E} \times \vec{B}$ therefore points forward — in the dielectric between the trace and the ground plane, in the direction of propagation. The energy flows continuously through the dielectric, not through the copper. The copper guides and confines the wave, but the energy is in the fields between the conductors.
 
 
 #### Propagation
 
-The integral forms above describe what happens around loops — they are good for intuition. To understand *propagation*, we need the differential forms, which describe what happens at a single point. The differential form of each law says the same thing as the integral form, but expressed locally: instead of "total field around a loop" it says "how the field varies spatially at this point" — written with the curl operator $\nabla \times$.
+**What is the curl operator?** The curl $\nabla \times$ is a spatial derivative — it measures how much a field changes from one point to the next in a perpendicular direction. It does not mean the field lines form circles. The perpendicularity between $\vec E$ (vertical) and its variation (horizontal) described in step 2 is exactly what $\nabla \times$ captures.
 
-> **What is the curl operator?** The curl $\nabla \times$ is a spatial derivative. It measures how much a field changes from one point to the next — not in the same direction as the field, but in a perpendicular direction. On a PCB, $\vec E$ points vertically (trace to ground plane), but at the wave front it varies *horizontally* — full strength behind the front, zero ahead. That horizontal gradient of the vertical field is what $\nabla \times \vec E$ captures. It does not mean the field lines form circles.
-
-In free space ($\rho = 0, \vec J = \vec 0$), the two laws in differential form become:
+In free space ($\rho = 0, \vec J = \vec 0$), the two laws simplify to:
 
 $$
     \nabla \times \vec{B} = \mu_0\varepsilon_0 \frac{\partial \vec{E}}{\partial t}
@@ -139,12 +141,12 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
 
   In free space there are no charges ($\rho$), so this becomes $\nabla \cdot \vec E = 0$. The first term vanishes:
   $$
-      \nabla^2 \vec E = \underbrace{\mu_0\,\varepsilon_0} \frac{\partial^2 \vec E}{\partial t^2}
+      \nabla^2 \vec E = \underbrace{\mu_0\,\varepsilon_0}_{1/v^2} \frac{\partial^2 \vec E}{\partial t^2}
   $$
 
   Recognize the standard wave equation for any quantity propagating at speed $v$:
   $$
-      \nabla^2 f = \underbrace{\frac{1}{v^2}} \frac{\partial^2 f}{\partial t^2}
+      \nabla^2 f = \frac{1}{v^2} \frac{\partial^2 f}{\partial t^2}
       \tag{\text{standard wave equation}}
   $$
 
@@ -274,7 +276,7 @@ Every time a chip switches its outputs or its internal gates toggle, it draws a 
 
 $$\Delta V = L_{pdn} \times \frac{dI}{dt}$$
 
-This is trace and via inductance resisting sudden changes in current. The chip sees its supply rail sag momentarily, reducing the voltage between its power and ground pins. If the sag is large enough, the chip misinterprets logic levels or produces timing errors. The design goal is to minimise $L_{pdn}$ across the full frequency range the chip draws current at — the details are covered in §3.1.
+This is trace and via inductance resisting sudden changes in current. The chip sees its supply rail sag momentarily, reducing the voltage between its power and ground pins. If the sag is large enough, the chip misinterprets logic levels or produces timing errors. The design goal is to minimise $L_{pdn}$ across the full frequency range the chip draws current at — the details are covered in §2.1.
 
 
 ---
@@ -353,7 +355,7 @@ EMI appears when that cancellation breaks down:
 
 - **Connector and cable radiation.** Every conductor that leaves the board — a power cable, a sensor wire, a USB connection — is a potential antenna. The board's internal switching noise couples onto the cable as common-mode current, and the cable radiates it. This is typically the dominant EMI path in a system like OPNhydro, where multiple cables connect to off-board sensors and motors.
 
-The physics is the same Maxwell's equations from §1.1. The difference is context: signal integrity asks whether the field arrives at the receiver correctly; EMI asks whether the field arrives somewhere it should not.
+The physics comes from the same Maxwell's equations as §1.1. The difference is context: signal integrity asks whether the field arrives at the receiver correctly; EMI asks whether the field arrives somewhere it should not.
 
 [^EMCLOOP]: Derived from the magnetic dipole radiation formula. The full expression includes constants ($\mu_0$, $c$), but the proportionality to $f^2$, $A$, and $I$ captures the design levers.
 
@@ -407,9 +409,9 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 
 **Rule 4b — Use multiple, low-inductance decoupling capacitors.** A single capacitor has parasitic lead and via inductance that limits its effectiveness above its self-resonant frequency. Multiple smaller capacitors in parallel reduce the effective inductance (inductances in parallel divide). Place them as close to the chip's power pins as physically possible — every millimetre of trace adds inductance.
 
-**Rule 4c — Minimise power and ground lead length in packages.** The inductance of the bond wires and package leads between die and PCB is often the dominant contributor to $Z_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (QFN, BGA) have lower inductance than those with long leads (SOIC, DIP).
+**Rule 4c — Minimise power and ground lead length in packages.** The inductance of the bond wires and package leads between die and PCB is often the dominant contributor to $L_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (QFN, BGA) have lower inductance than those with long leads (SOIC, DIP).
 
-**Rule 4d — Rely on on-chip decoupling for the highest frequencies.** Above ~100 MHz, no external capacitor can respond fast enough — the path inductance from capacitor to die is too high. Modern ICs include on-die decoupling for this reason. The PCB designer's job is to keep $Z_{\text{PDN}}$ low at the frequencies below that.
+**Rule 4d — Rely on on-chip decoupling for the highest frequencies.** Above ~100 MHz, no external capacitor can respond fast enough — the path inductance from capacitor to die is too high. Modern ICs include on-die decoupling for this reason. The PCB designer's job is to keep $L_{\text{PDN}}$ low at the frequencies below that.
 
 #### EMI — Radiated Emissions
 
