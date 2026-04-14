@@ -8,7 +8,6 @@ As in the Schematic Design document, the central problem remains **coexistence**
 
 After the PCB selection and general layout rules, we'll cover the different sections of the schematic.
 
-
 ## 1. PCB Selection and General Rules
 
 Since I personally like to understand design rules, we start with a highly technical guide that transitions from abstract electromagnetic theory to practical PCB design rules. It serves as a bridge between the high-level Architecture goals and the specific Schematic Design requirements.
@@ -17,19 +16,30 @@ Let's start with a puzzle. You flip a light switch, and the bulb lights up almos
 
 Not the electrons. The electromagnetic field did. And once you understand that, PCB layout stops being a set of rules to memorise and starts making intuitive sense.
 
+I will lean heavily on
+- my old physics classes from  Dipl.-Ing. J.J. Senff
+- my physics refresher from Walter Lewin
+- the book Signal and Power Integrety by Eric Bogatin 
 
-### 1.1. Field Theory
+
+### 1.1. Electro Magnetic Wave in the Dielectric
 
 > "Electromagnetic (EM) field theory based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^BOGATIN] and Kenneth Wyatts [^WYATTS].
 
 [^BOGATIN]: [Signal and Power Ingegrity, simplified 2nd (2010) - Eric Bogatin](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)
 [^WYATTS]: [PCB Design for Low EMI - Kenneth Wyatts](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)
 
-**Circuit theory**, as we learned as undergrads, is a simplified, low-frequency (<100 kHz) approximation of field theory. It assumes that the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws.
+**Circuit theory**, as we learned as undergrads, is a simplified, low-frequency approximation of field theory. It assumes that the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws.  A device would, for example, output a signal with a rise time of roughly 10 nsec and a clock frequency of 10 MHz, and the circuits would work with the
+crudest of interconnects. 
 
-As signal rise times shorten and PCB frequencies increase, those assumptions fail. **Field theory** is required to account for radiation, retardation, and wave propagation. PCB design shifts from drawing paths for current to designing transmission lines that contain EM fields, manage parasitic inductance and capacitance, and control radiated emissions.
+As clock frequencies increase, rise times shorten — as a rule of thumb, the rise time $t_r$ is roughly 10% of the clock period:
+$$
+  t_r \approx \frac{1}{10\,f_{clk}}
+$$
 
-Those physics classes about Electromagnetic fields and transmission lines are no longer reserved for the few RF engineers — they become practical for anyone designing a fast PCB.
+A 10 MHz clock has a comfortable 10 ns rise time; a 100 MHz clock demands 1 ns. At these shorter rise times, the wavelength of the signal's frequency content approaches the physical dimensions of the PCB traces, and the circuit-theory assumptions fail. **Field theory** is now required to account for radiation, retardation, and wave propagation. 
+
+PCB design shifts from drawing paths for current to designing transmission lines that contain EM fields, manage parasitic inductance and capacitance, and control radiated emissions. Those physics classes about electromagnetic fields and transmission lines are no longer reserved for RF engineers — they become practical for anyone designing a fast PCB.
 
 #### 1.1.1. From Voltage to EM Wave
 
@@ -89,6 +99,7 @@ $$
     \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} 
     \tag{\text{Faraday}}
 $$
+
 That neighbouring point now has a changing $\vec B$, which by Faraday produces spatial variation in $\vec E$ there. Which means the next neighbouring point has a different $\vec E$. And so on.
 
 The key is the curl operator — it is a spatial derivative. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. It cannot stay put, because the equations link time derivatives to spatial derivatives at every point.
@@ -178,28 +189,27 @@ $$
 The **propagation speed in FR-4** dielectric follows as **~15 cm/ns**. 
 
 
-#### 1.1.3.  What the conductors do
+---
+
+
+### 1.2. What the Conductors do
 
 So far the story has been about the fields — how they sustain each other and where the energy flows. But the wave does not exist in free space; it propagates between two copper conductors. Those conductors are not passive bystanders. 
 
 The EM wave's electric field has two components — one vertical (across the gap) and one horizontal (along the trace) — and the free electrons in the copper respond to each one differently. The vertical component drives a transient surface-charge redistribution that *confines* the wave to the dielectric. The horizontal component drives a sustained current that we measure with instruments — and that converts a small fraction of the field energy into heat. Together, these two responses explain why trace geometry determines impedance, why copper has loss, and why the ground plane is not optional.
 
-##### 1.1.3.1. Electrical field
+#### 1.2.1. The Electric Field has two Components
 
-The current flowing through the resistance of the metal converts some electric field energy to heat. This shows up as the electric field pointing slightly forward, rather than purely vertical. That forward component is the energy being absorbed by the conductor.
+The electric field between trace and ground plane is not perfectly vertical — it tilts slightly forward in the direction of propagation. That tilt is small, but it explains both the conduction current and the resistive loss.
 
-The $\vec E$ field is not perfectly vertical:
+- **Vertical component $E_v$** (dominant) — comes from the charge separation across the gap. The wave deposits positive charge on the trace and negative charge on the ground plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor. This component stores energy.
 
-- The **horizontal component** $E_h$ comes from the fact that the wave is travelling. At the wave front, the trace ahead is still uncharged — the wave has not arrived there yet. The trace behind is charged. There is a voltage gradient along the trace ($x$-axis):
+- **Horizontal component $E_h$** (small) — comes from the fact that the wave is *travelling*. The voltage is not the same everywhere along the trace at the same instant: the wave has arrived here but not yet at the next point down the line. That spatial gradient in voltage is a horizontal electric field:
 $$
     E_h = -\frac{\partial V}{\partial x}
 $$
 
-- The **dominant vertical component** $E_v$ comes from the charge separation between trace and ground plane ($y$-axis). The wave deposits positive charge on the trace and negative charge on the ground plane (or vice versa half a cycle later). These charges create an vertical electric field pointing from one conductor to the other — just like a capacitor. This is the dominant field. It stores energy.
-
-So, the total $\vec E$ field tilts slightly forward:
-$$
-    \vec E = E_\text{h}\hat x + E_\text{v}\hat y, \quad \text{where }E_v \gg E_h$$
+The vertical component confines the wave. The horizontal component drives the current and accounts for the loss. The following two subsections explain each.
 
 **Horizontal component → sustained current**
 
@@ -229,115 +239,200 @@ In other words, the electrons move vertically to rearrange themselves to **cance
 This cancellation is what **confines the wave**. The field cannot penetrate the copper, so it is forced to exist only in the dielectric between the trace and the ground plane. Without this electron response, the field would pass right through and keep going, like an antenna.
 
 
-##### 1.1.3.2. Magnetic field
+#### 1.2.2. The Magnetic Field — One Field, Two Sources
 
-The logitudinal (horizontal) current in the trace creates its own $\vec B$ field curling around the conductor. This is not a separate, competing magnetic field — it is the same $\vec B$ field that is part of the wave. Together the $\vec B$ field in the dielectric (from $\partial\vec E/\partial t$, the displacement current) and the $\vec B$ field at the conductor surface (from $\vec J$, the conduction current) are the same continuous field, satisfying boundary conditions at the interface.
+The horizontal current $\vec J$ in the trace creates a $\vec B$ field curling around the conductor. A natural question: is this a separate magnetic field competing with the wave's own $\vec B$? No — it is the *same* field. Ampere–Maxwell makes this explicit:
+
 $$
     \nabla \times \vec B =
-    \underbrace{\mu_0 \ \vec J}_{\substack{\text{conduction current}\\ \text{at the surface}}} 
-    +
+    \underbrace{\mu_0 \, \vec J}_{\substack{\text{conduction current}\\ \text{in the copper}}} 
+    \;+\;
     \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement current} \\ \text{in the dielectric}}}
 $$
 
-Think of it this way: in the dielectric, changing $\vec E$ sustains $\vec B$. At the conductor surface, $\vec J$ sustains $\vec B$. The field does not care which source is providing it — it is one continuous magnetic field with two sources that hand off seamlessly at the boundary.
+There is one continuous $\vec B$ field, but it has two sources depending on where you are. Inside the copper, $\vec J$ dominates — free electrons are moving, and their motion sustains $\vec B$. In the dielectric, there are no free electrons, so $\vec J = 0$ — but the changing $\vec E$ field acts as a displacement current that sustains $\vec B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\vec B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
 
-**What the conduction current actually changes about the wave:**
+#### 1.2.3. The Key Insight — One Self-Consistent System
 
-Two things:
+It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not. They are two views of a single electromagnetic solution, and neither can exist without the other.
 
-1. **Confinement.** The electron response forces the E field to zero at the conductor surface, which defines the geometry of the wave — the mode shape, the impedance, the propagation characteristics. This is why trace width and height above the ground plane matter: they set the boundary conditions that determine the field pattern.
+- Without the conduction current, the boundary condition that cancels $\vec E$ inside the metal would not be satisfied. The field would not be confined. There would be no guided wave — just radiation.
+- Without the propagating field, there would be nothing to drive the electrons. No $E_h$ means no $\vec J$. The current would not exist.
 
-2. **Loss.** The electrons are not perfect — copper has finite conductivity. The current flowing through the resistance of the metal converts some field energy to heat. This shows up as the Poynting vector pointing slightly into the conductor at the surface, rather than purely forward. That inward component is the energy being absorbed. This is the dominant loss mechanism in PCB traces at high frequencies (skin-effect loss).
-
-**The key insight**
-
-The wave in the dielectric and the current in the conductor are not two separate phenomena that happen to coexist. They are one self-consistent electromagnetic solution. The wave requires the conduction current to exist — without it, the boundary condition that confines the field would not be satisfied, and you would not have a guided wave at all. And the conduction current requires the wave — without the propagating field, there is nothing to drive the electrons.
+The wave creates the current. The current shapes the wave. They are mutually dependent — one self-consistent system, seen from different sides of the copper surface.
 
 
+---
 
 
-### 1.2. Field Theory applied to PCB Design
+### 1.3. Rail Noise in the Power Distribution Network
+
+Signal integrity is not the only concern. The power and ground paths that feed every chip on the board are themselves transmission lines with impedance — and when the current through them changes, that impedance produces voltage noise.
+
+Every time a chip switches its outputs or its internal gates toggle, it draws a sharp pulse of current from the power rail. That current passes through the impedance $Z_{pdn}$ of the power distribution network (PDN) — the planes, traces, vias, and decoupling capacitors between the voltage regulator and the chip. The resulting voltage drop is:
+
+$$\Delta V = Z_{pdn} \times \frac{dI}{dt}$$
+
+This is the same $V = L \frac{dI}{dt}$ from §1.1 — trace and via inductance resisting sudden changes in current. The chip sees its supply rail sag momentarily, reducing the voltage between its power and ground pins. If the sag is large enough, the chip misinterprets logic levels or produces timing errors.
 
 
-The trace and the ground plane are not pipes for the electrons. They are walls for the field. The electric field originates on the positive charge of the trace and terminates on the negative charge of the ground plane — confined to the dielectric between them. The magnetic field curls around the forward current in the trace and the return current in the plane; seen from a distance, these two fields are equal and opposite and cancel. The energy is trapped between the conductors and guided forward.
-
-Remove the ground plane — or cut a slot through it — and the field lines have nowhere to land. They spray outward. The cancellation of the magnetic fields breaks down. The energy that was supposed to travel from source to load instead radiates into space. That radiation is EMI, and it is the direct consequence of losing control of the fields.
-
-**What this means for PCB design**
-
-Every trace needs a return plane directly below it, not because current needs a path home (though it does), but because the field needs a wall on the other side. A via that crosses layers must have a ground via next to it for the same reason — the field transfers with the signal, and the return field must transfer too. A slot in a ground plane is not just an inconvenience for the return current; it is a gap in the wall that lets the field escape.
-
-The energy is in the fields. The dielectric is the medium. The copper is just the boundary condition that keeps it all in place.
+---
 
 
+### 1.4. Crosstalk
 
-**On the PCB specifically:**
-The forward current in the trace creates a magnetic field curling around the trace. The return current in the ground plane creates an equal and opposite magnetic field. Seen from a distance, these two fields cancel — the energy is "trapped" in the space between trace and plane rather than radiating outward. Interrupt the return path, and the cancellation breaks down. The fields no longer cancel. The loop radiates.
+Crosstalk is what happens when the EM field of one trace overlaps with the EM field of another. There are two coupling mechanisms — capacitive and inductive — and both are direct consequences of Maxwell's equations.
 
-The short version: the electric field drives the current, the current produces the magnetic field, and the two fields then sustain each other forward through space without needing the electrons to move anywhere.
+![Courtesy: Intel](../media/infographics/capacitive-and-inductive-coupling.png)
 
+#### 1.4.1. Capacitive (electric field)
 
-**Back to the PCB:**
-- Gauss (eq. 1): the voltage on the trace creates E between trace and plane.
-- Ampere (eq. 4): the current in the trace creates B curling around it; the return current in the plane creates equal-and-opposite B below.
-- Faraday (eq. 3) + Ampere (eq. 4): E and B leapfrog forward through the FR-4.
-- Gauss for B (eq. 2): B loops are always closed — which is why the return path is not optional. The magnetic field loop must close somewhere; if the ground plane is interrupted, it closes through a large loop, and a large loop radiates.
+The $\vec E$ field from a signal trace does not terminate exclusively on its own return plane. Some field lines — especially the fringing fields at the edges of the trace — terminate on nearby conductors instead: an adjacent trace, a via, a component pad.
 
+When the aggressor trace changes voltage, its $\vec E$ field changes. That changing field induces a displacement current ($\varepsilon_0 \frac{\partial \vec E}{\partial t}$) onto the victim trace — depositing charge on it, just as it would on a capacitor plate. The victim trace sees a current spike $V_C$ proportional to the rate of change of the aggressor's voltage $V_a$:
+$$
+    I_C = C_m \ \frac{dV_a}{dt}
+$$
 
-Changing E → B → changing B → E, entirely through the field terms. This works in the dielectric, in free space, everywhere. It is what Maxwell's displacement current term was invented to capture, and it is why electromagnetic waves can propagate through a vacuum.
+where $C_{\text{m}}$ is the mutual parasitic capacitance between the two traces — determined by their overlap area, separation distance, and the dielectric constant of the material between them. Closer traces, longer parallel runs, and higher $\varepsilon_r$ all increase the coupling.
 
-So, the wave propagates driven by the coupling between ∂E/∂t and ∂B/∂t. The conduction current J in the copper happens simultaneously — the electric field at the conductor surface drives electrons, which produce their own B — but this is a boundary effect that shapes and guides the wave, not what propagates it.
+This is purely Gauss's law at work: electric field lines must terminate on a conductor, and if another trace is closer or more convenient than the return plane, some of them will land there instead.
 
-**Low EMI Rules**
+#### 1.4.2. Inductive (magnetic field)
 
-When different signals cross paths in the dielectric they interact and we experience this as interference, cross talk.
+The current in the aggressor trace creates a $\vec B$ field curling around it. That field extends into the surrounding space — including through the loop formed by the victim trace and its return plane. When the aggressor's current $I_a$ changes, the $\vec B$ field through the victim's loop changes. Faraday's law says a changing magnetic flux through a loop induces a circulating electric field — which drives a voltage:
 
-If we allow fields from one circuit section A (motor control) to crosscouple with fields from circuit section B (analog) - this will lead to EMI, crosstalk and poor circuit performance.
+$$
+    \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} 
+    \tag{\text{Faraday}}
+$$
 
+The induced voltage $V_L$ is proportional to the rate of change of the aggressor's current:
+$$
+    V_L = -L_m \frac{dI_a}{dt}
+$$
 
-1. every signal trace needs an adjacent return plane (or trace)
-2. Every power trace (or plane) needs an adjacent return path (trace or plane)
-3. This includes return paths (vias) up/down through layers
+where $L_m$ is the mutual inductance between the two trace-return-plane loops. It depends on how much of the aggressor's $\vec B$ field threads through the victim's loop — set by the physical distance between traces, the height above the return plane, and the length of the parallel run.
 
-#### 1.2.1. Process
-
-
-1. Choose a stack-up
-2. Partition circuit functons
-3. Layout power plane
-4. Place local decoupling caps
-5. Route (minimize) clock traces
-6. Route data & address
-7. Check return paths
-8. Route low-speed traces
+Inductive crosstalk is worst where the return path is constrained. On a PCB with a continuous ground plane, the return current mirrors directly under the trace, keeping the loop area small. But through connectors, packages, and vias, multiple signals often share a single return pin instead of a wide plane. The return currents are forced through a common impedance, the loop areas grow, and the mutual inductance between aggressor and victim increases sharply.
 
 
-#### 1.2.2. Stackup
+#### 1.4.3. Why both matter, and how they differ
 
-**The typical stackup**
+The capacitive and inductive coupled signals arrive at the victim differently:
 
-L1 signals
-L2 Ground return plane
-L3 power plane
-L4 signals
+- **Capacitive coupling** injects current into the victim trace. That current splits and travels in both directions — toward the near end and the far end. Both ends see a pulse of the same polarity.
 
-This is also very high EMI risk.
-- power and gnd are too far separated for good high frequency decoupling. Should be 2-3 mill max.
-- signals in layer 4 are ferenced to power, rather than signal return. That is OK, if and only if, the power and return planes are tightly coupled together and with adequate decoupling capacitors.  Still wouldn't recommend it.
-power and gnd separed by core distance
+- **Inductive coupling** induces a voltage that drives current in a specific direction (Lenz's law — opposing the change). The near end sees a pulse of opposite polarity to the aggressor; the far end sees a pulse of the same polarity.
 
-**Lower EMI four layer board stack up**
+At the **near end** (closest to the aggressor's source), the capacitive and inductive components have opposite polarity — they partially cancel. At the **far end**, they have the same polarity — they add. This is why far-end crosstalk (FEXT) is typically worse than near-end crosstalk (NEXT) on a microstrip.
 
-L1 Signals / Routed power
-L2 Ground return plane
-L3 Ground return plane
-L4 Signals / Routed power
+#### 1.4.4. The field-theory view
 
-Prevent discontinuous signal return paths
+In circuit theory we talk about parasitic capacitance and mutual inductance as if they are discrete components accidentally added to the circuit. In field theory the picture is more honest: there is one EM field in the dielectric, and that field does not know which trace "owns" it. If two traces share the same dielectric volume, their fields overlap, and the overlap is the crosstalk. $C_m$ and $L_m$ are just circuit-theory approximations of that field overlap.
+
+---
+
+
+### 1.5. PCB Design Rules
+
+Everything in §1.1 through §1.4 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the ground plane is the other. The copper confines the field ($E_v$ cancellation), the dielectric carries it forward (displacement current), and the return current in the ground plane provides the equal-and-opposite $\vec B$ that prevents radiation (field cancellation at a distance).
+
+When that field structure breaks down, the consequences fall into four categories: degraded signal quality on a single net (reflections, ringing), crosstalk between adjacent nets (§1.4), rail collapse in the power distribution network (§1.3), and radiated EMI. Every PCB layout rule exists to prevent one or more of these — by keeping the field confined, the return path intact, and the coupling between unrelated fields to a minimum.
+
+#### 1.5.1. The Return Path
+
+The $\vec B$ field from the forward current in the trace and the $\vec B$ field from the return current in the ground plane are equal and opposite. At a distance, they cancel — the energy stays confined between the conductors. Gauss's law $\nabla \cdot \vec B = 0$ tells us magnetic field lines must always close. If the ground plane is continuous, they close tightly through the narrow gap between trace and plane. If the ground plane is interrupted — a slot, a cutout, a missing pour — the field lines must close through a larger loop. A larger loop means less cancellation at a distance, which means radiation.
+
+**Rule 1:** Every signal trace needs an unbroken return plane directly below it — not because current needs a path home (though it does), but because the field needs a wall on the other side.
+
+![Courtesy: Kenneth Wyatts, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/trace-crossing-gap-in-return-plane.png)
+
+> Forget the word ground. Every signal has a return path. Think return path and you will train your intuition to look for and treat the return path as carefully as you treat the signal path.
+
+#### 1.5.2. Layer Transitions need Return Vias
+
+When a trace passes through a via from one layer to another, the EM wave transfers between layers. But the wave is not just the trace — it is the field between the trace and its reference plane. If the reference plane changes (say, from L2 to L3), the return current must also transition. Without a nearby ground via, the return path detours around the edge of the plane, the loop area grows, and the field radiates.
+
+**Rule 2:** Every signal via needs a ground via alongside it, stitching the two reference planes together at the point of transition.
+
+![Courtesy: Kenneth Wyatts, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/trace-passing-through-two-planes-with-via.png)
 
 Trace passing through two vias layers causes the wave to leak in between the reference planes.  May interfere with other signals in that space, and cause board edge radiation.  If the planes are the same potential, you can prevent this with nearby sticking vias between the ground planes.  If they are different potentials you can add stiching capacitance very close.
 
-#### 1.2.3. Segregating Functional Regions
+
+#### 1.5.3. Fields Couple through Shared Dielectric
+
+The EM wave travels in the dielectric. If two signals share the same dielectric space — running parallel on the same layer, or overlapping on adjacent layers — their fields interact. The $\vec E$ field from one trace induces charge on the neighbouring trace (capacitive coupling). The $\vec B$ field from one trace's current induces current in the neighbouring trace (inductive coupling). This is crosstalk, and it is a direct consequence of overlapping field volumes.
+
+**Rule 3:** Keep fields from different functional domains separated — physically, by distance, or by interposing a ground plane between them. Moreover, provide at least $3W$ to $5W$ spacings between critical traces, where $W$ is the width of a trace. Keep traces on perpendicular to adjacent layers.  Motor control traces and analog sensor traces must not share the same dielectric space.
+
+#### 1.5.4. Power Planes Need Return Paths Too
+
+A power plane carrying current creates its own $\vec B$ field, just like a signal trace. The same physics applies: that field must have a nearby return plane to cancel at a distance, or it radiates. A power plane separated from its ground plane by a thick core (>10 mil) is a poor high-frequency decoupling pair — the fields between them are weakly confined.
+
+**Rule 4:** Every power plane or routed power trace needs an adjacent return plane, tightly coupled (2–3 mil dielectric separation) for effective high-frequency decoupling.
+
+#### 1.5.5. Rail Drop Mitigation
+
+The goal is to make $Z_{\text{PDN}}$ as low as possible across the full frequency range the chip draws current at. Each mitigation targets a different part of the impedance:
+
+**Rule 5a — Tightly couple power and ground planes.** A power plane and ground plane separated by a thin dielectric (2–3 mil) form a parallel-plate capacitor with very low inductance. This provides broadband decoupling across the entire board area — the EM field between the planes can supply current to the chip before the discrete capacitors or the regulator can respond. Place this plane pair near the surface of the board, close to the chip.
+
+**Rule 5b — Use multiple, low-inductance decoupling capacitors.** A single capacitor has parasitic lead and via inductance that limits its effectiveness above its self-resonant frequency. Multiple smaller capacitors in parallel reduce the effective inductance (inductances in parallel divide). Place them as close to the chip's power pins as physically possible — every millimetre of trace adds inductance.
+
+**Rule 5c — Minimise power and ground lead length in packages.** The inductance of the bond wires and package leads between the die and the PCB is often the dominant contributor to $Z_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (such as QFN or BGA) have lower inductance than those with long leads (such as SOIC or DIP).
+
+**Rule 5d — Rely on on-chip decoupling for the highest frequencies.** At frequencies above ~100 MHz, no external capacitor can respond fast enough — the inductance of the path from capacitor to die is too high. Modern ICs include on-die decoupling capacitance for this reason. The PCB designer's job is to keep $Z_{\text{PDN}}$ low at the frequencies *below* that — and let the silicon handle the rest.
+
+
+#### 1.5.6. Crosstalk Mitigation
+
+Both coupling mechanisms — capacitive ($C_m$) and inductive ($L_m$) — depend on how much of the aggressor's field overlaps with the victim's field volume. Every mitigation strategy reduces that overlap.
+
+**Rule 6a — Increase trace spacing.** The fringing $\vec E$ field that causes capacitive coupling falls off roughly as $1/d^2$ with distance. The $\vec B$ field that causes inductive coupling falls off as $1/d$. The 3W rule (space traces at least 3× the trace width apart) is a practical approximation of this.
+
+**Rule 6b — Minimise parallel run length.** Both $C_m$ and $L_m$ are proportional to the length over which the two traces run in parallel. The coupling is cumulative — every millimetre of shared dielectric adds to the total. Where two sensitive traces must be routed near each other, cross them at 90° rather than running them in parallel.
+
+**Rule 6c — Reduce trace height above the return plane.** The closer a trace is to its return plane, the more tightly the $\vec E$ and $\vec B$ fields are confined to the space directly underneath. Less field energy spills sideways into the neighbouring trace's volume. A trace at 4 mil above the ground plane has significantly less crosstalk than one at 8 mil, even at the same lateral spacing.
+
+**Rule 6d — Interpose a ground plane between layers.** A grounded conductor between two signal layers does both jobs at once. It terminates the $\vec E$ field lines from traces above (Gauss's law — the field lines land on the ground plane instead of reaching through to the layer below). And it provides a local return path for the $\vec B$ field, preventing the magnetic flux from one layer threading through the other.
+
+
+---
+
+
+### 1.6. PCB Stack-up
+
+The PCB has two hard constraints that drive most of the other design decisions. First, the 4.7A peak current on the 24V rail requires copper heavy enough to carry that current continuously without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
+
+The **typical 4-layer stack-up** is SIG/GND/PWR/SIG as shown in the table below. We are not using this, because the Power and GND are too far separated (the core distance) for good high frequency decoupling. Should be 2-3 mill max.  Also, signals in Layer 4 are referenced to power, rather than GND. That is OK, if and only if, the power and return planes are tightly coupled together and with adequate decoupling capacitors.
+
+Instead, we opt for the **Low EMI 4-layer stack-up** as shown below.
+
+Layer | Name   | Function                         | Components
+------|--------|----------------------------------|--------------------------
+L1    | Top    | Sensitive signals / routed power | ESP32, LiDAR, I2C, UART, EZO, BNC, 3V3/5V power traces
+L2    | GND    | Ground return plane              | Return plane for Layer 1
+L3    | GND    | Ground return plane              | Return plane for Layer 4
+L4    | Bottom | Noisy signals / routed 24V power | Stepper drivers, MOSFETs, 24V power traces
+
+![Courtesy: Kenneth Wyatts, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/lower-emi-4-layer-pcb.png)
+
+
+---
+
+
+### 1.7. PCB Materials 
+
+The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The heavier copper on L1 and L4 keeps resistance and heat low on the high-current 24V traces. The two inner layers (L2 and L3) use standard 1 oz copper, which is sufficient for the ground and power planes they carry.
+
+
+**PCB finish:** HASL (Hot Air Solder Leveling) is sufficient and lowest cost. ENIG (Electroless Nickel Immersion Gold) is a worthwhile upgrade for the fine-pitch SSOP-20 pads of the ADM3260.
+
+
+
+#### 1.8. Segregating Functional Regions
 
 Segregating Functional Regions
 
@@ -355,22 +450,10 @@ the dip in |Z| is ESR
 
 
 
-#### 1.2.4. PCB Guidelines
 
-The PCB has two hard constraints that drive most of the other design decisions. First, the 4.7A peak current on the 24V rail requires copper heavy enough to carry that current continuously without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
 
-The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The heavier copper on L1 and L4 keeps resistance and heat low on the high-current 24V traces. The two inner layers (L2 and L3) use standard 1 oz copper, which is sufficient for the ground and power planes they carry.
+---
 
-**Layer stack-up**
-
-The layer assignment is not arbitrary — L2 is the EMI shield that separates the noisy switching circuits on L4 from the sensitive signal traces on L1.
-
-Layer | Name   | Function                | Components
-------|--------|-------------------------|--------------------------
-L1    | Top    | Signal layer            | ESP32, LiDAR, I2C, UART, EZO, BNC
-L2    | GND    | Solid ground plane      | One uninterrupted copper pour — the EMI shield
-L3    | PWR    | Power planes            | Separate copper pours for 3.3V, 5V, and 24V
-L4    | Bottom | High-current switching  | Stepper drivers, MOSFETs, 24V power traces
 
 **Enclosure and mechanical**
 
@@ -379,15 +462,10 @@ The board targets a ~100 mm × 80 mm footprint, which fits standard off-the-shel
 - **Enclosure:** IP65-rated ABS, approximately 150 × 100 × 70 mm. The IP65 rating keeps moisture and insects out of the electronics.
 - **Cable glands:** Use glands for every wire entering the enclosure — probe cables, pump leads, and the PSU input.
 - **BNC connectors:** Mount three panel-mount BNC connectors on the enclosure face for the pH, EC, and RTD probes. Panel-mount rather than PCB-mount prevents mechanical stress on the isolation islands if a probe cable is tugged.
-- **PCB finish:** HASL (Hot Air Solder Leveling) is sufficient and lowest cost. ENIG (Electroless Nickel Immersion Gold) is a worthwhile upgrade for the fine-pitch SSOP-20 pads of the ADM3260.
 - **Optional:** A clear lid panel allows status LED visibility without opening the enclosure.
 
-**EMI Considerations**
 
-
-
-
-#### 1.2.5. Trace Widths
+#### 1.9. Trace Widths
 
 The trace widths can be calculated using the IPC-2221 empirical formula for external conductors.[^1]
 [^1]: [IPC-2221 Trace Width Calculator, Altium PCB Design Guide](https://resources.altium.com/p/ipc-2221-calculator-pcb-trace-current-and-heating).
@@ -415,7 +493,7 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 3.3V rail (post-LDO)    | 0.15A (Peak)      | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
 
 
-#### 1.2.6. PCB Layout Strategy
+#### 1.10. PCB Layout Strategy
 
 - **Star Power**: Run a dedicated pair of 24V wires from your main power input connector directly to the stepper section, and a separate pair to the logic regulator. Do not "daisy chain" the power from the motors to the sensors.
 - **Ground Plane:** Make sure you have an uninterrupted ground plane, to minimize current loops (inductance).

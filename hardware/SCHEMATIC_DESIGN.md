@@ -376,44 +376,34 @@ The schematic or firmware should use **StealthChop2** for dosing. It generates s
 
 Switching **noise** from the TMC2209 drivers and the buck converter spans a wide frequency range — from the fundamental chopping frequency (~20–50 kHz for the steppers, 1 MHz for the buck) up through many harmonics into the tens of MHz. No single capacitor type covers this entire range effectively. The strategy is to use two tiers of decoupling in parallel, each tuned to a different frequency band.
 
+A bypass capacitor's job is to supply charge faster than the power rail can. What limits that speed is not the capacitance — it is the **series inductance** (ESL) of the capacitor and its mounting loop. A capacitor behaves capacitively only below its self-resonant frequency; above that, ESL dominates and the part looks inductive. The target PDN impedance for this design is roughly 1 Ω — every nanohenry of loop inductance works against that goal.[^Bogatin]
+
+[^Bogatin]: [Eric Bogatin — The Myth of Three Capacitor Values](https://www.signalintegrityjournal.com/articles/1589-the-myth-of-three-capacitor-values)
+
+**Engineering Notes**
+
+- **Capacitance value matters less than package and placement.** Modern MLCC technology offers a wide range of values in the same body size — 10 µF fits in an 0402 just as easily as 10 nF. Because ESL is set by the package geometry, not the capacitance, the impedance at high frequency is the same for both. → Choose the largest value available in the smallest package, rather than spreading across many decades of capacitance.
+
+- **ESL benchmarks** — Standard MLCC: ~500 pH. Reverse-geometry (IDC/LGA): <100 pH. The lower the ESL, the higher the self-resonant frequency and the wider the effective bypass range.
+
+- **Minimize the mounting loop.** The current loop from the VDD pad, through the capacitor, to the GND pad and back is an inductor in its own right. Keep the vias close to the capacitor pads and close to each other. → Place decoupling capacitors as the second components during layout (after the IC), so they get the shortest possible loop before other routing claims the space.
 
 
-Inspired by Dr. Eric Bogatin[^Bogatin] 
+**Placement**
 
-[^Bogatin]: https://www.signalintegrityjournal.com/articles/1589-the-myth-of-three-capacitor-values
+A bypass cap only works if it is close to the load. Long traces add inductance that shifts the $f_{res}$ down and reduces effectiveness. Place caps in this priority order:
 
-The history values for through hole components has been 100nF or 1 uF for bypass capacitors.  This changed with newer packaging and technologies. Dr. Eric Bogatin suggestsing to use up to 22 uF in the smallest package possible. 
+Capacitor value  | Maximum distance from IC
+-----------------|--------------------------
+10 nF ceramics   | 2 mm
+100 nF ceramics  | 5 mm
+10–22 µF ceramics| 10 mm
+Electrolytics    | 20 mm
 
-The main goal for effective bypass capacitors is to minimize the series inductance.
-
-Target impedance is about 1 Ohm.
-
-
-Guidelines fro Dr. Todd Hubing
-1. if power and return plane are 4 mils or closer
-    - all capacitors contribute to all devices .e.g., create a single structure.
-    - capacitor position is relatively unimportant as long as there is good distribution across the board
-2. if power and return plane are futher than 10 mills apart
-    - capacitor position is extremely important
-    - capacitors are didicated to specific devices
-    - sharing vias can make sense with QFP type devices
-    - cavity resonance at some frequency is a "given"
-3. No power / ground return plane, i.e., routed power
-    - at least 3 caps per power pin
-
-It is extremely important to minimize the series inductance and loop area connecting bypass capacitors to power and return pins of digital ICs. Best to have the vias close to the capacitor and close to each other.
-
-Normal MLCC have about 500 pH of series inductance. Newer IDC have <100pH inductance. 
+For additional high-frequency rejection, add **ferrite beads** on power inputs to the most sensitive ICs (see §3.1 for the ADM3260 pi-filter).
 
 
-This connection between capacitance value and ESL dramatically affects the impedance profile of a large and a small value capacitor. At low frequency, the impedance of a real capacitor is about its capacitance. At high frequency, the impedance of a real capacitor is about its lead inductance.
-
-Often, a wide range of capacitance values can be obtained in exactly the same body size. It is just as easy to have 10 uF in an 0402 as a 0.01 uF. This means that the ESL of an MLCC capacitor, if optimally integrated into a board, will be independent of its capacitance value.
-
-Regardless of the application, lower mounting loop inductance is always of value. This is why the MLCC decoupling capacitors should always be the second components placed on the board, so they can be routed with the lowest mounting inductance practical.
-
-Power Delivery Network (PDN)
-
+**==START OLD==**
 
 **Medium-frequency bypass (10 µF and 220 µF)**
 
@@ -482,18 +472,9 @@ $$
     Q = \frac{1}{R_s} \sqrt{\frac{L_s}{C}}
 $$
 
-**Placement**
+**==END OLD==**
 
-A bypass cap only works if it is close to the load. Long traces add inductance that shifts the $f_{res}$ down and reduces effectiveness. Place caps in this priority order:
 
-Capacitor value  | Maximum distance from IC
------------------|--------------------------
-10 nF ceramics   | 2 mm
-100 nF ceramics  | 5 mm
-10–22 µF ceramics| 10 mm
-Electrolytics    | 20 mm
-
-For additional high-frequency rejection, add **ferrite beads** on power inputs to the most sensitive ICs (see §3.1 for the ADM3260 pi-filter).
 
 
 ### 2.4. PCB Layout Strategy
@@ -863,12 +844,17 @@ BME280  | Outside Air Temp / Humidity Sensor | 0x76 / 0x77
 BH1750  | Light Sensor                       | 0x23 / 0x5C
 SSD1306 | OLED Display                       | 0x3C / 0x3D
 
-To **fix noisy** SDA/SCL lines, use one or more of these methods:[^I2CNOISE]
-- **Strengthen Pull-ups:** Use lower resistance values (instead of 10kΩ) to increase current and ensure the signal reaches a logic high quickly, especially with high bus capacitance. → Use 2.2kΩ pull-ups.
-- **Series Resistors:** Place a small (100 to 300Ω) resistor in series with the SDA/SCL lines to reduce ringing and improve RF noise immunity. The resistor along with the pin capacitance forms a low pass filter and filters out any high frequency signals which may get coupled to the I2C lines.
-- **Proper Decoupling:** Use 0.1µF capacitors to ground for the power supply (VDD to GND) of the ICs. 
-- **Physical Layout:** Keep I2C traces short and separated from noise sources.
-- **Shunt Capacitors:** Place small capacitors (10 - 50pF) on the SDA and SCL lines to ground to create a low-pass filter, reducing high-frequency noise.
+**Engineering Notes**
+
+- I2C is an open-drain bus — the lines float HIGH via pull-up resistors and each device pulls LOW to signal. Noise immunity depends on how quickly and cleanly the bus returns to HIGH after a device releases it.[^I2CNOISE]
+
+- **Pull-ups** — The default 10 kΩ pull-ups leave the bus sluggish under high capacitive loading. Stronger 2.2 kΩ pull-ups increase the drive current, sharpening the rising edges and reducing susceptibility to coupled noise.
+
+- **Series resistors** — A 100–300 Ω resistor in series with each SDA/SCL line forms a low-pass filter together with the pin capacitance, attenuating high-frequency noise that couples onto the bus. This also dampens reflections on longer traces.
+
+- **Decoupling** — Place 100 nF capacitors from VDD to GND at each I2C device to keep supply transients from feeding back into the bus as common-mode noise.
+
+- **Common-mode chokes** — Cables to off-board sensors act as antennas for common-mode noise. A two-wire common-mode choke (e.g. Murata DLW21SN900SQ2L) on SDA and SCL near each connector blocks common-mode currents while passing the I2C signal unimpeded. → Place the choke on the board side, before the pull-up resistors, so the pull-ups remain on the cable side.
 
 [^I2CNOISE]: [I2C Design Mathematics: Capacitance and Resistance](https://www.allaboutcircuits.com/technical-articles/i2c-design-mathematics-capacitance-and-resistance/#:~:text=The%20NXP%20specification%20states%20that,cases%20the%20effect%20is%20negligible.)
 
