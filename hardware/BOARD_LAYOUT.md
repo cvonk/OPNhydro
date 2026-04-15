@@ -95,6 +95,30 @@ To summarise: once the electric field appears, a magnetic field arises alongside
 
 <br />
 
+#### In other words
+
+Here's roughly how I imagine Richard Feynman giving this talk. Chalk in one hand, no notes.
+
+Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of plastic. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
+
+You might think: electrons start moving in the wire, and eventually they get to the other end and light up the bulb. And that would be a perfectly reasonable thing to think. It's also completely wrong. The electrons in a wire drift along at about a meter per hour. If we had to wait for them to get there, nothing would ever work.
+
+So what really happens? Well, the instant you close the switch, there's a voltage between the trace and the plane. And whenever you have a voltage between two pieces of metal, there's an **electric field** between them. Bang — the field is just there, pointing from the trace down to the plane. Not in all of space, mind you — only right near the switch, because the rest of the trace hasn't heard the news yet.
+
+Now here is where it gets interesting. The electric field went from zero to something. That's a change. And it turns out — and this is one of the most marvelous things in physics — that **a changing electric field makes a magnetic field**. Not "has a magnetic field associated with it." Makes one. Maxwell figured this out. The electric field changes in time, and a magnetic field curls up around it, right there in the plastic.
+
+OK, so now we have a magnetic field. And it is also going from zero to something. It's changing in time too. And Faraday — long before Maxwell — figured out the other half of the story: **a changing magnetic field makes an electric field**. So the magnetic field we just made, by changing, makes another electric field — a little bit further along the trace than the one we started with.
+
+You see what's happening? The electric field made a magnetic field. The magnetic field made an electric field. The new electric field is further down the line. And now it is changing, so it makes another magnetic field, which makes another electric field, and off we go. The two fields are playing leapfrog, and they're heading down the trace at an enormous speed.
+
+And here's the punchline — the beautiful punchline. If you write down the two laws, Faraday's and Maxwell's, and you do a little algebra (which I'll spare you), out pops a speed. And the speed is $1/\sqrt{\mu_0 \varepsilon_0}$, where $\mu_0$ and $\varepsilon_0$ are just numbers you measured in a laboratory with magnets and charges, nothing to do with light at all. And when you plug them in, the speed is three hundred thousand kilometers per second. Which is the speed of light. Maxwell looked at this and said, my goodness, light is this. Light is just this game of leapfrog between electric and magnetic fields, propagating at the speed that falls out of the equations.
+
+So when you flipped that switch — the light turned on because a little piece of light, essentially, rushed down the trace. Not the electrons. The field. The electrons are just sitting there wiggling; they're the audience, not the performers. The show is in the plastic, between the conductors, where the fields are doing their dance.
+
+And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of light.
+
+Feynman would probably then pause, grin, and say "Isn't that something?"
+
 #### Propagation
 
 Steps 1–3 showed the first cycle. The same coupling, applied repeatedly, guarantees indefinite propagation. In the source-free dielectric, the two laws simplify to:
@@ -232,6 +256,8 @@ The **free electrons** in the copper respond to each component differently:
 - **Horizontal component $E_x$** (small) arises from the fact that the wave is *travelling*. The voltage is not the same everywhere along the trace at the same instant: the wave has arrived here but not yet at the next point down the line. That spatial gradient in voltage is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$. It drives a sustained current that we measure with instruments, and converts a small fraction of the field energy into heat.
 <br />
 
+>  the wave front induces a conduction current in the copper trace and back along the return plane. Of course, this conduction current cannot flow through the PC board dielectric, but the charge at the wave front repels a like charge on the return plane, which “appears” as if current is flowing. This is the same principle for capacitors and Maxwell called this effect “displacement current”.
+
 - **Vertical component $E_y$** (dominant) drives a transient surface-charge redistribution, in the copper, that **confines** the wave to the dielectric. It comes from the charge separation across the dielectric. The wave deposits positive charge on the trace and negative charge on the return plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor.
 
 ![Courtesy: Kenneth Wyatt](../media/infographics/signal-propagating-along-microstrip.png)
@@ -267,6 +293,36 @@ In other words, the electrons rearrange themselves to **cancel the electric fiel
 This cancellation is what **confines the wave**. The field cannot penetrate the copper, so it is forced to exist only in the dielectric between the trace and the return plane. Without this electron response, the field would not be confined — the wave would radiate away instead of propagating along the line.
 <br />
 
+##### In other words
+
+Here's how I imagine him walking us through it. Same chalkboard, he's just turned back to it.
+
+All right, so we've got this wave zipping down the trace, and the energy is really out there in the plastic — the fields are doing the heavy lifting. But now somebody in the back says, **"Now wait a minute, Professor. What about the electrons? What are they doing?"**
+
+Good question. Let's look.
+
+Here's the trick. That electric field in the dielectric — it's *almost* pointing straight down, from the trace to the plane. But not quite. It's tilted, just a little, forward — in the direction the wave is moving. Why? Because the wave is *going somewhere*. The voltage on the trace right here is a little different from the voltage a millimeter ahead, because the wave hasn't quite gotten there yet. And wherever the voltage changes from one place to another, there's an electric field pointing from high to low. So you get a small horizontal piece of the field along with the big vertical piece.
+
+So — two components. Let's call them the **down-field** (the big one) and the **along-field** (the tiny one). And the electrons in the copper feel both of them, but they do completely different things about each.
+
+**First, the along-field.** You've got free electrons in the copper — just sitting there, jiggling around from heat, but no net motion. Now the wave arrives, and suddenly there's a little electric field pushing them along the trace. They feel the force, they start to drift — very slowly, mind you, but they all drift together — and that is what we call a **current**. Now here's what I want you to notice: the current didn't cause anything. The field caused the current. The field shows up first, the electrons react. When your textbook says "apply a voltage, current flows," it makes it sound like the voltage pushes the electrons through the wire like water through a hose. That's not what's happening. The voltage is a bookkeeper's description of the field. The field is the real thing. The electrons are just reacting to it.
+
+**Now the down-field.** This one's bigger, and it's doing something much more dramatic. It's pointing from the trace down through the plastic to the return plane. So it's *pulling* the electrons in the trace — which are negative — *upward*, away from the bottom surface of the trace. And in the return plane, same field, same upward pull: electrons pile up against the top surface. You've got a pileup of negative charges on one surface and a corresponding deficit (meaning positive) on the other. A little capacitor, in effect, right where the wave front is sitting.
+
+And here's the marvelous thing. Those electrons don't stop moving until they've *cancelled* the field. They keep shoving themselves around until the extra field they create, from being piled up, exactly cancels the field that pushed them in the first place — so that inside the copper itself, the net field is zero. That's what conductors always do, in equilibrium. They arrange their electrons so the field inside is zero.
+
+And *that* is the thing I want you to appreciate, because it's what makes the whole PCB work. The electrons in the copper are throwing up a wall. They won't let the field into the metal. The field is forced to stay where the electrons aren't — in the dielectric, between the conductors. The wave can't escape. It's trapped. It has no choice but to go along the line, from the switch to the bulb, because the electrons in the copper refuse to let it go anywhere else.
+
+Somebody says, **"How fast do the electrons do that?"** And the answer is: very, very fast. Much faster than the wave is moving. If you try to push a little bit of field into the copper, it makes it in maybe 2 microns at a gigahertz before the electrons have shoved it back out. Two microns! In a piece of copper that's tens or hundreds of microns thick, the field barely gets in the door.
+
+So put it all together:
+- The wave is in the plastic.
+- The *down-field* from the wave shoves electrons around on the copper surfaces. Those electrons build a wall that keeps the wave trapped in the plastic.
+- The *along-field* from the wave pushes other electrons along the trace, giving you the little current you measure with your ammeter.
+
+The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field, the same way a line of dominoes reacts to the first push. The dominoes aren't transporting the energy down the line — the *falling pattern* is. And on a PCB, the falling pattern is the field.
+
+Then I bet he'd shrug and say *"And that's really all there is to it. The hard part is believing it."*
 
 #### Sources of the Magnetic Field
 
@@ -281,6 +337,36 @@ $$
 
 There is one continuous $\vec B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu_0 \vec J$) dominates — free electrons are moving, and their motion sustains $\vec B$. In the dielectric, there are no free electrons ($\vec J = 0$), so the displacement term takes over — the changing $\vec E$ field sustains $\vec B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\vec B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
 <br />
+
+##### In other words
+
+He's still at the chalkboard. Someone in the third row raises a hand.
+
+**"Professor, I'm confused. You just told us the wave has a magnetic field around it — that was part of the leapfrog thing. But now you're saying the electrons in the copper are flowing, and a flowing current also makes a magnetic field. So which is it? Are there two magnetic fields here, or what?"**
+
+That's a wonderful question. And the answer — which I think is one of the most beautiful things Maxwell ever did — is that there's only **one** magnetic field. There's just one field in space, wrapping around the trace. But that field has *two different things that can keep it going*, and which one is keeping it going depends on *where you are*.
+
+Let me show you. Maxwell's Ampère law — the real one, with his addition — says the curl of $\vec B$ is two things added together:
+
+$$\nabla \times \vec B = \mu_0 \vec J + \mu_0 \varepsilon_0 \frac{\partial \vec E}{\partial t}$$
+
+That first piece — $\mu_0 \vec J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field. Every kid who ever wrapped wire around a nail knows this.
+
+That second piece was Maxwell's great invention. He realized Ampère's law couldn't be complete because if you had a capacitor, the current comes *into* one plate and *out of* the other, but in between — in the empty space — there's no current flowing. And yet the magnetic field has to be continuous; it can't just stop at the plate and start up again on the other side. Something has to keep it going across the gap. And Maxwell said: the thing that keeps it going is the *changing electric field* between the plates. He called it the **displacement current**, even though nothing is really being displaced. It's just a changing field that *looks like* a current, from the magnetic field's point of view.
+
+Now look where we are on this PCB. You've got copper up top, copper down below, and plastic in between.
+
+**Inside the copper,** electrons are flowing. So $\vec J$ is big. And the electric field in the copper is essentially zero — we just spent the last lecture explaining why. So the second term is nothing. The $\mu_0 \vec J$ piece is doing all the work.
+
+**Inside the plastic,** there are no free electrons. $\vec J = 0$. Nothing is flowing through the dielectric. So the first term is nothing. But the electric field is enormous in there, and it's changing in time as the wave goes by. So the second term — the displacement current — is doing all the work.
+
+And here's what I want you to appreciate. You walk from the plastic up into the copper, crossing the boundary, and the $\vec B$ field doesn't care. It doesn't notice. It's perfectly smooth. It has the same value just below the surface as just above. What changes is '*who's responsible for it*. Down in the plastic, a changing electric field is keeping $\vec B$ alive. Up in the copper, moving electrons are keeping it alive. The field itself is completely oblivious — it just wraps around the trace as one continuous tube of magnetism.
+
+You can think of it like this. You've got a relay race. There are two runners. One runs through the plastic carrying the magnetic field; the other runs through the copper carrying the magnetic field. When they get to the copper-plastic boundary, they hand the baton off, cleanly, without dropping a step. And if you're the baton — if you're the magnetic field — you don't even know the runners changed. You just keep going.
+
+That was Maxwell's real insight. Not that current makes magnetism — we knew that. Not that changing fields make fields — Faraday had half of that. Maxwell's piece was realizing that *a changing electric field is, for the purposes of magnetism, every bit as good as a current.* Nature doesn't care which one is feeding the field. It'll take either. And on a PCB, inside the copper it takes one, inside the plastic it takes the other, and the result is a seamless, beautiful, continuous magnetic field wrapping the whole transmission line.
+
+And then — I think — he'd tap the board twice, right on the plus sign between the two terms, and say *"That little plus sign, right there, is one of the most important plus signs in all of physics."*
 
 #### One System, Two Views
 
