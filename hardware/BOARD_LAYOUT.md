@@ -104,15 +104,8 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
 
 <br />
 
-<figure>
-  <center>
-  <img src="../media/infographics/e-field-building-up-in-transmission-line.png" style="width: 60%; height: auto;">
-  <figcaption><i>Electric field building up in transmission line. <br />(Courtesy:  Ralph Morrison)</i></figcaption>
-  </center>
-</figure>
 
-
-**Two of Maxwell's Equations**
+##### Two of Maxwell's Equations
 
 As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampere-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free boundary condition.
 $$  
@@ -130,9 +123,16 @@ $$
 
 The **displacement current** term in the Ampère-Maxwell law in is not a real current — no charge crosses the gap. A changing electric field acts as a source of magnetic field, just as a real current does. This is what allows $\mathbf{B}$ to be continuous across the copper-dielectric boundary, and it is what sustains the wave in the dielectric where $\mathbf{J} = 0$. In a material dielectric like FR-4, bound-charge polarization ($\partial \mathbf{P}/\partial t$) adds a second contribution, but the mechanism works in pure vacuum too.
 
-**Microstrip Geometry**
+##### Microstrip Geometry
 
 Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. In the dielectric region ($\rho = 0, \mathbf J = \mathbf 0$ — no free charges between the conductors), 
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 90%; height: auto;">
+  <figcaption><i>Side view of microstrip <b>E</b> and <b>B</b> fields along the propagation direction.</i></figcaption>
+  </center>
+</figure>
 
 When a **voltage step** is applied at one end, the following chain of events unfolds:
 
@@ -154,9 +154,8 @@ Maxwell's curl equations link the two: a time change *here* forces a spatial dif
 
 **To summarize:** once the electric field appears, a magnetic field arises alongside it. That changing magnetic field extends the electric field slightly ahead, which in turn extends the magnetic field further still. **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
 
-<br />
 
-#### In other words
+##### In other words
 
 Here's how I imagine Richard Feynman would explain this. Chalk in one hand, no notes.
 
@@ -175,6 +174,7 @@ So when you flipped that switch — the light turned on because a little piece o
 
 And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of light. Isn't that something?
 </div>
+<br />
 
 #### Propagation
 
@@ -278,7 +278,6 @@ $$
 $$
 
 The wave **propagation speed in FR-4** is therefore **~15 cm/ns**. To be precise, this is the bulk-FR-4 (or stripline) speed. On a microstrip, part of the field is in air above the trace, so the effective permittivity is a bit lower and the speed rises to ~17–18 cm/ns.
-<br />
 
 ##### In other words
 
@@ -299,21 +298,6 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 §1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the metal, there are free electrons, and they are not passive bystanders.
 
-<figure>
-  <center>
-  <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 60%; height: auto;">
-  <figcaption><i>Cross-section of microstrip showing <b>E</b> and <b>B</b> fields.</i></figcaption>
-  </center>
-</figure>
-
-<figure>
-  <center>
-  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 90%; height: auto;">
-  <figcaption><i>3D view of microstrip <b>E</b> and <b>B</b> fields along the propagation direction.</i></figcaption>
-  </center>
-</figure>
-
-
 #### Components of the Electric Field
 
 The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — for example, at the wavefront near the trace, it tilts slightly forward in the direction of propagation. That tilt decomposes into two components:
@@ -321,11 +305,11 @@ $$
     \mathbf E = \hat x \, E_x - \hat z \, E_z
 $$
 
-where $\hat x$ points along the trace (the propagation direction) and $\hat z$ points from the return plane to the trace.
+where $\hat x$ points along the trace (the propagation direction) and $-\hat z$ points from the trace to the return plane.
 
 <figure>
   <center>
-  <img src="../media/infographics/e-field-building-up-in-transmission-line.png" style="width: 60%; height: auto;">
+  <img src="../media/infographics/microstrip-e-field-components.svg" style="width: 100%; height: auto;">
   <figcaption><i>At the wavefront, the electric field doesn't point straight down.<br />(Courtesy:  Ralph Morrison)</i></figcaption>
   </center>
 </figure>
@@ -345,7 +329,7 @@ The **free electrons** in the copper respond to each component differently:
 
 The two subsections below unpack each component in detail, starting with the horizontal.
 
-**Horizontal component $E_x$ → sustained current**
+##### Horizontal component $E_x$ → sustained current
 
 As the wave front reaches a section of the conductor, $E_x$ there rises from zero to some value. The free electrons — previously drifting only thermally, with no net motion — feel a force and begin to move horizontally:
 $$
@@ -373,7 +357,7 @@ where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This is 
 
 In other words: the field arrives first; the **current is the electrons' response to the electric field**. This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector $\mathbf E \times \mathbf B$, which points from the source toward the load, through the dielectric between the conductors.
 
-**Vertical component $E_z$ → transient redistribution of surface charge → confines the wave**
+##### Vertical component $E_z$ → transient redistribution of surface charge → confines the wave
 
 As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E$, so with $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*: in the trace, they move away from the dielectric-facing surface, leaving it positively charged; in the return plane, they move toward the dielectric-facing surface, making it negatively charged (or the reverse half a cycle later). By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the conductor.
 
