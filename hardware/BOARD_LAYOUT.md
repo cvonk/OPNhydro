@@ -308,7 +308,7 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 80%; height: auto;">
+  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 90%; height: auto;">
   <figcaption><i>3D view of microstrip <b>E</b> and <b>B</b> fields along the propagation direction.</i></figcaption>
   </center>
 </figure>
