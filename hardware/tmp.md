@@ -1,3 +1,12 @@
+Create SVG with a 2d view where the x-axis goes from left to right, z-axis bottom to top, and y-axis going into the paper/screen.
+- Show the microstrip at the top, and the return plane at the bottom, and the dielectric in between. 
+- Show the wavefront and 2/3 of the microstrip length.
+- On the left of the wavefront: show the electric field everywhere between the conductors (going from microstrip to ground return plane). Show the forward current in the microstrip, and show the return current in the return plane directly under it.  Show the magnetic field in between the conductors.
+- At the wavefront: show the varying electric field and varying magnetic field. make sure the wavefront, it changing E and B fields are also clearly visible,
+- clearly label the B-conduction, B-displacement, E fields, and varying E field at the wave front.
+- keep the trace in the color brown. change the color of the ground plane to green.  make the electric field red, and the magnetic field blue.
+- add (or remove) whatever you think will help the reader's understanding.
+
 # Board Design Guide
 
 This is the second document that answers **"How?"** — the companion to the Architecture document, and follow-up to the Schematic Design document. It covers the Printed Circuit Board (PCB) selection and layout rules for **OPNhydro**.

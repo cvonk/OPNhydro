@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 820 420"
+     font-family="Helvetica, Arial, sans-serif"
+     font-size="14">
+
+  <!--
+    Side view (x–z plane): +x̂ left→right (propagation),
+                           +ẑ bottom→top,
+                           +ŷ into the page.
+    Trace at top, return plane at bottom, dielectric between.
+    Wavefront at x = 500 (about 2/3 along visible length).
+  -->
+
+  <defs>
+    <marker id="arrE" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+    </marker>
+    <marker id="arrEdash" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#922b21"/>
+    </marker>
+    <marker id="arrI" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+    <marker id="arrAx" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- =============== GEOMETRY =============== -->
+  <!-- Dielectric (pale yellow) -->
+  <rect x="60" y="105" width="660" height="90"
+        fill="#fdf6c2" stroke="#c4b86a" stroke-width="0.8"/>
+
+  <!-- Trace (brown) at top -->
+  <rect x="60" y="90" width="660" height="15"
+        fill="#b87333" stroke="#6e3f1d" stroke-width="1"/>
+
+  <!-- Return plane (green) at bottom -->
+  <rect x="60" y="195" width="660" height="20"
+        fill="#4ea94e" stroke="#2f6b2f" stroke-width="1"/>
+
+  <!-- Material labels -->
+  <text x="728" y="101" fill="#333" font-weight="bold">trace</text>
+  <text x="728" y="147" fill="#7a6a2a">dielectric</text>
+  <text x="728" y="161" fill="#7a6a2a" font-size="11" font-style="italic">(FR-4)</text>
+  <text x="728" y="208" fill="#333" font-weight="bold">return plane</text>
+
+  <!-- =============== WAVEFRONT LINE =============== -->
+  <line x1="500" y1="60" x2="500" y2="235"
+        stroke="#6f4a6f" stroke-width="1.3" stroke-dasharray="6 4"/>
+  <text x="487" y="55" fill="#6f4a6f" font-style="italic" font-size="13">wavefront</text>
+
+  <!-- "Ahead of wavefront: no fields yet" -->
+  <text x="555" y="78" fill="#888" font-size="12" font-style="italic">ahead of wavefront:</text>
+  <text x="555" y="92" fill="#888" font-size="12" font-style="italic">no fields yet</text>
+
+  <!-- =============== CURRENTS =============== -->
+  <!-- Forward signal current on trace (+x̂) -->
+  <line x1="90" y1="78" x2="475" y2="78"
+        stroke="#333" stroke-width="2.4" marker-end="url(#arrI)"/>
+  <text x="230" y="72" fill="#333" font-style="italic">
+    I<tspan font-size="10" dy="2">sig</tspan><tspan dy="-2"> (+x̂) on trace</tspan>
+  </text>
+
+  <!-- Return current on return plane (−x̂), concentrated directly under trace -->
+  <line x1="475" y1="232" x2="90" y2="232"
+        stroke="#333" stroke-width="2.4" marker-end="url(#arrI)"/>
+  <text x="200" y="247" fill="#333" font-style="italic">
+    I<tspan font-size="10" dy="2">ret</tspan><tspan dy="-2"> (−x̂) directly under trace</tspan>
+  </text>
+
+  <!-- =============== E FIELD (established region, x &lt; 500) =============== -->
+  <!-- Vertical E arrows (red), trace → return plane -->
+  <g stroke="#c0392b" stroke-width="2" fill="none">
+    <line x1="110" y1="107" x2="110" y2="193" marker-end="url(#arrE)"/>
+    <line x1="190" y1="107" x2="190" y2="193" marker-end="url(#arrE)"/>
+    <line x1="270" y1="107" x2="270" y2="193" marker-end="url(#arrE)"/>
+    <line x1="350" y1="107" x2="350" y2="193" marker-end="url(#arrE)"/>
+    <line x1="430" y1="107" x2="430" y2="193" marker-end="url(#arrE)"/>
+  </g>
+  <!-- E label -->
+  <text x="140" y="153" fill="#c0392b" font-weight="bold" font-style="italic" font-size="17">E</text>
+
+  <!-- =============== B FIELD — CONDUCTION (⊗ into page, established region) =============== -->
+  <g>
+    <!-- Bulk ⊗ symbols in dielectric gap -->
+    <g stroke="#2471a3" stroke-width="1.8" fill="none">
+      <circle cx="150" cy="150" r="7"/>
+      <circle cx="230" cy="150" r="7"/>
+      <circle cx="310" cy="150" r="7"/>
+      <circle cx="390" cy="150" r="7"/>
+    </g>
+    <g stroke="#2471a3" stroke-width="1.8">
+      <line x1="145" y1="145" x2="155" y2="155"/><line x1="155" y1="145" x2="145" y2="155"/>
+      <line x1="225" y1="145" x2="235" y2="155"/><line x1="235" y1="145" x2="225" y2="155"/>
+      <line x1="305" y1="145" x2="315" y2="155"/><line x1="315" y1="145" x2="305" y2="155"/>
+      <line x1="385" y1="145" x2="395" y2="155"/><line x1="395" y1="145" x2="385" y2="155"/>
+    </g>
+  </g>
+  <!-- Leader line and label for B-conduction -->
+  <line x1="230" y1="132" x2="230" y2="118"
+        stroke="#2471a3" stroke-width="0.8"/>
+  <text x="175" y="114" fill="#2471a3" font-weight="bold" font-style="italic" font-size="13">
+    B (from I<tspan font-size="10" dy="2">cond</tspan><tspan dy="-2">, into page ⊗)</tspan>
+  </text>
+
+  <!-- =============== WAVEFRONT:  ∂E/∂t  (varying E, dashed red arrow) =============== -->
+  <line x1="486" y1="115" x2="486" y2="185"
+        stroke="#922b21" stroke-width="2.6" stroke-dasharray="6 3" marker-end="url(#arrEdash)"/>
+  <!-- ∂E/∂t label -->
+  <text x="378" y="135" fill="#922b21" font-style="italic" font-size="13">
+    ∂E/∂t at wavefront
+  </text>
+  <text x="378" y="149" fill="#922b21" font-size="11" font-style="italic">
+    (E turning on as wave passes)
+  </text>
+  <line x1="445" y1="142" x2="480" y2="145" stroke="#922b21" stroke-width="0.8"/>
+
+  <!-- =============== B FIELD — DISPLACEMENT (dashed ⊗ at wavefront) =============== -->
+  <g>
+    <g stroke="#5b8cb0" stroke-width="1.8" fill="none" stroke-dasharray="3 2">
+      <circle cx="470" cy="150" r="7"/>
+    </g>
+    <g stroke="#5b8cb0" stroke-width="1.8" stroke-dasharray="3 2">
+      <line x1="465" y1="145" x2="475" y2="155"/>
+      <line x1="475" y1="145" x2="465" y2="155"/>
+    </g>
+  </g>
+  <!-- Leader + label for B-displacement -->
+  <line x1="470" y1="168" x2="470" y2="182" stroke="#5b8cb0" stroke-width="0.8"/>
+  <text x="345" y="196" fill="#5b8cb0" font-style="italic" font-size="12">
+    B (from ∂E/∂t, displacement)
+  </text>
+  <line x1="450" y1="192" x2="467" y2="185" stroke="#5b8cb0" stroke-width="0.8"/>
+
+  <!-- =============== FRINGING E FIELD at wavefront =============== -->
+  <g stroke="#c0392b" stroke-width="1.7" fill="none">
+    <path d="M 500 105 C 504 130 510 160 515 193" marker-end="url(#arrE)"/>
+    <path d="M 500 105 C 518 130 532 160 545 193" marker-end="url(#arrE)"/>
+    <path d="M 500 105 C 540 120 565 150 585 193" marker-end="url(#arrE)"/>
+    <path d="M 500 100 C 540 108 575 135 605 193" marker-end="url(#arrE)"/>
+    <path d="M 500 94 C 545 95 595 125 630 193" marker-end="url(#arrE)"/>
+  </g>
+  <!-- Fringe label with leader -->
+  <text x="620" y="148" fill="#c0392b" font-style="italic" font-size="13">fringing E</text>
+  <text x="620" y="163" fill="#c0392b" font-size="11" font-style="italic">
+    (x̂ and ẑ components)
+  </text>
+  <line x1="615" y1="145" x2="585" y2="150" stroke="#c0392b" stroke-width="0.8"/>
+
+  <!-- =============== AXES =============== -->
+  <g stroke="#333" fill="#333">
+    <!-- x axis: right -->
+    <line x1="30" y1="340" x2="90" y2="340" stroke-width="1.5" marker-end="url(#arrAx)"/>
+    <text x="96" y="344" font-style="italic">x</text>
+    <text x="108" y="344" font-size="11" fill="#555">(propagation)</text>
+
+    <!-- z axis: up -->
+    <line x1="30" y1="340" x2="30" y2="280" stroke-width="1.5" marker-end="url(#arrAx)"/>
+    <text x="17" y="275" font-style="italic">z</text>
+
+    <!-- y axis: into page (⊗) -->
+    <g transform="translate(65,340)">
+      <circle r="7" fill="none" stroke="#333" stroke-width="1.3"/>
+      <line x1="-5" y1="-5" x2="5" y2="5" stroke="#333" stroke-width="1.3"/>
+      <line x1="5" y1="-5" x2="-5" y2="5" stroke="#333" stroke-width="1.3"/>
+    </g>
+    <text x="78" y="344" font-style="italic">y</text>
+    <text x="90" y="344" font-size="11" fill="#555">(into page)</text>
+  </g>
+
+  <!-- =============== LEGEND =============== -->
+  <g transform="translate(30,370)">
+    <rect x="0" y="0" width="760" height="38"
+          fill="#fafafa" stroke="#bbb" stroke-width="0.7"/>
+
+    <!-- E field -->
+    <line x1="12" y1="19" x2="42" y2="19"
+          stroke="#c0392b" stroke-width="2" marker-end="url(#arrE)"/>
+    <text x="48" y="23" font-size="11" fill="#333">E field</text>
+
+    <!-- ∂E/∂t -->
+    <line x1="110" y1="19" x2="140" y2="19"
+          stroke="#922b21" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arrEdash)"/>
+    <text x="146" y="23" font-size="11" fill="#333">∂E/∂t (varying E)</text>
+
+    <!-- Fringing E indicator -->
+    <path d="M 275 25 C 285 15 300 20 310 10"
+          stroke="#c0392b" stroke-width="1.7" fill="none"/>
+    <text x="318" y="23" font-size="11" fill="#333">fringing E</text>
+
+    <!-- B conduction -->
+    <g transform="translate(395,19)">
+      <circle r="6" fill="none" stroke="#2471a3" stroke-width="1.6"/>
+      <line x1="-4" y1="-4" x2="4" y2="4" stroke="#2471a3" stroke-width="1.6"/>
+      <line x1="4" y1="-4" x2="-4" y2="4" stroke="#2471a3" stroke-width="1.6"/>
+    </g>
+    <text x="408" y="23" font-size="11" fill="#333">B from I (conduction)</text>
+
+    <!-- B displacement -->
+    <g transform="translate(545,19)">
+      <circle r="6" fill="none" stroke="#5b8cb0" stroke-width="1.6" stroke-dasharray="3 2"/>
+      <line x1="-4" y1="-4" x2="4" y2="4" stroke="#5b8cb0" stroke-width="1.6" stroke-dasharray="2 1.5"/>
+      <line x1="4" y1="-4" x2="-4" y2="4" stroke="#5b8cb0" stroke-width="1.6" stroke-dasharray="2 1.5"/>
+    </g>
+    <text x="558" y="23" font-size="11" fill="#333">B from ∂E/∂t (displacement)</text>
+
+    <!-- Current -->
+    <line x1="690" y1="19" x2="720" y2="19"
+          stroke="#333" stroke-width="2" marker-end="url(#arrI)"/>
+    <text x="726" y="23" font-size="11" fill="#333">current I</text>
+  </g>
+
+</svg>

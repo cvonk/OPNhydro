@@ -302,25 +302,26 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 <figure>
   <center>
   <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 60%; height: auto;">
-  <figcaption><i>Cross-section of microstrip showing E and B fields.</i></figcaption>
+  <figcaption><i>Cross-section of microstrip showing <b>E</b> and <b>B</b> fields.</i></figcaption>
   </center>
 </figure>
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-3d-fields.svg" style="width: 70%; height: auto;">
-  <figcaption><i>3D view of microstrip E and B fields along the propagation direction.</i></figcaption>
+  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 80%; height: auto;">
+  <figcaption><i>3D view of microstrip <b>E</b> and <b>B</b> fields along the propagation direction.</i></figcaption>
   </center>
 </figure>
+
 
 #### Components of the Electric Field
 
 The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — for example, at the wavefront near the trace, it tilts slightly forward in the direction of propagation. That tilt decomposes into two components:
 $$
-    \mathbf E = \hat x \, E_x + \hat y \, E_y
+    \mathbf E = \hat x \, E_x - \hat z \, E_z
 $$
 
-where $\hat x$ points along the trace (the propagation direction) and $\hat y$ points from the trace to the return plane.
+where $\hat x$ points along the trace (the propagation direction) and $\hat z$ points from the return plane to the trace.
 
 <figure>
   <center>
@@ -333,7 +334,7 @@ The **free electrons** in the copper respond to each component differently:
 
 - **Horizontal component $E_x$** (small) arises from the fact that the wave is *travelling*. The voltage is not the same everywhere along the trace at the same instant: the wave has arrived here but not yet at the next point down the line. That spatial gradient in voltage is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$. It drives a sustained current that we measure with instruments, and converts a small fraction of the field energy into heat.
 
-- **Vertical component $E_y$** (dominant) drives a transient surface-charge redistribution, in the copper, that **confines** the wave to the dielectric. It comes from the charge separation across the dielectric. The wave deposits positive charge on the trace and negative charge on the return plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor.
+- **Vertical component $E_z$** (dominant) drives a transient surface-charge redistribution, in the copper, that **confines** the wave to the dielectric. It comes from the charge separation across the dielectric. The wave deposits positive charge on the trace and negative charge on the return plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor.
 
 <figure>
   <center>
@@ -372,11 +373,11 @@ where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This is 
 
 In other words: the field arrives first; the **current is the electrons' response to the electric field**. This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector $\mathbf E \times \mathbf B$, which points from the source toward the load, through the dielectric between the conductors.
 
-**Vertical component $E_y$ → transient redistribution of surface charge → confines the wave**
+**Vertical component $E_z$ → transient redistribution of surface charge → confines the wave**
 
-As the wave front reaches a section of the conductor, $E_y$ there rises from zero to some value. The force on an electron is $-q\mathbf E$, so with $E_y$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*: in the trace, they move away from the dielectric-facing surface, leaving it positively charged; in the return plane, they move toward the dielectric-facing surface, making it negatively charged (or the reverse half a cycle later). By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the conductor.
+As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E$, so with $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*: in the trace, they move away from the dielectric-facing surface, leaving it positively charged; in the return plane, they move toward the dielectric-facing surface, making it negatively charged (or the reverse half a cycle later). By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the conductor.
 
-In other words, the electrons rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that $E_y$ at the surface is nearly cancelled; what little field penetrates the metal decays within one skin depth (~66 µm at 1 MHz, ~2 µm at 1 GHz).
+In other words, the electrons rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that $E_z$ at the surface is nearly cancelled; what little field penetrates the metal decays within one skin depth (~66 µm at 1 MHz, ~2 µm at 1 GHz).
 
 This cancellation is what **confines the wave**. The field cannot penetrate the copper, so it is forced to exist only in the dielectric between the trace and the return plane. Without this electron response, the field would not be confined — the wave would radiate away instead of propagating along the line.
 <br />
@@ -609,7 +610,7 @@ Each rule in this chapter ties back to a specific result from Chapter 1. The aim
 
 ### 2.1. PCB Design Rules
 
-Everything in §1.1 through §1.5 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the return plane is the other. The copper confines the field ($E_y$ cancellation), the dielectric carries it forward (displacement current), and the return current in the return plane provides the equal-and-opposite $\mathbf B$ that prevents radiation (field cancellation at a distance).
+Everything in §1.1 through §1.5 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the return plane is the other. The copper confines the field ($E_z$ cancellation), the dielectric carries it forward (displacement current), and the return current in the return plane provides the equal-and-opposite $\mathbf B$ that prevents radiation (field cancellation at a distance).
 
 When that field structure breaks down, the consequences fall into four categories: degraded signal quality on a single net (reflections, ringing), rail collapse in the power distribution network (§1.3), crosstalk between adjacent nets (§1.4), and radiated EMI (§1.5). Every PCB layout rule exists to prevent one or more of these — by keeping the field confined, the return path intact, and the coupling between unrelated fields to a minimum.
 <br />
