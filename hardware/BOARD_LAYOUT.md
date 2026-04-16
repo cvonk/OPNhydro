@@ -19,6 +19,40 @@ The treatment draws heavily on:
 - Walter Lewin's physics lectures at MIT
 - *Signal and Power Integrity* by Eric Bogatin
 
+<style>
+  .quote {
+  position: relative;
+  width: 95%;
+  padding-left:4% !important;
+  /*margin: 0 auto;*/
+  /*line-height: 1.4;*/
+  z-index: 600;
+  overflow: visible;
+  /*background-color: #f6f6f6;*/
+}
+.quote:before {
+  position: absolute;
+  top: -0.25em;
+  left: 0;
+  z-index: -300;
+  font-family: Georgia, serif;
+  content: "\201C";
+  color: #999;
+  opacity: 0.3;
+  font-size: 2.3rem;
+  font-weight: 600;
+  text-shadow: none;
+}
+.quote cite {
+  color: #bbb !important;
+  display: block;
+  font-style: normal;
+  font-weight: 400;
+  text-align: right;
+  line-height: 1;
+}
+</style>
+
 ---
 
 
@@ -55,41 +89,57 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
 [^BOGATIN]: [Signal and Power Integrity, simplified 2nd (2010) - Eric Bogatin](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)
 [^WYATT]: [PCB Design for Low EMI - Kenneth Wyatt](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)
 
-As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — Faraday's Law and the Ampère-Maxwell Law — with Gauss's law providing the source-free boundary condition.
-
-![Courtesy: Patrick André](../media/infographics/microstrip-fields-2.png)
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-fields-2.png" style="width: 60%; height: auto;">
+  <figcaption><i>Crossection view of Microstrip fields.<br />(Courtesy: Patrick André)</i></figcaption>
+  </center>
+</figure>
 
 > **A note on field lines.** Textbook diagrams show fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. Where this document says "the $\vec E$ field points downward" or "the $\vec B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
 
 <br />
 
+<figure>
+  <center>
+  <img src="../media/infographics/e-field-building-up-in-transmission-line.png" style="width: 60%; height: auto;">
+  <figcaption><i>Electric field building up in transmission line. <br />(Courtesy:  Ralph Morrison)</i></figcaption>
+  </center>
+</figure>
+
+
 **Microstrip Geometry**
 
-Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. In the dielectric region ($\rho = 0, \vec J = \vec 0$ — no free charges between the conductors), when a voltage step is applied at one end, the following chain of events unfolds:
-
-1. An **electric field** $\vec{E}$ appears between trace and return plane, pointing vertically (from trace down to return plane). But this field cannot remain localised.
-<!-- TODO: Add a side-view graphic of trace and return plane with battery and initial E-field on the left. -->
-<br />
-
-2. The moment $\vec E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\vec J = \vec 0$), [Ampere-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) reduces to the displacement-current term — a time-changing electric field **produces a spatially varying magnetic field**:
-$$    
-    \nabla \times \vec B =
+As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampere-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free boundary condition.
+$$  
+  \begin{align}  
+    \nabla \times \vec B &=
     \underbrace{\cancel{\mu_0 \ \vec J}}_{\substack{\text{conduction} \\ \text{current}}}
     +\ 
     \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
-    \tag{\text{Ampère-Maxwell}}
+    \tag{\text{Ampère-Maxwell}} 
+    \\
+    \nabla \times \vec E &= -\frac{\partial \vec B}{\partial t}
+    \tag{\text{Faraday}}
+  \end{align}
 $$
-The time-changing $\vec E$ (right side) forces $\vec B$ to vary spatially (left side).
+
+Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. In the dielectric region ($\rho = 0, \vec J = \vec 0$ — no free charges between the conductors), 
+
+When a **voltage step** is applied at one end, the following chain of events unfolds:
+
+1. The sudden voltage change creates a sudden electric change. An **electric field** $\vec{E}$ appears between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only at the very beginning of the microstrip. It is $\vec{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localised. 
 <br />
 
-3. The $\vec B$ field created in step 2 is also rising from zero — i.e. **changing in time**. [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) says a time-changing magnetic field **produces a spatially varying electric field** — extending $\vec E$ slightly ahead of where it began:
-$$
-    \nabla \times \vec E = -\frac{\partial \vec B}{\partial t}
-    \tag{\text{Faraday}}
-$$
-The time-changing $\vec B$ (right side) forces $\vec E$ to vary spatially (left side). $\vec E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wave front advancing.
+2. The moment $\vec E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\vec J = \vec 0$), Ampere-Maxwell's Law  reduces to the displacement-current term — a time-changing electric field $\vec E$ (right side) **forces the magnetic field $\vec B$ to vary spatially** (left side).
+<br />
+
+3. The $\vec B$ field created in step 2 is also rising from zero — i.e. **changing in time** (right side). According to Faraday's Law this time-changing magnetic field **forces the electric field $\vec E$ to vary spatially** (left side) — extending $\vec E$ slightly ahead of where it began.
+
+The electric field $\vec E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wave front advancing.
 
 To summarise: once the electric field appears, a magnetic field arises alongside it. That changing magnetic field extends the electric field slightly ahead, which in turn extends the magnetic field further still. **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
+
 
 > **What is the curl operator?** The curl $\nabla \times$ is a spatial derivative — it measures how much a field changes from one point to the next in a perpendicular direction. It does not mean the field lines form circles. That pattern — a field pointing one way whose magnitude varies in a perpendicular direction — is exactly what $\nabla \times$ measures.
 
@@ -97,44 +147,44 @@ To summarise: once the electric field appears, a magnetic field arises alongside
 
 #### In other words
 
-Here's roughly how I imagine Richard Feynman giving this talk. Chalk in one hand, no notes.
+Here's how I imagine Richard Feynman would explain this. Chalk in one hand, no notes.
 
+<div class="quote">
 Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of plastic. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
 
-You might think: electrons start moving in the wire, and eventually they get to the other end and light up the bulb. And that would be a perfectly reasonable thing to think. It's also completely wrong. The electrons in a wire drift along at about a meter per hour. If we had to wait for them to get there, nothing would ever work.
+The instant you close the switch, there's a voltage between the trace and the plane. And whenever you have a voltage between two pieces of metal, there's an **electric field** between them. Bang — the field is just there, pointing from the trace down to the plane. Not in all of space, mind you — only right near the switch, because the rest of the trace hasn't heard the news yet.
 
-So what really happens? Well, the instant you close the switch, there's a voltage between the trace and the plane. And whenever you have a voltage between two pieces of metal, there's an **electric field** between them. Bang — the field is just there, pointing from the trace down to the plane. Not in all of space, mind you — only right near the switch, because the rest of the trace hasn't heard the news yet.
-
-Now here is where it gets interesting. The electric field went from zero to something. That's a change. And it turns out — and this is one of the most marvelous things in physics — that **a changing electric field makes a magnetic field**. Not "has a magnetic field associated with it." Makes one. Maxwell figured this out. The electric field changes in time, and a magnetic field curls up around it, right there in the plastic.
+Now, here is where it gets interesting. The electric field went from zero to something. That's a change. And it turns out — and this is one of the most marvelous things in physics — that **a changing electric field makes a magnetic field**. Not "has a magnetic field associated with it." Makes one. Maxwell figured this out. The electric field changes in time, and a magnetic field curls up around it, right there in the plastic.
 
 OK, so now we have a magnetic field. And it is also going from zero to something. It's changing in time too. And Faraday — long before Maxwell — figured out the other half of the story: **a changing magnetic field makes an electric field**. So the magnetic field we just made, by changing, makes another electric field — a little bit further along the trace than the one we started with.
 
 You see what's happening? The electric field made a magnetic field. The magnetic field made an electric field. The new electric field is further down the line. And now it is changing, so it makes another magnetic field, which makes another electric field, and off we go. The two fields are playing leapfrog, and they're heading down the trace at an enormous speed.
 
-And here's the punchline — the beautiful punchline. If you write down the two laws, Faraday's and Maxwell's, and you do a little algebra (which I'll spare you), out pops a speed. And the speed is $1/\sqrt{\mu_0 \varepsilon_0}$, where $\mu_0$ and $\varepsilon_0$ are just numbers you measured in a laboratory with magnets and charges, nothing to do with light at all. And when you plug them in, the speed is three hundred thousand kilometers per second. Which is the speed of light. Maxwell looked at this and said, my goodness, light is this. Light is just this game of leapfrog between electric and magnetic fields, propagating at the speed that falls out of the equations.
-
 So when you flipped that switch — the light turned on because a little piece of light, essentially, rushed down the trace. Not the electrons. The field. The electrons are just sitting there wiggling; they're the audience, not the performers. The show is in the plastic, between the conductors, where the fields are doing their dance.
 
-And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of light.
-
-Feynman would probably then pause, grin, and say "Isn't that something?"
+And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of light. Isn't that something?
+</div>
 
 #### Propagation
 
-Steps 1–3 showed the first cycle. The same coupling, applied repeatedly, guarantees indefinite propagation. In the source-free dielectric, the two laws simplify to:
+Steps 1–3 showed the first cycle. The same coupling, applied repeatedly, guarantees indefinite propagation. 
+
+As we have seen, in the source-free dielectric, the two laws simplify to:
 
 $$
+  \begin{align}
     \nabla \times \vec{B} = \mu_0\varepsilon_0 \frac{\partial \vec{E}}{\partial t}
-    \tag{\text{Ampere-Maxwell}}
-$$
-$$
+    \tag{\text{Ampere-Maxwell}} \\
     \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}
     \tag{\text{Faraday}}
+  \end{align}
 $$
 
 These two equations couple time variation to spatial variation — and that coupling is what makes propagation inevitable. If $\vec E$ is changing in time at some point, the first equation forces $\vec B$ to have a spatial gradient there — so $\vec B$ at the neighbouring point is different. At that neighbouring point, $\vec B$ is now changing in time, and by the second equation this forces spatial variation in $\vec E$ — so $\vec E$ at the *next* point is different. And so on.
 
 No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localised disturbance from remaining localised.
+
+How fast the electric and magnetic fields can build up is what sets the signal's propagation speed. The propagation and interaction of these fields is described by Maxwell’s Equations.
 
 <details>
   <summary>Expand to see the math.</summary>
@@ -211,13 +261,22 @@ That is the speed of light $c$ — derived entirely from electric and magnetic c
 
 This was Maxwell's 1865 result.  He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
 
-To find the propagation speed ($v'$) for a typical PCB dielectric FR-4, we need to replace $\varepsilon_0$ with $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$.
+To find the propagation speed ($v'$) for a typical PCB dielectric glass epoxy (FR-4), we need to replace $\varepsilon_0$ with $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$.
 $$
     v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 4.2 \times 8.854 \times 10^{-12}}} \approx 146.3 \times 10^6 \text{ m/s}
 $$
 
 The wave **propagation speed in FR-4** is therefore **~15 cm/ns**. This is the bulk-FR-4 (or stripline) speed. On a microstrip, roughly half the field is in air above the trace, so the effective permittivity is lower and the speed rises to ~17–18 cm/ns.
 <br />
+
+##### In other words
+
+Once more in the words of the favorite physics lecturer:
+
+<div class="quote">
+
+If you write down Faraday's and Maxwell's laws, and you do a little algebra (which I'll spare you), out pops a speed. And the speed is $1/\sqrt{\mu_0 \varepsilon_0}$, where $\mu_0$ and $\varepsilon_0$ are just numbers you measured in a laboratory with magnets and charges, nothing to do with light at all. And when you plug them in, the speed is three hundred thousand kilometers per second. Which is the speed of light. Maxwell looked at this and said, my goodness, light is just this game of leapfrog between electric and magnetic fields.
+</div>
 
 #### Where the energy flows
 
@@ -244,12 +303,19 @@ Behind the wave front on a PCB microstrip, $\vec{E}$ points vertically from trac
 
 #### Components of the Electric Field
 
-The electric field between trace and return plane is not perfectly vertical — it tilts slightly forward in the direction of propagation. That tilt decomposes into two components:
+The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — at the trace, it tilts slightly forward in the direction of propagation. That tilt decomposes into two components:
 $$
     \vec E = \hat x \, E_x + \hat y \, E_y
 $$
 
 where $\hat x$ points along the trace (the propagation direction) and $\hat y$ points from the trace to the return plane.
+
+<figure>
+  <center>
+  <img src="../media/infographics/e-field-building-up-in-transmission-line.png" style="width: 60%; height: auto;">
+  <figcaption><i>At the wavefront, the electric field doesn't point straight down.<br />(Courtesy:  Ralph Morrison)</i></figcaption>
+  </center>
+</figure>
 
 The **free electrons** in the copper respond to each component differently:
 
@@ -260,8 +326,12 @@ The **free electrons** in the copper respond to each component differently:
 
 - **Vertical component $E_y$** (dominant) drives a transient surface-charge redistribution, in the copper, that **confines** the wave to the dielectric. It comes from the charge separation across the dielectric. The wave deposits positive charge on the trace and negative charge on the return plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor.
 
-![Courtesy: Kenneth Wyatt](../media/infographics/signal-propagating-along-microstrip.png)
-
+<figure>
+  <center>
+  <img src="../media/infographics/signal-propagating-along-microstrip.png" style="width: 80%; height: auto;">
+  <figcaption><i>Signal propagating long a microstrip.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
+  </center>
+</figure>
 
 The two subsections below unpack each component in detail, starting with the horizontal.
 
@@ -274,6 +344,15 @@ $$
 $$
 
 > Note: physics uses the vector **current density** $\vec J$ — how charge moves through a specific area at a specific point — rather than the scalar current $I$, which is just the total charge flow in a wire.
+
+<figure>
+  <center>
+  <img src="../media/infographics/current-in-a-wave-along-transmission-lines.png" style="width: 60%; height: auto;">
+  <figcaption><i>Current in a wave along transmission line.<br />(Courtesy: Ralph Morrison)</i></figcaption>
+  </center>
+</figure>
+
+> The current is placing charge into the capacitance of the line. This current crosses the transmission line at the leading edge of the wave. One way to describe this current flow is to say it is charging the capacitance of the line.
 
 This collective drift of many electrons is what we measure as current density $\vec J$, and in a linear conductor it is proportional to $\vec E$:
 $$
@@ -295,7 +374,9 @@ This cancellation is what **confines the wave**. The field cannot penetrate the 
 
 ##### In other words
 
-Here's how I imagine him walking us through it. Same chalkboard, he's just turned back to it.
+Here's how I imagine Feynman walking us through it.
+
+<div class="quote">
 
 All right, so we've got this wave zipping down the trace, and the energy is really out there in the plastic — the fields are doing the heavy lifting. But now somebody in the back says, **"Now wait a minute, Professor. What about the electrons? What are they doing?"**
 
@@ -322,7 +403,8 @@ So put it all together:
 
 The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field, the same way a line of dominoes reacts to the first push. The dominoes aren't transporting the energy down the line — the *falling pattern* is. And on a PCB, the falling pattern is the field.
 
-Then I bet he'd shrug and say *"And that's really all there is to it. The hard part is believing it."*
+And that's really all there is to it. The hard part is believing it.
+</div>
 
 #### Sources of the Magnetic Field
 
@@ -340,9 +422,10 @@ There is one continuous $\vec B$ field, but it has two sources depending on wher
 
 ##### In other words
 
-He's still at the chalkboard. Someone in the third row raises a hand.
+Imagine Richard Feynman is still at the chalkboard. Someone in the third row raises a hand.
+<div class="quote">
 
-**"Professor, I'm confused. You just told us the wave has a magnetic field around it — that was part of the leapfrog thing. But now you're saying the electrons in the copper are flowing, and a flowing current also makes a magnetic field. So which is it? Are there two magnetic fields here, or what?"**
+*"Professor, I'm confused. You just told us the wave has a magnetic field around it — that was part of the leapfrog thing. But now you're saying the electrons in the copper are flowing, and a flowing current also makes a magnetic field. So which is it? Are there two magnetic fields here, or what?"*
 
 That's a wonderful question. And the answer — which I think is one of the most beautiful things Maxwell ever did — is that there's only **one** magnetic field. There's just one field in space, wrapping around the trace. But that field has *two different things that can keep it going*, and which one is keeping it going depends on *where you are*.
 
@@ -367,6 +450,7 @@ You can think of it like this. You've got a relay race. There are two runners. O
 That was Maxwell's real insight. Not that current makes magnetism — we knew that. Not that changing fields make fields — Faraday had half of that. Maxwell's piece was realizing that *a changing electric field is, for the purposes of magnetism, every bit as good as a current.* Nature doesn't care which one is feeding the field. It'll take either. And on a PCB, inside the copper it takes one, inside the plastic it takes the other, and the result is a seamless, beautiful, continuous magnetic field wrapping the whole transmission line.
 
 And then — I think — he'd tap the board twice, right on the plus sign between the two terms, and say *"That little plus sign, right there, is one of the most important plus signs in all of physics."*
+</div>
 
 #### One System, Two Views
 
@@ -406,7 +490,13 @@ Crosstalk is what happens when the EM field of one trace overlaps with the EM fi
 
 There are two coupling mechanisms — capacitive and inductive — and both are direct consequences of Maxwell's equations.
 
-![Courtesy: Intel](../media/infographics/capacitive-and-inductive-coupling.png)
+<figure>
+  <center>
+  <img src="../media/infographics/capacitive-and-inductive-coupling.png" style="width: 60%; height: auto;">
+  <figcaption><i>Capacitive and inductive coupling.<br />(Courtesy: Intel)</i></figcaption>
+  </center>
+</figure>
+
 <br />
 
 #### Capacitive (electric field)
@@ -521,13 +611,23 @@ A signal travelling along a trace is an EM wave guided by the trace and its retu
 
 **Rule 1a — Maintain a continuous return plane.** The $\vec B$ field from the forward current in the trace and the return current in the return plane are equal and opposite. They cancel at a distance, keeping the energy confined. Gauss's law for magnetism ($\nabla \cdot \vec B = 0$) requires magnetic field lines to close: with a continuous plane, they close tightly. Interrupt the plane — a slot, a cutout, a missing pour — and the loop area grows, the impedance changes, and the wave partially reflects.
 
-![Courtesy: Kenneth Wyatt, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/trace-crossing-gap-in-return-plane.png)
+<figure>
+  <center>
+  <img src="../media/infographics/trace-crossing-gap-in-return-plane.png" style="width: 60%; height: auto;">
+  <figcaption><i>Capacitive and inductive coupling.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
+  </center>
+</figure>
 
 > "Forget the word ground. Every signal has a return path. Think return path and you will train your intuition to look for and treat the return path as carefully as you treat the signal path." -- Eric Bogatin
 
 **Rule 1b — Provide return vias at layer transitions.** When a trace passes through a via, the EM wave transfers between layers. The wave is not just the trace — it is the field between the trace and its reference plane. If the return plane changes (say, from L2 to L3), the return current must also transition. Without a nearby ground via, the return path detours, the loop area grows, and the wave leaks between the return planes — causing both reflections on the signal net and interference with other signals in that space.
 
-![Courtesy: Kenneth Wyatt, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/trace-passing-through-two-planes-with-via.png)
+<figure>
+  <center>
+  <img src="../media/infographics/trace-passing-through-two-planes-with-via.png" style="width: 60%; height: auto;">
+  <figcaption><i>Trace passing through two planes with via.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
+  </center>
+</figure>
 
 If the planes are the same potential, prevent leakage with nearby stitching vias between them. If they are different potentials, place stitching capacitors as close to the signal via as possible.
 <br />
@@ -591,7 +691,12 @@ L2    | GND    | Ground return plane              | Primary return reference for
 L3    | GND    | Ground return plane              | Primary return reference for L4 signals
 L4    | Bottom | Noisy signals / routed 24V power | Stepper drivers, MOSFETs, 24V power traces
 
-![Courtesy: Kenneth Wyatt, [PCB Design for Low EMI](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)](../media/infographics/lower-emi-4-layer-pcb.png)
+<figure>
+  <center>
+  <img src="../media/infographics/lower-emi-4-layer-pcb.png" style="width: 70%; height: auto;">
+  <figcaption><i>Lower EMI in 4-layer PCB.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
+  </center>
+</figure>
 
 <br />
 
@@ -693,4 +798,13 @@ Ferrite chokes should not be placed in the PDN — the design requires low targe
 
 
 
+---
 
+
+## References
+
+[1] Dipl-Ing J.J. Senff at HTS Dordrecht, Transmission Line lectures, 1984.
+[2] Walter Lewin at MIT, Electricity and Magnetism lectures (8.02), Spring 2002
+[3] Ralph Morrison, Grounding and Shielding – Circuits and Interference, Wiley, 2016.
+[4] Ralph Morrison, Fast Circuit Boards – Energy Management, Wiley, 2018.
+[5] Eric Bogatin, Signal Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
