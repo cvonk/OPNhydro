@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 760 500"
+     font-family="Helvetica, Arial, sans-serif"
+     font-size="14">
+
+  <!--
+    Cabinet projection:
+      screen_x = 180 + Y + cos(30°) * X   (X is propagation depth)
+      screen_y = 350 + (-Z) + (-sin(30°)) * X
+    So +Y is screen right, +Z is screen up, +X is upper-right at 30°.
+  -->
+
+  <defs>
+    <marker id="arrE"  viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+    </marker>
+    <marker id="arrB"  viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2471a3"/>
+    </marker>
+    <marker id="arrI"  viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+    <marker id="arrAx" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+
+    <pattern id="copper" patternUnits="userSpaceOnUse" width="10" height="10">
+      <rect width="10" height="10" fill="#b87333"/>
+      <path d="M0,10 L10,0" stroke="#8a5220" stroke-width="0.5" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- ================================================================= -->
+  <!-- RETURN PLANE (Z in [-60,-50], Y in [0,300], X in [0,200])          -->
+  <!-- Draw the three visible faces: top, front, right                    -->
+  <!-- ================================================================= -->
+
+  <!-- Top face (visible surface the wave rides above) -->
+  <polygon points="180,400 480,400 653.2,300 353.2,300"
+           fill="url(#copper)" stroke="#6e3f1d" stroke-width="1"/>
+  <!-- Front face -->
+  <polygon points="180,400 480,400 480,410 180,410"
+           fill="#8a5220" stroke="#6e3f1d" stroke-width="1"/>
+  <!-- Right face -->
+  <polygon points="480,400 653.2,300 653.2,310 480,410"
+           fill="#9a5e28" stroke="#6e3f1d" stroke-width="1"/>
+
+  <!-- Return-plane current arrow (−X direction) on the visible top face,
+       along a lane not covered by the trace (Y = 60 or Y = 240).
+       Pointing from far to near = upper-right → lower-left -->
+  <g>
+    <line x1="633.2" y1="306.9" x2="345.8" y2="402.3"
+          stroke="#333" stroke-width="2.2" marker-end="url(#arrI)"/>
+    <text x="655" y="322" fill="#333" font-style="italic">
+      I<tspan font-size="10" dy="-4">return</tspan><tspan dy="4"> (−x̂)</tspan>
+    </text>
+  </g>
+
+  <!-- ================================================================= -->
+  <!-- DIELECTRIC (outline only; no fill, so we can see fields inside)    -->
+  <!-- Z in [-50,0], Y in [0,300], X in [0,200]                           -->
+  <!-- ================================================================= -->
+  <g stroke="#9a874a" stroke-width="0.9" fill="none" stroke-dasharray="0">
+    <!-- Top rectangle -->
+    <polygon points="180,350 480,350 653.2,250 353.2,250"/>
+    <!-- Bottom rectangle (coincides with return-plane top; drawn lightly) -->
+    <polygon points="180,400 480,400 653.2,300 353.2,300" stroke-opacity="0.4"/>
+    <!-- Four vertical edges -->
+    <line x1="180" y1="350" x2="180" y2="400"/>
+    <line x1="480" y1="350" x2="480" y2="400"/>
+    <line x1="653.2" y1="250" x2="653.2" y2="300"/>
+    <line x1="353.2" y1="250" x2="353.2" y2="300"/>
+  </g>
+  <!-- Dielectric label on the right face (very subtle) -->
+  <text x="668" y="278" fill="#9a874a" font-style="italic" font-size="12">dielectric (FR-4)</text>
+
+  <!-- ================================================================= -->
+  <!-- E FIELD (red) — vertical arrows in the dielectric, under the trace -->
+  <!-- From (X,Y,0) → (X,Y,-50); projects to vertical on screen            -->
+  <!-- Place at X ∈ {30,100,170}, Y ∈ {120,150,180}                        -->
+  <!-- ================================================================= -->
+  <g stroke="#c0392b" stroke-width="1.8" fill="none">
+    <!-- X = 30 slice -->
+    <line x1="326.0" y1="335" x2="326.0" y2="385" marker-end="url(#arrE)"/>
+    <line x1="356.0" y1="335" x2="356.0" y2="385" marker-end="url(#arrE)"/>
+    <line x1="386.0" y1="335" x2="386.0" y2="385" marker-end="url(#arrE)"/>
+    <!-- X = 100 slice -->
+    <line x1="386.6" y1="300" x2="386.6" y2="350" marker-end="url(#arrE)"/>
+    <line x1="416.6" y1="300" x2="416.6" y2="350" marker-end="url(#arrE)"/>
+    <line x1="446.6" y1="300" x2="446.6" y2="350" marker-end="url(#arrE)"/>
+    <!-- X = 170 slice -->
+    <line x1="447.2" y1="265" x2="447.2" y2="315" marker-end="url(#arrE)"/>
+    <line x1="477.2" y1="265" x2="477.2" y2="315" marker-end="url(#arrE)"/>
+    <line x1="507.2" y1="265" x2="507.2" y2="315" marker-end="url(#arrE)"/>
+  </g>
+  <text x="518" y="298" fill="#c0392b" font-weight="bold" font-style="italic" font-size="18">E</text>
+
+  <!-- ================================================================= -->
+  <!-- B FIELD (blue) — horizontal in +Y direction, across trace width   -->
+  <!-- At Z = -25 (mid-gap), at three X slices: 50, 100, 150              -->
+  <!-- Y sweeps from 110 to 190 (under the trace)                         -->
+  <!-- ================================================================= -->
+  <g stroke="#2471a3" stroke-width="2" fill="none">
+    <line x1="333.3" y1="350" x2="413.3" y2="350" marker-end="url(#arrB)"/>
+    <line x1="376.6" y1="325" x2="456.6" y2="325" marker-end="url(#arrB)"/>
+    <line x1="419.9" y1="300" x2="499.9" y2="300" marker-end="url(#arrB)"/>
+  </g>
+  <text x="508" y="304" fill="#2471a3" font-weight="bold" font-style="italic" font-size="18">B</text>
+
+  <!-- ================================================================= -->
+  <!-- TRACE (copper) — sits on top of the dielectric                     -->
+  <!-- Z in [0,10], Y in [105,195], X in [0,200]                          -->
+  <!-- Draw: right face, front face, top face (in depth order)            -->
+  <!-- ================================================================= -->
+
+  <!-- Right face (Y = 195) -->
+  <polygon points="375,340 548.2,240 548.2,250 375,350"
+           fill="#9a5e28" stroke="#6e3f1d" stroke-width="1"/>
+  <!-- Front face (X = 0) -->
+  <polygon points="285,340 375,340 375,350 285,350"
+           fill="#8a5220" stroke="#6e3f1d" stroke-width="1"/>
+  <!-- Top face (Z = 10) -->
+  <polygon points="285,340 375,340 548.2,240 458.2,240"
+           fill="url(#copper)" stroke="#6e3f1d" stroke-width="1"/>
+
+  <!-- Trace current arrow (+X) along the top at Y=150 -->
+  <g>
+    <line x1="347.3" y1="330" x2="485.9" y2="250"
+          stroke="#333" stroke-width="2.2" marker-end="url(#arrI)"/>
+    <text x="493" y="246" fill="#333" font-style="italic">
+      I<tspan font-size="10" dy="-4">signal</tspan><tspan dy="4"> (+x̂)</tspan>
+    </text>
+  </g>
+
+  <!-- Trace label -->
+  <text x="310" y="232" fill="#333" font-weight="bold">trace</text>
+
+  <!-- Return-plane label (above, pointing to it) -->
+  <text x="185" y="427" fill="#333" font-weight="bold">return plane</text>
+
+  <!-- ================================================================= -->
+  <!-- AXES (lower-left)                                                  -->
+  <!-- ================================================================= -->
+  <g stroke="#333" fill="#333">
+    <!-- +Y axis: horizontal right -->
+    <line x1="80" y1="450" x2="130" y2="450" stroke-width="1.5" marker-end="url(#arrAx)"/>
+    <text x="135" y="454" font-style="italic">y</text>
+    <text x="148" y="454" font-size="11" fill="#555">(across width)</text>
+
+    <!-- +Z axis: up -->
+    <line x1="80" y1="450" x2="80" y2="405" stroke-width="1.5" marker-end="url(#arrAx)"/>
+    <text x="66" y="400" font-style="italic">z</text>
+    <text x="56" y="388" font-size="11" fill="#555">(up)</text>
+
+    <!-- +X axis: upper-right at 30° -->
+    <line x1="80" y1="450" x2="123.3" y2="425" stroke-width="1.5" marker-end="url(#arrAx)"/>
+    <text x="125" y="420" font-style="italic">x</text>
+    <text x="138" y="420" font-size="11" fill="#555">(propagation)</text>
+  </g>
+
+  <!-- ================================================================= -->
+  <!-- LEGEND (top right)                                                 -->
+  <!-- ================================================================= -->
+  <g transform="translate(540,40)">
+    <rect x="0" y="0" width="200" height="115"
+          fill="#fafafa" stroke="#bbb" stroke-width="0.8"/>
+    <text x="10" y="20" font-weight="bold" fill="#333">Legend</text>
+
+    <line x1="12" y1="40" x2="44" y2="40"
+          stroke="#c0392b" stroke-width="2" marker-end="url(#arrE)"/>
+    <text x="52" y="44" fill="#333">E field (trace → plane)</text>
+
+    <line x1="12" y1="62" x2="44" y2="62"
+          stroke="#2471a3" stroke-width="2" marker-end="url(#arrB)"/>
+    <text x="52" y="66" fill="#333">B field (across width)</text>
+
+    <line x1="12" y1="84" x2="44" y2="84"
+          stroke="#333" stroke-width="2" marker-end="url(#arrI)"/>
+    <text x="52" y="88" fill="#333">current I</text>
+
+    <text x="10" y="108" font-size="11" fill="#666" font-style="italic">
+      Wave propagates in +x̂ direction.
+    </text>
+  </g>
+
+</svg>

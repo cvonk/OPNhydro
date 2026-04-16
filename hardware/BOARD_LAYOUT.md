@@ -68,7 +68,11 @@ This chapter builds up the field-theory picture from first principles:
 - **§1.4** — how the fields of one trace leak into another (crosstalk).
 - **§1.5** — what happens when the field escapes the board entirely (EMI).
 <br />
+
+
 ### 1.1. EM Wave in the Dielectric
+
+> "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
 
 As clock frequencies increase, rise times shorten — as a rule of thumb, the rise time $t_r$ is roughly 10% of the clock period:
 $$
@@ -96,7 +100,7 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
   </center>
 </figure>
 
-> **A note on field lines.** Textbook diagrams show fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. Where this document says "the $\vec E$ field points downward" or "the $\vec B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
+> **A note on field lines.** Textbook diagrams show fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. Where this document says "the $\mathbf E$ field points downward" or "the $\mathbf B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
 
 <br />
 
@@ -108,40 +112,47 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
 </figure>
 
 
-**Microstrip Geometry**
+**Two of Maxwell's Equations**
 
 As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampere-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free boundary condition.
 $$  
   \begin{align}  
-    \nabla \times \vec B &=
-    \underbrace{\cancel{\mu_0 \ \vec J}}_{\substack{\text{conduction} \\ \text{current}}}
+    \nabla \times \mathbf B &=
+    \underbrace{\cancel{\mu_0 \ \mathbf J}}_{\substack{\text{conduction} \\ \text{current}}}
     +\ 
-    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
+    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \mathbf E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
     \tag{\text{Ampère-Maxwell}} 
     \\
-    \nabla \times \vec E &= -\frac{\partial \vec B}{\partial t}
+    \nabla \times \mathbf E &= -\frac{\partial \mathbf B}{\partial t}
     \tag{\text{Faraday}}
   \end{align}
 $$
 
-Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. In the dielectric region ($\rho = 0, \vec J = \vec 0$ — no free charges between the conductors), 
+The **displacement current** term in the Ampère-Maxwell law in is not a real current — no charge crosses the gap. A changing electric field acts as a source of magnetic field, just as a real current does. This is what allows $\mathbf{B}$ to be continuous across the copper-dielectric boundary, and it is what sustains the wave in the dielectric where $\mathbf{J} = 0$. In a material dielectric like FR-4, bound-charge polarization ($\partial \mathbf{P}/\partial t$) adds a second contribution, but the mechanism works in pure vacuum too.
+
+**Microstrip Geometry**
+
+Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. In the dielectric region ($\rho = 0, \mathbf J = \mathbf 0$ — no free charges between the conductors), 
 
 When a **voltage step** is applied at one end, the following chain of events unfolds:
 
-1. The sudden voltage change creates a sudden electric change. An **electric field** $\vec{E}$ appears between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only at the very beginning of the microstrip. It is $\vec{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localised. 
+1. The sudden voltage change creates a sudden electric change. An **electric field** $\mathbf{E}$ appears between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only at the very beginning of the microstrip. It is $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localised. 
 <br />
 
-2. The moment $\vec E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\vec J = \vec 0$), Ampere-Maxwell's Law  reduces to the displacement-current term — a time-changing electric field $\vec E$ (right side) **forces the magnetic field $\vec B$ to vary spatially** (left side).
+2. The moment $\mathbf E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\mathbf J = \mathbf 0$), Ampere-Maxwell's Law  reduces to the displacement-current term — a time-changing electric field $\mathbf E$ (right side) **forces the magnetic field $\mathbf B$ to vary spatially** (left side).
 <br />
 
-3. The $\vec B$ field created in step 2 is also rising from zero — i.e. **changing in time** (right side). According to Faraday's Law this time-changing magnetic field **forces the electric field $\vec E$ to vary spatially** (left side) — extending $\vec E$ slightly ahead of where it began.
+3. The $\mathbf B$ field created in step 2 is also rising from zero — i.e. **changing in time** (right side). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (left side) — extending $\mathbf E$ slightly ahead of where it began.
 
-The electric field $\vec E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wave front advancing.
+The electric field $\mathbf E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wave front advancing.
 
-To summarise: once the electric field appears, a magnetic field arises alongside it. That changing magnetic field extends the electric field slightly ahead, which in turn extends the magnetic field further still. **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
+**Changing in time vs. changing in space.** These two phrases carry the whole argument, so it is worth pausing on them.
+- *Changing in time* ($\partial / \partial t$) — stand still at one point and watch the field rise, fall, or oscillate as the clock ticks. Units: [field] per second.
+- *Changing in space* ($\nabla\times$) — freeze time and walk to a neighbouring point; ask how the value here differs from the value just over there. Units: [field] per meter.
 
+Maxwell's curl equations link the two: a time change *here* forces a spatial difference *here*, which means the neighbouring point has a different value, which forces *it* to change in time, and so on. A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the coupling — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*.
 
-> **What is the curl operator?** The curl $\nabla \times$ is a spatial derivative — it measures how much a field changes from one point to the next in a perpendicular direction. It does not mean the field lines form circles. That pattern — a field pointing one way whose magnitude varies in a perpendicular direction — is exactly what $\nabla \times$ measures.
+**To summarize:** once the electric field appears, a magnetic field arises alongside it. That changing magnetic field extends the electric field slightly ahead, which in turn extends the magnetic field further still. **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
 
 <br />
 
@@ -173,14 +184,14 @@ As we have seen, in the source-free dielectric, the two laws simplify to:
 
 $$
   \begin{align}
-    \nabla \times \vec{B} = \mu_0\varepsilon_0 \frac{\partial \vec{E}}{\partial t}
+    \nabla \times \mathbf{B} = \mu_0\varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
     \tag{\text{Ampere-Maxwell}} \\
-    \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}
+    \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
     \tag{\text{Faraday}}
   \end{align}
 $$
 
-These two equations couple time variation to spatial variation — and that coupling is what makes propagation inevitable. If $\vec E$ is changing in time at some point, the first equation forces $\vec B$ to have a spatial gradient there — so $\vec B$ at the neighbouring point is different. At that neighbouring point, $\vec B$ is now changing in time, and by the second equation this forces spatial variation in $\vec E$ — so $\vec E$ at the *next* point is different. And so on.
+These two equations couple time variation to spatial variation — and that coupling is what makes propagation inevitable. If $\mathbf E$ is changing in time at some point, the first equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighbouring point is different. At that neighbouring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
 
 No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localised disturbance from remaining localised.
 
@@ -191,34 +202,34 @@ How fast the electric and magnetic fields can build up is what sets the signal's
 
   Take the curl of Faraday's law
   $$
-      \nabla \times (\nabla \times \vec E) = -\frac{\partial}{\partial t}(\nabla \times \vec B)
+      \nabla \times (\nabla \times \mathbf E) = -\frac{\partial}{\partial t}(\nabla \times \mathbf B)
   $$
 
   Substitute the simplified Ampere–Maxwell into the right side
   $$
-      \nabla \times (\nabla \times \vec E) = -\mu_0\varepsilon_0 \frac{\partial^2 \vec E}{\partial t^2}
+      \nabla \times (\nabla \times \mathbf E) = -\mu_0\varepsilon_0 \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 
   Recall the vector identity
   $$
-      \nabla \times (\nabla \times \vec E) = \nabla(\nabla \cdot \vec E) - \nabla^2\vec E
+      \nabla \times (\nabla \times \mathbf E) = \nabla(\nabla \cdot \mathbf E) - \nabla^2\mathbf E
       \tag{\text{vector identity}}
   $$
 
   Expand the left side using this vector identity
   $$
-      \nabla(\nabla \cdot \vec E) - \nabla^2\vec E = -\mu_0\varepsilon_0 \frac{\partial^2 \vec E}{\partial t^2}
+      \nabla(\nabla \cdot \mathbf E) - \nabla^2\mathbf E = -\mu_0\varepsilon_0 \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 
   Apply Gauss's law:
   $$
-      \nabla \cdot \vec E = \frac{\rho}{\varepsilon_0}
+      \nabla \cdot \mathbf E = \frac{\rho}{\varepsilon_0}
       \tag{\text{Gauss's law}}
   $$
 
-  In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \vec E = 0$. The first term vanishes:
+  In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \mathbf E = 0$. The first term vanishes:
   $$
-      \nabla^2 \vec E = \underbrace{\mu_0\,\varepsilon_0}_{1/v^2} \frac{\partial^2 \vec E}{\partial t^2}
+      \nabla^2 \mathbf E = \underbrace{\mu_0\,\varepsilon_0}_{1/v^2} \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 
   Recognize the standard wave equation for any quantity propagating at speed $v$:
@@ -266,46 +277,47 @@ $$
     v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 4.2 \times 8.854 \times 10^{-12}}} \approx 146.3 \times 10^6 \text{ m/s}
 $$
 
-The wave **propagation speed in FR-4** is therefore **~15 cm/ns**. This is the bulk-FR-4 (or stripline) speed. On a microstrip, roughly half the field is in air above the trace, so the effective permittivity is lower and the speed rises to ~17–18 cm/ns.
+The wave **propagation speed in FR-4** is therefore **~15 cm/ns**. To be precise, this is the bulk-FR-4 (or stripline) speed. On a microstrip, part of the field is in air above the trace, so the effective permittivity is a bit lower and the speed rises to ~17–18 cm/ns.
 <br />
 
 ##### In other words
 
-Once more in the words of the favorite physics lecturer:
+Once more in the words of a favorite physics lecturer:
 
 <div class="quote">
 
 If you write down Faraday's and Maxwell's laws, and you do a little algebra (which I'll spare you), out pops a speed. And the speed is $1/\sqrt{\mu_0 \varepsilon_0}$, where $\mu_0$ and $\varepsilon_0$ are just numbers you measured in a laboratory with magnets and charges, nothing to do with light at all. And when you plug them in, the speed is three hundred thousand kilometers per second. Which is the speed of light. Maxwell looked at this and said, my goodness, light is just this game of leapfrog between electric and magnetic fields.
 </div>
 
-#### Where the energy flows
-
-> "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
-
-Maxwell's equations describe the fields, but where does the energy actually flow? The Poynting vector $\vec{S}$ answers this directly — it points in the direction of energy flow:
-$$
-    \vec{S} = \frac{1}{\mu_0}\left( \vec{E} \times \vec{B} \right)
-$$
-
-Distinguish the **wave front** from the **fields themselves**. The wave front is the leading edge — the boundary between where the fields have arrived and where they have not. Behind that front, the $\vec E$ and $\vec B$ fields are fully established and steady (for a DC step) or oscillating (for an AC signal). The Poynting vector describes the energy flow in this established region, not just at the front.
-
-Behind the wave front on a PCB microstrip, $\vec{E}$ points vertically from trace to return plane, $\vec{B}$ wraps around the trace in the plane perpendicular to propagation — in the dielectric gap, it points across the trace width — and $\vec{E} \times \vec{B}$ therefore points forward, through the dielectric between trace and return plane, in the direction of propagation. The energy flows through the dielectric, not through the copper. The copper guides and confines the wave, but the energy is in the fields between the conductors.
-
 <br />
 
 ---
+
 <br />
 
+### 1.2. Conductors as Waveguides
 
-### 1.2. Conductors as Waveguide
+§1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the metal, there are free electrons, and they are not passive bystanders.
 
-§1.1 looked at the dielectric — the wave, the energy, the propagation. Now look at the copper. Inside the metal, there are free electrons, and they are not passive bystanders.
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 60%; height: auto;">
+  <figcaption><i>Cross-section of microstrip showing E and B fields.</i></figcaption>
+  </center>
+</figure>
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-3d-fields.svg" style="width: 70%; height: auto;">
+  <figcaption><i>3D view of microstrip E and B fields along the propagation direction.</i></figcaption>
+  </center>
+</figure>
 
 #### Components of the Electric Field
 
-The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — at the trace, it tilts slightly forward in the direction of propagation. That tilt decomposes into two components:
+The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — for example, at the wavefront near the trace, it tilts slightly forward in the direction of propagation. That tilt decomposes into two components:
 $$
-    \vec E = \hat x \, E_x + \hat y \, E_y
+    \mathbf E = \hat x \, E_x + \hat y \, E_y
 $$
 
 where $\hat x$ points along the trace (the propagation direction) and $\hat y$ points from the trace to the return plane.
@@ -320,9 +332,6 @@ where $\hat x$ points along the trace (the propagation direction) and $\hat y$ p
 The **free electrons** in the copper respond to each component differently:
 
 - **Horizontal component $E_x$** (small) arises from the fact that the wave is *travelling*. The voltage is not the same everywhere along the trace at the same instant: the wave has arrived here but not yet at the next point down the line. That spatial gradient in voltage is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$. It drives a sustained current that we measure with instruments, and converts a small fraction of the field energy into heat.
-<br />
-
->  the wave front induces a conduction current in the copper trace and back along the return plane. Of course, this conduction current cannot flow through the PC board dielectric, but the charge at the wave front repels a like charge on the return plane, which “appears” as if current is flowing. This is the same principle for capacitors and Maxwell called this effect “displacement current”.
 
 - **Vertical component $E_y$** (dominant) drives a transient surface-charge redistribution, in the copper, that **confines** the wave to the dielectric. It comes from the charge separation across the dielectric. The wave deposits positive charge on the trace and negative charge on the return plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor.
 
@@ -343,7 +352,7 @@ $$
   \tag{\text{Lorentz force law}}
 $$
 
-> Note: physics uses the vector **current density** $\vec J$ — how charge moves through a specific area at a specific point — rather than the scalar current $I$, which is just the total charge flow in a wire.
+> Note: physics uses the vector **current density** $\mathbf J$ — how charge moves through a specific area at a specific point — rather than the scalar current $I$, which is just the total charge flow in a wire.
 
 <figure>
   <center>
@@ -354,18 +363,18 @@ $$
 
 > The current is placing charge into the capacitance of the line. This current crosses the transmission line at the leading edge of the wave. One way to describe this current flow is to say it is charging the capacitance of the line.
 
-This collective drift of many electrons is what we measure as current density $\vec J$, and in a linear conductor it is proportional to $\vec E$:
+This collective drift of many electrons is what we measure as current density $\mathbf J$, and in a linear conductor it is proportional to $\mathbf E$:
 $$
-    \vec J = \sigma \vec E
+    \mathbf J = \sigma \mathbf E
 $$
 
-where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This is Ohm's law in its field form. A larger $\vec E$ means more force, more drift, more current.
+where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This is Ohm's law in its field form. A larger $\mathbf E$ means more force, more drift, more current.
 
-In other words: the field arrives first; the **current is the electrons' response to the electric field**. This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector $\vec E \times \vec B$, which points from the source toward the load, through the dielectric between the conductors.
+In other words: the field arrives first; the **current is the electrons' response to the electric field**. This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector $\mathbf E \times \mathbf B$, which points from the source toward the load, through the dielectric between the conductors.
 
 **Vertical component $E_y$ → transient redistribution of surface charge → confines the wave**
 
-As the wave front reaches a section of the conductor, $E_y$ there rises from zero to some value. The force on an electron is $-q\vec E$, so with $E_y$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*: in the trace, they move away from the dielectric-facing surface, leaving it positively charged; in the return plane, they move toward the dielectric-facing surface, making it negatively charged (or the reverse half a cycle later). By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the conductor.
+As the wave front reaches a section of the conductor, $E_y$ there rises from zero to some value. The force on an electron is $-q\mathbf E$, so with $E_y$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*: in the trace, they move away from the dielectric-facing surface, leaving it positively charged; in the return plane, they move toward the dielectric-facing surface, making it negatively charged (or the reverse half a cycle later). By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the conductor.
 
 In other words, the electrons rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that $E_y$ at the surface is nearly cancelled; what little field penetrates the metal decays within one skin depth (~66 µm at 1 MHz, ~2 µm at 1 GHz).
 
@@ -408,16 +417,16 @@ And that's really all there is to it. The hard part is believing it.
 
 #### Sources of the Magnetic Field
 
-The horizontal current $\vec J$ in the trace creates a $\vec B$ field curling around it. A natural question: is this a separate magnetic field competing with the wave's own $\vec B$? No — it is the *same* field. Ampere–Maxwell makes this explicit:
+The horizontal current $\mathbf J$ in the trace creates a $\mathbf B$ field curling around it. A natural question: is this a separate magnetic field competing with the wave's own $\mathbf B$? No — it is the *same* field. Ampere–Maxwell makes this explicit:
 
 $$
-    \nabla \times \vec B =
-    \underbrace{\mu_0 \, \vec J}_{\substack{\text{conduction current}\\ \text{in the copper}}} 
+    \nabla \times \mathbf B =
+    \underbrace{\mu_0 \, \mathbf J}_{\substack{\text{conduction current}\\ \text{in the copper}}} 
     \;+\;
-    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \vec E}{\partial t}}_{\substack{\text{displacement current} \\ \text{in the dielectric}}}
+    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \mathbf E}{\partial t}}_{\substack{\text{displacement current} \\ \text{in the dielectric}}}
 $$
 
-There is one continuous $\vec B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu_0 \vec J$) dominates — free electrons are moving, and their motion sustains $\vec B$. In the dielectric, there are no free electrons ($\vec J = 0$), so the displacement term takes over — the changing $\vec E$ field sustains $\vec B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\vec B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
+There is one continuous $\mathbf B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu_0 \mathbf J$) dominates — free electrons are moving, and their motion sustains $\mathbf B$. In the dielectric, there are no free electrons ($\mathbf J = 0$), so the displacement term takes over — the changing $\mathbf E$ field sustains $\mathbf B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\mathbf B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
 <br />
 
 ##### In other words
@@ -429,21 +438,21 @@ Imagine Richard Feynman is still at the chalkboard. Someone in the third row rai
 
 That's a wonderful question. And the answer — which I think is one of the most beautiful things Maxwell ever did — is that there's only **one** magnetic field. There's just one field in space, wrapping around the trace. But that field has *two different things that can keep it going*, and which one is keeping it going depends on *where you are*.
 
-Let me show you. Maxwell's Ampère law — the real one, with his addition — says the curl of $\vec B$ is two things added together:
+Let me show you. Maxwell's Ampère law — the real one, with his addition — says the curl of $\mathbf B$ is two things added together:
 
-$$\nabla \times \vec B = \mu_0 \vec J + \mu_0 \varepsilon_0 \frac{\partial \vec E}{\partial t}$$
+$$\nabla \times \mathbf B = \mu_0 \mathbf J + \mu_0 \varepsilon_0 \frac{\partial \mathbf E}{\partial t}$$
 
-That first piece — $\mu_0 \vec J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field. Every kid who ever wrapped wire around a nail knows this.
+That first piece — $\mu_0 \mathbf J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field. Every kid who ever wrapped wire around a nail knows this.
 
 That second piece was Maxwell's great invention. He realized Ampère's law couldn't be complete because if you had a capacitor, the current comes *into* one plate and *out of* the other, but in between — in the empty space — there's no current flowing. And yet the magnetic field has to be continuous; it can't just stop at the plate and start up again on the other side. Something has to keep it going across the gap. And Maxwell said: the thing that keeps it going is the *changing electric field* between the plates. He called it the **displacement current**, even though nothing is really being displaced. It's just a changing field that *looks like* a current, from the magnetic field's point of view.
 
 Now look where we are on this PCB. You've got copper up top, copper down below, and plastic in between.
 
-**Inside the copper,** electrons are flowing. So $\vec J$ is big. And the electric field in the copper is essentially zero — we just spent the last lecture explaining why. So the second term is nothing. The $\mu_0 \vec J$ piece is doing all the work.
+**Inside the copper,** electrons are flowing. So $\mathbf J$ is big. And the electric field in the copper is essentially zero — we just spent the last lecture explaining why. So the second term is nothing. The $\mu_0 \mathbf J$ piece is doing all the work.
 
-**Inside the plastic,** there are no free electrons. $\vec J = 0$. Nothing is flowing through the dielectric. So the first term is nothing. But the electric field is enormous in there, and it's changing in time as the wave goes by. So the second term — the displacement current — is doing all the work.
+**Inside the plastic,** there are no free electrons. $\mathbf J = 0$. Nothing is flowing through the dielectric. So the first term is nothing. But the electric field is enormous in there, and it's changing in time as the wave goes by. So the second term — the displacement current — is doing all the work.
 
-And here's what I want you to appreciate. You walk from the plastic up into the copper, crossing the boundary, and the $\vec B$ field doesn't care. It doesn't notice. It's perfectly smooth. It has the same value just below the surface as just above. What changes is '*who's responsible for it*. Down in the plastic, a changing electric field is keeping $\vec B$ alive. Up in the copper, moving electrons are keeping it alive. The field itself is completely oblivious — it just wraps around the trace as one continuous tube of magnetism.
+And here's what I want you to appreciate. You walk from the plastic up into the copper, crossing the boundary, and the $\mathbf B$ field doesn't care. It doesn't notice. It's perfectly smooth. It has the same value just below the surface as just above. What changes is '*who's responsible for it*. Down in the plastic, a changing electric field is keeping $\mathbf B$ alive. Up in the copper, moving electrons are keeping it alive. The field itself is completely oblivious — it just wraps around the trace as one continuous tube of magnetism.
 
 You can think of it like this. You've got a relay race. There are two runners. One runs through the plastic carrying the magnetic field; the other runs through the copper carrying the magnetic field. When they get to the copper-plastic boundary, they hand the baton off, cleanly, without dropping a step. And if you're the baton — if you're the magnetic field — you don't even know the runners changed. You just keep going.
 
@@ -456,8 +465,8 @@ And then — I think — he'd tap the board twice, right on the plus sign betwee
 
 It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not. They are two views of a single electromagnetic solution, and neither can exist without the other.
 
-- Without the surface-charge redistribution, the boundary condition that cancels $\vec E$ inside the metal would not be satisfied. The field would not be confined. There would be no guided wave — just radiation.
-- Without the propagating field, there would be nothing to drive the electrons. No $E_x$ means no $\vec J$. The current would not exist.
+- Without the surface-charge redistribution, the boundary condition that cancels $\mathbf E$ inside the metal would not be satisfied. The field would not be confined. There would be no guided wave — just radiation.
+- Without the propagating field, there would be nothing to drive the electrons. No $E_x$ means no $\mathbf J$. The current would not exist.
 
 The field drives the current. The current shapes the field. They are mutually dependent — one self-consistent system, seen from different sides of the copper surface.
 
@@ -501,9 +510,9 @@ There are two coupling mechanisms — capacitive and inductive — and both are 
 
 #### Capacitive (electric field)
 
-The $\vec E$ field from a signal trace does not terminate exclusively on its own return plane. Some field lines — especially the fringing fields at the edges of the trace — terminate on nearby conductors instead: an adjacent trace, a via, a component pad.
+The $\mathbf E$ field from a signal trace does not terminate exclusively on its own return plane. Some field lines — especially the fringing fields at the edges of the trace — terminate on nearby conductors instead: an adjacent trace, a via, a component pad.
 
-When the aggressor trace changes voltage, its $\vec E$ field changes. That changing field induces a displacement current ($\varepsilon_0 \varepsilon_r \frac{\partial \vec E}{\partial t}$) onto the victim trace — depositing charge on it, just as it would on a capacitor plate. The victim trace sees a current spike proportional to the rate of change of the aggressor's voltage $V_a$:
+When the aggressor trace changes voltage, its $\mathbf E$ field changes. That changing field induces a displacement current ($\varepsilon_0 \varepsilon_r \frac{\partial \mathbf E}{\partial t}$) onto the victim trace — depositing charge on it, just as it would on a capacitor plate. The victim trace sees a current spike proportional to the rate of change of the aggressor's voltage $V_a$:
 $$
     I_C = C_m \ \frac{dV_a}{dt}
 $$
@@ -515,10 +524,10 @@ This is purely Gauss's law at work: electric field lines must terminate on a con
 
 #### Inductive (magnetic field)
 
-The current in the aggressor trace creates a $\vec B$ field curling around it. That field extends into the surrounding space — including through the loop formed by the victim trace and its return plane. When the aggressor's current $I_a$ changes, the $\vec B$ field through the victim's loop changes. Faraday's law says a changing magnetic flux through a loop induces a circulating electric field — which drives a voltage:
+The current in the aggressor trace creates a $\mathbf B$ field curling around it. That field extends into the surrounding space — including through the loop formed by the victim trace and its return plane. When the aggressor's current $I_a$ changes, the $\mathbf B$ field through the victim's loop changes. Faraday's law says a changing magnetic flux through a loop induces a circulating electric field — which drives a voltage:
 
 $$
-    \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} 
+    \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} 
     \tag{\text{Faraday}}
 $$
 
@@ -527,7 +536,7 @@ $$
     V_L = -L_m \frac{dI_a}{dt}
 $$
 
-where $L_m$ is the mutual inductance between the two trace-return-plane loops. It depends on how much of the aggressor's $\vec B$ field threads through the victim's loop — set by the physical distance between traces, the height above the return plane, and the length of the parallel run.
+where $L_m$ is the mutual inductance between the two trace-return-plane loops. It depends on how much of the aggressor's $\mathbf B$ field threads through the victim's loop — set by the physical distance between traces, the height above the return plane, and the length of the parallel run.
 
 Inductive crosstalk is worst where the return path is constrained. On a PCB with a continuous return plane, the return current mirrors directly under the trace, keeping the loop area small. But through connectors, packages, and vias, multiple signals often share a single return pin instead of a wide plane. The return currents are forced through a common impedance, the loop areas grow, and the mutual inductance between aggressor and victim increases sharply.
 <br />
@@ -600,7 +609,7 @@ Each rule in this chapter ties back to a specific result from Chapter 1. The aim
 
 ### 2.1. PCB Design Rules
 
-Everything in §1.1 through §1.5 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the return plane is the other. The copper confines the field ($E_y$ cancellation), the dielectric carries it forward (displacement current), and the return current in the return plane provides the equal-and-opposite $\vec B$ that prevents radiation (field cancellation at a distance).
+Everything in §1.1 through §1.5 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the return plane is the other. The copper confines the field ($E_y$ cancellation), the dielectric carries it forward (displacement current), and the return current in the return plane provides the equal-and-opposite $\mathbf B$ that prevents radiation (field cancellation at a distance).
 
 When that field structure breaks down, the consequences fall into four categories: degraded signal quality on a single net (reflections, ringing), rail collapse in the power distribution network (§1.3), crosstalk between adjacent nets (§1.4), and radiated EMI (§1.5). Every PCB layout rule exists to prevent one or more of these — by keeping the field confined, the return path intact, and the coupling between unrelated fields to a minimum.
 <br />
@@ -609,7 +618,7 @@ When that field structure breaks down, the consequences fall into four categorie
 
 A signal travelling along a trace is an EM wave guided by the trace and its return plane. Anything that disrupts the wave's propagation — an impedance discontinuity, a missing return path, a stub — causes part of the energy to reflect back toward the source. The reflected wave interferes with the forward wave, producing ringing, overshoot, and timing uncertainty on the net.
 
-**Rule 1a — Maintain a continuous return plane.** The $\vec B$ field from the forward current in the trace and the return current in the return plane are equal and opposite. They cancel at a distance, keeping the energy confined. Gauss's law for magnetism ($\nabla \cdot \vec B = 0$) requires magnetic field lines to close: with a continuous plane, they close tightly. Interrupt the plane — a slot, a cutout, a missing pour — and the loop area grows, the impedance changes, and the wave partially reflects.
+**Rule 1a — Maintain a continuous return plane.** The $\mathbf B$ field from the forward current in the trace and the return current in the return plane are equal and opposite. They cancel at a distance, keeping the energy confined. Gauss's law for magnetism ($\nabla \cdot \mathbf B = 0$) requires magnetic field lines to close: with a continuous plane, they close tightly. Interrupt the plane — a slot, a cutout, a missing pour — and the loop area grows, the impedance changes, and the wave partially reflects.
 
 <figure>
   <center>
@@ -634,15 +643,15 @@ If the planes are the same potential, prevent leakage with nearby stitching vias
 
 #### Crosstalk
 
-Both coupling mechanisms — capacitive ($C_m$, from overlapping $\vec E$ fields) and inductive ($L_m$, from overlapping $\vec B$ fields) — depend on how much of the aggressor's field volume overlaps with the victim's. Every mitigation strategy reduces that overlap.
+Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fields) and inductive ($L_m$, from overlapping $\mathbf B$ fields) — depend on how much of the aggressor's field volume overlaps with the victim's. Every mitigation strategy reduces that overlap.
 
-**Rule 2a — Increase trace spacing.** The fringing $\vec E$ field that causes capacitive coupling falls off roughly as $1/d^2$ with distance. The $\vec B$ field that causes inductive coupling falls off as $1/d$. The 3W rule (space traces at least 3× the trace width apart) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
+**Rule 2a — Increase trace spacing.** The fringing $\mathbf E$ field that causes capacitive coupling falls off roughly as $1/d^2$ with distance. The $\mathbf B$ field that causes inductive coupling falls off as $1/d$. The 3W rule (space traces at least 3× the trace width apart) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
 
 **Rule 2b — Minimise parallel run length.** Both $C_m$ and $L_m$ are proportional to the length over which two traces run in parallel. The coupling is cumulative — every millimetre of shared dielectric adds to the total. Where two sensitive traces must be routed near each other, cross them at 90° rather than running them in parallel.
 
-**Rule 2c — Reduce trace height above the return plane.** The closer a trace is to its return plane, the more tightly the $\vec E$ and $\vec B$ fields are confined directly underneath. Less field energy spills sideways into the neighbouring trace's volume.
+**Rule 2c — Reduce trace height above the return plane.** The closer a trace is to its return plane, the more tightly the $\mathbf E$ and $\mathbf B$ fields are confined directly underneath. Less field energy spills sideways into the neighbouring trace's volume.
 
-**Rule 2d — Interpose a return plane between signal layers.** A grounded conductor between two signal layers terminates $\vec E$ field lines from traces above (Gauss's law — the lines land on the return plane instead of reaching the layer below) and provides a local return path that contains the $\vec B$ field, blocking inter-layer coupling.
+**Rule 2d — Interpose a return plane between signal layers.** A grounded conductor between two signal layers terminates $\mathbf E$ field lines from traces above (Gauss's law — the lines land on the return plane instead of reaching the layer below) and provides a local return path that contains the $\mathbf B$ field, blocking inter-layer coupling.
 
 **Rule 2e — Separate functional domains.** Motor control traces and analog sensor traces must not share the same dielectric space. Keep traces on adjacent layers perpendicular to each other to minimise the parallel run length between layers.
 <br />
@@ -662,7 +671,7 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 
 #### EMI — Radiated Emissions
 
-EMI is not a separate problem — it is the consequence of every other problem listed above. When a return path is broken, the $\vec B$ fields stop cancelling and the loop radiates. When crosstalk couples energy onto an unintended trace, that trace becomes an unintentional antenna. When a rail collapses, the transient current loop radiates at the switching frequency and its harmonics.
+EMI is not a separate problem — it is the consequence of every other problem listed above. When a return path is broken, the $\mathbf B$ fields stop cancelling and the loop radiates. When crosstalk couples energy onto an unintended trace, that trace becomes an unintentional antenna. When a rail collapses, the transient current loop radiates at the switching frequency and its harmonics.
 
 **Rule 4a — Minimise loop area.** Every current — signal, power, return — forms a loop. The radiated power from a loop is proportional to the loop area squared and to the frequency squared: $P_{\text{rad}} \propto A^2 f^2$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
 

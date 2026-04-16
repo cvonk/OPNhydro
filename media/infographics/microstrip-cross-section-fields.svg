@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 720 460"
+     font-family="Helvetica, Arial, sans-serif"
+     font-size="14">
+
+  <defs>
+    <!-- Arrowheads -->
+    <marker id="arrE" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+    </marker>
+    <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2471a3"/>
+    </marker>
+    <marker id="arrAxis" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+
+    <!-- Fills -->
+    <pattern id="fr4" patternUnits="userSpaceOnUse" width="14" height="14">
+      <rect width="14" height="14" fill="#e8dfb9"/>
+      <path d="M0,14 L14,0" stroke="#c7b77a" stroke-width="0.6" opacity="0.6"/>
+    </pattern>
+    <pattern id="copper" patternUnits="userSpaceOnUse" width="10" height="10">
+      <rect width="10" height="10" fill="#b87333"/>
+      <path d="M0,10 L10,0" stroke="#8a5220" stroke-width="0.5" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- ============================================================= -->
+  <!-- Geometry: dielectric slab + return plane + signal trace       -->
+  <!-- ============================================================= -->
+
+  <!-- Dielectric (FR-4) -->
+  <rect x="80" y="220" width="560" height="90" fill="url(#fr4)" stroke="#9a874a" stroke-width="1"/>
+
+  <!-- Return plane (bottom copper) -->
+  <rect x="80" y="310" width="560" height="18" fill="url(#copper)" stroke="#6e3f1d" stroke-width="1"/>
+
+  <!-- Signal trace (top copper) -->
+  <rect x="300" y="202" width="120" height="18" fill="url(#copper)" stroke="#6e3f1d" stroke-width="1"/>
+
+  <!-- Current-direction markers on the trace (into page ⊗) -->
+  <g font-size="14" fill="#333">
+    <circle cx="330" cy="211" r="5" fill="none" stroke="#333" stroke-width="1"/>
+    <line x1="326.5" y1="207.5" x2="333.5" y2="214.5" stroke="#333" stroke-width="1"/>
+    <line x1="333.5" y1="207.5" x2="326.5" y2="214.5" stroke="#333" stroke-width="1"/>
+    <circle cx="360" cy="211" r="5" fill="none" stroke="#333" stroke-width="1"/>
+    <line x1="356.5" y1="207.5" x2="363.5" y2="214.5" stroke="#333" stroke-width="1"/>
+    <line x1="363.5" y1="207.5" x2="356.5" y2="214.5" stroke="#333" stroke-width="1"/>
+    <circle cx="390" cy="211" r="5" fill="none" stroke="#333" stroke-width="1"/>
+    <line x1="386.5" y1="207.5" x2="393.5" y2="214.5" stroke="#333" stroke-width="1"/>
+    <line x1="393.5" y1="207.5" x2="386.5" y2="214.5" stroke="#333" stroke-width="1"/>
+  </g>
+
+  <!-- Current-direction markers on the return plane (out of page ⊙) -->
+  <g>
+    <circle cx="240" cy="319" r="5" fill="none" stroke="#333" stroke-width="1"/>
+    <circle cx="240" cy="319" r="1.3" fill="#333"/>
+    <circle cx="290" cy="319" r="5" fill="none" stroke="#333" stroke-width="1"/>
+    <circle cx="290" cy="319" r="1.3" fill="#333"/>
+    <circle cx="360" cy="319" r="5" fill="none" stroke="#333" stroke-width="1"/>
+    <circle cx="360" cy="319" r="1.3" fill="#333"/>
+    <circle cx="430" cy="319" r="5" fill="none" stroke="#333" stroke-width="1"/>
+    <circle cx="430" cy="319" r="1.3" fill="#333"/>
+    <circle cx="480" cy="319" r="5" fill="none" stroke="#333" stroke-width="1"/>
+    <circle cx="480" cy="319" r="1.3" fill="#333"/>
+  </g>
+
+  <!-- ============================================================= -->
+  <!-- E field (red): trace down to return plane, with edge fringing -->
+  <!-- ============================================================= -->
+  <g stroke="#c0392b" stroke-width="2" fill="none">
+    <!-- Straight lines directly under the trace -->
+    <line x1="315" y1="222" x2="315" y2="308" marker-end="url(#arrE)"/>
+    <line x1="335" y1="222" x2="335" y2="308" marker-end="url(#arrE)"/>
+    <line x1="355" y1="222" x2="355" y2="308" marker-end="url(#arrE)"/>
+    <line x1="375" y1="222" x2="375" y2="308" marker-end="url(#arrE)"/>
+    <line x1="395" y1="222" x2="395" y2="308" marker-end="url(#arrE)"/>
+    <line x1="405" y1="222" x2="405" y2="308" marker-end="url(#arrE)"/>
+
+    <!-- Fringing field lines (curves from trace edges to return plane) -->
+    <path d="M 302,220 C 270,240 240,280 240,308" marker-end="url(#arrE)"/>
+    <path d="M 298,213 C 240,220 190,260 190,308" marker-end="url(#arrE)"/>
+    <path d="M 296,208 C 220,210 140,250 140,308" marker-end="url(#arrE)"/>
+
+    <path d="M 418,220 C 450,240 480,280 480,308" marker-end="url(#arrE)"/>
+    <path d="M 422,213 C 480,220 530,260 530,308" marker-end="url(#arrE)"/>
+    <path d="M 424,208 C 500,210 580,250 580,308" marker-end="url(#arrE)"/>
+  </g>
+
+  <!-- ============================================================= -->
+  <!-- B field (blue): horizontal across the gap (into/out of page)  -->
+  <!-- ============================================================= -->
+  <!-- On the left of the trace: B points out of the page (⊙)        -->
+  <!-- On the right of the trace: B points into the page (⊗)         -->
+  <g>
+    <!-- Left side: out-of-page symbols -->
+    <g stroke="#2471a3" stroke-width="1.6" fill="none">
+      <circle cx="210" cy="250" r="7"/>
+      <circle cx="260" cy="255" r="7"/>
+      <circle cx="210" cy="280" r="7"/>
+      <circle cx="260" cy="285" r="7"/>
+    </g>
+    <g fill="#2471a3">
+      <circle cx="210" cy="250" r="1.8"/>
+      <circle cx="260" cy="255" r="1.8"/>
+      <circle cx="210" cy="280" r="1.8"/>
+      <circle cx="260" cy="285" r="1.8"/>
+    </g>
+
+    <!-- Right side: into-page symbols -->
+    <g stroke="#2471a3" stroke-width="1.6" fill="none">
+      <circle cx="460" cy="250" r="7"/>
+      <circle cx="510" cy="255" r="7"/>
+      <circle cx="460" cy="280" r="7"/>
+      <circle cx="510" cy="285" r="7"/>
+    </g>
+    <g stroke="#2471a3" stroke-width="1.6">
+      <line x1="455" y1="245" x2="465" y2="255"/>
+      <line x1="465" y1="245" x2="455" y2="255"/>
+      <line x1="505" y1="250" x2="515" y2="260"/>
+      <line x1="515" y1="250" x2="505" y2="260"/>
+      <line x1="455" y1="275" x2="465" y2="285"/>
+      <line x1="465" y1="275" x2="455" y2="285"/>
+      <line x1="505" y1="280" x2="515" y2="290"/>
+      <line x1="515" y1="280" x2="505" y2="290"/>
+    </g>
+
+    <!-- Horizontal B arrows inside the gap (showing sense of field) -->
+    <g stroke="#2471a3" stroke-width="2" fill="none">
+      <line x1="305" y1="265" x2="275" y2="265" marker-end="url(#arrB)"/>
+      <line x1="415" y1="265" x2="445" y2="265" marker-end="url(#arrB)"/>
+    </g>
+  </g>
+
+  <!-- ============================================================= -->
+  <!-- Labels                                                         -->
+  <!-- ============================================================= -->
+
+  <!-- Material / structure labels -->
+  <g fill="#333">
+    <text x="650" y="213" font-weight="bold">trace</text>
+    <text x="650" y="324" font-weight="bold">return plane</text>
+    <text x="650" y="267">dielectric</text>
+    <text x="650" y="283" font-style="italic" fill="#666" font-size="12">(FR-4)</text>
+  </g>
+
+  <!-- E and B field labels -->
+  <g>
+    <text x="378" y="275" fill="#c0392b" font-weight="bold" font-style="italic" font-size="17">E</text>
+    <text x="380" y="260" fill="#2471a3" font-weight="bold" font-style="italic" font-size="17">B</text>
+  </g>
+
+  <!-- Legend box (top right) -->
+  <g transform="translate(500,40)">
+    <rect x="0" y="0" width="200" height="110" fill="#fafafa" stroke="#bbb" stroke-width="0.8"/>
+    <text x="10" y="20" font-weight="bold" fill="#333">Legend</text>
+
+    <line x1="10" y1="38" x2="40" y2="38" stroke="#c0392b" stroke-width="2" marker-end="url(#arrE)"/>
+    <text x="48" y="42" fill="#333">E field</text>
+
+    <g transform="translate(25,58)">
+      <circle r="6" fill="none" stroke="#2471a3" stroke-width="1.6"/>
+      <circle r="1.6" fill="#2471a3"/>
+    </g>
+    <text x="48" y="62" fill="#333">B out of page</text>
+
+    <g transform="translate(25,78)">
+      <circle r="6" fill="none" stroke="#2471a3" stroke-width="1.6"/>
+      <line x1="-4" y1="-4" x2="4" y2="4" stroke="#2471a3" stroke-width="1.6"/>
+      <line x1="4" y1="-4" x2="-4" y2="4" stroke="#2471a3" stroke-width="1.6"/>
+    </g>
+    <text x="48" y="82" fill="#333">B into page</text>
+
+    <g transform="translate(25,98)">
+      <circle r="5" fill="none" stroke="#333" stroke-width="1"/>
+      <line x1="-3.5" y1="-3.5" x2="3.5" y2="3.5" stroke="#333"/>
+      <line x1="3.5" y1="-3.5" x2="-3.5" y2="3.5" stroke="#333"/>
+    </g>
+    <text x="48" y="102" fill="#333">current into page</text>
+  </g>
+
+  <!-- ============================================================= -->
+  <!-- Axes (bottom-left corner)                                     -->
+  <!-- x: along trace (propagation, into page)                       -->
+  <!-- y: across trace width                                         -->
+  <!-- z: vertical, trace-to-plane                                   -->
+  <!-- ============================================================= -->
+  <g transform="translate(70,420)" stroke="#333" fill="#333" font-style="italic" font-size="14">
+    <!-- y axis (horizontal, to the right) -->
+    <line x1="0" y1="0" x2="60" y2="0" stroke-width="1.5" marker-end="url(#arrAxis)"/>
+    <text x="65" y="5">y (across width)</text>
+
+    <!-- z axis (up) -->
+    <line x1="0" y1="0" x2="0" y2="-60" stroke-width="1.5" marker-end="url(#arrAxis)"/>
+    <text x="6" y="-55">z (up)</text>
+
+    <!-- x axis: out of page (propagation) -->
+    <circle cx="0" cy="0" r="6" fill="none" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="1.8" fill="#333"/>
+    <text x="-56" y="5">x (out of page)</text>
+  </g>
+
+  <!-- Caption under trace cross-section -->
+  <g fill="#555" font-size="12" font-style="italic">
+    <text x="360" y="370" text-anchor="middle">Cross-section — wave propagates out of the page (+x̂)</text>
+    <text x="360" y="388" text-anchor="middle">Trace current into page; return current out of page</text>
+  </g>
+
+</svg>
