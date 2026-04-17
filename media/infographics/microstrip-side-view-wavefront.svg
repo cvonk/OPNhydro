@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 -70 820 490"
+   viewBox="0 -70 793.56634 390.13983"
    font-family="Helvetica, Arial, sans-serif"
-   font-size="14"
+   font-size="14px"
    version="1.1"
    id="svg56"
    sodipodi:docname="microstrip-side-view-wavefront.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   width="793.56635"
+   height="390.13983"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -20,15 +22,24 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="5.7780726"
-     inkscape:cx="453.35187"
-     inkscape:cy="234.42073"
+     inkscape:zoom="2.0428572"
+     inkscape:cx="342.41258"
+     inkscape:cy="232.27272"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg56" />
+     inkscape:current-layer="g49">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="793.56635"
+       height="390.13983"
+       id="page1"
+       margin="0 0 39.160839 5.3846154"
+       bleed="0" />
+  </sodipodi:namedview>
   <!--
     Side view (x–z plane): +x̂ left→right (propagation),
                            +ẑ bottom→top,
@@ -47,7 +58,7 @@
        markerHeight="6"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
+         d="M 0,0 10,5 0,10 Z"
          fill="#c0392b"
          id="path1" />
     </marker>
@@ -60,7 +71,7 @@
        markerHeight="7"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
+         d="M 0,0 10,5 0,10 Z"
          fill="#922b21"
          id="path2" />
     </marker>
@@ -73,8 +84,8 @@
        markerHeight="7"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
-         fill="#333"
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
          id="path3" />
     </marker>
     <marker
@@ -86,16 +97,16 @@
        markerHeight="6"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
-         fill="#333"
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
          id="path4" />
     </marker>
   </defs>
   <!-- =============== GEOMETRY =============== -->
   <!-- Dielectric (pale yellow) -->
   <rect
-     x="60"
-     y="105"
+     x="48.741257"
+     y="89.825172"
      width="660"
      height="90"
      fill="#fdf6c2"
@@ -105,63 +116,79 @@
      sodipodi:insensitive="true" />
   <!-- Trace (brown) at top -->
   <rect
-     x="60"
-     y="90"
+     x="48.741257"
+     y="74.825172"
      width="660"
      height="15"
      fill="#b87333"
      stroke="#6e3f1d"
      stroke-width="1"
-     id="rect5" />
+     id="rect5"
+     style="fill:#deb187;fill-opacity:1" />
   <!-- Return plane (green) at bottom -->
   <rect
-     x="59.956383"
-     y="194.95639"
+     x="48.697639"
+     y="179.78157"
      width="660.08722"
      height="16.66066"
      fill="#4ea94e"
      stroke="#2f6b2f"
      stroke-width="0.912767"
-     id="rect6" />
+     id="rect6"
+     style="fill:#96cf96;fill-opacity:1" />
   <!-- Material labels -->
   <text
-     x="728"
-     y="101"
-     fill="#333"
+     x="716.74121"
+     y="85.825172"
+     fill="#333333"
      font-weight="bold"
-     id="text6">trace</text>
+     id="text6"
+     style="font-size:17.3333px">trace</text>
   <text
-     x="728"
-     y="154.83217"
+     x="716.74121"
+     y="139.65735"
      fill="#7a6a2a"
-     id="text7">dielectric</text>
+     id="text7"
+     style="font-size:17.3333px">dielectric</text>
   <text
-     x="728"
-     y="208"
-     fill="#333"
+     x="717.72021"
+     y="184.99301"
+     fill="#333333"
      font-weight="bold"
-     id="text9">return plane</text>
+     id="text9"
+     style="font-size:17.3333px;line-height:1"><tspan
+       sodipodi:role="line"
+       id="tspan2"
+       x="717.72021"
+       y="184.99301"
+       style="font-size:17.3333px;line-height:1">return</tspan><tspan
+       sodipodi:role="line"
+       id="tspan3"
+       x="717.72021"
+       y="202.32631"
+       style="font-size:17.3333px;line-height:1">plane</tspan></text>
   <!-- =============== WAVEFRONT LINE =============== -->
   <line
-     x1="496"
-     y1="-36.503498"
-     x2="496"
-     y2="235"
+     x1="484.74127"
+     y1="-51.678322"
+     x2="484.74127"
+     y2="219.82518"
      stroke="#6f4a6f"
      stroke-width="1.24715"
      stroke-dasharray="6, 4"
      id="line9" />
   <text
-     x="468.03934"
-     y="47.307728"
+     x="484.73886"
+     y="32.132904"
      fill="#6f4a6f"
      font-style="italic"
      font-size="13px"
-     id="text10">wavefront</text>
+     id="text10"
+     style="text-align:center;text-anchor:middle">wavefront</text>
   <!-- =============== PROPAGATING VOLTAGE STEP (above trace) =============== -->
   <g
      id="g15"
-     transform="translate(-2,18)">
+     transform="translate(-13.258741,2.8251752)">
     <!-- Plot baseline / axis lines (faint) -->
     <line
        x1="60"
@@ -208,11 +235,12 @@
     <!-- Plot title -->
     <text
        x="170"
-       y="-58"
+       y="-60"
        fill="#5a4d8c"
        font-size="12px"
        font-style="italic"
-       id="text13">propagating voltage step V(x, t)</text>
+       id="text13"
+       style="font-size:14.6667px">propagating voltage step V(x, t)</text>
     <!-- "Ahead of wavefront: no fields yet" -->
     <text
        x="555"
@@ -220,66 +248,72 @@
        fill="#888888"
        font-size="12px"
        font-style="italic"
-       id="text14">ahead of wavefront:</text>
-    <text
-       x="555"
-       y="-24"
-       fill="#888888"
-       font-size="12px"
-       font-style="italic"
-       id="text15">no fields yet</text>
+       id="text14"
+       style="font-size:14.6667px;line-height:1"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         x="555"
+         y="-38"
+         style="font-size:14.6667px;line-height:1">ahead of wavefront:</tspan><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         x="555"
+         y="-23.3333"
+         style="font-size:14.6667px;line-height:1">no fields yet</tspan></text>
   </g>
   <!-- =============== CURRENTS =============== -->
   <!-- Forward signal current on trace (+x̂) -->
   <line
-     x1="89.990128"
-     y1="78.065491"
-     x2="489.69519"
-     y2="78.065491"
+     x1="78.731392"
+     y1="60.890667"
+     x2="478.43646"
+     y2="60.890667"
      stroke="#333333"
      stroke-width="2.4"
      marker-end="url(#arrI)"
      id="line15" />
   <text
-     x="230"
-     y="72"
-     fill="#333"
+     x="218.74127"
+     y="54.825176"
+     fill="#333333"
      font-style="italic"
-     id="text16">
-    I<tspan
-   font-size="10"
+     id="text16"
+     style="font-size:14.6667px">I<tspan
+   font-size="10px"
    dy="2"
-   id="tspan15">fwd</tspan><tspan
-   dy="-2"
-   id="tspan16"> (+x̂) on trace</tspan></text>
+   id="tspan15"
+   style="font-size:14.6667px">fwd</tspan><tspan
+   style="font-size:14.6667px;writing-mode:tb-rl"
+   id="tspan1">on trace</tspan></text>
   <!-- Return current on return plane (−x̂), concentrated directly under trace -->
   <line
-     x1="489.69519"
-     y1="227.93451"
-     x2="89.990128"
-     y2="227.93451"
+     x1="478.43646"
+     y1="212.75969"
+     x2="78.731392"
+     y2="212.75969"
      stroke="#333333"
      stroke-width="2.4"
      marker-end="url(#arrI)"
      id="line16" />
   <text
-     x="166"
-     y="243"
+     x="218.86714"
+     y="229.29372"
      fill="#333333"
      font-style="italic"
-     id="text18">I<tspan
+     id="text18"
+     style="font-size:14.6667px">I<tspan
    font-size="10px"
    dy="2"
-   id="tspan17">ret</tspan><tspan
-   dy="-2"
-   id="tspan18">(−x̂) on return plane directly under trace</tspan></text>
+   id="tspan17"
+   style="font-size:14.6667px">ret</tspan></text>
   <!-- =============== E FIELD (established region, x &lt; 500) =============== -->
   <!-- Vertical E arrows (red), trace → return plane -->
   <g
      stroke="#c0392b"
      stroke-width="2"
      fill="none"
-     id="g22">
+     id="g22"
+     transform="translate(-11.258741,-15.174825)">
     <line
        x1="110"
        y1="107"
@@ -318,8 +352,8 @@
   </g>
   <!-- E label -->
   <text
-     x="88.601387"
-     y="153"
+     x="77.342651"
+     y="137.82518"
      fill="#c0392b"
      font-weight="bold"
      font-style="italic"
@@ -328,7 +362,8 @@
   <!-- =============== B FIELD — CONDUCTION (⊗ into page, established region) =============== -->
   <g
      id="g33"
-     sodipodi:insensitive="true">
+     sodipodi:insensitive="true"
+     transform="translate(-11.258741,-15.174825)">
     <!-- Bulk ⊗ symbols in dielectric gap -->
     <g
        stroke="#2471a3"
@@ -412,44 +447,38 @@
   </g>
   <!-- Leader line and label for B-conduction -->
   <text
-     x="198.04895"
-     y="171.76224"
+     x="186.79022"
+     y="156.58742"
      fill="#2471a3"
      font-weight="bold"
      font-style="italic"
      font-size="13px"
      id="text34"
-     style="line-height:1"><tspan
+     style="font-size:14.6667px;line-height:1"><tspan
        sodipodi:role="line"
        id="tspan62"
-       x="198.04895"
-       y="171.76224"
-       style="line-height:1">B (<tspan
-   style="font-size:10.6667px;line-height:1"
-   id="tspan57">from</tspan> I<tspan
+       x="186.79022"
+       y="156.58742"
+       style="font-size:14.6667px;line-height:1">B (from</tspan><tspan
+       sodipodi:role="line"
+       x="186.79022"
+       y="171.25412"
+       style="font-size:14.6667px;line-height:1"
+       id="tspan64">I<tspan
    font-size="10px"
    id="tspan33"
    dy="0 0 0"
-   style="font-size:8px;line-height:1;baseline-shift:sub">fwd</tspan></tspan><tspan
-       sodipodi:role="line"
-       x="198.04895"
-       y="184.76224"
-       style="line-height:1"
-       id="tspan64"><tspan
-         style="font-size:10.6667px"
-         id="tspan65"> and I</tspan><tspan
-         style="font-size:65%;baseline-shift:sub"
-         id="tspan67">ret</tspan><tspan
-         style="font-size:10.6667px"
-         id="tspan66">)</tspan></tspan></text>
+   style="font-size:14.6667px;line-height:1;baseline-shift:sub">fwd</tspan>+I<tspan
+   style="font-size:14.6667px;baseline-shift:sub"
+   id="tspan67">ret</tspan>)</tspan></text>
   <!-- =============== WAVEFRONT:  ∂E/∂t  (varying E, horizontal dashed red arrow) =============== -->
   <!-- Horizontal dashed red arrow — the varying-E region at the wavefront advances
        with the wave in +x̂ (the wave sweeps the E-field on to the right). -->
   <line
-     x1="484.42203"
-     y1="133.38455"
-     x2="515.00055"
-     y2="133.38455"
+     x1="473.1633"
+     y1="118.20972"
+     x2="503.74179"
+     y2="118.20972"
      stroke="#922b21"
      stroke-width="1.71844"
      stroke-dasharray="6, 3"
@@ -457,23 +486,22 @@
      id="line34" />
   <!-- ∂E/∂t label -->
   <text
-     x="540"
-     y="130"
+     x="522.37756"
+     y="114.82517"
      fill="#922b21"
      font-style="italic"
      font-size="13px"
-     id="text35">∂E/∂t at wavefront</text>
-  <text
-     x="540"
-     y="142"
-     fill="#922b21"
-     font-size="11px"
-     font-style="italic"
-     id="text36">(varying E advances with wave)</text>
+     id="text35"
+     style="font-size:14.6667px"><tspan
+       sodipodi:role="line"
+       id="tspan7"
+       x="522.37756"
+       y="114.82517"
+       style="font-size:14.6667px">∂E/∂t at wavefront</tspan></text>
   <!-- =============== B FIELD — DISPLACEMENT (dashed ⊗ at wavefront) =============== -->
   <g
      id="g38"
-     transform="translate(26.30635,3.4613619)">
+     transform="translate(15.047609,-11.713463)">
     <g
        stroke="#5b8cb0"
        stroke-width="1.8"
@@ -507,28 +535,28 @@
   </g>
   <!-- Leader + label for B-displacement -->
   <text
-     x="403.74124"
-     y="164.75954"
+     x="375.34964"
+     y="157.41689"
      fill="#5b8cb0"
      font-style="italic"
      font-size="12px"
      id="text38"
-     style="line-height:1"><tspan
+     style="font-size:14.6667px;line-height:1"><tspan
        sodipodi:role="line"
        id="tspan59"
-       x="403.74124"
-       y="164.75954"
-       style="line-height:1">B (from ∂E/∂t,</tspan><tspan
+       x="375.34964"
+       y="157.41689"
+       style="font-size:14.6667px;line-height:1">B (from ∂E/∂t,</tspan><tspan
        sodipodi:role="line"
        id="tspan60"
-       x="403.74124"
-       y="176.75954"
-       style="line-height:1">displacement)</tspan></text>
+       x="375.34964"
+       y="172.08359"
+       style="font-size:14.6667px;line-height:1">displacement)</tspan></text>
   <line
-     x1="473.34506"
-     y1="168.25105"
-     x2="488.77563"
-     y2="158.10451"
+     x1="462.08633"
+     y1="153.07623"
+     x2="477.51691"
+     y2="142.92969"
      stroke="#5b8cb0"
      stroke-width="0.917625"
      id="line39" />
@@ -538,7 +566,7 @@
      stroke-width="1.7"
      fill="none"
      id="g43"
-     transform="matrix(0.68762638,0,0,1.0044341,139.70557,0.54511713)">
+     transform="matrix(0.68762638,0,0,1.0044341,128.44683,-14.629707)">
     <path
        d="m 500,104.13848 c 6.02703,25.68922 7.51689,59.65221 3.21791,89.03382"
        marker-end="url(#arrE)"
@@ -558,32 +586,32 @@
   </g>
   <!-- Fringe label with leader -->
   <text
-     x="542.90649"
-     y="171.76955"
+     x="531.64771"
+     y="156.59473"
      fill="#c0392b"
      font-style="italic"
      font-size="13px"
-     id="text43">fringing E</text>
-  <text
-     x="542.56036"
-     y="184.69273"
-     fill="#c0392b"
-     font-size="11px"
-     font-style="italic"
-     id="text44">(x̂ and ẑ components)</text>
+     id="text43"
+     style="font-size:14.6667px"><tspan
+       sodipodi:role="line"
+       id="tspan9"
+       x="531.64771"
+       y="156.59473"
+       style="font-size:14.6667px">fringing E</tspan></text>
   <line
-     x1="538.07959"
-     y1="171.53864"
-     x2="506.07956"
-     y2="166.53864"
+     x1="526.8208"
+     y1="156.36382"
+     x2="494.82083"
+     y2="151.36382"
      stroke="#c0392b"
      stroke-width="0.8"
      id="line44" />
   <!-- =============== AXES =============== -->
   <g
-     stroke="#333"
-     fill="#333"
-     id="g49">
+     stroke="#333333"
+     fill="#333333"
+     id="g49"
+     transform="translate(-11.258741,-15.174825)">
     <!-- x axis: right -->
     <line
        x1="29.51049"
@@ -661,66 +689,70 @@
   </g>
   <!-- =============== LEGEND =============== -->
   <g
-     transform="translate(10.909091,332.7972)"
+     transform="translate(78.461538,316.64336)"
      id="g56">
     <rect
-       x="43.5583"
-       y="5.3764806"
-       width="724.77148"
-       height="38.01627"
+       x="297.14478"
+       y="-85.162956"
+       width="365.43079"
+       height="84.479767"
        fill="#fafafa"
        stroke="#bbbbbb"
-       stroke-width="0.68373"
-       id="rect49" />
+       stroke-width="0.723733"
+       id="rect49"
+       ry="0" />
     <!-- E field -->
     <line
-       x1="65.034966"
-       y1="23.895105"
-       x2="95.034966"
-       y2="23.895105"
+       x1="307.34265"
+       y1="-68.132866"
+       x2="337.34265"
+       y2="-68.132866"
        stroke="#c0392b"
        stroke-width="2"
        marker-end="url(#arrE)"
        id="line49" />
     <text
-       x="101.03497"
-       y="27.895105"
+       x="343.34268"
+       y="-64.132866"
        font-size="11px"
        fill="#333333"
-       id="text50">E field</text>
+       id="text50"
+       style="font-size:14.6667px">E field</text>
     <!-- ∂E/∂t -->
     <line
-       x1="145.41258"
-       y1="24.384615"
-       x2="175.41258"
-       y2="24.384615"
+       x1="306.95102"
+       y1="-41.699303"
+       x2="336.95102"
+       y2="-41.699303"
        stroke="#922b21"
        stroke-width="2"
        stroke-dasharray="4, 2"
        marker-end="url(#arrEdash)"
        id="line50" />
     <text
-       x="181.41258"
-       y="28.384615"
+       x="342.95102"
+       y="-37.699299"
        font-size="11px"
        fill="#333333"
-       id="text51">∂E/∂t (varying E)</text>
+       id="text51"
+       style="font-size:14.6667px">∂E/∂t (varying E)</text>
     <!-- Fringing E indicator -->
     <path
-       d="m 274.67832,30.384615 c 10,-10 25,-5 35,-15"
+       d="m 303.55944,-11.713287 c 10,-10 25,-5 35,-15"
        stroke="#c0392b"
        stroke-width="1.7"
        fill="none"
        id="path51" />
     <text
-       x="317.67834"
-       y="28.384615"
+       x="346.55945"
+       y="-13.713286"
        font-size="11px"
        fill="#333333"
-       id="text52">fringing E</text>
+       id="text52"
+       style="font-size:14.6667px">fringing E</text>
     <!-- B conduction -->
     <g
-       transform="translate(386.67832,24.384615)"
+       transform="translate(465.97902,-68.048951)"
        id="g53">
       <circle
          r="6"
@@ -748,14 +780,15 @@
          id="line53" />
     </g>
     <text
-       x="399.67834"
-       y="28.384615"
+       x="478.97903"
+       y="-64.04895"
        font-size="11px"
        fill="#333333"
-       id="text53">B from I (conduction)</text>
+       id="text53"
+       style="font-size:14.6667px">B from I (conduction)</text>
     <!-- B displacement -->
     <g
-       transform="translate(522.88811,25.363636)"
+       transform="translate(465.61538,-42.18881)"
        id="g55">
       <circle
          r="6"
@@ -786,26 +819,28 @@
          id="line55" />
     </g>
     <text
-       x="535.88806"
-       y="29.363636"
+       x="478.61533"
+       y="-38.188812"
        font-size="11px"
        fill="#333333"
-       id="text55">B from ∂E/∂t (displacement)</text>
+       id="text55"
+       style="font-size:14.6667px">B from ∂E/∂t (displacement)</text>
     <!-- Current -->
     <line
-       x1="681.67828"
-       y1="24.384615"
-       x2="711.67828"
-       y2="24.384615"
+       x1="458.95102"
+       y1="-15.755244"
+       x2="488.95102"
+       y2="-15.755244"
        stroke="#333333"
        stroke-width="2"
        marker-end="url(#arrI)"
        id="line56" />
     <text
-       x="717.67828"
-       y="28.384615"
+       x="494.95102"
+       y="-11.755244"
        font-size="11px"
        fill="#333333"
-       id="text56">current I</text>
+       id="text56"
+       style="font-size:14.6667px">current I</text>
   </g>
 </svg>

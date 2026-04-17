@@ -95,7 +95,7 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-fields-2.png" style="width: 60%; height: auto;">
+  <img src="../media/infographics/microstrip-fields-2.png" style="width: 40%; height: auto;">
   <figcaption><i>Crossection view of Microstrip fields.<br />(Courtesy: Patrick André)</i></figcaption>
   </center>
 </figure>
@@ -310,7 +310,7 @@ where $\hat x$ points along the trace (the propagation direction) and $-\hat z$ 
 <figure>
   <center>
   <img src="../media/infographics/microstrip-e-field-components.svg" style="width: 100%; height: auto;">
-  <figcaption><i>At the wavefront, the electric field doesn't point straight down.<br />(Courtesy:  Ralph Morrison)</i></figcaption>
+  <figcaption><i>Microstrip electric field components.</i></figcaption>
   </center>
 </figure>
 
@@ -320,12 +320,6 @@ The **free electrons** in the copper respond to each component differently:
 
 - **Vertical component $E_z$** (dominant) drives a transient surface-charge redistribution, in the copper, that **confines** the wave to the dielectric. It comes from the charge separation across the dielectric. The wave deposits positive charge on the trace and negative charge on the return plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor.
 
-<figure>
-  <center>
-  <img src="../media/infographics/signal-propagating-along-microstrip.png" style="width: 80%; height: auto;">
-  <figcaption><i>Signal propagating long a microstrip.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
-  </center>
-</figure>
 
 The two subsections below unpack each component in detail, starting with the horizontal.
 
@@ -341,8 +335,8 @@ $$
 
 <figure>
   <center>
-  <img src="../media/infographics/current-in-a-wave-along-transmission-lines.png" style="width: 60%; height: auto;">
-  <figcaption><i>Current in a wave along transmission line.<br />(Courtesy: Ralph Morrison)</i></figcaption>
+  <img src="../media/infographics/microstrip-ex-current.svg" style="width: 100%; height: auto;">
+  <figcaption><i>Microstrip E<sub>x</sub> current.</i></figcaption>
   </center>
 </figure>
 
@@ -359,9 +353,16 @@ In other words: the field arrives first; the **current is the electrons' respons
 
 ##### Vertical component $E_z$ → transient redistribution of surface charge → confines the wave
 
-As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E$, so with $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*: in the trace, they move away from the dielectric-facing surface, leaving it positively charged; in the return plane, they move toward the dielectric-facing surface, making it negatively charged (or the reverse half a cycle later). By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the conductor.
+As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E.$ With $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*: in the trace, they move away from the dielectric-facing surface, leaving it positively charged; in the return plane, they move toward the dielectric-facing surface, making it negatively charged. By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the conductor.
 
-In other words, the electrons rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that $E_z$ at the surface is nearly cancelled; what little field penetrates the metal decays within one skin depth (~66 µm at 1 MHz, ~2 µm at 1 GHz).
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-ez-confinement.svg" style="width: 100%; height: auto;">
+  <figcaption><i>Microstrip E<sub>z</sub> confinement.</i></figcaption>
+  </center>
+</figure>
+
+So, the electrons rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that $E_z$ at the surface is nearly cancelled. What little field penetrates the metal decays within one skin depth (~66 µm at 1 MHz, ~2 µm at 1 GHz).
 
 This cancellation is what **confines the wave**. The field cannot penetrate the copper, so it is forced to exist only in the dielectric between the trace and the return plane. Without this electron response, the field would not be confined — the wave would radiate away instead of propagating along the line.
 <br />
@@ -802,3 +803,11 @@ Ferrite chokes should not be placed in the PDN — the design requires low targe
 [3] Ralph Morrison, Grounding and Shielding – Circuits and Interference, Wiley, 2016.
 [4] Ralph Morrison, Fast Circuit Boards – Energy Management, Wiley, 2018.
 [5] Eric Bogatin, Signal Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
+
+
+<figure>
+  <center>
+  <img src="../media/infographics/signal-propagating-along-microstrip.png" style="width: 80%; height: auto;">
+  <figcaption><i>Signal propagating long a microstrip.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
+  </center>
+</figure>

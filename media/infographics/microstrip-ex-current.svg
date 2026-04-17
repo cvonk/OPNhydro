@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800.41956 647.83215"
+   font-family="Helvetica, Arial, sans-serif"
+   font-size="14px"
+   version="1.1"
+   id="svg67"
+   sodipodi:docname="microstrip-ex-current.svg"
+   width="800.41956"
+   height="647.83215"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview67"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.7875"
+     inkscape:cx="377.34266"
+     inkscape:cy="427.13287"
+     inkscape:window-width="2160"
+     inkscape:window-height="1261"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg67" />
+  <!--
+    Extreme close-up of the trace/dielectric interface as the wavefront
+    passes. Shows the horizontal Ex field just inside the copper, right
+    above the dielectric, and the free-electron response: collective
+    drift = current density J = σE = sustained current.
+
+    Side view (x-z plane): +x̂ left->right (propagation),
+                           +ẑ bottom->top, +ŷ into the page.
+  -->
+  <defs
+     id="defs6">
+    <marker
+       id="arrE"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1" />
+    </marker>
+    <marker
+       id="arre"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="5"
+       markerHeight="5"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#2471a3"
+         id="path2" />
+    </marker>
+    <marker
+       id="arrI"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path3" />
+    </marker>
+    <marker
+       id="arrJiggle"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="4"
+       markerHeight="4"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#7a8aa0"
+         id="path4" />
+    </marker>
+    <marker
+       id="arrAx"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path5" />
+    </marker>
+    <marker
+       id="arrLeader"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="5"
+       markerHeight="5"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#666666"
+         id="path6" />
+    </marker>
+  </defs>
+  <!-- =============== GEOMETRY (extreme close-up) =============== -->
+  <!-- Trace interior (copper) — large, since we are zoomed in -->
+  <rect
+     x="60"
+     y="152.30769"
+     width="660"
+     height="320"
+     fill="#b87333"
+     stroke="#6e3f1d"
+     stroke-width="1"
+     id="rect6"
+     style="fill:#deb187;fill-opacity:1"
+     sodipodi:insensitive="true" />
+  <!-- Subtle highlight: thin "near-surface" layer where Ex acts -->
+  <rect
+     x="60"
+     y="396.64337"
+     width="660"
+     height="75.66433"
+     fill="#a86628"
+     opacity="0.3"
+     stroke="none"
+     id="rect7"
+     style="stroke-width:0.73516" />
+  <!-- Trace ↔ dielectric interface -->
+  <line
+     x1="60"
+     y1="472.30771"
+     x2="720"
+     y2="472.30771"
+     stroke="#6e3f1d"
+     stroke-width="1.6"
+     id="line7" />
+  <!-- Dielectric strip (anchors the picture) -->
+  <rect
+     x="60"
+     y="472.30771"
+     width="660"
+     height="60"
+     fill="#fdf6c2"
+     stroke="#c4b86a"
+     stroke-width="0.8"
+     id="rect8" />
+  <!-- Material labels -->
+  <text
+     x="733.03497"
+     y="274.40561"
+     fill="#3a2410"
+     font-weight="bold"
+     id="text8">trace</text>
+  <text
+     x="733.03497"
+     y="289.40561"
+     fill="#5a3a1a"
+     font-size="11px"
+     font-style="italic"
+     id="text9">(copper)</text>
+  <text
+     x="728"
+     y="427.97205"
+     fill="#3a2410"
+     font-size="12px"
+     font-style="italic"
+     id="text10">near-surface</text>
+  <text
+     x="728"
+     y="441.97205"
+     fill="#3a2410"
+     font-size="12px"
+     font-style="italic"
+     id="text11">layer</text>
+  <text
+     x="728"
+     y="509.25876"
+     fill="#7a6a2a"
+     id="text12">dielectric</text>
+  <!-- Skin-depth bracket -->
+  <g
+     stroke="#5a3a1a"
+     stroke-width="0.8"
+     fill="none"
+     id="g13"
+     transform="translate(-2.1678321e-8,92.30769)">
+    <path
+       d="m 50,240 h -8 v 140 h 8"
+       id="path13" />
+  </g>
+  <text
+     x="20"
+     y="405.30771"
+     fill="#5a3a1a"
+     font-size="11px"
+     font-style="italic"
+     text-anchor="middle"
+     id="text14">δ</text>
+  <text
+     x="20"
+     y="420.30771"
+     fill="#5a3a1a"
+     font-size="9px"
+     font-style="italic"
+     text-anchor="middle"
+     id="text15">(skin)</text>
+  <!-- Interface caption -->
+  <!-- =============== WAVEFRONT =============== -->
+  <line
+     x1="480"
+     y1="132.30769"
+     x2="480"
+     y2="552.30768"
+     stroke="#6f4a6f"
+     stroke-width="1.3"
+     stroke-dasharray="6, 4"
+     id="line16" />
+  <text
+     x="466"
+     y="127.30769"
+     fill="#6f4a6f"
+     font-style="italic"
+     font-size="13px"
+     id="text17">wavefront</text>
+  <!-- Region tags inside the trace -->
+  <text
+     x="280.62219"
+     y="173.66434"
+     fill="#3a2410"
+     font-size="12px"
+     font-style="italic"
+     id="text18"
+     style="font-size:14.6667px;text-align:center;text-anchor:middle">behind wavefront: E<tspan
+   style="font-size:14.6667px;baseline-shift:sub"
+   id="tspan2">x</tspan> has arrived → electrons drift</text>
+  <text
+     x="531.9231"
+     y="173.66434"
+     fill="#3a2410"
+     font-size="12px"
+     font-style="italic"
+     id="text19"
+     style="font-size:14.6667px"><tspan
+       sodipodi:role="line"
+       id="tspan3"
+       x="531.9231"
+       y="173.66434">ahead of wavefront:</tspan><tspan
+       sodipodi:role="line"
+       id="tspan4"
+       x="531.9231"
+       y="191.99771">only thermal jiggle</tspan></text>
+  <!-- =============== CONVENTIONAL CURRENT (top of trace, in +x̂) =============== -->
+  <line
+     x1="115.52448"
+     y1="238.63637"
+     x2="445.52448"
+     y2="238.63637"
+     stroke="#333333"
+     stroke-width="2.4"
+     marker-end="url(#arrI)"
+     id="line19" />
+  <text
+     x="175.52446"
+     y="231.63637"
+     fill="#333333"
+     font-style="italic"
+     font-size="12px"
+     id="text20"
+     style="font-size:14.6667px">I<tspan
+   font-size="10px"
+   dy="2"
+   id="tspan19"
+   style="font-size:14.6667px">fwd= ∫ J · dA</tspan></text>
+  <!-- =============== Ex FIELD INSIDE COPPER (left of wavefront) =============== -->
+  <!-- Two rows of horizontal Ex arrows in the near-surface band -->
+  <g
+     stroke="#c0392b"
+     stroke-width="2.2"
+     fill="none"
+     id="g27"
+     transform="matrix(1.0009399,0,0,0.85313321,-0.25909052,144.91685)">
+    <line
+       x1="106.11783"
+       y1="348.93448"
+       x2="161.11783"
+       y2="348.93448"
+       marker-end="url(#arrE)"
+       id="line24" />
+    <line
+       x1="201.11783"
+       y1="348.93448"
+       x2="256.11783"
+       y2="348.93448"
+       marker-end="url(#arrE)"
+       id="line25" />
+    <line
+       x1="296.11783"
+       y1="348.93448"
+       x2="351.11783"
+       y2="348.93448"
+       marker-end="url(#arrE)"
+       id="line26" />
+    <line
+       x1="391.11783"
+       y1="348.93448"
+       x2="446.11783"
+       y2="348.93448"
+       marker-end="url(#arrE)"
+       id="line27" />
+  </g>
+  <!-- Ex label -->
+  <text
+     x="134.12587"
+     y="418.84616"
+     fill="#c0392b"
+     font-style="italic"
+     font-size="14px"
+     id="text28"
+     style="font-size:14.6667px">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1">x</tspan> inside copper, just above the dielectric</text>
+  <!-- =============== ELECTRONS — DRIFTING (left of wavefront) =============== -->
+  <!-- Drift opposite to Ex (force on electron is −eE) -->
+  <g
+     id="g36"
+     transform="translate(-2.1678321e-8,92.30769)">
+    <!-- row near y=305 (below upper Ex arrows) -->
+    <!-- row near y=370 (just above interface) -->
+    <g
+       id="g32">
+      <line
+         x1="135"
+         y1="368"
+         x2="118"
+         y2="368"
+         stroke="#2471a3"
+         stroke-width="1.6"
+         marker-end="url(#arre)"
+         id="line31" />
+      <circle
+         cx="143"
+         cy="368"
+         r="7"
+         fill="#2471a3"
+         id="circle31" />
+      <text
+         x="143"
+         y="372"
+         fill="#ffffff"
+         text-anchor="middle"
+         font-size="10px"
+         font-weight="bold"
+         id="text32">−</text>
+    </g>
+    <g
+       id="g33">
+      <line
+         x1="230"
+         y1="370"
+         x2="213"
+         y2="370"
+         stroke="#2471a3"
+         stroke-width="1.6"
+         marker-end="url(#arre)"
+         id="line32" />
+      <circle
+         cx="238"
+         cy="370"
+         r="7"
+         fill="#2471a3"
+         id="circle32" />
+      <text
+         x="238"
+         y="374"
+         fill="#ffffff"
+         text-anchor="middle"
+         font-size="10px"
+         font-weight="bold"
+         id="text33">−</text>
+    </g>
+    <g
+       id="g34">
+      <line
+         x1="325"
+         y1="368"
+         x2="308"
+         y2="368"
+         stroke="#2471a3"
+         stroke-width="1.6"
+         marker-end="url(#arre)"
+         id="line33" />
+      <circle
+         cx="333"
+         cy="368"
+         r="7"
+         fill="#2471a3"
+         id="circle33" />
+      <text
+         x="333"
+         y="372"
+         fill="#ffffff"
+         text-anchor="middle"
+         font-size="10px"
+         font-weight="bold"
+         id="text34">−</text>
+    </g>
+    <g
+       id="g35">
+      <line
+         x1="420"
+         y1="370"
+         x2="403"
+         y2="370"
+         stroke="#2471a3"
+         stroke-width="1.6"
+         marker-end="url(#arre)"
+         id="line34" />
+      <circle
+         cx="428"
+         cy="370"
+         r="7"
+         fill="#2471a3"
+         id="circle34" />
+      <text
+         x="428"
+         y="374"
+         fill="#ffffff"
+         text-anchor="middle"
+         font-size="10px"
+         font-weight="bold"
+         id="text35">−</text>
+    </g>
+  </g>
+  <!-- Drift caption -->
+  <text
+     x="68.636368"
+     y="318.71332"
+     fill="#2471a3"
+     font-style="italic"
+     font-size="12px"
+     id="text37"
+     style="font-size:14.6667px">F = −e·E<tspan
+   font-size="9px"
+   dy="2 -2"
+   id="tspan36"
+   style="font-size:14.6667px">x→ collective drift in −x̂ (= conventional current in +x̂)</tspan></text>
+  <!-- =============== ELECTRONS — THERMAL JIGGLE (right of wavefront) =============== -->
+  <g
+     id="g47"
+     transform="translate(-2.1678321e-8,92.30769)">
+    <!-- jiggle arrows + electron dots -->
+    <line
+       x1="504.96503"
+       y1="327.51749"
+       x2="516.96503"
+       y2="317.51749"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line37" />
+    <circle
+       cx="504.96503"
+       cy="327.51749"
+       r="6"
+       fill="#7a8aa0"
+       id="circle37" />
+    <text
+       x="504.96503"
+       y="331.51749"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text38">−</text>
+    <line
+       x1="555"
+       y1="345"
+       x2="545"
+       y2="338"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line38" />
+    <circle
+       cx="555"
+       cy="345"
+       r="6"
+       fill="#7a8aa0"
+       id="circle38" />
+    <text
+       x="555"
+       y="349"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text39">−</text>
+    <line
+       x1="591.04895"
+       y1="356.57343"
+       x2="601.04895"
+       y2="364.57343"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line39" />
+    <circle
+       cx="591.04895"
+       cy="356.57343"
+       r="6"
+       fill="#7a8aa0"
+       id="circle39" />
+    <text
+       x="591.04895"
+       y="360.57343"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text40">−</text>
+    <line
+       x1="640"
+       y1="365"
+       x2="650"
+       y2="357"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line40" />
+    <circle
+       cx="640"
+       cy="365"
+       r="6"
+       fill="#7a8aa0"
+       id="circle40" />
+    <text
+       x="640"
+       y="369"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text41">−</text>
+    <line
+       x1="691.15387"
+       y1="321.7832"
+       x2="681.15387"
+       y2="314.7832"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line41" />
+    <circle
+       cx="691.15387"
+       cy="321.7832"
+       r="6"
+       fill="#7a8aa0"
+       id="circle41" />
+    <text
+       x="691.15387"
+       y="325.7832"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text42">−</text>
+    <line
+       x1="525"
+       y1="370"
+       x2="535"
+       y2="362"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line42" />
+    <circle
+       cx="525"
+       cy="370"
+       r="6"
+       fill="#7a8aa0"
+       id="circle42" />
+    <text
+       x="525"
+       y="374"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text43">−</text>
+    <line
+       x1="576.15387"
+       y1="323.07693"
+       x2="586.15387"
+       y2="318.07693"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line43" />
+    <circle
+       cx="576.15387"
+       cy="323.07693"
+       r="6"
+       fill="#7a8aa0"
+       id="circle43" />
+    <text
+       x="576.15387"
+       y="327.07693"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text44">−</text>
+    <line
+       x1="615"
+       y1="345"
+       x2="623"
+       y2="353"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line44" />
+    <circle
+       cx="615"
+       cy="345"
+       r="6"
+       fill="#7a8aa0"
+       id="circle44" />
+    <text
+       x="615"
+       y="349"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text45">−</text>
+    <line
+       x1="660"
+       y1="335"
+       x2="650"
+       y2="328"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line45" />
+    <circle
+       cx="660"
+       cy="335"
+       r="6"
+       fill="#7a8aa0"
+       id="circle45" />
+    <text
+       x="660"
+       y="339"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text46">−</text>
+    <line
+       x1="700"
+       y1="365"
+       x2="690"
+       y2="357"
+       stroke="#7a8aa0"
+       stroke-width="1.2"
+       marker-end="url(#arrJiggle)"
+       id="line46" />
+    <circle
+       cx="700"
+       cy="365"
+       r="6"
+       fill="#7a8aa0"
+       id="circle46" />
+    <text
+       x="700"
+       y="369"
+       fill="#ffffff"
+       text-anchor="middle"
+       font-size="9px"
+       font-weight="bold"
+       id="text47">−</text>
+  </g>
+  <text
+     x="515.03497"
+     y="508.35666"
+     fill="#7a8aa0"
+     font-style="italic"
+     font-size="12px"
+     id="text48"
+     style="font-size:14.6667px">no E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6">x</tspan> yet → no net motion</text>
+  <!-- =============== CALLOUT / FORMULAS =============== -->
+  <g
+     id="g56"
+     transform="translate(111.88811,84.475522)">
+    <line
+       x1="71.38401"
+       y1="460.55338"
+       x2="64.155334"
+       y2="357.03726"
+       stroke="#666666"
+       stroke-width="0.206782"
+       marker-end="url(#arrLeader)"
+       id="line48" />
+    <text
+       x="40"
+       y="478"
+       fill="#333333"
+       font-size="12px"
+       id="text51"
+       style="font-size:14.6667px;fill:#bf2c2c;fill-opacity:1">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan9">x</tspan> rises from 0 → finite as wavefront sweeps past;</text>
+    <text
+       x="40.559441"
+       y="500.27274"
+       fill="#333333"
+       font-size="12px"
+       id="text52"
+       style="font-size:14.6667px">free electrons feel a horizontal force and start to drift.</text>
+  </g>
+  <!-- =============== AXES =============== -->
+  <g
+     stroke="#333333"
+     fill="#333333"
+     id="g61"
+     transform="translate(-502.93707,85.5944)">
+    <!-- x axis -->
+    <line
+       x1="540"
+       y1="510"
+       x2="590"
+       y2="510"
+       stroke-width="1.5"
+       marker-end="url(#arrAx)"
+       id="line56" />
+    <text
+       x="594"
+       y="514"
+       font-style="italic"
+       id="text57">x</text>
+    <text
+       x="606"
+       y="514"
+       font-size="11px"
+       fill="#555555"
+       id="text58">(propagation)</text>
+    <!-- z axis -->
+    <line
+       x1="540"
+       y1="510"
+       x2="540"
+       y2="475"
+       stroke-width="1.5"
+       marker-end="url(#arrAx)"
+       id="line58" />
+    <text
+       x="527"
+       y="473"
+       font-style="italic"
+       id="text59">z</text>
+    <!-- y axis (into page) -->
+    <g
+       transform="translate(540.02797,510)"
+       id="g60">
+      <circle
+         r="6"
+         fill="none"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="circle59"
+         cx="0"
+         cy="0" />
+      <line
+         x1="-4"
+         y1="-4"
+         x2="4"
+         y2="4"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line59" />
+      <line
+         x1="4"
+         y1="-4"
+         x2="-4"
+         y2="4"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line60" />
+    </g>
+    <text
+       x="509.74826"
+       y="529.10492"
+       font-style="italic"
+       font-size="11px"
+       id="text60">y (into page)</text>
+  </g>
+  <!-- =============== LEGEND =============== -->
+  <g
+     transform="translate(68.53147,630.66433)"
+     id="g67">
+    <rect
+       x="498.47498"
+       y="-85.580963"
+       width="181.092"
+       height="96.938141"
+       fill="#fafafa"
+       stroke="#bbbbbb"
+       stroke-width="0.726888"
+       id="rect61" />
+    <!-- Ex -->
+    <line
+       x1="508.46155"
+       y1="-74.594406"
+       x2="538.46155"
+       y2="-74.594406"
+       stroke="#c0392b"
+       stroke-width="2.2"
+       marker-end="url(#arrE)"
+       id="line61" />
+    <text
+       x="544.46155"
+       y="-70.594406"
+       font-size="11px"
+       fill="#333333"
+       id="text62">E<tspan
+   font-size="9px"
+   dy="2"
+   id="tspan61">x</tspan><tspan
+   dy="-2"
+   id="tspan62">field inside copper</tspan></text>
+    <!-- electron drift -->
+    <g
+       transform="translate(526.22378,-50.538462)"
+       id="g63">
+      <line
+         x1="0"
+         y1="0"
+         x2="-18"
+         y2="0"
+         stroke="#2471a3"
+         stroke-width="1.6"
+         marker-end="url(#arre)"
+         id="line62" />
+      <circle
+         cx="6"
+         cy="0"
+         r="6"
+         fill="#2471a3"
+         id="circle62" />
+      <text
+         x="6"
+         y="4"
+         fill="#ffffff"
+         text-anchor="middle"
+         font-size="9px"
+         font-weight="bold"
+         id="text63">−</text>
+    </g>
+    <text
+       x="544.22375"
+       y="-46.53846"
+       font-size="11px"
+       fill="#333333"
+       id="text64">drifting electron</text>
+    <!-- thermal jiggle -->
+    <g
+       transform="translate(523.00699,-26.482517)"
+       id="g65">
+      <line
+         x1="0"
+         y1="0"
+         x2="9"
+         y2="-7"
+         stroke="#7a8aa0"
+         stroke-width="1.2"
+         marker-end="url(#arrJiggle)"
+         id="line64" />
+      <circle
+         cx="-3"
+         cy="0"
+         r="6"
+         fill="#7a8aa0"
+         id="circle64" />
+      <text
+         x="-3"
+         y="4"
+         fill="#ffffff"
+         text-anchor="middle"
+         font-size="9px"
+         font-weight="bold"
+         id="text65">−</text>
+    </g>
+    <text
+       x="543.00702"
+       y="-22.482517"
+       font-size="11px"
+       fill="#333333"
+       id="text66">thermally jiggling electron</text>
+    <!-- conventional current -->
+    <line
+       x1="506.43356"
+       y1="-1.8671329"
+       x2="536.43359"
+       y2="-1.8671329"
+       stroke="#333333"
+       stroke-width="2.2"
+       marker-end="url(#arrI)"
+       id="line66" />
+    <text
+       x="542.43359"
+       y="2.1328671"
+       font-size="11px"
+       fill="#333333"
+       id="text67">conventional current I<tspan
+   font-size="9px"
+   dy="2"
+   id="tspan66">fwd</tspan></text>
+  </g>
+  <g
+     id="g15"
+     transform="translate(-23.864796,76.59671)">
+    <!-- Plot baseline / axis lines (faint) -->
+    <line
+       x1="86.673332"
+       y1="-15"
+       x2="824.11591"
+       y2="-15"
+       stroke="#bbbbbb"
+       stroke-width="0.634225"
+       stroke-dasharray="2, 2"
+       id="line10" />
+    <line
+       x1="170.58942"
+       y1="-55"
+       x2="824.11591"
+       y2="-55"
+       stroke="#bbbbbb"
+       stroke-width="0.59705"
+       stroke-dasharray="2, 2"
+       id="line11" />
+    <!-- Voltage step waveform: V0 left of wavefront, smooth transition at x=500, 0 right -->
+    <path
+       d="M 82.717281,-55.559441 480,-55 c 11.99999,0.0169 28.00008,40.042572 40,40 l 304.11588,-1.078921"
+       fill="none"
+       stroke="#5a4d8c"
+       stroke-width="2.2"
+       id="path11"
+       sodipodi:nodetypes="cssc" />
+    <!-- Tick labels -->
+    <text
+       x="72.747253"
+       y="-52"
+       fill="#5a4d8c"
+       font-size="11px"
+       text-anchor="end"
+       font-style="italic"
+       id="text11-0">V₀</text>
+    <text
+       x="72.747253"
+       y="-12"
+       fill="#5a4d8c"
+       font-size="11px"
+       text-anchor="end"
+       font-style="italic"
+       id="text12-9">0</text>
+    <!-- Plot title -->
+    <text
+       x="242.28772"
+       y="-60.157841"
+       fill="#5a4d8c"
+       font-size="12px"
+       font-style="italic"
+       id="text13-4">propagating voltage step V(x, t)</text>
+    <!-- "Ahead of wavefront: no fields yet" -->
+    <text
+       x="555"
+       y="-38"
+       fill="#888888"
+       font-size="12px"
+       font-style="italic"
+       id="text14-8">ahead of wavefront:</text>
+    <text
+       x="555"
+       y="-24"
+       fill="#888888"
+       font-size="12px"
+       font-style="italic"
+       id="text15-8">no fields yet</text>
+  </g>
+</svg>

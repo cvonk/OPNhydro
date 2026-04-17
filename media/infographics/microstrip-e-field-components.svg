@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 820 540"
+   viewBox="0 0 817.84216 602.57739"
    font-family="Helvetica, Arial, sans-serif"
-   font-size="14"
+   font-size="14px"
    version="1.1"
    id="svg75"
    sodipodi:docname="microstrip-e-field-components.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   width="817.84216"
+   height="602.57739"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -21,14 +23,23 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.8537037"
-     inkscape:cx="410.25974"
-     inkscape:cy="270"
+     inkscape:cx="426.44356"
+     inkscape:cy="389.76024"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg75" />
+     inkscape:current-layer="svg75">
+    <inkscape:page
+       x="2.0382107e-09"
+       y="1.3112818e-15"
+       width="817.84216"
+       height="602.57739"
+       id="page1"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
   <!--
     Close-up of the microstrip at the moment the wavefront passes.
     Decomposes the tilted E field into:
@@ -51,7 +62,7 @@
        markerHeight="6"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
+         d="M 0,0 10,5 0,10 Z"
          fill="#c0392b"
          id="path1" />
     </marker>
@@ -64,7 +75,7 @@
        markerHeight="5"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
+         d="M 0,0 10,5 0,10 Z"
          fill="#c0392b"
          id="path2" />
     </marker>
@@ -77,8 +88,8 @@
        markerHeight="6"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
-         fill="#333"
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
          id="path3" />
     </marker>
     <marker
@@ -90,8 +101,8 @@
        markerHeight="6"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
-         fill="#333"
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
          id="path4" />
     </marker>
     <marker
@@ -103,16 +114,16 @@
        markerHeight="5"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
-         fill="#666"
+         d="M 0,0 10,5 0,10 Z"
+         fill="#666666"
          id="path5" />
     </marker>
   </defs>
   <!-- =============== GEOMETRY (close-up) =============== -->
   <!-- Dielectric (pale yellow) -->
   <rect
-     x="60"
-     y="120"
+     x="57.842155"
+     y="235.98401"
      width="660"
      height="240"
      fill="#fdf6c2"
@@ -121,101 +132,99 @@
      id="rect5" />
   <!-- Trace (brown), thicker for close-up -->
   <rect
-     x="60"
-     y="80"
+     x="57.842155"
+     y="195.98401"
      width="660"
      height="40"
      fill="#b87333"
      stroke="#6e3f1d"
      stroke-width="1"
-     id="rect6" />
+     id="rect6"
+     style="fill:#deb187;fill-opacity:1" />
   <!-- Return plane (green), thicker for close-up -->
   <rect
-     x="60"
-     y="360"
+     x="57.842155"
+     y="475.98401"
      width="660"
      height="40"
      fill="#4ea94e"
      stroke="#2f6b2f"
      stroke-width="1"
-     id="rect7" />
+     id="rect7"
+     style="fill:#96cf96;fill-opacity:1" />
   <!-- Material labels -->
   <text
-     x="728"
-     y="104"
-     fill="#333"
+     x="725.84216"
+     y="219.98401"
+     fill="#333333"
      font-weight="bold"
-     id="text7">trace</text>
+     id="text7"
+     style="font-size:17.3333px">trace</text>
   <text
-     x="728"
-     y="100"
-     fill="#666"
-     font-size="11"
-     font-style="italic"
-     dy="14"
-     id="text8">(copper)</text>
-  <text
-     x="728"
-     y="237"
+     x="725.84216"
+     y="352.98401"
      fill="#7a6a2a"
-     id="text9">dielectric</text>
+     id="text9"
+     style="font-size:17.3333px">dielectric</text>
   <text
-     x="728"
-     y="251"
-     fill="#7a6a2a"
-     font-size="11"
-     font-style="italic"
-     id="text10">(FR-4)</text>
-  <text
-     x="728"
-     y="384"
-     fill="#333"
+     x="726.92108"
+     y="491.35263"
+     fill="#333333"
      font-weight="bold"
-     id="text11">return</text>
-  <text
-     x="728"
-     y="398"
-     fill="#333"
-     font-weight="bold"
-     id="text12">plane</text>
+     id="text11"
+     style="font-size:17.3333px;line-height:1"><tspan
+       sodipodi:role="line"
+       id="tspan2"
+       x="726.92108"
+       y="491.35263"
+       style="font-size:17.3333px;line-height:1">return</tspan><tspan
+       sodipodi:role="line"
+       id="tspan3"
+       x="726.92108"
+       y="508.68594"
+       style="font-size:17.3333px;line-height:1">plane</tspan></text>
   <!-- =============== WAVEFRONT =============== -->
   <line
-     x1="395.22476"
-     y1="28.92108"
-     x2="395.22476"
-     y2="428.92108"
+     x1="393.06693"
+     y1="64.525467"
+     x2="393.06693"
+     y2="544.90509"
      stroke="#6f4a6f"
-     stroke-width="1.3"
+     stroke-width="1.42464"
      stroke-dasharray="6, 4"
      id="line12" />
   <text
-     x="370.89609"
-     y="22.842159"
+     x="396.6965"
+     y="147.99699"
      fill="#6f4a6f"
      font-style="italic"
      font-size="13px"
-     id="text13">wavefront</text>
+     id="text13"
+     style="font-size:17.3333px;text-align:center;text-anchor:middle">wavefront</text>
   <!-- Region tags -->
   <text
-     x="159.46054"
-     y="62.947052"
+     x="142.73727"
+     y="178.93106"
      fill="#777777"
      font-size="12px"
      font-style="italic"
-     id="text14">established (fields present)</text>
+     id="text14"
+     style="font-size:14.6667px">established (fields present)</text>
   <text
-     x="497.46054"
-     y="62.947052"
+     x="462.3956"
+     y="179.47052"
      fill="#888888"
      font-size="12px"
      font-style="italic"
-     id="text15">ahead of wavefront (no fields yet)</text>
+     id="text15"
+     style="font-size:14.6667px">ahead of wavefront (no fields yet)</text>
   <!-- =============== ESTABLISHED-REGION E FIELD (mostly vertical) =============== -->
   <g
      stroke="#c0392b"
      stroke-width="2"
      fill="none"
-     id="g17">
+     id="g17"
+     transform="translate(-2.1578422,115.98402)">
     <line
        x1="120"
        y1="125"
@@ -239,20 +248,23 @@
        id="line17" />
   </g>
   <text
-     x="209.43257"
-     y="267.11789"
+     x="207.27473"
+     y="383.1019"
      fill="#c0392b"
      font-style="italic"
      font-size="12px"
-     id="text17"><tspan
+     id="text17"
+     style="font-size:14.6667px"><tspan
        sodipodi:role="line"
        id="tspan75"
-       x="209.43257"
-       y="267.11789">almost vertical away</tspan><tspan
+       x="207.27473"
+       y="383.1019"
+       style="font-size:14.6667px">almost vertical away</tspan><tspan
        sodipodi:role="line"
        id="tspan76"
-       x="209.43257"
-       y="282.11789">from wavefront</tspan></text>
+       x="207.27473"
+       y="401.43527"
+       style="font-size:14.6667px">from wavefront</tspan></text>
   <!-- =============== TILTED TOTAL E AT WAVEFRONT — DECOMPOSITION =============== -->
   <!--
     Origin O = (370, 132)  (just below trace bottom face)
@@ -262,39 +274,39 @@
   -->
   <!-- Parallelogram completion (faint dotted) -->
   <line
-     x1="420"
-     y1="132"
-     x2="420"
-     y2="348"
+     x1="417.84216"
+     y1="247.98401"
+     x2="417.84216"
+     y2="463.98401"
      stroke="#c0392b"
      stroke-width="0.7"
-     stroke-dasharray="2 3"
+     stroke-dasharray="2, 3"
      opacity="0.7"
      id="line18" />
   <line
-     x1="370"
-     y1="348"
-     x2="420"
-     y2="348"
+     x1="367.84216"
+     y1="463.98401"
+     x2="417.84216"
+     y2="463.98401"
      stroke="#c0392b"
      stroke-width="0.7"
-     stroke-dasharray="2 3"
+     stroke-dasharray="2, 3"
      opacity="0.7"
      id="line19" />
   <!-- Ex (small horizontal component) — dashed thinner -->
   <line
-     x1="370"
-     y1="132"
-     x2="420"
-     y2="132"
+     x1="367.84216"
+     y1="247.98401"
+     x2="417.84216"
+     y2="247.98401"
      stroke="#c0392b"
      stroke-width="2"
-     stroke-dasharray="6 3"
+     stroke-dasharray="6, 3"
      marker-end="url(#arrEthin)"
      id="line20" />
   <text
-     x="380.15784"
-     y="147.73627"
+     x="398.49951"
+     y="263.72028"
      fill="#c0392b"
      font-style="italic"
      font-size="14px"
@@ -302,45 +314,43 @@
    font-size="11px"
    dy="3"
    id="tspan20">x</tspan><tspan
-   dy="-3"
-   id="tspan21">(small)</tspan></text>
+   id="tspan21" /></text>
   <!-- Ez (large vertical component) — dashed thinner -->
   <line
-     x1="370"
-     y1="132"
-     x2="370"
-     y2="348"
+     x1="367.84216"
+     y1="247.98401"
+     x2="367.84216"
+     y2="463.98401"
      stroke="#c0392b"
      stroke-width="2"
-     stroke-dasharray="6 3"
+     stroke-dasharray="6, 3"
      marker-end="url(#arrEthin)"
      id="line21" />
   <text
-     x="312"
-     y="245"
+     x="346.52548"
+     y="358.28671"
      fill="#c0392b"
      font-style="italic"
-     font-size="14"
-     id="text23">
-    E<tspan
-   font-size="11"
+     font-size="14px"
+     id="text23"
+     style="font-size:14.6667px">E<tspan
+   font-size="11px"
    dy="3"
-   id="tspan22">z</tspan><tspan
-   dy="-3"
-   id="tspan23"> (large)</tspan></text>
+   id="tspan22"
+   style="font-size:14.6667px">z</tspan></text>
   <!-- Total E (the actual tilted field) — bold solid -->
   <line
-     x1="370"
-     y1="132"
-     x2="420"
-     y2="348"
+     x1="367.84216"
+     y1="247.98401"
+     x2="417.84216"
+     y2="463.98401"
      stroke="#c0392b"
      stroke-width="3"
      marker-end="url(#arrE)"
      id="line23" />
   <text
-     x="402.013"
-     y="238.2897"
+     x="399.85516"
+     y="354.27371"
      fill="#c0392b"
      font-weight="bold"
      font-style="italic"
@@ -348,8 +358,8 @@
      id="text24">E</text>
   <!-- Decomposition formula -->
   <text
-     x="423.30722"
-     y="237.51144"
+     x="421.14938"
+     y="353.49545"
      fill="#c0392b"
      font-size="17.214px"
      font-style="italic"
@@ -361,239 +371,18 @@
    style="stroke-width:1.32415">xx̂ − Ezẑ</tspan></text>
   <!-- =============== Ez CONSEQUENCE: SURFACE CHARGES (established region) =============== -->
   <!-- + charges on the dielectric-facing (bottom) surface of trace -->
-  <g
-     fill="#c0392b"
-     font-size="15"
-     font-weight="bold"
-     text-anchor="middle"
-     id="g33">
-    <text
-       x="100"
-       y="118"
-       id="text28">+</text>
-    <text
-       x="150"
-       y="118"
-       id="text29">+</text>
-    <text
-       x="200"
-       y="118"
-       id="text30">+</text>
-    <text
-       x="250"
-       y="118"
-       id="text31">+</text>
-    <text
-       x="300"
-       y="118"
-       id="text32">+</text>
-    <text
-       x="350"
-       y="118"
-       id="text33">+</text>
-  </g>
   <!-- − charges on the dielectric-facing (top) surface of return plane -->
-  <g
-     fill="#2471a3"
-     font-size="15"
-     font-weight="bold"
-     text-anchor="middle"
-     id="g39">
-    <text
-       x="100"
-       y="372"
-       id="text34">−</text>
-    <text
-       x="150"
-       y="372"
-       id="text35">−</text>
-    <text
-       x="200"
-       y="372"
-       id="text36">−</text>
-    <text
-       x="250"
-       y="372"
-       id="text37">−</text>
-    <text
-       x="300"
-       y="372"
-       id="text38">−</text>
-    <text
-       x="350"
-       y="372"
-       id="text39">−</text>
-  </g>
   <!-- Electrons displaced upward inside trace (away from dielectric face) -->
-  <g
-     fill="#2471a3"
-     font-size="11"
-     text-anchor="middle"
-     id="g45">
-    <text
-       x="100"
-       y="98"
-       id="text40">e⁻</text>
-    <text
-       x="150"
-       y="98"
-       id="text41">e⁻</text>
-    <text
-       x="200"
-       y="98"
-       id="text42">e⁻</text>
-    <text
-       x="250"
-       y="98"
-       id="text43">e⁻</text>
-    <text
-       x="300"
-       y="98"
-       id="text44">e⁻</text>
-    <text
-       x="350"
-       y="98"
-       id="text45">e⁻</text>
-  </g>
   <!-- =============== Ex CONSEQUENCE: DRIFT CURRENT IN TRACE =============== -->
   <!-- Small horizontal arrows showing conventional current along the trace (+x̂) -->
-  <g
-     stroke="#333"
-     stroke-width="1.6"
-     fill="none"
-     id="g47">
-    <line
-       x1="374.8002"
-       y1="107.46054"
-       x2="414.8002"
-       y2="107.46054"
-       marker-end="url(#arrI)"
-       id="line47" />
-  </g>
   <!-- =============== CALLOUT 1 — Ez consequence =============== -->
-  <g
-     id="g57">
-    <line
-       x1="247.63496"
-       y1="449.91653"
-       x2="352.20242"
-       y2="253.80464"
-       stroke="#666666"
-       stroke-width="0.600029"
-       marker-end="url(#arrLeader)"
-       id="line49" />
-    <text
-       x="40"
-       y="463"
-       fill="#333333"
-       font-size="12px"
-       id="text53"><tspan
-         font-style="italic"
-         fill="#c0392b"
-         id="tspan49">E</tspan><tspan
-         font-size="9px"
-         dy="3"
-         fill="#c0392b"
-         id="tspan50">z</tspan><tspan
-         dy="-3"
-         id="tspan51">pulls electrons up in</tspan><tspan
-         font-style="italic"
-         id="tspan52">both </tspan><tspan
-         id="tspan53">conductors:</tspan></text>
-    <text
-       x="40"
-       y="478"
-       fill="#333"
-       font-size="12"
-       id="text54">
-      surface charges (+ on trace, − on plane) build until
-    </text>
-    <text
-       x="40"
-       y="492"
-       fill="#333"
-       font-size="12"
-       id="text56">
-      their own field cancels <tspan
-   font-style="italic"
-   fill="#c0392b"
-   id="tspan54">E</tspan><tspan
-   font-size="9"
-   dy="3"
-   fill="#c0392b"
-   id="tspan55">z</tspan><tspan
-   dy="-3"
-   id="tspan56"> inside the copper</tspan></text>
-    <text
-       x="40"
-       y="506"
-       fill="#333"
-       font-size="12"
-       font-style="italic"
-       id="text57">
-      → wave is confined to the dielectric
-    </text>
-  </g>
   <!-- =============== CALLOUT 2 — Ex consequence =============== -->
-  <g
-     id="g63">
-    <line
-       x1="555.11713"
-       y1="445.0928"
-       x2="410.3924"
-       y2="151.72621"
-       stroke="#666666"
-       stroke-width="0.720468"
-       marker-end="url(#arrLeader)"
-       id="line57" />
-    <text
-       x="455"
-       y="463"
-       fill="#333"
-       font-size="12"
-       id="text59"><tspan
-         font-style="italic"
-         fill="#c0392b"
-         id="tspan57">E</tspan><tspan
-         font-size="9"
-         dy="3"
-         fill="#c0392b"
-         id="tspan58">x</tspan><tspan
-         dy="-3"
-         id="tspan59"> drives a horizontal force on free electrons</tspan></text>
-    <text
-       x="455"
-       y="478"
-       fill="#333"
-       font-size="12"
-       id="text60">
-      → collective drift = <tspan
-   font-weight="bold"
-   id="tspan60">sustained current</tspan> along trace
-    </text>
-    <text
-       x="455"
-       y="492"
-       fill="#333"
-       font-size="12"
-       font-style="italic"
-       id="text63">
-      (the <tspan
-   font-style="normal"
-   id="tspan61">I</tspan><tspan
-   font-size="9"
-   dy="3"
-   font-style="normal"
-   id="tspan62">fwd</tspan><tspan
-   dy="-3"
-   id="tspan63"> we measure with instruments)</tspan></text>
-  </g>
   <!-- =============== AXES =============== -->
   <g
      stroke="#333333"
      fill="#333333"
      id="g68"
-     transform="translate(0,-6.4735265)">
+     transform="translate(3.2367632,132.70729)">
     <!-- x axis (right) -->
     <line
        x1="30"
@@ -613,7 +402,7 @@
        y="434"
        font-size="11px"
        fill="#555555"
-       id="text65">(propagation)</text>
+       id="text65" />
     <!-- z axis (up) -->
     <line
        x1="30"
@@ -666,47 +455,47 @@
   </g>
   <!-- =============== LEGEND =============== -->
   <g
-     transform="translate(152.56743,510)"
+     transform="translate(263.6963,629.22078)"
      id="g75">
     <rect
-       x="0"
-       y="0"
-       width="560"
-       height="26"
+       x="263.17624"
+       y="-89.091507"
+       width="156.10509"
+       height="55.291908"
        fill="#fafafa"
        stroke="#bbbbbb"
-       stroke-width="0.7"
+       stroke-width="0.53896"
        id="rect68" />
     <!-- E (bold) -->
     <line
-       x1="10"
-       y1="13"
-       x2="40"
-       y2="13"
+       x1="280.26974"
+       y1="-74.932068"
+       x2="310.26974"
+       y2="-74.932068"
        stroke="#c0392b"
        stroke-width="3"
        marker-end="url(#arrE)"
        id="line68" />
     <text
-       x="46"
-       y="17"
+       x="316.26974"
+       y="-70.932068"
        font-size="11px"
        fill="#333333"
        id="text68">total E (tilted)</text>
     <!-- Ex / Ez component -->
     <line
-       x1="160"
-       y1="13"
-       x2="190"
-       y2="13"
+       x1="279.22079"
+       y1="-48.498501"
+       x2="309.22079"
+       y2="-48.498501"
        stroke="#c0392b"
        stroke-width="2"
        stroke-dasharray="6, 3"
        marker-end="url(#arrEthin)"
        id="line69" />
     <text
-       x="196"
-       y="17"
+       x="315.22079"
+       y="-44.498501"
        font-size="11px"
        fill="#333333"
        id="text72">component (E<tspan
@@ -721,34 +510,64 @@
    dy="-3"
    id="tspan72">)</tspan></text>
     <!-- Current -->
-    <line
-       x1="345"
-       y1="13"
-       x2="375"
-       y2="13"
-       stroke="#333333"
-       stroke-width="1.6"
-       marker-end="url(#arrI)"
-       id="line72" />
-    <text
-       x="381"
-       y="17"
-       font-size="11px"
-       fill="#333333"
-       id="text73">electron drift / I</text>
     <!-- + and − -->
+  </g>
+  <g
+     id="g15"
+     transform="translate(-109.9577,119.49681)">
+    <!-- Plot baseline / axis lines (faint) -->
+    <line
+       x1="170.58942"
+       y1="-15"
+       x2="824.11591"
+       y2="-15"
+       stroke="#bbbbbb"
+       stroke-width="0.59705"
+       stroke-dasharray="2, 2"
+       id="line10" />
+    <line
+       x1="170.58942"
+       y1="-55"
+       x2="824.11591"
+       y2="-55"
+       stroke="#bbbbbb"
+       stroke-width="0.59705"
+       stroke-dasharray="2, 2"
+       id="line11" />
+    <!-- Voltage step waveform: V0 left of wavefront, smooth transition at x=500, 0 right -->
+    <path
+       d="M 171.66833,-55 C 207.81219,-55 480,-55 480,-55 c 12,0 28.00008,40.042572 40,40 l 304.11588,-1.078921"
+       fill="none"
+       stroke="#5a4d8c"
+       stroke-width="2.2"
+       id="path11"
+       sodipodi:nodetypes="cssc" />
+    <!-- Tick labels -->
     <text
-       x="475"
-       y="17"
-       font-size="13px"
-       font-weight="bold"
-       fill="#c0392b"
-       id="text74">+</text>
-    <text
-       x="488"
-       y="17"
+       x="164.74725"
+       y="-52"
+       fill="#5a4d8c"
        font-size="11px"
-       fill="#333333"
-       id="text75">surface charge</text>
+       text-anchor="end"
+       font-style="italic"
+       id="text11-0">V₀</text>
+    <text
+       x="164.74725"
+       y="-12"
+       fill="#5a4d8c"
+       font-size="11px"
+       text-anchor="end"
+       font-style="italic"
+       id="text12-9">0</text>
+    <!-- Plot title -->
+    <text
+       x="325.38538"
+       y="-60.157841"
+       fill="#5a4d8c"
+       font-size="12px"
+       font-style="italic"
+       id="text13-4"
+       style="font-size:14.6667px;text-align:center;text-anchor:middle">propagating voltage step V(x, t)</text>
+    <!-- "Ahead of wavefront: no fields yet" -->
   </g>
 </svg>
