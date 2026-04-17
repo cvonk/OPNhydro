@@ -10,14 +10,9 @@ After the PCB selection and general layout rules, the document covers the differ
 
 Rather than presenting layout rules as a checklist to memorise, this guide starts from the underlying electromagnetic theory and derives the rules as consequences. It serves as a bridge between the high-level Architecture goals and the specific Schematic Design requirements.
 
-Let's start with a puzzle. You flip a light switch, and the bulb lights up almost instantly. But if you could tag a single electron at the switch and watch it, you would find it drifting toward the bulb at roughly one meter per hour — the speed of a snail. At that rate it would take days to arrive. So what turned the light on?
+Consider a puzzle. You flip a light switch, and the bulb lights up almost instantly. But if you could tag a single electron at the switch and watch it, you would find it drifting toward the bulb at roughly one meter per hour — the speed of a snail. At that rate it would take days to arrive. So what turned the light on?
 
 Not the electrons. The electromagnetic field did. And once you understand that, PCB layout starts making intuitive sense.
-
-The treatment draws heavily on:
-- Physics classes at HTS Dordrecht from Dipl.-Ing. J.J. Senff
-- Walter Lewin's physics lectures at MIT
-- *Signal and Power Integrity* by Eric Bogatin
 
 <style>
   .quote {
@@ -88,7 +83,7 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
 
 #### From Voltage to EM Wave
 
-> "Electromagnetic (EM) field theory based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^BOGATIN] and Kenneth Wyatt [^WYATT].
+> "Electromagnetic (EM) field theory, based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^BOGATIN] and Kenneth Wyatt [^WYATT].
 
 [^BOGATIN]: [Signal and Power Integrity, simplified 2nd (2010) - Eric Bogatin](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)
 [^WYATT]: [PCB Design for Low EMI - Kenneth Wyatt](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)
@@ -136,7 +131,7 @@ Consider a signal trace running above a ground return plane, separated by a thin
 
 When a **voltage step** is applied at one end, the following chain of events unfolds:
 
-1. The sudden voltage change creates an **electric field** $\mathbf{E}$ appears between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only at the very beginning of the microstrip. $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localised. 
+1. The sudden voltage change creates an **electric field** $\mathbf{E}$ between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only at the very beginning of the microstrip. $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localised. 
 <br />
 
 2. The moment $\mathbf E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\mathbf J = \mathbf 0$), Ampère-Maxwell's Law reduces to the displacement-current term — a time-changing electric field $\mathbf E$ (right side) **forces the magnetic field $\mathbf B$ to vary spatially** (left side).
@@ -157,7 +152,7 @@ Maxwell's curl equations link the two: a time change *here* forces a spatial dif
 
 ##### In other words
 
-Here's how I imagine Richard Feynman would explain this. Chalk in one hand, no notes.
+Here is how Feynman might have explained it. Chalk in one hand, no notes.
 
 <div class="quote">
 Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of plastic. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
@@ -281,7 +276,7 @@ The wave **propagation speed in FR-4** is therefore **~15 cm/ns**. To be precise
 
 ##### In other words
 
-Once more in the words of a favorite physics lecturer:
+Once more in Feynman's words:
 
 <div class="quote">
 
@@ -339,7 +334,7 @@ $$
   </center>
 </figure>
 
-The current is placing charge into the capacitance of the line. This current crosses the transmission line at the leading edge of the wave. One way to describe this current flow is to say it is charging the capacitance of the line.
+At the leading edge of the wave, this current charges the distributed capacitance of the line.
 
 This collective drift of many electrons is what we measure as current density $\mathbf J$, and in a linear conductor it is proportional to $\mathbf E$:
 $$
@@ -437,13 +432,9 @@ Now look where we are on this PCB. You've got copper up top, copper down below, 
 
 **Inside the plastic,** there are no free electrons. $\mathbf J = 0$. Nothing is flowing through the dielectric. So the first term is nothing. But the electric field is enormous in there, and it's changing in time as the wave goes by. So the second term — the displacement current — is doing all the work.
 
-And here's what I want you to appreciate. You walk from the plastic up into the copper, crossing the boundary, and the $\mathbf B$ field doesn't care. It doesn't notice. It's perfectly smooth. It has the same value just below the surface as just above. What changes is '*who's responsible for it*. Down in the plastic, a changing electric field is keeping $\mathbf B$ alive. Up in the copper, moving electrons are keeping it alive. The field itself is completely oblivious — it just wraps around the trace as one continuous tube of magnetism.
-
-You can think of it like this. You've got a relay race. There are two runners. One runs through the plastic carrying the magnetic field; the other runs through the copper carrying the magnetic field. When they get to the copper-plastic boundary, they hand the baton off, cleanly, without dropping a step. And if you're the baton — if you're the magnetic field — you don't even know the runners changed. You just keep going.
+And here's what I want you to appreciate. You walk from the plastic up into the copper, crossing the boundary, and the $\mathbf B$ field doesn't care. It doesn't notice. It's perfectly smooth. It has the same value just below the surface as just above. What changes is *who's responsible for it*. Down in the plastic, a changing electric field is keeping $\mathbf B$ alive. Up in the copper, moving electrons are keeping it alive. The field itself is completely oblivious — it just wraps around the trace as one continuous tube of magnetism.
 
 That was Maxwell's real insight. Not that current makes magnetism — we knew that. Not that changing fields make fields — Faraday had half of that. Maxwell's piece was realizing that *a changing electric field is, for the purposes of magnetism, every bit as good as a current.* Nature doesn't care which one is feeding the field. It'll take either. And on a PCB, inside the copper it takes one, inside the plastic it takes the other, and the result is a seamless, beautiful, continuous magnetic field wrapping the whole transmission line.
-
-And then — I think — he'd tap the board twice, right on the plus sign between the two terms, and say *"That little plus sign, right there, is one of the most important plus signs in all of physics."*
 </div>
 
 #### One System, Two Views
@@ -504,7 +495,7 @@ $$
     I_C = C_m \ \frac{dV_a}{dt}
 $$
 
-where $C_{\text{m}}$ is the mutual parasitic capacitance between the two traces — determined by their overlap area, separation distance, and the dielectric constant of the material between them. Closer traces, longer parallel runs, and higher $\varepsilon_r$ all increase the coupling.
+where $C_{\text{m}}$ is the mutual parasitic capacitance between the two traces — determined by their overlap area, separation distance, and the dielectric constant of the material between them. Closer traces and longer parallel runs increase the coupling (higher $\varepsilon_r$ increases mutual capacitance but also tightens confinement to the return plane, so the net effect depends on geometry).
 
 This is purely Gauss's law at work: electric field lines must terminate on a conductor, and if another trace is closer or more convenient than the return plane, some of them will land there instead.
 <br />
@@ -550,7 +541,7 @@ At the **near end** (closest to the aggressor's source), the capacitive and indu
 
 Sections §1.1 through §1.4 describe what happens when the EM field stays where it belongs — confined between a trace and its return plane. EMI is what happens when it escapes.
 
-A current loop is an antenna. The power it radiates is proportional to the loop area $A$ and the square of the frequency $f$. For a small loop (perimeter ≪ wavelength), the radiated electric field at distance $r$ is:[^EMCLOOP]
+A current loop is an antenna. For a small loop (perimeter ≪ wavelength), the radiated electric field at distance $r$ is proportional to the square of the frequency:[^EMCLOOP]
 $$
     E \;\propto\; \frac{f^2 \, A \, I}{r}
 $$
@@ -632,7 +623,7 @@ If the planes are the same potential, prevent leakage with nearby stitching vias
 
 Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fields) and inductive ($L_m$, from overlapping $\mathbf B$ fields) — depend on how much of the aggressor's field volume overlaps with the victim's. Every mitigation strategy reduces that overlap.
 
-**Rule 2a — Increase trace spacing.** The fringing $\mathbf E$ field that causes capacitive coupling falls off roughly as $1/d^2$ with distance. The $\mathbf B$ field that causes inductive coupling falls off as $1/d$. The 3W rule (space traces at least 3× the trace width apart) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
+**Rule 2a — Increase trace spacing.** The fringing $\mathbf E$ field that causes capacitive coupling falls off roughly as $1/d$ with distance. The $\mathbf B$ field that causes inductive coupling follows Ampere's Law and falls off as $1/d$. The 3W rule (space traces at least 3× the trace width apart) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
 
 **Rule 2b — Minimise parallel run length.** Both $C_m$ and $L_m$ are proportional to the length over which two traces run in parallel. The coupling is cumulative — every millimetre of shared dielectric adds to the total. Where two sensitive traces must be routed near each other, cross them at 90° rather than running them in parallel.
 
@@ -660,7 +651,7 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 
 EMI is not a separate problem — it is the consequence of every other problem listed above. When a return path is broken, the $\mathbf B$ fields stop cancelling and the loop radiates. When crosstalk couples energy onto an unintended trace, that trace becomes an unintentional antenna. When a rail collapses, the transient current loop radiates at the switching frequency and its harmonics.
 
-**Rule 4a — Minimise loop area.** Every current — signal, power, return — forms a loop. The radiated power from a loop is proportional to the loop area squared and to the frequency squared: $P_{\text{rad}} \propto A^2 f^4$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
+**Rule 4a — Minimise loop area.** Every current — signal, power, return — forms a loop. The radiated power from a loop is proportional to the loop area squared and to the fourth power of frequency: $P_{\text{rad}} \propto A^2 f^4$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
 
 **Rule 4b — Contain the fields at board edges.** EM fields that reach the edge of the PCB can radiate freely — there is no conductor to confine them. Pull traces and pours back from the board edge by at least 20× the dielectric thickness (the 20H rule). Place ground stitching vias along the board perimeter to create a continuous shield.
 
@@ -739,11 +730,11 @@ The trace widths can be calculated using the IPC-2221 empirical formula for exte
 
 $$
     \begin{align}
-    I  &= k × ΔT^{0.44} × A^{0.725} \\
+    I  &= k \times \Delta T^{0.44} \times A^{0.725} \\
     \rm{where\ \ } I &= \rm{current\ [A]} \nonumber \\
     k  &= 0.048 \rm{\ for\ outer\ layer,\ or\ } 0.024 \rm{\ for\ inner\ layer} \nonumber \\
-    ΔT &= \rm{allowable\ temperature\ increase\ [°C]} \nonumber \\
-    A  &= \rm{cross\ sectional\ area\ [mil²]} =  width_{mil} × thickness_{mil} \nonumber \\
+    \Delta T &= \rm{allowable\ temperature\ increase\ [°C]} \nonumber \\
+    A  &= \rm{cross\ sectional\ area\ [mil²]} =  width_{mil} \times thickness_{mil} \nonumber \\
    \rm{thickness_{mil}} &= 1.37\rm{mil\ for\ 1oz\ Cu,\ or\ } 2.74\rm{mil}\rm{\ for\ 2oz\ Cu} \nonumber 
 \end{align}
 $$
@@ -761,8 +752,6 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 
 
 ### 2.7. PCB Layout Strategy
-
-> TODO: Move these to their functional areas listed in paragraph 3.
 
 - **Star power distribution** — Run a dedicated pair of 24V traces from the power entry connector directly to the stepper section, and a separate pair to the logic regulator. Do not daisy-chain power from the motors to the sensors.
 - **Via stitching for high-current transitions** — When the 24V rail transitions between layers, use at least 3–4 vias per 2A connection. A single standard 10 mil via carries only 0.5–1A before excessive heating.
@@ -782,6 +771,8 @@ The PDN traces are transmission lines and require adjacent return planes. In thi
 Ferrite chokes should not be placed in the PDN — the design requires low target impedance throughout. The exception is filters for analog, RF, or PLL circuits, where isolation from switching noise takes priority over low impedance.
 
 
+---
+
 ### 3.2. I2C Sensors
 
 ### 3.3. Peristaltic Pump Drivers
@@ -793,8 +784,7 @@ Ferrite chokes should not be placed in the PDN — the design requires low targe
 ### 3.6. SoC, Test Points and Fiducials
 
 
-
----
+--
 
 
 ## References
