@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 820 640"
+   viewBox="0 0 820.6394 673.88611"
    font-family="Helvetica, Arial, sans-serif"
-   font-size="14"
+   font-size="14px"
    version="1.1"
    id="svg89"
    sodipodi:docname="microstrip-ez-confinement.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   width="820.6394"
+   height="673.88611"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -21,14 +23,23 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.5640625"
-     inkscape:cx="410.14985"
-     inkscape:cy="353.88611"
+     inkscape:cx="410.78921"
+     inkscape:cy="280.67932"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg89" />
+     inkscape:current-layer="svg89">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="820.6394"
+       height="673.88611"
+       id="page10"
+       margin="31.968033 0 0"
+       bleed="0" />
+  </sodipodi:namedview>
   <!--
     Vertical Ez component → transient surface-charge redistribution
     → confines the wave.
@@ -54,7 +65,7 @@
        markerHeight="6"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
+         d="M 0,0 10,5 0,10 Z"
          fill="#c0392b"
          id="path1" />
     </marker>
@@ -67,7 +78,7 @@
        markerHeight="5"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
+         d="M 0,0 10,5 0,10 Z"
          fill="#c0392b"
          id="path2" />
     </marker>
@@ -80,7 +91,7 @@
        markerHeight="5"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
+         d="M 0,0 10,5 0,10 Z"
          fill="#922b21"
          id="path3" />
     </marker>
@@ -93,7 +104,7 @@
        markerHeight="5"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
+         d="M 0,0 10,5 0,10 Z"
          fill="#2471a3"
          id="path4" />
     </marker>
@@ -106,8 +117,8 @@
        markerHeight="6"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
-         fill="#333"
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
          id="path5" />
     </marker>
     <marker
@@ -119,159 +130,225 @@
        markerHeight="5"
        orient="auto-start-reverse">
       <path
-         d="M0,0 L10,5 L0,10 z"
-         fill="#666"
+         d="M 0,0 10,5 0,10 Z"
+         fill="#666666"
          id="path6" />
+    </marker>
+    <marker
+       id="arrAx-3"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path4-2" />
+    </marker>
+    <marker
+       id="marker1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path1-2" />
     </marker>
   </defs>
   <!-- =============== GEOMETRY =============== -->
   <!-- Trace (copper) -->
-  <rect
-     x="60"
-     y="80"
-     width="660"
-     height="180"
-     fill="#deb187"
-     stroke="#6e3f1d"
-     stroke-width="1"
-     id="rect6" />
   <!-- Trace skin-depth layer (subtle highlight at the bottom of trace) -->
-  <rect
-     x="60"
-     y="230"
-     width="660"
-     height="30"
-     fill="#a86628"
-     opacity="0.30"
-     stroke="none"
-     id="rect7" />
   <!-- Dielectric -->
-  <rect
-     x="60"
-     y="260"
-     width="660"
-     height="80"
-     fill="#fdf6c2"
-     stroke="#c4b86a"
-     stroke-width="0.8"
-     id="rect8" />
   <!-- Return plane (copper, green) -->
-  <rect
-     x="60"
-     y="340"
-     width="660"
-     height="180"
-     fill="#4ea94e"
-     stroke="#2f6b2f"
-     stroke-width="1"
-     id="rect9"
-     style="fill:#96cf96;fill-opacity:1" />
   <!-- Return-plane skin-depth layer (subtle highlight at the top) -->
-  <rect
-     x="60"
-     y="340"
-     width="660"
-     height="30"
-     fill="#1f5e1f"
-     opacity="0.28"
-     stroke="none"
-     id="rect10" />
   <!-- Material labels -->
-  <text
-     x="731.83618"
-     y="153.06693"
-     fill="#3a2410"
-     font-weight="bold"
-     id="text10"
-     style="font-size:17.3333px">trace</text>
-  <text
-     x="729.27869"
-     y="167.06693"
-     fill="#5a3a1a"
-     font-size="11"
-     font-style="italic"
-     id="text11"
-     style="font-size:13.3333px">(copper)</text>
-  <text
-     x="728"
-     y="305"
-     fill="#7a6a2a"
-     id="text12">dielectric</text>
-  <text
-     x="729.27686"
-     y="431.91928"
-     fill="#1f5e1f"
-     font-weight="bold"
-     id="text14"
-     style="font-size:16.0001px;stroke-width:1.00001"><tspan
-       sodipodi:role="line"
-       id="tspan93"
-       x="729.27686"
-       y="431.91928"
-       style="font-size:16.0001px;stroke-width:1.00001">return</tspan><tspan
-       sodipodi:role="line"
-       id="tspan94"
-       x="729.27686"
-       y="451.9194"
-       style="font-size:16.0001px;stroke-width:1.00001">plane</tspan></text>
   <!-- Skin-depth bracket — trace -->
-  <g
-     stroke="#5a3a1a"
-     stroke-width="0.8"
-     fill="none"
-     id="g15">
-    <path
-       d="M 50 230 L 42 230 L 42 260 L 50 260"
-       id="path15" />
-  </g>
-  <text
-     x="20"
-     y="248"
-     fill="#5a3a1a"
-     font-size="11"
-     font-style="italic"
-     text-anchor="middle"
-     id="text16">δ</text>
   <!-- Skin-depth bracket — return plane -->
-  <g
-     stroke="#1f5e1f"
-     stroke-width="0.8"
-     fill="none"
-     id="g16">
-    <path
-       d="M 50 340 L 42 340 L 42 370 L 50 370"
-       id="path16" />
-  </g>
-  <text
-     x="20"
-     y="358"
-     fill="#1f5e1f"
-     font-size="11"
-     font-style="italic"
-     text-anchor="middle"
-     id="text17">δ</text>
   <!-- =============== WAVEFRONT =============== -->
+  <g
+     id="g9"
+     inkscape:label="BG"
+     transform="translate(0.63936067,56.263738)">
+    <rect
+       x="59.925423"
+       y="79.925423"
+       width="660.14911"
+       height="130.27904"
+       fill="#deb187"
+       stroke="#6e3f1d"
+       stroke-width="0.850844"
+       id="rect6" />
+    <rect
+       x="60"
+       y="180.76923"
+       width="660"
+       height="30"
+       fill="#a86628"
+       opacity="0.3"
+       stroke="none"
+       id="rect7" />
+    <rect
+       x="60.222687"
+       y="210.35255"
+       width="659.55463"
+       height="194.00018"
+       fill="#fdf6c2"
+       stroke="#c4b86a"
+       stroke-width="1.24537"
+       id="rect8" />
+    <rect
+       x="59.908447"
+       y="400.00833"
+       width="660.18311"
+       height="120.08321"
+       fill="#4ea94e"
+       stroke="#2f6b2f"
+       stroke-width="0.816894"
+       id="rect9"
+       style="fill:#96cf96;fill-opacity:1" />
+    <rect
+       x="59.360641"
+       y="399.46054"
+       width="660"
+       height="30"
+       fill="#1f5e1f"
+       opacity="0.28"
+       stroke="none"
+       id="rect10" />
+    <text
+       x="731.83618"
+       y="153.06693"
+       fill="#3a2410"
+       font-weight="bold"
+       id="text10"
+       style="font-size:17.3333px">trace</text>
+    <text
+       x="728"
+       y="305"
+       fill="#7a6a2a"
+       id="text12"
+       style="font-size:17.3333px"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+         id="tspan3">dielectric</tspan></text>
+    <text
+       x="729.9162"
+       y="467.08411"
+       fill="#1f5e1f"
+       font-weight="bold"
+       id="text14"
+       style="font-size:16.0001px;stroke-width:1.00001"><tspan
+         sodipodi:role="line"
+         id="tspan93"
+         x="729.9162"
+         y="467.08411"
+         style="font-size:16.0001px;stroke-width:1.00001">return</tspan><tspan
+         sodipodi:role="line"
+         id="tspan94"
+         x="729.9162"
+         y="487.08423"
+         style="font-size:16.0001px;stroke-width:1.00001">plane</tspan></text>
+    <g
+       stroke="#5a3a1a"
+       stroke-width="0.8"
+       fill="none"
+       id="g15"
+       transform="matrix(1.0029876,0,0,0.91617382,-3.3336369,-29.332715)">
+      <path
+         d="m 50,230 h -8 v 30 h 8"
+         id="path15" />
+    </g>
+    <text
+       x="25.754246"
+       y="199.40858"
+       fill="#5a3a1a"
+       font-size="11px"
+       font-style="italic"
+       text-anchor="middle"
+       id="text16"
+       style="font-size:14.6667px">δ</text>
+    <g
+       stroke="#1f5e1f"
+       stroke-width="0.8"
+       fill="none"
+       id="g16"
+       transform="matrix(1.0053268,0,0,0.8533523,0.39539302,111.84015)">
+      <path
+         d="m 50,340 h -8 v 30 h 8"
+         id="path16" />
+    </g>
+    <text
+       x="27.672329"
+       y="416.82117"
+       fill="#1f5e1f"
+       font-size="11px"
+       font-style="italic"
+       text-anchor="middle"
+       id="text17"
+       style="font-size:14.6667px">δ</text>
+    <text
+       x="728.70483"
+       y="195.37059"
+       fill="#3a2410"
+       font-size="12px"
+       font-style="italic"
+       id="text10-0"
+       style="font-size:14.6667px"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="728.70483"
+         y="195.37059"
+         style="font-size:14.6667px">near-surface</tspan><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="728.70483"
+         y="213.70396"
+         style="font-size:14.6667px">layer</tspan></text>
+    <text
+       x="730.14044"
+       y="408.62946"
+       fill="#3a2410"
+       font-size="12px"
+       font-style="italic"
+       id="text10-0-4"
+       style="font-size:14.6667px"><tspan
+         sodipodi:role="line"
+         id="tspan1-3"
+         x="730.14044"
+         y="408.62946"
+         style="font-size:14.6667px">near-surface</tspan><tspan
+         sodipodi:role="line"
+         id="tspan2-1"
+         x="730.14044"
+         y="426.96283"
+         style="font-size:14.6667px">layer</tspan></text>
+  </g>
   <line
-     x1="460"
-     y1="50"
-     x2="460"
-     y2="540"
+     x1="460.63934"
+     y1="39.770226"
+     x2="460.63934"
+     y2="577.08289"
      stroke="#6f4a6f"
-     stroke-width="1.3"
-     stroke-dasharray="6 4"
+     stroke-width="1.36132"
+     stroke-dasharray="6, 4"
      id="line17" />
   <text
-     x="459.91934"
-     y="38.606392"
+     x="460.55869"
+     y="93.591408"
      fill="#6f4a6f"
      font-style="italic"
      font-size="13px"
      id="text18"
-     style="font-size:14.6667px;text-align:center;text-anchor:middle">wavefront</text>
+     style="font-size:17.3333px;text-align:center;text-anchor:middle">wavefront</text>
   <!-- Region tags -->
   <text
-     x="272.13199"
-     y="63.523579"
+     x="272.79199"
+     y="118.02907"
      fill="#777777"
      font-size="12.3871px"
      font-style="italic"
@@ -281,8 +358,8 @@
    style="font-size:14.6667px;baseline-shift:sub"
    id="tspan89">z</tspan> present, electrons have responded)</text>
   <text
-     x="593.50488"
-     y="65"
+     x="594.14429"
+     y="121.26373"
      fill="#888888"
      font-size="12"
      font-style="italic"
@@ -295,7 +372,8 @@
      stroke="#c0392b"
      stroke-width="2.4"
      fill="none"
-     id="g24">
+     id="g24"
+     transform="matrix(0.99236736,0,0,2.373388,2.738339,-351.9463)">
     <line
        x1="120"
        y1="265"
@@ -332,29 +410,99 @@
        marker-end="url(#arrE)"
        id="line24" />
   </g>
-  <text
-     x="148"
-     y="305"
-     fill="#c0392b"
-     font-weight="bold"
-     font-style="italic"
-     font-size="20"
-     id="text24">E</text>
-  <text
-     x="166"
-     y="312"
-     fill="#c0392b"
-     font-style="italic"
-     font-size="13"
-     id="text25">z</text>
+  <g
+     id="g8"
+     style="display:none"
+     transform="translate(0.63936067,56.263738)">
+    <text
+       x="501.66351"
+       y="351.72269"
+       fill="#5b8cb0"
+       font-style="italic"
+       font-size="12px"
+       id="text38-7"
+       style="font-size:14.6667px;line-height:1"><tspan
+         sodipodi:role="line"
+         id="tspan59"
+         x="501.66351"
+         y="351.72269"
+         style="font-size:14.6667px;line-height:1">B (from ∂E/∂t,</tspan><tspan
+         sodipodi:role="line"
+         id="tspan60"
+         x="501.66351"
+         y="366.38937"
+         style="font-size:14.6667px;line-height:1">displacement)</tspan></text>
+    <line
+       x1="497.94647"
+       y1="353.55655"
+       x2="482.01688"
+       y2="320.83124"
+       stroke="#5b8cb0"
+       stroke-width="1.67441"
+       id="line39" />
+    <g
+       id="g38-8"
+       transform="translate(5.5024676,153.65433)">
+      <g
+         stroke="#5b8cb0"
+         stroke-width="1.8"
+         fill="none"
+         stroke-dasharray="3, 2"
+         id="g36-3">
+        <circle
+           cx="470"
+           cy="150"
+           r="7"
+           id="circle36-8" />
+      </g>
+      <g
+         stroke="#5b8cb0"
+         stroke-width="1.8"
+         stroke-dasharray="3, 2"
+         id="g37-3">
+        <line
+           x1="465"
+           y1="145"
+           x2="475"
+           y2="155"
+           id="line36-7" />
+        <line
+           x1="475"
+           y1="145"
+           x2="465"
+           y2="155"
+           id="line37-1" />
+      </g>
+    </g>
+  </g>
+  <g
+     id="g10"
+     transform="translate(246.15385,44.755247)">
+    <text
+       x="148"
+       y="305"
+       fill="#c0392b"
+       font-weight="bold"
+       font-style="italic"
+       font-size="20px"
+       id="text24">E</text>
+    <text
+       x="166"
+       y="312"
+       fill="#c0392b"
+       font-style="italic"
+       font-size="13px"
+       id="text25">z</text>
+  </g>
   <!-- =============== TRACE: surface charges + displaced electrons =============== -->
   <!-- + charges on the dielectric-facing (bottom) surface -->
   <g
      fill="#c0392b"
-     font-size="16"
+     font-size="16px"
      font-weight="bold"
      text-anchor="middle"
-     id="g33">
+     id="g33"
+     transform="translate(0.63936067,-0.63935937)">
     <text
        x="100"
        y="258"
@@ -390,7 +538,8 @@
   </g>
   <!-- Electrons in trace, displaced UPWARD from the dielectric face -->
   <g
-     id="g39">
+     id="g39"
+     transform="translate(0.63936067,-4.4755234)">
     <!-- electron with up-arrow showing it moved up -->
     <g
        id="g34">
@@ -412,9 +561,9 @@
       <text
          x="125"
          y="236"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text34">−</text>
     </g>
@@ -438,9 +587,9 @@
       <text
          x="200"
          y="229"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text35">−</text>
     </g>
@@ -464,9 +613,9 @@
       <text
          x="275"
          y="236"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text36">−</text>
     </g>
@@ -490,9 +639,9 @@
       <text
          x="350"
          y="229"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text37">−</text>
     </g>
@@ -516,17 +665,17 @@
       <text
          x="420"
          y="236"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text38">−</text>
     </g>
   </g>
   <!-- "E = 0" deep inside trace -->
   <text
-     x="255.98401"
-     y="154.24576"
+     x="256.62338"
+     y="170.22978"
      fill="#3a2410"
      font-size="13"
      font-style="italic"
@@ -534,8 +683,8 @@
      id="text39"
      style="font-size:14.6667px">E = 0 deep inside the metal</text>
   <text
-     x="259.06393"
-     y="171.6064"
+     x="259.70331"
+     y="187.59041"
      fill="#3a2410"
      font-size="11"
      font-style="italic"
@@ -548,10 +697,11 @@
   <!-- − charges on the dielectric-facing (top) surface -->
   <g
      fill="#1c3e6e"
-     font-size="16"
+     font-size="16px"
      font-weight="bold"
      text-anchor="middle"
-     id="g48">
+     id="g48"
+     transform="translate(1.2787213,120.1998)">
     <text
        x="100"
        y="354"
@@ -587,7 +737,8 @@
   </g>
   <!-- Electrons in return plane, displaced UPWARD toward the dielectric face -->
   <g
-     id="g54">
+     id="g54"
+     transform="translate(1.2787213,113.8062)">
     <g
        id="g49">
       <line
@@ -608,9 +759,9 @@
       <text
          x="125"
          y="406"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text49">−</text>
     </g>
@@ -634,9 +785,9 @@
       <text
          x="200"
          y="399"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text50">−</text>
     </g>
@@ -660,9 +811,9 @@
       <text
          x="275"
          y="406"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text51">−</text>
     </g>
@@ -686,9 +837,9 @@
       <text
          x="350"
          y="399"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text52">−</text>
     </g>
@@ -712,17 +863,17 @@
       <text
          x="420"
          y="406"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="10"
+         font-size="10px"
          font-weight="bold"
          id="text53">−</text>
     </g>
   </g>
   <!-- "E = 0" deep inside return plane -->
   <text
-     x="255.98401"
-     y="454.13086"
+     x="257.26276"
+     y="545.55939"
      fill="#0e3010"
      font-size="13"
      font-style="italic"
@@ -730,8 +881,8 @@
      id="text54"
      style="font-size:14.6667px">E = 0 deep inside the metal</text>
   <text
-     x="261.09891"
-     y="476.60638"
+     x="262.37766"
+     y="568.03491"
      fill="#0e3010"
      font-size="11"
      font-style="italic"
@@ -743,10 +894,11 @@
   <!-- =============== AHEAD OF WAVEFRONT: neutral, undisturbed electrons =============== -->
   <!-- A few neutral electrons in trace -->
   <g
-     fill="#888"
-     font-size="11"
+     fill="#888888"
+     font-size="11px"
      text-anchor="middle"
-     id="g63">
+     id="g63"
+     transform="translate(0.63936067,15.984018)">
     <circle
        cx="510"
        cy="170"
@@ -756,9 +908,9 @@
     <text
        x="510"
        y="173"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text56">−</text>
     <circle
        cx="560"
@@ -769,9 +921,9 @@
     <text
        x="560"
        y="203"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text57">−</text>
     <circle
        cx="610"
@@ -782,9 +934,9 @@
     <text
        x="610"
        y="163"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text58">−</text>
     <circle
        cx="660"
@@ -795,9 +947,9 @@
     <text
        x="660"
        y="213"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text59">−</text>
     <circle
        cx="700"
@@ -808,9 +960,9 @@
     <text
        x="700"
        y="183"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text60">−</text>
     <circle
        cx="540"
@@ -821,9 +973,9 @@
     <text
        x="540"
        y="233"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text61">−</text>
     <circle
        cx="595"
@@ -834,9 +986,9 @@
     <text
        x="595"
        y="243"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text62">−</text>
     <circle
        cx="650"
@@ -847,17 +999,18 @@
     <text
        x="650"
        y="228"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text63">−</text>
   </g>
   <!-- And in return plane -->
   <g
      fill="#9aa3b3"
-     font-size="11"
+     font-size="11px"
      text-anchor="middle"
-     id="g71">
+     id="g71"
+     transform="translate(1.2787213,91.428569)">
     <circle
        cx="510"
        cy="430"
@@ -867,9 +1020,9 @@
     <text
        x="510"
        y="433"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text64">−</text>
     <circle
        cx="560"
@@ -880,9 +1033,9 @@
     <text
        x="560"
        y="463"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text65">−</text>
     <circle
        cx="610"
@@ -893,9 +1046,9 @@
     <text
        x="610"
        y="423"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text66">−</text>
     <circle
        cx="660"
@@ -906,9 +1059,9 @@
     <text
        x="660"
        y="473"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text67">−</text>
     <circle
        cx="700"
@@ -919,9 +1072,9 @@
     <text
        x="700"
        y="443"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text68">−</text>
     <circle
        cx="540"
@@ -932,9 +1085,9 @@
     <text
        x="540"
        y="398"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text69">−</text>
     <circle
        cx="595"
@@ -945,9 +1098,9 @@
     <text
        x="595"
        y="388"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text70">−</text>
     <circle
        cx="650"
@@ -958,14 +1111,14 @@
     <text
        x="650"
        y="403"
-       fill="#fff"
+       fill="#ffffff"
        font-weight="bold"
-       font-size="9"
+       font-size="9px"
        id="text71">−</text>
   </g>
   <text
-     x="600"
-     y="300"
+     x="600.6394"
+     y="356.26373"
      fill="#888888"
      font-size="12"
      font-style="italic"
@@ -975,215 +1128,108 @@
    style="font-size:65%;baseline-shift:sub"
    id="tspan96">z</tspan> in dielectric here yet</text>
   <!-- =============== FORCE-ON-ELECTRON CALLOUT (one prominent example, in trace) =============== -->
-  <g
-     id="g73"
-     transform="translate(1.9180819,-5.1148851)">
-    <!-- Big upward force arrow next to one of the trace electrons -->
-    <line
-       x1="285"
-       y1="240"
-       x2="285"
-       y2="218"
-       stroke="#922b21"
-       stroke-width="2"
-       stroke-dasharray="3, 2"
-       marker-end="url(#arrEind)"
-       id="line72" />
-    <text
-       x="280.2128"
-       y="210.29471"
-       fill="#922b21"
-       font-size="12px"
-       font-style="italic"
-       id="text73"
-       style="font-size:14.6667px">F = −e·E</text>
-  </g>
   <!-- =============== CALLOUTS / ANNOTATIONS =============== -->
   <g
-     id="g77">
+     id="g77"
+     transform="translate(177.1029,61.378623)">
     <!-- Confinement note pointing to the dielectric -->
     <line
-       x1="169.97023"
-       y1="534.29388"
-       x2="220.02884"
-       y2="334.97598"
+       x1="26.677647"
+       y1="555.35333"
+       x2="-26.57443"
+       y2="416.76508"
        stroke="#666666"
-       stroke-width="0.8"
+       stroke-width="0.688033"
        marker-end="url(#arrLeader)"
        id="line73" />
     <text
-       x="40"
-       y="555"
+       x="38.081917"
+       y="547.3277"
        fill="#333333"
        font-size="12"
        id="text75"
-       style="font-size:14.6667px">Surface charges build up until their field cancels E<tspan
+       style="font-size:14.6667px"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         x="38.081917"
+         y="547.3277">Surface charges build up until their field cancels E<tspan
    font-size="9"
    dy="3 -3"
    font-style="italic"
    id="tspan74"
-   style="font-size:14.6667px">z inside the metal.</tspan></text>
+   style="font-size:14.6667px">z</tspan></tspan><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         x="38.081917"
+         y="565.69672"><tspan
+           font-size="9"
+           font-style="italic"
+           style="font-size:14.6667px"
+           id="tspan6">inside the metal.</tspan></tspan></text>
     <text
        x="40"
-       y="572"
+       y="589.90216"
        fill="#333333"
        font-size="12"
        id="text76"
-       style="font-size:14.6667px">Field exists only between the conductors → wave is confined to the dielectric.</text>
+       style="font-size:14.6667px;line-height:1.2"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         x="40"
+         y="589.90216"
+         style="line-height:1.2">Field exists only between the conductors</tspan><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         x="40"
+         y="607.5022"
+         style="line-height:1.2">→ wave is confined to the dielectric.</tspan></text>
   </g>
   <!-- =============== AXES =============== -->
-  <g
-     stroke="#333333"
-     fill="#333333"
-     id="g82"
-     transform="translate(22.377622,-15.344655)">
-    <!-- x axis -->
-    <line
-       x1="540"
-       y1="600"
-       x2="590"
-       y2="600"
-       stroke-width="1.5"
-       marker-end="url(#arrAx)"
-       id="line77" />
-    <text
-       x="594"
-       y="604"
-       font-style="italic"
-       id="text78">x</text>
-    <text
-       x="606"
-       y="604"
-       font-size="11px"
-       fill="#555555"
-       id="text79">(propagation)</text>
-    <!-- z axis -->
-    <line
-       x1="540"
-       y1="600"
-       x2="540"
-       y2="565"
-       stroke-width="1.5"
-       marker-end="url(#arrAx)"
-       id="line79" />
-    <text
-       x="527"
-       y="563"
-       font-style="italic"
-       id="text80">z</text>
-    <!-- y axis (into page) -->
-    <g
-       transform="translate(540.50749,599.36064)"
-       id="g81">
-      <circle
-         r="6"
-         fill="none"
-         stroke="#333333"
-         stroke-width="1.3"
-         id="circle80"
-         cx="0"
-         cy="0" />
-      <line
-         x1="-4"
-         y1="-4"
-         x2="4"
-         y2="4"
-         stroke="#333333"
-         stroke-width="1.3"
-         id="line80" />
-      <line
-         x1="4"
-         y1="-4"
-         x2="-4"
-         y2="4"
-         stroke="#333333"
-         stroke-width="1.3"
-         id="line81" />
-    </g>
-    <text
-       x="533.24475"
-       y="615.50848"
-       font-style="italic"
-       font-size="11px"
-       id="text81">y (into page)</text>
-  </g>
   <!-- =============== LEGEND =============== -->
   <g
-     transform="translate(40,615)"
+     transform="translate(98.821177,643.13187)"
      id="g89">
     <rect
-       x="0"
-       y="0"
-       width="740"
-       height="22"
+       x="478.18027"
+       y="-36.505047"
+       width="190.9122"
+       height="58.566536"
        fill="#fafafa"
-       stroke="#bbb"
-       stroke-width="0.7"
+       stroke="#bbbbbb"
+       stroke-width="0.598307"
        id="rect82" />
     <!-- Ez external -->
-    <line
-       x1="10"
-       y1="5"
-       x2="10"
-       y2="18"
-       stroke="#c0392b"
-       stroke-width="2.2"
-       marker-end="url(#arrE)"
-       id="line82" />
-    <text
-       x="20"
-       y="15"
-       font-size="11"
-       fill="#333"
-       id="text82">
-      external E<tspan
-   font-size="9"
-   dy="2"
-   id="tspan82">z</tspan></text>
     <!-- Force on electron (induced) -->
-    <line
-       x1="125"
-       y1="18"
-       x2="125"
-       y2="5"
-       stroke="#922b21"
-       stroke-width="2"
-       stroke-dasharray="3 2"
-       marker-end="url(#arrEind)"
-       id="line83" />
-    <text
-       x="135"
-       y="15"
-       font-size="11"
-       fill="#333"
-       id="text83">force on electron / induced motion</text>
     <!-- Surface + -->
     <text
-       x="345"
-       y="15"
-       font-size="13"
+       x="490.77423"
+       y="-3.5414586"
+       font-size="13px"
        font-weight="bold"
        fill="#c0392b"
        id="text84">+</text>
     <text
-       x="358"
-       y="15"
+       x="503.77423"
+       y="-3.5414586"
        font-size="11px"
        fill="#333333"
-       id="text85"><tspan
+       id="text85"
+       style="font-size:14.6667px"><tspan
          sodipodi:role="line"
          id="tspan99"
-         x="358"
-         y="15">positive surface charge</tspan><tspan
+         x="503.77423"
+         y="-3.5414586"
+         style="font-size:14.6667px">positive surface charge</tspan><tspan
          sodipodi:role="line"
          id="tspan100"
-         x="358"
-         y="28.75" /></text>
+         x="503.77423"
+         y="14.791917"
+         style="font-size:14.6667px" /></text>
     <!-- Surface − -->
     <text
        x="490"
        y="15"
-       font-size="13"
+       font-size="13px"
        font-weight="bold"
        fill="#1c3e6e"
        id="text86">−</text>
@@ -1192,57 +1238,197 @@
        y="15"
        font-size="11px"
        fill="#333333"
-       id="text87">negative surface charge</text>
+       id="text87"
+       style="font-size:14.6667px">negative surface charge</text>
     <!-- Electron -->
     <g
-       transform="translate(660,11)"
+       transform="translate(494.40559,-25.443556)"
        id="g88">
       <circle
          r="6"
          fill="#2471a3"
-         id="circle87" />
+         id="circle87"
+         cx="0"
+         cy="0" />
       <text
          x="0"
          y="3"
-         fill="#fff"
+         fill="#ffffff"
          text-anchor="middle"
-         font-size="9"
+         font-size="9px"
          font-weight="bold"
          id="text88">−</text>
     </g>
     <text
-       x="670"
-       y="15"
-       font-size="11"
-       fill="#333"
-       id="text89">electron</text>
+       x="504.40561"
+       y="-21.443556"
+       font-size="11px"
+       fill="#333333"
+       id="text89"
+       style="font-size:14.6667px">electron</text>
   </g>
-  <text
-     x="729.34418"
-     y="240.7652"
-     fill="#3a2410"
-     font-size="12px"
-     font-style="italic"
-     id="text10-0">near-surface</text>
-  <text
-     x="729.34418"
-     y="254.7652"
-     fill="#3a2410"
-     font-size="12px"
-     font-style="italic"
-     id="text11-9">layer</text>
-  <text
-     x="730.93463"
-     y="350.11285"
-     fill="#3a2410"
-     font-size="12px"
-     font-style="italic"
-     id="text10-0-8">near-surface</text>
-  <text
-     x="730.93463"
-     y="364.11285"
-     fill="#3a2410"
-     font-size="12px"
-     font-style="italic"
-     id="text11-9-8">layer</text>
+  <g
+     stroke="#333333"
+     fill="#333333"
+     id="g49-1"
+     transform="translate(1.2513945,340.3293)">
+    <!-- x axis: right -->
+    <line
+       x1="29.51049"
+       y1="297.4126"
+       x2="89.51049"
+       y2="297.4126"
+       stroke-width="1.5"
+       marker-end="url(#arrAx-3)"
+       id="line45"
+       style="marker-end:url(#arrAx-3)" />
+    <text
+       x="95.51049"
+       y="301.4126"
+       font-style="italic"
+       id="text45-6"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">x</text>
+    <text
+       x="107.51049"
+       y="301.4126"
+       font-size="11px"
+       fill="#555555"
+       id="text46-8"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(propagation)</text>
+    <!-- z axis: up -->
+    <line
+       x1="29.51049"
+       y1="297.4126"
+       x2="29.51049"
+       y2="237.41258"
+       stroke-width="1.5"
+       marker-end="url(#arrAx-3)"
+       id="line46"
+       style="marker-end:url(#arrAx-3)" />
+    <text
+       x="23.853148"
+       y="232.41258"
+       font-style="italic"
+       id="text47-5"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">z</text>
+    <!-- y axis: into page (⊗) -->
+    <g
+       transform="translate(64.51049,297.41259)"
+       id="g48-7">
+      <circle
+         r="7"
+         fill="none"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="circle47"
+         cx="-34.265736"
+         cy="0" />
+      <line
+         x1="-39.265736"
+         y1="-5"
+         x2="-29.265734"
+         y2="5"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line47" />
+      <line
+         x1="-29.265734"
+         y1="-5"
+         x2="-39.265736"
+         y2="5"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line48-6" />
+    </g>
+    <text
+       x="18.769232"
+       y="318.05597"
+       font-style="italic"
+       id="text48-1"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">y</text>
+    <text
+       x="30.769232"
+       y="318.54547"
+       font-size="11px"
+       fill="#555555"
+       id="text49-8"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(into page)</text>
+  </g>
+  <g
+     id="g15-0"
+     transform="translate(-35.932728,79.276119)"
+     inkscape:label="STEP">
+    <!-- Plot baseline / axis lines (faint) -->
+    <line
+       x1="86.673332"
+       y1="-15"
+       x2="824.11591"
+       y2="-15"
+       stroke="#bbbbbb"
+       stroke-width="0.634225"
+       stroke-dasharray="2, 2"
+       id="line10" />
+    <line
+       x1="170.58942"
+       y1="-55"
+       x2="824.11591"
+       y2="-55"
+       stroke="#bbbbbb"
+       stroke-width="0.59705"
+       stroke-dasharray="2, 2"
+       id="line11" />
+    <!-- Voltage step waveform: V0 left of wavefront, smooth transition at x=500, 0 right -->
+    <path
+       d="M 82.717281,-55.559441 480,-55 c 11.99999,0.0169 28.00008,40.042572 40,40 l 304.11588,-1.078921"
+       fill="none"
+       stroke="#5a4d8c"
+       stroke-width="2.2"
+       id="path11"
+       sodipodi:nodetypes="cssc" />
+    <!-- Tick labels -->
+    <text
+       x="72.747253"
+       y="-52"
+       fill="#5a4d8c"
+       font-size="11px"
+       text-anchor="end"
+       font-style="italic"
+       id="text11-0">V₀</text>
+    <text
+       x="72.747253"
+       y="-12"
+       fill="#5a4d8c"
+       font-size="11px"
+       text-anchor="end"
+       font-style="italic"
+       id="text12-9">0</text>
+    <!-- Plot title -->
+    <text
+       x="212.07793"
+       y="-62.395603"
+       fill="#5a4d8c"
+       font-size="12px"
+       font-style="italic"
+       id="text13-4"
+       style="font-size:14.6667px">propagating voltage step V(x, t)</text>
+    <!-- "Ahead of wavefront: no fields yet" -->
+    <text
+       x="555"
+       y="-38"
+       fill="#888888"
+       font-size="12px"
+       font-style="italic"
+       id="text14-8"
+       style="font-size:14.6667px;line-height:1"><tspan
+         sodipodi:role="line"
+         id="tspan5-7"
+         x="555"
+         y="-38"
+         style="font-size:14.6667px;line-height:1">ahead of wavefront:</tspan><tspan
+         sodipodi:role="line"
+         id="tspan7-3"
+         x="555"
+         y="-23.3333"
+         style="font-size:14.6667px;line-height:1">no fields yet</tspan></text>
+  </g>
 </svg>

@@ -296,7 +296,7 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 ### 1.2. Conductors as Waveguides
 
-§1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the metal, there are free electrons, and they are not passive bystanders.
+§1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the copper, there are free electrons, and they are not passive bystanders.
 
 #### Components of the Electric Field
 
@@ -319,7 +319,6 @@ The **free electrons** in the copper respond to each component differently:
 - **Horizontal component $E_x$** (small) arises from the fact that the wave is *travelling*. The voltage is not the same everywhere along the trace at the same instant: the wave has arrived here but not yet at the next point down the line. That spatial gradient in voltage is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$. It drives a sustained current that we measure with instruments, and converts a small fraction of the field energy into heat.
 
 - **Vertical component $E_z$** (dominant) drives a transient surface-charge redistribution, in the copper, that **confines** the wave to the dielectric. It comes from the charge separation across the dielectric. The wave deposits positive charge on the trace and negative charge on the return plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor.
-
 
 The two subsections below unpack each component in detail, starting with the horizontal.
 
