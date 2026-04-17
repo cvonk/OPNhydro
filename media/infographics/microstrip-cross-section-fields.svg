@@ -21,7 +21,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.176087"
-     inkscape:cx="360.04995"
+     inkscape:cx="360.50948"
      inkscape:cy="230"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
@@ -145,7 +145,8 @@
      fill="url(#fr4)"
      stroke="#9a874a"
      stroke-width="1"
-     id="rect5" />
+     id="rect5"
+     style="fill:#fdf6c2;fill-opacity:1" />
   <!-- Return plane (bottom copper) -->
   <rect
      x="80"
@@ -155,7 +156,8 @@
      fill="url(#copper)"
      stroke="#6e3f1d"
      stroke-width="1"
-     id="rect6" />
+     id="rect6"
+     style="fill:#96cf96;fill-opacity:1" />
   <!-- Signal trace (top copper) -->
   <rect
      x="300"
@@ -165,7 +167,8 @@
      fill="url(#copper)"
      stroke="#6e3f1d"
      stroke-width="1"
-     id="rect7" />
+     id="rect7"
+     style="fill:#deb187;fill-opacity:1" />
   <!-- Current-direction markers on the trace (into page ⊗) -->
   <g
      font-size="14"

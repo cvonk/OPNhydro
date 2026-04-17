@@ -175,6 +175,13 @@ And that, really, is what every trace on every PCB is doing. It's not carrying e
 
 Steps 1–3 showed the first cycle. The same coupling, applied repeatedly, guarantees indefinite propagation. 
 
+<figure>
+  <center>
+  <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 80%; height: auto;">
+  <figcaption><i><b>E</b> and <b>B</b> fields playing leapfrog down the microstrip.</i></figcaption>
+  </center>
+</figure>
+
 As we have seen, in the source-free dielectric, the two laws simplify to:
 
 $$
@@ -193,7 +200,7 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
 How fast the electric and magnetic fields can build up is what sets the signal's propagation speed. The propagation and interaction of these fields is described by Maxwell’s Equations.
 
 <details>
-  <summary>Expand to see the math.</summary>
+  <summary>Expand if you ❤️ math.</summary>
 
   Take the curl of Faraday's law
   $$
@@ -397,6 +404,13 @@ And that's really all there is to it. The hard part is believing it.
 
 #### Sources of the Magnetic Field
 
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-b-field-sources.svg" style="width: 80%; height: auto;">
+  <figcaption><i>Cross-section showing one continuous B field sustained by two sources: conduction current in the copper and displacement current in the dielectric.</i></figcaption>
+  </center>
+</figure>
+
 The horizontal current $\mathbf J$ in the trace creates a $\mathbf B$ field curling around it. A natural question: is this a separate magnetic field competing with the wave's own $\mathbf B$? No — it is the *same* field. Ampère–Maxwell makes this explicit:
 
 $$
@@ -454,7 +468,14 @@ So far, we have followed one signal on one trace — its wave, its return curren
 
 <br />
 
-### 1.3. Rail Collapse in the Power Distribution Network
+### 1.3. Rail Collapse
+
+<figure>
+  <center>
+  <img src="../media/infographics/rail-collapse.svg" style="width: 90%; height: auto;">
+  <figcaption><i>PDN inductance causes voltage sag when current changes sharply. The VRM, decoupling capacitors, and on-die capacitance each cover a different frequency band.</i></figcaption>
+  </center>
+</figure>
 
 The power and ground paths that feed every chip on the board are themselves transmission lines with impedance — and when the current through them changes, that impedance produces voltage noise.
 
@@ -479,8 +500,8 @@ There are two coupling mechanisms — capacitive and inductive — and both are 
 
 <figure>
   <center>
-  <img src="../media/infographics/capacitive-and-inductive-coupling.png" style="width: 60%; height: auto;">
-  <figcaption><i>Capacitive and inductive coupling.<br />(Courtesy: Intel)</i></figcaption>
+  <img src="../media/infographics/crosstalk-mechanisms.svg" style="width: 90%; height: auto;">
+  <figcaption><i>Capacitive coupling (E field fringing between traces) and inductive coupling (B field threading the victim loop), with near-end and far-end polarity summary.</i></figcaption>
   </center>
 </figure>
 
