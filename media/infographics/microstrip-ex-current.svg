@@ -23,8 +23,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.7875"
-     inkscape:cx="377.34266"
-     inkscape:cy="427.13287"
+     inkscape:cx="424.33566"
+     inkscape:cy="400.83916"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
@@ -167,17 +167,11 @@
   <!-- Material labels -->
   <text
      x="733.03497"
-     y="274.40561"
+     y="309.09091"
      fill="#3a2410"
      font-weight="bold"
-     id="text8">trace</text>
-  <text
-     x="733.03497"
-     y="289.40561"
-     fill="#5a3a1a"
-     font-size="11px"
-     font-style="italic"
-     id="text9">(copper)</text>
+     id="text8"
+     style="font-size:17.3333px">trace</text>
   <text
      x="728"
      y="427.97205"
@@ -196,34 +190,37 @@
      x="728"
      y="509.25876"
      fill="#7a6a2a"
-     id="text12">dielectric</text>
+     id="text12"
+     style="font-size:17.3333px">dielectric</text>
   <!-- Skin-depth bracket -->
   <g
      stroke="#5a3a1a"
      stroke-width="0.8"
      fill="none"
      id="g13"
-     transform="translate(-2.1678321e-8,92.30769)">
+     transform="matrix(1.018929,0,0,0.53430621,-0.86694633,269.40004)">
     <path
        d="m 50,240 h -8 v 140 h 8"
        id="path13" />
   </g>
   <text
-     x="20"
-     y="405.30771"
+     x="21.118881"
+     y="424.88812"
      fill="#5a3a1a"
      font-size="11px"
      font-style="italic"
      text-anchor="middle"
-     id="text14">δ</text>
+     id="text14"
+     style="font-size:14.6667px">δ</text>
   <text
-     x="20"
-     y="420.30771"
+     x="21.118881"
+     y="439.88812"
      fill="#5a3a1a"
      font-size="9px"
      font-style="italic"
      text-anchor="middle"
-     id="text15">(skin)</text>
+     id="text15"
+     style="font-size:14.6667px">(skin)</text>
   <!-- Interface caption -->
   <!-- =============== WAVEFRONT =============== -->
   <line
@@ -236,12 +233,13 @@
      stroke-dasharray="6, 4"
      id="line16" />
   <text
-     x="466"
-     y="127.30769"
+     x="481.45941"
+     y="118.35664"
      fill="#6f4a6f"
      font-style="italic"
      font-size="13px"
-     id="text17">wavefront</text>
+     id="text17"
+     style="font-size:17.3333px;text-align:center;text-anchor:middle">wavefront</text>
   <!-- Region tags inside the trace -->
   <text
      x="280.62219"
@@ -280,8 +278,8 @@
      marker-end="url(#arrI)"
      id="line19" />
   <text
-     x="175.52446"
-     y="231.63637"
+     x="206.85313"
+     y="227.72029"
      fill="#333333"
      font-style="italic"
      font-size="12px"
@@ -338,7 +336,7 @@
      id="text28"
      style="font-size:14.6667px">E<tspan
    style="font-size:65%;baseline-shift:sub"
-   id="tspan1">x</tspan> inside copper, just above the dielectric</text>
+   id="tspan1">x</tspan> inside trace, just above the dielectric</text>
   <!-- =============== ELECTRONS — DRIFTING (left of wavefront) =============== -->
   <!-- Drift opposite to Ex (force on electron is −eE) -->
   <g
@@ -745,7 +743,7 @@
      stroke="#333333"
      fill="#333333"
      id="g61"
-     transform="translate(-502.93707,85.5944)">
+     transform="translate(-501.81819,99.020973)">
     <!-- x axis -->
     <line
        x1="540"
@@ -818,16 +816,16 @@
   </g>
   <!-- =============== LEGEND =============== -->
   <g
-     transform="translate(68.53147,630.66433)"
+     transform="translate(31.048953,630.66433)"
      id="g67">
     <rect
-       x="498.47498"
-       y="-85.580963"
-       width="181.092"
-       height="96.938141"
+       x="498.50754"
+       y="-85.548386"
+       width="215.15273"
+       height="96.872993"
        fill="#fafafa"
        stroke="#bbbbbb"
-       stroke-width="0.726888"
+       stroke-width="0.792037"
        id="rect61" />
     <!-- Ex -->
     <line
@@ -844,12 +842,13 @@
        y="-70.594406"
        font-size="11px"
        fill="#333333"
-       id="text62">E<tspan
+       id="text62"
+       style="font-size:14.6667px">E<tspan
    font-size="9px"
-   dy="2"
-   id="tspan61">x</tspan><tspan
-   dy="-2"
-   id="tspan62">field inside copper</tspan></text>
+   id="tspan61"
+   style="font-size:14.6667px"><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan8">x</tspan> field inside trace</tspan></text>
     <!-- electron drift -->
     <g
        transform="translate(526.22378,-50.538462)"
@@ -883,7 +882,8 @@
        y="-46.53846"
        font-size="11px"
        fill="#333333"
-       id="text64">drifting electron</text>
+       id="text64"
+       style="font-size:14.6667px">Drifting electron</text>
     <!-- thermal jiggle -->
     <g
        transform="translate(523.00699,-26.482517)"
@@ -917,7 +917,8 @@
        y="-22.482517"
        font-size="11px"
        fill="#333333"
-       id="text66">thermally jiggling electron</text>
+       id="text66"
+       style="font-size:14.6667px">thermally jiggling electron</text>
     <!-- conventional current -->
     <line
        x1="506.43356"
@@ -933,10 +934,12 @@
        y="2.1328671"
        font-size="11px"
        fill="#333333"
-       id="text67">conventional current I<tspan
+       id="text67"
+       style="font-size:14.6667px">conventional current I<tspan
    font-size="9px"
    dy="2"
-   id="tspan66">fwd</tspan></text>
+   id="tspan66"
+   style="font-size:14.6667px">fwd</tspan></text>
   </g>
   <g
      id="g15"
@@ -987,12 +990,13 @@
        id="text12-9">0</text>
     <!-- Plot title -->
     <text
-       x="242.28772"
-       y="-60.157841"
+       x="212.07793"
+       y="-62.395603"
        fill="#5a4d8c"
        font-size="12px"
        font-style="italic"
-       id="text13-4">propagating voltage step V(x, t)</text>
+       id="text13-4"
+       style="font-size:14.6667px">propagating voltage step V(x, t)</text>
     <!-- "Ahead of wavefront: no fields yet" -->
     <text
        x="555"
@@ -1000,13 +1004,17 @@
        fill="#888888"
        font-size="12px"
        font-style="italic"
-       id="text14-8">ahead of wavefront:</text>
-    <text
-       x="555"
-       y="-24"
-       fill="#888888"
-       font-size="12px"
-       font-style="italic"
-       id="text15-8">no fields yet</text>
+       id="text14-8"
+       style="font-size:14.6667px;line-height:1"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         x="555"
+         y="-38"
+         style="font-size:14.6667px;line-height:1">ahead of wavefront:</tspan><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         x="555"
+         y="-23.3333"
+         style="font-size:14.6667px;line-height:1">no fields yet</tspan></text>
   </g>
 </svg>
