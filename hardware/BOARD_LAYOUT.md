@@ -363,7 +363,7 @@ This cancellation is what **confines the wave**. The field cannot penetrate the 
 
 ##### In other words
 
-Here's how I imagine Feynman walking us through it.
+Here is how Feynman might walk us through it.
 
 <div class="quote">
 
@@ -411,7 +411,7 @@ There is one continuous $\mathbf B$ field, but it has two sources depending on w
 
 ##### In other words
 
-Imagine Richard Feynman is still at the chalkboard. Someone in the third row raises a hand.
+Imagine Feynman is still at the chalkboard. Someone in the third row raises a hand.
 <div class="quote">
 
 *"Professor, I'm confused. You just told us the wave has a magnetic field around it — that was part of the leapfrog thing. But now you're saying the electrons in the copper are flowing, and a flowing current also makes a magnetic field. So which is it? Are there two magnetic fields here, or what?"*
@@ -739,7 +739,7 @@ $$
 \end{align}
 $$
 
-The table below uses a conservative $ΔT = 10°\rm{C}$ (IPC-2221 permits 20°C for most PCB classes). The inner-layer widths assume 1 oz copper; the outer-layer widths assume 2 oz copper per §2.3. Power nets are routed on the outer layers in this stack-up (§2.2), so the inner-layer column is reference-only — a 200 mil inner trace at 1 oz carries only ~3.9 A, which is **not** sufficient for the 6.5 A peak on the 24 V input. If any power net must be routed internally, size from the external column or widen accordingly.
+The table below uses a conservative $\Delta T = 10°\rm{C}$ (IPC-2221 permits 20°C for most PCB classes). The inner-layer widths assume 1 oz copper; the outer-layer widths assume 2 oz copper per §2.3. Power nets are routed on the outer layers in this stack-up (§2.2), so the inner-layer column is reference-only — a 200 mil inner trace at 1 oz carries only ~3.9 A, which is **not** sufficient for the 6.5 A peak on the 24 V input. If any power net must be routed internally, size from the external column or widen accordingly.
 
 Net                     | Target Current    | Internal Trace Width | External Trace Width | Rationale
 ------------------------|-------------------|----------------------|----------------------|----------
@@ -784,7 +784,7 @@ Ferrite chokes should not be placed in the PDN — the design requires low targe
 ### 3.6. SoC, Test Points and Fiducials
 
 
---
+---
 
 
 ## References
