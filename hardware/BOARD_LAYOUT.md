@@ -129,7 +129,7 @@ Consider a signal trace running above a ground return plane, separated by a thin
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 80%; height: auto;">
+  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 90%; height: auto;">
   <figcaption><i>Side view of microstrip <b>E</b> and <b>B</b> fields along the propagation direction.</i></figcaption>
   </center>
 </figure>
@@ -309,7 +309,7 @@ where $\hat x$ points along the trace (the propagation direction) and $-\hat z$ 
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-e-field-components.svg" style="width: 70%; height: auto;">
+  <img src="../media/infographics/microstrip-e-field-components.svg" style="width: 80%; height: auto;">
   <figcaption><i>Microstrip electric field components.</i></figcaption>
   </center>
 </figure>
