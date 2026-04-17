@@ -15,7 +15,7 @@ Let's start with a puzzle. You flip a light switch, and the bulb lights up almos
 Not the electrons. The electromagnetic field did. And once you understand that, PCB layout starts making intuitive sense.
 
 The treatment draws heavily on:
-- Physics classes at HTD Dordrecht from Dipl.-Ing. J.J. Senff
+- Physics classes at HTS Dordrecht from Dipl.-Ing. J.J. Senff
 - Walter Lewin's physics lectures at MIT
 - *Signal and Power Integrity* by Eric Bogatin
 
@@ -96,7 +96,7 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
 <figure>
   <center>
   <img src="../media/infographics/microstrip-fields-2.png" style="width: 40%; height: auto;">
-  <figcaption><i>Crossection view of Microstrip fields.<br />(Courtesy: Patrick André)</i></figcaption>
+  <figcaption><i>Cross-section view of Microstrip fields.<br />(Courtesy: Patrick André)</i></figcaption>
   </center>
 </figure>
 
@@ -107,7 +107,7 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
 
 ##### Two of Maxwell's Equations
 
-As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampere-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free boundary condition.
+As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free boundary condition.
 $$  
   \begin{align}  
     \nabla \times \mathbf B &=
@@ -121,11 +121,11 @@ $$
   \end{align}
 $$
 
-The **displacement current** term in the Ampère-Maxwell law in is not a real current — no charge crosses the gap. A changing electric field acts as a source of magnetic field, just as a real current does. This is what allows $\mathbf{B}$ to be continuous across the copper-dielectric boundary, and it is what sustains the wave in the dielectric where $\mathbf{J} = 0$. In a material dielectric like FR-4, bound-charge polarization ($\partial \mathbf{P}/\partial t$) adds a second contribution, but the mechanism works in pure vacuum too.
+The **displacement current** term in the Ampère-Maxwell law is not a real current — no charge crosses the gap. A changing electric field acts as a source of magnetic field, just as a real current does. This is what allows $\mathbf{B}$ to be continuous across the copper-dielectric boundary, and it is what sustains the wave in the dielectric where $\mathbf{J} = 0$. In a material dielectric like FR-4, bound-charge polarization ($\partial \mathbf{P}/\partial t$) adds a second contribution, but the mechanism works in pure vacuum too.
 
 ##### Microstrip Geometry
 
-Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. In the dielectric region ($\rho = 0, \mathbf J = \mathbf 0$ — no free charges between the conductors), 
+Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. In the dielectric region ($\rho = 0, \mathbf J = \mathbf 0$ — no free charges between the conductors), the fields evolve as follows.
 
 <figure>
   <center>
@@ -136,10 +136,10 @@ Consider a signal trace running above a ground return plane, separated by a thin
 
 When a **voltage step** is applied at one end, the following chain of events unfolds:
 
-1. The sudden voltage change creates a sudden electric change. An **electric field** $\mathbf{E}$ appears between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only at the very beginning of the microstrip. It is $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localised. 
+1. The sudden voltage change creates an **electric field** $\mathbf{E}$ appears between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only at the very beginning of the microstrip. $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localised. 
 <br />
 
-2. The moment $\mathbf E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\mathbf J = \mathbf 0$), Ampere-Maxwell's Law  reduces to the displacement-current term — a time-changing electric field $\mathbf E$ (right side) **forces the magnetic field $\mathbf B$ to vary spatially** (left side).
+2. The moment $\mathbf E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\mathbf J = \mathbf 0$), Ampère-Maxwell's Law reduces to the displacement-current term — a time-changing electric field $\mathbf E$ (right side) **forces the magnetic field $\mathbf B$ to vary spatially** (left side).
 <br />
 
 3. The $\mathbf B$ field created in step 2 is also rising from zero — i.e. **changing in time** (right side). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (left side) — extending $\mathbf E$ slightly ahead of where it began.
@@ -185,7 +185,7 @@ As we have seen, in the source-free dielectric, the two laws simplify to:
 $$
   \begin{align}
     \nabla \times \mathbf{B} = \mu_0\varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
-    \tag{\text{Ampere-Maxwell}} \\
+    \tag{\text{Ampère-Maxwell}} \\
     \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
     \tag{\text{Faraday}}
   \end{align}
@@ -205,7 +205,7 @@ How fast the electric and magnetic fields can build up is what sets the signal's
       \nabla \times (\nabla \times \mathbf E) = -\frac{\partial}{\partial t}(\nabla \times \mathbf B)
   $$
 
-  Substitute the simplified Ampere–Maxwell into the right side
+  Substitute the simplified Ampère–Maxwell into the right side
   $$
       \nabla \times (\nabla \times \mathbf E) = -\mu_0\varepsilon_0 \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
@@ -270,7 +270,7 @@ $$
 
 That is the speed of light $c$ — derived entirely from electric and magnetic constants.
 
-This was Maxwell's 1865 result.  He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
+This was Maxwell's 1865 result. He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
 
 To find the propagation speed ($v'$) for a typical PCB dielectric glass epoxy (FR-4), we need to replace $\varepsilon_0$ with $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$.
 $$
@@ -309,7 +309,7 @@ where $\hat x$ points along the trace (the propagation direction) and $-\hat z$ 
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-e-field-components.svg" style="width: 80%; height: auto;">
+  <img src="../media/infographics/microstrip-e-field-components.svg" style="width: 70%; height: auto;">
   <figcaption><i>Microstrip electric field components.</i></figcaption>
   </center>
 </figure>
@@ -339,7 +339,7 @@ $$
   </center>
 </figure>
 
-> The current is placing charge into the capacitance of the line. This current crosses the transmission line at the leading edge of the wave. One way to describe this current flow is to say it is charging the capacitance of the line.
+The current is placing charge into the capacitance of the line. This current crosses the transmission line at the leading edge of the wave. One way to describe this current flow is to say it is charging the capacitance of the line.
 
 This collective drift of many electrons is what we measure as current density $\mathbf J$, and in a linear conductor it is proportional to $\mathbf E$:
 $$
@@ -361,7 +361,7 @@ As the wave front reaches a section of the conductor, $E_z$ there rises from zer
   </center>
 </figure>
 
-So, the electrons rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that $E_z$ at the surface is nearly cancelled. What little field penetrates the metal decays within one skin depth (~66 µm at 1 MHz, ~2 µm at 1 GHz).
+So, the electrons rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that $E_z$ at the surface is nearly cancelled. What little field penetrates the metal decays within one skin depth calculated as $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz).
 
 This cancellation is what **confines the wave**. The field cannot penetrate the copper, so it is forced to exist only in the dielectric between the trace and the return plane. Without this electron response, the field would not be confined — the wave would radiate away instead of propagating along the line.
 <br />
@@ -402,7 +402,7 @@ And that's really all there is to it. The hard part is believing it.
 
 #### Sources of the Magnetic Field
 
-The horizontal current $\mathbf J$ in the trace creates a $\mathbf B$ field curling around it. A natural question: is this a separate magnetic field competing with the wave's own $\mathbf B$? No — it is the *same* field. Ampere–Maxwell makes this explicit:
+The horizontal current $\mathbf J$ in the trace creates a $\mathbf B$ field curling around it. A natural question: is this a separate magnetic field competing with the wave's own $\mathbf B$? No — it is the *same* field. Ampère–Maxwell makes this explicit:
 
 $$
     \nabla \times \mathbf B =
@@ -455,6 +455,8 @@ It is tempting to think of "the wave in the dielectric" and "the current in the 
 
 The field drives the current. The current shapes the field. They are mutually dependent — one self-consistent system, seen from different sides of the copper surface.
 
+So far, we have followed one signal on one trace — its wave, its return current, its confinement. But every chip on the board also needs a stable supply voltage, delivered through its own set of traces, vias, and planes. Those power paths are transmission lines too, and they are subject to the same field physics. When the current through them changes abruptly, the results are not subtle.
+
 <br />
 
 ---
@@ -463,7 +465,7 @@ The field drives the current. The current shapes the field. They are mutually de
 
 ### 1.3. Rail Collapse in the Power Distribution Network
 
-Signal integrity is not the only concern. The power and ground paths that feed every chip on the board are themselves transmission lines with impedance — and when the current through them changes, that impedance produces voltage noise.
+The power and ground paths that feed every chip on the board are themselves transmission lines with impedance — and when the current through them changes, that impedance produces voltage noise.
 
 Every time a chip switches its outputs or its internal gates toggle, it draws a sharp pulse of current from the power rail. That current passes through the inductance $L_{\text{PDN}}$ of the power distribution network (PDN) — the planes, traces, vias, and decoupling capacitors between the voltage regulator and the chip. The resulting voltage drop is:
 
@@ -531,11 +533,11 @@ Inductive crosstalk is worst where the return path is constrained. On a PCB with
 
 The capacitive and inductive coupled signals arrive at the victim differently:
 
-- **Capacitive coupling** injects current into the victim trace. That current splits and travels in both directions — toward the near end and the far end. Both ends see a pulse of the same polarity.
+- **Capacitive coupling** injects current into the victim trace. That current splits and travels in both directions — toward the near end and the far end. Both ends see a pulse of the same polarity as the aggressor.
 
-- **Inductive coupling** induces a voltage that drives current in a specific direction (Lenz's law — opposing the change). The near end sees a pulse of opposite polarity to the aggressor; the far end sees a pulse of the same polarity.
+- **Inductive coupling** induces a current that opposes the aggressor's current (Lenz's law). That current flows toward the near end, producing a pulse of the same polarity as the aggressor there, and a pulse of opposite polarity at the far end.
 
-At the **near end** (closest to the aggressor's source), the capacitive and inductive components have opposite polarity — they partially cancel. At the **far end**, they have the same polarity — they add. For long parallel runs on a microstrip, this is why far-end crosstalk (FEXT) often exceeds near-end crosstalk (NEXT); for short runs, NEXT still dominates.
+At the **near end** (closest to the aggressor's source), the capacitive and inductive components have the same polarity — they add. Near-end crosstalk (NEXT) is therefore the larger of the two. At the **far end**, they have opposite polarity — they partially cancel. In a stripline (homogeneous dielectric), the cancellation is exact and far-end crosstalk (FEXT) is zero. In a microstrip, the even- and odd-mode velocities differ slightly, so FEXT is nonzero but typically smaller than NEXT.
 
 <br />
 
@@ -582,7 +584,7 @@ Chapter 1 established how signals actually travel on a PCB — as EM waves guide
 The sections proceed from rules to physical build to final strategy:
 
 - **§2.1** distils the field theory into layout rules covering signal quality, crosstalk, rail collapse, and EMI.
-- **§2.2** explains the OPNhydro stack-up — a Low-EMI four-layer arrangement driven by the 4.7 A peak on the 24 V rail and the isolation moats around the pH and EC islands.
+- **§2.2** explains the OPNhydro stack-up — a Low-EMI four-layer arrangement driven by the 6.5 A peak on the 24 V input rail and the isolation moats around the pH and EC islands.
 - **§2.3** specifies the dielectric and copper.
 - **§2.4** separates the noisy motor-control, digital, and sensitive analog domains.
 - **§2.5** covers enclosure and mechanical constraints.
@@ -608,7 +610,7 @@ A signal travelling along a trace is an EM wave guided by the trace and its retu
 <figure>
   <center>
   <img src="../media/infographics/trace-crossing-gap-in-return-plane.png" style="width: 60%; height: auto;">
-  <figcaption><i>Capacitive and inductive coupling.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
+  <figcaption><i>Trace crossing a gap in the return plane.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
   </center>
 </figure>
 
@@ -658,7 +660,7 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 
 EMI is not a separate problem — it is the consequence of every other problem listed above. When a return path is broken, the $\mathbf B$ fields stop cancelling and the loop radiates. When crosstalk couples energy onto an unintended trace, that trace becomes an unintentional antenna. When a rail collapses, the transient current loop radiates at the switching frequency and its harmonics.
 
-**Rule 4a — Minimise loop area.** Every current — signal, power, return — forms a loop. The radiated power from a loop is proportional to the loop area squared and to the frequency squared: $P_{\text{rad}} \propto A^2 f^2$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
+**Rule 4a — Minimise loop area.** Every current — signal, power, return — forms a loop. The radiated power from a loop is proportional to the loop area squared and to the frequency squared: $P_{\text{rad}} \propto A^2 f^4$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
 
 **Rule 4b — Contain the fields at board edges.** EM fields that reach the edge of the PCB can radiate freely — there is no conductor to confine them. Pull traces and pours back from the board edge by at least 20× the dielectric thickness (the 20H rule). Place ground stitching vias along the board perimeter to create a continuous shield.
 
@@ -672,7 +674,7 @@ EMI is not a separate problem — it is the consequence of every other problem l
 
 ### 2.2. PCB Stack-up
 
-The PCB has two hard constraints that drive most of the other design decisions. First, the 4.7A peak current on the 24V rail requires copper heavy enough to carry that current continuously without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
+The PCB has two hard constraints that drive most of the other design decisions. First, the 6.5 A peak current on the 24 V input rail requires copper heavy enough to handle that current without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
 
 The **typical 4-layer stack-up** is SIG/GND/PWR/SIG. This design does not use it for two reasons. First, the power and return planes would be separated by the full core distance — too far apart for effective high-frequency decoupling (2–3 mil max is needed). Second, signals on Layer 4 would be referenced to the power plane rather than GND, which only works if the power and return planes are tightly coupled with adequate decoupling capacitors.
 
@@ -798,7 +800,7 @@ Ferrite chokes should not be placed in the PDN — the design requires low targe
 ## References
 
 [1] Dipl-Ing J.J. Senff at HTS Dordrecht, Transmission Line lectures, 1984.
-[2] Walter Lewin at MIT, Electricity and Magnetism lectures (8.02), Spring 2002
+[2] Walter Lewin at MIT, Electricity and Magnetism lectures (8.02), Spring 2002.
 [3] Ralph Morrison, Grounding and Shielding – Circuits and Interference, Wiley, 2016.
 [4] Ralph Morrison, Fast Circuit Boards – Energy Management, Wiley, 2018.
 [5] Eric Bogatin, Signal Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
@@ -807,6 +809,6 @@ Ferrite chokes should not be placed in the PDN — the design requires low targe
 <figure>
   <center>
   <img src="../media/infographics/signal-propagating-along-microstrip.png" style="width: 80%; height: auto;">
-  <figcaption><i>Signal propagating long a microstrip.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
+  <figcaption><i>Signal propagating along a microstrip.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
   </center>
 </figure>
