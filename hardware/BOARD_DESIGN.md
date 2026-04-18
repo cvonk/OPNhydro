@@ -328,18 +328,18 @@ The **free electrons** in the copper respond to each component differently:
 <br />
 
 The following subsections below unpack each component in detail, starting with the horizontal at the wavefront.
+<br />
 
-##### Horizontal component $E_x$ at the Wavefront
+##### Horizontal component $E_x$ at the wavefront
 
-At the wavefront, the tilt is significantly large — the voltage transitions from signal level to zero over a short distance, producing a steep spatial gradient (voltage). It arises from the fact that the wave is *traveling*. The voltage is not the same everywhere along the trace at the same instant: the wave has arrived here but not yet at the next point down the line. That spatial gradient in voltage is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$.
+As the wave front reaches a section of the conductor, $\mathbf{E}$ suddenly rises, while at point $x_2$, a little further down, it is still zero. This steep spatial gradient is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$.
 
-As the wave front reaches a section of the conductor, $E_x$ there rises from zero to some value. The free electrons — previously drifting only thermally, with no net motion — feel a force and begin to move horizontally:
+The free electrons — previously drifting only thermally, with no net motion — feel a force and begin to move horizontally:
 $$
   F_x = q \, E_x
   \tag{\text{Lorentz force law}}
-$$
+$$ 
 
-The resulting **displacement current** charges the distributed capacitance of the line. 
 
 <figure>
   <center>
@@ -353,7 +353,7 @@ The resulting **displacement current** charges the distributed capacitance of th
 In other words: the field arrives first; the **current is the electrons' response to the electric field**. This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector $\mathbf E \times \mathbf B$, which points from the source toward the load, through the dielectric between the conductors.
 <br />
 
-##### Horizontal component $E_x$ behind the Wavefront
+##### Horizontal component $E_x$ behind the wavefront
 
 Behind the wavefront, the voltage would be perfectly uniform on a lossless line and the field perfectly vertical. The small $E_x$ is due to the finite resistance of the copper: current flowing through that resistance produces ohmic $I^2\times R$ losses. A small fraction of the field energy transfers into heat.
 
@@ -381,6 +381,8 @@ The result is a pair of opposite surface charges — that act like a parallel-pl
 </figure>
 
 The cancellation happens almost instantly. What little field penetrates the metal decays within one skin depth $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz). Because the field cannot extent into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave**: without the electron response, the field would radiate away instead of propagating along the line.
+
+The resulting **displacement current** charges the distributed capacitance of the line. 
 <br />
 
 ##### In other words
