@@ -355,13 +355,14 @@ In other words: the field arrives first; the **current is the electrons' respons
 
 ##### Horizontal component $E_x$ behind the wavefront
 
-Behind the wavefront, the voltage would be perfectly uniform on a lossless line and the field perfectly vertical. The small $E_x$ is due to the finite resistance of the copper: current flowing through that resistance produces ohmic $I^2\times R$ losses. A small fraction of the field energy transfers into heat.
+On a lossless line, the voltage behind the wavefront would be perfectly uniform and the field perfectly vertical — no horizontal component at all.
 
-
-**Note:** physics uses the vector **current density** $\mathbf J$ — how charge moves through a specific area at a specific point — rather than the scalar current $I$, which is just the total charge flow in a wire. This collective drift of many electrons is what we measure as current density $\mathbf J$, and in a linear conductor it is proportional to $\mathbf E$:
+However, a real copper trace has finite resistance, so a small longitudinal field $E_x$ is needed to drive the current. Ohm's law in field form:
 $$
-    \mathbf J = \sigma \mathbf E
-$$ where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This is Ohm's law in its field form. A larger $\mathbf E$ means more force, more drift, more current.
+    J_x = \sigma \, E_x
+$$ where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper)
+
+This shows that even a tiny $E_x$ produces a large current density because $\sigma$ is so high. The resulting power dissipation ($\mathbf J \cdot \mathbf E$ per unit volume) converts a small fraction of the field energy into heat.
 <br />
 
 
@@ -371,7 +372,9 @@ As the wave front reaches a section of the conductor, $E_z$ there rises from zer
 - in the trace, they move away from the dielectric-facing surface, leaving it positively charged;
 - in the return plane, they move toward the dielectric-facing surface, making it negatively charged.
 
-The result is a pair of opposite surface charges — that act like a parallel-plate capacitor. Their field points from trace to return plane, opposing the incoming $E_z$ inside the copper. The electrons keep moving until their self-generated field exactly cancels the incoming field, driving the net $\mathbf E$ inside the metal to zero.
+The resulting **displacement current** charges the distributed capacitance of the line. 
+
+The result is a pair of opposite surface charges that act like a parallel-plate capacitor. Inside each conductor, the field from the nearby surface charge opposes the incoming $E_z$ — pointing upward in the trace (away from the positive surface) and downward in the return plane (away from the negative surface). The electrons keep moving until their self-generated field exactly cancels the incoming field, driving the net $\mathbf E$ inside the metal to zero.
 
 <figure>
   <center>
@@ -380,9 +383,9 @@ The result is a pair of opposite surface charges — that act like a parallel-pl
   </center>
 </figure>
 
-The cancellation happens almost instantly. What little field penetrates the metal decays within one skin depth $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz). Because the field cannot extent into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave**: without the electron response, the field would radiate away instead of propagating along the line.
+The cancellation happens almost instantly. What little field penetrates the metal decays within one skin depth $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz). 
 
-The resulting **displacement current** charges the distributed capacitance of the line. 
+Because the field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave**: without the electron response, the field would radiate away instead of propagating along the line.
 <br />
 
 ##### In other words

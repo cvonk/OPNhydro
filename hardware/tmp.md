@@ -824,3 +824,27 @@ Ferrite chokes should not be placed in the PDN — the design requires low targe
 [3] Ralph Morrison, Grounding and Shielding – Circuits and Interference, Wiley, 2016.
 [4] Ralph Morrison, Fast Circuit Boards – Energy Management, Wiley, 2018.
 [5] Eric Bogatin, Signal Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
+
+
+
+---
+
+##### Vertical component $E_z$, at and behind the wavefront
+
+As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron in the copper is $-q\mathbf E.$ With $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*:
+- in the trace, they move away from the dielectric-facing surface, leaving it positively charged;
+- in the return plane, they move toward the dielectric-facing surface, making it negatively charged.
+
+The resulting **displacement current** charges the distributed capacitance of the line. 
+
+The result is a pair of opposite surface charges — that act like a parallel-plate capacitor. Their field points from trace to return plane, opposing the incoming $E_z$ inside the copper. The electrons keep moving until their self-generated field exactly cancels the incoming field, driving the net $\mathbf E$ inside the metal to zero.
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-ez-confinement.svg" style="width: 100%; height: auto;">
+  <figcaption><i>Microstrip E<sub>z</sub> confinement.</i></figcaption>
+  </center>
+</figure>
+
+The cancellation happens almost instantly. What little field penetrates the metal decays within one skin depth $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz). Because the field cannot extent into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave**: without the electron response, the field would radiate away instead of propagating along the line.
+<br />
