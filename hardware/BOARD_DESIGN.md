@@ -365,7 +365,7 @@ $$ where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This 
 <br />
 
 
-##### Vertical component $E_z$
+##### Vertical component $E_z$, at and behind the wavefront
 
 As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E.$ With $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*:
 - in the trace, they move away from the dielectric-facing surface, leaving it positively charged;
