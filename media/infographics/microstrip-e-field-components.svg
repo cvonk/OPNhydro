@@ -22,9 +22,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="395.62625"
-     inkscape:cy="318.55161"
+     inkscape:zoom="2.8284272"
+     inkscape:cx="429.2138"
+     inkscape:cy="258.6243"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
@@ -313,6 +313,58 @@
          fill="#c0392b"
          id="path5-0" />
     </marker>
+    <marker
+       id="arrE-0-0"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9" />
+    </marker>
+    <marker
+       id="arrE-0-0-8"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9-2" />
+    </marker>
+    <marker
+       id="arrE-0-0-8-5"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9-2-1" />
+    </marker>
+    <marker
+       id="arrE-0-0-8-1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9-2-5" />
+    </marker>
   </defs>
   <!-- =============== GEOMETRY (close-up) =============== -->
   <!-- Dielectric (pale yellow) -->
@@ -531,9 +583,9 @@
          style="font-size:14.6667px">layer</tspan></text>
   </g>
   <line
-     x1="479.50159"
+     x1="483.50159"
      y1="-272.76447"
-     x2="479.50159"
+     x2="483.50159"
      y2="562.96448"
      stroke="#6f4a6f"
      stroke-width="1.87908"
@@ -566,8 +618,8 @@
      style="font-size:14.6667px;fill:#4d4d4d;fill-opacity:1">ahead of wavefront (no fields yet)</text>
   <!-- =============== ESTABLISHED-REGION E FIELD (mostly vertical) =============== -->
   <text
-     x="269.50012"
-     y="332.19022"
+     x="273.38922"
+     y="326.17981"
      fill="#c0392b"
      font-style="italic"
      font-size="12px"
@@ -575,22 +627,22 @@
      style="font-size:14.6667px"><tspan
        sodipodi:role="line"
        id="tspan75"
-       x="269.50012"
-       y="332.19022"
+       x="273.38922"
+       y="326.17981"
        style="font-size:14.6667px">almost</tspan><tspan
        sodipodi:role="line"
-       x="269.50012"
-       y="350.52359"
+       x="273.38922"
+       y="344.51318"
        style="font-size:14.6667px"
        id="tspan4">vertical</tspan><tspan
        sodipodi:role="line"
        id="tspan76"
-       x="269.50012"
-       y="368.85696"
+       x="273.38922"
+       y="362.84656"
        style="font-size:14.6667px">away from</tspan><tspan
        sodipodi:role="line"
-       x="269.50012"
-       y="387.19034"
+       x="273.38922"
+       y="381.17993"
        style="font-size:14.6667px"
        id="tspan6">wavefront</tspan></text>
   <!-- =============== TILTED TOTAL E AT WAVEFRONT — DECOMPOSITION =============== -->
@@ -602,93 +654,96 @@
   -->
   <!-- Parallelogram completion (faint dotted) -->
   <line
-     x1="511.53708"
+     x1="537.58911"
      y1="251.51955"
-     x2="511.53708"
-     y2="379.83832"
+     x2="537.58911"
+     y2="336.35126"
      stroke="#c0392b"
-     stroke-width="0.539531"
+     stroke-width="0.438683"
      stroke-dasharray="2, 3"
      opacity="0.7"
      id="line18" />
   <line
-     x1="479.65631"
-     y1="379.92279"
-     x2="510.30881"
-     y2="379.92279"
+     x1="463.7464"
+     y1="337.84995"
+     x2="535.76465"
+     y2="337.84995"
      stroke="#c0392b"
-     stroke-width="0.548082"
+     stroke-width="0.840106"
      stroke-dasharray="2, 3"
      opacity="0.7"
      id="line19" />
   <!-- Ex (small horizontal component) — dashed thinner -->
   <text
-     x="516.54321"
-     y="263.40659"
+     x="530.33179"
+     y="270.83121"
      fill="#c0392b"
      font-style="italic"
      font-size="14px"
      id="text21"
-     style="font-size:14.6667px;stroke:#ff0101;stroke-opacity:1">E<tspan
+     style="font-size:14.6667px;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">E<tspan
    font-size="11px"
    dy="3"
    id="tspan20"
-   style="font-size:14.6667px;stroke:#ff0101;stroke-opacity:1">x</tspan></text>
+   style="font-size:14.6667px;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">x</tspan></text>
   <!-- Ez (large vertical component) — dashed thinner -->
   <text
-     x="448.70242"
-     y="355.81186"
+     x="437.74225"
+     y="327.52759"
      fill="#c0392b"
      font-style="italic"
      font-size="14px"
      id="text23"
-     style="font-size:14.6667px;stroke:#ff0101;stroke-opacity:1">E<tspan
+     style="font-size:14.6667px;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">E<tspan
    font-size="11px"
    dy="3"
    id="tspan22"
-   style="font-size:14.6667px;stroke:#ff0101;stroke-opacity:1">z</tspan></text>
+   style="font-size:14.6667px;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">z</tspan></text>
   <!-- Total E (the actual tilted field) — bold solid -->
   <g
      id="g1"
-     transform="matrix(1.0125764,0,0,0.8538055,99.39509,39.667024)"
+     transform="matrix(1.0519972,0,0,0.85296445,68.746084,41.92712)"
      style="stroke:#ff0101;stroke-width:2.1;stroke-dasharray:none;stroke-opacity:1">
     <line
        x1="374.85516"
        y1="247.98401"
-       x2="407.93091"
+       x2="443.58594"
        y2="247.98401"
        stroke="#c0392b"
        stroke-width="1.62667"
        stroke-dasharray="6, 3"
        marker-end="url(#arrEthin)"
        id="line20"
-       style="stroke:#ff0101;stroke-width:2.1;stroke-dasharray:none;stroke-opacity:1" />
+       style="stroke:#ff0101;stroke-width:2.11133544;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:label="Ex" />
     <line
        x1="375.39462"
        y1="247.44455"
        x2="375.39462"
-       y2="375.37686"
+       y2="346.59702"
        stroke="#c0392b"
        stroke-width="1.53919"
        stroke-dasharray="6, 3"
        marker-end="url(#arrEthin)"
        id="line21"
-       style="stroke:#ff0101;stroke-width:2.1;stroke-dasharray:none;stroke-opacity:1" />
+       style="stroke:#ff0101;stroke-width:2.11133544;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:label="Ez" />
     <line
-       x1="376.92932"
-       y1="248.92505"
-       x2="405.77985"
-       y2="375.1601"
+       x1="377.17935"
+       y1="249.66112"
+       x2="444.47214"
+       y2="344.83484"
        stroke="#c0392b"
        stroke-width="1.74211"
        marker-end="url(#arrE)"
        id="line23"
-       style="stroke:#ff0101;stroke-width:2.1;stroke-dasharray:none;stroke-opacity:1" />
+       style="stroke:#ff0101;stroke-width:2.11133544;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:label="composit" />
   </g>
   <!-- Decomposition formula -->
   <g
      id="g2"
-     transform="translate(6.0104083,83.4386)">
+     transform="translate(29.344931,65.760931)">
     <text
        x="514.07117"
        y="278.79083"
@@ -734,48 +789,51 @@
      stroke-width="1.7"
      fill="none"
      id="g43"
-     transform="matrix(1.0315779,0,0,2.101197,-51.249734,32.955046)"
+     transform="matrix(0.90503992,0,0,2.1027489,3.2653469,34.956295)"
      style="stroke-width:1.20826;stroke-dasharray:none">
     <path
        d="m 504.13975,104.27073 c 6.02703,25.68922 3.37714,59.51996 -0.92184,88.90157"
        marker-end="url(#arrE-0)"
        id="path39"
        sodipodi:nodetypes="cc"
-       style="stroke:#bf4040;stroke-width:1.20826;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:0.5;marker-end:url(#arrE-0)" />
+       style="display:none;stroke:#bf4040;stroke-width:1.20826;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:0.5;marker-end:url(#arrE-0)" />
     <path
        d="m 514.11403,104.61534 c 17.55743,34.13211 12.45692,62.96604 -0.16808,89.24618"
        marker-end="url(#arrE-0)"
        id="path40"
        sodipodi:nodetypes="cc"
-       style="stroke:#bf4040;stroke-width:1.20826;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.5;marker-end:url(#arrE-0)" />
+       style="display:none;stroke:#bf4040;stroke-width:1.20826;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.5;marker-end:url(#arrE-0)" />
     <path
-       d="m 522.42403,104.23722 c 46.05972,25.63154 42.86524,64.76262 4.9588,88.4986"
+       d="m 510.40806,104.29825 c 65.04233,25.59618 54.81566,64.67328 1.28683,88.37652"
        marker-end="url(#arrE-0)"
        id="path43"
        sodipodi:nodetypes="cc"
-       style="stroke:#bf4040;stroke-width:1.20826;stroke-dasharray:none;stroke-dashoffset:2.41653;stroke-opacity:0.5;marker-end:url(#arrE-0)" />
+       style="stroke:#bf4040;stroke-width:1.43482;stroke-dasharray:none;stroke-dashoffset:2.41653;stroke-opacity:0.5;marker-end:url(#arrE-0)" />
   </g>
-  <text
-     x="564.2746"
-     y="426.52545"
-     fill="#c0392b"
-     font-style="italic"
-     font-size="13px"
-     id="text43"
-     style="font-size:14.6667px"><tspan
-       sodipodi:role="line"
-       id="tspan9"
-       x="564.2746"
-       y="426.52545"
-       style="font-size:14.6667px">fringing E</tspan></text>
-  <line
-     x1="556.61926"
-     y1="422.05188"
-     x2="524.61926"
-     y2="417.05188"
-     stroke="#c0392b"
-     stroke-width="0.8"
-     id="line44" />
+  <g
+     id="g6">
+    <text
+       x="543.76849"
+       y="421.92926"
+       fill="#c0392b"
+       font-style="italic"
+       font-size="13px"
+       id="text43"
+       style="font-size:14.6667px"><tspan
+         sodipodi:role="line"
+         id="tspan9"
+         x="543.76849"
+         y="421.92926"
+         style="font-size:14.6667px">fringing E</tspan></text>
+    <line
+       x1="536.11316"
+       y1="417.45569"
+       x2="504.11316"
+       y2="412.45569"
+       stroke="#c0392b"
+       stroke-width="0.8"
+       id="line44" />
+  </g>
   <g
      stroke="#333333"
      fill="#333333"
@@ -955,37 +1013,29 @@
        marker-end="url(#arrE-8)"
        id="line20-1"
        style="stroke-width:1.24675;stroke-dasharray:none;marker-end:url(#arrE-8)" />
-    <line
-       x1="200"
-       y1="265"
-       x2="200"
-       y2="335"
-       marker-end="url(#arrE-8)"
-       id="line21-8"
-       style="stroke-width:1.24675;stroke-dasharray:none;marker-end:url(#arrE-8)" />
-    <line
-       x1="280"
-       y1="265"
-       x2="280"
-       y2="335"
-       marker-end="url(#arrE-8)"
-       id="line22-9"
-       style="stroke-width:1.24675;stroke-dasharray:none;marker-end:url(#arrE-8)" />
-    <line
-       x1="360"
-       y1="265"
-       x2="360"
-       y2="335"
-       marker-end="url(#arrE-8)"
-       id="line23-8"
-       style="stroke-width:1.24675;stroke-dasharray:none;marker-end:url(#arrE-8)" />
-    <line
-       x1="430"
-       y1="265"
-       x2="430"
-       y2="335"
-       marker-end="url(#arrE-8)"
-       id="line24"
-       style="stroke-width:1.24675;stroke-dasharray:none;marker-end:url(#arrE-8)" />
+    <path
+       d="m 435.60905,264.65085 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0)"
+       id="path39-8"
+       sodipodi:nodetypes="cc"
+       style="stroke:#c0392b;stroke-width:1.24675386;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0)" />
+    <path
+       d="m 360.5227,264.71065 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0-8)"
+       id="path39-8-5"
+       sodipodi:nodetypes="cc"
+       style="stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8)" />
+    <path
+       d="m 280.23362,264.67927 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0-8-5)"
+       id="path39-8-5-1"
+       sodipodi:nodetypes="cc"
+       style="stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8-5)" />
+    <path
+       d="m 200.66829,264.5237 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0-8-1)"
+       id="path39-8-5-7"
+       sodipodi:nodetypes="cc"
+       style="stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8-1)" />
   </g>
 </svg>

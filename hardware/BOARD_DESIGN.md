@@ -8,7 +8,7 @@ As in the Schematic Design document, the central problem remains **coexistence**
 
 After the PCB selection and general layout rules, the document covers the different sections of the schematic.
 
-Rather than presenting layout rules as a checklist to memorise, this guide starts from the underlying electromagnetic theory and derives the rules as consequences. It serves as a bridge between the high-level Architecture goals and the specific Schematic Design requirements.
+Rather than presenting layout rules as a checklist to memorize, this guide starts from the underlying electromagnetic theory and derives the rules as consequences. It serves as a bridge between the high-level Architecture goals and the specific Schematic Design requirements.
 
 Consider a puzzle. You flip a light switch, and the bulb lights up almost instantly. But if you could tag a single electron at the switch and watch it, you would find it drifting toward the bulb at roughly one meter per hour — the speed of a snail. At that rate it would take days to arrive. So what turned the light on?
 
@@ -53,7 +53,7 @@ Not the electrons. The electromagnetic field did. And once you understand that, 
 
 ## 1. Field Theory
 
-**Circuit Theory**, as we learned as undergrads, is a simplified, low-frequency approximation of field theory. It assumes that the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws. Before the mid-1990s, a typical device might output signals with 10 ns rise times at 10 MHz — and the circuits worked with the crudest of interconnects.
+**Circuit Theory**, the simplified low-frequency approximation taught in undergraduate courses, is based on field theory. It assumes that the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws. Before the mid-1990s, a typical device might output signals with 10 ns rise times at 10 MHz — and the circuits worked with the crudest of interconnects.
 
 This chapter builds up the field-theory picture from first principles:
 
@@ -102,7 +102,7 @@ A microstrip has two regions: the dielectric between the conductors, and the cop
 
 ##### Two of Maxwell's Equations
 
-As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free boundary condition.
+As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free divergence constraint.
 $$  
   \begin{align}  
     \nabla \times \mathbf B &=
@@ -131,21 +131,21 @@ Consider a signal trace running above a ground return plane, separated by a thin
 
 When a **voltage step** is applied at one end, the following chain of events unfolds:
 
-1. The sudden voltage change creates an **electric field** $\mathbf{E}$ between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only at the very beginning of the microstrip. $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localised. 
+1. The sudden voltage change creates an **electric field** $\mathbf{E}$ between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only near the source end of the microstrip. $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localized. 
 <br />
 
-2. The moment $\mathbf E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\mathbf J = \mathbf 0$), Ampère-Maxwell's Law reduces to the displacement-current term — a time-changing electric field $\mathbf E$ (right side) **forces the magnetic field $\mathbf B$ to vary spatially** (left side).
+2. The moment $\mathbf E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\mathbf J = \mathbf 0$), Ampère-Maxwell's Law reduces to the displacement-current term — a time-changing electric field $\mathbf E$ (RHS) **forces the magnetic field $\mathbf B$ to vary spatially** (LHS).
 <br />
 
-3. The $\mathbf B$ field created in step 2 is also rising from zero — i.e. **changing in time** (right side). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (left side) — extending $\mathbf E$ slightly ahead of where it began.
+3. The $\mathbf B$ field created in step 2 is also rising from zero — i.e. **changing in time** (right side). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (LHS) — extending $\mathbf E$ slightly ahead of where it began.
 
 The electric field $\mathbf E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wave front advancing.
 
 **Changing in time vs. changing in space.** These two phrases carry the whole argument, so it is worth pausing on them.
 - *Changing in time* ($\partial / \partial t$) — stand still at one point and watch the field rise, fall, or oscillate as the clock ticks. Units: [field] per second.
-- *Changing in space* ($\nabla\times$) — freeze time and walk to a neighbouring point; ask how the value here differs from the value just over there. Units: [field] per meter.
+- *Changing in space* ($\nabla\times$) — freeze time and walk to a neighboring point; ask how the value here differs from the value just over there. Units: [field] per meter.
 
-Maxwell's curl equations link the two: a time change *here* forces a spatial difference *here*, which means the neighbouring point has a different value, which forces *it* to change in time, and so on. A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the coupling — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*.
+Maxwell's curl equations link the two: a time change *here* forces a spatial difference *here*, which means the neighboring point has a different value, which forces *it* to change in time, and so on. A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the coupling — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*.
 
 **To summarize:** once the electric field appears, a magnetic field arises alongside it. That changing magnetic field extends the electric field slightly ahead, which in turn extends the magnetic field further still. **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
 
@@ -193,9 +193,9 @@ $$
   \end{align}
 $$
 
-These two equations couple time variation to spatial variation — and that coupling is what makes propagation inevitable. If $\mathbf E$ is changing in time at some point, the first equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighbouring point is different. At that neighbouring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
+These two equations couple time variation to spatial variation — and that coupling is what makes propagation inevitable. If $\mathbf E$ is changing in time at some point, the first equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
 
-No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localised disturbance from remaining localised.
+No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localized disturbance from remaining localized.
 
 How fast the electric and magnetic fields can build up is what sets the signal's propagation speed. The propagation and interaction of these fields is described by Maxwell’s Equations.
 
@@ -302,7 +302,7 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 #### Components of the Electric Field
 
-The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — for example, at the wavefront near the trace, it tilts slightly forward in the direction of propagation. That tilt decomposes into two components:
+The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one. That tilt decomposes into two components:
 $$
     \mathbf E = \hat x \, E_x - \hat z \, E_z
 $$
@@ -318,13 +318,20 @@ where $\hat x$ points along the trace (the propagation direction) and $-\hat z$ 
 
 The **free electrons** in the copper respond to each component differently:
 
-- **Horizontal component $E_x$** (small) arises from the fact that the wave is *travelling*. The voltage is not the same everywhere along the trace at the same instant: the wave has arrived here but not yet at the next point down the line. That spatial gradient in voltage is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$. It drives a sustained current that we measure with instruments, and converts a small fraction of the field energy into heat.
+- **Horizontal component** $E_x$ has a tilt and is caused by two distinct phenonema depending on *where* along the line you look.
+   - **At the wavefront** (significant), the voltage transitions from signal level to zero over a short distance, producing a steep spatial gradient.
 
-- **Vertical component $E_z$** (dominant) drives a transient surface-charge redistribution, in the copper, that **confines** the wave to the dielectric. It comes from the charge separation across the dielectric. The wave deposits positive charge on the trace and negative charge on the return plane (or vice versa half a cycle later). These opposite surface charges create an electric field pointing from one conductor to the other, just like a parallel-plate capacitor.
+   - **Behind the wavefront** (small), due to the finite resistance of the copper.
+   <br />
 
-The two subsections below unpack each component in detail, starting with the horizontal.
+- **Vertical component $E_z$** (dominant) confines the wave to the dielectric.
+<br />
 
-##### Horizontal component $E_x$ → sustained current
+The following subsections below unpack each component in detail, starting with the horizontal at the wavefront.
+
+##### Horizontal component $E_x$ at the Wavefront
+
+At the wavefront, the tilt is significantly large — the voltage transitions from signal level to zero over a short distance, producing a steep spatial gradient (voltage). It arises from the fact that the wave is *traveling*. The voltage is not the same everywhere along the trace at the same instant: the wave has arrived here but not yet at the next point down the line. That spatial gradient in voltage is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$.
 
 As the wave front reaches a section of the conductor, $E_x$ there rises from zero to some value. The free electrons — previously drifting only thermally, with no net motion — feel a force and begin to move horizontally:
 $$
@@ -332,7 +339,7 @@ $$
   \tag{\text{Lorentz force law}}
 $$
 
-> Note: physics uses the vector **current density** $\mathbf J$ — how charge moves through a specific area at a specific point — rather than the scalar current $I$, which is just the total charge flow in a wire.
+The resulting **displacement current** charges the distributed capacitance of the line. 
 
 <figure>
   <center>
@@ -341,20 +348,30 @@ $$
   </center>
 </figure>
 
-At the leading edge of the wave, this current charges the distributed capacitance of the line.
 
-This collective drift of many electrons is what we measure as current density $\mathbf J$, and in a linear conductor it is proportional to $\mathbf E$:
-$$
-    \mathbf J = \sigma \mathbf E
-$$
-
-where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This is Ohm's law in its field form. A larger $\mathbf E$ means more force, more drift, more current.
 
 In other words: the field arrives first; the **current is the electrons' response to the electric field**. This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector $\mathbf E \times \mathbf B$, which points from the source toward the load, through the dielectric between the conductors.
+<br />
 
-##### Vertical component $E_z$ → transient redistribution of surface charge → confines the wave
+##### Horizontal component $E_x$ behind the Wavefront
 
-As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E.$ With $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*: in the trace, they move away from the dielectric-facing surface, leaving it positively charged; in the return plane, they move toward the dielectric-facing surface, making it negatively charged. By moving, these electrons create their own electric field that opposes the one that pushed them. The electrons keep moving until their self-generated field exactly cancels the incoming field inside the conductor.
+Behind the wavefront, the voltage would be perfectly uniform on a lossless line and the field perfectly vertical. The small $E_x$ is due to the finite resistance of the copper: current flowing through that resistance produces ohmic $I^2\times R$ losses. A small fraction of the field energy transfers into heat.
+
+
+**Note:** physics uses the vector **current density** $\mathbf J$ — how charge moves through a specific area at a specific point — rather than the scalar current $I$, which is just the total charge flow in a wire. This collective drift of many electrons is what we measure as current density $\mathbf J$, and in a linear conductor it is proportional to $\mathbf E$:
+$$
+    \mathbf J = \sigma \mathbf E
+$$ where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper). This is Ohm's law in its field form. A larger $\mathbf E$ means more force, more drift, more current.
+<br />
+
+
+##### Vertical component $E_z$
+
+As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E.$ With $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*:
+- in the trace, they move away from the dielectric-facing surface, leaving it positively charged;
+- in the return plane, they move toward the dielectric-facing surface, making it negatively charged.
+
+The result is a pair of opposite surface charges — that act like a parallel-plate capacitor. Their field points from trace to return plane, opposing the incoming $E_z$ inside the copper. The electrons keep moving until their self-generated field exactly cancels the incoming field, driving the net $\mathbf E$ inside the metal to zero.
 
 <figure>
   <center>
@@ -363,9 +380,7 @@ As the wave front reaches a section of the conductor, $E_z$ there rises from zer
   </center>
 </figure>
 
-So, the electrons rearrange themselves to **cancel the electric field** inside the metal. These electrons respond so quickly that $E_z$ at the surface is nearly cancelled. What little field penetrates the metal decays within one skin depth calculated as $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz).
-
-This cancellation is what **confines the wave**. The field cannot penetrate the copper, so it is forced to exist only in the dielectric between the trace and the return plane. Without this electron response, the field would not be confined — the wave would radiate away instead of propagating along the line.
+The cancellation happens almost instantly. What little field penetrates the metal decays within one skin depth $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz). Because the field cannot extent into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave**: without the electron response, the field would radiate away instead of propagating along the line.
 <br />
 
 ##### In other words
@@ -483,7 +498,7 @@ Every time a chip switches its outputs or its internal gates toggle, it draws a 
 
 $$\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$$
 
-This is trace and via inductance resisting sudden changes in current. The chip sees its supply rail sag momentarily, reducing the voltage between its power and ground pins. If the sag is large enough, the chip misinterprets logic levels or produces timing errors. The design goal is to minimise $L_{\text{PDN}}$ across the full frequency range the chip draws current at — the details are covered in §2.1.
+This is trace and via inductance resisting sudden changes in current. The chip sees its supply rail sag momentarily, reducing the voltage between its power and ground pins. If the sag is large enough, the chip misinterprets logic levels or produces timing errors. The design goal is to minimize $L_{\text{PDN}}$ across the full frequency range the chip draws current at — the details are covered in §2.1.
 
 <br />
 
@@ -516,7 +531,7 @@ $$
     I_C = C_m \ \frac{dV_a}{dt}
 $$
 
-where $C_{\text{m}}$ is the mutual parasitic capacitance between the two traces — determined by their overlap area, separation distance, and the dielectric constant of the material between them. Closer traces and longer parallel runs increase the coupling (higher $\varepsilon_r$ increases mutual capacitance but also tightens confinement to the return plane, so the net effect depends on geometry).
+where $C_{\text{m}}$ is the mutual parasitic capacitance between the two traces — determined by their overlap area, separation distance, and the dielectric constant of the material between them. Closer traces and longer parallel runs increase the coupling. A higher $\varepsilon_r$ increases mutual capacitance, but also tightens field confinement to the return plane — the net effect depends on geometry.
 
 This is purely Gauss's law at work: electric field lines must terminate on a conductor, and if another trace is closer or more convenient than the return plane, some of them will land there instead.
 <br />
@@ -560,6 +575,13 @@ At the **near end** (closest to the aggressor's source), the capacitive and indu
 
 ### 1.5. Electromagnetic Interference
 
+<figure>
+  <center>
+  <img src="../media/infographics/emi-mechanisms.svg" style="width: 90%; height: auto;">
+  <figcaption><i>Top: intact return path (fields cancel, minimal radiation) vs. broken return path (enlarged loop radiates). Middle: four EMI escape paths on a PCB. Bottom: radiation formula and design levers.</i></figcaption>
+  </center>
+</figure>
+
 Sections §1.1 through §1.4 describe what happens when the EM field stays where it belongs — confined between a trace and its return plane. EMI is what happens when it escapes.
 
 A current loop is an antenna. For a small loop (perimeter ≪ wavelength), the radiated electric field at distance $r$ is proportional to the square of the frequency:[^EMCLOOP]
@@ -595,7 +617,7 @@ Chapter 1 established how signals actually travel on a PCB — as EM waves guide
 
 The sections proceed from rules to physical build to final strategy:
 
-- **§2.1** distils the field theory into layout rules covering signal quality, crosstalk, rail collapse, and EMI.
+- **§2.1** distills the field theory into layout rules covering signal quality, crosstalk, rail collapse, and EMI.
 - **§2.2** explains the OPNhydro stack-up — a Low-EMI four-layer arrangement driven by the 6.5 A peak on the 24 V input rail and the isolation moats around the pH and EC islands.
 - **§2.3** specifies the dielectric and copper.
 - **§2.4** separates the noisy motor-control, digital, and sensitive analog domains.
@@ -615,7 +637,7 @@ When that field structure breaks down, the consequences fall into four categorie
 
 #### Signal Quality
 
-A signal travelling along a trace is an EM wave guided by the trace and its return plane. Anything that disrupts the wave's propagation — an impedance discontinuity, a missing return path, a stub — causes part of the energy to reflect back toward the source. The reflected wave interferes with the forward wave, producing ringing, overshoot, and timing uncertainty on the net.
+A signal traveling along a trace is an EM wave guided by the trace and its return plane. Anything that disrupts the wave's propagation — an impedance discontinuity, a missing return path, a stub — causes part of the energy to reflect back toward the source. The reflected wave interferes with the forward wave, producing ringing, overshoot, and timing uncertainty on the net.
 
 **Rule 1a — Maintain a continuous return plane.** The $\mathbf B$ field from the forward current in the trace and the return current in the return plane are equal and opposite. They cancel at a distance, keeping the energy confined. Gauss's law for magnetism ($\nabla \cdot \mathbf B = 0$) requires magnetic field lines to close: with a continuous plane, they close tightly. Interrupt the plane — a slot, a cutout, a missing pour — and the loop area grows, the impedance changes, and the wave partially reflects.
 
@@ -644,26 +666,26 @@ If the planes are the same potential, prevent leakage with nearby stitching vias
 
 Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fields) and inductive ($L_m$, from overlapping $\mathbf B$ fields) — depend on how much of the aggressor's field volume overlaps with the victim's. Every mitigation strategy reduces that overlap.
 
-**Rule 2a — Increase trace spacing.** The fringing $\mathbf E$ field that causes capacitive coupling falls off roughly as $1/d$ with distance. The $\mathbf B$ field that causes inductive coupling follows Ampere's Law and falls off as $1/d$. The 3W rule (space traces at least 3× the trace width apart) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
+**Rule 2a — Increase trace spacing.** The fringing $\mathbf E$ field that causes capacitive coupling falls off roughly as $1/d$ with distance. The $\mathbf B$ field that causes inductive coupling follows Ampere's Law and falls off as $1/d$. The 3W rule (center-to-center spacing of at least 3× the trace width) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
 
-**Rule 2b — Minimise parallel run length.** Both $C_m$ and $L_m$ are proportional to the length over which two traces run in parallel. The coupling is cumulative — every millimetre of shared dielectric adds to the total. Where two sensitive traces must be routed near each other, cross them at 90° rather than running them in parallel.
+**Rule 2b — Minimize parallel run length.** Both $C_m$ and $L_m$ are proportional to the length over which two traces run in parallel. The coupling is cumulative — every millimeter of shared dielectric adds to the total. Where two sensitive traces must be routed near each other, cross them at 90° rather than running them in parallel.
 
-**Rule 2c — Reduce trace height above the return plane.** The closer a trace is to its return plane, the more tightly the $\mathbf E$ and $\mathbf B$ fields are confined directly underneath. Less field energy spills sideways into the neighbouring trace's volume.
+**Rule 2c — Reduce trace height above the return plane.** The closer a trace is to its return plane, the more tightly the $\mathbf E$ and $\mathbf B$ fields are confined directly underneath. Less field energy spills sideways into the neighboring trace's volume.
 
 **Rule 2d — Interpose a return plane between signal layers.** A grounded conductor between two signal layers terminates $\mathbf E$ field lines from traces above (Gauss's law — the lines land on the return plane instead of reaching the layer below) and provides a local return path that contains the $\mathbf B$ field, blocking inter-layer coupling.
 
-**Rule 2e — Separate functional domains.** Motor control traces and analog sensor traces must not share the same dielectric space. Keep traces on adjacent layers perpendicular to each other to minimise the parallel run length between layers.
+**Rule 2e — Separate functional domains.** Motor control traces and analog sensor traces must not share the same dielectric space. Keep traces on adjacent layers perpendicular to each other to minimize the parallel run length between layers.
 <br />
 
 #### Rail Collapse
 
-Every time a chip switches, it draws a sharp current pulse from the power rail. That pulse passes through the inductance of the power distribution network, producing a voltage drop $\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$. The goal is to minimise the PDN inductance across the full frequency range the chip draws current at.
+Every time a chip switches, it draws a sharp current pulse from the power rail. That pulse passes through the inductance of the power distribution network, producing a voltage drop $\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$. The goal is to minimize the PDN inductance across the full frequency range the chip draws current at.
 
 **Rule 3a — Tightly couple power and return planes.** A power plane and return plane separated by a thin dielectric (2–3 mil) form a parallel-plate capacitor with very low inductance. This provides broadband decoupling across the entire board area — the EM field between the planes can supply current before the discrete capacitors or the regulator can respond. This design uses two GND planes (L2, L3) with power routed as traces rather than a dedicated plane, so broadband plane decoupling is achieved through discrete capacitors instead (see §2.2).
 
-**Rule 3b — Use multiple, low-inductance decoupling capacitors.** A single capacitor has parasitic lead and via inductance that limits its effectiveness above its self-resonant frequency. Multiple smaller capacitors in parallel reduce the effective inductance (inductances in parallel divide). Place them as close to the chip's power pins as physically possible — every millimetre of trace adds inductance.
+**Rule 3b — Use multiple, low-inductance decoupling capacitors.** A single capacitor has parasitic lead and via inductance that limits its effectiveness above its self-resonant frequency. Multiple smaller capacitors in parallel reduce the effective inductance (inductances in parallel divide). Place them as close to the chip's power pins as physically possible — every millimeter of trace adds inductance.
 
-**Rule 3c — Minimise power and ground lead length in packages.** The inductance of the bond wires and package leads between die and PCB is often the dominant contributor to $L_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (QFN, BGA) have lower inductance than those with long leads (SOIC, DIP).
+**Rule 3c — Minimize power and ground lead length in packages.** The inductance of the bond wires and package leads between die and PCB is often the dominant contributor to $L_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (QFN, BGA) have lower inductance than those with long leads (SOIC, DIP).
 
 **Rule 3d — Rely on on-chip decoupling for the highest frequencies.** Above ~100 MHz, no external capacitor can respond fast enough — the path inductance from capacitor to die is too high. Modern ICs include on-die decoupling for this reason. The PCB designer's job is to keep $L_{\text{PDN}}$ low at the frequencies below that.
 <br />
@@ -672,9 +694,9 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 
 EMI is not a separate problem — it is the consequence of every other problem listed above. When a return path is broken, the $\mathbf B$ fields stop cancelling and the loop radiates. When crosstalk couples energy onto an unintended trace, that trace becomes an unintentional antenna. When a rail collapses, the transient current loop radiates at the switching frequency and its harmonics.
 
-**Rule 4a — Minimise loop area.** Every current — signal, power, return — forms a loop. The radiated power from a loop is proportional to the loop area squared and to the fourth power of frequency: $P_{\text{rad}} \propto A^2 f^4$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
+**Rule 4a — Minimize loop area.** Every current — signal, power, return — forms a loop. The radiated power from a loop is proportional to the loop area squared and to the fourth power of frequency: $P_{\text{rad}} \propto A^2 f^4$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
 
-**Rule 4b — Contain the fields at board edges.** EM fields that reach the edge of the PCB can radiate freely — there is no conductor to confine them. Pull traces and pours back from the board edge by at least 20× the dielectric thickness (the 20H rule). Place ground stitching vias along the board perimeter to create a continuous shield.
+**Rule 4b — Contain the fields at board edges.** EM fields that reach the edge of the PCB can radiate freely — there is no conductor to confine them. Pull traces and pours back from the board edge by at least 20× the dielectric thickness (the 20H rule). Place return plane stitching vias along the board perimeter to create a continuous shield.
 
 **Rule 4c — Filter at I/O boundaries.** Every cable attached to the board is a potential antenna. Place filtering (ferrite beads, capacitors, common-mode chokes) at the point where signals enter or leave the board, before the field has a chance to propagate onto the cable.
 
@@ -723,7 +745,7 @@ The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The
 
 ### 2.4. Segregating Functional Regions
 
-The board layout separates functional domains to minimise coupling between noise sources and sensitive circuits:
+The board layout separates functional domains to minimize coupling between noise sources and sensitive circuits:
 
 1. Keep the BNC-to-EZO analog links and the EZO-to-MCU serial lines away from motor control and digital switching sections.
 2. Place power conversion (buck converter) and motor control (TMC2209 drivers) near the power entry point, so high-current loops stay short.

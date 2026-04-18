@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="emArr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <path d="M0,0 L7,2.5 L0,5" fill="#555"/>
+    </marker>
+    <marker id="emRed" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <path d="M0,0 L7,2.5 L0,5" fill="#cc3333"/>
+    </marker>
+    <marker id="emGrn" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <path d="M0,0 L7,2.5 L0,5" fill="#228833"/>
+    </marker>
+  </defs>
+
+  <!-- ============================================ -->
+  <!--  TOP LEFT: Intact return path (good)         -->
+  <!-- ============================================ -->
+  <text x="175" y="20" text-anchor="middle" font-size="13" font-weight="600" fill="#228833">Intact return path — fields cancel</text>
+
+  <!-- Return plane -->
+  <rect x="30" y="100" width="290" height="12" rx="2" fill="#96cf96" opacity="0.8"/>
+  <!-- Dielectric -->
+  <rect x="30" y="65" width="290" height="35" rx="0" fill="#fdf6c2" opacity="0.5"/>
+  <!-- Signal trace -->
+  <rect x="60" y="55" width="230" height="10" rx="1.5" fill="#deb187"/>
+
+  <!-- Signal current arrow (right) -->
+  <line x1="75" y1="60" x2="270" y2="60" stroke="#cc6633" stroke-width="1.8" marker-end="url(#emArr)"/>
+  <text x="170" y="52" text-anchor="middle" font-size="11" fill="#cc6633" font-style="italic">I signal</text>
+
+  <!-- Return current arrow (left, directly beneath) -->
+  <line x1="270" y1="106" x2="75" y2="106" stroke="#228833" stroke-width="1.8" marker-end="url(#emGrn)"/>
+  <text x="170" y="123" text-anchor="middle" font-size="11" fill="#228833" font-style="italic">I return</text>
+
+  <!-- Small loop area annotation -->
+  <rect x="60" y="56" width="230" height="55" rx="0" fill="none" stroke="#228833" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <text x="330" y="82" font-size="11" fill="#228833">small loop area</text>
+  <text x="330" y="96" font-size="11" fill="#228833">= minimal radiation</text>
+
+  <!-- Checkmark -->
+  <path d="M330,62 L338,72 L354,52" fill="none" stroke="#228833" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- ============================================ -->
+  <!--  TOP RIGHT: Broken return path (bad)         -->
+  <!-- ============================================ -->
+  <text x="555" y="20" text-anchor="middle" font-size="13" font-weight="600" fill="#cc3333">Broken return path — loop area grows</text>
+
+  <!-- Return plane with slot -->
+  <rect x="400" y="100" width="130" height="12" rx="2" fill="#96cf96" opacity="0.8"/>
+  <!-- Slot gap -->
+  <rect x="530" y="100" width="30" height="12" rx="0" fill="#fff" stroke="#cc3333" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="545" y="109" text-anchor="middle" font-size="11" fill="#cc3333" font-weight="600">slot</text>
+  <!-- Return plane continues -->
+  <rect x="560" y="100" width="130" height="12" rx="2" fill="#96cf96" opacity="0.8"/>
+
+  <!-- Dielectric -->
+  <rect x="400" y="65" width="290" height="35" rx="0" fill="#fdf6c2" opacity="0.5"/>
+  <!-- Signal trace crossing the slot -->
+  <rect x="430" y="55" width="230" height="10" rx="1.5" fill="#deb187"/>
+
+  <!-- Signal current arrow -->
+  <line x1="445" y1="60" x2="640" y2="60" stroke="#cc6633" stroke-width="1.8" marker-end="url(#emArr)"/>
+  <text x="540" y="52" text-anchor="middle" font-size="11" fill="#cc6633" font-style="italic">I signal</text>
+
+  <!-- Return current detour around slot -->
+  <path d="M640,106 L570,106 L570,140 L520,140 L520,106 L445,106"
+        fill="none" stroke="#cc3333" stroke-width="1.8" marker-end="url(#emRed)"/>
+  <text x="545" y="155" text-anchor="middle" font-size="11" fill="#cc3333" font-style="italic">I return detours</text>
+
+  <!-- Large loop area -->
+  <path d="M445,60 L640,60 L640,106 L570,106 L570,140 L520,140 L520,106 L445,106 Z"
+        fill="#cc3333" opacity="0.06" stroke="#cc3333" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="700" y="78" font-size="11" fill="#cc3333" font-weight="600">large</text>
+  <text x="700" y="92" font-size="11" fill="#cc3333" font-weight="600">loop</text>
+
+  <!-- Radiation squiggles from large loop -->
+  <path d="M620,45 C625,35 630,35 635,45" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.5"/>
+  <path d="M630,40 C636,28 642,28 648,40" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.4"/>
+  <path d="M640,35 C647,22 654,22 661,35" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.3"/>
+
+  <!-- Warning X -->
+  <line x1="695" y1="56" x2="707" y2="68" stroke="#cc3333" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="707" y1="56" x2="695" y2="68" stroke="#cc3333" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- ============================================ -->
+  <!--  MIDDLE: Board-level overview                -->
+  <!-- ============================================ -->
+  <line x1="30" y1="175" x2="690" y2="175" stroke="#ddd" stroke-width="1"/>
+
+  <text x="360" y="198" text-anchor="middle" font-size="13" font-weight="600" fill="#444">Four EMI escape paths</text>
+
+  <!-- PCB board outline -->
+  <rect x="160" y="220" width="400" height="180" rx="6" fill="#f8f6f0" stroke="#aaa" stroke-width="1.5"/>
+  <text x="360" y="240" text-anchor="middle" font-size="12" fill="#888" font-style="italic">PCB</text>
+
+  <!-- IC on board -->
+  <rect x="310" y="280" width="70" height="45" rx="4" fill="#dde4ee" stroke="#556688" stroke-width="1.2"/>
+  <text x="345" y="307" text-anchor="middle" font-size="11" font-weight="600" fill="#334466">IC</text>
+
+  <!-- Trace with return plane slot -->
+  <line x1="230" y1="300" x2="310" y2="300" stroke="#deb187" stroke-width="3"/>
+  <rect x="230" y="310" width="50" height="5" rx="1" fill="#96cf96" opacity="0.7"/>
+  <rect x="295" y="310" width="18" height="5" rx="0" fill="none" stroke="#cc3333" stroke-width="0.8" stroke-dasharray="2,1"/>
+  <text x="255" y="334" text-anchor="middle" font-size="11" fill="#cc3333">1. slot</text>
+
+  <!-- Cable leaving the board (right side) -->
+  <line x1="380" y1="300" x2="560" y2="300" stroke="#deb187" stroke-width="3"/>
+  <line x1="560" y1="300" x2="620" y2="300" stroke="#777" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="595" y="290" font-size="11" fill="#cc3333">4. cable</text>
+  <!-- Cable radiation squiggles -->
+  <path d="M585,286 C590,276 595,276 600,286" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.5"/>
+  <path d="M595,280 C601,268 607,268 613,280" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.4"/>
+  <path d="M605,274 C612,260 619,260 626,274" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.3"/>
+
+  <!-- Board edge trace (too close to edge) -->
+  <line x1="200" y1="260" x2="200" y2="380" stroke="#deb187" stroke-width="3"/>
+  <text x="183" y="350" font-size="11" fill="#cc3333" writing-mode="tb" text-anchor="middle">3. edge</text>
+  <!-- Board-edge radiation -->
+  <path d="M168,280 C158,285 158,290 168,295" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.5"/>
+  <path d="M162,275 C150,281 150,289 162,300" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.4"/>
+  <path d="M156,270 C142,278 142,292 156,305" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.3"/>
+
+  <!-- Common-mode current on cable (top) -->
+  <line x1="345" y1="280" x2="345" y2="235" stroke="#deb187" stroke-width="3"/>
+  <line x1="345" y1="235" x2="345" y2="210" stroke="#777" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="370" y="218" font-size="11" fill="#cc3333">2. CM current</text>
+  <!-- Radiation squiggles from CM -->
+  <path d="M360,218 C365,208 370,208 375,218" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.5"/>
+  <path d="M370,212 C376,200 382,200 388,212" fill="none" stroke="#cc3333" stroke-width="1.2" opacity="0.4"/>
+
+  <!-- ============================================ -->
+  <!--  BOTTOM: Radiation formula                   -->
+  <!-- ============================================ -->
+  <line x1="30" y1="420" x2="690" y2="420" stroke="#ddd" stroke-width="1"/>
+
+  <!-- Formula box -->
+  <rect x="120" y="438" width="220" height="55" rx="8" fill="#fff5f0" stroke="#cc3333" stroke-width="1.2"/>
+  <text x="230" y="460" text-anchor="middle" font-size="12" fill="#555">Radiated field from a loop:</text>
+  <text x="230" y="483" text-anchor="middle" font-size="15" fill="#cc3333" font-weight="600" font-style="italic">E  &#x221d;  f&#x00b2; &#x00d7; A &#x00d7; I / r</text>
+
+  <!-- Design levers box -->
+  <rect x="390" y="438" width="250" height="55" rx="8" fill="#f0f8f0" stroke="#228833" stroke-width="1.2"/>
+  <text x="515" y="458" text-anchor="middle" font-size="12" fill="#555">Design levers to reduce EMI:</text>
+  <text x="515" y="477" text-anchor="middle" font-size="12" fill="#228833" font-weight="600">minimise loop area A</text>
+  <text x="515" y="492" text-anchor="middle" font-size="12" fill="#228833" font-weight="600">filter at I/O boundaries</text>
+</svg>
