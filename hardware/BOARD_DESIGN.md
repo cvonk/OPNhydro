@@ -300,7 +300,7 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 §1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the copper, there are free electrons, and they are not passive bystanders.
 
-#### Components of the Electric Field
+(#### Components of the Electric Field)
 
 The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one. That tilt decomposes into two components:
 $$
@@ -331,7 +331,7 @@ The next two subsections below unpack each component in detail, starting with th
 <br />
 
 
-##### Vertical component $E_z$
+#### Vertical component $E_z$
 
 As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E.$ With $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*:
 - in the trace, they move away from the dielectric-facing surface, leaving it positively charged;
@@ -354,11 +354,15 @@ Because the field cannot extend into the copper, it is forced to remain in the d
 <br />
 
 
-##### Horizontal component $E_x$
+#### Horizontal component $E_x$
 
-**At the wavefront,** the local redistribution of charge caused by $E_z$, that we saw in the previous section, also means there's now a net **horizontal current** along the trace. As the wavefront advances, different sections are charged. Macroscopically, current does flow from the source toward the wavefront — it is what charges the line capacitance. 
+**At the wavefront**, the voltage rises from zero to signal level over a short distance, while a little further ahead it is still zero. This steep spatial gradient is a horizontal electric field:
+$$
+    E_x = -\frac{\partial V}{\partial x}
+$$
 
-But locally, the mechanism is $E_z$ sequentially polarizing each section: each section's electrons shift vertically, and the cumulative effect of those displacements happening in sequence along the trace appears as a horizontal current $J_{fwd}$ flowing in the skin layer. So $E_z$ is the primary driver, and the horizontal current is a consequence of the wavefront sequentially polarizing each section.
+The free electrons — previously in thermal equilibrium with no net motion — feel a force $F_x = q \, E_x$ and begin to move horizontally. The **current is the electrons' response to the electric field**.
+
 
 <figure>
   <center>
@@ -366,13 +370,6 @@ But locally, the mechanism is $E_z$ sequentially polarizing each section: each s
   <figcaption><i>Horizontal current arising from sequential vertical charge displacement at the wavefront.</i></figcaption>
   </center>
 </figure>
-
-Another way to look at this: at the wavefront, the voltage rises from zero to signal level over a short distance, while a little further ahead it is still zero. This steep spatial gradient is a horizontal electric field:
-$$
-    E_x = -\frac{\partial V}{\partial x}
-$$
-
-The free electrons — previously in thermal equilibrium with no net motion — feel a force $F_x = q \, E_x$ and begin to move horizontally. The **current is the electrons' response to the electric field**.
 
 So far we have described how $E_x$ arises at the wavefront itself. But the conductor is resistive, and that changes the picture behind the wavefront as well.
 
@@ -402,7 +399,7 @@ This also clarifies why "surface charge established" and "current flowing" aren'
 <br />
 
 
-##### In other words
+#### In other words
 
 Here is how Feynman might walk us through it.
 
@@ -436,7 +433,7 @@ The wave is the boss. The electrons are the help. And what the electrons do — 
 And that's really all there is to it. The hard part is believing it.
 </div>
 
-#### Sources of the Magnetic Field
+### 1.3. Sources of the Magnetic Field
 
 <figure>
   <center>
@@ -457,7 +454,7 @@ $$
 There is one continuous $\mathbf B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu_0 \mathbf J$) dominates — free electrons are moving, and their motion sustains $\mathbf B$. In the dielectric, there are no free electrons ($\mathbf J = 0$), so the displacement term takes over — the changing $\mathbf E$ field sustains $\mathbf B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\mathbf B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
 <br />
 
-##### In other words
+#### In other words
 
 Imagine Feynman is still at the chalkboard. Someone in the third row raises a hand.
 <div class="quote">
@@ -485,7 +482,7 @@ And here's what I want you to appreciate. You walk from the plastic up into the 
 That was Maxwell's real insight. Not that current makes magnetism — we knew that. Not that changing fields make fields — Faraday had half of that. Maxwell's piece was realizing that *a changing electric field is, for the purposes of magnetism, every bit as good as a current.* Nature doesn't care which one is feeding the field. It'll take either. And on a PCB, inside the copper it takes one, inside the plastic it takes the other, and the result is a seamless, beautiful, continuous magnetic field wrapping the whole transmission line.
 </div>
 
-#### One System, Two Views
+### One System, Two Views
 
 It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not. They are two views of a single electromagnetic solution, and neither can exist without the other.
 
@@ -502,7 +499,7 @@ So far, we have followed one signal on one trace — its wave, its return curren
 
 <br />
 
-### 1.3. Rail Collapse
+### 1.4. Rail Collapse
 
 <figure>
   <center>
@@ -526,7 +523,7 @@ This is trace and via inductance resisting sudden changes in current. The chip s
 <br />
 
 
-### 1.4. Crosstalk
+### 1.5. Crosstalk
 
 Crosstalk is what happens when the EM field of one trace overlaps with the EM field of another. In circuit theory we talk about parasitic capacitance and mutual inductance as if they are discrete components accidentally added to the circuit. In field theory the picture is more honest: there is one EM field in the dielectric, and that field does not know which trace "owns" it. If two traces share the same dielectric volume, their fields overlap, and the overlap is the crosstalk. $C_m$ and $L_m$ are just circuit-theory approximations of that field overlap.
 
@@ -592,7 +589,7 @@ At the **near end** (closest to the aggressor's source), the capacitive and indu
 <br />
 
 
-### 1.5. Electromagnetic Interference
+### 1.6. Electromagnetic Interference
 
 <figure>
   <center>
@@ -864,3 +861,11 @@ Ferrite chokes should not be placed in the PDN — the design requires low targe
   <figcaption><i>Signal propagating along a microstrip.<br />(Courtesy: Kenneth Wyatt)</i></figcaption>
   </center>
 </figure>
+
+
+## Do not remove
+
+**At the wavefront,** the local redistribution of charge caused by $E_z$, that we saw in the previous section, also means there's now a net **horizontal current** along the trace. As the wavefront advances, different sections are charged. Macroscopically, current does flow from the source toward the wavefront — it is what charges the line capacitance. 
+
+But locally, the mechanism is $E_z$ sequentially polarizing each section: each section's electrons shift vertically, and the cumulative effect of those displacements happening in sequence along the trace appears as a horizontal current $J_{fwd}$ flowing in the skin layer. So $E_z$ is the primary driver, and the horizontal current is a consequence of the wavefront sequentially polarizing each section.
+
