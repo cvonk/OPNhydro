@@ -848,3 +848,72 @@ The result is a pair of opposite surface charges — that act like a parallel-pl
 
 The cancellation happens almost instantly. What little field penetrates the metal decays within one skin depth $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz). Because the field cannot extent into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave**: without the electron response, the field would radiate away instead of propagating along the line.
 <br />
+
+
+---
+
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-ex-current.svg" style="width: 80%; height: auto;">
+  <figcaption><i>Microstrip E<sub>x</sub> current.</i></figcaption>
+  </center>
+</figure>
+
+---
+
+##### Horizontal component $E_x$
+
+**At the wavefront,** the voltage rises from zero to signal level over a short distance, while a little further ahead it is still zero. This steep spatial gradient is a horizontal electric field:
+
+$$
+    E_x = -\frac{\partial V}{\partial x}
+  $$
+
+The free electrons — previously drifting only thermally, with no net motion — feel a force $F_x = q \, E_x$ and begin to move horizontally. The **current is the electrons' response to the electric field**. The energy is not transported by the electrons — it travels in the field, described by the Poynting vector $\mathbf{E} \times \mathbf{B}$, which points from source toward load through the dielectric between the conductors.
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-ex-current.svg" style="width: 80%; height: auto;">
+  <figcaption><i>Microstrip E<sub>x</sub> current.</i></figcaption>
+  </center>
+</figure>
+
+**Behind the wavefront,** the surface charges at each section are already established — but current still flows through them. Each charged section acts as a conduit, carrying current to the wavefront that is still advancing ahead, charging new sections. Once the wavefront reaches a matched load, the current continues — now supplying the load instead of charging new sections.
+
+This sustained current means electrons are drifting through copper, scattering off lattice ions. Each collision transfers drift momentum to the lattice — a drag force opposing the current. To keep the electrons moving against this drag, the wave must continuously supply energy. That energy comes from the wave itself: the voltage amplitude drops slightly with distance, and that spatial gradient is a small $E_x$ behind the wavefront.
+
+$E_x$ is the system's response to resistance — the "cost" of pushing current through a lossy conductor. On a superconducting line there would be no scattering, no drag, no voltage drop, no $E_x$, and no loss. The power dissipated is $\mathbf{J} \cdot \mathbf{E}$ per unit volume — the energy that $E_x$ puts into the electrons is immediately scattered to heat (lattice vibrations). This is the microscopic origin of ohmic loss.
+<br />
+
+---
+
+##### Horizontal component $E_x$
+
+**At the wavefront,** the local redistribution of charge caused by $E_z$, that we saw in the previous section, also means there's now a net **current horizontally** along the trace. As the wavefront advances, different sections are charged. The horizontal current $J_fwd$ in the diagram isn't charge flowing from the source to the wavefront — it's the cumulative effect of all those local vertical displacements happening in sequence along the trace.  Each section's electrons shift up, and from a macroscopic view, that sequential process looks like a horizontal current flowing in the skin layer. So, $E_z$ is the primary driver. The horizontal current is a consequence of the wavefront sequentially polarizing each section. 
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-ex-current.svg" style="width: 80%; height: auto;">
+  <figcaption><i>Microstrip E<sub>x</sub> current.</i></figcaption>
+  </center>
+</figure>
+
+Another way of looking is: at the wavefront, the voltage rises from zero to signal level over a short distance, while a little further ahead it is still zero. This steep spatial gradient is a horizontal electric field:
+$$
+    E_x = -\frac{\partial V}{\partial x}
+  $$
+
+The free electrons — previously drifting only thermally, with no net motion — feel a force $F_x = q \, E_x$ and begin to move horizontally. The **current is the electrons' response to the electric field**.
+
+The drifting electrons scatter off nuclei, converting drift kinetic energy to lattice vibrations (heat). Each collision transfers drift momentum to the lattice. This is a drag force opposing the current. If nothing compensated for this drag, the current would decay. But the current can't just decay — the wavefront is still advancing, still demanding current to charge the next section. So the system has to sustain it. Here's how:
+
+The scattering drains energy from the wave. That means the wave amplitude (voltage) drops slightly with distance along the line. A voltage that decreases with $x$ means there's a spatial gradient:
+
+$$E_x = -\frac{\partial V}{\partial x}$$
+
+That gradient is $E_x$. And $E_x$ is exactly what re-accelerates the electrons against the drag.
+
+The resistance is the root cause. $E_x$ is the system's response to resistance — the "cost" of pushing current through a lossy conductor. On a superconducting line (no scattering), there would be no drag, no voltage drop, no $E_x$, and no loss.
+
+---

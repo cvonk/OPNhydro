@@ -318,7 +318,7 @@ where $\hat x$ points along the trace (the propagation direction) and $-\hat z$ 
 
 The **free electrons** in the copper respond to each component differently:
 
-- **Horizontal component** $E_x$ has a tilt and is caused by two distinct phenonema depending on *where* along the line you look.
+- **Horizontal component** $E_x$ is caused by two distinct phenonema depending on *where* along the line you look.
    - **At the wavefront** (significant), the voltage transitions from signal level to zero over a short distance, producing a steep spatial gradient.
 
    - **Behind the wavefront** (small), due to the finite resistance of the copper.
@@ -327,50 +327,17 @@ The **free electrons** in the copper respond to each component differently:
 - **Vertical component $E_z$** (dominant) confines the wave to the dielectric.
 <br />
 
-The following subsections below unpack each component in detail, starting with the horizontal at the wavefront.
-<br />
-
-##### Horizontal component $E_x$ at the wavefront
-
-As the wave front reaches a section of the conductor, $\mathbf{E}$ suddenly rises, while at point $x_2$, a little further down, it is still zero. This steep spatial gradient is a horizontal electric field: $E_x = -\frac{\partial V}{\partial x}$.
-
-The free electrons — previously drifting only thermally, with no net motion — feel a force and begin to move horizontally:
-$$
-  F_x = q \, E_x
-  \tag{\text{Lorentz force law}}
-$$ 
-
-
-<figure>
-  <center>
-  <img src="../media/infographics/microstrip-ex-current.svg" style="width: 80%; height: auto;">
-  <figcaption><i>Microstrip E<sub>x</sub> current.</i></figcaption>
-  </center>
-</figure>
-
-
-
-In other words: the field arrives first; the **current is the electrons' response to the electric field**. This is backwards from how most of us learned it. We were taught "apply a voltage, current flows." That is not wrong, but it hides what is actually happening. The voltage is just a way of describing the strength of the electric field. The "current flowing" is the electrons reacting to that field. The energy is not being transported by the electrons — it is in the field, described by the Poynting vector $\mathbf E \times \mathbf B$, which points from the source toward the load, through the dielectric between the conductors.
-<br />
-
-##### Horizontal component $E_x$ behind the wavefront
-
-On a lossless line, the voltage behind the wavefront would be perfectly uniform and the field perfectly vertical — no horizontal component at all.
-
-However, a real copper trace has finite resistance, so a small longitudinal field $E_x$ is needed to drive the current. Ohm's law in field form:
-$$
-    J_x = \sigma \, E_x
-$$ where $\sigma$ is the conductivity (~$5.8 \times 10^7$ S/m for copper)
-
-This shows that even a tiny $E_x$ produces a large current density because $\sigma$ is so high. The resulting power dissipation ($\mathbf J \cdot \mathbf E$ per unit volume) converts a small fraction of the field energy into heat.
+The next two subsections below unpack each component in detail, starting with the vertical.
 <br />
 
 
-##### Vertical component $E_z$, at and behind the wavefront
+##### Vertical component $E_z$
 
 As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $-q\mathbf E.$ With $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*:
 - in the trace, they move away from the dielectric-facing surface, leaving it positively charged;
 - in the return plane, they move toward the dielectric-facing surface, making it negatively charged.
+
+The local redistribution of charge caused by $E_z$ creates a vertical **displacement current** — charging the capacitance of the line.
 
 The resulting **displacement current** charges the distributed capacitance of the line. 
 
@@ -387,6 +354,53 @@ The cancellation happens almost instantly. What little field penetrates the meta
 
 Because the field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave**: without the electron response, the field would radiate away instead of propagating along the line.
 <br />
+
+
+##### Horizontal component $E_x$
+
+**At the wavefront,** the local redistribution of charge caused by $E_z$, that we saw in the previous section, also means there's now a net **horizontal current** along the trace. As the wavefront advances, different sections are charged. Macroscopically, current does flow from the source toward the wavefront — it is what charges the line capacitance. 
+
+But locally, the mechanism is $E_z$ sequentially polarizing each section: each section's electrons shift vertically, and the cumulative effect of those displacements happening in sequence along the trace appears as a horizontal current $J_{fwd}$ flowing in the skin layer. So $E_z$ is the primary driver, and the horizontal current is a consequence of the wavefront sequentially polarizing each section.
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-ex-current.svg" style="width: 80%; height: auto;">
+  <figcaption><i>Microstrip E<sub>x</sub> current.</i></figcaption>
+  </center>
+</figure>
+
+Another way of looking is: at the wavefront, the voltage rises from zero to signal level over a short distance, while a little further ahead it is still zero. This steep spatial gradient is a horizontal electric field:
+$$
+    E_x = -\frac{\partial V}{\partial x}
+$$
+
+The free electrons — previously drifting only thermally, with no net motion — feel a force $F_x = q \, E_x$ and begin to move horizontally. The **current is the electrons' response to the electric field**.
+
+The drifting electrons scatter off nuclei, converting drift kinetic energy to lattice vibrations (heat). This is a drag force opposing the current. If nothing compensated for this drag, the current would decay. But the current can't just decay — the wavefront is still advancing, still demanding current to charge the next section. So the system has to sustain it. Here's how:
+
+The scattering drains energy from the wave. That means the wave amplitude (voltage) drops slightly with distance along the line. A voltage that decreases with $x$ means there's a spatial gradient:
+$$
+    E_x = -\frac{\partial V}{\partial x}
+$$
+
+That gradient is $E_x$. And $E_x$ is exactly what re-accelerates the electrons against the drag.
+
+The resistance is the root cause. $E_x$ is the system's response to resistance — the "cost" of pushing current through a lossy conductor. On a superconducting line (no scattering), there would be no drag, no voltage drop, no $E_x$, and no loss.
+
+**Behind the wavefront**,  the surface charge at any section behind the wavefront is already established. But current still flows through those sections — not to charge them, but to supply the wavefront that's still advancing ahead.
+
+Think about what happens at the wavefront right now, at section $x_3$:
+- $E_z$ pushes electrons upward in the trace → bottom surface becomes positive (electron deficit).
+- Those displaced electrons don't pile up at the top — they flow back through the conductor toward the source
+- That flow of electrons through all the sections behind the wavefront is $J_fwd$.
+
+So each already-charged section behind the wavefront is acting as a conduit. Its own surface charges are set, but current passes through it to feed the front. It's like a pipe that's already full of water — water still flows through it to supply whatever is at the end.
+
+The moment the wavefront stops advancing (reaches a matched load), the current doesn't vanish — it continues, now supplying the load instead of charging new sections.
+
+This also clarifies why "surface charge established" and "current flowing" aren't contradictory. In any DC circuit, the wire has stable surface charges (they guide the current), yet current flows through it continuously. The transmission line behind the wavefront is in exactly that state — a quasi-DC condition where the surface charges steer the current, and E_x sustains it against resistive drag.
+<br />
+
 
 ##### In other words
 
