@@ -337,9 +337,7 @@ As the wave front reaches a section of the conductor, $E_z$ there rises from zer
 - in the trace, they move away from the dielectric-facing surface, leaving it positively charged;
 - in the return plane, they move toward the dielectric-facing surface, making it negatively charged.
 
-The local redistribution of charge caused by $E_z$ creates a vertical **displacement current** — charging the capacitance of the line.
-
-The resulting **displacement current** charges the distributed capacitance of the line. 
+The local redistribution of charge caused by $E_z$ creates a vertical **displacement current** — charging the distributed capacitance of the line.
 
 The result is a pair of opposite surface charges that act like a parallel-plate capacitor. Inside each conductor, the field from the nearby surface charge opposes the incoming $E_z$ — pointing upward in the trace (away from the positive surface) and downward in the return plane (away from the negative surface). The electrons keep moving until their self-generated field exactly cancels the incoming field, driving the net $\mathbf E$ inside the metal to zero.
 
@@ -365,25 +363,27 @@ But locally, the mechanism is $E_z$ sequentially polarizing each section: each s
 <figure>
   <center>
   <img src="../media/infographics/microstrip-ex-current.svg" style="width: 80%; height: auto;">
-  <figcaption><i>Microstrip E<sub>x</sub> current.</i></figcaption>
+  <figcaption><i>Horizontal current arising from sequential vertical charge displacement at the wavefront.</i></figcaption>
   </center>
 </figure>
 
-Another way of looking is: at the wavefront, the voltage rises from zero to signal level over a short distance, while a little further ahead it is still zero. This steep spatial gradient is a horizontal electric field:
+Another way to look at this: at the wavefront, the voltage rises from zero to signal level over a short distance, while a little further ahead it is still zero. This steep spatial gradient is a horizontal electric field:
 $$
     E_x = -\frac{\partial V}{\partial x}
 $$
 
-The free electrons — previously drifting only thermally, with no net motion — feel a force $F_x = q \, E_x$ and begin to move horizontally. The **current is the electrons' response to the electric field**.
+The free electrons — previously in thermal equilibrium with no net motion — feel a force $F_x = q \, E_x$ and begin to move horizontally. The **current is the electrons' response to the electric field**.
+
+So far we have described how $E_x$ arises at the wavefront itself. But the conductor is resistive, and that changes the picture behind the wavefront as well.
 
 The drifting electrons scatter off nuclei, converting drift kinetic energy to lattice vibrations (heat). This is a drag force opposing the current. If nothing compensated for this drag, the current would decay. But the current can't just decay — the wavefront is still advancing, still demanding current to charge the next section. So the system has to sustain it. Here's how:
 
-The scattering drains energy from the wave. That means the wave amplitude (voltage) drops slightly with distance along the line. A voltage that decreases with $x$ means there's a spatial gradient:
+The scattering drains energy from the wave. That means the wave amplitude (voltage) drops slightly with distance along the line. A voltage that decreases with $x$ means there's a spatial gradient — the same relation as before, now in a different context:
 $$
     E_x = -\frac{\partial V}{\partial x}
 $$
 
-That gradient is $E_x$. And $E_x$ is exactly what re-accelerates the electrons against the drag.
+This $E_x$ is what re-accelerates the electrons against the drag.
 
 The resistance is the root cause. $E_x$ is the system's response to resistance — the "cost" of pushing current through a lossy conductor. On a superconducting line (no scattering), there would be no drag, no voltage drop, no $E_x$, and no loss.
 
@@ -392,13 +392,13 @@ The resistance is the root cause. $E_x$ is the system's response to resistance �
 Think about what happens at the wavefront right now, at section $x_3$:
 - $E_z$ pushes electrons upward in the trace → bottom surface becomes positive (electron deficit).
 - Those displaced electrons don't pile up at the top — they flow back through the conductor toward the source
-- That flow of electrons through all the sections behind the wavefront is $J_fwd$.
+- That flow of electrons through all the sections behind the wavefront is $J_{fwd}$.
 
 So each already-charged section behind the wavefront is acting as a conduit. Its own surface charges are set, but current passes through it to feed the front. It's like a pipe that's already full of water — water still flows through it to supply whatever is at the end.
 
 The moment the wavefront stops advancing (reaches a matched load), the current doesn't vanish — it continues, now supplying the load instead of charging new sections.
 
-This also clarifies why "surface charge established" and "current flowing" aren't contradictory. In any DC circuit, the wire has stable surface charges (they guide the current), yet current flows through it continuously. The transmission line behind the wavefront is in exactly that state — a quasi-DC condition where the surface charges steer the current, and E_x sustains it against resistive drag.
+This also clarifies why "surface charge established" and "current flowing" aren't contradictory. In any DC circuit, the wire has stable surface charges (they guide the current), yet current flows through it continuously. The transmission line behind the wavefront is in exactly that state — a quasi-DC condition where the surface charges steer the current, and $E_x$ sustains it against resistive drag.
 <br />
 
 
