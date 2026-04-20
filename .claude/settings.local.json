@@ -39,7 +39,11 @@
       "WebFetch(domain:www.youyeetoo.com)",
       "WebFetch(domain:www.waveshare.com)",
       "Bash(python3 -)",
-      "Bash(node -e ':*)"
+      "Bash(node -e ':*)",
+      "Bash(python3 -c ' *)"
+    ],
+    "additionalDirectories": [
+      "u:\\Users\\Coert\\src\\OPNhydro\\hardware"
     ]
   }
 }

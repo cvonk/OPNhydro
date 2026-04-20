@@ -23,8 +23,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.0428572"
-     inkscape:cx="346.32866"
-     inkscape:cy="209.75524"
+     inkscape:cx="392.09789"
+     inkscape:cy="218.56643"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
@@ -127,6 +127,19 @@
          fill="#333333"
          id="path1-7" />
     </marker>
+    <marker
+       id="arrE-1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-5" />
+    </marker>
   </defs>
   <!-- =============== GEOMETRY =============== -->
   <!-- Dielectric (pale yellow) -->
@@ -209,7 +222,7 @@
      font-style="italic"
      font-size="13px"
      id="text10"
-     style="font-size:17.3333px;text-align:center;text-anchor:middle">wavefront</text>
+     style="font-size:20px;text-align:center;text-anchor:middle">wavefront</text>
   <!-- =============== PROPAGATING VOLTAGE STEP (above trace) =============== -->
   <g
      id="g15"
@@ -376,6 +389,14 @@
        y2="193"
        marker-end="url(#arrE)"
        id="line22" />
+    <line
+       x1="495.64334"
+       y1="107.48951"
+       x2="495.64334"
+       y2="193.48952"
+       marker-end="url(#arrE-1)"
+       id="line22-7"
+       style="marker-end:url(#arrE-1)" />
   </g>
   <!-- E label -->
   <text
@@ -503,9 +524,9 @@
        with the wave in +x̂ (the wave sweeps the E-field on to the right). -->
   <line
      x1="464.84161"
-     y1="96.671257"
+     y1="112.67126"
      x2="495.4201"
-     y2="96.671257"
+     y2="112.67126"
      stroke="#922b21"
      stroke-width="1.71844"
      stroke-dasharray="6, 3"
@@ -513,8 +534,8 @@
      id="line34" />
   <!-- ∂E/∂t label -->
   <text
-     x="514.05591"
-     y="93.286713"
+     x="504.75522"
+     y="116.13986"
      fill="#922b21"
      font-style="italic"
      font-size="13px"
@@ -522,8 +543,8 @@
      style="font-size:14.6667px"><tspan
        sodipodi:role="line"
        id="tspan7"
-       x="514.05591"
-       y="93.286713"
+       x="504.75522"
+       y="116.13986"
        style="font-size:14.6667px">∂E/∂t at wavefront</tspan></text>
   <!-- =============== B FIELD — DISPLACEMENT (dashed ⊗ at wavefront) =============== -->
   <g
@@ -595,110 +616,63 @@
      stroke-width="1.7"
      fill="none"
      id="g43"
-     transform="matrix(0.68762638,0,0,1.0044341,120.12515,-36.168169)">
-    <path
-       d="m 500,104.13848 c 6.02703,25.68922 7.51689,59.65221 3.21791,89.03382"
-       marker-end="url(#arrE)"
-       id="path39"
-       sodipodi:nodetypes="cc" />
-    <path
-       d="m 510.31926,104.48309 c 17.55743,34.13211 16.25169,63.09829 3.62669,89.37843"
-       marker-end="url(#arrE)"
-       id="path40"
-       sodipodi:nodetypes="cc" />
-    <path
-       d="m 522.42403,104.23722 c 46.05972,25.63154 42.86524,64.76262 4.9588,88.4986"
-       marker-end="url(#arrE)"
-       id="path43"
-       sodipodi:nodetypes="cc"
-       style="stroke-width:1.98497" />
-  </g>
+     transform="matrix(0.68762638,0,0,1.0044341,120.12515,-36.168169)" />
   <!-- Fringe label with leader -->
-  <text
-     x="523.32605"
-     y="135.05626"
-     fill="#c0392b"
-     font-style="italic"
-     font-size="13px"
-     id="text43"
-     style="font-size:14.6667px"><tspan
-       sodipodi:role="line"
-       id="tspan9"
-       x="523.32605"
-       y="135.05626"
-       style="font-size:14.6667px">fringing E</tspan></text>
-  <line
-     x1="518.49915"
-     y1="134.82535"
-     x2="486.49915"
-     y2="129.82535"
-     stroke="#c0392b"
-     stroke-width="0.8"
-     id="line44" />
   <!-- =============== AXES =============== -->
   <!-- =============== LEGEND =============== -->
   <g
      transform="translate(83.846153,295.1049)"
      id="g56">
-    <rect
-       x="228.98744"
-       y="-89.19442"
-       width="384.75244"
-       height="37.228004"
-       fill="#fafafa"
-       stroke="#bbbbbb"
-       stroke-width="0.492975"
-       id="rect49"
-       ry="0" />
     <!-- E field -->
-    <line
-       x1="237.34267"
-       y1="-70.090904"
-       x2="267.34265"
-       y2="-70.090904"
-       stroke="#c0392b"
-       stroke-width="2"
-       marker-end="url(#arrE)"
-       id="line49" />
-    <text
-       x="273.34268"
-       y="-66.090904"
-       font-size="11px"
-       fill="#333333"
-       id="text50"
-       style="font-size:14.6667px">E field</text>
     <!-- ∂E/∂t -->
-    <line
-       x1="339.2587"
-       y1="-69.111893"
-       x2="369.2587"
-       y2="-69.111893"
-       stroke="#922b21"
-       stroke-width="2"
-       stroke-dasharray="4, 2"
-       marker-end="url(#arrEdash)"
-       id="line50" />
-    <text
-       x="375.2587"
-       y="-65.111885"
-       font-size="11px"
-       fill="#333333"
-       id="text51"
-       style="font-size:14.6667px">∂E/∂t (varying E)</text>
+    <g
+       id="g1"
+       transform="translate(94.475522)">
+      <rect
+         x="228.94684"
+         y="-89.235023"
+         width="267.84064"
+         height="37.309219"
+         fill="#fafafa"
+         stroke="#bbbbbb"
+         stroke-width="0.411761"
+         id="rect49"
+         ry="0" />
+      <line
+         x1="237.34267"
+         y1="-70.090904"
+         x2="267.34265"
+         y2="-70.090904"
+         stroke="#c0392b"
+         stroke-width="2"
+         marker-end="url(#arrE)"
+         id="line49" />
+      <text
+         x="273.34268"
+         y="-66.090904"
+         font-size="11px"
+         fill="#333333"
+         id="text50"
+         style="font-size:14.6667px">E field</text>
+      <line
+         x1="339.2587"
+         y1="-69.111893"
+         x2="369.2587"
+         y2="-69.111893"
+         stroke="#922b21"
+         stroke-width="2"
+         stroke-dasharray="4, 2"
+         marker-end="url(#arrEdash)"
+         id="line50" />
+      <text
+         x="375.2587"
+         y="-65.111885"
+         font-size="11px"
+         fill="#333333"
+         id="text51"
+         style="font-size:14.6667px">∂E/∂t (varying E)</text>
+    </g>
     <!-- Fringing E indicator -->
-    <path
-       d="m 501.81118,-61.643356 c 10,-10 25,-5 35,-15"
-       stroke="#c0392b"
-       stroke-width="1.7"
-       fill="none"
-       id="path51" />
-    <text
-       x="544.81122"
-       y="-63.643356"
-       font-size="11px"
-       fill="#333333"
-       id="text52"
-       style="font-size:14.6667px">fringing E</text>
     <!-- B conduction -->
     <g
        transform="translate(465.97902,-68.048951)"
