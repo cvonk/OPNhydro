@@ -203,36 +203,38 @@ $$
 These two equations **couple time variation to spatial variation** — and that coupling is what makes propagation inevitable. 
 
 <details>
-  <summary>Expand if you ❤️ math.</summary>
+  <summary>Expand to see the ❤️ math for reducing the curl to one dimension</summary>
+
 At the wavefront, $\mathbf E$ changes in the $x$-direction, so we can simplify Faraday's equation for a one-dimension line, where the field only changes in the $x$-direction. The curl ($\nabla \times E$) reduces to
 $$
   \begin{align*}
-    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+    \nabla \times \mathbf{E} 
+    &= -\frac{\partial \mathbf{B}}{\partial t} \\
       \begin{vmatrix}
         \hat x & \hat y & \hat z \\
-        \frac{\partial}{\partial x} & \cancel{\frac{\partial}{\partial y}} & \cancel{\frac{\partial}{\partial z}} \\
+        \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
         E_x & E_y & E_z
-       \end{vmatrix} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+       \end{vmatrix} &= \\
        \hat x
          \begin{vmatrix}
-            \cancel{\frac{\partial}{\partial y}} & \cancel{\frac{\partial}{\partial z}} \\
+            \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
             E_y & E_z
          \end{vmatrix}
        - \hat y
          \begin{vmatrix}
-            \frac{\partial}{\partial x} & \cancel{\frac{\partial}{\partial z}} \\
+            \frac{\partial}{\partial x} & \frac{\partial}{\partial z} \\
             E_x & E_z
          \end{vmatrix}
        + \hat z
          \begin{vmatrix}
-            \frac{\partial}{\partial x} & \cancel{\frac{\partial}{\partial y}} \\
+            \frac{\partial}{\partial x} & \frac{\partial}{\partial y} \\
             E_x & E_y
          \end{vmatrix}
-       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+       &= \\
        \left(\frac{\partial E_z}{\partial y} - \frac{\partial E_y}{\partial z}\right) \hat x
        + \left(\frac{\partial E_z}{\partial x} - \frac{\partial E_x}{\partial z}\right) \hat y       
        + \left(\frac{\partial E_x}{\partial y} - \frac{\partial E_y}{\partial x}\right) \hat z
-       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+       &=
   \end{align*}
 $$
 
@@ -244,7 +246,7 @@ $$
        + \left(\frac{\cancel{\partial E_x}}{\partial y} - \frac{\cancel{\partial E_y}}{\partial x}\right) \hat z
        &= -\frac{\partial \mathbf{B}}{\partial t} \\
       \frac{\partial E_z}{\partial x} \hat y 
-       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+       &=
   \end{align*}
 $$
 </details>
@@ -265,7 +267,7 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
 How fast the electric and magnetic fields can build up is what sets the signal's propagation speed. The propagation and interaction of these fields is described by Maxwell’s Equations.
 
 <details>
-  <summary>Expand if you ❤️ to see more math.</summary>
+  <summary>Expand if you ❤️ math and see the derivation of the wave equation and propagation speed.</summary>
 
   Take the curl of Faraday's law
   $$
