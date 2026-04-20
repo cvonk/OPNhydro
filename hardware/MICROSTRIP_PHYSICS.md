@@ -46,6 +46,12 @@ Chapter 1 builds the field-theory picture from first principles — starting wit
 
 The treatment assumes familiarity with basic circuit theory (Ohm's law, Kirchhoff's laws) but does not require a background in electromagnetics. Where the mathematics goes deeper, expandable sections and Feynman-style narratives offer the same insight from a different angle.
 
+Most textbook introductions to transmission lines start with the lumped-element model — an infinite ladder of series inductors and shunt capacitors. That model yields the right equations (the wave equation, $Z_0 = \sqrt{L/C}$, propagation delay), but it obscures the physics. It cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology. This document takes a different path: it starts from the fields themselves — Maxwell’s equations applied to the cross-section of a microstrip — and derives the circuit quantities (impedance, capacitance, inductance) as consequences. The result is a mental model that transfers directly to layout decisions, where the fields, not the lumped elements, are what the designer actually controls.
+
+
+---
+
+
 ## 1. Field Theory
 
 **Circuit Theory**, the simplified low-frequency approximation taught in undergraduate courses, is based on field theory. It assumes that the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws. Before the mid-1990s, a typical device might output signals with 10 ns rise times at 10 MHz — and the circuits worked with the crudest of interconnects.
@@ -161,24 +167,25 @@ Now, here is where it gets interesting. The electric field went from zero to som
 
 OK, so now we have a magnetic field. And it is also going from zero to something. It's changing in time too. And Faraday — long before Maxwell — figured out the other half of the story: **a changing magnetic field makes an electric field**. So the magnetic field we just made, by changing, makes another electric field — a little bit further along the trace than the one we started with.
 
-You see what's happening? The electric field made a magnetic field. The magnetic field made an electric field. The new electric field is further down the line. And now it is changing, so it makes another magnetic field, which makes another electric field, and off we go. The two fields are playing leapfrog, and they're heading down the trace at an enormous speed.
+You see what's happening? The electric field made a magnetic field. The magnetic field made an electric field. The new electric field is further down the line. And now it is changing, so it makes another magnetic field, which makes another electric field, and off we go. The two fields are playing leapfrog[^LEAPFROG], and they're heading down the trace at an enormous speed.
 
 So when you flipped that switch — the light turned on because a little piece of light, essentially, rushed down the trace. Not the electrons. The field. The electrons are just sitting there wiggling; they're the audience, not the performers. The show is in the plastic, between the conductors, where the fields are doing their dance.
 
 And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of light. Isn't that something?
 </div>
+
+[^LEAPFROG]: In reality the two fields coexist at every point, but the "leapfrog" picture captures how each sustains the other.
 <br />
+
+<figure>
+  <center>
+  <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 40%; height: auto;">
+</figure>
+
 
 #### Propagation
 
 Steps 1–3 showed the first cycle. The same coupling, applied repeatedly, guarantees indefinite propagation. 
-
-<figure>
-  <center>
-  <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 60%; height: auto;">
-  <figcaption><i><b>E</b> and <b>B</b> fields playing leapfrog down the microstrip.</i></figcaption>
-  </center>
-</figure>
 
 As we have seen, in the source-free dielectric, the two laws simplify to:
 
@@ -498,7 +505,7 @@ And here's what I want you to appreciate. You walk from the plastic up into the 
 That was Maxwell's real insight. Not that current makes magnetism — we knew that. Not that changing fields make fields — Faraday had half of that. Maxwell's piece was realizing that *a changing electric field is, for the purposes of magnetism, every bit as good as a current.* Nature doesn't care which one is feeding the field. It'll take either. And on a PCB, inside the copper it takes one, inside the plastic it takes the other, and the result is a seamless, beautiful, continuous magnetic field wrapping the whole transmission line.
 </div>
 
-### One System, Two Views
+#### One System, Two Views
 
 It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not. They are two views of a single electromagnetic solution, and neither can exist without the other.
 
@@ -641,6 +648,8 @@ The physics comes from the same Maxwell's equations as §1.1. The difference is 
 
 ---
 
+---
+
 <br />
 
 ## 2. From Physics to Layout
@@ -658,7 +667,7 @@ The sections proceed from rules to physical build to final strategy:
 - **§2.7** assembles all of the above into a concrete layout strategy.
 
 Each rule in this chapter ties back to a specific result from Chapter 1. The aim is that no rule is a folklore prescription — every one has a physical reason behind it.
-
+<br />
 
 ### 2.1. PCB Design Rules
 
