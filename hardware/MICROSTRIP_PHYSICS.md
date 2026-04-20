@@ -56,6 +56,8 @@ Most textbook introductions to transmission lines start with the lumped-element 
 
 **Circuit Theory**, the simplified low-frequency approximation taught in undergraduate courses, is based on field theory. It assumes that the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws. Before the mid-1990s, a typical device might output signals with 10 ns rise times at 10 MHz — and the circuits worked with the crudest of interconnects.
 
+Where circuit theory talks about voltages and currents, field theory talks about the electric field $\mathbf E$ and the magnetic field $\mathbf B$. These are the same physics described at a deeper level: voltage is a measure of $\mathbf E$, and current arises because $\mathbf E$ pushes electrons. Together, $\mathbf E$ and $\mathbf B$ describe how energy is stored, how it moves from one place to another, and when it radiates.
+
 This chapter builds up the field-theory picture from first principles:
 
 - **§1.1** — how a voltage step becomes an EM wave, and where its energy actually flows.
@@ -191,21 +193,79 @@ As we have seen, in the source-free dielectric, the two laws simplify to:
 
 $$
   \begin{align}
-    \nabla \times \mathbf{B} = \mu_0\varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
+    \nabla \times \mathbf{B} &= \mu_0\varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
     \tag{\text{Ampère-Maxwell}} \\
-    \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
+    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
     \tag{\text{Faraday}}
   \end{align}
 $$
 
-These two equations couple time variation to spatial variation — and that coupling is what makes propagation inevitable. If $\mathbf E$ is changing in time at some point, the first equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
+These two equations **couple time variation to spatial variation** — and that coupling is what makes propagation inevitable. 
+
+<details>
+  <summary>Expand if you ❤️ math.</summary>
+At the wavefront, $\mathbf E$ changes in the $x$-direction, so we can simplify Faraday's equation for a one-dimension line, where the field only changes in the $x$-direction. The curl ($\nabla \times E$) reduces to
+$$
+  \begin{align*}
+    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+      \begin{vmatrix}
+        \hat x & \hat y & \hat z \\
+        \frac{\partial}{\partial x} & \cancel{\frac{\partial}{\partial y}} & \cancel{\frac{\partial}{\partial z}} \\
+        E_x & E_y & E_z
+       \end{vmatrix} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+       \hat x
+         \begin{vmatrix}
+            \cancel{\frac{\partial}{\partial y}} & \cancel{\frac{\partial}{\partial z}} \\
+            E_y & E_z
+         \end{vmatrix}
+       - \hat y
+         \begin{vmatrix}
+            \frac{\partial}{\partial x} & \cancel{\frac{\partial}{\partial z}} \\
+            E_x & E_z
+         \end{vmatrix}
+       + \hat z
+         \begin{vmatrix}
+            \frac{\partial}{\partial x} & \cancel{\frac{\partial}{\partial y}} \\
+            E_x & E_y
+         \end{vmatrix}
+       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+       \left(\frac{\partial E_z}{\partial y} - \frac{\partial E_y}{\partial z}\right) \hat x
+       + \left(\frac{\partial E_z}{\partial x} - \frac{\partial E_x}{\partial z}\right) \hat y       
+       + \left(\frac{\partial E_x}{\partial y} - \frac{\partial E_y}{\partial x}\right) \hat z
+       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \end{align*}
+$$
+
+The field is in the $z$-direction, so $E_x = E_y = 0$. The field is uniform across the cross-section, so $\frac{\partial E_z}{\partial y} = 0$.
+$$
+  \begin{align*}
+       \left(\cancel{\frac{\partial E_z}{\partial y}} - \frac{\cancel{\partial E_y}}{\partial z}\right) \hat x
+       + \left(\frac{\partial E_z}{\partial x} - \frac{\cancel{\partial E_x}}{\partial z}\right) \hat y       
+       + \left(\frac{\cancel{\partial E_x}}{\partial y} - \frac{\cancel{\partial E_y}}{\partial x}\right) \hat z
+       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+      \frac{\partial E_z}{\partial x} \hat y 
+       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \end{align*}
+$$
+</details>
+<br />
+
+**Takeaway:** Writing out the curl operator ($\nabla\times$) for the $\mathbf{E}$ field proves mathematically that: it is impossible for the electric field to vary over distance without a magnetic field simultaneously varying over time.
+$$
+  \begin{align*}
+      \frac{\partial E_z}{\partial x} \hat y 
+       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \end{align*}
+$$
+
+So, if $\mathbf E$ is changing in time at some point, the first equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
 
 No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localized disturbance from remaining localized.
 
 How fast the electric and magnetic fields can build up is what sets the signal's propagation speed. The propagation and interaction of these fields is described by Maxwell’s Equations.
 
 <details>
-  <summary>Expand if you ❤️ math.</summary>
+  <summary>Expand if you ❤️ to see more math.</summary>
 
   Take the curl of Faraday's law
   $$
@@ -673,14 +733,14 @@ Each rule in this chapter ties back to a specific result from Chapter 1. The aim
 
 Everything in §1.1 through §1.5 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the return plane is the other. The copper confines the field ($E_z$ cancellation), the dielectric carries it forward (displacement current), and the return current in the return plane provides the equal-and-opposite $\mathbf B$ that prevents radiation (field cancellation at a distance).
 
-When that field structure breaks down, the consequences fall into four categories: degraded signal quality on a single net (reflections, ringing), rail collapse in the power distribution network (§1.3), crosstalk between adjacent nets (§1.4), and radiated EMI (§1.5). Every PCB layout rule exists to prevent one or more of these — by keeping the field confined, the return path intact, and the coupling between unrelated fields to a minimum.
+When that field structure breaks down, the consequences fall into four categories: degraded signal quality on a single net (reflections, ringing), rail collapse in the power distribution network (§1.4), crosstalk between adjacent nets (§1.5), and radiated EMI (§1.6). Every PCB layout rule exists to prevent one or more of these — by keeping the field confined, the return path intact, and the coupling between unrelated fields to a minimum.
 <br />
 
 #### Signal Quality
 
 A signal traveling along a trace is an EM wave guided by the trace and its return plane. Anything that disrupts the wave's propagation — an impedance discontinuity, a missing return path, a stub — causes part of the energy to reflect back toward the source. The reflected wave interferes with the forward wave, producing ringing, overshoot, and timing uncertainty on the net.
 
-**Rule 1a — Maintain a continuous return plane.** The $\mathbf B$ field from the forward current in the trace and the return current in the return plane are equal and opposite. They cancel at a distance, keeping the energy confined. Gauss's law for magnetism ($\nabla \cdot \mathbf B = 0$) requires magnetic field lines to close: with a continuous plane, they close tightly. Interrupt the plane — a slot, a cutout, a missing pour — and the loop area grows, the impedance changes, and the wave partially reflects.
+**Rule 1a — Maintain a continuous return plane.** The $\mathbf B$ field from the forward current in the trace and the return current in the plane cancel at a distance, keeping the energy confined. A continuous plane provides a nearby, low-impedance return path, so the current loop is small and the fields close tightly around the trace. Interrupt the plane — a slot, a cutout, a missing pour — and the return current detours, the loop area grows, the impedance changes, and the wave partially reflects.
 
 <figure>
   <center>
@@ -783,15 +843,17 @@ The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The
 **PCB finish:** HASL (Hot Air Solder Leveling) is sufficient and lowest cost for the packages used in this design (SSOP-20 at 0.65 mm pitch and larger). ENIG (Electroless Nickel Immersion Gold) is only worth the premium if a future revision adds true fine-pitch parts (QFN/LGA at 0.5 mm or below, or BGA).
 
 
+---
+
 
 ### 2.4. Segregating Functional Regions
 
 The board layout separates functional domains to minimize coupling between noise sources and sensitive circuits:
 
-1. Keep the BNC-to-EZO analog links and the EZO-to-MCU serial lines away from motor control and digital switching sections.
-2. Place power conversion (buck converter) and motor control (TMC2209 drivers) near the power entry point, so high-current loops stay short.
-3. Filter and transient-protect all power and I/O connectors at the board boundary.
-4. Group all power and I/O connectors along one edge of the board where possible, to contain cable radiation (Rule 4c).
+- Keep the BNC-to-EZO analog links and the EZO-to-MCU serial lines away from motor control and digital switching sections.
+- Place power conversion (buck converter) and motor control (TMC2209 drivers) near the power entry point, so high-current loops stay short.
+- Filter and transient-protect all power and I/O connectors at the board boundary.
+- Group all power and I/O connectors along one edge of the board where possible, to contain cable radiation (Rule 4c).
 
 
 ---
@@ -827,18 +889,23 @@ The table below uses a conservative $\Delta T = 10°\rm{C}$ (IPC-2221 permits 20
 
 Net                     | Target Current    | Internal Trace Width | External Trace Width | Rationale
 ------------------------|-------------------|----------------------|----------------------|----------
-24V input (PSU→TVS→RPP) | 6.5A (Peak)       | 5.0mm (200mil)       |  2.0mm (80mil)       | Reduce sag
+24V input (PSU→TVS→RPP) | 6.5A (Peak)       | N/A†       |  2.0mm (80mil)       | Reduce sag
 24V main pump           | 1.2A (Continuous) | 1.0mm  (40mil)       |  0.4mm (15mil)       | Manage heat
-24V each dosing pump    | 1.53A (Peak)      | 1.0mm  (40mil)       |  0.4mm (15mil)       | Lower inductance
+24V each dosing pump    | 1.53A (Peak)      | 1.0mm  (40mil)       |  0.4mm (15mil)       | Peak current headroom
 24V ATO valve           | 0.3A (Peak)       | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
 5V rail (post-buck)     | 0.75A (Peak)      | 0.5mm  (20mil)       |  0.2mm  (8mil)       | Stable power
 3.3V rail (post-LDO)    | 0.15A (Peak)      | 0.2mm   (8mil)       |  0.2mm  (8mil)       | Fab minimum
+
+† Inner-layer routing cannot carry 6.5 A at 1 oz copper within any practical trace width. This net must remain on an outer layer.
 
 
 ### 2.7. PCB Layout Strategy
 
 - **Star power distribution** — Run a dedicated pair of 24V traces from the power entry connector directly to the stepper section, and a separate pair to the logic regulator. Do not daisy-chain power from the motors to the sensors.
 - **Via stitching for high-current transitions** — When the 24V rail transitions between layers, use at least 3–4 vias per 2A connection. A single standard 10 mil via carries only 0.5–1A before excessive heating.
+- **Decoupling capacitor placement** — Place bulk capacitors (10–100 µF) within 10 mm of each power pin cluster. Place high-frequency bypass capacitors (100 nF ceramic) within 2 mm of the chip power pin they serve, with vias dropping straight to the return plane. Route the capacitor’s return via before the signal via — current must flow through the capacitor, not around it (Rule 3b).
+- **Isolation moat continuity** — The pH and EC islands require unbroken isolation moats through all four layers (§2.2). No trace, pour, or via may cross the moat except the designated serial links, which must bridge the gap with adequate creepage. Verify moat integrity in the fabrication output for every layer.
+- **Board-edge clearance** — Pull all traces and copper pours back from the board edge by at least 20× the dielectric thickness (Rule 4b). On the OPNhydro stack-up, this is approximately 1.5 mm. Place return-plane stitching vias along the board perimeter at ≤5 mm intervals.
 - **Antenna keep-out** — The return plane must not extend under the ESP32-C6 antenna keep-out area to ensure proper wireless performance.
 
 

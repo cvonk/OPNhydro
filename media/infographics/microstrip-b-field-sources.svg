@@ -433,7 +433,7 @@
      font-style="italic"
      font-weight="600"
      id="text28"
-     style="font-size:17.3333px">J &gt; 0 , dE/dt ≈ 0</text>
+     style="font-size:17.3333px">J &gt; 0 , ∂E/∂t≈ 0</text>
   <text
      x="488.53146"
      y="87.475525"
@@ -509,7 +509,7 @@
      font-style="italic"
      font-weight="600"
      id="text34"
-     style="font-size:17.3333px">J = 0 , dE/dt &gt; 0</text>
+     style="font-size:17.3333px">J = 0 , ∂E/∂t&gt; 0</text>
   <text
      x="488.53146"
      y="217.47551"
