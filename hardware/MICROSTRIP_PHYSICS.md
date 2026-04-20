@@ -187,7 +187,7 @@ And that, really, is what every trace on every PCB is doing. It's not carrying e
 
 #### Propagation
 
-Steps 1–3 showed the first cycle. The same coupling, applied repeatedly, guarantees indefinite propagation. 
+The same coupling, applied repeatedly, guarantees indefinite propagation. 
 
 As we have seen, in the source-free dielectric, the two laws simplify to:
 
@@ -205,7 +205,7 @@ These two equations **couple time variation to spatial variation** — and that 
 <details>
   <summary>Expand to see the ❤️ math for reducing the curl to one dimension</summary>
 
-At the wavefront, $\mathbf E$ changes in the $x$-direction, so we can simplify Faraday's equation for a one-dimension line, where the field only changes in the $x$-direction. The curl ($\nabla \times E$) reduces to
+For the wavefront, at a place in between the trace and the return plane, we can apply two simplifications. First, the wave propagates in $\hat x$ and the fields are uniform in $\hat y$ and $\hat z$, so all $\partial/\partial y$ and $\partial/\partial z$ vanish. Second, the electric field points in the $\hat z$-direction (trace to return plane), so $E_x = E_y = 0$. Under these two assumptions, the curl ($\nabla \times \mathbf E$) reduces to
 $$
   \begin{align*}
     \nabla \times \mathbf{E} 
@@ -238,7 +238,7 @@ $$
   \end{align*}
 $$
 
-The field is in the $z$-direction, so $E_x = E_y = 0$. The field is uniform across the cross-section, so $\frac{\partial E_z}{\partial y} = 0$.
+Applying both assumptions cancels every term except one:
 $$
   \begin{align*}
        \left(\cancel{\frac{\partial E_z}{\partial y}} - \frac{\cancel{\partial E_y}}{\partial z}\right) \hat x
@@ -255,19 +255,20 @@ $$
 **Takeaway:** Writing out the curl operator ($\nabla\times$) for the $\mathbf{E}$ field proves mathematically that: it is impossible for the electric field to vary over distance without a magnetic field simultaneously varying over time.
 $$
   \begin{align*}
-      \frac{\partial E_z}{\partial x} \hat y 
-       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+      \frac{\partial E_z}{\partial x}
+       &= -\frac{\partial B_y}{\partial t} \\
   \end{align*}
 $$
+
+where $\hat y$ points across the trace width — the direction $\mathbf B$ curls around the conductor.
 
 So, if $\mathbf E$ is changing in time at some point, the first equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
 
 No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localized disturbance from remaining localized.
 
-How fast the electric and magnetic fields can build up is what sets the signal's propagation speed. The propagation and interaction of these fields is described by Maxwell’s Equations.
 
 <details>
-  <summary>Expand if you ❤️ math and see the derivation of the wave equation and propagation speed.</summary>
+  <summary>Expand if you ❤️ math and want to see the derivation of propagation speed.</summary>
 
   Take the curl of Faraday's law
   $$
