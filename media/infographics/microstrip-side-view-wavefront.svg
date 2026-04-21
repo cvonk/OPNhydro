@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 -70 785.24468 327.48251"
+   viewBox="0 -70 788.18175 348.04196"
    font-family="Helvetica, Arial, sans-serif"
    font-size="14px"
    version="1.1"
    id="svg56"
    sodipodi:docname="microstrip-side-view-wavefront.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
-   width="785.24469"
-   height="327.48251"
+   width="788.18176"
+   height="348.04196"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -22,20 +22,20 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="2.0428572"
-     inkscape:cx="392.09789"
-     inkscape:cy="218.56643"
-     inkscape:window-width="2160"
-     inkscape:window-height="1261"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:zoom="2.8890364"
+     inkscape:cx="320.0029"
+     inkscape:cy="227.93067"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg56">
+     inkscape:current-layer="g15">
     <inkscape:page
-       x="7.7638713e-09"
+       x="0"
        y="0"
-       width="785.24469"
-       height="327.48251"
+       width="788.18176"
+       height="348.04196"
        id="page1"
        margin="0 0 39.160839 5.3846154"
        bleed="0" />
@@ -144,7 +144,7 @@
   <!-- =============== GEOMETRY =============== -->
   <!-- Dielectric (pale yellow) -->
   <rect
-     x="40.419579"
+     x="43.35664"
      y="68.286713"
      width="660"
      height="90"
@@ -154,7 +154,7 @@
      id="rect4" />
   <!-- Trace (brown) at top -->
   <rect
-     x="40.419579"
+     x="43.35664"
      y="53.286709"
      width="660"
      height="15"
@@ -165,7 +165,7 @@
      style="fill:#deb187;fill-opacity:1" />
   <!-- Return plane (green) at bottom -->
   <rect
-     x="40.375961"
+     x="43.313023"
      y="158.2431"
      width="660.08722"
      height="16.66066"
@@ -176,20 +176,20 @@
      style="fill:#96cf96;fill-opacity:1" />
   <!-- Material labels -->
   <text
-     x="708.41956"
+     x="711.35663"
      y="64.286713"
      fill="#333333"
      font-weight="bold"
      id="text6"
      style="font-size:17.3333px">trace</text>
   <text
-     x="708.41956"
+     x="711.35663"
      y="118.11889"
      fill="#7a6a2a"
      id="text7"
      style="font-size:17.3333px">dielectric</text>
   <text
-     x="709.39856"
+     x="712.33563"
      y="163.45454"
      fill="#333333"
      font-weight="bold"
@@ -197,26 +197,134 @@
      style="font-size:17.3333px;line-height:1"><tspan
        sodipodi:role="line"
        id="tspan2"
-       x="709.39856"
+       x="712.33563"
        y="163.45454"
        style="font-size:17.3333px;line-height:1">return</tspan><tspan
        sodipodi:role="line"
        id="tspan3"
-       x="709.39856"
+       x="712.33563"
        y="180.78784"
        style="font-size:17.3333px;line-height:1">plane</tspan></text>
+  <!-- =============== BATTERY + SWITCH (left side) =============== -->
+  <g
+     id="g-battery-switch"
+     transform="translate(-2.4280479)">
+    <!-- Wires -->
+    <g
+       stroke="#333333"
+       stroke-width="1.8"
+       fill="none"
+       id="g1">
+      <!-- Top wire: trace -> vertical down to switch -->
+      <line
+         x1="45.958176"
+         y1="60.790001"
+         x2="18"
+         y2="60.790001"
+         id="bs-wire-top-h"
+         style="stroke-width:2;stroke-dasharray:none" />
+      <line
+         x1="18"
+         y1="59.74979"
+         x2="18"
+         y2="72"
+         id="bs-wire-top-v"
+         style="stroke-width:2.09073;stroke-dasharray:none" />
+      <!-- Switch arm (open, angled up-left) -->
+      <line
+         x1="17.941257"
+         y1="73.744423"
+         x2="15.422379"
+         y2="86.220612"
+         id="bs-switch-arm"
+         inkscape:transform-center-x="1.2237762" />
+      <!-- Wire: bottom switch terminal -> battery + -->
+      <line
+         x1="18"
+         y1="87"
+         x2="18"
+         y2="120.80419"
+         id="bs-wire-mid"
+         style="stroke-width:2;stroke-dasharray:none" />
+      <!-- Wire: battery - -> return plane level -->
+      <line
+         x1="18"
+         y1="129.78322"
+         x2="18"
+         y2="167.42665"
+         id="bs-wire-bot-v"
+         style="stroke-width:2.02315;stroke-dasharray:none" />
+      <!-- Bottom wire: horizontal to return plane -->
+      <line
+         x1="18"
+         y1="166.57001"
+         x2="45.958176"
+         y2="166.57001"
+         id="bs-wire-bot-h"
+         style="stroke-width:2;stroke-dasharray:none" />
+    </g>
+    <!-- Battery + terminal (long thin line) -->
+    <!-- Battery - terminal (short thick line) -->
+    <!-- Switch terminals (filled dots) -->
+    <circle
+       cx="18"
+       cy="72"
+       r="2.5"
+       fill="#333333"
+       id="bs-term-top" />
+    <circle
+       cx="18"
+       cy="87"
+       r="2.5"
+       fill="#333333"
+       id="bs-term-bot" />
+    <!-- Labels -->
+    <text
+       x="2.9090915"
+       y="54.029869"
+       fill="#333333"
+       font-style="italic"
+       style="font-size:12px"
+       id="bs-label-switch">switch</text>
+    <g
+       id="g3"
+       transform="translate(0,21.04895)">
+      <line
+         x1="6"
+         y1="100"
+         x2="30"
+         y2="100"
+         stroke="#333333"
+         stroke-width="1.2"
+         id="bs-bat-plus" />
+      <line
+         x1="12"
+         y1="108"
+         x2="24"
+         y2="108"
+         stroke="#333333"
+         stroke-width="2.8"
+         id="bs-bat-minus" />
+      <text
+         x="6.0769238"
+         y="96.9021"
+         fill="#333333"
+         style="font-weight:bold;font-size:13px"
+         id="bs-label-plus">+</text>
+    </g>
+  </g>
   <!-- =============== WAVEFRONT LINE =============== -->
   <line
-     x1="476.47574"
+     x1="65.042191"
      y1="-32.097904"
-     x2="476.47574"
+     x2="65.042191"
      y2="175.76923"
      stroke="#6f4a6f"
      stroke-width="1.09125"
      stroke-dasharray="6, 4"
      id="line9" />
   <text
-     x="476.41718"
+     x="64.983627"
      y="22.832205"
      fill="#6f4a6f"
      font-style="italic"
@@ -226,7 +334,7 @@
   <!-- =============== PROPAGATING VOLTAGE STEP (above trace) =============== -->
   <g
      id="g15"
-     transform="translate(-21.580419,5.7622372)">
+     transform="translate(-18.643356,5.7622372)">
     <!-- Plot baseline / axis lines (faint) -->
     <line
        x1="60"
@@ -248,11 +356,12 @@
        id="line11" />
     <!-- Voltage step waveform: V0 left of wavefront, smooth transition at x=500, 0 right -->
     <path
-       d="m 60,-55 h 420 c 12,0 28,40 40,40 h 200"
+       d="m 60,-55 h 7.097913 c 12,0 28,40 39.999997,40 H 720"
        fill="none"
        stroke="#5a4d8c"
        stroke-width="2.2"
-       id="path11" />
+       id="path11"
+       sodipodi:nodetypes="cssc" />
     <!-- Tick labels -->
     <text
        x="52"
@@ -272,8 +381,8 @@
        id="text12">0</text>
     <!-- Plot title -->
     <text
-       x="170"
-       y="-60"
+       x="58.544151"
+       y="-61.730682"
        fill="#5a4d8c"
        font-size="12px"
        font-style="italic"
@@ -281,30 +390,25 @@
        style="font-size:14.6667px">propagating voltage step V(x, t)</text>
     <!-- "Ahead of wavefront: no fields yet" -->
     <text
-       x="555"
-       y="-38"
+       x="318.58899"
+       y="-20.347055"
        fill="#888888"
        font-size="12px"
        font-style="italic"
        id="text14"
        style="font-size:14.6667px;line-height:1"><tspan
          sodipodi:role="line"
-         id="tspan4"
-         x="555"
-         y="-38"
-         style="font-size:14.6667px;line-height:1">ahead of wavefront:</tspan><tspan
-         sodipodi:role="line"
          id="tspan5"
-         x="555"
-         y="-23.3333"
-         style="font-size:14.6667px;line-height:1">no fields yet</tspan></text>
+         x="318.58899"
+         y="-20.347055"
+         style="font-size:14.6667px;line-height:1">ahead of wavefront: no fields yet</tspan></text>
   </g>
   <!-- =============== CURRENTS =============== -->
   <!-- Forward signal current on trace (+x̂) -->
   <line
-     x1="70.409714"
+     x1="73.346779"
      y1="39.352203"
-     x2="470.11478"
+     x2="473.05185"
      y2="39.352203"
      stroke="#333333"
      stroke-width="2.4"
@@ -312,7 +416,7 @@
      id="line15"
      style="display:none" />
   <text
-     x="210.41959"
+     x="213.35664"
      y="33.286713"
      fill="#333333"
      font-style="italic"
@@ -326,9 +430,9 @@
    id="tspan1">on trace</tspan></text>
   <!-- Return current on return plane (−x̂), concentrated directly under trace -->
   <line
-     x1="470.11478"
+     x1="473.05185"
      y1="191.22122"
-     x2="70.409714"
+     x2="73.346779"
      y2="191.22122"
      stroke="#333333"
      stroke-width="2.4"
@@ -336,7 +440,7 @@
      id="line16"
      style="display:none" />
   <text
-     x="210.54546"
+     x="213.48251"
      y="207.75525"
      fill="#333333"
      font-style="italic"
@@ -353,7 +457,7 @@
      stroke-width="2"
      fill="none"
      id="g22"
-     transform="translate(-19.580419,-36.713287)">
+     transform="translate(-57.02797,-36.958042)">
     <line
        x1="110"
        y1="107"
@@ -367,28 +471,32 @@
        x2="190"
        y2="193"
        marker-end="url(#arrE)"
-       id="line19" />
+       id="line19"
+       style="display:none" />
     <line
        x1="270"
        y1="107"
        x2="270"
        y2="193"
        marker-end="url(#arrE)"
-       id="line20" />
+       id="line20"
+       style="display:none" />
     <line
        x1="350"
        y1="107"
        x2="350"
        y2="193"
        marker-end="url(#arrE)"
-       id="line21" />
+       id="line21"
+       style="display:none" />
     <line
        x1="430"
        y1="107"
        x2="430"
        y2="193"
        marker-end="url(#arrE)"
-       id="line22" />
+       id="line22"
+       style="display:none" />
     <line
        x1="495.64334"
        y1="107.48951"
@@ -396,12 +504,12 @@
        y2="193.48952"
        marker-end="url(#arrE-1)"
        id="line22-7"
-       style="marker-end:url(#arrE-1)" />
+       style="display:none;marker-end:url(#arrE-1)" />
   </g>
   <!-- E label -->
   <text
-     x="69.020973"
-     y="116.28672"
+     x="55.804192"
+     y="138.06993"
      fill="#c0392b"
      font-weight="bold"
      font-style="italic"
@@ -410,7 +518,7 @@
   <!-- =============== B FIELD — CONDUCTION (⊗ into page, established region) =============== -->
   <g
      id="g33"
-     transform="translate(-19.580419,-36.713287)"
+     transform="translate(-16.643356,-36.713287)"
      style="display:none">
     <!-- Bulk ⊗ symbols in dielectric gap -->
     <g
@@ -495,7 +603,7 @@
   </g>
   <!-- Leader line and label for B-conduction -->
   <text
-     x="178.46854"
+     x="181.40559"
      y="135.04895"
      fill="#2471a3"
      font-weight="bold"
@@ -505,11 +613,11 @@
      style="font-size:14.6667px;line-height:1;display:none"><tspan
        sodipodi:role="line"
        id="tspan62"
-       x="-1.4685314"
+       x="2.9370627"
        y="0"
        style="font-size:14.6667px;line-height:1">B (from</tspan><tspan
        sodipodi:role="line"
-       x="-1.4685314"
+       x="2.9370627"
        y="0"
        style="font-size:14.6667px;line-height:1"
        id="tspan64">I<tspan
@@ -523,19 +631,19 @@
   <!-- Horizontal dashed red arrow — the varying-E region at the wavefront advances
        with the wave in +x̂ (the wave sweeps the E-field on to the right). -->
   <line
-     x1="464.84161"
+     x1="53.40807"
      y1="112.67126"
-     x2="495.4201"
+     x2="80.739464"
      y2="112.67126"
      stroke="#922b21"
-     stroke-width="1.71844"
+     stroke-width="1.62464"
      stroke-dasharray="6, 3"
      marker-end="url(#arrEdash)"
      id="line34" />
   <!-- ∂E/∂t label -->
   <text
-     x="504.75522"
-     y="116.13986"
+     x="82.307686"
+     y="106.34966"
      fill="#922b21"
      font-style="italic"
      font-size="13px"
@@ -543,13 +651,13 @@
      style="font-size:14.6667px"><tspan
        sodipodi:role="line"
        id="tspan7"
-       x="504.75522"
-       y="116.13986"
+       x="82.307686"
+       y="106.34966"
        style="font-size:14.6667px">∂E/∂t at wavefront</tspan></text>
   <!-- =============== B FIELD — DISPLACEMENT (dashed ⊗ at wavefront) =============== -->
   <g
      id="g38"
-     transform="translate(6.725931,-33.251925)"
+     transform="translate(9.6629938,-33.251925)"
      style="display:none">
     <g
        stroke="#5b8cb0"
@@ -584,7 +692,7 @@
   </g>
   <!-- Leader + label for B-displacement -->
   <text
-     x="367.02795"
+     x="369.96503"
      y="135.87842"
      fill="#5b8cb0"
      font-style="italic"
@@ -593,18 +701,18 @@
      style="font-size:14.6667px;line-height:1;display:none"><tspan
        sodipodi:role="line"
        id="tspan59"
-       x="-1.4685314"
+       x="2.9370627"
        y="0"
        style="font-size:14.6667px;line-height:1">B (from ∂E/∂t,</tspan><tspan
        sodipodi:role="line"
        id="tspan60"
-       x="-1.4685314"
+       x="2.9370627"
        y="0"
        style="font-size:14.6667px;line-height:1">displacement)</tspan></text>
   <line
-     x1="453.76465"
+     x1="456.70172"
      y1="131.53777"
-     x2="469.19522"
+     x2="472.13229"
      y2="121.39123"
      stroke="#5b8cb0"
      stroke-width="0.917625"
@@ -616,17 +724,17 @@
      stroke-width="1.7"
      fill="none"
      id="g43"
-     transform="matrix(0.68762638,0,0,1.0044341,120.12515,-36.168169)" />
+     transform="matrix(0.68762638,0,0,1.0044341,123.06221,-36.168169)" />
   <!-- Fringe label with leader -->
   <!-- =============== AXES =============== -->
   <!-- =============== LEGEND =============== -->
   <g
-     transform="translate(83.846153,295.1049)"
+     transform="translate(86.783216,295.1049)"
      id="g56">
     <!-- E field -->
     <!-- ∂E/∂t -->
     <g
-       id="g1"
+       id="g2"
        transform="translate(94.475522)">
       <rect
          x="228.94684"
@@ -773,7 +881,7 @@
      stroke="#333333"
      fill="#333333"
      id="g49"
-     transform="translate(-11.353,-65.48489)">
+     transform="translate(83.829354,-44.633607)">
     <!-- x axis: right -->
     <line
        x1="29.51049"

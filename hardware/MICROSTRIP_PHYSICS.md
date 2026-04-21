@@ -127,6 +127,15 @@ where $\mathbf E$ and $\mathbf B$ are the electric and magnetic field vectors at
 
 Consider a **signal trace running above a ground return plane**, separated by a thin dielectric — the basic microstrip geometry of every PCB. For simplicity, this section treats the dielectric as the only medium between the conductors, ignoring the fringing fields that extend through the air above the trace.
 
+The 3D Cartesian coordinate system ($x,y,z$) aligns with the structure's geometry to define propagation, width and height:
+- **$x$-axis:** the direction along which the signal propagates, corresponding to direction of the copper strip (trace).
+- **$y$-axis:** is parallel to the PCB surface and perpendicular to propagation, corresponding to the width of the microstrip.
+- **$z$-axis:** is perpendicular to the return plane, representing the thickness of the dielectric.
+
+Changing in time vs. changing in space. These two phrases carry the whole argument, so it is worth pausing on them.
+- **Changing in time** ($\partial / \partial t$) (=temporal variation) — stand still at one point and watch the field rise, fall, or oscillate as the clock ticks. Units: [field] per second.
+- **Changing in space** ($\nabla\times$) (=spatial variation) — freeze time and walk to a neighboring point; ask how the value here differs from the value just over there. Units: [field] per meter.
+
 In the source-free dielectric region ($\rho = 0, \mathbf J = \mathbf 0$), the fields evolve as shown in the drawing below.
 
 <figure>
@@ -136,30 +145,30 @@ In the source-free dielectric region ($\rho = 0, \mathbf J = \mathbf 0$), the fi
   </center>
 </figure>
 
-The 3D Cartesian coordinate system ($x,y,z$) aligns with the structure's geometry to define propagation, width and height:
-- **$x$-axis:** the direction along which the signal propagates, corresponding to direction of the copper strip (trace).
-- **$y$-axis:** is parallel to the PCB surface and perpendicular to propagation, corresponding to the width of the microstrip.
-- **$z$-axis:** is perpendicular to the return plane, representing the thickness of the dielectric.
+When a **voltage step** is applied at the left end, the following chain of events unfolds:
 
-When a **voltage step** is applied at one end, the following chain of events unfolds:
-
-1. The sudden voltage change creates an **electric field** $\mathbf{E}$ between trace and return plane, pointing vertically (from trace down to return plane). This electric field exists only near the source end of the microstrip. $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. This field cannot remain localized. 
+1. The sudden voltage change creates an **electric field** $\mathbf{E}$ between the trace and the return plane, pointing vertically (from trace down to return plane). $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. Initially, this electric field exists only near the source end of the microstrip, but it cannot remain localized.
 <br />
 
-2. The moment $\mathbf E$ appears, it is rising from zero — i.e. **changing in time**. Since the dielectric carries no conduction current ($\mathbf J = \mathbf 0$), Ampère-Maxwell's Law reduces to the displacement-current term — a time-changing electric field $\mathbf E$ (RHS) **forces the magnetic field $\mathbf B$ to vary spatially** (LHS).
+2. The moment the $\mathbf E$-field appears, it is rising from zero → **changing in time**. According to Ampère-Maxwell's Law, a time-changing electric field $\mathbf E$ (right hand side) **forces the magnetic field $\mathbf B$ to vary spatially** (LHS).
 <br />
 
-3. The $\mathbf B$ field created in step 2 is also rising from zero — i.e. **changing in time** (right side). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (LHS) — extending $\mathbf E$ slightly ahead of where it began.
+3. The $\mathbf B$-field created in step 2 is also rising from zero → **changing in time** (RHS). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (LHS) — extending $\mathbf E$ slightly ahead of where it began.
 
 The electric field $\mathbf E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wave front advancing.
 
-**Changing in time vs. changing in space.** These two phrases carry the whole argument, so it is worth pausing on them.
-- *Changing in time* ($\partial / \partial t$) — stand still at one point and watch the field rise, fall, or oscillate as the clock ticks. Units: [field] per second.
-- *Changing in space* ($\nabla\times$) — freeze time and walk to a neighboring point; ask how the value here differs from the value just over there. Units: [field] per meter.
+In the source-free dielectric, the two laws simplify to:
 
-Maxwell's curl equations link the two: a time change *here* forces a spatial difference *here*, which means the neighboring point has a different value, which forces *it* to change in time, and so on. A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the coupling — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*.
+$$
+  \begin{align}
+    \nabla \times \mathbf{B} &= \color{red}\cancel{\color{black}\mu \, \mathbf{J}} \color{black} + \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
+    \tag{\text{source-free Ampère-Maxwell}} \\
+    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
+    \tag{\text{Faraday}}
+  \end{align}
+$$
 
-**To summarize:** once the electric field appears, a magnetic field arises alongside it. That changing magnetic field extends the electric field slightly ahead, which in turn extends the magnetic field further still. **Each field regenerates the other**. The wave is self-sustaining — it needs no electrons to carry it forward.
+A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the **coupling** — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*. **Each field regenerates the other**, so the wave is self-sustaining — no electrons required. The mathematics forbid a localized disturbance from remaining localized. For more details, refer to Appendix A.
 
 
 ##### In other words
@@ -191,36 +200,19 @@ And that, really, is what every trace on every PCB is doing. It's not carrying e
 </figure>
 
 
-#### Propagation
+#### Wave Propagation in Vacuum
 
-The same coupling, applied repeatedly, guarantees indefinite propagation. 
-
-As we have seen, in the source-free dielectric, the two laws simplify to:
-
-$$
-  \begin{align}
-    \nabla \times \mathbf{B} &= \mu \, \mathbf{J} +  \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
-    \tag{\text{Ampère-Maxwell}} \\
-    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
-    \tag{\text{Faraday}}
-  \end{align}
-$$
-
-These two equations **couple time variation to spatial variation** — and that coupling is what makes propagation inevitable. See Appendix A for a proof.
-
-So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
-
-No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localized disturbance from remaining localized.
+The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the source-free Ampère–Maxwell law and Gauss's law.
 
 <details>
-  <summary>Expand if you ❤️ to see the derivation of propagation speed.</summary>
+  <summary>Expand if you ❤️ to see the math.</summary>
 
   Take the curl of Faraday's law
   $$
       \nabla \times (\nabla \times \mathbf E) = -\frac{\partial}{\partial t}(\nabla \times \mathbf B)
   $$
 
-  Substitute the simplified Ampère–Maxwell into the right side
+  Substitute the source-free Ampère–Maxwell into the right side
   $$
       \nabla \times (\nabla \times \mathbf E) = -\mu\varepsilon \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
@@ -244,38 +236,40 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
 
   In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \mathbf E = 0$. The first term vanishes:
   $$
-      \nabla^2 \mathbf E = \underbrace{\mu\,\varepsilon}_{1/v^2} \frac{\partial^2 \mathbf E}{\partial t^2}
-  $$
-
-  Recognize the standard wave equation for any quantity propagating at speed $v$:
-  $$
-      \nabla^2 f = \frac{1}{v^2} \frac{\partial^2 f}{\partial t^2}
-      \tag{\text{standard wave equation}}
-  $$
-
-  Comparing the two, term by term, gives the speed of the wave propagation:
-  $$
-      \frac{1}{v^2} = \mu \varepsilon
-      \quad \Rightarrow \quad
-      v = \frac{1}{\sqrt{\mu \, \varepsilon}}
+      \nabla^2 \mathbf E = \mu\,\varepsilon_{1/v^2} \ \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 </details>
 <br />
 
-**Takeaway:** combining Faraday and Ampère-Maxwell yields the standard wave equation with speed $v$. This speed of the EM wave follows directly from the constants for permeability ($\mu$) and permittivity ($\varepsilon$).
+**Takeaway:** combining Faraday and Ampère-Maxwell yields the standard wave equation
 $$
+    \nabla^2 \mathbf E = \underbrace{\mu\,\varepsilon}_{1/v^2} \,\frac{\partial^2 \mathbf E}{\partial t^2}
+$$
+
+Recognize the standard wave equation for any quantity propagating at speed $v$:
+<div class="quote">
+
+$$
+    \nabla^2 f = \frac{1}{v^2} \ \frac{\partial^2 f}{\partial t^2}
+    \tag{\text{standard wave equation}}
+$$
+</div>
+
+Comparing the two, term by term, gives the speed $v$ of the wave propagation:
+$$
+    \frac{1}{v^2} = \mu \varepsilon
+    \quad \Rightarrow \quad
     v = \frac{1}{\sqrt{\mu \, \varepsilon}}
 $$
 
-For a vacuum, the constants $\mu = \mu_0$ and $\varepsilon = \varepsilon_0$, where $\mu_0$ and $\varepsilon_0$ follow from independent magnetic and electric experiments, respectively — neither involving light.
-
+where for vacuum, the permeability constant $\mu = \mu_0$, and the permittivity constant $\varepsilon = \varepsilon_0$. These $\mu_0$ and $\varepsilon_0$ follow from independent magnetic and electric experiments, respectively — neither involving light.
 $$
-  \left.
+  \left\{
     \begin{align*}
       \mu_0 &= 4\pi \times 10^{-7} \text{ H/m} \\
       \varepsilon_0 &= 8.854 \times 10^{-12} \text{ F/m}
     \end{align*}
-  \right\}
+  \right.
 $$
 
 Substituting the constants:
@@ -287,7 +281,9 @@ That is the speed of light $c$ — derived entirely from electric and magnetic c
 
 This was Maxwell's 1865 result. He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
 
-To find the propagation speed ($v'$) for a typical PCB dielectric glass epoxy (FR-4), we need to replace $\varepsilon$ with $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$.
+#### Wave Propagation in Dielectric
+
+To find the propagation speed ($v'$) for the typical PCB dielectric glass epoxy (FR-4), we can keep $\mu = \mu_0$, but need to set $\varepsilon$ to $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$.
 $$
     v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 4.2 \times 8.854 \times 10^{-12}}} \approx 146.3 \times 10^6 \text{ m/s}
 $$
@@ -947,7 +943,7 @@ We can do the same for the **Faraday Law**
 
 For the wavefront, at a place in between the trace and the return plane, we can apply two simplifications. First, the wave propagates in $\hat x$ and the fields are uniform in $\hat y$ and $\hat z$, so all $\partial/\partial y$ and $\partial/\partial z$ vanish. Second, the electric field points in the -$\hat z$-direction (trace to return plane), so $E_x = E_y = 0$.
 
-Expand the curl ($\nabla \times \mathbf E$) operator, and write out the matrix determinant:
+Expand the curl ($\nabla \times \mathbf E$) operator, do a Laplace expansion for the matrix determinant:
 $$
   \begin{align*}
     \nabla \times \mathbf{E} 
