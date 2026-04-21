@@ -87,7 +87,7 @@ A microstrip has **two regions**: the dielectric between the conductors, and the
 
 #### From Voltage to EM Wave
 
-> "Electromagnetic (EM) field theory, based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^BOGATIN] and Kenneth Wyatt [^WYATT].
+"Electromagnetic (EM) field theory, based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^BOGATIN] and Kenneth Wyatt [^WYATT].
 
 [^BOGATIN]: [Signal and Power Integrity, simplified 2nd (2010) - Eric Bogatin](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)
 [^WYATT]: [PCB Design for Low EMI - Kenneth Wyatt](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)
@@ -103,37 +103,43 @@ A microstrip has **two regions**: the dielectric between the conductors, and the
 
 <br />
 
-
 ##### Two of Maxwell's Equations
 
 As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell's Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free divergence constraint.
 $$  
   \begin{align}  
     \nabla \times \mathbf B &=
-    \underbrace{\cancel{\mu_0 \ \mathbf J}}_{\substack{\text{conduction} \\ \text{current}}}
+    \underbrace{\mu \ \mathbf J}_{\substack{\text{conduction} \\ \text{current}}}
     +\ 
-    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \mathbf E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
+    \underbrace{\mu\,\varepsilon\, \frac{\partial \mathbf E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
     \tag{\text{Ampère-Maxwell}} 
     \\
     \nabla \times \mathbf E &= -\frac{\partial \mathbf B}{\partial t}
     \tag{\text{Faraday}}
   \end{align}
-$$
+$$ 
 
-The **displacement current** term in the Ampère-Maxwell law is not a real current — no charge crosses the gap. A changing electric field acts as a source of magnetic field, just as a real current does. This is what allows $\mathbf{B}$ to be continuous across the copper-dielectric boundary, and it is what sustains the wave in the dielectric where $\mathbf{J} = 0$. In a material dielectric like FR-4, bound-charge polarization ($\partial \mathbf{P}/\partial t$) adds a second contribution, but the mechanism works in pure vacuum too.
+where $\mathbf E$ and $\mathbf B$ are the electric and magnetic field vectors at each point in space, $\mathbf J$ is the conduction current density, and $\mu$ and $\varepsilon$ are constants for the material. Note that the **displacement current** term in the Ampère-Maxwell law is not a real current, but a changing electric field that **acts as** a source of magnetic field, just like a real current.
+
+<br />
 
 ##### Microstrip Geometry
 
-Consider a signal trace running above a ground return plane, separated by a thin dielectric — the basic microstrip geometry of every PCB. For simplicity, this section treats the dielectric as the only medium between the conductors, ignoring the fringing fields that extend through the air above the trace. That simplification is revisited at the end of this section, where it gets a proper name.
+Consider a **signal trace running above a ground return plane**, separated by a thin dielectric — the basic microstrip geometry of every PCB. For simplicity, this section treats the dielectric as the only medium between the conductors, ignoring the fringing fields that extend through the air above the trace.
 
-In the source-free dielectric region ($\rho = 0, \mathbf J = \mathbf 0$), the fields evolve as follows.
+In the source-free dielectric region ($\rho = 0, \mathbf J = \mathbf 0$), the fields evolve as shown in the drawing below.
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 90%; height: auto;">
+  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 85%; height: auto;">
   <figcaption><i>Side view of microstrip <b>E</b> and <b>B</b> fields along the propagation direction.</i></figcaption>
   </center>
 </figure>
+
+The 3D Cartesian coordinate system ($x,y,z$) aligns with the structure's geometry to define propagation, width and height:
+- **$x$-axis:** the direction along which the signal propagates, corresponding to direction of the copper strip (trace).
+- **$y$-axis:** is parallel to the PCB surface and perpendicular to propagation, corresponding to the width of the microstrip.
+- **$z$-axis:** is perpendicular to the return plane, representing the thickness of the dielectric.
 
 When a **voltage step** is applied at one end, the following chain of events unfolds:
 
@@ -173,7 +179,7 @@ You see what's happening? The electric field made a magnetic field. The magnetic
 
 So when you flipped that switch — the light turned on because a little piece of light, essentially, rushed down the trace. Not the electrons. The field. The electrons are just sitting there wiggling; they're the audience, not the performers. The show is in the plastic, between the conductors, where the fields are doing their dance.
 
-And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of light. Isn't that something?
+And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of energy. Isn't that something?
 </div>
 
 [^LEAPFROG]: In reality the two fields coexist at every point, but the "leapfrog" picture captures how each sustains the other.
@@ -193,82 +199,21 @@ As we have seen, in the source-free dielectric, the two laws simplify to:
 
 $$
   \begin{align}
-    \nabla \times \mathbf{B} &= \mu_0\varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
+    \nabla \times \mathbf{B} &= \mu \, \mathbf{J} +  \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
     \tag{\text{Ampère-Maxwell}} \\
     \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
     \tag{\text{Faraday}}
   \end{align}
 $$
 
-These two equations **couple time variation to spatial variation** — and that coupling is what makes propagation inevitable. 
+These two equations **couple time variation to spatial variation** — and that coupling is what makes propagation inevitable. See Appendix A for a proof.
 
-<details>
-  <summary>Expand to see the ❤️ math for reducing the curl to one dimension</summary>
-
-For the wavefront, at a place in between the trace and the return plane, we can apply two simplifications. First, the wave propagates in $\hat x$ and the fields are uniform in $\hat y$ and $\hat z$, so all $\partial/\partial y$ and $\partial/\partial z$ vanish. Second, the electric field points in the $\hat z$-direction (trace to return plane), so $E_x = E_y = 0$. Under these two assumptions, the curl ($\nabla \times \mathbf E$) reduces to
-$$
-  \begin{align*}
-    \nabla \times \mathbf{E} 
-    &= -\frac{\partial \mathbf{B}}{\partial t} \\
-      \begin{vmatrix}
-        \hat x & \hat y & \hat z \\
-        \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
-        E_x & E_y & E_z
-       \end{vmatrix} &= \\
-       \hat x
-         \begin{vmatrix}
-            \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
-            E_y & E_z
-         \end{vmatrix}
-       - \hat y
-         \begin{vmatrix}
-            \frac{\partial}{\partial x} & \frac{\partial}{\partial z} \\
-            E_x & E_z
-         \end{vmatrix}
-       + \hat z
-         \begin{vmatrix}
-            \frac{\partial}{\partial x} & \frac{\partial}{\partial y} \\
-            E_x & E_y
-         \end{vmatrix}
-       &= \\
-       \left(\frac{\partial E_z}{\partial y} - \frac{\partial E_y}{\partial z}\right) \hat x
-       + \left(\frac{\partial E_z}{\partial x} - \frac{\partial E_x}{\partial z}\right) \hat y       
-       + \left(\frac{\partial E_x}{\partial y} - \frac{\partial E_y}{\partial x}\right) \hat z
-       &=
-  \end{align*}
-$$
-
-Applying both assumptions cancels every term except one:
-$$
-  \begin{align*}
-       \left(\cancel{\frac{\partial E_z}{\partial y}} - \frac{\cancel{\partial E_y}}{\partial z}\right) \hat x
-       + \left(\frac{\partial E_z}{\partial x} - \frac{\cancel{\partial E_x}}{\partial z}\right) \hat y       
-       + \left(\frac{\cancel{\partial E_x}}{\partial y} - \frac{\cancel{\partial E_y}}{\partial x}\right) \hat z
-       &= -\frac{\partial \mathbf{B}}{\partial t} \\
-      \frac{\partial E_z}{\partial x} \hat y 
-       &=
-  \end{align*}
-$$
-</details>
-<br />
-
-**Takeaway:** Writing out the curl operator ($\nabla\times$) for the $\mathbf{E}$ field proves mathematically that: it is impossible for the electric field to vary over distance without a magnetic field simultaneously varying over time.
-$$
-  \begin{align*}
-      \frac{\partial E_z}{\partial x}
-       &= -\frac{\partial B_y}{\partial t} \\
-  \end{align*}
-$$
-
-where $\hat y$ points across the trace width — the direction $\mathbf B$ curls around the conductor.
-
-So, if $\mathbf E$ is changing in time at some point, the first equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
+So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
 
 No mechanism "pushes" the wave forward. A time change here forces a spatial difference here, which means a different value there, which forces a time change there. The disturbance has no choice but to spread. The wave propagates because the mathematics forbid a localized disturbance from remaining localized.
 
-
 <details>
-  <summary>Expand if you ❤️ math and want to see the derivation of propagation speed.</summary>
+  <summary>Expand if you ❤️ to see the derivation of propagation speed.</summary>
 
   Take the curl of Faraday's law
   $$
@@ -277,7 +222,7 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
 
   Substitute the simplified Ampère–Maxwell into the right side
   $$
-      \nabla \times (\nabla \times \mathbf E) = -\mu_0\varepsilon_0 \frac{\partial^2 \mathbf E}{\partial t^2}
+      \nabla \times (\nabla \times \mathbf E) = -\mu\varepsilon \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 
   Recall the vector identity
@@ -288,18 +233,18 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
 
   Expand the left side using this vector identity
   $$
-      \nabla(\nabla \cdot \mathbf E) - \nabla^2\mathbf E = -\mu_0\varepsilon_0 \frac{\partial^2 \mathbf E}{\partial t^2}
+      \nabla(\nabla \cdot \mathbf E) - \nabla^2\mathbf E = -\mu\varepsilon \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 
   Apply Gauss's law:
   $$
-      \nabla \cdot \mathbf E = \frac{\rho}{\varepsilon_0}
+      \nabla \cdot \mathbf E = \frac{\rho}{\varepsilon}
       \tag{\text{Gauss's law}}
   $$
 
   In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \mathbf E = 0$. The first term vanishes:
   $$
-      \nabla^2 \mathbf E = \underbrace{\mu_0\,\varepsilon_0}_{1/v^2} \frac{\partial^2 \mathbf E}{\partial t^2}
+      \nabla^2 \mathbf E = \underbrace{\mu\,\varepsilon}_{1/v^2} \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 
   Recognize the standard wave equation for any quantity propagating at speed $v$:
@@ -310,19 +255,19 @@ No mechanism "pushes" the wave forward. A time change here forces a spatial diff
 
   Comparing the two, term by term, gives the speed of the wave propagation:
   $$
-      \frac{1}{v^2} = \mu_0 \varepsilon_0
+      \frac{1}{v^2} = \mu \varepsilon
       \quad \Rightarrow \quad
-      v = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}
+      v = \frac{1}{\sqrt{\mu \, \varepsilon}}
   $$
 </details>
 <br />
 
-**Takeaway:** combining Faraday and Ampère-Maxwell yields the standard wave equation with speed $v$. This speed of the EM wave follows directly from the constants for permeability ($\mu_0$) and permittivity ($\varepsilon_0$):
+**Takeaway:** combining Faraday and Ampère-Maxwell yields the standard wave equation with speed $v$. This speed of the EM wave follows directly from the constants for permeability ($\mu$) and permittivity ($\varepsilon$).
 $$
-    v = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}
+    v = \frac{1}{\sqrt{\mu \, \varepsilon}}
 $$
 
-The constants $\mu_0$ and $\varepsilon_0$ follow from independent magnetic and electric experiments, respectively — neither involving light.
+For a vacuum, the constants $\mu = \mu_0$ and $\varepsilon = \varepsilon_0$, where $\mu_0$ and $\varepsilon_0$ follow from independent magnetic and electric experiments, respectively — neither involving light.
 
 $$
   \left.
@@ -342,7 +287,7 @@ That is the speed of light $c$ — derived entirely from electric and magnetic c
 
 This was Maxwell's 1865 result. He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
 
-To find the propagation speed ($v'$) for a typical PCB dielectric glass epoxy (FR-4), we need to replace $\varepsilon_0$ with $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$.
+To find the propagation speed ($v'$) for a typical PCB dielectric glass epoxy (FR-4), we need to replace $\varepsilon$ with $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$.
 $$
     v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 4.2 \times 8.854 \times 10^{-12}}} \approx 146.3 \times 10^6 \text{ m/s}
 $$
@@ -532,9 +477,9 @@ The horizontal current $\mathbf J$ in the trace creates a $\mathbf B$ field curl
 
 $$
     \nabla \times \mathbf B =
-    \underbrace{\mu_0 \, \mathbf J}_{\substack{\text{conduction current}\\ \text{in the copper}}} 
+    \underbrace{\mu \, \mathbf J}_{\substack{\text{conduction current}\\ \text{in the copper}}} 
     \;+\;
-    \underbrace{\mu_0\,\varepsilon_0\, \frac{\partial \mathbf E}{\partial t}}_{\substack{\text{displacement current} \\ \text{in the dielectric}}}
+    \underbrace{\mu\,\varepsilon\, \frac{\partial \mathbf E}{\partial t}}_{\substack{\text{displacement current} \\ \text{in the dielectric}}}
 $$
 
 There is one continuous $\mathbf B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu_0 \mathbf J$) dominates — free electrons are moving, and their motion sustains $\mathbf B$. In the dielectric, there are no free electrons ($\mathbf J = 0$), so the displacement term takes over — the changing $\mathbf E$ field sustains $\mathbf B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\mathbf B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
@@ -551,7 +496,7 @@ That's a wonderful question. And the answer — which I think is one of the most
 
 Let me show you. Maxwell's Ampère law — the real one, with his addition — says the curl of $\mathbf B$ is two things added together:
 
-$$\nabla \times \mathbf B = \mu_0 \mathbf J + \mu_0 \varepsilon_0 \frac{\partial \mathbf E}{\partial t}$$
+$$\nabla \times \mathbf B = \mu_0 \mathbf J + \mu \varepsilon \frac{\partial \mathbf E}{\partial t}$$
 
 That first piece — $\mu_0 \mathbf J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field. Every kid who ever wrapped wire around a nail knows this.
 
@@ -628,7 +573,7 @@ There are two coupling mechanisms — capacitive and inductive — and both are 
 
 The $\mathbf E$ field from a signal trace does not terminate exclusively on its own return plane. Some field lines — especially the fringing fields at the edges of the trace — terminate on nearby conductors instead: an adjacent trace, a via, a component pad.
 
-When the aggressor trace changes voltage, its $\mathbf E$ field changes. That changing field induces a displacement current ($\varepsilon_0 \varepsilon_r \frac{\partial \mathbf E}{\partial t}$) onto the victim trace — depositing charge on it, just as it would on a capacitor plate. The victim trace sees a current spike proportional to the rate of change of the aggressor's voltage $V_a$:
+When the aggressor trace changes voltage, its $\mathbf E$ field changes. That changing field induces a displacement current ($\mu \varepsilon \frac{\partial \mathbf E}{\partial t}$) onto the victim trace — depositing charge on it, just as it would on a capacitor plate. The victim trace sees a current spike proportional to the rate of change of the aggressor's voltage $V_a$:
 $$
     I_C = C_m \ \frac{dV_a}{dt}
 $$
@@ -915,6 +860,164 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 ---
 
 
+## Appendix A: coupling of time variation and spatial variation
+
+
+<details>
+  <summary>Expand to see how the Ampère-Maxwell Law couples time (temporal) change of the electric field to spatial variation of the magnetic field.</summary>
+
+For the wavefront, at a place in between the trace and the return plane, we can apply three simplifications. First, the wave propagates in $\hat x$ and the magnetic field is uniform in $\hat y$ and $\hat z$, so all $\partial/\partial y$ and $\partial/\partial z$ vanish. Second, the magnetic field points in the $\hat y$-direction (into the paper), so $B_x = B_z = 0$. Third, there is no current $\mathbf{J}$ in the dielectric. 
+
+Since there is no current $\mathbf{J}$ in the dielectric, the law simplifies to 
+$$
+    \nabla \times \mathbf{B} 
+    = \mu\, \varepsilon \frac{\partial \mathbf{E}}{\partial t} \\
+$$
+
+Expand the curl ($\nabla \times \mathbf B$) operator, and write out the matrix determinant:
+$$
+  \begin{align*}
+    \nabla \times \mathbf{B} 
+    &= \mu\, \varepsilon \frac{\partial \mathbf{E}}{\partial t} \\
+    \begin{vmatrix}
+      \hat x & \hat y & \hat z \\
+      \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+      B_x & B_y & B_z
+    \end{vmatrix} 
+    &= \\
+    \hat x
+      \begin{vmatrix}
+        \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+        B_y & B_z
+      \end{vmatrix}
+    - \hat y
+      \begin{vmatrix}
+        \frac{\partial}{\partial x} & \frac{\partial}{\partial z} \\
+        B_x & B_z
+      \end{vmatrix}
+    + \hat z
+      \begin{vmatrix}
+        \frac{\partial}{\partial x} & \frac{\partial}{\partial y} \\
+        B_x & B_y
+      \end{vmatrix}
+    &= \\
+    \left(\frac{\partial B_z}{\partial y} - \frac{\partial B_y}{\partial z}\right) \hat x
+    - \left(\frac{\partial B_z}{\partial x} - \frac{\partial B_x}{\partial z}\right) \hat y       
+    + \left(\frac{\partial B_y}{\partial x} - \frac{\partial B_x}{\partial y}\right) \hat z
+    &=
+  \end{align*}
+$$
+
+From the assumptions, we know that the field strength only changes as the wave travels down the line → $\frac{\partial}{\partial y} = \frac{\partial}{\partial z} = 0$, and the magnetic field only exists in the $y$-direction → $B_x = B_z = 0$. Applying these assumptions cancels every term except one:
+$$
+  \begin{align*}
+    \left(\bcancel{\frac{\partial B_z}{\partial y}} - \bcancel{\frac{\partial B_y}{\partial z}}\right) \hat x
+    - \left(\frac{\cancel{\partial B_z}}{\partial x} - \bcancel{\frac{\partial B_x}{\partial z}}\right) \hat y       
+    + \left(\frac{\partial B_y}{\partial x} - \bcancel{\frac{\partial B_x}{\partial y}}\right) \hat z
+    &= \mu \, \varepsilon \frac{\partial \mathbf{E}}{\partial t} \\
+    \frac{\partial B_y}{\partial x} \, \hat z 
+    &= \mu \, \varepsilon \frac{\partial \mathbf{E}}{\partial t}
+  \end{align*}
+$$
+
+This implies that only the part of $\mathbf{E}$ in the $z$-direction is relevant.
+$$
+  \begin{align*}
+    \frac{\partial B_y}{\partial x}
+    &= \mu \, \varepsilon \frac{\partial E_z}{\partial t} \\
+  \end{align*}
+$$
+</details>
+<br />
+
+**Takeaway:** the range of change in the electric field **in time** ($t$) is exactly balanced by the rate of change of the magnetic field **in space** ($x$)
+
+$$
+  \frac{\partial B_y}{\partial x} = \mu\, \varepsilon\, \frac{\partial E_z}{\partial t} \\
+$$
+
+So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
+
+---
+
+We can do the same for the **Faraday Law**
+
+<details>
+  <summary>Expand to see how the Faraday's Law couples time (temporal) change of the magnetic field to spatial variation of the electric field.</summary>
+
+For the wavefront, at a place in between the trace and the return plane, we can apply two simplifications. First, the wave propagates in $\hat x$ and the fields are uniform in $\hat y$ and $\hat z$, so all $\partial/\partial y$ and $\partial/\partial z$ vanish. Second, the electric field points in the -$\hat z$-direction (trace to return plane), so $E_x = E_y = 0$.
+
+Expand the curl ($\nabla \times \mathbf E$) operator, and write out the matrix determinant:
+$$
+  \begin{align*}
+    \nabla \times \mathbf{E} 
+    &= -\frac{\partial \mathbf{B}}{\partial t} \\
+      \begin{vmatrix}
+        \hat x & \hat y & \hat z \\
+        \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+        E_x & E_y & E_z
+       \end{vmatrix} &= \\
+       \hat x
+         \begin{vmatrix}
+            \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+            E_y & E_z
+         \end{vmatrix}
+       - \hat y
+         \begin{vmatrix}
+            \frac{\partial}{\partial x} & \frac{\partial}{\partial z} \\
+            E_x & E_z
+         \end{vmatrix}
+       + \hat z
+         \begin{vmatrix}
+            \frac{\partial}{\partial x} & \frac{\partial}{\partial y} \\
+            E_x & E_y
+         \end{vmatrix}
+       &= \\
+       \left(\frac{\partial E_z}{\partial y} - \frac{\partial E_y}{\partial z}\right) \hat x
+       - \left(\frac{\partial E_z}{\partial x} - \frac{\partial E_x}{\partial z}\right) \hat y       
+       + \left(\frac{\partial E_y}{\partial x} - \frac{\partial E_x}{\partial y}\right) \hat z
+       &=
+  \end{align*}
+$$
+
+Applying both assumptions cancels every term except one:
+$$
+  \begin{align*}
+       \left(\bcancel{\frac{\partial E_z}{\partial y}} - \bcancel{\frac{\partial E_y}{\partial z}}\right) \hat x
+       - \left(\frac{\partial E_z}{\partial x} - \bcancel{\frac{\partial E_x}{\partial z}}\right) \hat y       
+       + \left(\frac{\partial \cancel{E_y}}{\partial x} - \bcancel{\frac{\partial E_x}{\partial y}}\right) \hat z
+       &= -\frac{\partial \mathbf{B}}{\partial t} \\
+      - \frac{\partial E_z}{\partial x} \hat y 
+       &= -\frac{\partial \mathbf{B}}{\partial t}
+  \end{align*}
+$$
+
+This implies that only the part of $\mathbf{B}$ in the $y$-direction is relevant.
+$$
+  \begin{align*}
+    -\frac{\partial E_z}{\partial x}
+    &= -\frac{\partial B_y}{\partial t} \\
+  \end{align*}
+$$
+
+
+</details>
+<br />
+
+**Takeaway:** the range of change in the electric field **in space** ($x$) is exactly balanced by the rate of change of the magnetic field **in time** ($t$)
+$$
+  \begin{align*}
+      -\frac{\partial E_z}{\partial x}
+       &= -\frac{\partial B_y}{\partial t} \\
+  \end{align*}
+$$
+
+where $\hat y$ points across the trace width — the direction $\mathbf B$ curls around the conductor. Remember the direction of $\mathbf{E}$ was opposite the $z$-axis, so $E_z \lt 0$.
+
+
+---
+
+
 ## References
 
 [1] Dipl-Ing J.J. Senff at HTS Dordrecht, Transmission Line lectures, 1984.
@@ -922,3 +1025,7 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 [3] Ralph Morrison, Grounding and Shielding – Circuits and Interference, Wiley, 2016.
 [4] Ralph Morrison, Fast Circuit Boards – Energy Management, Wiley, 2018.
 [5] Eric Bogatin, Signal Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
+
+
+---
+
