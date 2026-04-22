@@ -378,8 +378,8 @@ And here's the whole point: because the field can't get into the copper, it has 
 **At the wavefront**, the trace voltage drops from signal level (behind) to zero (ahead) over a short distance. That spatial gradient is a horizontal field, $E_x = -\partial V/\partial x$, pointing in the direction of propagation (high V → low V). The force on an electron is again $-e\, E_x$, so electrons are pushed backward, opposite to the wavefront's motion, toward the source.
 
 The electrons in *both* conductors are pushed *sideways*:
-- *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the $+$ terminal of the source;
-- *in the return plane*, they are attracted, in the same direction as the wavefront's motion, away from the $-$ terminal of the source.
+- *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the '$+$' terminal of the source;
+- *in the return plane*, they are attracted, in the same direction as the wavefront's motion, away from the '$-$' terminal of the source.
 
 <figure>
   <center>
@@ -388,7 +388,7 @@ The electrons in *both* conductors are pushed *sideways*:
   </center>
 </figure>
 
-This drift is the transmission-line current. And it is also how the positive surface charge on the bottom of the trace gets established. Electrons don't climb upward within the section — they drain out horizontally along the trace toward the source, leaving the bottom of that section positively charged. The same current then accumulates as negative charge on the top of the return plane further back.
+This drift is the transmission-line **current**. And it is also how the positive surface charge on the bottom of the trace gets established. Electrons drain out of the section horizontally toward the source, leaving the bottom of that section positively charged. The same current then accumulates as negative charge on the top of the return plane further back.
 
 ##### In other words
 
@@ -396,7 +396,7 @@ This drift is the transmission-line current. And it is also how the positive sur
 
 Now, what about the along-field — the dotted horizontal arrow? Where does that come from?
 
-It comes from the wave *going somewhere*. The voltage on the trace right here is at signal level. But a millimeter ahead, the wave hasn't arrived yet — the voltage is still zero. So you've got a voltage that changes from one place to another. And wherever the voltage changes from place to place, there's an electric field pointing from high to low. That's the along-field. It's a spatial gradient — $E_x = -\partial V / \partial x$ — and right at the wavefront, where the voltage drops from full to zero in a very short distance, it's steep.
+It comes from the wave *going somewhere*. The voltage on the trace right here is at signal level. But a millimeter ahead, the wave hasn't arrived yet — the voltage is still zero. So you've got a voltage that changes from one place to another. And wherever the voltage changes from place to place, there's an electric field pointing from high to low. That's the along-field. It's a spatial gradient, $E_x = -\partial V / \partial x$. Right at the wavefront, where the voltage drops from full to zero in a very short distance, it's steep.
 
 The free electrons in the copper feel that field and start to drift. Very slowly, mind you — but they all drift together, and that is what we call a **current**. The current didn't cause anything. The field caused the current. The field shows up first, the electrons react. 
 </div>
@@ -411,7 +411,7 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 4. That positive surface charge generates its own field that cancels $E_z$ inside the metal.
 5. The wavefront advances one step further; the process repeats in the next section.
 
-The field shows up first, the electrons react. Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net motion. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
+Once more, **the field shows up first, the electrons react**. Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net motion. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
 <br />
 
 #### Horizontal Component $E_x$

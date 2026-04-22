@@ -30,7 +30,7 @@
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g3-9">
+     inkscape:current-layer="g36">
     <inkscape:page
        x="0"
        y="0"
@@ -937,7 +937,7 @@
     </g>
     <g
        id="g35-82"
-       transform="translate(74.803175,1.154834)">
+       transform="translate(70.393487,1.154834)">
       <line
          x1="420"
          y1="370"
@@ -1058,7 +1058,7 @@
     <!-- row near y=370 (just above interface) -->
     <g
        id="g32-1"
-       transform="translate(-64.490315,5.7580638)">
+       transform="translate(-51.652966,5.7580638)">
       <line
          x1="135"
          y1="368"
@@ -2069,89 +2069,6 @@
        fill="none"
        id="g25">
       <g
-         id="g5"
-         transform="translate(33.360547)">
-        <circle
-           cx="150"
-           cy="150"
-           r="7"
-           id="circle22" />
-        <line
-           x1="145"
-           y1="145"
-           x2="155"
-           y2="155"
-           id="line25-3" />
-        <line
-           x1="155"
-           y1="145"
-           x2="145"
-           y2="155"
-           id="line26-9" />
-      </g>
-      <g
-         id="g3">
-        <circle
-           cx="310"
-           cy="150"
-           r="7"
-           id="circle24" />
-        <line
-           x1="305"
-           y1="145"
-           x2="315"
-           y2="155"
-           id="line29" />
-        <line
-           x1="315"
-           y1="145"
-           x2="305"
-           y2="155"
-           id="line30" />
-      </g>
-      <g
-         id="g3-0"
-         transform="translate(121.62382,-0.04900649)">
-        <circle
-           cx="310"
-           cy="150"
-           r="7"
-           id="circle24-2" />
-        <line
-           x1="305"
-           y1="145"
-           x2="315"
-           y2="155"
-           id="line29-8" />
-        <line
-           x1="315"
-           y1="145"
-           x2="305"
-           y2="155"
-           id="line30-6" />
-      </g>
-      <g
-         id="g3-0-2"
-         transform="translate(135.59907,0.09263845)">
-        <circle
-           cx="310"
-           cy="150"
-           r="7"
-           id="circle24-2-4" />
-        <line
-           x1="305"
-           y1="145"
-           x2="315"
-           y2="155"
-           id="line29-8-8" />
-        <line
-           x1="315"
-           y1="145"
-           x2="305"
-           y2="155"
-           id="line30-6-6" />
-      </g>
-      <g
          id="g-battery-switch"
          transform="matrix(1.4394595,0,0,1.4702351,36.522123,-15.002951)">
         <!-- Wires -->
@@ -2250,20 +2167,108 @@
       </g>
     </g>
   </g>
-  <text
-     x="197.75598"
-     y="446.09476"
-     fill="#2471a3"
-     font-weight="bold"
-     font-style="italic"
-     font-size="13px"
-     id="text34-8"
-     style="font-size:17.9328px;line-height:1;stroke-width:1.22269"><tspan
-       sodipodi:role="line"
+  <g
+     id="g2"
+     inkscape:label="B"
+     style="display:none">
+    <g
+       id="g5"
+       transform="matrix(1.2226901,0,0,1.2226901,-6.7716135,224.21524)">
+      <circle
+         cx="150"
+         cy="150"
+         r="7"
+         id="circle22" />
+      <line
+         x1="145"
+         y1="145"
+         x2="155"
+         y2="155"
+         id="line25-3" />
+      <line
+         x1="155"
+         y1="145"
+         x2="145"
+         y2="155"
+         id="line26-9" />
+    </g>
+    <g
+       id="g3"
+       transform="matrix(1.2226901,0,0,1.2226901,-47.561224,224.21524)">
+      <circle
+         cx="310"
+         cy="150"
+         r="7"
+         id="circle24" />
+      <line
+         x1="305"
+         y1="145"
+         x2="315"
+         y2="155"
+         id="line29" />
+      <line
+         x1="315"
+         y1="145"
+         x2="305"
+         y2="155"
+         id="line30" />
+    </g>
+    <g
+       id="g3-0"
+       transform="matrix(1.2226901,0,0,1.2226901,101.14702,224.15532)">
+      <circle
+         cx="310"
+         cy="150"
+         r="7"
+         id="circle24-2" />
+      <line
+         x1="305"
+         y1="145"
+         x2="315"
+         y2="155"
+         id="line29-8" />
+      <line
+         x1="315"
+         y1="145"
+         x2="305"
+         y2="155"
+         id="line30-6" />
+    </g>
+    <g
+       id="g3-0-2"
+       transform="matrix(1.2226901,0,0,1.2226901,118.23442,224.32851)">
+      <circle
+         cx="310"
+         cy="150"
+         r="7"
+         id="circle24-2-4" />
+      <line
+         x1="305"
+         y1="145"
+         x2="315"
+         y2="155"
+         id="line29-8-8" />
+      <line
+         x1="315"
+         y1="145"
+         x2="305"
+         y2="155"
+         id="line30-6-6" />
+    </g>
+    <text
        x="197.75598"
        y="446.09476"
-       style="font-size:17.9328px;line-height:1;stroke-width:1.22269"
-       id="tspan64">B <tspan
+       fill="#2471a3"
+       font-weight="bold"
+       font-style="italic"
+       font-size="13px"
+       id="text34-8"
+       style="font-size:17.9328px;line-height:1;stroke-width:1.22269"><tspan
+         sodipodi:role="line"
+         x="197.75598"
+         y="446.09476"
+         style="font-size:17.9328px;line-height:1;stroke-width:1.22269"
+         id="tspan64">B <tspan
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Italic'"
    id="tspan45">(from J</tspan><tspan
    font-size="10px"
@@ -2276,22 +2281,23 @@
    id="tspan67">ret</tspan><tspan
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Italic'"
    id="tspan47">)</tspan></tspan></text>
-  <text
-     x="412.25824"
-     y="445.88547"
-     fill="#2471a3"
-     font-weight="bold"
-     font-style="italic"
-     font-size="13px"
-     id="text34-8-1"
-     style="font-size:17.9328px;line-height:1;stroke-width:1.22269"><tspan
-       sodipodi:role="line"
+    <text
        x="412.25824"
        y="445.88547"
-       style="font-size:17.9328px;line-height:1;stroke-width:1.22269"
-       id="tspan64-3">B <tspan
+       fill="#2471a3"
+       font-weight="bold"
+       font-style="italic"
+       font-size="13px"
+       id="text34-8-1"
+       style="font-size:17.9328px;line-height:1;stroke-width:1.22269"><tspan
+         sodipodi:role="line"
+         x="412.25824"
+         y="445.88547"
+         style="font-size:17.9328px;line-height:1;stroke-width:1.22269"
+         id="tspan64-3">B <tspan
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Italic'"
    id="tspan48">(from ∂E/∂t)</tspan></tspan></text>
+  </g>
   <!-- =============== ∂E/∂t GRAPH =============== -->
   <g
      id="g-dEdt"
