@@ -342,7 +342,7 @@ The following subsections describe each component in detail, starting with the v
 
 As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The electrons in the conductor feels a force $\mathbf F = -e\mathbf\, E_z$, that is upward (opposite to $E_z$). 
 
-The electrons in *both* conductors are pushed *upward*:
+So, the electrons in both conductors are pushed *upward*:
 - *in the trace*, they move away from the dielectric-facing surface, leaving it positively charged;
 - *in the return plane*, they move toward the dielectric-facing surface, making it negatively charged.
 
@@ -353,7 +353,7 @@ The electrons in *both* conductors are pushed *upward*:
   </center>
 </figure>
 
-The local redistribution of charge caused by $E_z$ charges the distributed capacitance of the line. This charge builds its own upward-pointing electric field inside the metal, which grows until it exactly cancels the incoming $E_z$ — driving the net field $\mathbf E$ inside the copper to zero. Because the field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave in the dielectric**. 
+The local redistribution of electrons charges the distributed capacitance of the line. This charge builds its own upward-pointing electric field inside the metal, which grows until it exactly cancels the incoming $E'_z$ — driving the net vertical field inside the copper to zero. Because the electric field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors. This **confines the wave to the dielectric**. 
 
 
 ##### In other words
@@ -368,14 +368,14 @@ In the trace, they move up, away from the bottom. Electrons leave, positive ions
 
 Now here's the good part. Those two sheets of charge have their own field, pointing the *other way*. Inside the copper, two fields are fighting: the wave pushing down, the surface charges pushing up. The electrons keep rearranging until those fields *exactly cancel* — and the field inside the metal goes to zero.
 
-And here's the whole point: because the field can't get into the copper, it has nowhere to go but to **stay between the two conductors**. The electrons have built a cage for the wave. Without them, the field would spill into space and radiate away. The wave says "up!" — the electrons in the copper go up — and by going up they build the very walls that keep the wave on in the plastic.
+And here's the whole point: because the field can't get into the copper, it has nowhere to go but to **stay between the two conductors**. The electrons have built a cage for the wave.
 </div>
 <br />
 
 
 #### Horizontal Spatial Gradient
 
-**At the wavefront**, the trace voltage drops from signal level (behind) to zero (ahead) over a short distance. That spatial gradient is a horizontal field, $E_x = -\partial V/\partial x$, pointing in the direction of propagation (high V → low V). The force on an electron is again $-e E_x$, so electrons are pushed backward, opposite to the wavefront's motion, toward the source.
+**At the wavefront**, the trace voltage drops from signal level (behind) to zero (ahead) over a short distance. That spatial gradient is a horizontal field, $E_x = -\partial V/\partial x$, pointing in the direction of propagation (high V → low V). The force on an electron is again $-e\, E_x$, so electrons are pushed backward, opposite to the wavefront's motion, toward the source.
 
 The electrons in *both* conductors are pushed *sideways*:
 - *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the $+$ terminal of the source;
