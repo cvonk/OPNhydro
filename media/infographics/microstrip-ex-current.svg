@@ -30,7 +30,7 @@
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g37">
+     inkscape:current-layer="g25">
     <inkscape:page
        x="0"
        y="0"
@@ -2150,27 +2150,6 @@
            x2="305"
            y2="155"
            id="line30-6-6" />
-      </g>
-      <g
-         id="g3-0-0"
-         transform="translate(106.84264,0.48558289)">
-        <circle
-           cx="310"
-           cy="150"
-           r="7"
-           id="circle24-2-9" />
-        <line
-           x1="305"
-           y1="145"
-           x2="315"
-           y2="155"
-           id="line29-8-0" />
-        <line
-           x1="315"
-           y1="145"
-           x2="305"
-           y2="155"
-           id="line30-6-0" />
       </g>
     </g>
   </g>

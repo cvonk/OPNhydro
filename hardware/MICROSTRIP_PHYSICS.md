@@ -308,7 +308,7 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 ### 1.2. Conductors as Waveguides
 
-§1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the copper, there are free electrons, and they are not passive bystanders.
+§1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the copper, there are **free electrons**, and they are not passive bystanders.
 
 #### Components of the Electric Field
 
@@ -330,23 +330,21 @@ The **free electrons** in the copper respond to each component differently:
 
 - **Vertical component $E_z$** (dominant) — confines the wave to the dielectric by driving surface charges that cancel the field inside the metal.
 
-- **Horizontal component $E_x$** — arises from two distinct causes depending on where along the line you look:
-   - **At the wavefront** (strong) — the voltage transitions from signal level to zero over a short distance, producing a steep spatial gradient ($E_x = -\partial V/\partial x$). This initiates the current.
-   - **Behind the wavefront** (small) — the finite resistance of the copper causes a gradual voltage drop with distance, producing a gentler $E_x$ that sustains the current against resistive drag.
+- **Horizontal spatial gradient $\frac{\partial E}{\partial t}$** (strong) — charges the capacitance of the transmission line and initiates current.
 
-The following subsections unpack each component in detail, starting with the vertical.
+- **Horizontal component $E_x$** (small) — sustains the current against resistive drag.
+
+The following subsections describe each component in detail, starting with the vertical.
 <br />
 
 
 #### Vertical Component $E_z$
 
-As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The force on an electron is $\mathbf F = (-e)\,\mathbf E$ (where $e > 0$). With $E_z$ pointing from trace down to return plane, electrons in *both* conductors are pushed *upward*:
-- in the trace, they move away from the dielectric-facing surface, leaving it positively charged;
-- in the return plane, they move toward the dielectric-facing surface, making it negatively charged.
+As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The electrons in the conductor feels a force $\mathbf F = -e\mathbf\, E_z$, that is upward (opposite to $E_z$). 
 
-The local redistribution of charge caused by $E_z$ charges the distributed capacitance of the line.
-
-The result is a pair of opposite surface charges that act like a parallel-plate capacitor. Inside each conductor, the field from the nearby surface charge opposes the incoming $E_z$ — pointing upward in the trace (away from the positive surface) and downward in the return plane (away from the negative surface). The electrons keep moving until their self-generated field exactly cancels the incoming field, driving the net $\mathbf E$ inside the metal to zero.
+The electrons in *both* conductors are pushed *upward*:
+- *in the trace*, they move away from the dielectric-facing surface, leaving it positively charged;
+- *in the return plane*, they move toward the dielectric-facing surface, making it negatively charged.
 
 <figure>
   <center>
@@ -355,32 +353,33 @@ The result is a pair of opposite surface charges that act like a parallel-plate 
   </center>
 </figure>
 
-The cancellation happens almost instantly. What little field penetrates the metal decays within one skin depth $\delta = \sqrt{2/(\omega \mu \sigma)}$ (~66 µm at 1 MHz, ~2 µm at 1 GHz). 
+The local redistribution of charge caused by $E_z$ charges the distributed capacitance of the line. This charge builds its own upward-pointing electric field inside the metal, which grows until it exactly cancels the incoming $E_z$ — driving the net field $\mathbf E$ inside the copper to zero. Because the field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave in the dielectric**. 
 
-Because the field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors. This is what **confines the wave**: without the electron response, the field would radiate away instead of propagating along the line.
 
 ##### In other words
 
 <div class="quote">
 
-Here's what the down-field does — and I think this is the most important thing happening on the whole PCB.
+I want to tell you what the down-field does, because I think this is the most beautiful thing happening on the whole PCB.
 
-The wave comes along, and it's got this big electric field pointing from the trace down to the return plane. Now, inside the copper there are free electrons — trillions of them, just sitting there. And that field grabs them. In the trace, it yanks them *upward*, away from the bottom surface. In the return plane, same thing — it shoves them *up* toward the top surface. So now you've got a deficit of electrons on the bottom of the trace — that's a positive surface charge — and a pileup of electrons on the top of the return plane — that's a negative surface charge. You've made a little capacitor, right there, between the two conductors.
+The wave comes along with an electric field pointing from the trace down to the return plane. Now, what's an electric field? It's a rule that says how hard an electron gets pushed, and which way. The field points down, electrons are negative, so every electron in both conductors suddenly gets shoved *up*.
 
-But here's the thing. Those piled-up charges have their own electric field. And it points the *other way* — from the positive surface up toward the negative surface. So inside the copper, you've now got two fields fighting: the incoming field from the wave, pushing down, and the self-field from the surface charges, pushing up. And the electrons keep rearranging themselves until those two fields *exactly cancel*. The net field inside the metal goes to zero.
+In the trace, they move up, away from the bottom. Electrons leave, positive ions stay — so the bottom of the trace becomes a positively charged surface. In the return plane, they pile up on top — a negatively charged surface. You've made a capacitor, right there, on the fly.
 
-How far does the incoming field get before the electrons shut it down? Almost nowhere. At a gigahertz, the field penetrates about 2 microns — two millionths of a meter — before the electrons have killed it. That's the skin depth. The copper in a PCB trace is tens of microns thick. The field doesn't stand a chance.
+Now here's the good part. Those two sheets of charge have their own field, pointing the *other way*. Inside the copper, two fields are fighting: the wave pushing down, the surface charges pushing up. The electrons keep rearranging until those fields *exactly cancel* — and the field inside the metal goes to zero.
+
+And here's the whole point: because the field can't get into the copper, it has nowhere to go but to **stay between the two conductors**. The electrons have built a cage for the wave. Without them, the field would spill into space and radiate away. The wave says "up!" — the electrons in the copper go up — and by going up they build the very walls that keep the wave on in the plastic.
 </div>
 <br />
 
+
 #### Horizontal Spatial Gradient
 
-**At the wavefront**, the voltage rises from zero to signal level over a short distance (as seen at a fixed point when the wave arrives), while a little further ahead it is still zero. This steep spatial gradient is a horizontal electric field:
-$$
-    E_x = -\frac{\partial V}{\partial x}
-$$
+**At the wavefront**, the trace voltage drops from signal level (behind) to zero (ahead) over a short distance. That spatial gradient is a horizontal field, $E_x = -\partial V/\partial x$, pointing in the direction of propagation (high V → low V). The force on an electron is again $-e E_x$, so electrons are pushed backward, opposite to the wavefront's motion, toward the source.
 
-The free electrons — previously in thermal equilibrium with no net motion — feel a force $F_x = (-e) \, E_x$ and begin to move horizontally. The **current is the electrons' response to the electric field**.
+The electrons in *both* conductors are pushed *sideways*:
+- *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the $+$ terminal of the source;
+- *in the return plane*, they are attracted, in the same direction as the wavefront's motion, away from the $-$ terminal of the source.
 
 <figure>
   <center>
@@ -388,6 +387,8 @@ The free electrons — previously in thermal equilibrium with no net motion — 
   <figcaption><i>Horizontal current arising from sequential vertical charge displacement at the wavefront.</i></figcaption>
   </center>
 </figure>
+
+This drift is the transmission-line current. And it is also how the positive surface charge on the bottom of the trace gets established. Electrons don't climb upward within the section — they drain out horizontally along the trace toward the source, leaving the bottom of that section positively charged. The same current then accumulates as negative charge on the top of the return plane further back.
 
 ##### In other words
 
@@ -401,33 +402,28 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 </div>
 <br />
 
+
+#### To review (at the top trace):
+
+1. $E_z$ appears → tries to push electrons up.
+2. $E_x$ appears simultaneously → pushes electrons horizontally backward.
+3. Electrons drift backward along the trace; the section at the wavefront loses electrons → bottom of the trace becomes positive.
+4. That positive surface charge generates its own field that cancels $E_z$ inside the metal.
+5. The wavefront advances one step further; the process repeats in the next section.
+
+The field shows up first, the electrons react. Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net motion. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
+<br />
+
 #### Horizontal Component $E_x$
 
-So far we have described how $E_x$ arises at the wavefront itself. But the conductor is resistive, and that changes the picture behind the wavefront as well.
+So far we have described how $E_x$ arises at the wavefront itself. The conductor is also resistive, which produces a second, smaller $E_x$ behind the wavefront.
 
-The drifting electrons scatter off nuclei, converting drift kinetic energy to lattice vibrations (heat). This is a drag force opposing the current. If nothing compensated for this drag, the current would decay. But the current can't just decay — the wavefront is still advancing, still demanding current to charge the next section. So the system has to sustain it. Here's how:
-
-The scattering drains energy from the wave. That means the wave amplitude (voltage) drops slightly with distance along the line. A voltage that decreases with $x$ means there's a spatial gradient — the same relation as before, now in a different context:
+The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a spatial gradient
 $$
     E_x = -\frac{\partial V}{\partial x}
-$$
+$$ that re-accelerates the electrons between scattering events. $E_x$ behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no voltage drop, no $E_x$, and no loss.
 
-This $E_x$ is what re-accelerates the electrons against the drag.
-
-The resistance is the root cause. $E_x$ is the system's response to resistance — the "cost" of pushing current through a lossy conductor. On a superconducting line (no scattering), there would be no drag, no voltage drop, no $E_x$, and no loss.
-
-**Behind the wavefront**, the surface charge at any given section is already established. But current still flows through those sections — not to charge them, but to supply the wavefront that's still advancing ahead.
-
-Think about what happens at the wavefront right now, at section $x_3$:
-- $E_z$ pushes electrons upward in the trace → bottom surface becomes positive (electron deficit).
-- Those displaced electrons don't pile up at the top — they flow back through the conductor toward the source
-- That flow of electrons through all the sections behind the wavefront is $J_{fwd}$.
-
-So each already-charged section behind the wavefront is acting as a conduit. Its own surface charges are set, but current passes through it to feed the front. It's like a pipe that's already full of water — water still flows through it to supply whatever is at the end.
-
-The moment the wavefront stops advancing (reaches a matched load), the current doesn't vanish — it continues, now supplying the load instead of charging new sections.
-
-This also clarifies why "surface charge established" and "current flowing" aren't contradictory. In any DC circuit, the wire has stable surface charges (they guide the current), yet current flows through it continuously. The transmission line behind the wavefront is in exactly that state — a quasi-DC condition where the surface charges steer the current, and $E_x$ sustains it against resistive drag.
+**Why current still flows through already-charged sections.** The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and $E_x$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
 
 ##### In other words
 

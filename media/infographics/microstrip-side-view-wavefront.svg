@@ -23,14 +23,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.8890364"
-     inkscape:cx="320.0029"
+     inkscape:cx="148.14628"
      inkscape:cy="227.93067"
-     inkscape:window-width="3840"
-     inkscape:window-height="2054"
-     inkscape:window-x="-11"
-     inkscape:window-y="-11"
+     inkscape:window-width="2160"
+     inkscape:window-height="1261"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g15">
+     inkscape:current-layer="svg56">
     <inkscape:page
        x="0"
        y="0"
@@ -139,6 +139,84 @@
          d="M 0,0 10,5 0,10 Z"
          fill="#c0392b"
          id="path1-5" />
+    </marker>
+    <marker
+       id="arrE-0-0"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9" />
+    </marker>
+    <marker
+       id="arrE-0-0-82"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9-4" />
+    </marker>
+    <marker
+       id="arrE-0-0-8"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9-2" />
+    </marker>
+    <marker
+       id="arrE-0-0-8-5"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9-2-1" />
+    </marker>
+    <marker
+       id="arrE-0-0-8-1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9-2-5" />
+    </marker>
+    <marker
+       id="arrE-0-0-8-1-0"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#c0392b"
+         id="path1-9-9-2-5-9" />
     </marker>
   </defs>
   <!-- =============== GEOMETRY =============== -->
@@ -322,7 +400,8 @@
      stroke="#6f4a6f"
      stroke-width="1.09125"
      stroke-dasharray="6, 4"
-     id="line9" />
+     id="line9"
+     style="stroke:#6f4a6f;stroke-opacity:0.60000002" />
   <text
      x="64.983627"
      y="22.832205"
@@ -457,7 +536,8 @@
      stroke-width="2"
      fill="none"
      id="g22"
-     transform="translate(-57.02797,-36.958042)">
+     transform="translate(-57.02797,-36.958042)"
+     style="display:none">
     <line
        x1="110"
        y1="107"
@@ -963,5 +1043,49 @@
        fill="#555555"
        id="text49"
        style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(into page)</text>
+  </g>
+  <g
+     stroke="#c0392b"
+     stroke-width="2.4"
+     fill="none"
+     id="g24-6"
+     transform="matrix(0.70212522,0,0,1.2384775,-31.583406,-258.79875)"
+     style="stroke-width:1.24675;stroke-dasharray:none">
+    <path
+       d="m 435.60905,264.65085 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0)"
+       id="path39-8"
+       sodipodi:nodetypes="cc"
+       style="display:none;stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0)" />
+    <path
+       d="m 501.03534,264.41556 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0-82)"
+       id="path39-8-51"
+       sodipodi:nodetypes="cc"
+       style="display:none;stroke:#c0392b;stroke-width:0.81039;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-82)" />
+    <path
+       d="m 360.5227,264.71065 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0-8)"
+       id="path39-8-5"
+       sodipodi:nodetypes="cc"
+       style="display:none;stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8)" />
+    <path
+       d="m 280.23362,264.67927 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0-8-5)"
+       id="path39-8-5-1"
+       sodipodi:nodetypes="cc"
+       style="display:none;stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8-5)" />
+    <path
+       d="m 200.66829,264.5237 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0-8-1)"
+       id="path39-8-5-7"
+       sodipodi:nodetypes="cc"
+       style="display:none;stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8-1)" />
+    <path
+       d="m 120.70616,264.76472 c 4.11846,22.01147 2.3077,48.94898 -0.62993,71.95711"
+       marker-end="url(#arrE-0-0-8-1-0)"
+       id="path39-8-5-7-8"
+       sodipodi:nodetypes="cc"
+       style="stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8-1-0)" />
   </g>
 </svg>
