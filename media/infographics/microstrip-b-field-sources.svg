@@ -22,7 +22,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.3833333"
-     inkscape:cx="297.06294"
+     inkscape:cx="273.98602"
      inkscape:cy="147.06294"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
@@ -227,7 +227,7 @@
            stroke-width="0.693922"
            opacity="0.55"
            id="path11"
-           style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.6027295;stroke-dasharray:none"
+           style="stroke:#8a5522;stroke-opacity:0.5;stroke-width:0.6027295;stroke-dasharray:none"
            inkscape:label="outside-right" />
         <path
            d="m 163.74126,54.003255 c -45.22463,0 -72.89146,29.989718 -72.89146,57.301775 0,31.59631 27.66683,51.41094 72.89146,53.01753"
@@ -237,22 +237,22 @@
            opacity="0.55"
            marker-end="url(#bArrow)"
            id="path10"
-           style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.6027295;stroke-dasharray:none"
+           style="stroke:#8a5522;stroke-opacity:0.5;stroke-width:0.6027295;stroke-dasharray:none"
            inkscape:label="outside-left" />
       </g>
       <g
          id="g1"
          inkscape:label="inside"
          transform="matrix(1.3641666,0,0,1.1702521,-59.209533,-82.464812)"
-         style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.79145564;stroke-dasharray:none">
+         style="stroke:#8a5522;stroke-opacity:0.5;stroke-width:0.79145564;stroke-dasharray:none">
         <path
-           d="m 165.56311,154.68302 c 34.58354,-5.35531 58.52599,-18.74358 58.52599,-43.37799 0,-26.240997 -23.94245,-47.662223 -58.52599,-47.662223"
+           d="m 164.09701,154.68302 c 34.58354,-5.35531 58.52599,-18.74358 58.52599,-43.37799 0,-26.240997 -23.94245,-47.662223 -58.52599,-47.662223"
            fill="none"
            stroke="#7744aa"
            stroke-width="0.960824"
            stroke-dasharray="none"
            id="path9"
-           style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.79145564;stroke-dasharray:none"
+           style="stroke:#8a5522;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.5"
            inkscape:label="inside-right" />
         <path
            d="m 163.74126,63.642807 c -34.58354,0 -58.52598,21.421226 -58.52598,47.662223 0,24.63441 23.94244,38.02268 58.52598,43.37799"
@@ -262,7 +262,7 @@
            stroke-dasharray="none"
            marker-end="url(#bArrow)"
            id="path8"
-           style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.79145564;stroke-dasharray:none"
+           style="stroke:#8a5522;stroke-opacity:0.5;stroke-width:0.79145564;stroke-dasharray:none"
            inkscape:label="inside-left" />
       </g>
     </g>
@@ -274,7 +274,7 @@
          id="g2-2"
          transform="matrix(1.7913133,0,0,1.5366804,-129.15105,-122.68766)"
          inkscape:label="outside"
-         style="stroke:#0109ff;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.6">
+         style="stroke:#8a5522;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.5">
         <path
            d="m 163.74126,164.32256 c 45.22463,-1.60659 72.89146,-21.42122 72.89146,-53.01753 0,-27.312057 -27.66683,-57.301775 -72.89146,-57.301775"
            fill="none"
@@ -282,7 +282,7 @@
            stroke-width="0.693922"
            opacity="0.55"
            id="path11-4"
-           style="stroke:#0109ff;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.6"
+           style="stroke:#8a5522;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.5"
            inkscape:label="outside-right" />
         <path
            d="m 163.74126,54.003255 c -45.22463,0 -72.89146,29.989718 -72.89146,57.301775 0,31.59631 27.66683,51.41094 72.89146,53.01753"
@@ -292,14 +292,14 @@
            opacity="0.55"
            marker-end="url(#bArrow-0)"
            id="path10-5"
-           style="stroke:#0109ff;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.6;marker-end:url(#bArrow-0)"
+           style="stroke:#8a5522;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.5;marker-end:url(#bArrow-0)"
            inkscape:label="outside-left" />
       </g>
       <g
          id="g1-5"
          inkscape:label="inside"
          transform="matrix(1.3641666,0,0,1.1702521,-59.209533,-82.464812)"
-         style="stroke:#0109ff;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.6">
+         style="stroke:#8a5522;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.5">
         <path
            d="m 165.56311,154.68302 c 34.58354,-5.35531 58.52599,-18.74358 58.52599,-43.37799 0,-26.240997 -23.94245,-47.662223 -58.52599,-47.662223"
            fill="none"
@@ -307,7 +307,7 @@
            stroke-width="0.960824"
            stroke-dasharray="none"
            id="path9-1"
-           style="stroke:#0109ff;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.6"
+           style="stroke:#8a5522;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.5"
            inkscape:label="inside-right" />
         <path
            d="m 163.74126,63.642807 c -34.58354,0 -58.52598,21.421226 -58.52598,47.662223 0,24.63441 23.94244,38.02268 58.52598,43.37799"
@@ -317,7 +317,7 @@
            stroke-dasharray="none"
            marker-end="url(#bArrow-0)"
            id="path8-7"
-           style="stroke:#0109ff;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.6;marker-end:url(#bArrow-0)"
+           style="stroke:#8a5522;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.5;marker-end:url(#bArrow-0)"
            inkscape:label="inside-left" />
       </g>
     </g>
@@ -331,7 +331,8 @@
      font-weight="bold"
      fill="#7744aa"
      font-style="italic"
-     id="text11">B</text>
+     id="text11"
+     style="fill:#8a5522;fill-opacity:0.50196081">B</text>
   <!-- Conduction current J arrows in trace (into page = circle with X) -->
   <circle
      cx="128.53148"
@@ -544,7 +545,7 @@
      font-style="italic"
      font-weight="600"
      id="text28"
-     style="font-size:17.3333px">J &gt; 0 , ∂E/∂t≈ 0</text>
+     style="font-size:17.3333px;fill:#8a5522;fill-opacity:1">J &gt; 0 , ∂E/∂t≈ 0</text>
   <text
      x="488.53146"
      y="87.475525"
@@ -552,7 +553,9 @@
      font-size="11px"
      fill="#666666"
      id="text29"
-     style="font-size:14.6667px">B is sustained by moving electrons</text>
+     style="font-size:14.6667px"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI', Arial, sans-serif;-inkscape-font-specification:'Segoe UI, Arial, sans-serif Bold'"
+   id="tspan4">B</tspan> is sustained by moving electrons</text>
   <!-- Arrow showing seamless handoff -->
   <g
      id="g5"
@@ -574,7 +577,7 @@
   </g>
   <text
      x="500.41959"
-     y="112.76222"
+     y="118.21677"
      font-size="10px"
      fill="#7744aa"
      font-weight="600"
@@ -607,7 +610,9 @@
      font-weight="600"
      fill="#5a7a40"
      id="text32"
-     style="font-size:14.6667px">In the dielectric</text>
+     style="font-size:14.6667px"><tspan
+       style="fill:#2277aa;fill-opacity:1"
+       id="tspan2">In the dielectric</tspan></text>
   <text
      x="488.53146"
      y="176.47551"
@@ -633,7 +638,11 @@
      font-size="11px"
      fill="#666666"
      id="text35"
-     style="font-size:14.6667px">B is sustained by changing E field</text>
+     style="font-size:14.6667px"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI', Arial, sans-serif;-inkscape-font-specification:'Segoe UI, Arial, sans-serif Bold'"
+   id="tspan5">B</tspan> is sustained by changing <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI', Arial, sans-serif;-inkscape-font-specification:'Segoe UI, Arial, sans-serif Bold'"
+   id="tspan6">E</tspan> field</text>
   <!-- Connecting lines from cross-section to annotation boxes -->
   <line
      x1="218.56642"
@@ -688,15 +697,18 @@
        font-style="italic"
        id="text37">curl B = <tspan
    fill="#cc6633"
-   id="tspan36">μ₀ J</tspan> + <tspan
-   fill="#2277aa"
-   id="tspan37">μ₀ε₀ ∂E/∂t</tspan></text>
+   id="tspan36"
+   style="fill:#8a5522;fill-opacity:1">μ₀ J</tspan> + <tspan
+   style="fill:#2277aa;fill-opacity:1"
+   id="tspan3">μ₀ε₀ ∂E/∂t</tspan></text>
     <text
        x="267.72028"
        y="345.58743"
        font-size="9px"
        fill="#cc6633"
-       id="text38">conduction</text>
+       id="text38"><tspan
+         style="fill:#8a5522;fill-opacity:1"
+         id="tspan1">conduction</tspan></text>
     <text
        x="326.92307"
        y="345.16785"

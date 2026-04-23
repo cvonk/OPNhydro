@@ -342,7 +342,7 @@ The following subsections describe each component in detail, starting with the v
 <br />
 
 
-#### Vertical Component $E_z$
+#### Vertical Component $E_z$ (AKA $E_T$ for Traverse)
 
 As the wave front reaches a section of the conductor, $E_z$ there rises from zero to some value. The electrons in the conductor feels a force $\mathbf F = -e\mathbf\, E_z$, that is upward (opposite to $E_z$). 
 
@@ -418,7 +418,7 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 Once more, **the field shows up first, the electrons react**. Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net motion. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
 <br />
 
-#### Horizontal Component $E_x$
+#### Horizontal Component $E_x$ (AKA $E_L$ for longitudinal)
 
 So far we have described how $E_x$ arises at the wavefront itself. The conductor is also resistive, which produces a second, smaller $E_x$ behind the wavefront.
 
@@ -494,7 +494,7 @@ Let me show you. Maxwell's Ampère law — the real one, with his addition — s
 
 $$\nabla \times \mathbf B = \mu_0 \mathbf J + \mu \varepsilon \frac{\partial \mathbf E}{\partial t}$$
 
-That first piece — $\mu_0 \mathbf J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field. Every kid who ever wrapped wire around a nail knows this.
+That first piece — $\mu_0 \mathbf J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field.
 
 That second piece was Maxwell's great invention. He realized Ampère's law couldn't be complete because if you had a capacitor, the current comes *into* one plate and *out of* the other, but in between — in the empty space — there's no current flowing. And yet the magnetic field has to be continuous; it can't just stop at the plate and start up again on the other side. Something has to keep it going across the gap. And Maxwell said: the thing that keeps it going is the *changing electric field* between the plates. He called it the **displacement current**, even though nothing is really being displaced. It's just a changing field that *looks like* a current, from the magnetic field's point of view.
 
@@ -518,8 +518,6 @@ It is tempting to think of "the wave in the dielectric" and "the current in the 
 
 The field drives the current. The current shapes the field. They are mutually dependent — one self-consistent system, seen from different sides of the copper surface.
 
-So far, we have followed one signal on one trace — its wave, its return current, its confinement. But every chip on the board also needs a stable supply voltage, delivered through its own set of traces, vias, and planes. Those power paths are transmission lines too, and they are subject to the same field physics. When the current through them changes abruptly, the results are not subtle.
-
 <br />
 
 ---
@@ -527,6 +525,8 @@ So far, we have followed one signal on one trace — its wave, its return curren
 <br />
 
 ### 1.4. Rail Collapse
+
+So far, we have followed one signal on one trace — its wave, its return current, its confinement. But every chip on the board also needs a stable supply voltage, delivered through its own set of traces, vias, and planes. Those power paths are transmission lines too, and they are subject to the same field physics. When the current through them changes abruptly, the results are not subtle.
 
 <figure>
   <center>
@@ -1026,6 +1026,4 @@ where $\hat y$ points across the trace width — the direction $\mathbf B$ curls
 [4] Ralph Morrison, Fast Circuit Boards – Energy Management, Wiley, 2018.
 [5] Eric Bogatin, Signal Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
 [6] [Dan Beeker - Industry Keynote: Electromagnetic Fields for Normal Folks, Altium, 2019](https://resources.altium.com/p/al-keynote-dan-beeker)
-[7] [Foundations for Microstrip Circuit, Terry Edwards and Michael Steer, IEEE, 2016](https://pce-fet.com/common/library/books/33/9606_[Edwards,_T._C]_Foundations_for_microstrip_circuit(b-ok.org).pdf)
----
 
