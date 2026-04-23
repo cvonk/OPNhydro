@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 614.96496 276.08396"
+   viewBox="0 0 612.86706 230.76928"
    font-family="'Segoe UI', Arial, sans-serif"
    version="1.1"
    id="svg39"
    sodipodi:docname="microstrip-b-field-sources.svg"
-   width="614.96497"
-   height="276.08395"
+   width="612.86707"
+   height="230.76927"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -22,8 +22,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.3833333"
-     inkscape:cx="273.98602"
-     inkscape:cy="147.06294"
+     inkscape:cx="271.88812"
+     inkscape:cy="147.27273"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
@@ -33,8 +33,8 @@
     <inkscape:page
        x="0"
        y="0"
-       width="614.96497"
-       height="276.08395"
+       width="612.86707"
+       height="230.76929"
        id="page40"
        margin="0 0 8.3915968"
        bleed="0" />
@@ -122,7 +122,7 @@
   <!--  LEFT SIDE: Cross-section view               -->
   <!-- ============================================ -->
   <text
-     x="158.91608"
+     x="156.81818"
      y="208.71329"
      text-anchor="middle"
      font-size="13px"
@@ -131,7 +131,7 @@
      id="text4">Cross-section</text>
   <!-- Air above -->
   <rect
-     x="8.5314684"
+     x="6.4335661"
      y="-14.895104"
      width="310"
      height="72.447548"
@@ -141,7 +141,7 @@
      id="rect4"
      style="display:none;stroke-width:0.951627" />
   <text
-     x="23.04895"
+     x="20.951048"
      y="4.2657313"
      font-size="10px"
      fill="#888899"
@@ -150,7 +150,7 @@
      style="font-size:17.3333px;display:none">air</text>
   <!-- Signal trace (copper) -->
   <rect
-     x="108.53148"
+     x="106.43358"
      y="34.475525"
      width="110"
      height="24"
@@ -159,7 +159,7 @@
      id="rect5"
      style="fill:#deb187;fill-opacity:1" />
   <text
-     x="60.314678"
+     x="58.216778"
      y="47.118885"
      text-anchor="middle"
      font-size="11"
@@ -169,7 +169,7 @@
      style="font-size:14.6667px;fill:#ca8340;fill-opacity:1">signal trace</text>
   <!-- Dielectric -->
   <rect
-     x="8.5314684"
+     x="6.4335661"
      y="58.475525"
      width="310"
      height="110"
@@ -179,7 +179,7 @@
      id="rect6"
      style="fill:#fdf6c2;fill-opacity:1" />
   <text
-     x="23.04895"
+     x="20.951048"
      y="78.216782"
      font-size="10px"
      fill="#5a7a40"
@@ -188,7 +188,7 @@
      style="font-size:14.6667px">dielectric</text>
   <!-- Return plane (copper) -->
   <rect
-     x="8.5314684"
+     x="6.4335661"
      y="168.47551"
      width="310"
      height="20"
@@ -198,7 +198,7 @@
      id="rect7"
      style="fill:#96cf96;fill-opacity:1" />
   <text
-     x="56.118885"
+     x="54.020985"
      y="181.63634"
      text-anchor="middle"
      font-size="10"
@@ -211,7 +211,8 @@
   <!-- Outer loop -->
   <g
      id="g4"
-     inkscape:label="B fields">
+     inkscape:label="B fields"
+     transform="translate(-2.0979021)">
     <g
        id="g3"
        inkscape:label="B field trace">
@@ -219,7 +220,7 @@
          id="g2"
          transform="matrix(1.7913133,0,0,1.5366804,-129.15105,-122.68766)"
          inkscape:label="outside"
-         style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.6027295;stroke-dasharray:none">
+         style="stroke:#0109ff;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.6">
         <path
            d="m 163.74126,164.32256 c 45.22463,-1.60659 72.89146,-21.42122 72.89146,-53.01753 0,-27.312057 -27.66683,-57.301775 -72.89146,-57.301775"
            fill="none"
@@ -227,7 +228,7 @@
            stroke-width="0.693922"
            opacity="0.55"
            id="path11"
-           style="stroke:#8a5522;stroke-opacity:0.5;stroke-width:0.6027295;stroke-dasharray:none"
+           style="stroke:#8a5522;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.5"
            inkscape:label="outside-right" />
         <path
            d="m 163.74126,54.003255 c -45.22463,0 -72.89146,29.989718 -72.89146,57.301775 0,31.59631 27.66683,51.41094 72.89146,53.01753"
@@ -237,14 +238,14 @@
            opacity="0.55"
            marker-end="url(#bArrow)"
            id="path10"
-           style="stroke:#8a5522;stroke-opacity:0.5;stroke-width:0.6027295;stroke-dasharray:none"
+           style="stroke:#8a5522;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.5"
            inkscape:label="outside-left" />
       </g>
       <g
          id="g1"
          inkscape:label="inside"
          transform="matrix(1.3641666,0,0,1.1702521,-59.209533,-82.464812)"
-         style="stroke:#8a5522;stroke-opacity:0.5;stroke-width:0.79145564;stroke-dasharray:none">
+         style="stroke:#8a5522;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.5">
         <path
            d="m 164.09701,154.68302 c 34.58354,-5.35531 58.52599,-18.74358 58.52599,-43.37799 0,-26.240997 -23.94245,-47.662223 -58.52599,-47.662223"
            fill="none"
@@ -262,7 +263,7 @@
            stroke-dasharray="none"
            marker-end="url(#bArrow)"
            id="path8"
-           style="stroke:#8a5522;stroke-opacity:0.5;stroke-width:0.79145564;stroke-dasharray:none"
+           style="stroke:#8a5522;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.5"
            inkscape:label="inside-left" />
       </g>
     </g>
@@ -324,7 +325,7 @@
   </g>
   <!-- B label on left loop -->
   <text
-     x="80.167839"
+     x="78.069939"
      y="118.73425"
      text-anchor="middle"
      font-size="15px"
@@ -332,10 +333,10 @@
      fill="#7744aa"
      font-style="italic"
      id="text11"
-     style="fill:#8a5522;fill-opacity:0.50196081">B</text>
+     style="fill:#8a5522;fill-opacity:0.501961">B</text>
   <!-- Conduction current J arrows in trace (into page = circle with X) -->
   <circle
-     cx="128.53148"
+     cx="126.43358"
      cy="46.475525"
      r="7"
      fill="none"
@@ -343,23 +344,23 @@
      stroke-width="1.5"
      id="circle11" />
   <line
-     x1="123.53148"
+     x1="121.43358"
      y1="41.475525"
-     x2="133.53146"
+     x2="131.43356"
      y2="51.475525"
      stroke="#cc6633"
      stroke-width="1.5"
      id="line11" />
   <line
-     x1="133.53146"
+     x1="131.43356"
      y1="41.475525"
-     x2="123.53148"
+     x2="121.43358"
      y2="51.475525"
      stroke="#cc6633"
      stroke-width="1.5"
      id="line12" />
   <circle
-     cx="163.53146"
+     cx="161.43356"
      cy="46.475525"
      r="7"
      fill="none"
@@ -367,23 +368,23 @@
      stroke-width="1.5"
      id="circle12" />
   <line
-     x1="158.53146"
+     x1="156.43356"
      y1="41.475525"
-     x2="168.53146"
+     x2="166.43356"
      y2="51.475525"
      stroke="#cc6633"
      stroke-width="1.5"
      id="line13" />
   <line
-     x1="168.53146"
+     x1="166.43356"
      y1="41.475525"
-     x2="158.53146"
+     x2="156.43356"
      y2="51.475525"
      stroke="#cc6633"
      stroke-width="1.5"
      id="line14" />
   <circle
-     cx="198.53146"
+     cx="196.43356"
      cy="46.475525"
      r="7"
      fill="none"
@@ -391,24 +392,24 @@
      stroke-width="1.5"
      id="circle14" />
   <line
-     x1="193.53146"
+     x1="191.43356"
      y1="41.475525"
-     x2="203.53146"
+     x2="201.43356"
      y2="51.475525"
      stroke="#cc6633"
      stroke-width="1.5"
      id="line15" />
   <line
-     x1="203.53146"
+     x1="201.43356"
      y1="41.475525"
-     x2="193.53146"
+     x2="191.43356"
      y2="51.475525"
      stroke="#cc6633"
      stroke-width="1.5"
      id="line16" />
   <!-- Return current in return plane (out of page = circle with dot) -->
   <circle
-     cx="128.53148"
+     cx="126.43358"
      cy="178.47551"
      r="6"
      fill="none"
@@ -416,13 +417,13 @@
      stroke-width="1.3"
      id="circle16" />
   <circle
-     cx="128.53148"
+     cx="126.43358"
      cy="178.47551"
      r="1.8"
      fill="#cc6633"
      id="circle17" />
   <circle
-     cx="163.53146"
+     cx="161.43356"
      cy="178.47551"
      r="6"
      fill="none"
@@ -430,13 +431,13 @@
      stroke-width="1.3"
      id="circle18" />
   <circle
-     cx="163.53146"
+     cx="161.43356"
      cy="178.47551"
      r="1.8"
      fill="#cc6633"
      id="circle19" />
   <circle
-     cx="198.53146"
+     cx="196.43356"
      cy="178.47551"
      r="6"
      fill="none"
@@ -444,34 +445,34 @@
      stroke-width="1.3"
      id="circle20" />
   <circle
-     cx="198.53146"
+     cx="196.43356"
      cy="178.47551"
      r="1.8"
      fill="#cc6633"
      id="circle21" />
   <!-- E field arrows in dielectric (vertical, trace to return plane) -->
   <line
-     x1="128.53148"
+     x1="126.43358"
      y1="66.475525"
-     x2="128.53148"
+     x2="126.43358"
      y2="162.47551"
      stroke="#cc3333"
      stroke-width="1.5"
      marker-end="url(#eArrow)"
      id="line21" />
   <line
-     x1="163.53146"
+     x1="161.43356"
      y1="66.475525"
-     x2="163.53146"
+     x2="161.43356"
      y2="162.47551"
      stroke="#cc3333"
      stroke-width="1.5"
      marker-end="url(#eArrow)"
      id="line22" />
   <line
-     x1="198.53146"
+     x1="196.43356"
      y1="66.475525"
-     x2="198.53146"
+     x2="196.43356"
      y2="162.47551"
      stroke="#cc3333"
      stroke-width="1.5"
@@ -479,7 +480,7 @@
      id="line23" />
   <!-- E label -->
   <text
-     x="172.34964"
+     x="170.25174"
      y="113.34264"
      font-size="14px"
      font-weight="bold"
@@ -488,7 +489,7 @@
      id="text23">E</text>
   <!-- J label -->
   <text
-     x="210.55943"
+     x="208.46153"
      y="50.349648"
      font-size="12px"
      font-weight="bold"
@@ -496,7 +497,7 @@
      font-style="italic"
      id="text24">J</text>
   <text
-     x="210.18222"
+     x="208.08432"
      y="183.31203"
      font-size="12px"
      font-weight="bold"
@@ -508,7 +509,7 @@
   <!-- ============================================ -->
   <!-- Copper region box -->
   <rect
-     x="368.53146"
+     x="366.43356"
      y="4.4755244"
      width="240"
      height="90"
@@ -520,7 +521,7 @@
      id="rect25"
      style="fill:#ff8005;fill-opacity:1" />
   <text
-     x="491.68997"
+     x="489.59207"
      y="26.055946"
      text-anchor="middle"
      font-size="12px"
@@ -529,7 +530,7 @@
      id="text26"
      style="font-size:14.6667px;text-align:center;text-anchor:middle">In the copper</text>
   <text
-     x="488.53146"
+     x="486.43356"
      y="46.475525"
      text-anchor="middle"
      font-size="11px"
@@ -537,7 +538,7 @@
      id="text27"
      style="font-size:14.6667px">Conduction current dominates:</text>
   <text
-     x="488.53146"
+     x="486.43356"
      y="69.475525"
      text-anchor="middle"
      font-size="14px"
@@ -547,7 +548,7 @@
      id="text28"
      style="font-size:17.3333px;fill:#8a5522;fill-opacity:1">J &gt; 0 , ∂E/∂t≈ 0</text>
   <text
-     x="488.53146"
+     x="486.43356"
      y="87.475525"
      text-anchor="middle"
      font-size="11px"
@@ -560,7 +561,7 @@
   <g
      id="g5"
      inkscape:label="handoff arrow"
-     transform="rotate(180,488.53147,113.97552)">
+     transform="rotate(180,487.48252,113.97552)">
     <line
        x1="488.53146"
        y1="99.475525"
@@ -570,20 +571,20 @@
        stroke-width="2"
        id="line29" />
     <polygon
-       points="520,204 528,192 512,192 "
+       points="512,192 520,204 528,192 "
        fill="#7744aa"
        id="polygon29"
        transform="translate(-31.468532,-75.524475)" />
   </g>
   <text
-     x="500.41959"
+     x="498.32169"
      y="118.21677"
      font-size="10px"
      fill="#7744aa"
      font-weight="600"
      id="text30">seamless handoff</text>
   <text
-     x="528.53143"
+     x="526.43353"
      y="131.47551"
      font-size="10px"
      fill="#7744aa"
@@ -591,7 +592,7 @@
      id="text31" />
   <!-- Dielectric region box -->
   <rect
-     x="368.53146"
+     x="366.43356"
      y="134.47551"
      width="240"
      height="90"
@@ -603,7 +604,7 @@
      id="rect31"
      style="fill:#f7de26;fill-opacity:1" />
   <text
-     x="488.53146"
+     x="486.43356"
      y="156.47551"
      text-anchor="middle"
      font-size="12px"
@@ -614,7 +615,7 @@
        style="fill:#2277aa;fill-opacity:1"
        id="tspan2">In the dielectric</tspan></text>
   <text
-     x="488.53146"
+     x="486.43356"
      y="176.47551"
      text-anchor="middle"
      font-size="11px"
@@ -622,7 +623,7 @@
      id="text33"
      style="font-size:14.6667px">Displacement current dominates:</text>
   <text
-     x="488.53146"
+     x="486.43356"
      y="199.47551"
      text-anchor="middle"
      font-size="14px"
@@ -632,7 +633,7 @@
      id="text34"
      style="font-size:17.3333px">J = 0 , ∂E/∂t&gt; 0</text>
   <text
-     x="488.53146"
+     x="486.43356"
      y="217.47551"
      text-anchor="middle"
      font-size="11px"
@@ -645,9 +646,9 @@
    id="tspan6">E</tspan> field</text>
   <!-- Connecting lines from cross-section to annotation boxes -->
   <line
-     x1="218.56642"
+     x1="216.46852"
      y1="46.475525"
-     x2="366.53146"
+     x2="364.43356"
      y2="46.475525"
      stroke="#c87533"
      stroke-width="1.00909"
@@ -655,9 +656,9 @@
      opacity="0.5"
      id="line35" />
   <line
-     x1="291.97681"
+     x1="289.87891"
      y1="111.35451"
-     x2="366.54764"
+     x2="364.44974"
      y2="179.49861"
      stroke="#5a7a40"
      stroke-width="0.727906"
@@ -665,55 +666,4 @@
      opacity="0.5"
      id="line36" />
   <!-- Bottom: unified equation -->
-  <g
-     id="g39"
-     transform="matrix(1.3591174,0,0,1.3591174,-123.37427,-198.86569)">
-    <rect
-       x="86.853142"
-       y="281.74826"
-       width="440"
-       height="70"
-       rx="10"
-       fill="#f8f4fc"
-       stroke="#7744aa"
-       stroke-width="1.2"
-       id="rect36"
-       style="display:none" />
-    <text
-       x="306.85315"
-       y="303.74826"
-       text-anchor="middle"
-       font-size="12px"
-       fill="#555555"
-       id="text36"
-       style="display:none">One continuous B field, two sources:</text>
-    <text
-       x="306.85315"
-       y="329.74826"
-       text-anchor="middle"
-       font-size="15px"
-       fill="#7744aa"
-       font-weight="600"
-       font-style="italic"
-       id="text37">curl B = <tspan
-   fill="#cc6633"
-   id="tspan36"
-   style="fill:#8a5522;fill-opacity:1">μ₀ J</tspan> + <tspan
-   style="fill:#2277aa;fill-opacity:1"
-   id="tspan3">μ₀ε₀ ∂E/∂t</tspan></text>
-    <text
-       x="267.72028"
-       y="345.58743"
-       font-size="9px"
-       fill="#cc6633"
-       id="text38"><tspan
-         style="fill:#8a5522;fill-opacity:1"
-         id="tspan1">conduction</tspan></text>
-    <text
-       x="326.92307"
-       y="345.16785"
-       font-size="9px"
-       fill="#2277aa"
-       id="text39">displacement</text>
-  </g>
 </svg>

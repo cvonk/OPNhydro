@@ -473,7 +473,7 @@ And that's really all there is to it. The hard part is believing it.
 
 §1.1 showed that a changing electric field $\mathbf E$ in the dielectric creates a magnetic field $\mathbf B$ — the displacement current. §1.2 showed that the same wave drives a conduction current $\mathbf J$ in the copper, and a conduction current also creates a $\mathbf B$ field.
 
-So **are there two competing magnetic fields** on a microstrip, one from the wave and one from the current? This section shows there is only one — and that the two sources are just two terms in the same equation.
+So are there two competing magnetic fields on a microstrip, one from the wave and one from the current? This section shows there is only one — and that the two sources are just two terms in the same equation.
 
 <figure>
   <center>
@@ -496,9 +496,7 @@ There is one continuous $\mathbf B$ field, but it has two sources depending on w
 
 #### In Other Words
 
-That equation says it cleanly. The intuition is worth making concrete.
-
-Imagine Feynman is still at the chalkboard. Someone in the third row raises a hand.
+The equation is the short answer. Here is the long one, in a voice we have borrowed before: Imagine Feynman is still at the chalkboard. Someone in the third row raises a hand.
 <div class="quote">
 
 *"Professor, I'm confused. You just told us the wave has a magnetic field around it — that was part of the leapfrog thing. But now you're saying the electrons in the copper are flowing, and a flowing current also makes a magnetic field. So which is it? Are there two magnetic fields here, or what?"*
