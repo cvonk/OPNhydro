@@ -440,6 +440,17 @@ And what about the sections the wavefront has already passed? Their surface char
 <br />
 
 
+#### One System, Two Views
+
+It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not. They are two views of a single electromagnetic solution, and neither can exist without the other.
+
+- Without the surface-charge redistribution, the boundary condition that cancels $\mathbf E$ inside the metal would not be satisfied. The field would not be confined. There would be no guided wave — just radiation.
+- Without the propagating field, there would be nothing to drive the electrons. No $E_x$ means no $\mathbf J$. The current would not exist.
+
+The field drives the current. The current shapes the field. They are mutually dependent — one self-consistent system, seen from different sides of the interface.
+
+<br />
+
 #### Putting It Together
 
 <div class="quote">
@@ -460,16 +471,18 @@ And that's really all there is to it. The hard part is believing it.
 
 ### 1.3. Sources of the Magnetic Field
 
-§1.1 showed that a changing electric field $\mathbf E$  in the dielectric creates a magnetic field $\mathbf B$  (displacement current). §1.2 showed that the wave drives a conduction current $\mathbf J$ in the copper — and from introductory physics we know that a current also creates a $\mathbf B$ field. That raises an obvious question: are there two competing magnetic fields on a microstrip, one from the wave and one from the current? This section shows there is only one — and that the two sources are just two terms in the same equation.
+§1.1 showed that a changing electric field $\mathbf E$ in the dielectric creates a magnetic field $\mathbf B$ — the displacement current. §1.2 showed that the same wave drives a conduction current $\mathbf J$ in the copper, and a conduction current also creates a $\mathbf B$ field.
+
+So **are there two competing magnetic fields** on a microstrip, one from the wave and one from the current? This section shows there is only one — and that the two sources are just two terms in the same equation.
 
 <figure>
   <center>
   <img src="../media/infographics/microstrip-b-field-sources.svg" style="width: 80%; height: auto;">
-  <figcaption><i>Cross-section showing one continuous B field sustained by two sources: conduction current in the copper and displacement current in the dielectric.</i></figcaption>
+  <figcaption><i>Cross-section showing one continuous <b>B</b> field sustained by two sources: conduction current in the copper and displacement current in the dielectric.</i></figcaption>
   </center>
 </figure>
 
-The horizontal current $\mathbf J$ in the trace creates a $\mathbf B$ field curling around it. A natural question: is this a separate magnetic field competing with the wave's own $\mathbf B$? No — it is the *same* field. Ampère–Maxwell makes this explicit:
+Ampère–Maxwell makes the unification explicit. It writes $\nabla \times \mathbf B$ as a sum of two source terms — one fed by moving charge in the conductor, the other by a changing electric field in the dielectric:
 
 $$
     \nabla \times \mathbf B =
@@ -478,10 +491,12 @@ $$
     \underbrace{\mu\,\varepsilon\, \frac{\partial \mathbf E}{\partial t}}_{\substack{\text{displacement current} \\ \text{in the dielectric}}}
 $$
 
-There is one continuous $\mathbf B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu_0 \mathbf J$) dominates — free electrons are moving, and their motion sustains $\mathbf B$. In the dielectric, there are no free electrons ($\mathbf J = 0$), so the displacement term takes over — the changing $\mathbf E$ field sustains $\mathbf B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\mathbf B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
+There is one continuous $\mathbf B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu \mathbf J$) is the sole source — free electrons are moving, and their motion sustains $\mathbf B$. In the dielectric, there are no free electrons ($\mathbf J = 0$), so the displacement term takes over — the changing $\mathbf E$ field sustains $\mathbf B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\mathbf B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
 <br />
 
-#### In other words
+#### In Other Words
+
+That equation says it cleanly. The intuition is worth making concrete.
 
 Imagine Feynman is still at the chalkboard. Someone in the third row raises a hand.
 <div class="quote">
@@ -492,7 +507,7 @@ That's a wonderful question. And the answer — which I think is one of the most
 
 Let me show you. Maxwell's Ampère law — the real one, with his addition — says the curl of $\mathbf B$ is two things added together:
 
-$$\nabla \times \mathbf B = \mu_0 \mathbf J + \mu \varepsilon \frac{\partial \mathbf E}{\partial t}$$
+$$\nabla \times \mathbf B = \mu \mathbf J + \mu \varepsilon \frac{\partial \mathbf E}{\partial t}$$
 
 That first piece — $\mu_0 \mathbf J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field.
 
@@ -500,23 +515,14 @@ That second piece was Maxwell's great invention. He realized Ampère's law could
 
 Now look where we are on this PCB. You've got copper up top, copper down below, and plastic in between.
 
-**Inside the copper,** electrons are flowing. So $\mathbf J$ is big. And the electric field in the copper is essentially zero — we just spent the last lecture explaining why. So the second term is nothing. The $\mu_0 \mathbf J$ piece is doing all the work.
+**Inside the copper,** electrons are flowing. So $\mathbf J$ is big. And the electric field in the copper is essentially zero — we just spent the last lecture explaining why. So the second term is nothing. The $\mu \mathbf J$ piece is doing all the work.
 
 **Inside the plastic,** there are no free electrons. $\mathbf J = 0$. Nothing is flowing through the dielectric. So the first term is nothing. But the electric field is enormous in there, and it's changing in time as the wave goes by. So the second term — the displacement current — is doing all the work.
 
-And here's what I want you to appreciate. You walk from the plastic up into the copper, crossing the boundary, and the $\mathbf B$ field doesn't care. It doesn't notice. It's perfectly smooth. It has the same value just below the surface as just above. What changes is *who's responsible for it*. Down in the plastic, a changing electric field is keeping $\mathbf B$ alive. Up in the copper, moving electrons are keeping it alive. The field itself is completely oblivious — it just wraps around the trace as one continuous tube of magnetism.
+And here's what I want you to appreciate. You walk from the plastic up into the copper, crossing the boundary, and the $\mathbf B$ field doesn't care. It doesn't notice. It's perfectly smooth. It has the same value just below the surface as just above it. What changes is *who's responsible for it*. Down in the plastic, a changing electric field is keeping $\mathbf B$ alive. Up in the copper, moving electrons are keeping it alive. The field itself is completely oblivious — it just wraps around the trace as one continuous tube of magnetism.
 
 That was Maxwell's real insight. Not that current makes magnetism — we knew that. Not that changing fields make fields — Faraday had half of that. Maxwell's piece was realizing that *a changing electric field is, for the purposes of magnetism, every bit as good as a current.* Nature doesn't care which one is feeding the field. It'll take either. And on a PCB, inside the copper it takes one, inside the plastic it takes the other, and the result is a seamless, beautiful, continuous magnetic field wrapping the whole transmission line.
 </div>
-
-#### One System, Two Views
-
-It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not. They are two views of a single electromagnetic solution, and neither can exist without the other.
-
-- Without the surface-charge redistribution, the boundary condition that cancels $\mathbf E$ inside the metal would not be satisfied. The field would not be confined. There would be no guided wave — just radiation.
-- Without the propagating field, there would be nothing to drive the electrons. No $E_x$ means no $\mathbf J$. The current would not exist.
-
-The field drives the current. The current shapes the field. They are mutually dependent — one self-consistent system, seen from different sides of the copper surface.
 
 <br />
 
