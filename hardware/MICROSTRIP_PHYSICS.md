@@ -54,9 +54,13 @@ Most textbook introductions to transmission lines start with the lumped-element 
 
 ## 1. Field Theory
 
-**Circuit Theory**, the simplified low-frequency approximation taught in undergraduate courses, is based on field theory. It assumes that the physical size of components is much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws. Before the mid-1990s, a typical device might output signals with 10 ns rise times at 10 MHz — and the circuits worked with the crudest of interconnects.
+**Circuit Theory**, the simplified low-frequency approximation taught in undergraduate courses, is based on field theory. It assumes that the PCB traces are much smaller the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws. Before the mid-1990s, a typical device might output signals with 10 ns rise times at 10 MHz — and the circuits worked with the crudest of interconnects.
 
 Where circuit theory talks about voltages and currents, field theory talks about the electric field $\mathbf E$ and the magnetic field $\mathbf B$. These are the same physics described at a deeper level: voltage is a measure of $\mathbf E$, and current arises because $\mathbf E$ pushes electrons. Together, $\mathbf E$ and $\mathbf B$ describe how energy is stored, how it moves from one place to another, and when it radiates.
+
+Voltage and current are convenient abstractions, but they are not fundamental. Energy on a PCB does not ride on the wire — it propagates through the dielectric as an EM field, and the copper is only there to guide it. Reasoning in fields is what makes signal integrity tractable: where energy is stored, how it flows, and when it escapes.
+
+> At a witching speed of 1 ns, it only takes a 10 cm PCB trace to become an efficient $\lambda/4$ antenna.  Since the TTL days, there has been a four magnitudes change in the switching speed of transistors.  -- Dan Beeker
 
 This chapter builds up the field-theory picture from first principles:
 
@@ -456,7 +460,7 @@ And that's really all there is to it. The hard part is believing it.
 
 ### 1.3. Sources of the Magnetic Field
 
-§1.1 showed that a changing $\mathbf E$ field in the dielectric creates a $\mathbf B$ field (displacement current). §1.2 showed that the wave drives a conduction current $\mathbf J$ in the copper — and from introductory physics we know that a current also creates a $\mathbf B$ field. That raises an obvious question: are there two competing magnetic fields on a microstrip, one from the wave and one from the current? This section shows there is only one — and that the two sources are just two terms in the same equation.
+§1.1 showed that a changing electric field $\mathbf E$  in the dielectric creates a magnetic field $\mathbf B$  (displacement current). §1.2 showed that the wave drives a conduction current $\mathbf J$ in the copper — and from introductory physics we know that a current also creates a $\mathbf B$ field. That raises an obvious question: are there two competing magnetic fields on a microstrip, one from the wave and one from the current? This section shows there is only one — and that the two sources are just two terms in the same equation.
 
 <figure>
   <center>
@@ -851,6 +855,10 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 
 ---
 
+TO DO: still need to add: signal/power traces must be one dielectric away from the return plane.
+
+---
+
 
 ## Appendix A: coupling of time variation and spatial variation
 
@@ -1017,7 +1025,7 @@ where $\hat y$ points across the trace width — the direction $\mathbf B$ curls
 [3] Ralph Morrison, Grounding and Shielding – Circuits and Interference, Wiley, 2016.
 [4] Ralph Morrison, Fast Circuit Boards – Energy Management, Wiley, 2018.
 [5] Eric Bogatin, Signal Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
-
-
+[6] [Dan Beeker - Industry Keynote: Electromagnetic Fields for Normal Folks, Altium, 2019](https://resources.altium.com/p/al-keynote-dan-beeker)
+[7] [Foundations for Microstrip Circuit, Terry Edwards and Michael Steer, IEEE, 2016](https://pce-fet.com/common/library/books/33/9606_[Edwards,_T._C]_Foundations_for_microstrip_circuit(b-ok.org).pdf)
 ---
 

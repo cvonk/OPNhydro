@@ -22,7 +22,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.3833333"
-     inkscape:cx="316.15385"
+     inkscape:cx="297.06294"
      inkscape:cy="147.06294"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
@@ -92,6 +92,30 @@
          d="M 0,0 7,2.5 0,5"
          fill="#2277aa"
          id="path4" />
+    </marker>
+    <marker
+       id="bArrow-0"
+       markerWidth="7"
+       markerHeight="5"
+       refX="7"
+       refY="2.5"
+       orient="auto">
+      <path
+         d="M 0,0 7,2.5 0,5"
+         fill="#7744aa"
+         id="path1-9" />
+    </marker>
+    <marker
+       id="marker2"
+       markerWidth="7"
+       markerHeight="5"
+       refX="7"
+       refY="2.5"
+       orient="auto">
+      <path
+         d="M 0,0 7,2.5 0,5"
+         fill="#7744aa"
+         id="path2-4" />
     </marker>
   </defs>
   <!-- ============================================ -->
@@ -184,41 +208,120 @@
      style="font-size:13.3333px;fill:#3a823a;fill-opacity:1">return plane</text>
   <!-- B field loops — continuous, one color throughout -->
   <!-- Inner loop -->
-  <path
-     d="m 163.74126,63.642807 c -34.58354,0 -58.52598,21.421226 -58.52598,47.662223 0,24.63441 23.94244,38.02268 58.52598,43.37799"
-     fill="none"
-     stroke="#7744aa"
-     stroke-width="0.960824"
-     stroke-dasharray="none"
-     marker-end="url(#bArrow)"
-     id="path8"
-     style="stroke:#4a4cc8;stroke-opacity:1" />
-  <path
-     d="m 163.74126,154.68302 c 34.58354,-5.35531 58.52599,-18.74358 58.52599,-43.37799 0,-26.240997 -23.94245,-47.662223 -58.52599,-47.662223"
-     fill="none"
-     stroke="#7744aa"
-     stroke-width="0.960824"
-     stroke-dasharray="none"
-     id="path9"
-     style="stroke:#4a4cc8;stroke-opacity:1" />
   <!-- Outer loop -->
-  <path
-     d="m 163.74126,54.003255 c -45.22463,0 -72.89146,29.989718 -72.89146,57.301775 0,31.59631 27.66683,51.41094 72.89146,53.01753"
-     fill="none"
-     stroke="#7744aa"
-     stroke-width="0.693922"
-     opacity="0.55"
-     marker-end="url(#bArrow)"
-     id="path10"
-     style="stroke:#4a4cc8;stroke-opacity:1" />
-  <path
-     d="m 163.74126,164.32256 c 45.22463,-1.60659 72.89146,-21.42122 72.89146,-53.01753 0,-27.312057 -27.66683,-57.301775 -72.89146,-57.301775"
-     fill="none"
-     stroke="#7744aa"
-     stroke-width="0.693922"
-     opacity="0.55"
-     id="path11"
-     style="stroke:#4a4cc8;stroke-opacity:1" />
+  <g
+     id="g4"
+     inkscape:label="B fields">
+    <g
+       id="g3"
+       inkscape:label="B field trace">
+      <g
+         id="g2"
+         transform="matrix(1.7913133,0,0,1.5366804,-129.15105,-122.68766)"
+         inkscape:label="outside"
+         style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.6027295;stroke-dasharray:none">
+        <path
+           d="m 163.74126,164.32256 c 45.22463,-1.60659 72.89146,-21.42122 72.89146,-53.01753 0,-27.312057 -27.66683,-57.301775 -72.89146,-57.301775"
+           fill="none"
+           stroke="#7744aa"
+           stroke-width="0.693922"
+           opacity="0.55"
+           id="path11"
+           style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.6027295;stroke-dasharray:none"
+           inkscape:label="outside-right" />
+        <path
+           d="m 163.74126,54.003255 c -45.22463,0 -72.89146,29.989718 -72.89146,57.301775 0,31.59631 27.66683,51.41094 72.89146,53.01753"
+           fill="none"
+           stroke="#7744aa"
+           stroke-width="0.693922"
+           opacity="0.55"
+           marker-end="url(#bArrow)"
+           id="path10"
+           style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.6027295;stroke-dasharray:none"
+           inkscape:label="outside-left" />
+      </g>
+      <g
+         id="g1"
+         inkscape:label="inside"
+         transform="matrix(1.3641666,0,0,1.1702521,-59.209533,-82.464812)"
+         style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.79145564;stroke-dasharray:none">
+        <path
+           d="m 165.56311,154.68302 c 34.58354,-5.35531 58.52599,-18.74358 58.52599,-43.37799 0,-26.240997 -23.94245,-47.662223 -58.52599,-47.662223"
+           fill="none"
+           stroke="#7744aa"
+           stroke-width="0.960824"
+           stroke-dasharray="none"
+           id="path9"
+           style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.79145564;stroke-dasharray:none"
+           inkscape:label="inside-right" />
+        <path
+           d="m 163.74126,63.642807 c -34.58354,0 -58.52598,21.421226 -58.52598,47.662223 0,24.63441 23.94244,38.02268 58.52598,43.37799"
+           fill="none"
+           stroke="#7744aa"
+           stroke-width="0.960824"
+           stroke-dasharray="none"
+           marker-end="url(#bArrow)"
+           id="path8"
+           style="stroke:#0109ff;stroke-opacity:0.60000002;stroke-width:0.79145564;stroke-dasharray:none"
+           inkscape:label="inside-left" />
+      </g>
+    </g>
+    <g
+       id="g3-8"
+       inkscape:label="B field trace"
+       transform="matrix(1.0000016,0,0,-0.99948016,-2.8610313,229.63187)">
+      <g
+         id="g2-2"
+         transform="matrix(1.7913133,0,0,1.5366804,-129.15105,-122.68766)"
+         inkscape:label="outside"
+         style="stroke:#0109ff;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.6">
+        <path
+           d="m 163.74126,164.32256 c 45.22463,-1.60659 72.89146,-21.42122 72.89146,-53.01753 0,-27.312057 -27.66683,-57.301775 -72.89146,-57.301775"
+           fill="none"
+           stroke="#7744aa"
+           stroke-width="0.693922"
+           opacity="0.55"
+           id="path11-4"
+           style="stroke:#0109ff;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.6"
+           inkscape:label="outside-right" />
+        <path
+           d="m 163.74126,54.003255 c -45.22463,0 -72.89146,29.989718 -72.89146,57.301775 0,31.59631 27.66683,51.41094 72.89146,53.01753"
+           fill="none"
+           stroke="#7744aa"
+           stroke-width="0.693922"
+           opacity="0.55"
+           marker-end="url(#bArrow-0)"
+           id="path10-5"
+           style="stroke:#0109ff;stroke-width:0.602729;stroke-dasharray:none;stroke-opacity:0.6;marker-end:url(#bArrow-0)"
+           inkscape:label="outside-left" />
+      </g>
+      <g
+         id="g1-5"
+         inkscape:label="inside"
+         transform="matrix(1.3641666,0,0,1.1702521,-59.209533,-82.464812)"
+         style="stroke:#0109ff;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.6">
+        <path
+           d="m 165.56311,154.68302 c 34.58354,-5.35531 58.52599,-18.74358 58.52599,-43.37799 0,-26.240997 -23.94245,-47.662223 -58.52599,-47.662223"
+           fill="none"
+           stroke="#7744aa"
+           stroke-width="0.960824"
+           stroke-dasharray="none"
+           id="path9-1"
+           style="stroke:#0109ff;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.6"
+           inkscape:label="inside-right" />
+        <path
+           d="m 163.74126,63.642807 c -34.58354,0 -58.52598,21.421226 -58.52598,47.662223 0,24.63441 23.94244,38.02268 58.52598,43.37799"
+           fill="none"
+           stroke="#7744aa"
+           stroke-width="0.960824"
+           stroke-dasharray="none"
+           marker-end="url(#bArrow-0)"
+           id="path8-7"
+           style="stroke:#0109ff;stroke-width:0.791456;stroke-dasharray:none;stroke-opacity:0.6;marker-end:url(#bArrow-0)"
+           inkscape:label="inside-left" />
+      </g>
+    </g>
+  </g>
   <!-- B label on left loop -->
   <text
      x="80.167839"
@@ -384,13 +487,21 @@
      id="text23">E</text>
   <!-- J label -->
   <text
-     x="208.55943"
+     x="210.55943"
      y="50.349648"
      font-size="12px"
      font-weight="bold"
      fill="#cc6633"
      font-style="italic"
      id="text24">J</text>
+  <text
+     x="210.18222"
+     y="183.31203"
+     font-size="12px"
+     font-weight="bold"
+     fill="#cc6633"
+     font-style="italic"
+     id="text24-1">J</text>
   <!-- ============================================ -->
   <!--  RIGHT SIDE: Source annotations              -->
   <!-- ============================================ -->
@@ -443,19 +554,24 @@
      id="text29"
      style="font-size:14.6667px">B is sustained by moving electrons</text>
   <!-- Arrow showing seamless handoff -->
-  <line
-     x1="488.53146"
-     y1="99.475525"
-     x2="488.53146"
-     y2="119.47551"
-     stroke="#7744aa"
-     stroke-width="2"
-     id="line29" />
-  <polygon
-     points="512,192 520,204 528,192 "
-     fill="#7744aa"
-     id="polygon29"
-     transform="translate(-31.468532,-75.524475)" />
+  <g
+     id="g5"
+     inkscape:label="handoff arrow"
+     transform="rotate(180,488.53147,113.97552)">
+    <line
+       x1="488.53146"
+       y1="99.475525"
+       x2="488.53146"
+       y2="119.47551"
+       stroke="#7744aa"
+       stroke-width="2"
+       id="line29" />
+    <polygon
+       points="520,204 528,192 512,192 "
+       fill="#7744aa"
+       id="polygon29"
+       transform="translate(-31.468532,-75.524475)" />
+  </g>
   <text
      x="500.41959"
      y="112.76222"
