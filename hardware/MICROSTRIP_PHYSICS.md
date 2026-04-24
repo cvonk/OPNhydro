@@ -60,7 +60,7 @@ Where circuit theory talks about voltages and currents, field theory talks about
 
 Voltage and current are convenient abstractions, but they are not fundamental. Energy on a PCB does not ride on the wire — it propagates through the dielectric as an EM field, and the copper is only there to guide it. Reasoning in fields is what makes signal integrity tractable: where energy is stored, how it flows, and when it escapes.
 
-> At a witching speed of 1 ns, it only takes a 10 cm PCB trace to become an efficient $\lambda/4$ antenna.  Since the TTL days, there has been a four magnitudes change in the switching speed of transistors.  -- Dan Beeker
+> At a switching speed of 1 ns, it only takes a 10 cm PCB trace to become an efficient $\lambda/4$ antenna.  Since the TTL days, there has been a four orders of magnitude change in the switching speed of transistors.  -- Dan Beeker
 
 This chapter builds up the field-theory picture from first principles:
 
@@ -93,7 +93,7 @@ A microstrip has **two regions**: the dielectric between the conductors, and the
 
 "Electromagnetic (EM) field theory, based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^BOGATIN] and Kenneth Wyatt [^WYATT].
 
-[^BOGATIN]: Signal and Power Integrity, simplified 2nd (2010) - Eric Bogatin
+[^BOGATIN]: Signal and Power Integrity, simplified 3rd (2018) - Eric Bogatin
 [^WYATT]: [PCB Design for Low EMI - Kenneth Wyatt](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)
 
 <figure>
@@ -407,7 +407,7 @@ This drift is the transmission-line **current**. And it is also how the positive
 
 Now, what about the along-field — the dotted horizontal arrow? Where does that come from?
 
-It comes from the wave *going somewhere*. The voltage on the trace right here is at signal level. But a millimeter ahead, the wave hasn't arrived yet — the voltage is still zero. So you've got a voltage that changes from one place to another. And wherever the voltage changes from place to place, there's an electric field pointing from high to low. That's the along-field. It's a spatial gradient, $E_z = -\partial V / \partial x$. Right at the wavefront, where the voltage drops from full to zero in a very short distance, it's steep.
+It comes from the wave *going somewhere*. The voltage on the trace right here is at signal level. But a millimeter ahead, the wave hasn't arrived yet — the voltage is still zero. So you've got a voltage that changes from one place to another. And wherever the voltage changes from place to place, there's an electric field pointing from high to low. That's the along-field. It's a spatial gradient, $E_z = -\partial V / \partial z$. Right at the wavefront, where the voltage drops from full to zero in a very short distance, it's steep.
 
 The free electrons in the copper feel that field and start to drift. Very slowly, mind you — but they all drift together, and that is what we call a **current**. The current didn't cause anything. The field caused the current. The field shows up first, the electrons react. 
 </div>
@@ -433,7 +433,7 @@ So far we have described how $E_z$ arises at the wavefront itself. The conductor
 
 The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a spatial gradient
 $$
-    E_z = -\frac{\partial V}{\partial x}
+    E_z = -\frac{\partial V}{\partial z}
 $$ that re-accelerates the electrons between scattering events. $E_z$ behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no voltage drop, no $E_z$, and no loss.
 
 **Why current still flows through already-charged sections.** The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
@@ -638,7 +638,7 @@ At the **near end** (closest to the aggressor's source), the capacitive and indu
 
 Sections §1.1 through §1.5 describe what happens when the EM field stays where it belongs — confined between a trace and its return plane. EMI is what happens when it escapes.
 
-A current loop is an antenna. For a small loop (perimeter ≪ wavelength), the radiated electric field at distance $r$ is proportional to the square of the frequency:[^EMCLOOP]
+A current loop is an antenna. For a small loop (perimeter ≪ wavelength), the radiated electric field at distance $r$ grows with the square of the frequency, with the loop area $A$, and with the loop current $I$, and falls off inversely with $r$:[^EMCLOOP]
 $$
     E \;\propto\; \frac{f^2 \, A \, I}{r}
 $$
@@ -871,7 +871,7 @@ TO DO: still need to add: signal/power traces must be one dielectric away from t
 ---
 
 
-## Appendix A: coupling of time variation and spatial variation
+## Appendix A: Coupling of Time Variation and Spatial Variation
 
 
 ### A.1. How the Ampère-Maxwell Law couples time (temporal) change of the electric field to spatial variation of the magnetic field.
@@ -941,7 +941,7 @@ $$
 
 <br />
 
-**Takeaway:** the range of change in the electric field **in time** ($t$) is exactly balanced by the rate of change of the magnetic field **in space** ($z$)
+**Takeaway:** the rate of change in the electric field **in time** ($t$) is exactly balanced by the rate of change of the magnetic field **in space** ($z$)
 
 $$
   \frac{\partial B_y}{\partial z} = -\mu\, \varepsilon\, \frac{\partial E_x}{\partial t} \\
@@ -953,7 +953,7 @@ So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equati
 
 ### A.2. How Faraday's Law couples time (temporal) change of the magnetic field to spatial variation of the electric field.
 
-We can do the same for the **Faraday Law**
+We can do the same for **Faraday's Law**.
 
 For the wavefront traveling in the $+\hat z$ direction, at a place in between the trace and the return plane, we can apply some simplifications:
 1. The electric field does not vary along $x$ or $y$, so all $\partial/\partial x$ and $\partial/\partial y$ vanish.
@@ -1015,7 +1015,7 @@ $$
 
 <br />
 
-**Takeaway:** the range of change in the electric field **in space** ($z$) is exactly balanced by the rate of change of the magnetic field **in time** ($t$)
+**Takeaway:** the rate of change in the electric field **in space** ($z$) is exactly balanced by the rate of change of the magnetic field **in time** ($t$)
 $$
   \begin{align*}
       \frac{\partial E_x}{\partial z}
