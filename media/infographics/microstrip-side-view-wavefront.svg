@@ -22,15 +22,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="2.8890364"
-     inkscape:cx="148.14628"
-     inkscape:cy="227.93067"
-     inkscape:window-width="2160"
-     inkscape:window-height="1261"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:zoom="4"
+     inkscape:cx="362.375"
+     inkscape:cy="178.875"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg56">
+     inkscape:current-layer="g15">
     <inkscape:page
        x="0"
        y="0"
@@ -218,6 +218,32 @@
          fill="#c0392b"
          id="path1-9-9-2-5-9" />
     </marker>
+    <marker
+       id="arrAx-5-1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path4-5-7" />
+    </marker>
+    <marker
+       id="marker1-5"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path1-1" />
+    </marker>
   </defs>
   <!-- =============== GEOMETRY =============== -->
   <!-- Dielectric (pale yellow) -->
@@ -254,39 +280,28 @@
      style="fill:#96cf96;fill-opacity:1" />
   <!-- Material labels -->
   <text
-     x="711.35663"
-     y="64.286713"
+     x="569.10663"
+     y="66.036713"
      fill="#333333"
      font-weight="bold"
      id="text6"
-     style="font-size:17.3333px">trace</text>
+     style="font-size:17.3333px;fill:#6e3f1d;fill-opacity:1">trace</text>
   <text
-     x="711.35663"
-     y="118.11889"
-     fill="#7a6a2a"
-     id="text7"
-     style="font-size:17.3333px">dielectric</text>
-  <text
-     x="712.33563"
-     y="163.45454"
+     x="570.91406"
+     y="172.12917"
      fill="#333333"
      font-weight="bold"
      id="text9"
-     style="font-size:17.3333px;line-height:1"><tspan
-       sodipodi:role="line"
-       id="tspan2"
-       x="712.33563"
-       y="163.45454"
-       style="font-size:17.3333px;line-height:1">return</tspan><tspan
+     style="font-size:17.3333px;line-height:1;fill:#2f6b2f;fill-opacity:1"><tspan
        sodipodi:role="line"
        id="tspan3"
-       x="712.33563"
-       y="180.78784"
-       style="font-size:17.3333px;line-height:1">plane</tspan></text>
+       x="570.91406"
+       y="172.12917"
+       style="font-size:17.3333px;line-height:1;fill:#2f6b2f;fill-opacity:1">return plane</tspan></text>
   <!-- =============== BATTERY + SWITCH (left side) =============== -->
   <g
      id="g-battery-switch"
-     transform="translate(-2.4280479)">
+     transform="matrix(1,0,0,0.85829189,-2.4280479,15.43876)">
     <!-- Wires -->
     <g
        stroke="#333333"
@@ -466,7 +481,7 @@
        font-size="12px"
        font-style="italic"
        id="text13"
-       style="font-size:14.6667px">propagating voltage step V(x, t)</text>
+       style="font-size:14.6667px">propagating voltage step V(z, t)</text>
     <!-- "Ahead of wavefront: no fields yet" -->
     <text
        x="318.58899"
@@ -958,93 +973,6 @@
        style="font-size:14.6667px;display:none">current I</text>
   </g>
   <g
-     stroke="#333333"
-     fill="#333333"
-     id="g49"
-     transform="translate(83.829354,-44.633607)">
-    <!-- x axis: right -->
-    <line
-       x1="29.51049"
-       y1="297.4126"
-       x2="89.51049"
-       y2="297.4126"
-       stroke-width="1.5"
-       marker-end="url(#arrAx-9)"
-       id="line45"
-       style="marker-end:url(#arrAx-9)" />
-    <text
-       x="95.51049"
-       y="301.4126"
-       font-style="italic"
-       id="text45"
-       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">x</text>
-    <text
-       x="107.51049"
-       y="301.4126"
-       font-size="11px"
-       fill="#555555"
-       id="text46"
-       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(propagation)</text>
-    <!-- z axis: up -->
-    <line
-       x1="29.51049"
-       y1="297.4126"
-       x2="29.51049"
-       y2="237.41258"
-       stroke-width="1.5"
-       marker-end="url(#arrAx-9)"
-       id="line46"
-       style="marker-end:url(#arrAx-9)" />
-    <text
-       x="23.853148"
-       y="232.41258"
-       font-style="italic"
-       id="text47"
-       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">z</text>
-    <!-- y axis: into page (⊗) -->
-    <g
-       transform="translate(64.51049,297.41259)"
-       id="g48">
-      <circle
-         r="7"
-         fill="none"
-         stroke="#333333"
-         stroke-width="1.3"
-         id="circle47"
-         cx="-34.265736"
-         cy="0" />
-      <line
-         x1="-39.265736"
-         y1="-5"
-         x2="-29.265734"
-         y2="5"
-         stroke="#333333"
-         stroke-width="1.3"
-         id="line47" />
-      <line
-         x1="-29.265734"
-         y1="-5"
-         x2="-39.265736"
-         y2="5"
-         stroke="#333333"
-         stroke-width="1.3"
-         id="line48" />
-    </g>
-    <text
-       x="18.769232"
-       y="318.05597"
-       font-style="italic"
-       id="text48"
-       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">y</text>
-    <text
-       x="30.769232"
-       y="318.54547"
-       font-size="11px"
-       fill="#555555"
-       id="text49"
-       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(into page)</text>
-  </g>
-  <g
      stroke="#c0392b"
      stroke-width="2.4"
      fill="none"
@@ -1087,5 +1015,140 @@
        id="path39-8-5-7-8"
        sodipodi:nodetypes="cc"
        style="stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8-1-0)" />
+  </g>
+  <g
+     id="g4"
+     inkscape:label="Load">
+    <line
+       x1="702.90814"
+       y1="68.157043"
+       x2="730.93176"
+       y2="68.157043"
+       id="bs-wire-top-h-9"
+       style="stroke:#000000;stroke-width:2.00233;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1"
+       width="10.783379"
+       height="32.350136"
+       x="725.49158"
+       y="96.700424" />
+    <line
+       x1="730.93176"
+       y1="67.229637"
+       x2="730.93176"
+       y2="96.861801"
+       id="bs-wire-mid-4"
+       style="stroke:#000000;stroke-width:2;stroke-dasharray:none;stroke-opacity:1" />
+    <line
+       x1="730.93176"
+       y1="129.05191"
+       x2="730.93176"
+       y2="159.41594"
+       id="bs-wire-bot-v-8"
+       style="stroke:#000000;stroke-width:1.99132;stroke-dasharray:none;stroke-opacity:1" />
+    <line
+       x1="730.93176"
+       y1="158.41554"
+       x2="702.90814"
+       y2="158.41554"
+       id="bs-wire-bot-h-8"
+       style="stroke:#000000;stroke-width:2.00233;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <text
+     x="568.60663"
+     y="118.94708"
+     fill="#7a6a2a"
+     id="text7"
+     style="font-size:17.3333px"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+       id="tspan4">dielectric</tspan></text>
+  <g
+     stroke="#333333"
+     fill="#333333"
+     id="g49"
+     transform="translate(62.60743,-86.78433)"
+     inkscape:label="Axis">
+    <!-- x axis: right -->
+    <line
+       x1="28.803383"
+       y1="297.4126"
+       x2="89.500038"
+       y2="297.4126"
+       stroke-width="1.50868"
+       marker-end="url(#arrAx-5-1)"
+       id="line45-3"
+       style="marker-end:url(#arrAx-5-1)" />
+    <text
+       x="95.51049"
+       y="301.4126"
+       font-style="italic"
+       id="text45-5"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">z</text>
+    <text
+       x="107.51049"
+       y="301.4126"
+       font-size="11px"
+       fill="#555555"
+       id="text46-2"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(propagation)</text>
+    <!-- z axis: up -->
+    <line
+       x1="29.864044"
+       y1="296.62466"
+       x2="29.864044"
+       y2="357.66953"
+       stroke-width="1.513"
+       marker-end="url(#arrAx-5-1)"
+       id="line46"
+       style="marker-end:url(#arrAx-5-1)" />
+    <text
+       x="37.111401"
+       y="358.63116"
+       font-style="italic"
+       id="text47-7-2"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">x</text>
+    <!-- y axis: into page (⊗) -->
+    <text
+       x="22.127989"
+       y="283.93808"
+       font-style="italic"
+       id="text48-6"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">y</text>
+    <text
+       x="34.127987"
+       y="284.42758"
+       font-size="11px"
+       fill="#555555"
+       id="text49"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(into page)</text>
+    <g
+       transform="translate(64.058301,297.00559)"
+       id="g48-7">
+      <circle
+         r="7"
+         fill="none"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="circle47"
+         cx="-34.265736"
+         cy="0" />
+      <line
+         x1="-39.265736"
+         y1="-5"
+         x2="-29.265734"
+         y2="5"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line47" />
+      <line
+         x1="-29.265734"
+         y1="-5"
+         x2="-39.265736"
+         y2="5"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line48-6" />
+    </g>
   </g>
 </svg>

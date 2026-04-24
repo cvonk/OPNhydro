@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 836.93401 625.91193"
+   viewBox="0 0 858.14727 574.29315"
    font-family="Helvetica, Arial, sans-serif"
    font-size="14px"
    version="1.1"
    id="svg75"
    sodipodi:docname="microstrip-e-field-components.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
-   width="836.93402"
-   height="625.91193"
+   width="858.14728"
+   height="574.29315"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -22,9 +22,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="2"
-     inkscape:cx="409.75"
-     inkscape:cy="293.25"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="340.11836"
+     inkscape:cy="272.94322"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
@@ -32,10 +32,10 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg75">
     <inkscape:page
-       x="5.4034381e-09"
-       y="6.4724475e-08"
-       width="836.93402"
-       height="625.91193"
+       x="0"
+       y="0"
+       width="858.14728"
+       height="574.29315"
        id="page1"
        margin="0"
        bleed="0" />
@@ -413,7 +413,7 @@
   <!-- =============== WAVEFRONT =============== -->
   <g
      id="g1-2"
-     transform="translate(-77.123413,-174.39844)"
+     transform="translate(-55.910211,-167.32737)"
      style="display:inline"
      inkscape:label="BG">
     <rect
@@ -622,10 +622,10 @@
          style="font-size:14.6667px">layer</tspan></text>
   </g>
   <line
-     x1="467.57968"
-     y1="357.73724"
-     x2="504.41214"
-     y2="357.73724"
+     x1="488.79288"
+     y1="364.80832"
+     x2="525.62537"
+     y2="364.80832"
      stroke="#922b21"
      stroke-width="1.886"
      stroke-dasharray="6, 3"
@@ -633,37 +633,37 @@
      id="line34"
      style="stroke:#ff2412;stroke-opacity:1" />
   <line
-     x1="483.50159"
-     y1="-272.76447"
-     x2="483.50159"
-     y2="562.96448"
+     x1="504.71478"
+     y1="-265.69339"
+     x2="504.71478"
+     y2="570.03552"
      stroke="#6f4a6f"
      stroke-width="1.87908"
      stroke-dasharray="6, 4"
      id="line12" />
   <line
-     x1="465.2012"
-     y1="25.829029"
-     x2="465.2012"
-     y2="70.659073"
+     x1="486.4144"
+     y1="20.879282"
+     x2="486.4144"
+     y2="65.709328"
      stroke="#6f4a6f"
      stroke-width="0.435208"
      stroke-dasharray="6, 4"
      id="line12-4"
-     style="stroke-width:1;stroke-dasharray:1,3;stroke-dashoffset:0" />
+     style="stroke-width:1;stroke-dasharray:1, 3;stroke-dashoffset:0" />
   <line
-     x1="500.59872"
-     y1="64.889084"
-     x2="500.59872"
-     y2="70.828262"
+     x1="521.81195"
+     y1="59.939335"
+     x2="521.81195"
+     y2="65.878517"
      stroke="#6f4a6f"
      stroke-width="0.435208"
      stroke-dasharray="6, 4"
      id="line12-4-5"
      style="stroke-width:0.363981;stroke-dasharray:0.363981, 1.09194;stroke-dashoffset:0" />
   <text
-     x="480.84219"
-     y="107.33834"
+     x="502.05539"
+     y="110.87388"
      fill="#6f4a6f"
      font-style="italic"
      font-size="13px"
@@ -671,16 +671,16 @@
      style="font-size:20px;text-align:center;text-anchor:middle">wavefront</text>
   <!-- Region tags -->
   <text
-     x="180.21393"
-     y="193.7803"
+     x="201.42712"
+     y="200.85138"
      fill="#777777"
      font-size="12px"
      font-style="italic"
      id="text14"
      style="font-size:14.6667px;fill:#4d4d4d;fill-opacity:1">established (fields present)</text>
   <text
-     x="511.83673"
-     y="191.49133"
+     x="533.04999"
+     y="198.56241"
      fill="#888888"
      font-size="12px"
      font-style="italic"
@@ -688,8 +688,8 @@
      style="font-size:14.6667px;fill:#4d4d4d;fill-opacity:1">ahead of wavefront (no fields yet)</text>
   <!-- =============== ESTABLISHED-REGION E FIELD (mostly vertical) =============== -->
   <text
-     x="352.40842"
-     y="330.95279"
+     x="373.62161"
+     y="338.02386"
      fill="#c0392b"
      font-style="italic"
      font-size="12px"
@@ -697,22 +697,22 @@
      style="font-size:14.6667px"><tspan
        sodipodi:role="line"
        id="tspan75"
-       x="352.40842"
-       y="330.95279"
+       x="373.62161"
+       y="338.02386"
        style="font-size:14.6667px">almost</tspan><tspan
        sodipodi:role="line"
-       x="352.40842"
-       y="349.28616"
+       x="373.62161"
+       y="356.35724"
        style="font-size:14.6667px"
        id="tspan4">vertical</tspan><tspan
        sodipodi:role="line"
        id="tspan76"
-       x="352.40842"
-       y="367.61954"
+       x="373.62161"
+       y="374.69061"
        style="font-size:14.6667px">away from</tspan><tspan
        sodipodi:role="line"
-       x="352.40842"
-       y="385.95291"
+       x="373.62161"
+       y="393.02399"
        style="font-size:14.6667px"
        id="tspan6">wavefront</tspan></text>
   <!-- =============== TILTED TOTAL E AT WAVEFRONT — DECOMPOSITION =============== -->
@@ -724,57 +724,54 @@
   -->
   <!-- Parallelogram completion (faint dotted) -->
   <line
-     x1="197.47075"
-     y1="251.87309"
-     x2="197.47075"
-     y2="336.7048"
+     x1="218.68394"
+     y1="258.94415"
+     x2="218.68394"
+     y2="343.77588"
      stroke="#c0392b"
      stroke-width="0.438683"
      stroke-dasharray="2, 3"
      opacity="0.7"
      id="line18"
-     style="stroke-width:1;stroke-dasharray:3,3;stroke-dashoffset:0" />
+     style="stroke-width:1;stroke-dasharray:3, 3;stroke-dashoffset:0" />
   <line
-     x1="186.7373"
-     y1="337.49423"
-     x2="197.76759"
-     y2="337.49423"
+     x1="207.9505"
+     y1="344.56531"
+     x2="218.98079"
+     y2="344.56531"
      stroke="#c0392b"
      stroke-width="0.328781"
      stroke-dasharray="2, 3"
      opacity="0.7"
      id="line19"
-     style="stroke-width:1;stroke-dasharray:3,3;stroke-dashoffset:0;stroke:#c0392b;stroke-opacity:1" />
+     style="stroke:#c0392b;stroke-width:1;stroke-dasharray:3, 3;stroke-dashoffset:0;stroke-opacity:1" />
   <!-- Ex (small horizontal component) — dashed thinner -->
   <text
-     x="188.75938"
-     y="243.90137"
+     x="209.97258"
+     y="250.97244"
      fill="#c0392b"
      font-style="italic"
      font-size="14px"
      id="text21"
      style="font-size:20px;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">E<tspan
    font-size="11px"
-   dy="3"
    id="tspan20"
-   style="font-size:20px;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">x</tspan></text>
+   style="font-size:65%;baseline-shift:sub;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">z</tspan></text>
   <!-- Ez (large vertical component) — dashed thinner -->
   <text
-     x="157.90996"
-     y="331.88113"
+     x="179.12315"
+     y="338.95221"
      fill="#c0392b"
      font-style="italic"
      font-size="14px"
      id="text23"
      style="font-size:20px;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">E<tspan
-   font-size="11px"
-   dy="3"
-   id="tspan22"
-   style="font-size:20px;stroke:#ff0101;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1">z</tspan></text>
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2">x</tspan></text>
   <!-- Total E (the actual tilted field) — bold solid -->
   <g
      id="g1"
-     transform="matrix(1.0519972,0,0,0.85296445,-206.84877,41.396789)"
+     transform="matrix(1.0519972,0,0,0.85296445,-185.63557,48.467857)"
      style="stroke:#ff0101;stroke-width:2.1;stroke-dasharray:none;stroke-opacity:1">
     <line
        x1="376.47275"
@@ -815,10 +812,10 @@
   <!-- Decomposition formula -->
   <g
      id="g2"
-     transform="translate(-310.86962,42.785163)">
+     transform="translate(-289.65642,49.856231)">
     <text
-       x="514.07117"
-       y="278.79083"
+       x="518.31378"
+       y="278.08374"
        fill="#c0392b"
        font-weight="bold"
        font-style="italic"
@@ -826,8 +823,8 @@
        id="text24"
        style="fill:#ff1800;fill-opacity:1;stroke:#ff0000;stroke-width:0;stroke-dasharray:none;stroke-opacity:1">E</text>
     <text
-       x="530.41565"
-       y="278.01257"
+       x="534.65826"
+       y="277.30548"
        fill="#c0392b"
        font-size="17.214px"
        font-style="italic"
@@ -836,7 +833,7 @@
    font-size="13.2415px"
    dy="3.9724574 -3.9724574 0 0 0 0 0 3.9724574 -3.9724574"
    id="tspan24"
-   style="fill:#ff1800;fill-opacity:1;stroke-width:0;stroke-dasharray:none">xx̂ − Ezẑ</tspan></text>
+   style="fill:#ff1800;fill-opacity:1;stroke-width:0;stroke-dasharray:none">xx̂ + Ezẑ</tspan></text>
   </g>
   <!-- =============== Ez CONSEQUENCE: SURFACE CHARGES (established region) =============== -->
   <!-- + charges on the dielectric-facing (bottom) surface of trace -->
@@ -849,7 +846,7 @@
   <!-- =============== AXES =============== -->
   <!-- =============== LEGEND =============== -->
   <g
-     transform="translate(293.39479,656.09084)"
+     transform="translate(314.60799,663.16191)"
      id="g75">
     <!-- E (bold) -->
     <!-- Ex / Ez component -->
@@ -860,14 +857,15 @@
      stroke="#333333"
      fill="#333333"
      id="g49"
-     transform="translate(4.0688528,296.20076)">
+     transform="translate(-15.023031,-185.33896)"
+     inkscape:label="Axis">
     <!-- x axis: right -->
     <line
-       x1="29.51049"
+       x1="28.803383"
        y1="297.4126"
-       x2="89.51049"
+       x2="89.500038"
        y2="297.4126"
-       stroke-width="1.5"
+       stroke-width="1.50868"
        marker-end="url(#arrAx-5)"
        id="line45"
        style="marker-end:url(#arrAx-5)" />
@@ -876,7 +874,7 @@
        y="301.4126"
        font-style="italic"
        id="text45"
-       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">x</text>
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">z</text>
     <text
        x="107.51049"
        y="301.4126"
@@ -886,24 +884,37 @@
        style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(propagation)</text>
     <!-- z axis: up -->
     <line
-       x1="29.51049"
-       y1="297.4126"
-       x2="29.51049"
-       y2="237.41258"
-       stroke-width="1.5"
+       x1="29.864044"
+       y1="296.62466"
+       x2="29.864044"
+       y2="357.66953"
+       stroke-width="1.513"
        marker-end="url(#arrAx-5)"
        id="line46"
        style="marker-end:url(#arrAx-5)" />
     <text
-       x="23.853148"
-       y="232.41258"
+       x="37.111401"
+       y="358.63116"
        font-style="italic"
        id="text47"
-       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">z</text>
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">x</text>
     <!-- y axis: into page (⊗) -->
+    <text
+       x="22.127989"
+       y="283.93808"
+       font-style="italic"
+       id="text48"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">y</text>
+    <text
+       x="34.127987"
+       y="284.42758"
+       font-size="11px"
+       fill="#555555"
+       id="text49"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(into page)</text>
     <g
-       transform="translate(64.51049,297.41259)"
-       id="g48">
+       transform="translate(64.058301,297.00559)"
+       id="g48-7">
       <circle
          r="7"
          fill="none"
@@ -927,48 +938,35 @@
          y2="5"
          stroke="#333333"
          stroke-width="1.3"
-         id="line48" />
+         id="line48-6" />
     </g>
-    <text
-       x="18.769232"
-       y="318.05597"
-       font-style="italic"
-       id="text48"
-       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">y</text>
-    <text
-       x="30.769232"
-       y="318.54547"
-       font-size="11px"
-       fill="#555555"
-       id="text49"
-       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(into page)</text>
   </g>
   <g
      id="g15"
-     transform="translate(-15.802674,81.373816)"
+     transform="translate(5.4105287,88.444884)"
      inkscape:label="STEP">
     <!-- Plot baseline / axis lines (faint) -->
     <line
-       x1="86.673332"
-       y1="-15"
-       x2="824.11591"
-       y2="-15"
+       x1="95.512169"
+       y1="-27.020815"
+       x2="815.2771"
+       y2="-27.020815"
        stroke="#bbbbbb"
-       stroke-width="0.634225"
+       stroke-width="0.626577"
        stroke-dasharray="2, 2"
        id="line10" />
     <line
        x1="170.58942"
-       y1="-55"
+       y1="-67.020813"
        x2="824.11591"
-       y2="-55"
+       y2="-67.020813"
        stroke="#bbbbbb"
        stroke-width="0.59705"
        stroke-dasharray="2, 2"
        id="line11" />
     <!-- Voltage step waveform: V0 left of wavefront, smooth transition at x=500, 0 right -->
     <path
-       d="M 82.717281,-55.559441 480,-55 c 11.99999,0.0169 28.00008,40.042572 40,40 l 304.11588,-1.078921"
+       d="M 94.384543,-67.580256 C 106.40536,-67.226703 480,-67.020815 480,-67.020815 c 11.99999,0.0169 28.00008,40.042572 40,40 l 304.11588,-1.078921"
        fill="none"
        stroke="#5a4d8c"
        stroke-width="2.2"
@@ -977,7 +975,7 @@
     <!-- Tick labels -->
     <text
        x="72.747253"
-       y="-52"
+       y="-64.020813"
        fill="#5a4d8c"
        font-size="11px"
        text-anchor="end"
@@ -985,7 +983,7 @@
        id="text11-0">V₀</text>
     <text
        x="72.747253"
-       y="-12"
+       y="-24.020815"
        fill="#5a4d8c"
        font-size="11px"
        text-anchor="end"
@@ -994,36 +992,36 @@
     <!-- Plot title -->
     <text
        x="212.07793"
-       y="-62.395603"
+       y="-74.41642"
        fill="#5a4d8c"
        font-size="12px"
        font-style="italic"
        id="text13-4"
-       style="font-size:14.6667px">propagating voltage step V(x, t)</text>
+       style="font-size:14.6667px">propagating voltage step V(z, t)</text>
     <text
        x="477.40637"
-       y="-0.35872555"
+       y="-6.7226868"
        fill="#5a4d8c"
        font-size="12px"
        font-style="italic"
        id="text13-4-9"
-       style="font-size:14.6667px">x<tspan
+       style="font-size:14.6667px">z<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan1">1</tspan></text>
     <text
        x="510.69199"
-       y="-0.26353574"
+       y="-6.6274967"
        fill="#5a4d8c"
        font-size="12px"
        font-style="italic"
        id="text13-4-9-8"
-       style="font-size:14.6667px">x<tspan
+       style="font-size:14.6667px">z<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan1-8">2</tspan></text>
     <!-- "Ahead of wavefront: no fields yet" -->
     <text
        x="555"
-       y="-38"
+       y="-50.020817"
        fill="#888888"
        font-size="12px"
        font-style="italic"
@@ -1032,12 +1030,12 @@
          sodipodi:role="line"
          id="tspan5"
          x="555"
-         y="-38"
+         y="-50.020817"
          style="font-size:14.6667px;line-height:1">ahead of wavefront:</tspan><tspan
          sodipodi:role="line"
          id="tspan7"
          x="555"
-         y="-23.3333"
+         y="-35.354118"
          style="font-size:14.6667px;line-height:1">no fields yet</tspan></text>
   </g>
   <g
@@ -1045,20 +1043,20 @@
      stroke-width="2.4"
      fill="none"
      id="g24-6"
-     transform="matrix(0.99137015,0,0,2.5957491,-12.321663,-433.09692)"
+     transform="matrix(0.99137015,0,0,2.5957491,8.8915394,-426.02585)"
      style="stroke-width:1.24675;stroke-dasharray:none">
     <path
        d="m 435.60905,264.65085 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
        marker-end="url(#arrE-0-0)"
        id="path39-8"
        sodipodi:nodetypes="cc"
-       style="stroke:#c0392b;stroke-width:1.24675386;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0)" />
+       style="stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0)" />
     <path
        d="m 501.03534,264.41556 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
        marker-end="url(#arrE-0-0-82)"
        id="path39-8-51"
        sodipodi:nodetypes="cc"
-       style="stroke:#c0392b;stroke-width:0.81039001;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-82)" />
+       style="stroke:#c0392b;stroke-width:0.81039;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-82)" />
     <path
        d="m 360.5227,264.71065 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
        marker-end="url(#arrE-0-0-8)"
@@ -1085,8 +1083,8 @@
        style="stroke:#c0392b;stroke-width:1.24675;stroke-dasharray:none;stroke-dashoffset:3.4;stroke-opacity:1;marker-end:url(#arrE-0-0-8-1-0)" />
   </g>
   <text
-     x="513.55469"
-     y="362.21487"
+     x="534.76794"
+     y="369.28595"
      fill="#922b21"
      font-style="italic"
      font-size="13px"
@@ -1094,7 +1092,7 @@
      style="font-size:20px"><tspan
        sodipodi:role="line"
        id="tspan7-1"
-       x="513.55469"
-       y="362.21487"
+       x="534.76794"
+       y="369.28595"
        style="font-size:20px;fill:#fb1500;fill-opacity:1">∂E/∂t at wavefront</tspan></text>
 </svg>
