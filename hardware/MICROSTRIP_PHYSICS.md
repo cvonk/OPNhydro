@@ -469,8 +469,8 @@ It is tempting to think of "the wave in the dielectric" and "the current in the 
 
 $$
   \begin{align}
-    \frac{\partial V}{\partial z} &= -L\,\frac{\partial I}{\partial t} - R\,I \label{eq:dvdz} \\
-    \frac{\partial I}{\partial z} &= -C\,\frac{\partial V}{\partial t} \label{eq:didz}
+    \frac{\partial V}{\partial z} &= -L\,\frac{\partial I}{\partial t} - R\,I \\
+    \frac{\partial I}{\partial z} &= -C\,\frac{\partial V}{\partial t}
   \end{align}
 $$
 
