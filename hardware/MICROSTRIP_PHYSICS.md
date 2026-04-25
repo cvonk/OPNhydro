@@ -330,7 +330,7 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 The electric field is force per unit positive charge. As a positive test charge moves from point $A$ to point $B$, the field does work on it — equal to $\int_A^B \mathbf E \cdot d\mathbf l$ per unit charge — and that work is the voltage drop, $V_A - V_B$, between the two points:
 $$
   \begin{align*}
-    \Delta V \ \overset{\Delta}{=} \ V_A - V_B &= \int_A^B \mathbf E \cdot d\mathbf l & \text{(definition)} \\
+    \Delta V \ \triangleq \ V_A - V_B &= \int_A^B \mathbf E \cdot d\mathbf l & \text{(from above)} \\
     \Rightarrow 
     \mathbf E &= -\nabla V & \text{(take derivative)} \\
     \Rightarrow
@@ -362,7 +362,7 @@ The **free electrons** in the copper feel three distinct effects:
 
 - **Voltage gradient behind the wavefront** (small) — sustains the current against resistive drag.
 
-The following subsections describe each in detail, starting with the vertical.
+The following subsections describe each in detail, starting with $E_x$.
 <br />
 
 
@@ -416,7 +416,7 @@ The electrons in *both* conductors are pushed *sideways*:
   </center>
 </figure>
 
-This drift is the transmission-line **current**. And it is also how the positive surface charge on the bottom of the trace gets established. Electrons drain out of the section horizontally toward the source, leaving the bottom of that section positively charged. The same current then accumulates as negative charge on the top of the return plane further back.
+This drift is the transmission-line **current**. And this same drift is what builds up the positive surface charge on the bottom of the trace: electrons drain out of the section horizontally toward the source, leaving the bottom of that section positively charged. The same current then accumulates as negative charge on the top of the return plane further back.
 
 ##### In other words
 
@@ -474,14 +474,14 @@ $$
   \end{align}
 $$
 
-The first equation $\eqref{eq:dvdz}$ is where $E_z$ comes from. A voltage gradient along the trace *is* a horizontal electric field: $E_z = -\partial V/\partial z$. The right-hand side identifies two contributions:
+The first equation is where $E_z$ comes from. A voltage gradient along the trace *is* a horizontal electric field: $E_z = -\partial V/\partial z$. The right-hand side identifies two contributions:
 
 - **$-L\,\partial I/\partial t$ dominates at the wavefront**, where the current rises sharply from zero to signal level. This is the steep $E_z$ cliff — the inductive back-EMF of the trace-and-return loop, forcing a voltage gradient to accommodate the rising current.
 - **$-R\,I$ dominates behind the wavefront**, where the current is steady. This is the small resistive $E_z$ that pays the ohmic tax — the "cost of pushing current through a lossy conductor" from earlier.
 
-The second equation $\eqref{eq:didz}$ is the surface-charge story. Wherever $V$ is rising in time, the current flowing into a section exceeds the current flowing out, and the difference is deposited as surface charge to raise $V$ against the distributed capacitance. In field terms: displacement current in the dielectric ($C\,\partial V/\partial t$) matched by a divergence of conduction current on the trace ($\partial I/\partial z$).
+The second equation is the surface-charge story. Wherever $V$ is rising in time, the current flowing into a section exceeds the current flowing out, and the difference is deposited as surface charge to raise $V$ against the distributed capacitance. In field terms: displacement current in the dielectric ($C\,\partial V/\partial t$) matched by a divergence of conduction current on the trace ($\partial I/\partial z$).
 
-Together: equation $\eqref{eq:didz}$ diverts current into the capacitance at the wavefront; equation $\eqref{eq:dvdz}$ turns the resulting $\partial I/\partial t$ into the $E_z$ that sweeps the wavefront one step further. The same leapfrog as §1.1, projected from $(\mathbf E, \mathbf B)$ onto $(V, I)$.
+Together: the second equation diverts current into the capacitance at the wavefront; the first equation turns the resulting $\partial I/\partial t$ into the $E_z$ that sweeps the wavefront one step further. The same leapfrog as §1.1, projected from $(\mathbf E, \mathbf B)$ onto $(V, I)$.
 
 $V$ and $I$ are quantities you measure on the copper. But the coefficients $L$ and $C$ that couple them are set by the field geometry in the dielectric — how tightly the $\mathbf B$ loops close, how densely the $\mathbf E$ lines terminate. The telegrapher's equations are the interface between the two views.
 
