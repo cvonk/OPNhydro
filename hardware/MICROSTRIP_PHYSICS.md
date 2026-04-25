@@ -162,7 +162,7 @@ When a **voltage step** is applied at the left end, the following chain of event
 
 3. The $\mathbf B$-field created in step 2 is also rising from zero → **changing in time** (RHS). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (LHS) — extending $\mathbf E$ slightly ahead of where it began.
 
-The electric field $\mathbf E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wave front advancing.
+The electric field $\mathbf E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wavefront advancing.
 
 In the source-free dielectric, the two laws simplify to:
 
@@ -321,43 +321,40 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 §1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the copper, there are **free electrons**, and they are not passive bystanders.
 
-#### First a note on notation
+#### First a Note on Notation
 
 §1.1 described everything in terms of the field vector $\mathbf E$, the natural quantity inside the dielectric. On the copper, the natural quantity is the trace voltage $V$ — what a scope would read. Recall the [definition of potential difference](https://coertvonk.com/physics/electromagnetism/electricity/electric-potential-29188):
 
 <div class="quote">
 
-The electric field is force per unit positive charge. The voltage at a point is the work needed to bring a positive test charge there from a reference, against the field. Putting these two definitions together, between points $A$ and $B$:
+The electric field is force per unit positive charge. As a positive test charge moves from point $A$ to point $B$, the field does work on it — equal to $\int_A^B \mathbf E \cdot d\mathbf l$ per unit charge — and that work is the voltage drop, $V_A - V_B$, between the two points:
 $$
   \begin{align*}
-    \Delta V \ \overset{\Delta}{=} \ V_A - V_B &= \int_A^B \mathbf E \cdot d\mathbf l & \text{(take derivative)} \\
+    \Delta V \ \overset{\Delta}{=} \ V_A - V_B &= \int_A^B \mathbf E \cdot d\mathbf l & \text{(definition)} \\
     \Rightarrow 
-    \mathbf E &= -\nabla V & \text{(only in z-dimention)} \\
+    \mathbf E &= -\nabla V & \text{(take derivative)} \\
     \Rightarrow
-    E_z &= -\frac{\partial V}{\partial z}
+    E_z &= -\frac{\partial V}{\partial z}& \text{(z-component only)}
   \end{align*}
 $$
 </div>
 
-The two are linked: on a transmission line operated in the quasi-TEM regime, $E_z$ and $-\partial V/\partial z$ are two ways of writing the same quantity — the voltage-gradient view is the circuit-theory shorthand, the $E_z$ view is the field-theory version. This paragraph uses whichever form makes the physics clearer at each step.
+The two are linked: on a transmission line operated in the quasi-TEM regime[^quasiTEM], $E_z$ and $-\partial V/\partial z$ are two ways of writing the same quantity — the voltage-gradient view is the circuit-theory shorthand, the $E_z$ view is the field-theory version. This paragraph uses whichever form makes the physics clearer at each step.
 
-#### Components of the Electric Field
+[^quasiTEM]: Strictly, $\mathbf E = -\nabla V - \partial \mathbf A/\partial t$ (the magnetic vector potential contributes a longitudinal piece). Quasi-TEM is the regime where that second term is negligible along the trace, leaving $E_z \approx -\partial V/\partial z$.
 
-The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one. That tilt decomposes into two components:
-$$
-    \mathbf E = \hat x \, E_x + \hat z \, E_z
-$$
+#### Three Effects on the Free Electrons
 
-where $\hat z$ points along the trace (the propagation direction) and $\hat x$ points from the trace to the return plane.
+The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one. (Throughout, $\hat x$ points from the trace to the return plane, $\hat z$ along the propagation direction.)
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-e-field-components.svg" style="width: 70%; max-width:800px; height: auto;">
-  <figcaption><i>Microstrip electric field components.</i></figcaption>
+  <img src="../media/infographics/microstrip-e-field.svg" style="width: 70%; max-width:800px; height: auto;">
+  <figcaption><i>Microstrip electric field.</i></figcaption>
   </center>
 </figure>
 
-The **free electrons** in the copper respond to each component differently:
+The **free electrons** in the copper feel three distinct effects:
 
 - **Vertical component $E_x$** (dominant) — confines the wave to the dielectric.
 
@@ -365,13 +362,13 @@ The **free electrons** in the copper respond to each component differently:
 
 - **Voltage gradient behind the wavefront** (small) — sustains the current against resistive drag.
 
-The following subsections describe each component in detail, starting with the vertical.
+The following subsections describe each in detail, starting with the vertical.
 <br />
 
 
 #### Vertical Component $E_x$
 
-As the wave front reaches a section of the conductor, $E_x$ there rises from zero to some value. The electrons in the conductor feel a force $\mathbf F = -e \, \mathbf E_x$, that is upward (opposite to $E_x$). 
+As the wavefront reaches a section of the conductor, $E_x$ there rises from zero to some value. The electrons in the conductor feel an upward force $F_x = -e \, E_x$ (the minus sign flips the direction of $E_x$). 
 
 So, the electrons in both conductors are pushed *upward*:
 - *in the trace*, they move away from the dielectric-facing surface, leaving it positively charged;
@@ -379,7 +376,7 @@ So, the electrons in both conductors are pushed *upward*:
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-ez-confinement.svg" style="width:100%; max-width:900px; height: auto;">
+  <img src="../media/infographics/microstrip-ex-confinement.svg" style="width:100%; max-width:900px; height: auto;">
   <figcaption><i>Microstrip E<sub>x</sub> confinement.</i></figcaption>
   </center>
 </figure>
@@ -406,7 +403,7 @@ And here's the whole point: because the field can't get into the copper, it has 
 
 #### Voltage Gradient $\partial V/\partial z$ at the Wavefront
 
-**At the wavefront**, the trace voltage drops from signal level (behind) to zero (ahead) over a short distance. That spatial gradient is a horizontal field, $E_z = -\partial V/\partial z$, pointing in the direction of propagation (high V → low V). The force on an electron is again $-e\, E_z$, so electrons are pushed backward, opposite to the wavefront's motion, toward the source.
+**At the wavefront**, the trace voltage drops from signal level (behind) to zero (ahead) over a short distance. That is a longitudinal voltage gradient $\partial V/\partial z$, with voltage falling in the propagation direction. Electrons, being negatively charged, are pushed toward the higher-voltage side — backward along the trace, opposite to the wavefront's motion, toward the source.
 
 The electrons in *both* conductors are pushed *sideways*:
 - *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the '$+$' terminal of the source;
@@ -415,7 +412,7 @@ The electrons in *both* conductors are pushed *sideways*:
 <figure>
   <center>
   <img src="../media/infographics/microstrip-copper-current.svg" style="width: 80%; max-width:800px; height: auto;">
-  <figcaption><i>Horizontal current arising from sequential vertical charge displacement at the wavefront.</i></figcaption>
+  <figcaption><i>Horizontal current at the wavefront, driven by the longitudinal voltage gradient.</i></figcaption>
   </center>
 </figure>
 
@@ -425,7 +422,7 @@ This drift is the transmission-line **current**. And it is also how the positive
 
 <div class="quote">
 
-Now, what about the along-field — the dotted horizontal arrow? Where does that come from?
+Now, what about the along-field? Where does that come from?
 
 It comes from the wave *going somewhere*. The voltage on the trace right here is at signal level. But a millimeter ahead, the wave hasn't arrived yet — the voltage is still zero. So you've got a voltage that changes from one place to another. And wherever the voltage changes from place to place, there's an electric field pointing from high to low. That's the along-field. It's a spatial gradient, $E_z = -\partial V / \partial z$. Right at the wavefront, where the voltage drops from full to zero in a very short distance, it's steep.
 
@@ -434,12 +431,12 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 <br />
 
 
-#### The Wavefront Cycle
+#### Recap: The At-Wavefront Cycle
 
 Tracking the signal trace, one wavefront step looks like this:
 
 1. $E_x$ appears → tries to push electrons up.
-2. $E_z$ appears simultaneously → pushes electrons horizontally backward.
+2. A voltage gradient $\partial V/\partial z$ appears simultaneously → pushes electrons backward along the trace (toward higher V).
 3. Electrons drift backward along the trace; the section at the wavefront loses electrons → bottom of the trace becomes positive.
 4. That positive surface charge generates its own field that cancels $E_x$ inside the metal.
 5. The wavefront advances one step further; the process repeats in the next section.
@@ -449,14 +446,11 @@ Each section of the trace only "wakes up" when the wavefront arrives — until t
 
 #### Voltage Gradient $\partial V/\partial z$ Behind the Wavefront
 
-So far we have described how $E_z$ arises at the wavefront itself. The conductor is also resistive, which produces a second, smaller $E_z$ behind the wavefront.
+So far we have described the steep voltage gradient at the wavefront itself. The conductor is also resistive, which produces a second, smaller voltage gradient behind the wavefront.
 
-The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a spatial gradient
-$$
-    E_z = -\frac{\partial V}{\partial z}
-$$ that re-accelerates the electrons between scattering events. $E_z$ behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no voltage drop, no $E_z$, and no loss.
+The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a small longitudinal gradient $\partial V/\partial z$ that re-accelerates the electrons between scattering events. This residual gradient behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no voltage drop, and no loss.
 
-**Why current still flows through already-charged sections.** The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
+**Why current still flows through already-charged sections.** The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small $\partial V/\partial z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
 
 ##### In other words
 
@@ -469,36 +463,25 @@ And what about the sections the wavefront has already passed? Their surface char
 <br />
 
 
-#### One System, Two Views
-
-It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not. They are two views of a single electromagnetic solution, and neither can exist without the other.
-
-- Without the surface-charge redistribution, the boundary condition that cancels $\mathbf E$ inside the metal would not be satisfied. The field would not be confined. There would be no guided wave — just radiation.
-- Without the propagating field, there would be nothing to drive the electrons. No $E_z$ means no $\mathbf J$. The current would not exist.
-
-The field drives the current. The current shapes the field. They are mutually dependent — one self-consistent system, seen from different sides of the interface.
-
-<br />
-
 #### The Wavefront Cycle in Equations
 
-Everything §1.2 has described step-by-step collapses into two coupled equations for the trace voltage $V(z,t)$ and the trace current $I(z,t)$ — the **telegrapher's equations** for a line with per-unit-length inductance $L$, capacitance $C$, and resistance $R$:
+It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not — they are two views of a single electromagnetic solution. Everything §1.2 has described step-by-step collapses into two coupled equations for the trace voltage $V(z,t)$ and the trace current $I(z,t)$ — the **telegrapher's equations** for a line with per-unit-length inductance $L$, capacitance $C$, and resistance $R$:
 
 $$
-\begin{align}
-\frac{\partial V}{\partial z} &= -L\,\frac{\partial I}{\partial t} - R\,I \\
-\frac{\partial I}{\partial z} &= -C\,\frac{\partial V}{\partial t}
-\end{align}
+  \begin{align}
+    \frac{\partial V}{\partial z} &= -L\,\frac{\partial I}{\partial t} - R\,I \label{eq:dvdz} \\
+    \frac{\partial I}{\partial z} &= -C\,\frac{\partial V}{\partial t} \label{eq:didz}
+  \end{align}
 $$
 
-The first equation is where $E_z$ comes from. A voltage gradient along the trace *is* a horizontal electric field: $E_z = -\partial V/\partial z$. The right-hand side identifies two contributions:
+The first equation $\eqref{eq:dvdz}$ is where $E_z$ comes from. A voltage gradient along the trace *is* a horizontal electric field: $E_z = -\partial V/\partial z$. The right-hand side identifies two contributions:
 
 - **$-L\,\partial I/\partial t$ dominates at the wavefront**, where the current rises sharply from zero to signal level. This is the steep $E_z$ cliff — the inductive back-EMF of the trace-and-return loop, forcing a voltage gradient to accommodate the rising current.
 - **$-R\,I$ dominates behind the wavefront**, where the current is steady. This is the small resistive $E_z$ that pays the ohmic tax — the "cost of pushing current through a lossy conductor" from earlier.
 
-The second equation is the surface-charge story. Wherever $V$ is rising in time, the current flowing into a section exceeds the current flowing out, and the difference is deposited as surface charge to raise $V$ against the distributed capacitance. In field terms: displacement current in the dielectric ($C\,\partial V/\partial t$) matched by a divergence of conduction current on the trace ($\partial I/\partial z$).
+The second equation $\eqref{eq:didz}$ is the surface-charge story. Wherever $V$ is rising in time, the current flowing into a section exceeds the current flowing out, and the difference is deposited as surface charge to raise $V$ against the distributed capacitance. In field terms: displacement current in the dielectric ($C\,\partial V/\partial t$) matched by a divergence of conduction current on the trace ($\partial I/\partial z$).
 
-Together: equation 2 diverts current sideways at the wavefront to charge the capacitance; equation 1 turns the resulting $\partial I/\partial t$ into the $E_z$ that sweeps the wavefront one step further. The same leapfrog as §1.1, projected from $(\mathbf E, \mathbf B)$ onto $(V, I)$.
+Together: equation $\eqref{eq:didz}$ diverts current into the capacitance at the wavefront; equation $\eqref{eq:dvdz}$ turns the resulting $\partial I/\partial t$ into the $E_z$ that sweeps the wavefront one step further. The same leapfrog as §1.1, projected from $(\mathbf E, \mathbf B)$ onto $(V, I)$.
 
 $V$ and $I$ are quantities you measure on the copper. But the coefficients $L$ and $C$ that couple them are set by the field geometry in the dielectric — how tightly the $\mathbf B$ loops close, how densely the $\mathbf E$ lines terminate. The telegrapher's equations are the interface between the two views.
 

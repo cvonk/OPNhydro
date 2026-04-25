@@ -24,13 +24,13 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2"
      inkscape:cx="322.25"
-     inkscape:cy="650.25"
+     inkscape:cy="393.75"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g-dEdt">
+     inkscape:current-layer="svg67">
     <inkscape:page
        x="3.9559285e-09"
        y="0"
@@ -1212,7 +1212,7 @@
      font-style="italic"
      font-size="14px"
      id="text28"
-     style="font-size:14.6667px">E<tspan
+     style="font-size:14.6667px;display:none">E<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan1">z</tspan> inside trace, just above the dielectric</text>
   <!-- =============== ELECTRONS — DRIFTING (left of wavefront) =============== -->
@@ -1547,7 +1547,7 @@
      font-style="italic"
      font-size="12px"
      id="text37"
-     style="font-size:14.6667px">F = −e·E<tspan
+     style="font-size:14.6667px;display:none">F = −e·E<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan5">z</tspan><tspan
    font-size="9px"
