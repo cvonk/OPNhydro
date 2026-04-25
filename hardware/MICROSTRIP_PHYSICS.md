@@ -321,6 +321,26 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 §1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the copper, there are **free electrons**, and they are not passive bystanders.
 
+#### First a note on notation
+
+§1.1 described everything in terms of the field vector $\mathbf E$, the natural quantity inside the dielectric. On the copper, the natural quantity is the trace voltage $V$ — what a scope would read. Recall the [definition of potential difference](https://coertvonk.com/physics/electromagnetism/electricity/electric-potential-29188):
+
+<div class="quote">
+
+The electric field is force per unit positive charge. The voltage at a point is the work needed to bring a positive test charge there from a reference, against the field. Putting these two definitions together, between points $A$ and $B$:
+$$
+  \begin{align*}
+    \Delta V \ \overset{\Delta}{=} \ V_A - V_B &= \int_A^B \mathbf E \cdot d\mathbf l & \text{(take derivative)} \\
+    \Rightarrow 
+    \mathbf E &= -\nabla V & \text{(only in z-dimention)} \\
+    \Rightarrow
+    E_z &= -\frac{\partial V}{\partial z}
+  \end{align*}
+$$
+</div>
+
+The two are linked: on a transmission line operated in the quasi-TEM regime, $E_z$ and $-\partial V/\partial z$ are two ways of writing the same quantity — the voltage-gradient view is the circuit-theory shorthand, the $E_z$ view is the field-theory version. This paragraph uses whichever form makes the physics clearer at each step.
+
 #### Components of the Electric Field
 
 The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one. That tilt decomposes into two components:
@@ -341,9 +361,9 @@ The **free electrons** in the copper respond to each component differently:
 
 - **Vertical component $E_x$** (dominant) — confines the wave to the dielectric.
 
-- **Horizontal component $E_z$ at the wavefront** (strong) — the steep voltage cliff drives the current and establishes the surface charge.
+- **Voltage gradient at the wavefront** (strong) — the steep cliff drives the current and establishes the surface charge.
 
-- **Horizontal component $E_z$ behind the wavefront** (small) — sustains the current against resistive drag.
+- **Voltage gradient behind the wavefront** (small) — sustains the current against resistive drag.
 
 The following subsections describe each component in detail, starting with the vertical.
 <br />
@@ -384,7 +404,7 @@ And here's the whole point: because the field can't get into the copper, it has 
 <br />
 
 
-#### Horizontal Component $E_z$ at the Wavefront
+#### Voltage Gradient $\partial V/\partial z$ at the Wavefront
 
 **At the wavefront**, the trace voltage drops from signal level (behind) to zero (ahead) over a short distance. That spatial gradient is a horizontal field, $E_z = -\partial V/\partial z$, pointing in the direction of propagation (high V → low V). The force on an electron is again $-e\, E_z$, so electrons are pushed backward, opposite to the wavefront's motion, toward the source.
 
@@ -394,7 +414,7 @@ The electrons in *both* conductors are pushed *sideways*:
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-ex-current.svg" style="width: 80%; max-width:800px; height: auto;">
+  <img src="../media/infographics/microstrip-copper-current.svg" style="width: 80%; max-width:800px; height: auto;">
   <figcaption><i>Horizontal current arising from sequential vertical charge displacement at the wavefront.</i></figcaption>
   </center>
 </figure>
@@ -427,7 +447,7 @@ Tracking the signal trace, one wavefront step looks like this:
 Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net motion. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
 <br />
 
-#### Horizontal Component $E_z$ Behind the Wavefront
+#### Voltage Gradient $\partial V/\partial z$ Behind the Wavefront
 
 So far we have described how $E_z$ arises at the wavefront itself. The conductor is also resistive, which produces a second, smaller $E_z$ behind the wavefront.
 
@@ -457,6 +477,30 @@ It is tempting to think of "the wave in the dielectric" and "the current in the 
 - Without the propagating field, there would be nothing to drive the electrons. No $E_z$ means no $\mathbf J$. The current would not exist.
 
 The field drives the current. The current shapes the field. They are mutually dependent — one self-consistent system, seen from different sides of the interface.
+
+<br />
+
+#### The Wavefront Cycle in Equations
+
+Everything §1.2 has described step-by-step collapses into two coupled equations for the trace voltage $V(z,t)$ and the trace current $I(z,t)$ — the **telegrapher's equations** for a line with per-unit-length inductance $L$, capacitance $C$, and resistance $R$:
+
+$$
+\begin{align}
+\frac{\partial V}{\partial z} &= -L\,\frac{\partial I}{\partial t} - R\,I \\
+\frac{\partial I}{\partial z} &= -C\,\frac{\partial V}{\partial t}
+\end{align}
+$$
+
+The first equation is where $E_z$ comes from. A voltage gradient along the trace *is* a horizontal electric field: $E_z = -\partial V/\partial z$. The right-hand side identifies two contributions:
+
+- **$-L\,\partial I/\partial t$ dominates at the wavefront**, where the current rises sharply from zero to signal level. This is the steep $E_z$ cliff — the inductive back-EMF of the trace-and-return loop, forcing a voltage gradient to accommodate the rising current.
+- **$-R\,I$ dominates behind the wavefront**, where the current is steady. This is the small resistive $E_z$ that pays the ohmic tax — the "cost of pushing current through a lossy conductor" from earlier.
+
+The second equation is the surface-charge story. Wherever $V$ is rising in time, the current flowing into a section exceeds the current flowing out, and the difference is deposited as surface charge to raise $V$ against the distributed capacitance. In field terms: displacement current in the dielectric ($C\,\partial V/\partial t$) matched by a divergence of conduction current on the trace ($\partial I/\partial z$).
+
+Together: equation 2 diverts current sideways at the wavefront to charge the capacitance; equation 1 turns the resulting $\partial I/\partial t$ into the $E_z$ that sweeps the wavefront one step further. The same leapfrog as §1.1, projected from $(\mathbf E, \mathbf B)$ onto $(V, I)$.
+
+$V$ and $I$ are quantities you measure on the copper. But the coefficients $L$ and $C$ that couple them are set by the field geometry in the dielectric — how tightly the $\mathbf B$ loops close, how densely the $\mathbf E$ lines terminate. The telegrapher's equations are the interface between the two views.
 
 <br />
 
