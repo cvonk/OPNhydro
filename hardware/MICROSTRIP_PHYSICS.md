@@ -441,7 +441,7 @@ Tracking the signal trace, one wavefront step looks like this:
 4. That positive surface charge generates its own field that cancels $E_x$ inside the metal.
 5. The wavefront advances one step further; the process repeats in the next section.
 
-Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net motion. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
+Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net drift. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
 <br />
 
 #### Voltage Gradient $\partial V/\partial z$ Behind the Wavefront
@@ -469,19 +469,19 @@ It is tempting to think of "the wave in the dielectric" and "the current in the 
 
 $$
   \begin{align}
-    \frac{\partial V}{\partial z} &= -L\,\frac{\partial I}{\partial t} - R\,I \\
-    \frac{\partial I}{\partial z} &= -C\,\frac{\partial V}{\partial t}
+    \frac{\partial V}{\partial z} &= -L\,\frac{\partial I}{\partial t} - R\,I \tag{1} \\
+    \frac{\partial I}{\partial z} &= -C\,\frac{\partial V}{\partial t} \tag{2}
   \end{align}
 $$
 
-The first equation is where $E_z$ comes from. A voltage gradient along the trace *is* a horizontal electric field: $E_z = -\partial V/\partial z$. The right-hand side identifies two contributions:
+The first equation (1) is where $E_z$ comes from. A voltage gradient along the trace *is* a horizontal electric field: $E_z = -\partial V/\partial z$. The right-hand side identifies two contributions:
 
 - **$-L\,\partial I/\partial t$ dominates at the wavefront**, where the current rises sharply from zero to signal level. This is the steep $E_z$ cliff — the inductive back-EMF of the trace-and-return loop, forcing a voltage gradient to accommodate the rising current.
 - **$-R\,I$ dominates behind the wavefront**, where the current is steady. This is the small resistive $E_z$ that pays the ohmic tax — the "cost of pushing current through a lossy conductor" from earlier.
 
-The second equation is the surface-charge story. Wherever $V$ is rising in time, the current flowing into a section exceeds the current flowing out, and the difference is deposited as surface charge to raise $V$ against the distributed capacitance. In field terms: displacement current in the dielectric ($C\,\partial V/\partial t$) matched by a divergence of conduction current on the trace ($\partial I/\partial z$).
+The second equation (2) is the surface-charge story. Wherever $V$ is rising in time, the current flowing into a section exceeds the current flowing out, and the difference is deposited as surface charge to raise $V$ against the distributed capacitance. In field terms: displacement current in the dielectric ($C\,\partial V/\partial t$) matched by a divergence of conduction current on the trace ($\partial I/\partial z$).
 
-Together: the second equation diverts current into the capacitance at the wavefront; the first equation turns the resulting $\partial I/\partial t$ into the $E_z$ that sweeps the wavefront one step further. The same leapfrog as §1.1, projected from $(\mathbf E, \mathbf B)$ onto $(V, I)$.
+Together: equation (2) diverts current into the capacitance at the wavefront; equation (1) turns the resulting $\partial I/\partial t$ into the $E_z$ that sweeps the wavefront one step further. The same leapfrog as §1.1, projected from $(\mathbf E, \mathbf B)$ onto $(V, I)$.
 
 $V$ and $I$ are quantities you measure on the copper. But the coefficients $L$ and $C$ that couple them are set by the field geometry in the dielectric — how tightly the $\mathbf B$ loops close, how densely the $\mathbf E$ lines terminate. The telegrapher's equations are the interface between the two views.
 
