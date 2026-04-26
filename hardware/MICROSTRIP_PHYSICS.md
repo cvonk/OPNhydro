@@ -491,6 +491,45 @@ $V$ and $I$ are quantities you measure on the copper. But the coefficients $L$ a
 
 <br />
 
+#### The Boundary-Condition View
+
+A third lens on the same phenomenon, equivalent to the force-on-electrons picture and the telegrapher's equations. At a near-perfect conductor, $\mathbf E$ and $\mathbf B$ vanish inside. To reconcile with the wave's nonzero $\mathbf E$ and $\mathbf B$ just outside, the boundary conditions force the conductor to carry **surface charge** and **surface current** in algebraically determined amounts.
+
+**Normal $\mathbf E$ → surface charge.** Gauss's law forces a discontinuity in $D_\perp$ at the surface equal to the surface charge density:
+$$
+    \sigma_s = \varepsilon\, E_\perp\big|_{\text{outside}}
+$$
+The positive surface charge on the bottom of the trace is whatever $\sigma_s$ the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture earlier in §1.2 is the dynamic mechanism; this equation is the algebraic statement of the same fact.
+
+
+
+
+**Tangential $\mathbf B$ → surface current.** Ampère's law forces a discontinuity in $\mathbf B_\parallel$ at the surface equal to a surface current density:
+$$
+    \mathbf K = \frac{1}{\mu_0}\,\hat n \times \mathbf B_{\text{outside}}
+$$
+where $\hat n$ is the outward normal from the conductor. Appendix A shows that $\mathbf B$ in the dielectric points in $\pm\hat y$ — curling around the trace. Plugging $\hat n = +\hat x$ (downward, from trace into dielectric) and $\mathbf B = B_y\,\hat y$ gives $\mathbf K = (B_y/\mu_0)\,\hat z$ — conventional current in the propagation direction. The trace current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 70%; max-width:800px; height: auto;">
+  <figcaption><i>Cross-section of the microstrip <b>B</b> field. Loops curl around the trace; below the return plane, the field is screened to ~0.</i></figcaption>
+  </center>
+</figure>
+
+**Charge conservation ties the two together.** On the trace surface,
+$$
+    \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} = 0
+$$
+
+- *Behind the wavefront*, $\sigma_s$ is steady, so $\nabla_s \cdot \mathbf K = 0$ — current flows uniformly along $z$.
+- *At the wavefront*, $\sigma_s$ is ramping from zero, so $\nabla_s \cdot \mathbf K \neq 0$ — the current must converge into the section to deposit the new charge.
+
+That second case is the same "current diverts into the capacitance at the wavefront" statement from the telegrapher's equations, recast as charge conservation on a 2-D surface.
+
+**The unified picture.** The wave's $\mathbf E$ and $\mathbf B$ in the dielectric *dictate* what the copper must carry: the surface charge $\sigma_s$ is set by $E_\perp$; the surface current $\mathbf K$ by $\mathbf B_\parallel$. This is why "the wave is the boss; the electrons are the help" is exact rather than metaphorical — the boundary conditions are the explicit form of that statement.
+<br />
+
 #### Putting It Together
 
 <div class="quote">
