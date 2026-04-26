@@ -73,106 +73,6 @@
     </marker>
     <marker
        style="overflow:visible"
-       id="marker24"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path24" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="marker23"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path23" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="marker22"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path22" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="marker21"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path21" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="ArrowWide"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path20" />
-    </marker>
-    <marker
-       style="overflow:visible"
        id="marker19"
        refX="0"
        refY="0"
@@ -1119,7 +1019,8 @@
      font-size="12px"
      font-style="italic"
      id="text18"
-     style="font-size:14.6667px;text-align:center;text-anchor:middle">behind wavefront: E<tspan
+     style="font-size:14.6667px;text-align:center;text-anchor:middle;display:none"
+     inkscape:label="electrons drift">behind wavefront: E<tspan
    style="font-size:14.6667px;baseline-shift:sub"
    id="tspan2">x</tspan> has arrived → electrons drift</text>
   <text
@@ -1212,19 +1113,23 @@
      font-style="italic"
      font-size="14px"
      id="text28"
-     style="font-size:14.6667px;display:none">E<tspan
+     style="font-size:14.6667px;display:none"
+     inkscape:label="Ez inside trace">E<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan1">z</tspan> inside trace, just above the dielectric</text>
   <!-- =============== ELECTRONS — DRIFTING (left of wavefront) =============== -->
   <!-- Drift opposite to Ex (force on electron is −eE) -->
   <g
      id="g36"
-     transform="translate(-3.3401842,-61.538464)">
+     transform="translate(-3.3401842,-61.538464)"
+     inkscape:label="electrons trace">
     <!-- row near y=305 (below upper Ex arrows) -->
     <!-- row near y=370 (just above interface) -->
     <g
        id="g32"
-       transform="translate(43.118678)">
+       transform="translate(43.118678)"
+       style="display:none"
+       inkscape:label="electron 1">
       <line
          x1="135"
          y1="368"
@@ -1251,7 +1156,9 @@
     </g>
     <g
        id="g34"
-       transform="translate(-2.3735052,-2.3735052)">
+       transform="translate(-2.3735052,-2.3735052)"
+       inkscape:label="electron 2"
+       style="display:none">
       <line
          x1="325"
          y1="368"
@@ -1278,7 +1185,8 @@
     </g>
     <g
        id="g35-82"
-       transform="translate(70.393487,1.154834)">
+       transform="translate(70.393487,1.154834)"
+       inkscape:label="electron 5">
       <line
          x1="420"
          y1="370"
@@ -1306,7 +1214,8 @@
     </g>
     <g
        id="g35-2"
-       transform="translate(60.200596,-8.9997189)">
+       transform="translate(60.200596,-8.9997189)"
+       inkscape:label="electron 4">
       <line
          x1="420"
          y1="370"
@@ -1334,7 +1243,8 @@
     </g>
     <g
        id="g35-21"
-       transform="translate(42.538227,-0.30698716)">
+       transform="translate(42.538227,-0.30698716)"
+       inkscape:label="electron 3">
       <line
          x1="420"
          y1="370"
@@ -1395,12 +1305,14 @@
   </g>
   <g
      id="g36-6"
-     transform="matrix(-1.0305136,0,0,-1.0305136,573.78154,891.38093)">
+     transform="matrix(-1.0305136,0,0,-1.0305136,573.78154,891.38093)"
+     inkscape:label="electrons return plane">
     <!-- row near y=305 (below upper Ex arrows) -->
     <!-- row near y=370 (just above interface) -->
     <g
        id="g32-1"
-       transform="translate(-51.652966,5.7580638)">
+       transform="translate(-51.652966,5.7580638)"
+       inkscape:label="electron 4">
       <line
          x1="135"
          y1="368"
@@ -1428,7 +1340,8 @@
     </g>
     <g
        id="g32-1-8"
-       transform="translate(-54.247557,-3.7816028)">
+       transform="translate(-54.247557,-3.7816028)"
+       inkscape:label="electron 5">
       <line
          x1="135"
          y1="368"
@@ -1456,7 +1369,9 @@
     </g>
     <g
        id="g33-3"
-       transform="translate(-1.8721134,-2.407003)">
+       transform="translate(-1.8721134,-2.407003)"
+       inkscape:label="electron 2"
+       style="display:none">
       <line
          x1="230"
          y1="370"
@@ -1484,7 +1399,9 @@
     </g>
     <g
        id="g34-0"
-       transform="translate(-230.70642,0.38387092)">
+       transform="translate(-230.70642,0.38387092)"
+       style="display:inline"
+       inkscape:label="electron 3">
       <line
          x1="325"
          y1="368"
@@ -1512,7 +1429,9 @@
     </g>
     <g
        id="g35-8"
-       transform="translate(-29.68637,-4.8140059)">
+       transform="translate(-29.68637,-4.8140059)"
+       inkscape:label="electron 1"
+       style="display:none">
       <line
          x1="420"
          y1="370"

@@ -46,7 +46,7 @@ Chapter 1 builds the field-theory picture from first principles — starting wit
 
 The treatment assumes familiarity with basic circuit theory (Ohm's law, Kirchhoff's laws) but does not require a background in electromagnetics. Where the mathematics goes deeper, expandable sections and Feynman-style narratives offer the same insight from a different angle.
 
-Most textbook introductions to transmission lines start with the lumped-element model — an infinite ladder of series inductors and shunt capacitors. That model yields the right equations (the wave equation, $Z_0 = \sqrt{L/C}$, propagation delay), but it obscures the physics. It cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology. This document takes a different path: it starts from the fields themselves — Maxwell’s equations applied to the cross-section of a microstrip — and derives the circuit quantities (impedance, capacitance, inductance) as consequences. The result is a mental model that transfers directly to layout decisions, where the fields, not the lumped elements, are what the designer actually controls.
+Most textbook introductions to transmission lines start with the lumped-element model — an infinite ladder of series inductors and shunt capacitors. That model yields the right equations (the wave equation, $Z_0 = \sqrt{L/C}$, propagation delay), but it obscures the physics. It cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology. This document takes a different path: it starts from the fields themselves — Maxwell's equations applied to the cross-section of a microstrip — and derives the circuit quantities (impedance, capacitance, inductance) as consequences. The result is a mental model that transfers directly to layout decisions, where the fields, not the lumped elements, are what the designer actually controls.
 
 
 ---
@@ -109,7 +109,7 @@ A microstrip has **two regions**: the dielectric between the conductors, and the
 
 ##### Two of Maxwell's Equations
 
-As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free divergence constraint.
+As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free divergence constraint.
 $$  
   \begin{align}  
     \nabla \times \mathbf B &=
@@ -129,12 +129,12 @@ where $\mathbf E$ and $\mathbf B$ are the electric and magnetic field vectors at
 
 ##### Microstrip Geometry
 
-Consider a **signal trace running above a ground return plane**, separated by a thin dielectric — the basic microstrip geometry of every PCB. For simplicity, this section treats the dielectric as the only medium between the conductors, ignoring the fringing fields that extend through the air above the trace.
+Consider a **signal trace running above a ground return plane**, separated by a thin dielectric — the basic microstrip geometry of every PCB. For simplicity, this section treats the dielectric as the only medium between the conductors.
 
 The 3D Cartesian coordinate system ($x,y,z$) aligns with the structure's geometry to define propagation, width and height:
 - **$x$-axis:** is perpendicular to the return plane, representing the thickness of the dielectric.
 - **$y$-axis:** is parallel to the PCB surface and perpendicular to propagation, corresponding to the width of the microstrip.
-- **$z$-axis:** the direction along which the signal propagates, corresponding to direction of the copper strip (trace).
+- **$z$-axis:** the direction along which the signal propagates, corresponding to the direction of the copper strip (trace).
 
 ##### Changing in Time vs. Changing in Space
 
@@ -162,7 +162,7 @@ When a **voltage step** is applied at the left end, the following chain of event
 
 3. The $\mathbf B$-field created in step 2 is also rising from zero → **changing in time** (RHS). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (LHS) — extending $\mathbf E$ slightly ahead of where it began.
 
-The electric field $\mathbf E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — field direction and variation are perpendicular. That is a wavefront advancing.
+The electric field $\mathbf E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — the field direction is perpendicular to the direction in which it varies. That is a wavefront advancing.
 
 In the source-free dielectric, the two laws simplify to:
 
@@ -175,7 +175,7 @@ $$
   \end{align}
 $$
 
-A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the **coupling** — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*. **Each field regenerates the other**, so the wave is self-sustaining — no electrons required. The mathematics forbid a localized disturbance from remaining localized. For more details, refer to Appendix A.
+A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the **coupling** — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*. **Each field regenerates the other**, so the wave is self-sustaining — no electrons required. The mathematics forbids a localized disturbance from remaining localized. For more details, refer to Appendix A.
 
 
 ##### In other words
@@ -223,7 +223,7 @@ The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the
 
   Substitute the source-free Ampère–Maxwell into the right side
   $$
-      \nabla \times (\nabla \times \mathbf E) = -\mu\varepsilon \frac{\partial^2 \mathbf E}{\partial t^2}
+      \nabla \times (\nabla \times \mathbf E) = -\mu\,\varepsilon \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 
   Recall the vector identity
@@ -234,7 +234,7 @@ The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the
 
   Expand the left side using this vector identity
   $$
-      \nabla(\nabla \cdot \mathbf E) - \nabla^2\mathbf E = -\mu\varepsilon \frac{\partial^2 \mathbf E}{\partial t^2}
+      \nabla(\nabla \cdot \mathbf E) - \nabla^2\mathbf E = -\mu\,\varepsilon \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 
   Apply Gauss's law:
@@ -330,9 +330,13 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 The electric field is force per unit positive charge. As a positive test charge moves from point $A$ to point $B$, the field does work on it — equal to $\int_A^B \mathbf E \cdot d\mathbf l$ per unit charge — and that work is the voltage drop, $V_A - V_B$, between the two points:
 $$
   \begin{align*}
-    \Delta V \ \triangleq \ V_A - V_B &= \int_A^B \mathbf E \cdot d\mathbf l & \text{(from above)} \\
+    V_{AB} \ \triangleq \ V_A - V_B &= \int_A^B \mathbf E \cdot d\mathbf l & \text{(from above)} \\
     \Rightarrow 
-    \mathbf E &= -\nabla V & \text{(take derivative)} \\
+    \frac{d}{d r_B} \left( V_A - V_B \right) &= \frac{d}{d r_B} \int_A^B \mathbf E \cdot d\mathbf l & \text{(take derivative)} \\
+    \Rightarrow 
+    \bcancel{\nabla V_A} - \nabla V_B &= \mathbf E & \rm{(V_A\ is\ constant)} \\
+    \Rightarrow
+    \mathbf E &= -\left( \bcancel{\frac{\partial V}{\partial x_B}\hat x} + \bcancel{\frac{\partial V}{\partial y_B}\hat y} + \frac{\partial V}{\partial z_B}\hat z  \right) & \rm{(write\ out\ \nabla)} \\
     \Rightarrow
     E_z &= -\frac{\partial V}{\partial z}& \text{(z-component only)}
   \end{align*}
@@ -530,7 +534,7 @@ $$
 There is one continuous $\mathbf B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu \mathbf J$) is the sole source — free electrons are moving, and their motion sustains $\mathbf B$. In the dielectric, there are no free electrons ($\mathbf J = 0$), so the displacement term takes over — the changing $\mathbf E$ field sustains $\mathbf B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\mathbf B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
 <br />
 
-#### In other words
+##### In other words
 
 The equation is the short answer. Here is the long one, in a voice we have borrowed before: Imagine Feynman is still at the chalkboard. Someone in the third row raises a hand.
 <div class="quote">
@@ -579,8 +583,7 @@ Every time a chip switches its outputs or its internal gates toggle, it draws a 
 
 $$\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$$
 
-This is trace and via inductance resisting sudden changes in current. The chip sees its supply rail sag momentarily, reducing the voltage between its power and ground pins. If the sag is large enough, the chip misinterprets logic levels or produces timing errors. The design goal is to minimize $L_{\text{PDN}}$ across the full frequency range over which the chip draws current — the details are covered in §2.1.
-
+This is trace and via inductance resisting sudden changes in current. The chip sees its supply rail sag for a moment, reducing the voltage between its power and ground pins. If the sag is large enough — what designers call **rail collapse** — the chip misinterprets logic levels or produces timing errors. The design goal is to minimize $L_{\text{PDN}}$ across the full frequency range over which the chip draws current — the details are covered in §2.1.
 <br />
 
 ---
@@ -612,7 +615,7 @@ $$
     I_C = C_m \ \frac{dV_a}{dt}
 $$
 
-where $C_{\text{m}}$ is the mutual parasitic capacitance between the two traces — determined by their overlap area, separation distance, and the dielectric constant of the material between them. Closer traces and longer parallel runs increase the coupling. A higher $\varepsilon_r$ increases mutual capacitance, but also tightens field confinement to the return plane — the net effect depends on geometry.
+where $C_m$ is the mutual parasitic capacitance between the two traces — determined by their overlap area, separation distance, and the dielectric constant of the material between them. Closer traces and longer parallel runs increase the coupling. A higher $\varepsilon_r$ increases mutual capacitance, but also tightens field confinement to the return plane — the net effect depends on geometry.
 
 This is purely Gauss's law at work: electric field lines must terminate on a conductor, and if another trace is closer or more convenient than the return plane, some of them will land there instead.
 <br />
@@ -743,6 +746,8 @@ A signal traveling along a trace is an EM wave guided by the trace and its retur
 </figure>
 
 If the planes are the same potential, prevent leakage with nearby stitching vias between them. If they are different potentials, place stitching capacitors as close to the signal via as possible.
+
+**Rule 1c — Keep every signal and power layer one dielectric away from a return plane.** The wave's confinement weakens as the trace moves away from its return — fields spread laterally, the loop area grows, and the characteristic impedance becomes ill-defined. Every routing layer needs a return plane in the immediately adjacent dielectric (no skipping a layer). This constraint is what drives the stack-up choice in §2.2.
 <br />
 
 #### Crosstalk
@@ -853,7 +858,7 @@ The board targets a ~100 mm × 80 mm footprint, which fits standard off-the-shel
 
 ### 2.6. Trace Widths
 
-The trace widths can be calculated using the IPC-2221 empirical formula for external conductors.[^1]
+The trace widths can be calculated using the IPC-2221 empirical formula for PCB conductors.[^1]
 [^1]: [IPC-2221 Trace Width Calculator, Altium PCB Design Guide](https://resources.altium.com/p/ipc-2221-calculator-pcb-trace-current-and-heating).
 
 $$
@@ -862,12 +867,12 @@ $$
     \rm{where\ \ } I &= \rm{current\ [A]} \nonumber \\
     k  &= 0.048 \rm{\ for\ outer\ layer,\ or\ } 0.024 \rm{\ for\ inner\ layer} \nonumber \\
     \Delta T &= \rm{allowable\ temperature\ increase\ [°C]} \nonumber \\
-    A  &= \rm{cross\ sectional\ area\ [mil²]} =  width_{mil} \times thickness_{mil} \nonumber \\
-   \rm{thickness_{mil}} &= 1.37\rm{mil\ for\ 1oz\ Cu,\ or\ } 2.74\rm{mil}\rm{\ for\ 2oz\ Cu} \nonumber 
+    A  &= \rm{cross\text{-}sectional\ area\ [mil²]} =  width_{mil} \times thickness_{mil} \nonumber \\
+   thickness_{mil} &= 1.37 \rm{\ mil\ for\ 1oz\ Cu,\ or\ } 2.74 \rm{\ mil\ for\ 2oz\ Cu} \nonumber 
 \end{align}
 $$
 
-The table below uses a conservative $\Delta T = 10°\rm{C}$ (IPC-2221 permits 20°C for most PCB classes). The inner-layer widths assume 1 oz copper; the outer-layer widths assume 2 oz copper per §2.3. Power nets are routed on the outer layers in this stack-up (§2.2), so the inner-layer column is reference-only — a 200 mil inner trace at 1 oz carries only ~3.9 A, which is **not** sufficient for the 6.5 A peak on the 24 V input. If any power net must be routed internally, treat the external-column width as a floor and widen further to compensate for the 1 oz inner copper.
+The table below uses a conservative $\Delta T = 10^\circ\mathrm{C}$ (IPC-2221 permits 20°C for most PCB classes). The inner-layer widths assume 1 oz copper; the outer-layer widths assume 2 oz copper per §2.3. Power nets are routed on the outer layers in this stack-up (§2.2), so the inner-layer column is reference-only — a 200 mil inner trace at 1 oz carries only ~3.9 A, which is **not** sufficient for the 6.5 A peak on the 24 V input. If any power net must be routed internally, treat the external-column width as a floor and widen further to compensate for the 1 oz inner copper.
 
 Net                     | Target Current    | Internal Trace Width | External Trace Width | Rationale
 ------------------------|-------------------|----------------------|----------------------|----------
@@ -885,7 +890,7 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 
 - **Star power distribution** — Run a dedicated pair of 24V traces from the power entry connector directly to the stepper section, and a separate pair to the logic regulator. Do not daisy-chain power from the motors to the sensors.
 - **Via stitching for high-current transitions** — When the 24V rail transitions between layers, use at least 3–4 vias per 2A connection. A single standard 10 mil via carries only 0.5–1A before excessive heating.
-- **Decoupling capacitor placement** — Place bulk capacitors (10–100 µF) within 10 mm of each power pin cluster. Place high-frequency bypass capacitors (100 nF ceramic) within 2 mm of the chip power pin they serve, with vias dropping straight to the return plane. Route the capacitor’s return via before the signal via — current must flow through the capacitor, not around it (Rule 3b).
+- **Decoupling capacitor placement** — Place bulk capacitors (10–100 µF) within 10 mm of each power pin cluster. Place high-frequency bypass capacitors (100 nF ceramic) within 2 mm of the chip power pin they serve, with vias dropping straight to the return plane. Route the capacitor's return via before the signal via — current must flow through the capacitor, not around it (Rule 3b).
 - **Isolation moat continuity** — The pH and EC islands require unbroken isolation moats through all four layers (§2.2). No trace, pour, or via may cross the moat except the designated serial links, which must bridge the gap with adequate creepage. Verify moat integrity in the fabrication output for every layer.
 - **Board-edge clearance** — Pull all traces and copper pours back from the board edge by at least 20× the dielectric thickness (Rule 4b). On the OPNhydro stack-up, this is approximately 1.5 mm. Place return-plane stitching vias along the board perimeter at ≤5 mm intervals.
 - **Antenna keep-out** — The return plane must not extend under the ESP32-C6 antenna keep-out area to ensure proper wireless performance.
@@ -893,15 +898,11 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 
 ---
 
-TO DO: still need to add: signal/power traces must be one dielectric away from the return plane.
-
----
-
 
 ## Appendix A: Coupling of Time Variation and Spatial Variation
 
 
-### A.1. How the Ampère-Maxwell Law couples time (temporal) change of the electric field to spatial variation of the magnetic field.
+### A.1. How the Ampère-Maxwell Law Couples Time Variation of E to Spatial Variation of B
 
 For the wavefront traveling in the $+\hat z$ direction, at a place in between the trace and the return plane, we can apply some simplifications:
 1. The magnetic field does not vary along $x$ or $y$, so all $\partial/\partial x$ and $\partial/\partial y$ vanish.
@@ -910,39 +911,43 @@ For the wavefront traveling in the $+\hat z$ direction, at a place in between th
 Since there is no current $\mathbf{J}$ in the dielectric, the law simplifies to:
 $$
     \nabla \times \mathbf{B} 
-    = \mu\, \varepsilon \frac{\partial \mathbf{E}}{\partial t} \\
+    = \mu\, \varepsilon \frac{\partial \mathbf{E}}{\partial t}
 $$
 
-Expand the curl ($\nabla \times \mathbf B$) operator, and write out the matrix determinant:
+Expand the curl ($\nabla \times \mathbf B$) operator, do a Laplace expansion for the matrix determinant:
 $$
   \begin{align*}
     \nabla \times \mathbf{B} 
     &= \mu\, \varepsilon \frac{\partial \mathbf{E}}{\partial t} \\
+    \Rightarrow
     \begin{vmatrix}
       \hat x & \hat y & \hat z \\
       \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
       B_x & B_y & B_z
-      \end{vmatrix} &= \\
-      \hat x
-        \begin{vmatrix}
-          \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
-          B_y & B_z
-        \end{vmatrix}
-      - \hat y
-        \begin{vmatrix}
-          \frac{\partial}{\partial x} & \frac{\partial}{\partial z} \\
-          B_x & B_z
-        \end{vmatrix}
-      + \hat z
-        \begin{vmatrix}
-          \frac{\partial}{\partial x} & \frac{\partial}{\partial y} \\
-          B_x & B_y
-        \end{vmatrix}
-      &= \\
-      \left(\frac{\partial B_z}{\partial y} - \frac{\partial B_y}{\partial z}\right) \hat x
-      - \left(\frac{\partial B_z}{\partial x} - \frac{\partial B_x}{\partial z}\right) \hat y       
-      + \left(\frac{\partial B_y}{\partial x} - \frac{\partial B_x}{\partial y}\right) \hat z
-      &=
+    \end{vmatrix} 
+    &= \mu\, \varepsilon \frac{\partial \mathbf{E}}{\partial t} \\
+    \Rightarrow
+    \hat x
+    \begin{vmatrix}
+      \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+      B_y & B_z
+    \end{vmatrix}
+    - \hat y
+    \begin{vmatrix}
+      \frac{\partial}{\partial x} & \frac{\partial}{\partial z} \\
+      B_x & B_z
+    \end{vmatrix}
+    + \hat z
+    \begin{vmatrix}
+      \frac{\partial}{\partial x} & \frac{\partial}{\partial y} \\
+      B_x & B_y
+    \end{vmatrix}
+    &= \mu\, \varepsilon \frac{\partial \mathbf{E}}{\partial t} \\
+    \Rightarrow
+    \left(\frac{\partial B_z}{\partial y} - \frac{\partial B_y}{\partial z}\right) \hat x
+    - \left(\frac{\partial B_z}{\partial x} - \frac{\partial B_x}{\partial z}\right) \hat y       
+    + \left(\frac{\partial B_y}{\partial x} - \frac{\partial B_x}{\partial y}\right) \hat z
+    &= \mu\, \varepsilon \frac{\partial \mathbf{E}}{\partial t} \\
   \end{align*}
 $$
 
@@ -960,10 +965,7 @@ $$
 
 This implies that only the part of $\mathbf{E}$ in the $x$-direction is relevant.
 $$
-  \begin{align*}
-    \frac{\partial B_y}{\partial z} (-\hat x)
-    &= \mu \, \varepsilon \frac{\partial E_x}{\partial t}\, \hat x \\
-  \end{align*}
+    \frac{\partial B_y}{\partial z} (-\hat x) = \mu \, \varepsilon \frac{\partial E_x}{\partial t}\, \hat x
 $$
 
 <br />
@@ -971,14 +973,14 @@ $$
 **Takeaway:** the rate of change in the electric field **in time** ($t$) is exactly balanced by the rate of change of the magnetic field **in space** ($z$)
 
 $$
-  \frac{\partial B_y}{\partial z} = -\mu\, \varepsilon\, \frac{\partial E_x}{\partial t} \\
+  \frac{\partial B_y}{\partial z} = -\mu\, \varepsilon\, \frac{\partial E_x}{\partial t}
 $$
 
 So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
 
 ---
 
-### A.2. How Faraday's Law couples time (temporal) change of the magnetic field to spatial variation of the electric field.
+### A.2. How Faraday's Law Couples Time Variation of B to Spatial Variation of E
 
 We can do the same for **Faraday's Law**.
 
@@ -991,52 +993,54 @@ $$
   \begin{align*}
     \nabla \times \mathbf{E} 
     &= -\frac{\partial \mathbf{B}}{\partial t} \\
-      \begin{vmatrix}
-        \hat x & \hat y & \hat z \\
-        \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
-        E_x & E_y & E_z
-       \end{vmatrix} &= \\
-       \hat x
-         \begin{vmatrix}
-            \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
-            E_y & E_z
-         \end{vmatrix}
-       - \hat y
-         \begin{vmatrix}
-            \frac{\partial}{\partial x} & \frac{\partial}{\partial z} \\
-            E_x & E_z
-         \end{vmatrix}
-       + \hat z
-         \begin{vmatrix}
-            \frac{\partial}{\partial x} & \frac{\partial}{\partial y} \\
-            E_x & E_y
-         \end{vmatrix}
-       &= \\
-       \left(\frac{\partial E_z}{\partial y} - \frac{\partial E_y}{\partial z}\right) \hat x
-       - \left(\frac{\partial E_z}{\partial x} - \frac{\partial E_x}{\partial z}\right) \hat y       
-       + \left(\frac{\partial E_y}{\partial x} - \frac{\partial E_x}{\partial y}\right) \hat z
-       &=
+    \Rightarrow
+    \begin{vmatrix}
+      \hat x & \hat y & \hat z \\
+      \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+      E_x & E_y & E_z
+    \end{vmatrix} 
+    &= -\frac{\partial \mathbf{B}}{\partial t} \\
+    \Rightarrow
+    \hat x
+    \begin{vmatrix}
+      \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+      E_y & E_z
+    \end{vmatrix}
+    - \hat y
+    \begin{vmatrix}
+      \frac{\partial}{\partial x} & \frac{\partial}{\partial z} \\
+      E_x & E_z
+    \end{vmatrix}
+    + \hat z
+    \begin{vmatrix}
+      \frac{\partial}{\partial x} & \frac{\partial}{\partial y} \\
+      E_x & E_y
+    \end{vmatrix}
+    &= -\frac{\partial \mathbf{B}}{\partial t} \\
+    \Rightarrow
+    \left(\frac{\partial E_z}{\partial y} - \frac{\partial E_y}{\partial z}\right) \hat x
+    - \left(\frac{\partial E_z}{\partial x} - \frac{\partial E_x}{\partial z}\right) \hat y       
+    + \left(\frac{\partial E_y}{\partial x} - \frac{\partial E_x}{\partial y}\right) \hat z
+    &= -\frac{\partial \mathbf{B}}{\partial t} \\
   \end{align*}
 $$
 
 Applying both assumptions cancels every term except one:
 $$
   \begin{align*}
-       \left( \bcancel{\frac{\partial E_z}{\partial y}} - \frac{\partial \cancel{E_y}}{\partial z} \right) \hat x
-       - \left( \bcancel{\frac{\partial E_z}{\partial x}} - \frac{\partial E_x}{\partial z} \right) \hat y       
-       + \left( \bcancel{\frac{\partial E_y}{\partial x}} - \bcancel{\frac{\partial E_x}{\partial y}} \right) \hat z
-       &= -\frac{\partial \mathbf{B}}{\partial t} \\
-      \frac{\partial E_x}{\partial z} \hat y 
-       &= -\frac{\partial \mathbf{B}}{\partial t}
+    \left( \bcancel{\frac{\partial E_z}{\partial y}} - \frac{\partial \cancel{E_y}}{\partial z} \right) \hat x
+    - \left( \bcancel{\frac{\partial E_z}{\partial x}} - \frac{\partial E_x}{\partial z} \right) \hat y       
+    + \left( \bcancel{\frac{\partial E_y}{\partial x}} - \bcancel{\frac{\partial E_x}{\partial y}} \right) \hat z
+    &= -\frac{\partial \mathbf{B}}{\partial t} \\
+    \Rightarrow
+    \frac{\partial E_x}{\partial z} \hat y 
+      &= -\frac{\partial \mathbf{B}}{\partial t}
   \end{align*}
 $$
 
 This implies that only the part of $\mathbf{B}$ in the $y$-direction is relevant.
 $$
-  \begin{align*}
-    \frac{\partial E_x}{\partial z} \, \hat y
-    &= -\frac{\partial B_y}{\partial t} \, \hat y \\
-  \end{align*}
+    \frac{\partial E_x}{\partial z} \, \hat y = -\frac{\partial B_y}{\partial t} \, \hat y
 $$
 
 
@@ -1044,10 +1048,7 @@ $$
 
 **Takeaway:** the rate of change in the electric field **in space** ($z$) is exactly balanced by the rate of change of the magnetic field **in time** ($t$)
 $$
-  \begin{align*}
-      \frac{\partial E_x}{\partial z}
-       &= -\frac{\partial B_y}{\partial t} \\
-  \end{align*}
+    \frac{\partial E_x}{\partial z} = -\frac{\partial B_y}{\partial t}
 $$
 
 where $\hat y$ points across the trace width — the direction $\mathbf B$ curls around the conductor.
@@ -1062,7 +1063,7 @@ where $\hat y$ points across the trace width — the direction $\mathbf B$ curls
 [2] Walter Lewin at MIT, Electricity and Magnetism lectures (8.02), Spring 2002.
 [3] Ralph Morrison, Grounding and Shielding – Circuits and Interference, Wiley, 2016.
 [4] Ralph Morrison, Fast Circuit Boards – Energy Management, Wiley, 2018.
-[5] Eric Bogatin, Signal Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
+[5] Eric Bogatin, Signal and Power Integrity – Simplified, 3rd edition, Prentice-Hall, 2018.
 [6] [Dan Beeker, Industry Keynote: Electromagnetic Fields for Normal Folks, Altium, 2019](https://resources.altium.com/p/al-keynote-dan-beeker)
 [7] [Walter Lewin, Electromagnetic Waves - Solutions to Maxwell's Equations - Polarization, MIT, 2004](https://www.youtube.com/watch?v=nFtNCPUMoYA&list=PLyQSN7X0ro22WeXM2QCKJm2NP_xHpGV89&index=14)
 

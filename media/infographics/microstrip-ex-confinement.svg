@@ -5,7 +5,7 @@
    font-size="14px"
    version="1.1"
    id="svg89"
-   sodipodi:docname="microstrip-ez-confinement.svg"
+   sodipodi:docname="microstrip-ex-confinement.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
    width="967.74274"
    height="661.30847"
@@ -24,14 +24,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.0000001"
-     inkscape:cx="541.24999"
-     inkscape:cy="413.24999"
-     inkscape:window-width="3840"
-     inkscape:window-height="2054"
-     inkscape:window-x="-11"
-     inkscape:window-y="-11"
+     inkscape:cx="541.24997"
+     inkscape:cy="413.24998"
+     inkscape:window-width="2160"
+     inkscape:window-height="1261"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="ez-profile">
+     inkscape:current-layer="svg89">
     <inkscape:page
        x="1.7420135e-08"
        y="0"
@@ -627,7 +627,7 @@
      font-weight="bold"
      text-anchor="middle"
      id="g33"
-     transform="translate(142.33817,-0.63935937)">
+     transform="translate(131.83817,224.86063)">
     <text
        x="100"
        y="258"
@@ -661,10 +661,50 @@
        y="258"
        id="text33">+</text>
   </g>
+  <g
+     fill="#c0392b"
+     font-size="16px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="g33-9"
+     transform="translate(130.23438,7.8437502)">
+    <text
+       x="100"
+       y="258"
+       id="text26-4">+</text>
+    <text
+       x="150"
+       y="258"
+       id="text27-8">+</text>
+    <text
+       x="200"
+       y="258"
+       id="text28-8">+</text>
+    <text
+       x="250"
+       y="258"
+       id="text29-2">+</text>
+    <text
+       x="300"
+       y="258"
+       id="text30-4">+</text>
+    <text
+       x="350"
+       y="258"
+       id="text31-5">+</text>
+    <text
+       x="400"
+       y="258"
+       id="text32-5">+</text>
+    <text
+       x="445"
+       y="258"
+       id="text33-1">+</text>
+  </g>
   <!-- Electrons in trace, displaced UPWARD from the dielectric face -->
   <g
      id="g39"
-     transform="translate(210.22042,9.6666122)">
+     transform="translate(208.22042,18.666612)">
     <!-- electron with up-arrow showing it moved up -->
     <g
        id="g36"
@@ -776,7 +816,7 @@
      font-weight="bold"
      text-anchor="middle"
      id="g48"
-     transform="translate(142.97754,120.1998)">
+     transform="translate(130.47754,115.6998)">
     <text
        x="100"
        y="354"
@@ -810,10 +850,50 @@
        y="354"
        id="text48">−</text>
   </g>
+  <g
+     fill="#1c3e6e"
+     font-size="16px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="g48-1"
+     transform="translate(130.09374,-101.78124)">
+    <text
+       x="100"
+       y="354"
+       id="text41-1">−</text>
+    <text
+       x="150"
+       y="354"
+       id="text42-5">−</text>
+    <text
+       x="200"
+       y="354"
+       id="text43-2">−</text>
+    <text
+       x="250"
+       y="354"
+       id="text44-7">−</text>
+    <text
+       x="300"
+       y="354"
+       id="text45-6">−</text>
+    <text
+       x="350"
+       y="354"
+       id="text46-1">−</text>
+    <text
+       x="400"
+       y="354"
+       id="text47-4">−</text>
+    <text
+       x="445"
+       y="354"
+       id="text48-2">−</text>
+  </g>
   <!-- Electrons in return plane, displaced UPWARD toward the dielectric face -->
   <g
      id="g54"
-     transform="translate(142.97754,103.90671)">
+     transform="translate(141.47754,83.906711)">
     <g
        id="g51"
        transform="translate(174.65537,-6.363961)">
