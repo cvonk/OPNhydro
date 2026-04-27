@@ -317,37 +317,11 @@ If you write down Faraday's and Maxwell's laws, and you do a little algebra (whi
 
 <br />
 
-### 1.2. Conductors as Waveguides
+### 1.2. Effect of the EM Wave on the Copper
 
 §1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the copper, there are **free electrons**, and they are not passive bystanders.
 
-#### First a Note on Notation
-
-§1.1 described everything in terms of the field vector $\mathbf E$, the natural quantity inside the dielectric. On the copper, the natural quantity is the trace voltage $V$ — what a scope would read. Recall the [definition of potential difference](https://coertvonk.com/physics/electromagnetism/electricity/electric-potential-29188):
-
-<div class="quote">
-
-The electric field is force per unit positive charge. As a positive test charge moves from point $A$ to point $B$, the field does work on it — equal to $\int_A^B \mathbf E \cdot d\mathbf l$ per unit charge — and that work is the voltage drop, $V_A - V_B$, between the two points:
-$$
-  \begin{align*}
-    V_{AB} \ \triangleq \ V_A - V_B &= \int_A^B \mathbf E \cdot d\mathbf l & \text{(from above)} \\
-    \Rightarrow 
-    \frac{d}{d r_B} \left( V_A - V_B \right) &= \frac{d}{d r_B} \int_A^B \mathbf E \cdot d\mathbf l & \text{(take derivative)} \\
-    \Rightarrow 
-    \bcancel{\nabla V_A} - \nabla V_B &= \mathbf E & \rm{(V_A\ is\ constant)} \\
-    \Rightarrow
-    \mathbf E &= -\left( \bcancel{\frac{\partial V}{\partial x_B}\hat x} + \bcancel{\frac{\partial V}{\partial y_B}\hat y} + \frac{\partial V}{\partial z_B}\hat z  \right) & \rm{(write\ out\ \nabla)} \\
-    \Rightarrow
-    E_z &= -\frac{\partial V}{\partial z}& \text{(z-component only)}
-  \end{align*}
-$$
-</div>
-
-The two are linked: on a transmission line operated in the quasi-TEM regime[^quasiTEM], $E_z$ and $-\partial V/\partial z$ are two ways of writing the same quantity — the voltage-gradient view is the circuit-theory shorthand, the $E_z$ view is the field-theory version. This paragraph uses whichever form makes the physics clearer at each step.
-
-[^quasiTEM]: Strictly, $\mathbf E = -\nabla V - \partial \mathbf A/\partial t$ (the magnetic vector potential contributes a longitudinal piece). Quasi-TEM is the regime where that second term is negligible along the trace, leaving $E_z \approx -\partial V/\partial z$.
-
-#### Three Effects on the Free Electrons
+#### Effects on the Free Electrons
 
 The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one. (Throughout, $\hat x$ points from the trace to the return plane, $\hat z$ along the propagation direction.)
 
@@ -362,9 +336,9 @@ The **free electrons** in the copper feel three distinct effects:
 
 - **Vertical component $E_x$** (dominant) — confines the wave to the dielectric.
 
-- **Voltage gradient at the wavefront** (strong) — the steep cliff drives the current and establishes the surface charge.
+- **Horizontal component $\frac{\partial E_x}{dz}$ at the wavefront** (strong) — the steep cliff drives the current and establishes the surface charge.
 
-- **Voltage gradient behind the wavefront** (small) — sustains the current against resistive drag.
+- **Horizontal component $E_z$ behind the wavefront** (small) — sustains the current against resistive drag.
 
 The following subsections describe each in detail, starting with $E_x$.
 <br />
@@ -404,10 +378,63 @@ And here's the whole point: because the field can't get into the copper, it has 
 </div>
 <br />
 
+##### Boundary-condition view
 
-#### Voltage Gradient $\partial V/\partial z$ at the Wavefront
+The boundary-condition view of Gauss's Law states that the component of the electric field perpendicular to a conductor's surface just outside the conductor is directly proportional to the local surface charge density.
 
-**At the wavefront**, the trace voltage drops from signal level (behind) to zero (ahead) over a short distance. That is a longitudinal voltage gradient $\partial V/\partial z$, with voltage falling in the propagation direction. Electrons, being negatively charged, are pushed toward the higher-voltage side — backward along the trace, opposite to the wavefront's motion, toward the source.
+<figure>
+  <center>
+  <img src="../media/infographics/boundary-pillbox-gauss.svg" style="width: 70%; max-width:500px; height: auto;">
+  <figcaption><i>Pillbox straddling a conductor surface: only the outside face contributes to the flux integral.</i></figcaption>
+  </center>
+</figure>
+
+<details>
+  <summary>Expand if you ❤️ to see the derivation</summary>
+
+Imagine a conductor with a surface charge density $\sigma_s$ (charge per unit area). To find the electric field just outside the surface, we place a very thin, small, cylindrical Gaussian "pillbox" so that it straddles the conductor surface.
+
+A key property of a conductor in electrostatic equilibrium is that the electric field inside the conducting material is zero and flux $\Phi_{in} = 0$. Given that the pillbox is very thin, this implies that the only flux passing through the pillbox comes from the bottom face, which has an area $A$ and is located outside:
+$$
+  \Phi_E = E_x\cdot A
+$$ 
+
+So the pillbox encloses only the charge located on the surface of the conductor within the area $A$:
+$$
+    Q_{enc} = \sigma_s \cdot A
+$$
+
+Gauss's law states that the net flux out of a closed surface is equal to the enclosed charge divided by $\varepsilon$:
+<div class="quote">
+
+$$
+    \Phi_{E} = \frac{Q_{enc}}{\varepsilon} \tag{\text{Gauss's law}}
+$$
+</div>
+
+Substituting the flux and enclosed charge derived above:
+$$
+  \begin{align*}
+    E_x\cdot \bcancel{A} &= \frac{\sigma_s\cdot \bcancel{A}}{\varepsilon} \\
+    \Rightarrow
+    \sigma_s &= \varepsilon\, E_x\big|_{\text{outside}}
+  \end{align*}
+$$
+</details>
+<br>
+
+**Takeaway:** Gauss's law applied to a thin pillbox straddling the conductor surface forces $\varepsilon E_x$ just outside to equal the surface charge density $\sigma_s$ (the field is zero inside the metal, so the pillbox flux comes entirely from the outside face):
+$$
+    \sigma_s = \varepsilon\, E_x\big|_{\text{outside}}
+$$
+
+The positive surface charge on the bottom of the trace is whatever $\sigma_s$ the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture above is the dynamic mechanism; this equation is the algebraic statement of the same fact.
+<br />
+
+
+#### Horizontal Component $\frac{\partial E_x}{dz}$ at the Wavefront
+
+**At the wavefront**, the there is a strong variation in the $E_x$ field in the propagation direction. (i.e. the field has dropped from full strength behind to zero ahead over a short distance). This acts as a field $E_z$ acting on the electrons in the conductor with a force $F_z = -e\,E_z$ — opposite to $E_z$, so backward along the trace, opposite to the wavefront's motion, toward the source.
 
 The electrons in *both* conductors are pushed *sideways*:
 - *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the '$+$' terminal of the source;
@@ -416,7 +443,7 @@ The electrons in *both* conductors are pushed *sideways*:
 <figure>
   <center>
   <img src="../media/infographics/microstrip-copper-current.svg" style="width: 80%; max-width:800px; height: auto;">
-  <figcaption><i>Horizontal current at the wavefront, driven by the longitudinal voltage gradient.</i></figcaption>
+  <figcaption><i>Horizontal current at the wavefront, driven by the longitudinal field $E_z$.</i></figcaption>
   </center>
 </figure>
 
@@ -434,13 +461,94 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 </div>
 <br />
 
+##### Boundary-condition view
+
+The wave's $\mathbf B$ field runs tangential to the trace surface. 
+
+<figure>
+  <center>
+  <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 70%; max-width:500px; height: auto;">
+  <figcaption><i>Amperian loop straddling the conductor surface: only the outside long side contributes to the circulation.</i></figcaption>
+  </center>
+</figure>
+
+<details>
+  <summary>Expand if you ❤️ to see the derivation</summary>
+
+Imagine a tiny rectangular "Amperian loop" straddling the bottom surface of the copper. Two side of length $L$ run parallel to the surface (one inside the copper, one outside).  Two sides of height $h$ run perpendicular to the surface.
+
+As we schrink the height $h \to 0$, the perpendicular sides contribute nothing.  Inside the conductor, $\mathbf{B_{in}} = 0$. Therefore, the total path integral is just the field outside times the length.
+$$
+  \oint \mathbf{B} \cdot d \mathbf{l} = B_{out} \cdot L
+$$
+
+The current passing through this loop is the surface current density $K$ (amps per meter) times the length $L$.
+$$
+  I_{enc} = K \cdot L
+$$
+
+Recall Ampère's Law in integral form:
+<div class="quote">
+
+$$
+  \oint \mathbf{B} \cdot d\mathbf{l} = \mu\, I_{enc}
+$$
+</div>
+
+Substitude $\oint \mathbf{B}\cdot d\mathbf{l}$ and $I_{enc}$ in Ampère's law:
+$$
+  \begin{align*}
+    B_{out} \cdot \bcancel{L} = \mu \left( K \bcancel{L} \right) \\
+    \Rightarrow
+    K = \frac{B_{out}}{\mu}
+  \end{align*}
+$$
+
+By the right-hand rule, to produce a $\mathbf{B}$ field parallel to the surface, the current $\mathbf K$ must flow perpendicular to $\mathbf{B_\parallel}$ within the surface plane.
+</details>
+<br />
+
+
+**Takeaway:** Ampère's law applied to a thin loop straddling the conductor surface forces a surface current of magnitude $|\mathbf B_\parallel|/\mu$, at right angles to $\mathbf B_\parallel$ in the surface plane (the field is zero inside the metal, so the loop circulation comes entirely from the outside leg):
+$$
+    \mathbf K = \frac{1}{\mu}\,\hat n \times \mathbf B_{\text{outside}}
+$$
+
+where $\hat n$ is the outward normal from the conductor. Appendix A shows that $\mathbf B$ in the dielectric points in $\pm\hat y$ — curling around the trace. Plugging $\hat n = +\hat x$ (downward, from trace into dielectric) and $\mathbf B = B_y\,\hat y$ gives $\mathbf K = (B_y/\mu_0)\,\hat z$ — conventional current in the propagation direction. The trace current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
+
+> **A note on $\mathbf K$ and $\sigma_s$.** These are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a perfect conductor, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 70%; max-width:800px; height: auto;">
+  <figcaption><i>Cross-section of the microstrip. <b>B</b>-field loops curl around the trace; below the return plane, the field is screened to ~0.</i></figcaption>
+  </center>
+</figure>
+
+**Charge conservation at the wavefront.** On the trace surface,
+$$
+    \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} = 0
+$$
+At the wavefront, $\sigma_s$ is ramping from zero to $\varepsilon E_x$ as the wave passes, so $\nabla_s \cdot \mathbf K \neq 0$ — the current converges into the section to deposit the new charge.
+
+**The wavefront moves at speed $v$.** A wave traveling at speed $v$ depends only on $(z - vt)$, so $\partial/\partial t = -v\,\partial/\partial z$ for any field quantity. Apply that to charge conservation:
+$$
+    \frac{\partial K_z}{\partial z} = v\,\frac{\partial \sigma_s}{\partial z}
+    \quad \Rightarrow \quad
+    K_z = v\,\sigma_s
+$$
+(both → 0 ahead of the wavefront, so the integration constant is zero). **The surface current is the surface charge times the wave velocity** — not as a *consequence* of electron motion, but as the *only* consistent answer when a charge pattern advances rigidly at speed $v$. The wavefront is the kinematic boundary between the field-off and field-on regions, and the surface charge and current are forced to advance at speed $v$ to keep up with it.
+
+Cross-check against the field expressions: for a TEM wave, $E_x = v\,B_y$, so $K_z = B_y/\mu_0 = E_x/(\mu_0 v) = \varepsilon E_x \cdot v = \sigma_s \cdot v$ (using $\mu_0\varepsilon v^2 = 1$). The boundary conditions, charge conservation, and the wave's $|\mathbf E|/|\mathbf B|$ ratio all agree.
+<br />
+
 
 #### Recap: The At-Wavefront Cycle
 
 Tracking the signal trace, one wavefront step looks like this:
 
 1. $E_x$ appears → tries to push electrons up.
-2. A voltage gradient $\partial V/\partial z$ appears simultaneously → pushes electrons backward along the trace (toward higher V).
+2. $E_z$ appears simultaneously → pushes electrons backward along the trace (force $-e\,E_z$, opposite to $E_z$).
 3. Electrons drift backward along the trace; the section at the wavefront loses electrons → bottom of the trace becomes positive.
 4. That positive surface charge generates its own field that cancels $E_x$ inside the metal.
 5. The wavefront advances one step further; the process repeats in the next section.
@@ -448,13 +556,13 @@ Tracking the signal trace, one wavefront step looks like this:
 Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net drift. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
 <br />
 
-#### Voltage Gradient $\partial V/\partial z$ Behind the Wavefront
+#### Horizontal Component $E_z$ Behind the Wavefront
 
-So far we have described the steep voltage gradient at the wavefront itself. The conductor is also resistive, which produces a second, smaller voltage gradient behind the wavefront.
+So far we have described the steep $E_z$ cliff at the wavefront itself. The conductor is also resistive, which produces a second, smaller $E_z$ behind the wavefront.
 
-The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a small longitudinal gradient $\partial V/\partial z$ that re-accelerates the electrons between scattering events. This residual gradient behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no voltage drop, and no loss.
+The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a small residual $E_z$ that re-accelerates the electrons between scattering events. This residual field behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no field drop, and no loss.
 
-**Why current still flows through already-charged sections.** The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small $\partial V/\partial z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
+**Why current still flows through already-charged sections.** The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small residual $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
 
 ##### In other words
 
@@ -466,69 +574,13 @@ And what about the sections the wavefront has already passed? Their surface char
 </div>
 <br />
 
+##### Boundary-condition view
 
-#### The Wavefront Cycle in Equations
+**Behind the wavefront**, $\sigma_s$ and $\mathbf K$ are steady — charge conservation reduces to $\nabla_s \cdot \mathbf K = 0$, which says the current flows uniformly along $z$.
 
-It is tempting to think of "the wave in the dielectric" and "the current in the copper" as two separate things that happen to coexist. They are not — they are two views of a single electromagnetic solution. Everything §1.2 has described step-by-step collapses into two coupled equations for the trace voltage $V(z,t)$ and the trace current $I(z,t)$ — the **telegrapher's equations** for a line with per-unit-length inductance $L$, capacitance $C$, and resistance $R$:
-
-$$
-  \begin{align}
-    \frac{\partial V}{\partial z} &= -L\,\frac{\partial I}{\partial t} - R\,I \tag{1} \\
-    \frac{\partial I}{\partial z} &= -C\,\frac{\partial V}{\partial t} \tag{2}
-  \end{align}
-$$
-
-The first equation (1) is where $E_z$ comes from. A voltage gradient along the trace *is* a horizontal electric field: $E_z = -\partial V/\partial z$. The right-hand side identifies two contributions:
-
-- **$-L\,\partial I/\partial t$ dominates at the wavefront**, where the current rises sharply from zero to signal level. This is the steep $E_z$ cliff — the inductive back-EMF of the trace-and-return loop, forcing a voltage gradient to accommodate the rising current.
-- **$-R\,I$ dominates behind the wavefront**, where the current is steady. This is the small resistive $E_z$ that pays the ohmic tax — the "cost of pushing current through a lossy conductor" from earlier.
-
-The second equation (2) is the surface-charge story. Wherever $V$ is rising in time, the current flowing into a section exceeds the current flowing out, and the difference is deposited as surface charge to raise $V$ against the distributed capacitance. In field terms: displacement current in the dielectric ($C\,\partial V/\partial t$) matched by a divergence of conduction current on the trace ($\partial I/\partial z$).
-
-Together: equation (2) diverts current into the capacitance at the wavefront; equation (1) turns the resulting $\partial I/\partial t$ into the $E_z$ that sweeps the wavefront one step further. The same leapfrog as §1.1, projected from $(\mathbf E, \mathbf B)$ onto $(V, I)$.
-
-$V$ and $I$ are quantities you measure on the copper. But the coefficients $L$ and $C$ that couple them are set by the field geometry in the dielectric — how tightly the $\mathbf B$ loops close, how densely the $\mathbf E$ lines terminate. The telegrapher's equations are the interface between the two views.
-
+**The residual $E_z$ violates the perfect-conductor BC.** For an idealized perfect conductor, the boundary condition is $E_\parallel = 0$ on the surface — no tangential field, no resistive losses. Real conductors have nonzero $E_\parallel$, and the product $E_\parallel \cdot K_z$ per unit area is the **ohmic dissipation**. The small residual $E_z$ behind the wavefront *is* that BC violation, expressed as a field. The field doesn't penetrate the bulk metal — it dies off over the **skin depth** $\delta = \sqrt{2/(\omega\mu\sigma)}$ (≈ 2 μm in copper at 1 GHz) — but that thin layer is where the current actually flows and the loss happens. The surface-current approximation $\mathbf K = (1/\mu_0)\,\hat n \times \mathbf B_{\text{outside}}$ holds to corrections of order $\delta/d$, where $d$ is the conductor thickness.
 <br />
 
-#### The Boundary-Condition View
-
-A third lens on the same phenomenon, equivalent to the force-on-electrons picture and the telegrapher's equations. At a near-perfect conductor, $\mathbf E$ and $\mathbf B$ vanish inside. To reconcile with the wave's nonzero $\mathbf E$ and $\mathbf B$ just outside, the boundary conditions force the conductor to carry **surface charge** and **surface current** in algebraically determined amounts.
-
-**Normal $\mathbf E$ → surface charge.** Gauss's law forces a discontinuity in $D_\perp$ at the surface equal to the surface charge density:
-$$
-    \sigma_s = \varepsilon\, E_\perp\big|_{\text{outside}}
-$$
-The positive surface charge on the bottom of the trace is whatever $\sigma_s$ the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture earlier in §1.2 is the dynamic mechanism; this equation is the algebraic statement of the same fact.
-
-
-
-
-**Tangential $\mathbf B$ → surface current.** Ampère's law forces a discontinuity in $\mathbf B_\parallel$ at the surface equal to a surface current density:
-$$
-    \mathbf K = \frac{1}{\mu_0}\,\hat n \times \mathbf B_{\text{outside}}
-$$
-where $\hat n$ is the outward normal from the conductor. Appendix A shows that $\mathbf B$ in the dielectric points in $\pm\hat y$ — curling around the trace. Plugging $\hat n = +\hat x$ (downward, from trace into dielectric) and $\mathbf B = B_y\,\hat y$ gives $\mathbf K = (B_y/\mu_0)\,\hat z$ — conventional current in the propagation direction. The trace current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
-
-<figure>
-  <center>
-  <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 70%; max-width:800px; height: auto;">
-  <figcaption><i>Cross-section of the microstrip <b>B</b> field. Loops curl around the trace; below the return plane, the field is screened to ~0.</i></figcaption>
-  </center>
-</figure>
-
-**Charge conservation ties the two together.** On the trace surface,
-$$
-    \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} = 0
-$$
-
-- *Behind the wavefront*, $\sigma_s$ is steady, so $\nabla_s \cdot \mathbf K = 0$ — current flows uniformly along $z$.
-- *At the wavefront*, $\sigma_s$ is ramping from zero, so $\nabla_s \cdot \mathbf K \neq 0$ — the current must converge into the section to deposit the new charge.
-
-That second case is the same "current diverts into the capacitance at the wavefront" statement from the telegrapher's equations, recast as charge conservation on a 2-D surface.
-
-**The unified picture.** The wave's $\mathbf E$ and $\mathbf B$ in the dielectric *dictate* what the copper must carry: the surface charge $\sigma_s$ is set by $E_\perp$; the surface current $\mathbf K$ by $\mathbf B_\parallel$. This is why "the wave is the boss; the electrons are the help" is exact rather than metaphorical — the boundary conditions are the explicit form of that statement.
-<br />
 
 #### Putting It Together
 
@@ -539,6 +591,8 @@ So put it all together:
 - The *along-field* from the wave pushes other electrons along the trace, giving you the little current you measure with your ammeter.
 
 The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field, the same way a line of dominoes reacts to the first push. The dominoes aren't transporting the energy down the line — the *falling pattern* is. And on a PCB, the falling pattern is the field.
+
+You can also say this without ever mentioning an electron. The wave's $\mathbf E$ and $\mathbf B$ exist right up to the surface of the copper, but inside the copper they have to be zero — that's what good conductors do. So there's a jump at the surface, and nature does not allow that for free: wherever the perpendicular $\mathbf E$ has a jump, there must be **charge** to account for it; wherever the parallel $\mathbf B$ has a jump, there must be **current**. The metal has no choice. You can read off the surface charge and the surface current *purely from what the field is doing in the dielectric* — no forces, no electron motion, no kinetics. The electrons just sign the ledger.
 
 And that's really all there is to it. The hard part is believing it.
 </div>

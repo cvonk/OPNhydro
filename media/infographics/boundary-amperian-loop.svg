@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 601.09088 347.87878"
+   width="601.09088"
+   height="347.87878"
+   font-family="sans-serif"
+   version="1.1"
+   id="svg36"
+   sodipodi:docname="boundary-amperian-loop.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview36"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.0625"
+     inkscape:cx="266.42424"
+     inkscape:cy="171.39394"
+     inkscape:window-width="1916"
+     inkscape:window-height="1303"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg36" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="ArrowWide"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path41" />
+    </marker>
+    <marker
+       id="bArrow"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1" />
+    </marker>
+    <marker
+       id="loopArrow"
+       viewBox="0 -4 8 8"
+       refX="4"
+       refY="0"
+       markerWidth="8"
+       markerHeight="8"
+       orient="auto">
+      <path
+         d="M 0,-4 8,0 0,4 Z"
+         fill="#2d8a47"
+         id="path2" />
+    </marker>
+    <marker
+       id="arrAx-5-1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path4-5-7" />
+    </marker>
+    <marker
+       id="marker1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path1-1" />
+    </marker>
+    <marker
+       id="bArrow-0"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-9" />
+    </marker>
+  </defs>
+  <!-- Conductor (top) -->
+  <rect
+     x="-18.90909"
+     y="-78.060608"
+     width="620"
+     height="180"
+     fill="#d9d9d9"
+     id="rect2"
+     style="opacity:0.5;fill:#a86628;fill-opacity:1" />
+  <!-- Dielectric (bottom) -->
+  <rect
+     x="-18.90909"
+     y="101.93939"
+     width="620"
+     height="260"
+     fill="#fff5b8"
+     id="rect3"
+     style="fill:#fdf6c2;fill-opacity:1" />
+  <!-- Surface line -->
+  <line
+     x1="-18.90909"
+     y1="101.93939"
+     x2="601.09088"
+     y2="101.93939"
+     stroke="#7a3f0c"
+     stroke-width="1.5"
+     id="line4" />
+  <!-- Surface current K (out of page) -->
+  <g
+     fill="#ffffff"
+     stroke="#cc3300"
+     stroke-width="1.5"
+     id="g12"
+     transform="translate(-18.909091,-78.060606)">
+    <circle
+       cx="60"
+       cy="180"
+       r="6"
+       id="circle4" />
+    <circle
+       cx="120"
+       cy="180"
+       r="6"
+       id="circle5" />
+    <circle
+       cx="180"
+       cy="180"
+       r="6"
+       id="circle6" />
+    <circle
+       cx="240"
+       cy="180"
+       r="6"
+       id="circle7" />
+    <circle
+       cx="300"
+       cy="180"
+       r="6"
+       id="circle8" />
+    <circle
+       cx="360"
+       cy="180"
+       r="6"
+       id="circle9" />
+    <circle
+       cx="420"
+       cy="180"
+       r="6"
+       id="circle10" />
+    <circle
+       cx="480"
+       cy="180"
+       r="6"
+       id="circle11" />
+    <circle
+       cx="540"
+       cy="180"
+       r="6"
+       id="circle12" />
+  </g>
+  <g
+     fill="#cc3300"
+     id="g21"
+     transform="translate(-18.909091,-78.060606)">
+    <circle
+       cx="60"
+       cy="180"
+       r="1.6"
+       id="circle13" />
+    <circle
+       cx="120"
+       cy="180"
+       r="1.6"
+       id="circle14" />
+    <circle
+       cx="180"
+       cy="180"
+       r="1.6"
+       id="circle15" />
+    <circle
+       cx="240"
+       cy="180"
+       r="1.6"
+       id="circle16" />
+    <circle
+       cx="300"
+       cy="180"
+       r="1.6"
+       id="circle17" />
+    <circle
+       cx="360"
+       cy="180"
+       r="1.6"
+       id="circle18" />
+    <circle
+       cx="420"
+       cy="180"
+       r="1.6"
+       id="circle19" />
+    <circle
+       cx="480"
+       cy="180"
+       r="1.6"
+       id="circle20" />
+    <circle
+       cx="540"
+       cy="180"
+       r="1.6"
+       id="circle21" />
+  </g>
+  <text
+     x="463.36362"
+     y="125.39394"
+     font-size="13px"
+     fill="#cc3300"
+     font-weight="bold"
+     id="text21"
+     style="font-size:14.6667px">K (out of page)</text>
+  <!-- Amperian loop, counterclockwise viewed from +z -->
+  <!-- Top side (in metal): going right → left -->
+  <!-- Left side: top → bottom -->
+  <!-- Bottom side (in dielectric): left → right -->
+  <!-- Right side: bottom → top -->
+  <g
+     id="g45"
+     transform="matrix(1.1634064,0,0,0.65020328,-45.932044,35.658064)">
+    <line
+       x1="361.09091"
+       y1="81.939392"
+       x2="206.09091"
+       y2="81.939392"
+       stroke="#2d8a47"
+       stroke-width="2.2"
+       stroke-dasharray="6, 4"
+       marker-end="url(#loopArrow)"
+       id="line21"
+       style="stroke:#000000;stroke-dasharray:9.43781, 6.29187;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWide)" />
+    <line
+       x1="201.09091"
+       y1="81.939392"
+       x2="201.09091"
+       y2="116.93939"
+       stroke="#2d8a47"
+       stroke-width="2.2"
+       stroke-dasharray="6, 4"
+       marker-end="url(#loopArrow)"
+       id="line22"
+       style="stroke:#000000;stroke-dasharray:9.43781, 6.29187;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWide)" />
+    <line
+       x1="201.09091"
+       y1="121.93939"
+       x2="356.09091"
+       y2="121.93939"
+       stroke="#2d8a47"
+       stroke-width="2.2"
+       stroke-dasharray="6, 4"
+       marker-end="url(#loopArrow)"
+       id="line23"
+       style="stroke:#000000;stroke-dasharray:9.43781, 6.29187;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWide)" />
+    <line
+       x1="361.09091"
+       y1="121.93939"
+       x2="361.09091"
+       y2="86.939392"
+       stroke="#2d8a47"
+       stroke-width="2.2"
+       stroke-dasharray="6, 4"
+       marker-end="url(#loopArrow)"
+       id="line24"
+       style="stroke:#000000;stroke-dasharray:9.43781, 6.29187;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWide)" />
+  </g>
+  <!-- Loop label with leader line -->
+  <line
+     x1="376.09091"
+     y1="101.93939"
+     x2="366.09091"
+     y2="101.93939"
+     stroke="#2d8a47"
+     stroke-width="1"
+     id="line25" />
+  <text
+     x="387.87875"
+     y="81.939392"
+     font-size="13px"
+     fill="#2d8a47"
+     font-style="italic"
+     id="text25"
+     style="font-size:14.6667px;fill:#000000;fill-opacity:1">Amperian loop</text>
+  <!-- Annotations -->
+  <text
+     x="278.21463"
+     y="69.454544"
+     font-size="11px"
+     fill="#2d8a47"
+     id="text26"
+     style="font-size:14.6667px;text-align:center;text-anchor:middle"><tspan
+       style="font-size:14.6667px;fill:#000000;fill-opacity:1"
+       id="tspan42">top leg in metal: B<tspan
+   style="font-size:14.6667px;baseline-shift:sub"
+   id="tspan1">in</tspan> = 0 → 0</tspan></text>
+  <text
+     x="278.72644"
+     y="137.45454"
+     font-size="11px"
+     fill="#2d8a47"
+     id="text27"
+     style="font-size:14.6667px;text-align:center;text-anchor:middle"><tspan
+       style="fill:#000000;fill-opacity:1"
+       id="tspan43">bottom leg: contributes |B</tspan><tspan
+       style="font-size:65%;baseline-shift:sub;fill:#000000;fill-opacity:1"
+       id="tspan41">∥</tspan><tspan
+       style="fill:#000000;fill-opacity:1"
+       id="tspan44">| · L</tspan></text>
+  <!-- B field arrows in dielectric (parallel to surface, +ŷ) -->
+  <g
+     stroke="#0066cc"
+     stroke-width="2.5"
+     id="g34"
+     transform="translate(-20.848485,-108.12121)">
+    <line
+       x1="48.331062"
+       y1="262.29987"
+       x2="592.99115"
+       y2="262.29987"
+       marker-end="url(#bArrow)"
+       id="line31"
+       style="stroke-width:2;stroke-dasharray:none" />
+    <line
+       x1="48.45454"
+       y1="348.51517"
+       x2="593.11462"
+       y2="348.51517"
+       marker-end="url(#bArrow-0)"
+       id="line31-8"
+       style="stroke-width:2;stroke-dasharray:none;marker-end:url(#bArrow-0)" />
+    <line
+       x1="48.331062"
+       y1="307.70013"
+       x2="592.99115"
+       y2="307.70013"
+       marker-end="url(#bArrow)"
+       id="line32"
+       style="stroke-width:2;stroke-dasharray:none" />
+  </g>
+  <text
+     x="353.9697"
+     y="180.72726"
+     font-size="14px"
+     fill="#0066cc"
+     font-weight="bold"
+     id="text34">B<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan45">∥</tspan> (parallel to surface)</text>
+  <!-- Bottom result -->
+  <text
+     x="267.99997"
+     y="293.33331"
+     font-size="13px"
+     fill="#2d8a47"
+     id="text35"
+     style="font-size:14.6667px"><tspan
+       sodipodi:role="line"
+       id="tspan37"
+       x="267.99997"
+       y="293.33331"
+       style="font-size:14.6667px">Ampère's law on the loop:</tspan><tspan
+       sodipodi:role="line"
+       id="tspan38"
+       x="267.99997"
+       y="311.66669"
+       style="font-size:14.6667px">only the bottom leg contributes circulation</tspan></text>
+  <text
+     x="265.57574"
+     y="334.81818"
+     font-size="15px"
+     fill="#2d8a47"
+     font-weight="bold"
+     id="text36"
+     style="font-size:17.3333px">⇒ |B<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan39">∥</tspan>| = μ₀ |K|</text>
+  <text
+     x="7.6127481"
+     y="47.599503"
+     font-size="13px"
+     fill="#555555"
+     font-style="italic"
+     id="text2"
+     style="font-size:14.6667px">B= 0 inside</text>
+  <text
+     x="7.878686"
+     y="22.221331"
+     fill="#3a2410"
+     font-weight="bold"
+     id="text10-7"
+     style="font-size:17.3333px;display:inline;fill:#7f4d1f;fill-opacity:1">trace</text>
+  <text
+     x="9.6724367"
+     y="129.63934"
+     fill="#7a6a2a"
+     id="text12-4"
+     style="font-size:17.3333px;display:inline"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+       id="tspan3-2">dielectric</tspan></text>
+  <g
+     stroke="#333333"
+     fill="#333333"
+     id="g49"
+     transform="translate(-11.475905,-20.950993)"
+     inkscape:label="Axis">
+    <!-- x axis: right -->
+    <line
+       x1="28.803383"
+       y1="297.4126"
+       x2="89.500038"
+       y2="297.4126"
+       stroke-width="1.50868"
+       marker-end="url(#arrAx-5-1)"
+       id="line45-3"
+       style="marker-end:url(#arrAx-5-1)" />
+    <text
+       x="95.51049"
+       y="301.4126"
+       font-style="italic"
+       id="text45-5"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">z</text>
+    <text
+       x="107.51049"
+       y="301.4126"
+       font-size="11px"
+       fill="#555555"
+       id="text46-2"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(propagation)</text>
+    <!-- z axis: up -->
+    <line
+       x1="29.864044"
+       y1="296.62466"
+       x2="29.864044"
+       y2="357.66953"
+       stroke-width="1.513"
+       marker-end="url(#arrAx-5-1)"
+       id="line46"
+       style="marker-end:url(#arrAx-5-1)" />
+    <text
+       x="37.111401"
+       y="358.63116"
+       font-style="italic"
+       id="text47-7-2"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">x</text>
+    <!-- y axis: into page (⊗) -->
+    <text
+       x="22.127989"
+       y="283.93808"
+       font-style="italic"
+       id="text48-6"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">y</text>
+    <text
+       x="34.127987"
+       y="284.42758"
+       font-size="11px"
+       fill="#555555"
+       id="text49"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(into page)</text>
+    <g
+       transform="translate(64.058301,297.00559)"
+       id="g48-7">
+      <circle
+         r="7"
+         fill="none"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="circle47"
+         cx="-34.265736"
+         cy="0" />
+      <line
+         x1="-39.265736"
+         y1="-5"
+         x2="-29.265734"
+         y2="5"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line47" />
+      <line
+         x1="-29.265734"
+         y1="-5"
+         x2="-39.265736"
+         y2="5"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line48-6" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 601.44215 331.10892"
+   width="601.44214"
+   height="331.10892"
+   font-family="sans-serif"
+   version="1.1"
+   id="svg23"
+   sodipodi:docname="boundary-pillbox-gauss.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview23"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.0625"
+     inkscape:cx="208.24242"
+     inkscape:cy="135.51515"
+     inkscape:window-width="1916"
+     inkscape:window-height="1303"
+     inkscape:window-x="226"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg23" />
+  <defs
+     id="defs1">
+    <marker
+       id="eArrow"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#cc3300"
+         id="path1" />
+    </marker>
+    <marker
+       id="eArrow-8"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#cc3300"
+         id="path1-8" />
+    </marker>
+    <marker
+       id="marker2"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#cc3300"
+         id="path2" />
+    </marker>
+    <marker
+       id="arrAx-5-1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path4-5-7" />
+    </marker>
+    <marker
+       id="marker1"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path1-1" />
+    </marker>
+  </defs>
+  <!-- Conductor (top) -->
+  <rect
+     x="-18.55789"
+     y="-82.967194"
+     width="620"
+     height="180"
+     fill="#d9d9d9"
+     id="rect1"
+     style="opacity:0.5;fill:#a86628;fill-opacity:1" />
+  <text
+     x="14.812857"
+     y="47.371971"
+     font-size="13px"
+     fill="#555555"
+     font-style="italic"
+     id="text2"
+     style="font-size:14.6667px">E = 0 inside</text>
+  <!-- Dielectric (bottom) -->
+  <rect
+     x="-18.55789"
+     y="97.032806"
+     width="620"
+     height="260"
+     fill="#fff5b8"
+     id="rect2"
+     style="fill:#fdf6c2;fill-opacity:1" />
+  <!-- Surface line -->
+  <line
+     x1="-18.55789"
+     y1="97.032806"
+     x2="601.44214"
+     y2="97.032806"
+     stroke="#7a3f0c"
+     stroke-width="1.5"
+     id="line3" />
+  <!-- Surface charges -->
+  <g
+     font-size="16px"
+     fill="#cc3300"
+     font-weight="bold"
+     text-anchor="middle"
+     id="g12"
+     transform="translate(-18.557891,-82.967196)">
+    <text
+       x="60"
+       y="186"
+       id="text4">+</text>
+    <text
+       x="120"
+       y="186"
+       id="text5">+</text>
+    <text
+       x="180"
+       y="186"
+       id="text6">+</text>
+    <text
+       x="240"
+       y="186"
+       id="text7">+</text>
+    <text
+       x="300"
+       y="186"
+       id="text8">+</text>
+    <text
+       x="360"
+       y="186"
+       id="text9">+</text>
+    <text
+       x="420"
+       y="186"
+       id="text10">+</text>
+    <text
+       x="480"
+       y="186"
+       id="text11">+</text>
+    <text
+       x="540"
+       y="186"
+       id="text12">+</text>
+  </g>
+  <text
+     x="513.8147"
+     y="82.233047"
+     font-size="14px"
+     fill="#cc3300"
+     font-weight="bold"
+     id="text13"
+     style="font-size:17.3333px">σ<tspan
+   style="font-size:17.3333px;baseline-shift:sub"
+   id="tspan28">s</tspan></text>
+  <!-- Pillbox -->
+  <rect
+     x="192.58574"
+     y="86.116333"
+     width="177.71277"
+     height="21.832952"
+     fill="rgba(45,138,71,0.12)"
+     stroke="#2d8a47"
+     stroke-width="1.39863"
+     stroke-dasharray="6, 4"
+     id="rect13"
+     style="fill:none;stroke:#000000;stroke-opacity:1" />
+  <!-- Pillbox label with leader line -->
+  <text
+     x="380.88953"
+     y="82.17662"
+     font-size="13px"
+     fill="#2d8a47"
+     font-style="italic"
+     id="text14"
+     style="font-size:17.3333px"><tspan
+       style="font-size:17.3333px;fill:#000000;fill-opacity:1"
+       id="tspan27">pillbox</tspan></text>
+  <!-- Annotations near the pillbox faces -->
+  <text
+     x="270.42145"
+     y="67.888992"
+     font-size="11px"
+     fill="#2d8a47"
+     id="text15"
+     style="font-size:14.6667px;text-align:center;text-anchor:middle"><tspan
+       style="font-size:14.6667px;fill:#000000;fill-opacity:1"
+       id="tspan1">top face inside copper: Φ<tspan
+   style="font-size:14.6667px;baseline-shift:sub"
+   id="tspan7">in</tspan>=0</tspan></text>
+  <text
+     x="183.53012"
+     y="127.89143"
+     font-size="11"
+     fill="#2d8a47"
+     id="text16"
+     style="font-size:14.6667px"><tspan
+       style="font-size:14.6667px;fill:#000000;fill-opacity:1"
+       id="tspan2">bottom face: Φext= E</tspan><tspan
+       style="font-size:14.6667px;baseline-shift:sub;fill:#000000;fill-opacity:1"
+       id="tspan26">x</tspan><tspan
+       style="font-size:14.6667px;fill:#000000;fill-opacity:1"
+       id="tspan3">· A</tspan></text>
+  <!-- E field arrows in dielectric -->
+  <g
+     stroke="#cc3300"
+     stroke-width="2.5"
+     id="g21"
+     transform="translate(-19.527588,-89.755075)">
+    <line
+       x1="107.77001"
+       y1="238.62865"
+       x2="107.77001"
+       y2="318.62863"
+       marker-end="url(#eArrow)"
+       id="line16" />
+    <line
+       x1="187.77"
+       y1="238.62865"
+       x2="187.77"
+       y2="318.62863"
+       marker-end="url(#eArrow)"
+       id="line17" />
+    <line
+       x1="274.435"
+       y1="240.50966"
+       x2="274.435"
+       y2="320.50967"
+       marker-end="url(#eArrow-8)"
+       id="line16-4"
+       style="marker-end:url(#eArrow-8)" />
+    <line
+       x1="354.435"
+       y1="240.50966"
+       x2="354.435"
+       y2="320.50967"
+       marker-end="url(#eArrow-8)"
+       id="line17-5"
+       style="marker-end:url(#eArrow-8)" />
+    <line
+       x1="450"
+       y1="240"
+       x2="450"
+       y2="320"
+       marker-end="url(#eArrow)"
+       id="line20" />
+    <line
+       x1="540"
+       y1="240"
+       x2="540"
+       y2="320"
+       marker-end="url(#eArrow)"
+       id="line21" />
+  </g>
+  <text
+     x="399.50272"
+     y="142.76009"
+     font-size="14px"
+     fill="#cc3300"
+     font-weight="bold"
+     id="text21"
+     style="font-size:14.6667px">E<tspan
+   style="font-size:14.6667px;baseline-shift:sub"
+   id="tspan4">x</tspan> (perpendicular)</text>
+  <!-- Bottom result -->
+  <text
+     x="212.28351"
+     y="258.09048"
+     font-size="13"
+     fill="#2d8a47"
+     id="text22"
+     style="font-size:14.6667px"><tspan
+       sodipodi:role="line"
+       id="tspan29"
+       x="212.28351"
+       y="258.09048">Gauss's law on the pillbox:</tspan><tspan
+       sodipodi:role="line"
+       id="tspan30"
+       x="212.28351"
+       y="276.42386">only the bottom face contributes to the flux integral</tspan></text>
+  <text
+     x="213.64651"
+     y="294.90332"
+     font-size="15px"
+     fill="#2d8a47"
+     font-weight="bold"
+     id="text23"
+     style="font-size:17.3333px">⇒ σ<tspan
+   style="font-size:17.3333px;baseline-shift:sub"
+   id="tspan9">s</tspan> = ε E<tspan
+   style="font-size:17.3333px;baseline-shift:sub"
+   id="tspan5">x</tspan></text>
+  <text
+     x="15.078794"
+     y="21.993799"
+     fill="#3a2410"
+     font-weight="bold"
+     id="text10-7"
+     style="font-size:17.3333px;display:inline;fill:#7f4d1f;fill-opacity:1">trace</text>
+  <text
+     x="16.872545"
+     y="129.41182"
+     fill="#7a6a2a"
+     id="text12-4"
+     style="font-size:17.3333px;display:inline"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+       id="tspan3-2">dielectric</tspan></text>
+  <g
+     stroke="#333333"
+     fill="#333333"
+     id="g49"
+     transform="translate(-7.9001408,-36.072209)"
+     inkscape:label="Axis">
+    <!-- x axis: right -->
+    <line
+       x1="28.803383"
+       y1="297.4126"
+       x2="89.500038"
+       y2="297.4126"
+       stroke-width="1.50868"
+       marker-end="url(#arrAx-5-1)"
+       id="line45-3"
+       style="marker-end:url(#arrAx-5-1)" />
+    <text
+       x="95.51049"
+       y="301.4126"
+       font-style="italic"
+       id="text45-5"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">z</text>
+    <text
+       x="107.51049"
+       y="301.4126"
+       font-size="11px"
+       fill="#555555"
+       id="text46-2"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(propagation)</text>
+    <!-- z axis: up -->
+    <line
+       x1="29.864044"
+       y1="296.62466"
+       x2="29.864044"
+       y2="357.66953"
+       stroke-width="1.513"
+       marker-end="url(#arrAx-5-1)"
+       id="line46"
+       style="marker-end:url(#arrAx-5-1)" />
+    <text
+       x="37.111401"
+       y="358.63116"
+       font-style="italic"
+       id="text47-7-2"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">x</text>
+    <!-- y axis: into page (⊗) -->
+    <text
+       x="22.127989"
+       y="283.93808"
+       font-style="italic"
+       id="text48-6"
+       style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">y</text>
+    <text
+       x="34.127987"
+       y="284.42758"
+       font-size="11px"
+       fill="#555555"
+       id="text49"
+       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(into page)</text>
+    <g
+       transform="translate(64.058301,297.00559)"
+       id="g48-7">
+      <circle
+         r="7"
+         fill="none"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="circle47"
+         cx="-34.265736"
+         cy="0" />
+      <line
+         x1="-39.265736"
+         y1="-5"
+         x2="-29.265734"
+         y2="5"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line47" />
+      <line
+         x1="-29.265734"
+         y1="-5"
+         x2="-39.265736"
+         y2="5"
+         stroke="#333333"
+         stroke-width="1.3"
+         id="line48-6" />
+    </g>
+  </g>
+</svg>

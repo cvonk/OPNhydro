@@ -23,14 +23,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2"
-     inkscape:cx="625.25"
-     inkscape:cy="575.25"
+     inkscape:cx="406.75"
+     inkscape:cy="364.25"
      inkscape:window-width="2160"
      inkscape:window-height="1261"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g37">
+     inkscape:current-layer="svg67">
     <inkscape:page
        x="3.9559285e-09"
        y="0"
@@ -1067,9 +1067,7 @@
      font-style="italic"
      font-size="12px"
      id="text20-9"
-     style="font-size:17.3333px">I<tspan
-   style="font-size:17.3333px;baseline-shift:sub"
-   id="tspan6" /></text>
+     style="font-size:17.3333px">J</text>
   <!-- =============== Ex FIELD INSIDE COPPER (left of wavefront) =============== -->
   <!-- Two rows of horizontal Ex arrows in the near-surface band -->
   <g
@@ -1981,7 +1979,9 @@
          fill="#333333"
          font-size="12px"
          id="text51"
-         style="font-size:17.3333px;fill:#bf2c2c;fill-opacity:1">V(z) falls from finite →0</text>
+         style="font-size:17.3333px;fill:#bf2c2c;fill-opacity:1"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+   id="tspan8">E</tspan>(z) falls from finite →0</text>
       <text
          x="43.964069"
          y="434.88776"
@@ -2247,9 +2247,7 @@
      font-style="italic"
      font-size="12px"
      id="text20-9-8"
-     style="font-size:17.3333px">I<tspan
-   style="font-size:17.3333px;baseline-shift:sub"
-   id="tspan6-2" /></text>
+     style="font-size:17.3333px">J</text>
   <g
      id="g33-4"
      transform="matrix(1.2226901,0,0,1.2226901,-48.663646,224.21524)"
@@ -2498,56 +2496,7 @@
      inkscape:label="dEdt">
     <!-- Baseline (zero level) -->
     <!-- Peak reference line -->
-    <line
-       x1="170.58942"
-       y1="-55"
-       x2="824.11591"
-       y2="-55"
-       stroke="#bbbbbb"
-       stroke-width="0.59705"
-       stroke-dasharray="2, 2"
-       id="line-dedt-peak" />
     <!-- ∂E/∂t waveform: slight positive behind wavefront, spike at wavefront, zero ahead -->
-    <path
-       d="m 103.6633,-67.985118 h 373.91408 c 14.43993,0 9.07252,52.985118 22.15238,52.985118 9.95399,0 8.26367,-55.985118 20.38881,-55.985118 h 237.30078"
-       fill="none"
-       stroke="#d4760a"
-       stroke-width="2.06588"
-       id="path-dedt"
-       sodipodi:nodetypes="csscc" />
-    <!-- Tick labels -->
-    <g
-       id="g6"
-       transform="translate(0,-56)">
-      <line
-         x1="86.673332"
-         y1="-15"
-         x2="824.11591"
-         y2="-15"
-         stroke="#bbbbbb"
-         stroke-width="0.634225"
-         stroke-dasharray="2, 2"
-         id="line-dedt-base" />
-      <text
-         x="94.423988"
-         y="-12.009205"
-         fill="#d4760a"
-         font-size="11px"
-         text-anchor="end"
-         font-style="italic"
-         id="text-dedt-zero"
-         style="font-size:15.4208px;stroke-width:1.05142">0</text>
-    </g>
-    <!-- Plot title -->
-    <text
-       x="151.44751"
-       y="-48.119518"
-       fill="#d4760a"
-       font-size="12px"
-       font-style="italic"
-       id="text-dedt-title"
-       style="font-size:17.3333px">∂V/∂z (time rate of change in V)</text>
-    <!-- Annotation: small nonzero behind wavefront -->
     <text
        x="200"
        y="-25"
@@ -2555,8 +2504,8 @@
        font-size="11px"
        font-style="italic"
        id="text-dedt-ohmic"
-       style="font-size:14.6667px">slightly &gt; 0 (ohmic losses)</text>
-    <!-- Annotation: zero ahead of wavefront -->
+       style="font-size:14.6667px"
+       inkscape:label="ohmic losses">slightly &gt; 0 (ohmic losses)</text>
     <text
        x="600"
        y="-21.536329"
@@ -2565,6 +2514,56 @@
        font-style="italic"
        id="text-dedt-ahead"
        style="font-size:14.6667px">0 (no fields yet)</text>
+    <!-- Tick labels -->
+    <g
+       id="g38"
+       inkscape:label="graph">
+      <path
+         d="m 103.6633,-18 h 373.91408 c 14.43993,0 9.07252,-52.985118 22.15238,-52.985118 9.95399,0 8.26367,55.985118 20.38881,55.985118 h 237.30078"
+         fill="none"
+         stroke="#d4760a"
+         stroke-width="2.06588"
+         id="path-dedt"
+         sodipodi:nodetypes="csscc"
+         style="display:inline"
+         inkscape:label="graph" />
+      <line
+         x1="86.673332"
+         y1="-71"
+         x2="824.11591"
+         y2="-71"
+         stroke="#bbbbbb"
+         stroke-width="0.634225"
+         stroke-dasharray="2, 2"
+         id="line-dedt-base"
+         inkscape:label="base line" />
+    </g>
+    <text
+       x="93.423988"
+       y="-13.009201"
+       fill="#d4760a"
+       font-size="11px"
+       text-anchor="end"
+       font-style="italic"
+       id="text-dedt-zero"
+       style="font-size:15.4208px;stroke-width:1.05142"
+       inkscape:label="0 value">0</text>
+    <!-- Plot title -->
+    <text
+       x="151.44751"
+       y="-48.119518"
+       fill="#d4760a"
+       font-size="12px"
+       font-style="italic"
+       id="text-dedt-title"
+       style="font-size:17.3333px"
+       inkscape:label="title">∂<tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold Italic'"
+   id="tspan38">E</tspan>/∂z (change in <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold Italic'"
+   id="tspan39">E</tspan>)</text>
+    <!-- Annotation: small nonzero behind wavefront -->
+    <!-- Annotation: zero ahead of wavefront -->
   </g>
   <g
      stroke="#333333"
@@ -2660,7 +2659,7 @@
      fill="none"
      id="g24-6"
      transform="matrix(0.99137015,0,0,2.5957491,-16.527572,-371.20211)"
-     style="stroke-width:1.24675;stroke-dasharray:none;opacity:0.3">
+     style="stroke-width:1.24675;stroke-dasharray:none;opacity:0.80115274">
     <path
        d="m 435.60905,264.65085 c 4.11846,22.01147 2.30771,48.94898 -0.62993,71.95711"
        marker-end="url(#arrE-0-0)"
