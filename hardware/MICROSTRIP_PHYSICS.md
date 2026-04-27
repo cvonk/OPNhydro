@@ -110,7 +110,10 @@ A microstrip has **two regions**: the dielectric between the conductors, and the
 ##### Two of Maxwell's Equations
 
 As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free divergence constraint.
+<div class="quote">
+
 $$  
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
   \begin{align}  
     \nabla \times \mathbf B &=
     \underbrace{\mu \ \mathbf J}_{\substack{\text{conduction} \\ \text{current}}}
@@ -122,6 +125,7 @@ $$
     \tag{\text{Faraday}}
   \end{align}
 $$ 
+</div>
 
 where $\mathbf E$ and $\mathbf B$ are the electric and magnetic field vectors at each point in space, $\mathbf J$ is the conduction current density, and $\mu$ and $\varepsilon$ are constants for the material. Note that the **displacement current** term in the Ampère-Maxwell law is not a real current, but a changing electric field that **acts as** a source of magnetic field, just like a real current.
 
@@ -167,12 +171,12 @@ The electric field $\mathbf E$ points vertically (trace to return plane), but it
 In the source-free dielectric, the two laws simplify to:
 
 $$
-  \begin{align}
+  \begin{align*}
     \nabla \times \mathbf{B} &= \color{red}\cancel{\color{black}\mu \, \mathbf{J}} \color{black} + \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
-    \tag{\text{source-free Ampère-Maxwell}} \\
+    & \tag{\text{source-free Ampère-Maxwell}} \\
     \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
     \tag{\text{Faraday}}
-  \end{align}
+  \end{align*}
 $$
 
 A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the **coupling** — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*. **Each field regenerates the other**, so the wave is self-sustaining — no electrons required. The mathematics forbids a localized disturbance from remaining localized. For more details, refer to Appendix A.
@@ -245,14 +249,17 @@ The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the
 
   In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \mathbf E = 0$. The first term vanishes:
   $$
-      \nabla^2 \mathbf E = \mu\,\varepsilon \ \frac{\partial^2 \mathbf E}{\partial t^2}
+    \nabla^2 \mathbf E = \mu\,\varepsilon \ \frac{\partial^2 \mathbf E}{\partial t^2}
   $$
 </details>
 <br />
 
 **Takeaway:** combining Faraday and Ampère-Maxwell yields the standard wave equation
 $$
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \shaded{
     \nabla^2 \mathbf E = \underbrace{\mu\,\varepsilon}_{1/v^2} \,\frac{\partial^2 \mathbf E}{\partial t^2}
+  }
 $$
 
 Recognize the standard wave equation for any quantity propagating at speed $v$:
@@ -266,9 +273,12 @@ $$
 
 Comparing the two, term by term, gives the speed $v$ of the wave propagation:
 $$
-    \frac{1}{v^2} = \mu \varepsilon
-    \quad \Rightarrow \quad
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \frac{1}{v^2} = \mu \varepsilon
+  \quad \Rightarrow \quad
+  \shaded{
     v = \frac{1}{\sqrt{\mu \, \varepsilon}}
+  }
 $$
 
 where for vacuum, the permeability constant $\mu = \mu_0$, and the permittivity constant $\varepsilon = \varepsilon_0$. These $\mu_0$ and $\varepsilon_0$ follow from independent magnetic and electric experiments, respectively — neither involving light.
@@ -430,7 +440,10 @@ $$
 
 **Takeaway:** Gauss's law applied to a thin pillbox straddling the conductor surface the surface charge density $\sigma_s$:
 $$
-    \sigma_s = \varepsilon\, E_x, \quad \text{in }\left[ \rm{C/m^2} \right]
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \shaded{
+    \sigma_s = \varepsilon\, E_x
+  }, \quad \text{in }\left[ \rm{C/m^2} \right]
 $$
 
 The positive surface charge $\sigma_s$ on the bottom of the trace is whatever the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture above is the dynamic mechanism; this equation is the algebraic statement of the same fact.
@@ -468,8 +481,6 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 
 ##### Boundary-condition view
 
-Having established an intuitive understanding, we will now analyze this phenomenum from a more formal perspective.
-
 The magnetic field $\mathbf{B}$, from the wave propagating through the dielectric, is screened by the return plane. To stay in the $xy$-plane, it has no other choice but to **loop around the trace**.
 <figure>
   <center>
@@ -484,7 +495,7 @@ Zooming in on a small section of the trace/dielectric boundary, we see that the 
 <figure>
   <center>
   <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 100%; max-width:600px; height: auto;">
-  <figcaption><i>Close-up of Amperian loop straddling the trace/delectric boundary.</i></figcaption>
+  <figcaption><i>Close-up of Amperian loop straddling the trace/dielectric boundary.</i></figcaption>
   </center>
 </figure>
 
@@ -511,7 +522,7 @@ $$
 $$
 </div>
 
-Substitude $\oint \mathbf{B}\cdot d\mathbf{l}$ and $I_{enc}$ in Ampère's law:
+Substitute $\oint \mathbf{B}\cdot d\mathbf{l}$ and $I_{enc}$ in Ampère's law:
 $$
   \begin{align*}
     B_{out} \cdot \bcancel{L} &= \mu \left( K \bcancel{L} \right) \\
@@ -523,29 +534,73 @@ $$ where $\hat n$ is the outward normal from the conductor.
 <br />
 
 
-**Takeaway:** Ampère's law applied to a thin loop straddling the conductor surface forces a surface current $\mathbf{K}$ in the propagation direction:
+**Takeaway:** Ampère's law applied to a thin loop straddling the conductor surface forces a surface current $\mathbf{K}$ in the propagation direction. This surface current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands:
 $$
-    \mathbf K = \frac{1}{\mu}\,B\,\hat z, \quad \text{in }\left[ \rm{A/m} \right]
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \shaded{
+    \mathbf K = \frac{B_y}{\mu}\,\hat z
+  }, \quad \text{in }\left[ \rm{A/m} \right]
 $$
 
-This surface current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
-<br />
+<details>
+  <summary>Expand if you ❤️ to see the derivation</summary>
 
-**Charge conservation at the wavefront.** On the trace surface,
+Surface current $\mathbf{K}$ only exists in the $z$-direction ($\mathbf{K} = K_z \hat z$), so we can rewrite this as:
 $$
-    \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} = 0
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \shaded{
+      K_z = \frac{B_y}{\mu}
+  }
 $$
-At the wavefront, $\sigma_s$ is ramping from zero to $\varepsilon E_x$ as the wave passes, so $\nabla_s \cdot \mathbf K \neq 0$ — the current converges into the section to deposit the new charge.
 
-**The wavefront moves at speed $v$.** A wave traveling at speed $v$ depends only on $(z - vt)$, so $\partial/\partial t = -v\,\partial/\partial z$ for any field quantity. Apply that to charge conservation:
+Recall the **Continuity Equation** (that follows from Ampère–Maxwell Law)
+<div class="quote">
+
+$$
+  \nabla \cdot \mathbf J + \frac{\partial \rho}{\partial t} = 0
+  \tag{Continuity Equation}
+$$
+</div>
+
+Expressed on a 2D surface, this becomes the surface charge conservation on the trace surface:
+$$
+  \begin{align*}
+    \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} &= 0 \\
+    \Rightarrow\quad
+    {\frac{\partial K_x}{\partial x}} + {\frac{\partial K_y}{\partial y}} + \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}&= 0
+  \end{align*}
+$$
+
+As we saw, $\mathbf{K}$ exists only in the $+z$-direction:
+$$
+    \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}= 0 
+$$
+
+At the wavefront, $\sigma_s$ is ramping from zero to $\varepsilon E_x$ as the wave passes, so $\partial K_z/\partial z \neq 0$ — the current converges into the section to deposit the new charge.
+
+Because the wave moves at speed $v$, the field follows the form $E_x(z-vt)$. This **wavefront constraint** links a *change in time* to a *change in space*:
+$$
+  \frac{\partial \bcancel{E_x}}{\partial t} = -v\, \frac{\partial \bcancel{E_x}}{\partial z}
+$$
+
+So $\partial/\partial t = -v\,\partial/\partial z$ for any field quantity. Apply that to surface charge conservation:
 $$
     \frac{\partial K_z}{\partial z} = v\,\frac{\partial \sigma_s}{\partial z}
-    \quad \Rightarrow \quad
-    K_z = v\,\sigma_s
 $$
-(both → 0 ahead of the wavefront, so the integration constant is zero). **The surface current is the surface charge times the wave velocity** — not as a *consequence* of electron motion, but as the *only* consistent answer when a charge pattern advances rigidly at speed $v$. The wavefront is the kinematic boundary between the field-off and field-on regions, and the surface charge and current are forced to advance at speed $v$ to keep up with it.
 
-Cross-check against the field expressions: for a TEM wave, $E_x = v\,B_y$, so $K_z = B_y/\mu_0 = E_x/(\mu_0 v) = \varepsilon E_x \cdot v = \sigma_s \cdot v$ (using $\mu_0\varepsilon v^2 = 1$). The boundary conditions, charge conservation, and the wave's $|\mathbf E|/|\mathbf B|$ ratio all agree.
+Integrate along $z$ on both sides. Both $K_z$ and $\sigma_s$ vanish ahead of the wavefront, so the integration constant is zero.
+</details>
+<br />
+
+**Takeaway:** The Continuity Equation and the Wavefront Constrain govern the surface current:
+$$
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \shaded{    
+    K_z = v\,\sigma_s
+  }
+$$
+
+This is not as a *consequence* of electron motion, but as the *only* consistent answer when a charge pattern advances rigidly at speed $v$. The wavefront is the kinematic boundary between the field-off and field-on regions, and the surface charge and current are forced to advance at speed $v$ to keep up with it.
 <br />
 
 
@@ -646,8 +701,12 @@ The equation is the short answer. Here is the long one, in a voice we have borro
 That's a wonderful question. And the answer — which I think is one of the most beautiful things Maxwell ever did — is that there's only **one** magnetic field. There's just one field in space, wrapping around the trace. But that field has *two different things that can keep it going*, and which one is keeping it going depends on *where you are*.
 
 Let me show you. Maxwell's Ampère law — the real one, with his addition — says the curl of $\mathbf B$ is two things added together:
+<div class="quote">
 
-$$\nabla \times \mathbf B = \mu \mathbf J + \mu \varepsilon \frac{\partial \mathbf E}{\partial t}$$
+$$
+  \nabla \times \mathbf B = \mu \mathbf J + \mu \varepsilon \frac{\partial \mathbf E}{\partial t}
+$$
+</div>
 
 That first piece — $\mu \mathbf J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field.
 
@@ -1073,9 +1132,11 @@ $$
 <br />
 
 **Takeaway:** the rate of change in the electric field **in time** ($t$) is exactly balanced by the rate of change of the magnetic field **in space** ($z$)
-
 $$
-  \frac{\partial B_y}{\partial z} = -\mu\, \varepsilon\, \frac{\partial E_x}{\partial t}
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \shaded{
+    \frac{\partial B_y}{\partial z} = -\mu\, \varepsilon\, \frac{\partial E_x}{\partial t}
+  }
 $$
 
 So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
@@ -1150,11 +1211,52 @@ $$
 
 **Takeaway:** the rate of change in the electric field **in space** ($z$) is exactly balanced by the rate of change of the magnetic field **in time** ($t$)
 $$
-    \frac{\partial E_x}{\partial z} = -\frac{\partial B_y}{\partial t}
+    \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+    \shaded{
+        \frac{\partial E_x}{\partial z} = -\frac{\partial B_y}{\partial t}
+    }
 $$
 
 where $\hat y$ points across the trace width — the direction $\mathbf B$ curls around the conductor.
 
+
+---
+
+
+### A.3. TEM Ratio: $E$ and $B$ Locked by the Wave Speed
+
+For a TEM wave propagating in $+\hat z$ at speed $v$, the electric and magnetic field amplitudes are not independent — they are locked together by Faraday's law (§A.2) plus the wave-speed constraint.
+
+Start from the relationship between the rate of change in the electric field *in space* ($z$) and the rate of change of the magnetic field *in time* ($t$) (Appendix A.2):
+<div class="quote">
+
+$$
+    \frac{\partial E_x}{\partial z} = -\frac{\partial B_y}{\partial t}
+$$
+</div>
+
+**Apply the wavefront constraint:** Because the wave moves at speed $v$, the field follows the form $E_x(z-vt)$. This links the *change in time* to the *change in space*:
+$$
+  \frac{\partial \bcancel{E_x}}{\partial t} = -v\, \frac{\partial \bcancel{E_x}}{\partial z}
+$$
+
+So $\partial/\partial t = -v\,\partial/\partial z$ for any field quantity. Substitute on the right:
+$$
+    \frac{\partial E_x}{\partial z} = v\,\frac{\partial B_y}{\partial z}
+$$
+
+Integrate along $z$. Both $E_x$ and $B_y$ vanish ahead of the wavefront, so the integration constant is zero:
+$$
+    E_x = v\,B_y
+$$
+
+**Takeaway:** the wave's electric and magnetic field amplitudes are tied by the propagation speed: 
+$$
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \shaded{
+    v = \frac{E_x}{B_y}
+  }
+$$
 
 ---
 

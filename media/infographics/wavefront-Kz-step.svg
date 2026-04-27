@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400" font-family="sans-serif">
+  <defs>
+    <marker id="axisArrow" viewBox="0 -4 8 8" refX="7" refY="0" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,-4 L8,0 L0,4 Z" fill="#333"/>
+    </marker>
+    <marker id="waveArrow" viewBox="0 -5 10 10" refX="9" refY="0" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,-5 L10,0 L0,5 Z" fill="#cc3300"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="350" y="28" font-size="15" font-weight="bold" text-anchor="middle" fill="#222">
+    Surface current K_z along the trace, at one instant in time
+  </text>
+
+  <!-- y-axis -->
+  <line x1="110" y1="340" x2="110" y2="80" stroke="#333" stroke-width="1.5" marker-end="url(#axisArrow)"/>
+  <text x="92" y="75" font-size="15" font-style="italic" fill="#333">K_z</text>
+
+  <!-- x-axis -->
+  <line x1="90" y1="320" x2="650" y2="320" stroke="#333" stroke-width="1.5" marker-end="url(#axisArrow)"/>
+  <text x="660" y="325" font-size="15" font-style="italic" fill="#333">z</text>
+
+  <!-- 0 label on y-axis -->
+  <text x="100" y="325" font-size="13" fill="#333" text-anchor="end">0</text>
+
+  <!-- K_0 dashed level guide -->
+  <line x1="110" y1="130" x2="380" y2="130" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="100" y="134" font-size="14" fill="#333" text-anchor="end">K₀</text>
+
+  <!-- The K_z step function (blue) -->
+  <!-- Behind the wavefront: K_z = K_0 -->
+  <line x1="110" y1="130" x2="380" y2="130" stroke="#0066cc" stroke-width="3.5"/>
+  <!-- Wavefront drop (vertical) -->
+  <line x1="380" y1="130" x2="380" y2="320" stroke="#0066cc" stroke-width="3.5"/>
+  <!-- Ahead of the wavefront: K_z = 0 -->
+  <line x1="380" y1="320" x2="610" y2="320" stroke="#0066cc" stroke-width="3.5"/>
+
+  <!-- Wavefront vertical marker (red dashed) -->
+  <line x1="380" y1="345" x2="380" y2="55" stroke="#cc3300" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="380" y="48" font-size="14" fill="#cc3300" font-weight="bold" text-anchor="middle">wavefront</text>
+
+  <!-- Wave-direction arrow above the wavefront marker -->
+  <line x1="395" y1="65" x2="475" y2="65" stroke="#cc3300" stroke-width="2" marker-end="url(#waveArrow)"/>
+  <text x="482" y="69" font-size="13" fill="#cc3300" font-style="italic">moves at speed v</text>
+
+  <!-- "behind" annotation -->
+  <text x="245" y="180" font-size="13" fill="#333" text-anchor="middle">behind: current flowing</text>
+  <text x="245" y="200" font-size="13" fill="#0066cc" text-anchor="middle" font-style="italic">K_z = K₀</text>
+
+  <!-- "ahead" annotation -->
+  <text x="495" y="290" font-size="13" fill="#333" text-anchor="middle">ahead: no current yet</text>
+  <text x="495" y="270" font-size="13" fill="#0066cc" text-anchor="middle" font-style="italic">K_z = 0</text>
+
+  <!-- "at the wavefront" annotation, beside the drop -->
+  <text x="405" y="225" font-size="13" fill="#cc3300" font-style="italic">∂K_z/∂z &lt; 0</text>
+  <text x="405" y="245" font-size="12" fill="#cc3300">current converges</text>
+  <text x="405" y="262" font-size="12" fill="#cc3300">into this section</text>
+
+  <!-- Footer note relating to σ_s -->
+  <text x="350" y="385" font-size="13" fill="#555" text-anchor="middle" font-style="italic">
+    σ_s has the same step shape — and K_z = v · σ_s relates the two heights.
+  </text>
+</svg>
