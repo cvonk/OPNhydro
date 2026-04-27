@@ -336,7 +336,7 @@ The **free electrons** in the copper feel three distinct effects:
 
 - **Vertical component $E_x$** (dominant) — confines the wave to the dielectric.
 
-- **Horizontal component $\frac{\partial E_x}{dz}$ at the wavefront** (strong) — the steep cliff drives the current and establishes the surface charge.
+- **Horizontal variation $\frac{\partial E_x}{dz}$ at the wavefront** (strong) — the steep cliff drives the current and establishes the surface charge.
 
 - **Horizontal component $E_z$ behind the wavefront** (small) — sustains the current against resistive drag.
 
@@ -376,16 +376,18 @@ Now here's the good part. Those two sheets of charge have their own field, point
 
 And here's the whole point: because the field can't get into the copper, it has nowhere to go but to **stay between the two conductors**. The electrons have built a cage for the wave.
 </div>
-<br />
+
 
 ##### Boundary-condition view
+
+Following the intuitive, casual discussions, this section provides a more formal examination of this phenomena.
 
 The boundary-condition view of Gauss's Law states that the component of the electric field perpendicular to a conductor's surface just outside the conductor is directly proportional to the local surface charge density.
 
 <figure>
   <center>
-  <img src="../media/infographics/boundary-pillbox-gauss.svg" style="width: 70%; max-width:500px; height: auto;">
-  <figcaption><i>Side view of pillbox straddling a conductor surface.</i></figcaption>
+  <img src="../media/infographics/boundary-pillbox-gauss.svg" style="width: 70%; max-width:900px; height: auto;">
+  <figcaption><i>Side-view close-up of pillowbox straddling the trace/delectric boundary.</i></figcaption>
   </center>
 </figure>
 
@@ -426,16 +428,16 @@ $$
 
 **Takeaway:** Gauss's law applied to a thin pillbox straddling the conductor surface forces $\varepsilon E_x$ just outside to equal the surface charge density $\sigma_s$ (the field is zero inside the metal, so the pillbox flux comes entirely from the outside face):
 $$
-    \sigma_s = \varepsilon\, E_x\big|_{\text{outside}}
+    \sigma_s = \varepsilon\, E_x
 $$
 
-The positive surface charge on the bottom of the trace is whatever $\sigma_s$ the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture above is the dynamic mechanism; this equation is the algebraic statement of the same fact.
+The positive surface charge $\sigma_s$ on the bottom of the trace is whatever the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture above is the dynamic mechanism; this equation is the algebraic statement of the same fact.
 <br />
 
 
-#### Horizontal Component $\frac{\partial E_x}{dz}$ at the Wavefront
+#### Horizontal Variation $\frac{\partial E_x}{dz}$ at the Wavefront
 
-**At the wavefront**, the there is a strong variation in the $E_x$ field in the propagation direction. (i.e. the field has dropped from full strength behind to zero ahead over a short distance). This acts as a field $E_z$ acting on the electrons in the conductor with a force $F_z = -e\,E_z$ — opposite to $E_z$, so backward along the trace, opposite to the wavefront's motion, toward the source.
+**At the wavefront**, the there is a strong variation in the $E_x$ field in the propagation direction. (i.e. the field drops from full strength behind to zero ahead over a short distance). This acts as a field $E_z$ acting on the electrons in the conductor with a force $F_z = -e\,E_z$ — opposite to $E_z$, so backward along the trace, opposite to the wavefront's motion.
 
 The electrons in *both* conductors are pushed *sideways*:
 - *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the '$+$' terminal of the source;
@@ -450,6 +452,7 @@ The electrons in *both* conductors are pushed *sideways*:
 
 This drift is the transmission-line **current**. And this same drift is what builds up the positive surface charge on the bottom of the trace: electrons drain out of the section horizontally toward the source, leaving the bottom of that section positively charged. The same current then accumulates as negative charge on the top of the return plane further back.
 
+
 ##### In other words
 
 <div class="quote">
@@ -460,11 +463,12 @@ It comes from the wave *going somewhere*. The voltage on the trace right here is
 
 The free electrons in the copper feel that field and start to drift. Very slowly, mind you — but they all drift together, and that is what we call a **current**. The current didn't cause anything. The field caused the current. The field shows up first, the electrons react. 
 </div>
-<br />
 
 ##### Boundary-condition view
 
-The magnetic field $\mathbf{B}$ is screened by the return plane. It has no other choice but to loop around the trace.
+Having established an intuitive understanding in previous sessions, we will now analyze these phenomena from a more formal perspective.
+
+The magnetic field $\mathbf{B}$ is screened by the return plane. To stay in the $xy$-plane, it has no other choice but to **loop around the trace**.
 <figure>
   <center>
   <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 90%; max-width:800px; height: auto;">
@@ -472,11 +476,13 @@ The magnetic field $\mathbf{B}$ is screened by the return plane. It has no other
   </center>
 </figure>
 
-If we zoom into a small section of the trace/dielectric boundary, we see that the wave's $\mathbf B$ field runs tangential to the trace surface. 
+> **A note on $\mathbf K$ and $\sigma_s$:** These are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a perfect conductor, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
+
+Zooming in on a small section of the trace/dielectric boundary, we see that the wave's $\mathbf B$ field is tangential to the trace surface. 
 <figure>
   <center>
-  <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 80%; max-width:500px; height: auto;">
-  <figcaption><i>Cross-section: Amperian loop straddling the conductor surface.</i></figcaption>
+  <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 90%; max-width:600px; height: auto;">
+  <figcaption><i>Close-up of Amperian loop straddling the trace/delectric boundary.</i></figcaption>
   </center>
 </figure>
 
@@ -523,8 +529,6 @@ $$
 $$
 
 where $\hat n$ is the outward normal from the conductor. Appendix A shows that $\mathbf B$ in the dielectric points in $\pm\hat y$ — curling around the trace. Plugging $\hat n = +\hat x$ (downward, from trace into dielectric) and $\mathbf B = B_y\,\hat y$ gives $\mathbf K = (B_y/\mu_0)\,\hat z$ — conventional current in the propagation direction. The trace current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
-
-> **A note on $\mathbf K$ and $\sigma_s$.** These are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a perfect conductor, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
 
 **Charge conservation at the wavefront.** On the trace surface,
 $$
@@ -605,7 +609,9 @@ And that's really all there is to it. The hard part is believing it.
 
 ### 1.3. Sources of the Magnetic Field
 
-§1.1 showed that a changing electric field $\mathbf E$ in the dielectric creates a magnetic field $\mathbf B$ — the displacement current. §1.2 showed that the same wave drives a conduction current $\mathbf J$ in the copper, and a conduction current also creates a $\mathbf B$ field.
+§1.1 showed that a changing electric field $\mathbf E$ in the dielectric — the displacement current — creates a magnetic field $\mathbf B$. §1.2 showed that the same wave drives a conduction current $\mathbf J$ in the copper, and a conduction current also creates a $\mathbf B$ field. The surface current $\mathbf K$ from §1.2 is just $\mathbf J$ integrated across the thin skin-depth layer where the current actually flows; for the macroscopic Ampère-Maxwell equation here, either formulation gives the same answer.
+
+#### One Field, Two Sources
 
 So are there two competing magnetic fields on a microstrip, one from the wave and one from the current? This section shows there is only one — and that the two sources are just two terms in the same equation.
 
@@ -615,6 +621,7 @@ So are there two competing magnetic fields on a microstrip, one from the wave an
   <figcaption><i>Cross-section showing one continuous <b>B</b> field sustained by two sources: conduction current in the copper and displacement current in the dielectric.</i></figcaption>
   </center>
 </figure>
+
 
 Ampère–Maxwell makes the unification explicit. It writes $\nabla \times \mathbf B$ as a sum of two source terms — one fed by moving charge in the conductor, the other by a changing electric field in the dielectric:
 

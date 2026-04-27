@@ -23,14 +23,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.5387259"
-     inkscape:cx="341.51633"
-     inkscape:cy="266.77917"
+     inkscape:cx="341.51632"
+     inkscape:cy="266.77916"
      inkscape:window-width="1916"
      inkscape:window-height="1303"
      inkscape:window-x="226"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg69" />
+     inkscape:current-layer="g49" />
   <defs
      id="defs5">
     <marker
@@ -332,10 +332,12 @@
      fill="#333333"
      id="g12"
      transform="translate(-15.59732,-124.12867)"
-     inkscape:label="trace current">
+     inkscape:label="trace current"
+     style="stroke:#c03f3f;stroke-opacity:1;fill:none">
     <g
        id="g10"
-       inkscape:label="1">
+       inkscape:label="1"
+       style="stroke:#c03f3f;stroke-opacity:1;fill:none">
       <circle
          cx="330"
          cy="211"
@@ -343,7 +345,8 @@
          fill="none"
          stroke="#333333"
          stroke-width="1"
-         id="circle7" />
+         id="circle7"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="326.5"
          y1="207.5"
@@ -351,7 +354,8 @@
          y2="214.5"
          stroke="#333333"
          stroke-width="1"
-         id="line7" />
+         id="line7"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="333.5"
          y1="207.5"
@@ -359,11 +363,13 @@
          y2="214.5"
          stroke="#333333"
          stroke-width="1"
-         id="line8" />
+         id="line8"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
     </g>
     <g
        id="g9"
-       inkscape:label="2">
+       inkscape:label="2"
+       style="stroke:#c03f3f;stroke-opacity:1;fill:none">
       <circle
          cx="360"
          cy="211"
@@ -371,7 +377,8 @@
          fill="none"
          stroke="#333333"
          stroke-width="1"
-         id="circle8" />
+         id="circle8"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="356.5"
          y1="207.5"
@@ -379,7 +386,8 @@
          y2="214.5"
          stroke="#333333"
          stroke-width="1"
-         id="line9" />
+         id="line9"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="363.5"
          y1="207.5"
@@ -387,11 +395,13 @@
          y2="214.5"
          stroke="#333333"
          stroke-width="1"
-         id="line10" />
+         id="line10"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
     </g>
     <g
        id="g8"
-       inkscape:label="3">
+       inkscape:label="3"
+       style="stroke:#c03f3f;stroke-opacity:1;fill:none">
       <circle
          cx="390"
          cy="211"
@@ -399,7 +409,8 @@
          fill="none"
          stroke="#333333"
          stroke-width="1"
-         id="circle10" />
+         id="circle10"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="386.5"
          y1="207.5"
@@ -407,7 +418,8 @@
          y2="214.5"
          stroke="#333333"
          stroke-width="1"
-         id="line11" />
+         id="line11"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="393.5"
          y1="207.5"
@@ -415,18 +427,21 @@
          y2="214.5"
          stroke="#333333"
          stroke-width="1"
-         id="line12" />
+         id="line12"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
     </g>
   </g>
   <!-- Current-direction markers on the return plane (out of page ⊙) -->
   <g
      id="g21"
      transform="translate(-15.59732,-124.12867)"
-     inkscape:label="return current">
+     inkscape:label="return current"
+     style="fill:none;stroke:#c03f3f;stroke-opacity:1">
     <g
        id="g7"
        inkscape:label="2"
-       transform="translate(40.293078)">
+       transform="translate(40.293078)"
+       style="fill:none;stroke:#c03f3f;stroke-opacity:1">
       <circle
          cx="290"
          cy="319"
@@ -434,18 +449,21 @@
          fill="none"
          stroke="#333333"
          stroke-width="1"
-         id="circle14" />
+         id="circle14"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
       <circle
          cx="290"
          cy="319"
          fill="#333333"
          id="circle15"
-         r="1.3" />
+         r="1.3"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
     </g>
     <g
        id="g6"
        inkscape:label="3"
-       transform="translate(5.5240509)">
+       transform="translate(5.5240509)"
+       style="fill:none;stroke:#c03f3f;stroke-opacity:1">
       <circle
          cx="360"
          cy="319"
@@ -453,18 +471,21 @@
          fill="none"
          stroke="#333333"
          stroke-width="1"
-         id="circle16" />
+         id="circle16"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
       <circle
          cx="360"
          cy="319"
          r="1.3"
          fill="#333333"
-         id="circle17" />
+         id="circle17"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
     </g>
     <g
        id="g5"
        inkscape:label="4"
-       transform="translate(-35.09397)">
+       transform="translate(-35.09397)"
+       style="fill:none;stroke:#c03f3f;stroke-opacity:1">
       <circle
          cx="430"
          cy="319"
@@ -472,13 +493,15 @@
          fill="none"
          stroke="#333333"
          stroke-width="1"
-         id="circle18" />
+         id="circle18"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
       <circle
          cx="430"
          cy="319"
          r="1.3"
          fill="#333333"
-         id="circle19" />
+         id="circle19"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
     </g>
   </g>
   <!-- ============================================================= -->
@@ -709,7 +732,7 @@
     <g
        transform="translate(28.89933,75.578852)"
        id="g64"
-       style="stroke-width:1.33333;stroke-dasharray:none">
+       style="stroke-width:1.33333;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none">
       <circle
          r="5"
          fill="none"
@@ -718,7 +741,7 @@
          id="circle62"
          cx="0"
          cy="0"
-         style="stroke-width:1.33333;stroke-dasharray:none" />
+         style="stroke-width:1.33333;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="-3.5"
          y1="-3.5"
@@ -726,7 +749,7 @@
          y2="3.5"
          stroke="#333333"
          id="line63"
-         style="stroke-width:1.33333;stroke-dasharray:none" />
+         style="stroke-width:1.33333;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="3.5"
          y1="-3.5"
@@ -734,7 +757,7 @@
          y2="3.5"
          stroke="#333333"
          id="line64"
-         style="stroke-width:1.33333;stroke-dasharray:none" />
+         style="stroke-width:1.33333;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
     </g>
     <text
        x="51.89933"
@@ -799,7 +822,7 @@
        font-size="11px"
        fill="#555555"
        id="text46-2"
-       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(propagation)</text>
+       style="font-size:14.6667px;display:none;stroke-width:0;stroke-dasharray:none">(propagation)</text>
     <!-- z axis: up -->
     <line
        x1="29.864044"
@@ -862,7 +885,8 @@
   <g
      id="g2"
      inkscape:label="inner B"
-     transform="translate(-15.59732,-124.12867)">
+     transform="translate(-15.59732,-124.12867)"
+     style="stroke-width:2;stroke-dasharray:none">
     <line
        x1="303.68213"
        y1="245.40083"
@@ -872,7 +896,7 @@
        stroke-width="0.898603"
        marker-end="url(#bArrow)"
        id="line9-6"
-       style="stroke-width:2.66667;stroke-dasharray:none" />
+       style="stroke-width:2;stroke-dasharray:none" />
     <line
        x1="373.77939"
        y1="245.40083"
@@ -882,7 +906,7 @@
        stroke-width="0.898603"
        marker-end="url(#bArrow)"
        id="line12-8"
-       style="stroke-width:2.66667;stroke-dasharray:none" />
+       style="stroke-width:2;stroke-dasharray:none" />
     <line
        x1="381.03082"
        y1="175.30357"
@@ -893,7 +917,7 @@
        marker-end="url(#bArrow)"
        opacity="0.85"
        id="line14"
-       style="stroke-width:2.66667;stroke-dasharray:none" />
+       style="stroke-width:2;stroke-dasharray:none" />
     <path
        d="m 303.68214,245.40085 c -36.25721,0 -36.25721,-70.09728 24.17148,-70.09728"
        fill="none"
@@ -902,7 +926,7 @@
        stroke-dasharray="5, 3"
        opacity="0.55"
        id="path17"
-       style="stroke-width:2.66667;stroke-dasharray:10.6667, 2.66667;stroke-dashoffset:0" />
+       style="stroke-width:2;stroke-dasharray:none;stroke-dashoffset:0" />
     <path
        d="m 414.87093,245.40085 c 36.25722,0 36.25722,-70.09728 -33.84006,-70.09728"
        fill="none"
@@ -911,13 +935,13 @@
        stroke-dasharray="5, 3"
        opacity="0.55"
        id="path18"
-       style="stroke-width:2.66667;stroke-dasharray:10.6667, 2.66667;stroke-dashoffset:0" />
+       style="stroke-width:2;stroke-dasharray:none;stroke-dashoffset:0" />
   </g>
   <g
      id="g2-7"
      inkscape:label="inner B"
      transform="matrix(1.7021286,0,0,1.7021286,-265.9987,-271.30149)"
-     style="stroke-width:1.64439;stroke-dasharray:none">
+     style="stroke-width:1.17499935;stroke-dasharray:none">
     <line
        x1="303.68213"
        y1="245.40083"
@@ -927,7 +951,7 @@
        stroke-width="0.898603"
        marker-end="url(#bArrow-5)"
        id="line9-6-9"
-       style="stroke-width:1.64439;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
+       style="stroke-width:1.17499935;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
     <line
        x1="373.77939"
        y1="245.40083"
@@ -937,7 +961,7 @@
        stroke-width="0.898603"
        marker-end="url(#bArrow-5)"
        id="line12-8-5"
-       style="stroke-width:1.64439;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
+       style="stroke-width:1.17499935;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
     <line
        x1="381.03082"
        y1="175.30357"
@@ -948,7 +972,7 @@
        marker-end="url(#bArrow-5)"
        opacity="0.85"
        id="line14-4"
-       style="stroke-width:1.64439;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
+       style="stroke-width:1.17499935;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
     <path
        d="m 303.68214,245.40085 c -36.25721,0 -36.25721,-70.09728 24.17148,-70.09728"
        fill="none"
@@ -957,7 +981,7 @@
        stroke-dasharray="5, 3"
        opacity="0.55"
        id="path17-3"
-       style="stroke-width:1.64439;stroke-dasharray:6.57755, 1.64439;stroke-dashoffset:0" />
+       style="stroke-width:1.17499935;stroke-dasharray:none;stroke-dashoffset:0" />
     <path
        d="m 414.87093,245.40085 c 36.25722,0 36.25722,-70.09728 -33.84006,-70.09728"
        fill="none"
@@ -966,7 +990,7 @@
        stroke-dasharray="5, 3"
        opacity="0.55"
        id="path18-1"
-       style="stroke-width:1.64439;stroke-dasharray:6.57755, 1.64439;stroke-dashoffset:0" />
+       style="stroke-width:1.17499935;stroke-dasharray:none;stroke-dashoffset:0" />
   </g>
   <text
      x="215.01143"
