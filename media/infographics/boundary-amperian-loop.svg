@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 601.09088 347.87878"
-   width="601.09088"
-   height="347.87878"
+   viewBox="0 0 705.33332 214.54542"
+   width="705.33331"
+   height="214.54543"
    font-family="sans-serif"
    version="1.1"
    id="svg36"
@@ -22,14 +22,23 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.0625"
-     inkscape:cx="286.78788"
-     inkscape:cy="150.54545"
+     inkscape:cx="445.33333"
+     inkscape:cy="149.57576"
      inkscape:window-width="1916"
      inkscape:window-height="1303"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg36" />
+     inkscape:current-layer="svg36">
+    <inkscape:page
+       x="9.9205387e-08"
+       y="0"
+       width="705.33331"
+       height="214.54543"
+       id="page4"
+       margin="0 0 0 25.212122"
+       bleed="0" />
+  </sodipodi:namedview>
   <defs
      id="defs2">
     <marker
@@ -146,84 +155,28 @@
   </defs>
   <!-- Conductor (top) -->
   <rect
-     x="-18.90909"
-     y="-78.060608"
-     width="620"
-     height="180"
+     x="167.75757"
+     y="0.48484662"
+     width="445.93939"
+     height="101.45454"
      fill="#d9d9d9"
      id="rect2"
-     style="opacity:0.5;fill:#a86628;fill-opacity:1" />
+     style="opacity:0.5;fill:#a86628;fill-opacity:1;stroke-width:0.63671" />
   <!-- Dielectric (bottom) -->
   <rect
-     x="-18.90909"
+     x="167.75757"
      y="101.93939"
-     width="620"
-     height="260"
+     width="445.93939"
+     height="113.09091"
      fill="#fff5b8"
      id="rect3"
-     style="fill:#fdf6c2;fill-opacity:1" />
+     style="fill:#fdf6c2;fill-opacity:1;stroke-width:0.559331" />
   <!-- Surface line -->
-  <line
-     x1="-18.90909"
-     y1="101.93939"
-     x2="601.09088"
-     y2="101.93939"
-     stroke="#7a3f0c"
-     stroke-width="1.5"
-     id="line4" />
   <!-- Surface current K (out of page) -->
   <g
      id="g2"
-     inkscape:label="current">
-    <g
-       fill="#cc3300"
-       id="g21"
-       transform="translate(77.090909,-80.484848)"
-       inkscape:label="1">
-      <g
-         id="g1"
-         inkscape:transform-center-x="-29.090909"
-         inkscape:transform-center-y="-16.969697"
-         transform="translate(-163.87879,45.090909)"
-         style="stroke:#f80000;stroke-opacity:1"
-         inkscape:label="current">
-        <g
-           transform="translate(160.82483,137.71061)"
-           id="g48-7-1"
-           inkscape:transform-center-x="-32.484848"
-           inkscape:transform-center-y="-15.030303"
-           style="stroke:#f80000;stroke-opacity:1"
-           inkscape:label="1">
-          <circle
-             r="7"
-             fill="none"
-             stroke="#333333"
-             stroke-width="1.3"
-             id="circle47-7"
-             cx="-34.265736"
-             cy="0"
-             style="stroke:#f80000;stroke-opacity:1" />
-          <line
-             x1="-39.265736"
-             y1="-5"
-             x2="-29.265734"
-             y2="5"
-             stroke="#333333"
-             stroke-width="1.3"
-             id="line47-1"
-             style="stroke:#f80000;stroke-opacity:1" />
-          <line
-             x1="-29.265734"
-             y1="-5"
-             x2="-39.265736"
-             y2="5"
-             stroke="#333333"
-             stroke-width="1.3"
-             id="line48-6-1"
-             style="stroke:#f80000;stroke-opacity:1" />
-        </g>
-      </g>
-    </g>
+     inkscape:label="current"
+     transform="translate(70.303029)">
     <g
        fill="#cc3300"
        id="g21-2"
@@ -520,8 +473,8 @@
     </g>
   </g>
   <text
-     x="463.36362"
-     y="125.39394"
+     x="488.57578"
+     y="126.84849"
      font-size="13px"
      fill="#cc3300"
      font-weight="bold"
@@ -534,7 +487,7 @@
   <!-- Right side: bottom → top -->
   <g
      id="g45"
-     transform="matrix(1.1634064,0,0,0.65020328,-45.932044,35.658064)"
+     transform="matrix(1.1634064,0,0,0.65020328,24.370985,35.658064)"
      inkscape:label="Ampian loop">
     <line
        x1="361.09091"
@@ -583,15 +536,15 @@
   </g>
   <!-- Loop label with leader line -->
   <line
-     x1="376.09091"
+     x1="446.39395"
      y1="101.93939"
-     x2="366.09091"
+     x2="436.39395"
      y2="101.93939"
      stroke="#2d8a47"
      stroke-width="1"
      id="line25" />
   <text
-     x="387.87875"
+     x="458.18179"
      y="81.939392"
      font-size="13px"
      fill="#2d8a47"
@@ -600,18 +553,18 @@
      style="font-size:14.6667px;fill:#000000;fill-opacity:1">Amperian loop</text>
   <!-- Annotations -->
   <text
-     x="278.21463"
+     x="348.51767"
      y="69.454544"
      font-size="11px"
      fill="#2d8a47"
      id="text26"
      style="font-size:14.6667px;text-align:center;text-anchor:middle"><tspan
        style="font-size:14.6667px;fill:#000000;fill-opacity:1"
-       id="tspan42">top leg in metal: B<tspan
+       id="tspan42">top leg in copper: B<tspan
    style="font-size:14.6667px;baseline-shift:sub"
    id="tspan1">in</tspan> = 0 → 0</tspan></text>
   <text
-     x="278.72644"
+     x="349.02948"
      y="137.45454"
      font-size="11px"
      fill="#2d8a47"
@@ -628,8 +581,9 @@
      stroke="#0066cc"
      stroke-width="2.5"
      id="g34"
-     transform="translate(-20.848485,-108.12121)"
-     inkscape:label="B field">
+     transform="matrix(0.74944875,0,0,1.0104244,144.275,-111.09216)"
+     inkscape:label="B field"
+     style="stroke-width:3.44745315;stroke-dasharray:none">
     <line
        x1="48.331062"
        y1="262.29987"
@@ -637,15 +591,7 @@
        y2="262.29987"
        marker-end="url(#bArrow)"
        id="line31"
-       style="stroke-width:2;stroke-dasharray:none" />
-    <line
-       x1="48.45454"
-       y1="348.51517"
-       x2="593.11462"
-       y2="348.51517"
-       marker-end="url(#bArrow-0)"
-       id="line31-8"
-       style="stroke-width:2;stroke-dasharray:none;marker-end:url(#bArrow-0)" />
+       style="stroke-width:3.44745315;stroke-dasharray:none" />
     <line
        x1="48.331062"
        y1="307.70013"
@@ -653,10 +599,10 @@
        y2="307.70013"
        marker-end="url(#bArrow)"
        id="line32"
-       style="stroke-width:2;stroke-dasharray:none" />
+       style="stroke-width:3.44745315;stroke-dasharray:none" />
   </g>
   <text
-     x="353.9697"
+     x="424.27274"
      y="180.72726"
      font-size="14px"
      fill="#0066cc"
@@ -665,61 +611,71 @@
    style="font-size:65%;baseline-shift:sub"
    id="tspan45">∥</tspan> (parallel to surface)</text>
   <!-- Bottom result -->
-  <text
-     x="267.99997"
-     y="293.33331"
-     font-size="13px"
-     fill="#2d8a47"
-     id="text35"
-     style="font-size:14.6667px"><tspan
-       sodipodi:role="line"
-       id="tspan37"
+  <g
+     id="g3"
+     style="display:none"
+     transform="translate(70.303029)">
+    <text
        x="267.99997"
        y="293.33331"
-       style="font-size:14.6667px">Ampère's law on the loop:</tspan><tspan
-       sodipodi:role="line"
-       id="tspan38"
-       x="267.99997"
-       y="311.66669"
-       style="font-size:14.6667px">only the bottom leg contributes circulation</tspan></text>
-  <text
-     x="265.57574"
-     y="334.81818"
-     font-size="15px"
-     fill="#2d8a47"
-     font-weight="bold"
-     id="text36"
-     style="font-size:17.3333px">⇒ |B<tspan
+       font-size="13px"
+       fill="#2d8a47"
+       id="text35"
+       style="font-size:14.6667px"><tspan
+         sodipodi:role="line"
+         id="tspan37"
+         x="267.99997"
+         y="293.33331"
+         style="font-size:14.6667px">Ampère's law on the loop:</tspan><tspan
+         sodipodi:role="line"
+         id="tspan38"
+         x="267.99997"
+         y="311.66669"
+         style="font-size:14.6667px">only the bottom leg contributes circulation</tspan></text>
+    <text
+       x="265.57574"
+       y="334.81818"
+       font-size="15px"
+       fill="#2d8a47"
+       font-weight="bold"
+       id="text36"
+       style="font-size:17.3333px">⇒ |B<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan39">∥</tspan>| = μ₀ |K|</text>
+  </g>
   <text
-     x="7.6127481"
-     y="47.599503"
+     x="181.18849"
+     y="24.326775"
      font-size="13px"
      fill="#555555"
      font-style="italic"
      id="text2"
      style="font-size:14.6667px">B= 0 inside</text>
-  <text
-     x="7.878686"
-     y="22.221331"
-     fill="#3a2410"
-     font-weight="bold"
-     id="text10-7"
-     style="font-size:17.3333px;display:inline;fill:#7f4d1f;fill-opacity:1">trace</text>
-  <text
-     x="9.6724367"
-     y="129.63934"
-     fill="#7a6a2a"
-     id="text12-4"
-     style="font-size:17.3333px;display:inline"><tspan
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
-       id="tspan3-2">dielectric</tspan></text>
+  <g
+     id="g4"
+     inkscape:label="layers"
+     transform="translate(614.30302)">
+    <text
+       x="8.8483829"
+       y="22.221331"
+       fill="#3a2410"
+       font-weight="bold"
+       id="text10-7"
+       style="font-size:17.3333px;display:inline;fill:#7f4d1f;fill-opacity:1">trace</text>
+    <text
+       x="10.642134"
+       y="129.63934"
+       fill="#7a6a2a"
+       id="text12-4"
+       style="font-size:17.3333px;display:inline"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+         id="tspan3-2">dielectric</tspan></text>
+  </g>
   <g
      stroke="#333333"
      fill="#333333"
      id="g49"
-     transform="translate(59.552919,-18.466147)"
+     transform="translate(46.946857,-154.22372)"
      inkscape:label="Axis">
     <!-- x axis: right -->
     <line
@@ -743,7 +699,7 @@
        font-size="11px"
        fill="#555555"
        id="text46-2"
-       style="font-size:14.6667px;stroke-width:0;stroke-dasharray:none">(propagation)</text>
+       style="font-size:14.6667px;display:none;stroke-width:0;stroke-dasharray:none">(propagation)</text>
     <!-- z axis: up -->
     <line
        x1="29.864044"

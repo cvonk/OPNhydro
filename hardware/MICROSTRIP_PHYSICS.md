@@ -468,15 +468,15 @@ The magnetic field $\mathbf{B}$ is screened by the return plane. It has no other
 <figure>
   <center>
   <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 90%; max-width:800px; height: auto;">
-  <figcaption><i>Cross-section of the microstrip. <b>B</b>-field loops curl around the trace; below the return plane.</i></figcaption>
+  <figcaption><i>Cross-section of the microstrip. <b>B</b>-field curls around the trace.</i></figcaption>
   </center>
 </figure>
 
 If we zoom into a small section of the trace/dielectric boundary, we see that the wave's $\mathbf B$ field runs tangential to the trace surface. 
 <figure>
   <center>
-  <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 70%; max-width:500px; height: auto;">
-  <figcaption><i>Cross-section: Amperian loop straddling the conductor surface: only the.</i></figcaption>
+  <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 80%; max-width:500px; height: auto;">
+  <figcaption><i>Cross-section: Amperian loop straddling the conductor surface.</i></figcaption>
   </center>
 </figure>
 
