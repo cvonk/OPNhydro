@@ -570,12 +570,12 @@
      fill="#2d8a47"
      id="text27"
      style="font-size:14.6667px;text-align:center;text-anchor:middle"><tspan
-       style="fill:#000000;fill-opacity:1"
+       style="font-size:14.6667px;fill:#000000;fill-opacity:1"
        id="tspan43">bottom leg: contributes |B</tspan><tspan
-       style="font-size:65%;baseline-shift:sub;fill:#000000;fill-opacity:1"
-       id="tspan41">∥</tspan><tspan
-       style="fill:#000000;fill-opacity:1"
-       id="tspan44">| · L</tspan></text>
+       style="font-size:14.6667px;baseline-shift:sub;fill:#000000;fill-opacity:1"
+       id="tspan41">out</tspan><tspan
+       style="font-size:14.6667px;fill:#000000;fill-opacity:1"
+       id="tspan44">| L</tspan></text>
   <!-- B field arrows in dielectric (parallel to surface, +ŷ) -->
   <g
      stroke="#0066cc"
@@ -602,14 +602,15 @@
        style="stroke-width:3.44745315;stroke-dasharray:none" />
   </g>
   <text
-     x="424.27274"
-     y="180.72726"
+     x="297.72726"
+     y="189.45454"
      font-size="14px"
      fill="#0066cc"
      font-weight="bold"
-     id="text34">B<tspan
-   style="font-size:65%;baseline-shift:sub"
-   id="tspan45">∥</tspan> (parallel to surface)</text>
+     id="text34"
+     style="font-size:14.6667px">B<tspan
+   style="font-size:14.6667px;baseline-shift:sub"
+   id="tspan45">out</tspan> (parallel to surface)</text>
   <!-- Bottom result -->
   <g
      id="g3"

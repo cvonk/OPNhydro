@@ -528,7 +528,7 @@ $$
     \mathbf K = \frac{1}{\mu}\,\left( \hat n \times \mathbf B_{\text{out}} \right)
 $$
 
-where $\hat n$ is the outward normal from the conductor. Appendix A shows that $\mathbf B$ in the dielectric points in $\pm\hat y$ — curling around the trace. Plugging $\hat n = +\hat x$ (downward, from trace into dielectric) and $\mathbf B = B_y\,\hat y$ gives $\mathbf K = (B_y/\mu_0)\,\hat z$ — conventional current in the propagation direction. The trace current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
+where $\hat n$ is the outward normal from the conductor. Appendix A shows that $\mathbf B$ in the dielectric points in $\pm\hat y$ — curling around the trace. Plugging $\hat n = +\hat x$ (downward, from trace into dielectric) and $\mathbf B = B_y\,\hat y$ gives $\mathbf K = (B_{out}/\mu)\,\hat z$ — conventional current in the propagation direction. The trace current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
 
 **Charge conservation at the wavefront.** On the trace surface,
 $$
