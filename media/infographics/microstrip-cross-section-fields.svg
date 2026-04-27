@@ -23,14 +23,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="3.0774517"
-     inkscape:cx="426.48922"
-     inkscape:cy="127.37811"
+     inkscape:cx="493.10278"
+     inkscape:cy="127.21564"
      inkscape:window-width="1916"
-     inkscape:window-height="2041"
-     inkscape:window-x="1911"
+     inkscape:window-height="1303"
+     inkscape:window-x="226"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="g65" />
+     inkscape:current-layer="g3" />
   <defs
      id="defs5">
     <marker
@@ -584,14 +584,6 @@
      fill="#333333"
      id="g55"
      transform="translate(-15.59732,-124.12867)">
-    <text
-       x="78.356461"
-       y="149.32079"
-       font-size="13px"
-       fill="#666666"
-       font-style="italic"
-       id="text4"
-       style="font-size:14.6667px">air (fringing)</text>
     <g
        id="svg56"
        transform="translate(79.049388,146.65447)">
@@ -599,12 +591,19 @@
          id="g3"
          transform="translate(0,3.2494417)">
         <text
-           x="366.34146"
+           x="570.73132"
            y="66.036713"
            fill="#333333"
            font-weight="bold"
            id="text6-2"
            style="font-size:17.3333px;fill:#6e3f1d;fill-opacity:1">trace</text>
+        <text
+           x="571.34961"
+           y="9.9058046"
+           fill="#333333"
+           font-weight="bold"
+           id="text6-2-9"
+           style="font-size:17.3333px;fill:#8e8e8e;fill-opacity:1">air</text>
         <text
            x="570.91406"
            y="172.12917"

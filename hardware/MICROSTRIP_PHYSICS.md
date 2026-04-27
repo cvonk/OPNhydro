@@ -385,12 +385,13 @@ The boundary-condition view of Gauss's Law states that the component of the elec
 <figure>
   <center>
   <img src="../media/infographics/boundary-pillbox-gauss.svg" style="width: 70%; max-width:500px; height: auto;">
-  <figcaption><i>Pillbox straddling a conductor surface: only the outside face contributes to the flux integral.</i></figcaption>
+  <figcaption><i>Side view of pillbox straddling a conductor surface.</i></figcaption>
   </center>
 </figure>
 
 <details>
   <summary>Expand if you ❤️ to see the derivation</summary>
+
 
 Imagine a conductor with a surface charge density $\sigma_s$ (charge per unit area). To find the electric field just outside the surface, we place a very thin, small, cylindrical Gaussian "pillbox" so that it straddles the conductor surface.
 
@@ -463,12 +464,19 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 
 ##### Boundary-condition view
 
-The wave's $\mathbf B$ field runs tangential to the trace surface. 
+The magnetic field $\mathbf{B}$ is screened by the return plane. It has no other choice but to loop around the trace.
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 90%; max-width:800px; height: auto;">
+  <figcaption><i>Cross-section of the microstrip. <b>B</b>-field loops curl around the trace; below the return plane.</i></figcaption>
+  </center>
+</figure>
 
+If we zoom into a small section of the trace/dielectric boundary, we see that the wave's $\mathbf B$ field runs tangential to the trace surface. 
 <figure>
   <center>
   <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 70%; max-width:500px; height: auto;">
-  <figcaption><i>Amperian loop straddling the conductor surface: only the outside long side contributes to the circulation.</i></figcaption>
+  <figcaption><i>Cross-section: Amperian loop straddling the conductor surface: only the.</i></figcaption>
   </center>
 </figure>
 
@@ -511,19 +519,12 @@ By the right-hand rule, to produce a $\mathbf{B}$ field parallel to the surface,
 
 **Takeaway:** Ampère's law applied to a thin loop straddling the conductor surface forces a surface current of magnitude $|\mathbf B_\parallel|/\mu$, at right angles to $\mathbf B_\parallel$ in the surface plane (the field is zero inside the metal, so the loop circulation comes entirely from the outside leg):
 $$
-    \mathbf K = \frac{1}{\mu}\,\hat n \times \mathbf B_{\text{outside}}
+    \mathbf K = \frac{1}{\mu}\,\left( \hat n \times \mathbf B_{\text{out}} \right)
 $$
 
 where $\hat n$ is the outward normal from the conductor. Appendix A shows that $\mathbf B$ in the dielectric points in $\pm\hat y$ — curling around the trace. Plugging $\hat n = +\hat x$ (downward, from trace into dielectric) and $\mathbf B = B_y\,\hat y$ gives $\mathbf K = (B_y/\mu_0)\,\hat z$ — conventional current in the propagation direction. The trace current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
 
 > **A note on $\mathbf K$ and $\sigma_s$.** These are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a perfect conductor, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
-
-<figure>
-  <center>
-  <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 70%; max-width:800px; height: auto;">
-  <figcaption><i>Cross-section of the microstrip. <b>B</b>-field loops curl around the trace; below the return plane, the field is screened to ~0.</i></figcaption>
-  </center>
-</figure>
 
 **Charge conservation at the wavefront.** On the trace surface,
 $$

@@ -22,8 +22,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.0625"
-     inkscape:cx="266.42424"
-     inkscape:cy="171.39394"
+     inkscape:cx="286.78788"
+     inkscape:cy="150.54545"
      inkscape:window-width="1916"
      inkscape:window-height="1303"
      inkscape:window-x="0"
@@ -117,6 +117,32 @@
          fill="#0066cc"
          id="path1-9" />
     </marker>
+    <marker
+       id="arrAx-5-1-8"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path4-5-7-2" />
+    </marker>
+    <marker
+       id="marker1-4"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#333333"
+         id="path1-5" />
+    </marker>
   </defs>
   <!-- Conductor (top) -->
   <rect
@@ -147,106 +173,351 @@
      id="line4" />
   <!-- Surface current K (out of page) -->
   <g
-     fill="#ffffff"
-     stroke="#cc3300"
-     stroke-width="1.5"
-     id="g12"
-     transform="translate(-18.909091,-78.060606)">
-    <circle
-       cx="60"
-       cy="180"
-       r="6"
-       id="circle4" />
-    <circle
-       cx="120"
-       cy="180"
-       r="6"
-       id="circle5" />
-    <circle
-       cx="180"
-       cy="180"
-       r="6"
-       id="circle6" />
-    <circle
-       cx="240"
-       cy="180"
-       r="6"
-       id="circle7" />
-    <circle
-       cx="300"
-       cy="180"
-       r="6"
-       id="circle8" />
-    <circle
-       cx="360"
-       cy="180"
-       r="6"
-       id="circle9" />
-    <circle
-       cx="420"
-       cy="180"
-       r="6"
-       id="circle10" />
-    <circle
-       cx="480"
-       cy="180"
-       r="6"
-       id="circle11" />
-    <circle
-       cx="540"
-       cy="180"
-       r="6"
-       id="circle12" />
-  </g>
-  <g
-     fill="#cc3300"
-     id="g21"
-     transform="translate(-18.909091,-78.060606)">
-    <circle
-       cx="60"
-       cy="180"
-       r="1.6"
-       id="circle13" />
-    <circle
-       cx="120"
-       cy="180"
-       r="1.6"
-       id="circle14" />
-    <circle
-       cx="180"
-       cy="180"
-       r="1.6"
-       id="circle15" />
-    <circle
-       cx="240"
-       cy="180"
-       r="1.6"
-       id="circle16" />
-    <circle
-       cx="300"
-       cy="180"
-       r="1.6"
-       id="circle17" />
-    <circle
-       cx="360"
-       cy="180"
-       r="1.6"
-       id="circle18" />
-    <circle
-       cx="420"
-       cy="180"
-       r="1.6"
-       id="circle19" />
-    <circle
-       cx="480"
-       cy="180"
-       r="1.6"
-       id="circle20" />
-    <circle
-       cx="540"
-       cy="180"
-       r="1.6"
-       id="circle21" />
+     id="g2"
+     inkscape:label="current">
+    <g
+       fill="#cc3300"
+       id="g21"
+       transform="translate(77.090909,-80.484848)"
+       inkscape:label="1">
+      <g
+         id="g1"
+         inkscape:transform-center-x="-29.090909"
+         inkscape:transform-center-y="-16.969697"
+         transform="translate(-163.87879,45.090909)"
+         style="stroke:#f80000;stroke-opacity:1"
+         inkscape:label="current">
+        <g
+           transform="translate(160.82483,137.71061)"
+           id="g48-7-1"
+           inkscape:transform-center-x="-32.484848"
+           inkscape:transform-center-y="-15.030303"
+           style="stroke:#f80000;stroke-opacity:1"
+           inkscape:label="1">
+          <circle
+             r="7"
+             fill="none"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="circle47-7"
+             cx="-34.265736"
+             cy="0"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-39.265736"
+             y1="-5"
+             x2="-29.265734"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line47-1"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-29.265734"
+             y1="-5"
+             x2="-39.265736"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line48-6-1"
+             style="stroke:#f80000;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
+    <g
+       fill="#cc3300"
+       id="g21-2"
+       transform="translate(244.87879,-81.06061)"
+       inkscape:label="3">
+      <g
+         id="g1-7"
+         inkscape:transform-center-x="-29.090909"
+         inkscape:transform-center-y="-16.969697"
+         transform="translate(-163.87879,45.090909)"
+         style="stroke:#f80000;stroke-opacity:1"
+         inkscape:label="current">
+        <g
+           transform="translate(160.82483,137.71061)"
+           id="g48-7-1-6"
+           inkscape:transform-center-x="-32.484848"
+           inkscape:transform-center-y="-15.030303"
+           style="stroke:#f80000;stroke-opacity:1"
+           inkscape:label="1">
+          <circle
+             r="7"
+             fill="none"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="circle47-7-1"
+             cx="-34.265736"
+             cy="0"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-39.265736"
+             y1="-5"
+             x2="-29.265734"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line47-1-4"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-29.265734"
+             y1="-5"
+             x2="-39.265736"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line48-6-1-2"
+             style="stroke:#f80000;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
+    <g
+       fill="#cc3300"
+       id="g21-22"
+       transform="translate(388.78788,-80.291743)"
+       inkscape:label="5">
+      <g
+         id="g1-1"
+         inkscape:transform-center-x="-29.090909"
+         inkscape:transform-center-y="-16.969697"
+         transform="translate(-163.87879,45.090909)"
+         style="stroke:#f80000;stroke-opacity:1"
+         inkscape:label="current">
+        <g
+           transform="translate(160.82483,137.71061)"
+           id="g48-7-1-68"
+           inkscape:transform-center-x="-32.484848"
+           inkscape:transform-center-y="-15.030303"
+           style="stroke:#f80000;stroke-opacity:1"
+           inkscape:label="1">
+          <circle
+             r="7"
+             fill="none"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="circle47-7-5"
+             cx="-34.265736"
+             cy="0"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-39.265736"
+             y1="-5"
+             x2="-29.265734"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line47-1-7"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-29.265734"
+             y1="-5"
+             x2="-39.265736"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line48-6-1-6"
+             style="stroke:#f80000;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
+    <g
+       fill="#cc3300"
+       id="g21-8"
+       transform="translate(322.27273,-80.776592)"
+       inkscape:label="4">
+      <g
+         id="g1-9"
+         inkscape:transform-center-x="-29.090909"
+         inkscape:transform-center-y="-16.969697"
+         transform="translate(-163.87879,45.090909)"
+         style="stroke:#f80000;stroke-opacity:1"
+         inkscape:label="current">
+        <g
+           transform="translate(160.82483,137.71061)"
+           id="g48-7-1-2"
+           inkscape:transform-center-x="-32.484848"
+           inkscape:transform-center-y="-15.030303"
+           style="stroke:#f80000;stroke-opacity:1"
+           inkscape:label="1">
+          <circle
+             r="7"
+             fill="none"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="circle47-7-7"
+             cx="-34.265736"
+             cy="0"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-39.265736"
+             y1="-5"
+             x2="-29.265734"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line47-1-9"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-29.265734"
+             y1="-5"
+             x2="-39.265736"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line48-6-1-5"
+             style="stroke:#f80000;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
+    <g
+       fill="#cc3300"
+       id="g21-2-8"
+       transform="translate(466.21212,-81.03803)"
+       inkscape:label="6">
+      <g
+         id="g1-7-7"
+         inkscape:transform-center-x="-29.090909"
+         inkscape:transform-center-y="-16.969697"
+         transform="translate(-163.87879,45.090909)"
+         style="stroke:#f80000;stroke-opacity:1"
+         inkscape:label="current">
+        <g
+           transform="translate(160.82483,137.71061)"
+           id="g48-7-1-6-4"
+           inkscape:transform-center-x="-32.484848"
+           inkscape:transform-center-y="-15.030303"
+           style="stroke:#f80000;stroke-opacity:1"
+           inkscape:label="1">
+          <circle
+             r="7"
+             fill="none"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="circle47-7-1-2"
+             cx="-34.265736"
+             cy="0"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-39.265736"
+             y1="-5"
+             x2="-29.265734"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line47-1-4-7"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-29.265734"
+             y1="-5"
+             x2="-39.265736"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line48-6-1-2-7"
+             style="stroke:#f80000;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
+    <g
+       fill="#cc3300"
+       id="g21-8-9"
+       transform="translate(543.60606,-80.068333)"
+       inkscape:label="7">
+      <g
+         id="g1-9-3"
+         inkscape:transform-center-x="-29.090909"
+         inkscape:transform-center-y="-16.969697"
+         transform="translate(-163.87879,45.090909)"
+         style="stroke:#f80000;stroke-opacity:1"
+         inkscape:label="current">
+        <g
+           transform="translate(160.82483,137.71061)"
+           id="g48-7-1-2-1"
+           inkscape:transform-center-x="-32.484848"
+           inkscape:transform-center-y="-15.030303"
+           style="stroke:#f80000;stroke-opacity:1"
+           inkscape:label="1">
+          <circle
+             r="7"
+             fill="none"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="circle47-7-7-9"
+             cx="-34.265736"
+             cy="0"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-39.265736"
+             y1="-5"
+             x2="-29.265734"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line47-1-9-8"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-29.265734"
+             y1="-5"
+             x2="-39.265736"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line48-6-1-5-6"
+             style="stroke:#f80000;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
+    <g
+       fill="#cc3300"
+       id="g21-3"
+       transform="translate(160.90909,-81.102204)"
+       inkscape:label="2">
+      <g
+         id="g1-12"
+         inkscape:transform-center-x="-29.090909"
+         inkscape:transform-center-y="-16.969697"
+         transform="translate(-163.87879,45.090909)"
+         style="stroke:#f80000;stroke-opacity:1"
+         inkscape:label="current">
+        <g
+           transform="translate(160.82483,137.71061)"
+           id="g48-7-1-3"
+           inkscape:transform-center-x="-32.484848"
+           inkscape:transform-center-y="-15.030303"
+           style="stroke:#f80000;stroke-opacity:1"
+           inkscape:label="1">
+          <circle
+             r="7"
+             fill="none"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="circle47-7-3"
+             cx="-34.265736"
+             cy="0"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-39.265736"
+             y1="-5"
+             x2="-29.265734"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line47-1-41"
+             style="stroke:#f80000;stroke-opacity:1" />
+          <line
+             x1="-29.265734"
+             y1="-5"
+             x2="-39.265736"
+             y2="5"
+             stroke="#333333"
+             stroke-width="1.3"
+             id="line48-6-1-1"
+             style="stroke:#f80000;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
   </g>
   <text
      x="463.36362"
@@ -255,7 +526,7 @@
      fill="#cc3300"
      font-weight="bold"
      id="text21"
-     style="font-size:14.6667px">K (out of page)</text>
+     style="font-size:14.6667px">K (into page)</text>
   <!-- Amperian loop, counterclockwise viewed from +z -->
   <!-- Top side (in metal): going right → left -->
   <!-- Left side: top → bottom -->
@@ -263,7 +534,8 @@
   <!-- Right side: bottom → top -->
   <g
      id="g45"
-     transform="matrix(1.1634064,0,0,0.65020328,-45.932044,35.658064)">
+     transform="matrix(1.1634064,0,0,0.65020328,-45.932044,35.658064)"
+     inkscape:label="Ampian loop">
     <line
        x1="361.09091"
        y1="81.939392"
@@ -356,7 +628,8 @@
      stroke="#0066cc"
      stroke-width="2.5"
      id="g34"
-     transform="translate(-20.848485,-108.12121)">
+     transform="translate(-20.848485,-108.12121)"
+     inkscape:label="B field">
     <line
        x1="48.331062"
        y1="262.29987"
@@ -446,27 +719,27 @@
      stroke="#333333"
      fill="#333333"
      id="g49"
-     transform="translate(-11.475905,-20.950993)"
+     transform="translate(59.552919,-18.466147)"
      inkscape:label="Axis">
     <!-- x axis: right -->
     <line
-       x1="28.803383"
-       y1="297.4126"
-       x2="89.500038"
-       y2="297.4126"
+       x1="28.296495"
+       y1="298.35449"
+       x2="-32.400158"
+       y2="298.35449"
        stroke-width="1.50868"
-       marker-end="url(#arrAx-5-1)"
+       marker-end="url(#arrAx-5-1-8)"
        id="line45-3"
-       style="marker-end:url(#arrAx-5-1)" />
+       style="marker-end:url(#arrAx-5-1-8)" />
     <text
-       x="95.51049"
-       y="301.4126"
+       x="22.011868"
+       y="283.67154"
        font-style="italic"
        id="text45-5"
        style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">z</text>
     <text
-       x="107.51049"
-       y="301.4126"
+       x="41.108288"
+       y="300.9057"
        font-size="11px"
        fill="#555555"
        id="text46-2"
@@ -478,9 +751,9 @@
        x2="29.864044"
        y2="357.66953"
        stroke-width="1.513"
-       marker-end="url(#arrAx-5-1)"
+       marker-end="url(#arrAx-5-1-8)"
        id="line46"
-       style="marker-end:url(#arrAx-5-1)" />
+       style="marker-end:url(#arrAx-5-1-8)" />
     <text
        x="37.111401"
        y="358.63116"
@@ -489,8 +762,8 @@
        style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">x</text>
     <!-- y axis: into page (⊗) -->
     <text
-       x="22.127989"
-       y="283.93808"
+       x="-44.274216"
+       y="300.15848"
        font-style="italic"
        id="text48-6"
        style="font-size:14.6667px;stroke-width:0.5;stroke-dasharray:none">y</text>

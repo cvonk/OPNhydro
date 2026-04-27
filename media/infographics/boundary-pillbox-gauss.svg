@@ -299,23 +299,23 @@
    id="tspan4">x</tspan> (perpendicular)</text>
   <!-- Bottom result -->
   <text
-     x="212.28351"
-     y="258.09048"
+     x="210.82896"
+     y="269.242"
      font-size="13"
      fill="#2d8a47"
      id="text22"
      style="font-size:14.6667px"><tspan
        sodipodi:role="line"
        id="tspan29"
-       x="212.28351"
-       y="258.09048">Gauss's law on the pillbox:</tspan><tspan
+       x="210.82896"
+       y="269.242">Gauss's law on the pillbox:</tspan><tspan
        sodipodi:role="line"
        id="tspan30"
-       x="212.28351"
-       y="276.42386">only the bottom face contributes to the flux integral</tspan></text>
+       x="210.82896"
+       y="287.57538">only the bottom face contributes to the flux integral</tspan></text>
   <text
-     x="213.64651"
-     y="294.90332"
+     x="210.25258"
+     y="315.26697"
      font-size="15px"
      fill="#2d8a47"
      font-weight="bold"
