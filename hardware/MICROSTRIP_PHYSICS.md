@@ -394,41 +394,43 @@ The boundary-condition view of Gauss's Law states that the component of the elec
 <details>
   <summary>Expand if you ❤️ to see the derivation</summary>
 
+Imagine a conductor with a surface charge density $\sigma_s$ (charge per unit area) and normal vector $\hat n$ that points perpendicular to the conductor surface. To find the electric field just outside the surface, we place a very thin, small, cylindrical Gaussian "pillbox" so that it straddles the conductor surface.
 
-Imagine a conductor with a surface charge density $\sigma_s$ (charge per unit area). To find the electric field just outside the surface, we place a very thin, small, cylindrical Gaussian "pillbox" so that it straddles the conductor surface.
+Gauss's law in integral form states that the net electric flux through any closed surface ($S$) is directly proportional to the total electric charge ($Q_{enc}$) enclosed within that surface.
 
-A key property of a conductor in electrostatic equilibrium is that the electric field inside the conducting material is zero and flux $\Phi_{in} = 0$. Given that the pillbox is very thin, this implies that the only flux passing through the pillbox comes from the bottom face, which has an area $A$ and is located outside:
-$$
-  \Phi_E = E_x\cdot A
-$$ 
-
-So the pillbox encloses only the charge located on the surface of the conductor within the area $A$:
-$$
-    Q_{enc} = \sigma_s \cdot A
-$$
-
-Gauss's law states that the net flux out of a closed surface is equal to the enclosed charge divided by $\varepsilon$:
 <div class="quote">
 
 $$
-    \Phi_{E} = \frac{Q_{enc}}{\varepsilon} \tag{\text{Gauss's law}}
+    \oint_S \mathbf E \cdot d\mathbf a = \frac{Q_{enc}}{\varepsilon} \tag{\text{Gauss's law}}
 $$
-</div>
+</div> 
 
-Substituting the flux and enclosed charge derived above:
+where $d \mathbf{a}$ is an infinitesimal vector element of the surface area, pointing outwards normal to the surface.
+
+A key property of a conductor in electrostatic equilibrium is that the electric field $\mathbf {E}$ inside the conducting material is zero, so the inside aread doesn't contribute. With the height $h \to 0$, the side areas do not contribute either. This implies that the only flux passing through the pillbox comes from the bottom face.
 $$
   \begin{align*}
-    E_x\cdot \bcancel{A} &= \frac{\sigma_s\cdot \bcancel{A}}{\varepsilon} \\
+    \oint_{out} \mathbf E \cdot (A \hat n) &= \left( \mathbf{E} \cdot \hat n \right) A = \frac{Q_{enc}}{\varepsilon} \tag{$d\mathbf{a_{out}}=A\hat n$} \\
     \Rightarrow
-    \sigma_s &= \varepsilon\, E_x\big|_{\text{outside}}
+    \varepsilon \left(\mathbf{E}\cdot\hat n \right)A &= Q_{enc} \tag{$Q_{enc} = \sigma_s A$}
   \end{align*}
+$$
+
+The enclosed charge is $Q_{enc} = \sigma_s A$
+$$
+    \varepsilon \left(\mathbf{E}\cdot\hat n \right) \bcancel{A} = \sigma_s \bcancel{A}
+$$
+
+$\mathbf{E}\cdot\hat n$ is the component of the field normal to the surface ($E_x$):
+$$
+    \varepsilon\, E_x = \sigma_s
 $$
 </details>
 <br>
 
-**Takeaway:** Gauss's law applied to a thin pillbox straddling the conductor surface forces $\varepsilon E_x$ just outside to equal the surface charge density $\sigma_s$ (the field is zero inside the metal, so the pillbox flux comes entirely from the outside face):
+**Takeaway:** Gauss's law applied to a thin pillbox straddling the conductor surface the surface charge density $\sigma_s$:
 $$
-    \sigma_s = \varepsilon\, E_x
+    \sigma_s = \varepsilon\, E_x, \quad \text{in }\left[ \rm{C/m^2} \right]
 $$
 
 The positive surface charge $\sigma_s$ on the bottom of the trace is whatever the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture above is the dynamic mechanism; this equation is the algebraic statement of the same fact.
@@ -466,9 +468,9 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 
 ##### Boundary-condition view
 
-Having established an intuitive understanding in previous sessions, we will now analyze these phenomena from a more formal perspective.
+Having established an intuitive understanding, we will now analyze this phenomenum from a more formal perspective.
 
-The magnetic field $\mathbf{B}$ is screened by the return plane. To stay in the $xy$-plane, it has no other choice but to **loop around the trace**.
+The magnetic field $\mathbf{B}$, from the wave propagating through the dielectric, is screened by the return plane. To stay in the $xy$-plane, it has no other choice but to **loop around the trace**.
 <figure>
   <center>
   <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 90%; max-width:800px; height: auto;">
@@ -476,12 +478,12 @@ The magnetic field $\mathbf{B}$ is screened by the return plane. To stay in the 
   </center>
 </figure>
 
-> **A note on $\mathbf K$ and $\sigma_s$:** These are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a perfect conductor, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
+> **A note on $\mathbf K$ and $\sigma_s$:** These are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a *perfect conductor*, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
 
 Zooming in on a small section of the trace/dielectric boundary, we see that the wave's $\mathbf B$ field is tangential to the trace surface. 
 <figure>
   <center>
-  <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 90%; max-width:600px; height: auto;">
+  <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 100%; max-width:600px; height: auto;">
   <figcaption><i>Close-up of Amperian loop straddling the trace/delectric boundary.</i></figcaption>
   </center>
 </figure>
@@ -512,23 +514,22 @@ $$
 Substitude $\oint \mathbf{B}\cdot d\mathbf{l}$ and $I_{enc}$ in Ampère's law:
 $$
   \begin{align*}
-    B_{out} \cdot \bcancel{L} = \mu \left( K \bcancel{L} \right) \\
+    B_{out} \cdot \bcancel{L} &= \mu \left( K \bcancel{L} \right) \\
     \Rightarrow
-    K = \frac{B_{out}}{\mu}
+    K &= \frac{B_{out}}{\mu} = \frac{1}{\mu}\,\left( \hat n \times \mathbf B_{\text{out}} \right) = \frac{1}{\mu}\, |\mathbf B_{\text{out}}|\, \hat z & \text{(right-hand rule)}
   \end{align*}
-$$
-
-By the right-hand rule, to produce a $\mathbf{B}$ field parallel to the surface, the current $\mathbf K$ must flow perpendicular to $\mathbf{B_\parallel}$ within the surface plane.
+$$ where $\hat n$ is the outward normal from the conductor. 
 </details>
 <br />
 
 
-**Takeaway:** Ampère's law applied to a thin loop straddling the conductor surface forces a surface current of magnitude $|\mathbf B_\parallel|/\mu$, at right angles to $\mathbf B_\parallel$ in the surface plane (the field is zero inside the metal, so the loop circulation comes entirely from the outside leg):
+**Takeaway:** Ampère's law applied to a thin loop straddling the conductor surface forces a surface current $\mathbf{K}$ in the propagation direction:
 $$
-    \mathbf K = \frac{1}{\mu}\,\left( \hat n \times \mathbf B_{\text{out}} \right)
+    \mathbf K = \frac{1}{\mu}\,B\,\hat z, \quad \text{in }\left[ \rm{A/m} \right]
 $$
 
-where $\hat n$ is the outward normal from the conductor. Appendix A shows that $\mathbf B$ in the dielectric points in $\pm\hat y$ — curling around the trace. Plugging $\hat n = +\hat x$ (downward, from trace into dielectric) and $\mathbf B = B_y\,\hat y$ gives $\mathbf K = (B_{out}/\mu)\,\hat z$ — conventional current in the propagation direction. The trace current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
+This surface current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands.
+<br />
 
 **Charge conservation at the wavefront.** On the trace surface,
 $$
