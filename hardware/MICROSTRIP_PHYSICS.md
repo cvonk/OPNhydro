@@ -38,11 +38,57 @@
   text-align: right;
   line-height: 1;
 }
+.important-note {
+  position: relative;
+  margin: 0 0 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 1rem 1rem 1rem 5rem;
+  background: #f1f3a2;
+  background: -webkit-gradient(
+    linear,
+    0% 0%,
+    0% 100%,
+    from(rgba(247, 247, 210, 1)),
+    to(rgba(240, 242, 155, 1))
+  );
+  background: -moz-linear-gradient(
+    top,
+    rgba(247, 247, 210, 1),
+    rgba(240, 242, 155, 1)
+  );
+}
+.important-note .MathJax_Preview {
+  display: none;
+}
+.important-note .icon {
+  font-weight: 700;
+  background: #ff7a18;
+  background: -webkit-gradient(
+    linear,
+    0% 0%,
+    0% 100%,
+    from(#ffad71),
+    to(#ff7a18)
+  );
+  background: -moz-linear-gradient(top, #ffad71, #ff7a18);
+  color: #fff;
+  padding: 0 0.3rem;
+  font-size: 40px;
+  margin-right: 0rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: unset;
+  display: flex;
+  align-items: center;
+}
 </style>
 
 This document develops the electromagnetic theory behind PCB trace design and derives practical layout rules from it. It is a companion to the Board Design Guide, providing the physical reasoning that underpins the design decisions made there.
 
-Chapter 1 builds the field-theory picture from first principles — starting with Maxwell's equations applied to a microstrip, and working through wave propagation, conductor response, rail collapse, crosstalk, and EMI. Chapter 2 translates that physics into concrete layout rules, stack-up choices, and trace sizing for OPNhydro.
+Chapter 1 builds the field theory picture from first principles — starting with Maxwell's equations applied to a microstrip, and working through wave propagation, conductor response, rail collapse, crosstalk, and EMI. Chapter 2 translates that physics into concrete layout rules, stack-up choices, and trace sizing for OPNhydro.
 
 The treatment assumes familiarity with basic circuit theory (Ohm's law, Kirchhoff's laws) but does not require a background in electromagnetics. Where the mathematics goes deeper, expandable sections and Feynman-style narratives offer the same insight from a different angle.
 
@@ -62,21 +108,6 @@ Voltage and current are convenient abstractions, but they are not fundamental. E
 
 > At a switching speed of 1 ns, it only takes a 10 cm PCB trace to become an efficient $\lambda/4$ antenna.  Since the TTL days, there has been a four orders of magnitude change in the switching speed of transistors.  -- Dan Beeker
 
-This chapter builds up the field-theory picture from first principles:
-
-- **§1.1** — how a voltage step becomes an EM wave, and where its energy actually flows.
-- **§1.2** — what the copper does in response: sustained currents and surface-charge confinement.
-- **§1.3** — how the conduction current in the copper and the displacement current in the dielectric sustain one continuous magnetic field.
-- **§1.4** — what happens when the power distribution network cannot supply current fast enough (rail collapse).
-- **§1.5** — how the fields of one trace leak into another (crosstalk).
-- **§1.6** — what happens when the field escapes the board entirely (EMI).
-<br />
-
-
-### 1.1. EM Wave in the Dielectric
-
-> "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
-
 As clock frequencies increase, rise times shorten — by convention, the rise time $t_r$ is taken as roughly 10% of the clock period:
 $$
   t_r \approx \frac{1}{10\,f_{clk}}
@@ -89,25 +120,27 @@ PCB design shifts from drawing paths for current to designing transmission lines
 A microstrip has **two regions**: the dielectric between the conductors, and the copper itself. §1.1 looks at the dielectric — that is where the wave lives and where the energy flows. §1.2 then turns to the copper, where the free electrons respond.
 <br />
 
-#### From Voltage to EM Wave
+This chapter builds up the field theory picture from first principles:
 
-"Electromagnetic (EM) field theory, based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), is the fundamental description of electrical phenomena (fields, waves, radiation)."  -- Dr. Eric Bogatin [^BOGATIN] and Kenneth Wyatt [^WYATT].
-
-[^BOGATIN]: Signal and Power Integrity, simplified 3rd (2018) - Eric Bogatin
-[^WYATT]: [PCB Design for Low EMI - Kenneth Wyatt](https://www.protoexpress.com/webinars/pcb-design-for-low-emi/?watch-now)
-
-<figure>
-  <center>
-  <img src="../media/infographics/microstrip-fields-2.png" style="width: 40%; max-width:400px; height: auto;">
-  <figcaption><i>Cross-section view of Microstrip fields.<br />(Courtesy: Patrick André)</i></figcaption>
-  </center>
-</figure>
-
-> **A note on field lines.** Textbook diagrams show fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. Where this document says "the $\mathbf E$ field points downward" or "the $\mathbf B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
-
+- **§1.1** — how a voltage step becomes an EM wave, and where its energy actually flows.
+- **§1.2** — what the copper does in response: sustained currents and surface-charge confinement.
+- **§1.3** — how the conduction current in the copper and the displacement current in the dielectric sustain one continuous magnetic field.
+- **§1.4** — what happens when the power distribution network cannot supply current fast enough (rail collapse).
+- **§1.5** — how the fields of one trace leak into another (crosstalk).
+- **§1.6** — what happens when the field escapes the board entirely (EMI).
 <br />
 
-##### Two of Maxwell's Equations
+
+### 1.1. From Voltage Step to EM Wave in the Dielectric
+
+> "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
+
+Electromagnetic (EM) field theory, based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), provides the fundamental description of electrical phenomena: fields, waves and radiation.
+
+In a PCB trace, these phenomena are not abstract -- they determine how signals propagate. 
+<br />
+
+#### Two of Maxwell's Equations
 
 As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free divergence constraint.
 <div class="quote">
@@ -127,27 +160,23 @@ $$
 </div>
 
 where $\mathbf E$ and $\mathbf B$ are the electric and magnetic field vectors at each point in space, $\mathbf J$ is the conduction current density, and $\mu$ and $\varepsilon$ are constants for the material. Note that the **displacement current** term in the Ampère-Maxwell law is not a real current, but a changing electric field that **acts as** a source of magnetic field, just like a real current.
-
 <br />
 
-##### Microstrip Geometry
 
-Consider a **signal trace running above a ground return plane**, separated by a thin dielectric — the basic microstrip geometry of every PCB. For simplicity, this section treats the dielectric as the only medium between the conductors.
+#### The Physical Setup
 
-The 3D Cartesian coordinate system ($x,y,z$) aligns with the structure's geometry to define propagation, width and height:
+Consider a **microstrip**: a conductor trace above a ground return plane, separated by a dielectic — the basic microstrip geometry of every PCB. For simplicity, this section treats the dielectric as the only medium between the conductors.
+
+We align the Cartesian coordinates with the structure's geometry:
 - **$x$-axis:** is perpendicular to the return plane, representing the thickness of the dielectric.
 - **$y$-axis:** is parallel to the PCB surface and perpendicular to propagation, corresponding to the width of the microstrip.
 - **$z$-axis:** the direction along which the signal propagates, corresponding to the direction of the copper strip (trace).
+<br />
 
-##### Changing in Time vs. Changing in Space
 
-Two phrases that carry the whole argument:
+#### Chain of Events
 
-- **Changing in time** ($\partial / \partial t$, a temporal derivative) — stand still at one point and watch the field rise, fall, or oscillate as the clock ticks. Units: [field] per second.
-- **Changing in space** ($\nabla\times$, a spatial derivative) — freeze time and walk to a neighboring point; ask how the value here differs from the value just over there. Units: [field] per meter.
-
-In the source-free dielectric region ($\rho = 0, \mathbf J = \mathbf 0$), the fields evolve as shown in the drawing below.
-
+In the source-free dielectric region ($\rho = 0, \mathbf J = \mathbf 0$), the fields evolve as shown below.
 <figure>
   <center>
   <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 85%; max-width:800px; height: auto;">
@@ -155,35 +184,77 @@ In the source-free dielectric region ($\rho = 0, \mathbf J = \mathbf 0$), the fi
   </center>
 </figure>
 
-When a **voltage step** is applied at the left end, the following chain of events unfolds:
+When a **voltage step** is applied to the left end of the trace, the following chain of events unfolds:
 
-1. The sudden voltage change creates an **electric field** $\mathbf{E}$ between the trace and the return plane, pointing vertically (from trace down to return plane). $\mathbf{E}$ is called a vector field because it has an intensity and direction at every point in space. Initially, this electric field exists only near the source end of the microstrip, but it cannot remain localized.
+**Step 1: Establish an Electric Field**
+
+The applied voltage immediately creates an **electric field** between the trace and the return plane, directed in the $x$-direction.
+
+At the instant of switching:
+   - This field exists only near the source, 
+   - It rises from zero to a finite value → it is **changing in time**.
+
+**Step 2: A Changing Electric Field Creates a Magnetic Field**
+
+According to the Ampère-Maxwell Law:
+<div class="quote">
+
+A time-varying electric field ($\mathbf E$) **creates a magnetic field** that curls around the trace.
+</div>
+
+This magnetic field:
+- is initially localized near the source, just like the electric field that created it.
+-  rises from zero to a finite value → it is **changing in time**.
+
+**Step 3: A Changing Magnetic Field Extends the Electric Field**
+
+According to Faraday's Law:
+<div class="quote">
+
+This time-varying magnetic field ($\mathbf B$) **creates an electric field**
+</div>
+
+This electric field is slightly **further** along the trace.
+
+**Step 4: Self-Sustaining Propagation**
+
+This coupling continues:
+- changing $\mathbf E$ → $\mathbf B$
+- changing $\mathbf B$ → $\mathbf E$ slighter father
+
+Two key points:
+- The fields vary **in time** (they rise and fall at a point)
+- The fields vary **in space** (they differ from one location to the next)
+
+It is this coupling between temporal and spatial variation that forces the disturbance to move.  A field that changed only in time would remain localized; one that changed only in space would be static.  Together, they produce a **propagating wavefront**.
+
+<div class="important-note"><span class="icon">💡</span>A voltage step on a trace launces an electromagnetic wave in the dielectric. The copper does not carry the energy; it guides the fields as we will see later.</div>
 <br />
 
-2. The moment the $\mathbf E$-field appears, it is rising from zero → **changing in time**. According to the Ampère-Maxwell Law, a time-changing electric field $\mathbf E$ (right hand side) **forces the magnetic field $\mathbf B$ to vary spatially** (LHS).
-<br />
+#### In Other Words 1
 
-3. The $\mathbf B$-field created in step 2 is also rising from zero → **changing in time** (RHS). According to Faraday's Law this time-changing magnetic field **forces the electric field $\mathbf E$ to vary spatially** (LHS) — extending $\mathbf E$ slightly ahead of where it began.
-
-The electric field $\mathbf E$ points vertically (trace to return plane), but its magnitude changes as you move horizontally along the trace — the field direction is perpendicular to the direction in which it varies. That is a wavefront advancing.
-
-In the source-free dielectric, the two laws simplify to:
-
-$$
-  \begin{align*}
-    \nabla \times \mathbf{B} &= \color{red}\cancel{\color{black}\mu \, \mathbf{J}} \color{black} + \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
-    \tag{\text{source-free Ampère-Maxwell}} \\
-    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
-    \tag{\text{Faraday}}
-  \end{align*}
-$$
-
-A field that changed only in time would just pulse in place; one that changed only in space would be a frozen pattern. It is the **coupling** — time-derivative on one side, spatial-derivative on the other — that makes the disturbance *move*. **Each field regenerates the other**, so the wave is self-sustaining — no electrons required. The mathematics forbids a localized disturbance from remaining localized. For more details, refer to Appendix A.
-
-
-##### In other words
-
+<div class="quote">
 Here is how Feynman might have explained it. Chalk in one hand, no notes.
+
+You’ve got a trace, a return plane and a slab of dielectric in between. That’s the whole system.
+
+You flip a switch. Instantly, there’s a voltage between the trace and the plane — and wherever there’s a voltage, there’s an electric field. So now you’ve got a field pointing from the trace down to the plane, right near the source.
+
+But here’s the key: the field didn’t just appear — it changed. And one of the deepest facts in physics is that a changing electric field produces a magnetic field. Not metaphorically—literally. It makes one.
+
+Now you’ve got a magnetic field, and it’s changing too. And Faraday tells us that a changing magnetic field produces an electric field. So the magnetic field you just created produces another electric field a little farther down the trace.
+
+And now that new electric field is changing, so it produces another magnetic field, and that produces another electric field…
+
+The two fields keep regenerating each other, step by step, moving forward. That’s the signal.
+
+The important thing is what’s actually moving. It’s not electrons streaming down the wire. The electrons mostly stay in place, just shifting slightly to accommodate the fields. What moves is the electromagnetic disturbance in the dielectric.
+
+The trace isn’t carrying the signal — it’s guiding it.
+</div>
+<br />
+
+#### In Other Words 2
 
 <div class="quote">
 Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of plastic. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
@@ -203,16 +274,25 @@ And that, really, is what every trace on every PCB is doing. It's not carrying e
 
 [^LEAPFROG]: In reality the two fields coexist at every point, but the "leapfrog" picture captures how each sustains the other.
 
-<br />
-
 <figure>
   <center>
   <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 40%; max-width:400px; height: auto;">
   </center>
 </figure>
+<br />
 
 
-#### Wave Propagation in Vacuum
+#### In Formal Form (optional)
+
+In the source-free dielectric, the two laws simplify to:
+$$
+  \begin{align*}
+    \nabla \times \mathbf{B} &= \color{red}\cancel{\color{black}\mu \, \mathbf{J}} \color{black} + \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
+    \tag{\text{source-free Ampère-Maxwell}} \\
+    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
+    \tag{\text{Faraday}}
+  \end{align*}
+$$
 
 The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the source-free Ampère–Maxwell law and Gauss's law.
 
@@ -246,20 +326,17 @@ The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the
       \tag{\text{Gauss's law}}
   $$
 
-  In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \mathbf E = 0$. The first term vanishes:
-  $$
-    \nabla^2 \mathbf E = \mu\,\varepsilon \ \frac{\partial^2 \mathbf E}{\partial t^2}
-  $$
+  In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \mathbf E = 0$. The first term vanishes.
 </details>
 <br />
 
-**Takeaway:** combining Faraday and Ampère-Maxwell yields the standard wave equation
+<div class="important-note"><span class="icon">💡</span>
+
+Combining Faraday and Ampère-Maxwell yields the standard wave equation
 $$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-  \shaded{
     \nabla^2 \mathbf E = \underbrace{\mu\,\varepsilon}_{1/v^2} \,\frac{\partial^2 \mathbf E}{\partial t^2}
-  }
 $$
+</div>
 
 Recognize the standard wave equation for any quantity propagating at speed $v$:
 <div class="quote">
@@ -298,6 +375,7 @@ $$
 That is the speed of light $c$ — derived entirely from electric and magnetic constants.
 
 This was Maxwell's 1865 result. He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
+<br />
 
 #### Wave Propagation in Dielectric
 
@@ -308,18 +386,11 @@ $$
 
 The wave **propagation speed in FR-4** is therefore **~15 cm/ns**. To be precise, this is the bulk-FR-4 (or stripline) speed. On a microstrip, part of the field is in air above the trace, so the effective permittivity is a bit lower and the speed rises to ~17–18 cm/ns.
 
-This is also the right moment to name the simplification we have been using. Throughout this section, $\mathbf E$ points vertically and $\mathbf B$ curls horizontally — both entirely perpendicular to the propagation direction. A wave mode where neither field has a longitudinal component is called **TEM** (Transverse Electromagnetic). A stripline, where the trace is sandwiched between two return planes in a uniform dielectric, supports a pure TEM mode.
+At this point, we can name the simplification we have been using. Throughout this section, $\mathbf E$ points vertically and $\mathbf B$ curls horizontally — both entirely perpendicular to the propagation direction. A wave mode where neither field has a longitudinal component is called **TEM** (Transverse Electromagnetic). A stripline, where the trace is sandwiched between two return planes in a uniform dielectric, supports a pure TEM mode.
 
-A microstrip does not: part of the field travels through the dielectric ($\varepsilon_r \approx 4.2$) and part through the air above ($\varepsilon_r = 1$). Because the two media have different propagation speeds, the fields cannot be purely transverse — small longitudinal components appear to satisfy the boundary conditions. The mode is called **quasi-TEM**. At the frequencies relevant to PCB design (up to a few GHz), the longitudinal components are small enough that the quasi-TEM approximation holds well, and the transmission-line model — characteristic impedance, propagation delay, reflections — remains valid.
+A microstrip does not: part of the field travels through the dielectric ($\varepsilon_r \approx 4.2$) and part through the air above ($\varepsilon_r = 1$). Strict TEM requires a homogeneous medium; the air-dielectric interface prevents this.
 
-##### In other words
-
-Once more in Feynman's words:
-
-<div class="quote">
-If you write down Faraday's and Maxwell's laws, and you do a little algebra (which I'll spare you), out pops a speed. And the speed is $1/\sqrt{\mu_0 \varepsilon_0}$, where $\mu_0$ and $\varepsilon_0$ are just numbers you measured in a laboratory with magnets and charges, nothing to do with light at all. And when you plug them in, the speed is three hundred thousand kilometers per second. Which is the speed of light. Maxwell looked at this and said, my goodness, light is just this game of leapfrog between electric and magnetic fields.
-</div>
-
+Because the two media have different propagation speeds, the fields cannot be purely transverse — small longitudinal components appear to satisfy the boundary conditions. The mode is called **quasi-TEM**. At the frequencies relevant to PCB design (up to a few GHz), the longitudinal components are small enough that the quasi-TEM approximation holds well, and the transmission-line model — characteristic impedance, propagation delay, reflections — remains valid.
 <br />
 
 ---
@@ -387,7 +458,7 @@ And here's the whole point: because the field can't get into the copper, it has 
 </div>
 
 
-##### Boundary-condition view
+##### Formal Form (optional)
 
 Following the intuitive discussion above, here's the formal version.
 
@@ -401,47 +472,48 @@ Following the intuitive discussion above, here's the formal version.
 <details>
   <summary>Expand if you ❤️ to see the derivation</summary>
 
-Imagine a conductor with a surface charge density $\sigma_s$ (charge per unit area) and normal vector $\hat n$ that points perpendicular to the conductor surface. To find the electric field just outside the surface, we place a very thin, small, cylindrical Gaussian "pillbox" so that it straddles the conductor surface.
+  Imagine a conductor with a surface charge density $\sigma_s$ (charge per unit area) and normal vector $\hat n$ that points perpendicular to the conductor surface. To find the electric field just outside the surface, we place a very thin, small, cylindrical Gaussian "pillbox" so that it straddles the conductor surface.
 
-Gauss's law in integral form states that the net electric flux through any closed surface ($S$) is directly proportional to the total electric charge ($Q_{enc}$) enclosed within that surface.
+  Gauss's law in integral form states that the net electric flux through any closed surface ($S$) is directly proportional to the total electric charge ($Q_{enc}$) enclosed within that surface.
 
-<div class="quote">
+  <div class="quote">
 
-$$
-    \oint_S \mathbf E \cdot d\mathbf a = \frac{Q_{enc}}{\varepsilon} \tag{\text{Gauss's law}}
-$$
-</div> 
+  $$
+      \oint_S \mathbf E \cdot d\mathbf a = \frac{Q_{enc}}{\varepsilon} \tag{\text{Gauss's law}}
+  $$
+  </div> 
 
-where $d \mathbf{a}$ is an infinitesimal vector element of the surface area, pointing outwards normal to the surface.
+  where $d \mathbf{a}$ is an infinitesimal vector element of the surface area, pointing outwards normal to the surface.
 
-A key property of a conductor in electrostatic equilibrium is that the electric field $\mathbf {E}$ inside the conducting material is zero, so the inside area doesn't contribute. With the height $h \to 0$, the side areas do not contribute either. This implies that the only flux passing through the pillbox comes from the bottom face.
-$$
-  \begin{align*}
-    \oint_{out} \mathbf E \cdot (A \hat n) &= \left( \mathbf{E} \cdot \hat n \right) A = \frac{Q_{enc}}{\varepsilon} \tag{$d\mathbf{a_{out}}=A\hat n$} \\
-    \Rightarrow
-    \varepsilon \left(\mathbf{E}\cdot\hat n \right)A &= Q_{enc} \tag{$Q_{enc} = \sigma_s A$}
-  \end{align*}
-$$
+  A key property of a conductor in electrostatic equilibrium is that the electric field $\mathbf {E}$ inside the conducting material is zero, so the inside area doesn't contribute. With the height $h \to 0$, the side areas do not contribute either. This implies that the only flux passing through the pillbox comes from the bottom face.
+  $$
+    \begin{align*}
+      \oint_{out} \mathbf E \cdot (A \hat n) &= \left( \mathbf{E} \cdot \hat n \right) A = \frac{Q_{enc}}{\varepsilon} \tag{$d\mathbf{a_{out}}=A\hat n$} \\
+      \Rightarrow
+      \varepsilon \left(\mathbf{E}\cdot\hat n \right)A &= Q_{enc} \tag{$Q_{enc} = \sigma_s A$}
+    \end{align*}
+  $$
 
-The enclosed charge is $Q_{enc} = \sigma_s A$
-$$
-    \varepsilon \left(\mathbf{E}\cdot\hat n \right) \bcancel{A} = \sigma_s \bcancel{A}
-$$
+  The enclosed charge is $Q_{enc} = \sigma_s A$
+  $$
+      \varepsilon \left(\mathbf{E}\cdot\hat n \right) \bcancel{A} = \sigma_s \bcancel{A}
+  $$
 
-$\mathbf{E}\cdot\hat n$ is the component of the field normal to the surface ($E_x$):
-$$
-    \varepsilon\, E_x = \sigma_s
-$$
+  $\mathbf{E}\cdot\hat n$ is the component of the field normal to the surface ($E_x$):
+  $$
+      \varepsilon\, E_x = \sigma_s
+  $$
 </details>
 <br>
 
-**Takeaway:** Gauss's law applied to a thin pillbox straddling the conductor surface gives the surface charge density $\sigma_s$:
+<div class="important-note"><span class="icon">💡</span>
+
+Gauss's law applied to a thin pillbox straddling the conductor surface gives the surface charge density $\sigma_s$:
 $$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-  \shaded{
-    \sigma_s = \varepsilon\, E_x
-  }, \quad \text{in }\left[ \rm{C/m^2} \right]
+    \sigma_s = \varepsilon\, E_x, \quad \text{in }\left[ \rm{C/m^2} \right]
 $$
+</div>
+
 
 The positive surface charge $\sigma_s$ on the bottom of the trace is whatever the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture above is the dynamic mechanism; this equation is the algebraic statement of the same fact.
 <br />
@@ -754,6 +826,9 @@ A 100 mV dip on a 3.3 V rail is enough to upset logic levels in some chips. A 5 
 **Why no single capacitor solves it.** The chip draws current at many timescales — slow gate switching, fast clock edges, faster glitches — spanning DC up to GHz. Each regime is supplied by a different source: the **voltage regulator (VRM)** for slow load changes (DC to ~kHz), **bulk decoupling capacitors** for mid-frequency draws (kHz to ~10 MHz), **ceramic bypass capacitors** for high-frequency transients (10 MHz to ~100 MHz), and the chip's **on-die capacitance** for the very fastest demand (>100 MHz). Each tier hands off to the next as the current draw gets faster — the figure above sketches the frequency bands.
 
 If the sag is large enough — what designers call **rail collapse** — the chip misinterprets logic levels or produces timing errors. The PCB-design problem is to keep $L_{\text{PDN}}$ low across the full frequency range below where on-die decoupling takes over. The detailed layout rules are in §2.1.
+
+TO DO: tie back to field theory.  E.g. PDN inductance = magnetic energy storage in loop fields; or Voltage sag = field reconfiguration delay
+
 <br />
 
 ---

@@ -85,3 +85,14 @@ $$
 
 ---
 
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-fields-2.png" style="width: 40%; max-width:400px; height: auto;">
+  <figcaption><i>Cross-section view of Microstrip fields.<br />(Courtesy: Patrick André)</i></figcaption>
+  </center>
+</figure>
+
+> **A note on field lines.** Textbook diagrams show fields as lines with arrows. These *field lines* are a visualization invented by Faraday, not physical objects. They are drawn by stepping from point to point in the direction the field vector points, with line density representing field strength. The field itself exists at *every* point in space — between the lines too. Where this document says "the $\mathbf E$ field points downward" or "the $\mathbf B$ field curls around the trace," it is shorthand for: the field vector at each point in that region has that direction and magnitude.
+
+---
+
