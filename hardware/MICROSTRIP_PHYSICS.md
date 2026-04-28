@@ -389,9 +389,7 @@ And here's the whole point: because the field can't get into the copper, it has 
 
 ##### Boundary-condition view
 
-Following the intuitive, casual discussions, this section provides a more formal examination of this phenomenon.
-
-The boundary-condition view of Gauss's Law states that the component of the electric field perpendicular to a conductor's surface just outside the conductor is directly proportional to the local surface charge density.
+Following the intuitive discussion above, here's the formal version.
 
 <figure>
   <center>
@@ -451,7 +449,7 @@ The positive surface charge $\sigma_s$ on the bottom of the trace is whatever th
 
 #### Horizontal Component $E_z$ at the Wavefront
 
-**At the wavefront**, there is a strong variation in the $E_x$ field in the propagation direction. (i.e. the field drops from full strength behind to zero ahead over a short distance). This acts as a field $E_z$ acting on the electrons in the conductor with a force $F_z = -e\,E_z$ — opposite to $E_z$, so backward along the trace, opposite to the wavefront's motion.
+**At the wavefront**, there is a strong variation in the $E_x$ field in the propagation direction (i.e., the field drops from full strength behind to zero ahead over a short distance). This is a field $E_z$ along the trace, exerting a force $F_z = -e\,E_z$ on the electrons — opposite to $E_z$, so backward along the trace, opposite to the wavefront's motion.
 
 The electrons in *both* conductors are pushed *sideways*:
 - *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the '$+$' terminal of the source;
@@ -479,6 +477,8 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 </div>
 
 ##### Boundary-condition view
+
+Following the intuitive discussion above, here's the formal version.
 
 The magnetic field $\mathbf{B}$, from the wave propagating through the dielectric, is screened by the return plane. To stay in the $xy$-plane, it has no other choice but to **loop around the trace**.
 <figure>
@@ -548,7 +548,6 @@ $$
 
 Surface current $\mathbf{K}$ only exists in the $z$-direction ($\mathbf{K} = K_z \hat z$), so we can rewrite this as:
 $$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
   K_z = \frac{B_y}{\mu}
 $$
 
@@ -561,12 +560,12 @@ $$
 $$
 </div>
 
-Expressed on a 2D surface, this becomes the surface charge conservation on the trace surface:
+Expressed on a 2D surface, this becomes the surface charge conservation on the trace surface (the surface divergence operator $\nabla_s\cdot$ takes derivatives only in directions tangent to the surface — for our trace surface with normal $\hat x$, that's $\hat y$ and $\hat z$):
 $$
   \begin{align*}
     \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} &= 0 \\
     \Rightarrow\quad
-    {\frac{\partial K_x}{\partial x}} + {\frac{\partial K_y}{\partial y}} + \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}&= 0
+    \frac{\partial K_y}{\partial y} + \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}&= 0
   \end{align*}
 $$
 
@@ -634,6 +633,8 @@ And what about the sections the wavefront has already passed? Their surface char
 </div>
 
 ##### Boundary-condition (BC) view
+
+Following the intuitive discussion above, here's the formal version.
 
 **Behind the wavefront**, $\sigma_s$ and $\mathbf K$ are steady — charge conservation reduces to $\nabla_s \cdot \mathbf K = 0$, which says the current flows uniformly along $z$.
 
@@ -742,9 +743,17 @@ So far, we have followed one signal on one trace — its wave, its return curren
 
 Every time a chip switches its outputs or its internal gates toggle, it draws a sharp pulse of current from the power rail. That pulse passes through the inductance $L_{\text{PDN}}$ of the power distribution network (PDN) — the planes, traces, vias, and decoupling capacitors between the voltage regulator and the chip — and the inductance turns $dI/dt$ into voltage noise on the rail:
 
-$$\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$$
+$$\Delta V = L_{\text{PDN}} \cdot \frac{dI}{dt}$$
 
-This is trace and via inductance resisting sudden changes in current. The chip sees its supply rail sag for a moment, reducing the voltage between its power and ground pins. If the sag is large enough — what designers call **rail collapse** — the chip misinterprets logic levels or produces timing errors. The design goal is to minimize $L_{\text{PDN}}$ across the full frequency range over which the chip draws current — the details are covered in §2.1.
+This is the same Faraday's-law physics from §1.1, applied to the power loop: a changing current through an inductive path induces a back-EMF that opposes the change. The chip sees its supply rail sag for a moment, reducing the voltage between its power and ground pins.
+
+**A concrete example.** A typical microcontroller might switch 100 mA in 1 ns. Even a small parasitic inductance $L = 1\,\text{nH}$ (a few mm of trace) gives
+$$\Delta V = 1\,\text{nH} \cdot \frac{100\,\text{mA}}{1\,\text{ns}} = 100\,\text{mV}.$$
+A 100 mV dip on a 3.3 V rail is enough to upset logic levels in some chips. A 5 mm trace from a poorly placed decoupling capacitor can already reach this — a small detail with disproportionate consequences.
+
+**Why no single capacitor solves it.** The chip draws current at many timescales — slow gate switching, fast clock edges, faster glitches — spanning DC up to GHz. Each regime is supplied by a different source: the **voltage regulator (VRM)** for slow load changes (DC to ~kHz), **bulk decoupling capacitors** for mid-frequency draws (kHz to ~10 MHz), **ceramic bypass capacitors** for high-frequency transients (10 MHz to ~100 MHz), and the chip's **on-die capacitance** for the very fastest demand (>100 MHz). Each tier hands off to the next as the current draw gets faster — the figure above sketches the frequency bands.
+
+If the sag is large enough — what designers call **rail collapse** — the chip misinterprets logic levels or produces timing errors. The PCB-design problem is to keep $L_{\text{PDN}}$ low across the full frequency range below where on-die decoupling takes over. The detailed layout rules are in §2.1.
 <br />
 
 ---
