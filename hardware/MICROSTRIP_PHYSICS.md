@@ -619,7 +619,7 @@ Each section of the trace only "wakes up" when the wavefront arrives — until t
 
 #### Horizontal Component $E_z$ Behind the Wavefront
 
-So far we have described the steep $E_z$ cliff at the wavefront itself. The conductor is also resistive, which produces a second, smaller $E_z$ behind the wavefront.
+So far we have described the steep $E_x$ cliff at the wavefront itself. The conductor is also resistive, which produces a smaller $E_z$ behind the wavefront.
 
 The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a small residual $E_z$ that re-accelerates the electrons between scattering events. This residual field behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no field drop, and no loss.
 
@@ -633,13 +633,14 @@ The electrons don't drift for free. They bang into copper atoms as they go — t
 
 And what about the sections the wavefront has already passed? Their surface charges are set — the capacitor is charged. But current still flows through them, because the wavefront is still advancing ahead, still demanding current to charge the *next* section. It's like a pipe that's already full of water — water still flows through it to supply whatever is at the end. The moment the wavefront reaches a matched load, the current doesn't vanish — it just switches from charging new sections to supplying the load.
 </div>
-<br />
 
-##### Boundary-condition view
+##### Boundary-condition (BC) view
 
 **Behind the wavefront**, $\sigma_s$ and $\mathbf K$ are steady — charge conservation reduces to $\nabla_s \cdot \mathbf K = 0$, which says the current flows uniformly along $z$.
 
-**The residual $E_z$ violates the perfect-conductor BC.** For an idealized perfect conductor, the boundary condition is $E_\parallel = 0$ on the surface — no tangential field, no resistive losses. Real conductors have nonzero $E_\parallel$, and the product $E_\parallel \cdot K_z$ per unit area is the **ohmic dissipation**. The small residual $E_z$ behind the wavefront *is* that BC violation, expressed as a field. The field doesn't penetrate the bulk metal — it dies off over the **skin depth** $\delta = \sqrt{2/(\omega\mu\sigma)}$ (≈ 2 μm in copper at 1 GHz) — but that thin layer is where the current actually flows and the loss happens. The surface-current approximation $\mathbf K = (1/\mu_0)\,\hat n \times \mathbf B_{\text{outside}}$ holds to corrections of order $\delta/d$, where $d$ is the conductor thickness.
+The **residual $E_z$ violates** the perfect-conductor Boundary-condition. For an idealized perfect conductor, the boundary condition is $E_z = 0$ on the surface — no tangential field, no resistive losses. Real conductors have nonzero $E_z$, and the product $E_x \cdot K_z$ per unit area is the **ohmic dissipation**. The small residual $E_z$ behind the wavefront *is* that BC violation, expressed as a field.
+
+The field doesn't penetrate the copper — it dies off over the **skin depth** $\delta$ (≈ 2 μm in copper at 1 GHz; see Appendix A.4 for the derivation). That thin layer is where the current actually flows and the loss happens. The surface-current approximation $\mathbf K = (1/\mu_0)\,\hat n \times \mathbf B_{\text{out}}$ holds to corrections of order $\delta/d$, where $d$ is the conductor thickness.
 <br />
 
 
@@ -1060,10 +1061,10 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 ---
 
 
-## Appendix A: Coupling of Time Variation and Spatial Variation
+## Appendix A: More Math for Curious Readers
 
 
-### A.1. How the Ampère-Maxwell Law Couples Time Variation of E to Spatial Variation of B
+### A.1. Ampère-Maxwell Law Couples Time Variation of E to Spatial Variation of B
 
 For the wavefront traveling in the $+\hat z$ direction, at a place in between the trace and the return plane, we can apply some simplifications:
 1. The magnetic field does not vary along $x$ or $y$, so all $\partial/\partial x$ and $\partial/\partial y$ vanish.
@@ -1143,7 +1144,7 @@ So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equati
 
 ---
 
-### A.2. How Faraday's Law Couples Time Variation of B to Spatial Variation of E
+### A.2. Faraday's Law Couples Time Variation of B to Spatial Variation of E
 
 We can do the same for **Faraday's Law**.
 
@@ -1223,7 +1224,7 @@ where $\hat y$ points across the trace width — the direction $\mathbf B$ curls
 ---
 
 
-### A.3. TEM Ratio: $E$ and $B$ Locked by the Wave Speed
+### A.3. TEM Ratio
 
 For a TEM wave propagating in $+\hat z$ at speed $v$, the electric and magnetic field amplitudes are not independent — they are locked together by Faraday's law (§A.2) plus the wave-speed constraint.
 
@@ -1257,6 +1258,69 @@ $$
     v = \frac{E_x}{B_y}
   }
 $$
+
+---
+
+
+### A.4. Skin Depth
+
+Inside a good conductor, the electromagnetic field does not propagate as a wave — it *diffuses*, decaying exponentially with depth. The decay length is the **skin depth** $\delta$.
+
+**Conduction current dominates.**
+Recall Ampère-Maxwell inside the conductor:
+<div class="quote">
+
+$$
+    \nabla \times \mathbf B = \mu\,\mathbf J + \mu\varepsilon\,\frac{\partial \mathbf E}{\partial t} \tag{Ampère-Maxwell}
+$$
+</div>
+
+Use Ohm's law $\mathbf J = \sigma\mathbf E$. At signal frequencies in a good conductor, $\sigma \gg \omega\varepsilon$ (for copper at 1 GHz, $\sigma \approx 5.8\times 10^7$ S/m vs. $\omega\varepsilon \approx 5.6\times 10^{-2}$ S/m — nine orders of magnitude). The displacement-current term is negligible:
+$$
+    \nabla \times \mathbf B \approx \mu\sigma\,\mathbf E
+$$
+
+**Combine with Faraday's law.** 
+Take the curl of $\nabla \times \mathbf E = -\partial \mathbf B/\partial t$ and substitute the result above:
+$$
+    \nabla \times (\nabla \times \mathbf E) = -\frac{\partial}{\partial t}(\nabla \times \mathbf B) = -\mu\sigma\,\frac{\partial \mathbf E}{\partial t}
+$$
+
+Use the vector identity $\nabla \times (\nabla \times \mathbf E) = \nabla(\nabla \cdot \mathbf E) - \nabla^2 \mathbf E$. Free charge dies off rapidly in a good conductor, so $\nabla \cdot \mathbf E \approx 0$, leaving the **diffusion equation**:
+$$
+    \nabla^2 \mathbf E = \mu\sigma\,\frac{\partial \mathbf E}{\partial t}
+$$
+
+(Contrast with §1.1: in the dielectric, the wave equation has $\partial^2/\partial t^2$; here, the diffusion equation has $\partial/\partial t$. Conductors dissipate; dielectrics don't.)
+
+**Time-harmonic field.** 
+For a field oscillating at frequency $\omega$, write $\mathbf E(\mathbf r, t) = \mathbf E_0(\mathbf r)\,e^{-i\omega t}$. The time derivative becomes $-i\omega$:
+$$
+    \nabla^2 \mathbf E_0 = -i\omega\mu\sigma\,\mathbf E_0
+$$
+
+**Penetration into the metal.** 
+Let $x$ be depth into the conductor (with $x=0$ at the surface). For 1D penetration, try $\mathbf E_0 \propto e^{kx}$:
+$$
+    k^2 = -i\omega\mu\sigma
+$$
+
+Take the complex square root using $-i = e^{-i\pi/2}$:
+$$
+    k = \pm\sqrt{\omega\mu\sigma}\cdot e^{-i\pi/4} = \pm\sqrt{\frac{\omega\mu\sigma}{2}}\,(1 - i)
+$$
+
+For the field to **decay** with depth, take the negative root. The field is then $\mathbf E_0(x) \propto e^{-x/\delta}\cdot e^{+ix/\delta}$ — exponentially damped and oscillating — where the decay length $\delta$ is set by the real part of $k$:
+
+**Takeaway:** the field amplitude drops by $1/e$ over depth $\delta$
+$$
+  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
+  \shaded{
+    \delta = \sqrt{\frac{2}{\omega\mu\sigma}}
+  }
+$$
+
+Higher frequency, higher conductivity, or higher permeability all push the field out of the bulk and into a thinner surface layer. For copper at 1 GHz, $\delta \approx 2\,\mu$m — well below the 35 µm thickness of 1 oz copper, justifying the surface-current approximation in §1.2's boundary-condition view.
 
 ---
 
