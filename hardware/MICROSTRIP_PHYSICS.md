@@ -38,6 +38,12 @@
   text-align: right;
   line-height: 1;
 }
+.quote.feynman:before {
+  color: red;
+}
+.quote.feynman {
+  /*color: cornflowerblue;*/
+}
 .important-note {
   position: relative;
   margin: 0 0 1.5rem;
@@ -94,9 +100,11 @@ The treatment assumes familiarity with basic circuit theory (Ohm's law, Kirchhof
 
 Most textbook introductions to transmission lines start with the lumped-element model — an infinite ladder of series inductors and shunt capacitors. That model yields the right equations (the wave equation, $Z_0 = \sqrt{L/C}$, propagation delay), but it obscures the physics. It cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology. This document takes a different path: it starts from the fields themselves — Maxwell's equations applied to the cross-section of a microstrip — and derives the circuit quantities (impedance, capacitance, inductance) as consequences. The result is a mental model that transfers directly to layout decisions, where the fields, not the lumped elements, are what the designer actually controls.
 
+<br />
 
 ---
 
+<br />
 
 ## 1. Field Theory
 
@@ -128,8 +136,12 @@ This chapter builds up the field theory picture from first principles:
 - **§1.4** — what happens when the power distribution network cannot supply current fast enough (rail collapse).
 - **§1.5** — how the fields of one trace leak into another (crosstalk).
 - **§1.6** — what happens when the field escapes the board entirely (EMI).
+
 <br />
 
+---
+
+<br />
 
 ### 1.1. From Voltage Step to EM Wave in the Dielectric
 
@@ -231,9 +243,9 @@ It is this coupling between temporal and spatial variation that forces the distu
 <div class="important-note"><span class="icon">💡</span>A voltage step on a trace launces an electromagnetic wave in the dielectric. The copper does not carry the energy; it guides the fields as we will see later.</div>
 <br />
 
-#### In Other Words 1
+#### Intuitive Form 1
 
-<div class="quote">
+<div class="quote feynman">
 Here is how Feynman might have explained it. Chalk in one hand, no notes.
 
 You’ve got a trace, a return plane and a slab of dielectric in between. That’s the whole system.
@@ -254,9 +266,9 @@ The trace isn’t carrying the signal — it’s guiding it.
 </div>
 <br />
 
-#### In Other Words 2
+#### Intuitive Form 2
 
-<div class="quote">
+<div class="quote feynman">
 Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of plastic. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
 
 The instant you close the switch, there's a voltage between the trace and the plane. And whenever you have a voltage between two pieces of metal, there's an **electric field** between them. Bang — the field is just there, pointing from the trace down to the plane. Not in all of space, mind you — only right near the switch, because the rest of the trace hasn't heard the news yet.
@@ -282,7 +294,7 @@ And that, really, is what every trace on every PCB is doing. It's not carrying e
 <br />
 
 
-#### In Formal Form (optional)
+#### Formal Form (optional)
 
 In the source-free dielectric, the two laws simplify to:
 $$
@@ -442,9 +454,9 @@ So, the electrons in both conductors are pushed *upward*:
 The local redistribution of electrons charges the distributed capacitance of the line. This charge builds its own upward-pointing electric field inside the metal, which grows until it exactly cancels the incoming $E_x$ — driving the net vertical field inside the copper to zero. Because the electric field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors. This **confines the wave to the dielectric**. 
 
 
-##### In other words
+##### Intuitive Form
 
-<div class="quote">
+<div class="quote feynman">
 
 I want to tell you what the down-field does, because I think this is the most beautiful thing happening on the whole PCB.
 
@@ -537,9 +549,9 @@ The electrons in *both* conductors are pushed *sideways*:
 This drift is the transmission-line **current**. And this same drift is what builds up the positive surface charge on the bottom of the trace: electrons drain out of the section horizontally toward the source, leaving the bottom of that section positively charged. The same current then accumulates as negative charge on the top of the return plane further back.
 
 
-##### In other words
+##### Intuitive Form
 
-<div class="quote">
+<div class="quote feynman">
 
 Now, what about the along-field? Where does that come from?
 
@@ -548,7 +560,7 @@ It comes from the wave *going somewhere*. The voltage on the trace right here is
 The free electrons in the copper feel that field and start to drift. Very slowly, mind you — but they all drift together, and that is what we call a **current**. The current didn't cause anything. The field caused the current. The field shows up first, the electrons react. 
 </div>
 
-##### Boundary-condition view
+##### Formal Form (optional)
 
 Following the intuitive discussion above, here's the formal version.
 
@@ -606,14 +618,13 @@ $$ where $\hat n$ is the outward normal from the conductor.
 </details>
 <br />
 
+<div class="important-note"><span class="icon">💡</span>
 
-**Takeaway:** Ampère's law applied to a thin loop straddling the conductor surface forces a surface current $\mathbf{K}$ in the propagation direction. This surface current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands:
+Ampère's law applied to a thin loop straddling the conductor surface forces a surface current $\mathbf{K}$ in the propagation direction. This surface current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands:
 $$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-  \shaded{
-    \mathbf K = \frac{B_y}{\mu}\,\hat z
-  }, \quad \text{in }\left[ \rm{A/m} \right]
+    \mathbf K = \frac{B_y}{\mu}\,\hat z, \quad \text{in }\left[ \rm{A/m} \right]
 $$
+</div>
 
 <details>
   <summary>Expand if you ❤️ to see the derivation</summary>
@@ -662,13 +673,13 @@ Integrate along $z$ on both sides. Both $K_z$ and $\sigma_s$ vanish ahead of the
 </details>
 <br />
 
-**Takeaway:** The Continuity Equation and the Wavefront Constraint govern the surface current:
+<div class="important-note"><span class="icon">💡</span>
+
+The Continuity Equation and the Wavefront Constraint govern the surface current:
 $$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-  \shaded{    
-    K_z = v\,\sigma_s
-  }
+  K_z = v\,\sigma_s
 $$
+</div>
 
 This is not as a *consequence* of electron motion, but as the *only* consistent answer when a charge pattern advances rigidly at speed $v$. The wavefront is the kinematic boundary between the field-off and field-on regions, and the surface charge and current are forced to advance at speed $v$ to keep up with it.
 <br />
@@ -695,18 +706,18 @@ The drifting electrons scatter off the lattice, converting drift kinetic energy 
 
 **Why current still flows through already-charged sections.** The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small residual $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
 
-##### In other words
+##### Intuitive Form
 
-<div class="quote">
+<div class="quote feynman">
 
 The electrons don't drift for free. They bang into copper atoms as they go — that's resistance — and every collision turns a little bit of drift energy into heat. That friction drains energy from the wave, so the wave amplitude drops slightly with distance. And a voltage that drops with distance means — there it is again — a spatial gradient. A gentler one this time, not the steep cliff at the wavefront, but enough to keep pushing the electrons forward against the drag. Behind the wavefront, the along-field is the system's way of paying the resistive tax.
 
 And what about the sections the wavefront has already passed? Their surface charges are set — the capacitor is charged. But current still flows through them, because the wavefront is still advancing ahead, still demanding current to charge the *next* section. It's like a pipe that's already full of water — water still flows through it to supply whatever is at the end. The moment the wavefront reaches a matched load, the current doesn't vanish — it just switches from charging new sections to supplying the load.
 </div>
 
-##### Boundary-condition (BC) view
+##### Formal Form
 
-Following the intuitive discussion above, here's the formal version.
+Following the intuitive discussion above, here's the boundary-condition version.
 
 **Behind the wavefront**, $\sigma_s$ and $\mathbf K$ are steady — charge conservation reduces to $\nabla_s \cdot \mathbf K = 0$, which says the current flows uniformly along $z$.
 
@@ -764,10 +775,10 @@ $$
 There is one continuous $\mathbf B$ field, but it has two sources depending on where you are. Inside the copper, the conduction term ($\mu \mathbf J$) is the sole source — free electrons are moving, and their motion sustains $\mathbf B$. In the dielectric, there are no free electrons ($\mathbf J = 0$), so the displacement term takes over — the changing $\mathbf E$ field sustains $\mathbf B$ just the same. At the copper-dielectric boundary, the two sources hand off seamlessly. The $\mathbf B$ field does not care which term is producing it; it is one smooth, continuous solution across the interface.
 <br />
 
-##### In other words
+##### Intuitive Form
 
 The equation is the short answer. Here is the long one, in a voice we have borrowed before: Imagine Feynman is still at the chalkboard. Someone in the third row raises a hand.
-<div class="quote">
+<div class="quote feynman">
 
 *"Professor, I'm confused. You just told us the wave has a magnetic field around it — that was part of the leapfrog thing. But now you're saying the electrons in the copper are flowing, and a flowing current also makes a magnetic field. So which is it? Are there two magnetic fields here, or what?"*
 
@@ -1140,9 +1151,11 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 - **Board-edge clearance** — Pull all traces and copper pours back from the board edge by at least 20× the dielectric thickness (Rule 4b). On the OPNhydro stack-up, this is approximately 1.5 mm. Place return-plane stitching vias along the board perimeter at ≤5 mm intervals.
 - **Antenna keep-out** — The return plane must not extend under the ESP32-C6 antenna keep-out area to ensure proper wireless performance.
 
+<br />
 
 ---
 
+<br />
 
 ## Appendix A: More Math for Curious Readers
 
@@ -1213,19 +1226,21 @@ $$
     \frac{\partial B_y}{\partial z} (-\hat x) = \mu \, \varepsilon \frac{\partial E_x}{\partial t}\, \hat x
 $$
 
-<br />
+<div class="important-note"><span class="icon">💡</span>
 
-**Takeaway:** the rate of change in the electric field **in time** ($t$) is exactly balanced by the rate of change of the magnetic field **in space** ($z$)
+The rate of change in the electric field **in time** ($t$) is exactly balanced by the rate of change of the magnetic field **in space** ($z$)
 $$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-  \shaded{
-    \frac{\partial B_y}{\partial z} = -\mu\, \varepsilon\, \frac{\partial E_x}{\partial t}
-  }
+  \frac{\partial B_y}{\partial z} = -\mu\, \varepsilon\, \frac{\partial E_x}{\partial t}
 $$
+</div>
 
 So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equation forces $\mathbf B$ to have a spatial gradient there — so $\mathbf B$ at the neighboring point is different. At that neighboring point, $\mathbf B$ is now changing in time, and by the second equation this forces spatial variation in $\mathbf E$ — so $\mathbf E$ at the *next* point is different. And so on.
 
+<br />
+
 ---
+
+<br />
 
 ### A.2. Faraday's Law Couples Time Variation of B to Spatial Variation of E
 
@@ -1293,19 +1308,21 @@ $$
 
 <br />
 
-**Takeaway:** the rate of change in the electric field **in space** ($z$) is exactly balanced by the rate of change of the magnetic field **in time** ($t$)
+<div class="important-note"><span class="icon">💡</span>
+
+The rate of change in the electric field **in space** ($z$) is exactly balanced by the rate of change of the magnetic field **in time** ($t$)
 $$
-    \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-    \shaded{
-        \frac{\partial E_x}{\partial z} = -\frac{\partial B_y}{\partial t}
-    }
+  \frac{\partial E_x}{\partial z} = -\frac{\partial B_y}{\partial t}
 $$
 
 where $\hat y$ points across the trace width — the direction $\mathbf B$ curls around the conductor.
+</div>
 
+<br />
 
 ---
 
+<br />
 
 ### A.3. TEM Ratio
 
@@ -1334,15 +1351,19 @@ $$
     E_x = v\,B_y
 $$
 
-**Takeaway:** the wave's electric and magnetic field amplitudes are tied by the propagation speed: 
+<div class="important-note"><span class="icon">💡</span>
+
+The wave's electric and magnetic field amplitudes are tied by the propagation speed $v$: 
 $$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-  \shaded{
-    v = \frac{E_x}{B_y}
-  }
+  v = \frac{E_x}{B_y}
 $$
+</div>
+
+<br />
 
 ---
+
+<br />
 
 
 ### A.4. Skin Depth
@@ -1395,13 +1416,13 @@ $$
 
 For the field to **decay** with depth, take the negative root. The field is then $\mathbf E_0(x) \propto e^{-x/\delta}\cdot e^{+ix/\delta}$ — exponentially damped and oscillating — where the decay length $\delta$ is set by the real part of $k$:
 
-**Takeaway:** the field amplitude drops by $1/e$ over depth $\delta$
+<div class="important-note"><span class="icon">💡</span>
+
+The field amplitude drops by $1/e$ over depth $\delta$
 $$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-  \shaded{
-    \delta = \sqrt{\frac{2}{\omega\mu\sigma}}
-  }
+  \delta = \sqrt{\frac{2}{\omega\mu\sigma}}
 $$
+</div>
 
 Higher frequency, higher conductivity, or higher permeability all push the field out of the bulk and into a thinner surface layer. For copper at 1 GHz, $\delta \approx 2\,\mu$m — well below the 35 µm thickness of 1 oz copper, justifying the surface-current approximation in §1.2's boundary-condition view.
 
