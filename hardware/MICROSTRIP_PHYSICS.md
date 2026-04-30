@@ -864,12 +864,14 @@ These quantities are not independent drivers but are determined by the fields of
 
 ### 1.3. Sources of the Magnetic Field
 
-In a PCB transmission structure, the magnetic field associated with a signal arrises from an electromagnetic wave ($\mathbf E$ and $\partial\mathbf{E}\partial t$) propagating through the dielectric.
+Sections §1.1 and §1.2 established that signal propagation is an electromagnetic wave in the dielectric, and that the conductors respond through surface charge and current. We now examine a fundamental question:
+
+> **What sustains the magnetic field as it spans both dielectric and conductor regions?**
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-b-field-sources.svg" style="width: 80%; max-width:600px; height: auto;">
-  <figcaption><i>Cross-section showing one continuous <b>B</b> field sustained by two sources: conduction current in the copper and displacement current in the dielectric.</i></figcaption>
+  <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 90%; max-width:800px; height: auto;">
+  <figcaption><i>Cross-section of the microstrip. <b>B</b>-field curls around the trace.</i></figcaption>
   </center>
 </figure>
 
