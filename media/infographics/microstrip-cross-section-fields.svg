@@ -22,15 +22,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.5387259"
-     inkscape:cx="341.51632"
-     inkscape:cy="266.77916"
-     inkscape:window-width="1916"
-     inkscape:window-height="1303"
-     inkscape:window-x="226"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g49" />
+     inkscape:zoom="2.176087"
+     inkscape:cx="320.29969"
+     inkscape:cy="176.6933"
+     inkscape:window-width="2160"
+     inkscape:window-height="1261"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g57" />
   <defs
      id="defs5">
     <marker
@@ -289,6 +289,162 @@
          fill="#c0392b"
          id="path1-3" />
     </marker>
+    <marker
+       id="bArrow-5-0"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-9" />
+    </marker>
+    <marker
+       id="bArrow-5-0-2"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-9-4" />
+    </marker>
+    <marker
+       id="bArrow-5-5"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-1" />
+    </marker>
+    <marker
+       id="bArrow-5-0-2-7"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-9-4-1" />
+    </marker>
+    <marker
+       id="bArrow-5-4"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-2" />
+    </marker>
+    <marker
+       id="bArrow-5-0-2-3"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-9-4-2" />
+    </marker>
+    <marker
+       id="bArrow-5-4-1"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-2-8" />
+    </marker>
+    <marker
+       id="bArrow-5-0-2-3-9"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-9-4-2-2" />
+    </marker>
+    <marker
+       id="bArrow-5-7"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-95" />
+    </marker>
+    <marker
+       id="bArrow-5-0-2-4"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-9-4-3" />
+    </marker>
+    <marker
+       id="bArrow-5-2"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-7" />
+    </marker>
+    <marker
+       id="bArrow-5-0-2-79"
+       viewBox="0 -5 10 10"
+       refX="9"
+       refY="0"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,-5 10,0 0,5 Z"
+         fill="#0066cc"
+         id="path1-2-7-9-4-31" />
+    </marker>
   </defs>
   <!-- ============================================================= -->
   <!-- Geometry: dielectric slab + return plane + signal trace       -->
@@ -327,266 +483,190 @@
      id="rect7"
      style="fill:#deb187;fill-opacity:1" />
   <!-- Current-direction markers on the trace (into page ⊗) -->
-  <g
-     font-size="14px"
-     fill="#333333"
-     id="g12"
-     transform="translate(-15.59732,-124.12867)"
-     inkscape:label="trace current"
-     style="stroke:#c03f3f;stroke-opacity:1;fill:none">
-    <g
-       id="g10"
-       inkscape:label="1"
-       style="stroke:#c03f3f;stroke-opacity:1;fill:none">
-      <circle
-         cx="330"
-         cy="211"
-         r="5"
-         fill="none"
-         stroke="#333333"
-         stroke-width="1"
-         id="circle7"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-      <line
-         x1="326.5"
-         y1="207.5"
-         x2="333.5"
-         y2="214.5"
-         stroke="#333333"
-         stroke-width="1"
-         id="line7"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-      <line
-         x1="333.5"
-         y1="207.5"
-         x2="326.5"
-         y2="214.5"
-         stroke="#333333"
-         stroke-width="1"
-         id="line8"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-    </g>
-    <g
-       id="g9"
-       inkscape:label="2"
-       style="stroke:#c03f3f;stroke-opacity:1;fill:none">
-      <circle
-         cx="360"
-         cy="211"
-         r="5"
-         fill="none"
-         stroke="#333333"
-         stroke-width="1"
-         id="circle8"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-      <line
-         x1="356.5"
-         y1="207.5"
-         x2="363.5"
-         y2="214.5"
-         stroke="#333333"
-         stroke-width="1"
-         id="line9"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-      <line
-         x1="363.5"
-         y1="207.5"
-         x2="356.5"
-         y2="214.5"
-         stroke="#333333"
-         stroke-width="1"
-         id="line10"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-    </g>
-    <g
-       id="g8"
-       inkscape:label="3"
-       style="stroke:#c03f3f;stroke-opacity:1;fill:none">
-      <circle
-         cx="390"
-         cy="211"
-         r="5"
-         fill="none"
-         stroke="#333333"
-         stroke-width="1"
-         id="circle10"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-      <line
-         x1="386.5"
-         y1="207.5"
-         x2="393.5"
-         y2="214.5"
-         stroke="#333333"
-         stroke-width="1"
-         id="line11"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-      <line
-         x1="393.5"
-         y1="207.5"
-         x2="386.5"
-         y2="214.5"
-         stroke="#333333"
-         stroke-width="1"
-         id="line12"
-         style="stroke:#c03f3f;stroke-opacity:1;fill:none" />
-    </g>
-  </g>
   <!-- Current-direction markers on the return plane (out of page ⊙) -->
   <g
-     id="g21"
-     transform="translate(-15.59732,-124.12867)"
-     inkscape:label="return current"
-     style="fill:none;stroke:#c03f3f;stroke-opacity:1">
+     id="g4"
+     inkscape:label="current">
     <g
-       id="g7"
-       inkscape:label="2"
-       transform="translate(40.293078)"
-       style="fill:none;stroke:#c03f3f;stroke-opacity:1">
-      <circle
-         cx="290"
-         cy="319"
-         r="5"
-         fill="none"
-         stroke="#333333"
-         stroke-width="1"
-         id="circle14"
-         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
-      <circle
-         cx="290"
-         cy="319"
-         fill="#333333"
-         id="circle15"
-         r="1.3"
-         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
+       font-size="14px"
+       fill="#333333"
+       id="g12"
+       transform="translate(-15.59732,-124.12867)"
+       inkscape:label="trace"
+       style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none">
+      <g
+         id="g10"
+         inkscape:label="1"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none">
+        <circle
+           cx="330"
+           cy="211"
+           r="5"
+           fill="none"
+           stroke="#333333"
+           stroke-width="1"
+           id="circle7"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+        <line
+           x1="326.5"
+           y1="207.5"
+           x2="333.5"
+           y2="214.5"
+           stroke="#333333"
+           stroke-width="1"
+           id="line7"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+        <line
+           x1="333.5"
+           y1="207.5"
+           x2="326.5"
+           y2="214.5"
+           stroke="#333333"
+           stroke-width="1"
+           id="line8"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+      </g>
+      <g
+         id="g9"
+         inkscape:label="2"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none">
+        <circle
+           cx="360"
+           cy="211"
+           r="5"
+           fill="none"
+           stroke="#333333"
+           stroke-width="1"
+           id="circle8"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+        <line
+           x1="356.5"
+           y1="207.5"
+           x2="363.5"
+           y2="214.5"
+           stroke="#333333"
+           stroke-width="1"
+           id="line9"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+        <line
+           x1="363.5"
+           y1="207.5"
+           x2="356.5"
+           y2="214.5"
+           stroke="#333333"
+           stroke-width="1"
+           id="line10"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+      </g>
+      <g
+         id="g8"
+         inkscape:label="3"
+         style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none">
+        <circle
+           cx="390"
+           cy="211"
+           r="5"
+           fill="none"
+           stroke="#333333"
+           stroke-width="1"
+           id="circle10"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+        <line
+           x1="386.5"
+           y1="207.5"
+           x2="393.5"
+           y2="214.5"
+           stroke="#333333"
+           stroke-width="1"
+           id="line11"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+        <line
+           x1="393.5"
+           y1="207.5"
+           x2="386.5"
+           y2="214.5"
+           stroke="#333333"
+           stroke-width="1"
+           id="line12"
+           style="stroke:#c03f3f;stroke-opacity:1;fill:none;stroke-width:2;stroke-dasharray:none" />
+      </g>
     </g>
     <g
-       id="g6"
-       inkscape:label="3"
-       transform="translate(5.5240509)"
-       style="fill:none;stroke:#c03f3f;stroke-opacity:1">
-      <circle
-         cx="360"
-         cy="319"
-         r="5"
-         fill="none"
-         stroke="#333333"
-         stroke-width="1"
-         id="circle16"
-         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
-      <circle
-         cx="360"
-         cy="319"
-         r="1.3"
-         fill="#333333"
-         id="circle17"
-         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
-    </g>
-    <g
-       id="g5"
-       inkscape:label="4"
-       transform="translate(-35.09397)"
-       style="fill:none;stroke:#c03f3f;stroke-opacity:1">
-      <circle
-         cx="430"
-         cy="319"
-         r="5"
-         fill="none"
-         stroke="#333333"
-         stroke-width="1"
-         id="circle18"
-         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
-      <circle
-         cx="430"
-         cy="319"
-         r="1.3"
-         fill="#333333"
-         id="circle19"
-         style="fill:none;stroke:#c03f3f;stroke-opacity:1" />
+       id="g21"
+       transform="translate(-15.59732,-124.12867)"
+       inkscape:label="return"
+       style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none">
+      <g
+         id="g7"
+         inkscape:label="2"
+         transform="translate(40.293078)"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none">
+        <circle
+           cx="290"
+           cy="319"
+           r="5"
+           fill="none"
+           stroke="#333333"
+           stroke-width="1"
+           id="circle14"
+           style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none" />
+        <circle
+           cx="290"
+           cy="319"
+           fill="#333333"
+           id="circle15"
+           r="1.3"
+           style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none" />
+      </g>
+      <g
+         id="g6"
+         inkscape:label="3"
+         transform="translate(5.5240509)"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none">
+        <circle
+           cx="360"
+           cy="319"
+           r="5"
+           fill="none"
+           stroke="#333333"
+           stroke-width="1"
+           id="circle16"
+           style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none" />
+        <circle
+           cx="360"
+           cy="319"
+           r="1.3"
+           fill="#333333"
+           id="circle17"
+           style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none" />
+      </g>
+      <g
+         id="g5"
+         inkscape:label="4"
+         transform="translate(-35.09397)"
+         style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none">
+        <circle
+           cx="430"
+           cy="319"
+           r="5"
+           fill="none"
+           stroke="#333333"
+           stroke-width="1"
+           id="circle18"
+           style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none" />
+        <circle
+           cx="430"
+           cy="319"
+           r="1.3"
+           fill="#333333"
+           id="circle19"
+           style="fill:none;stroke:#c03f3f;stroke-opacity:1;stroke-width:2;stroke-dasharray:none" />
+      </g>
     </g>
   </g>
   <!-- ============================================================= -->
   <!-- E field (red): trace down to return plane, with edge fringing -->
   <!-- ============================================================= -->
-  <g
-     stroke="#c0392b"
-     stroke-width="2"
-     fill="none"
-     id="g31"
-     transform="translate(-15.59732,-124.12867)">
-    <!-- Straight lines directly under the trace -->
-    <line
-       x1="315"
-       y1="222"
-       x2="315"
-       y2="308"
-       marker-end="url(#arrE)"
-       id="line21" />
-    <line
-       x1="335"
-       y1="222"
-       x2="335"
-       y2="308"
-       marker-end="url(#arrE)"
-       id="line22" />
-    <line
-       x1="355"
-       y1="222"
-       x2="355"
-       y2="308"
-       marker-end="url(#arrE)"
-       id="line23" />
-    <line
-       x1="375"
-       y1="222"
-       x2="375"
-       y2="308"
-       marker-end="url(#arrE)"
-       id="line24" />
-    <line
-       x1="395"
-       y1="222"
-       x2="395"
-       y2="308"
-       marker-end="url(#arrE)"
-       id="line25" />
-    <line
-       x1="412.14877"
-       y1="222"
-       x2="412.14877"
-       y2="308"
-       marker-end="url(#arrE)"
-       id="line26" />
-    <!-- Fringing field lines (curves from trace edges to return plane) -->
-    <g
-       id="g1"
-       inkscape:label="fringing E"
-       style="display:none">
-      <path
-         d="m 302,220 c -32,20 -62,60 -62,88"
-         marker-end="url(#arrE)"
-         id="path26" />
-      <path
-         d="m 298,213 c -58,7 -108,47 -108,95"
-         marker-end="url(#arrE)"
-         id="path27" />
-      <path
-         d="m 296,208 c -76,2 -156,42 -156,100"
-         marker-end="url(#arrE)"
-         id="path28" />
-      <path
-         d="m 418,220 c 32,20 62,60 62,88"
-         marker-end="url(#arrE)"
-         id="path29" />
-      <path
-         d="m 422,213 c 58,7 108,47 108,95"
-         marker-end="url(#arrE)"
-         id="path30" />
-      <path
-         d="m 424,208 c 76,2 156,42 156,100"
-         marker-end="url(#arrE)"
-         id="path31" />
-    </g>
-  </g>
   <!-- ============================================================= -->
   <!-- B field (blue): horizontal across the gap (into/out of page)  -->
   <!-- ============================================================= -->
@@ -655,16 +735,16 @@
      id="g57"
      transform="translate(30.544752,-100.73269)">
     <text
-       x="378"
-       y="275"
+       x="379.76627"
+       y="278.03436"
        fill="#c0392b"
        font-weight="bold"
        font-style="italic"
        font-size="17px"
        id="text56">E</text>
     <text
-       x="255.9442"
-       y="116.92472"
+       x="206.32176"
+       y="221.50168"
        fill="#2471a3"
        font-weight="bold"
        font-style="italic"
@@ -732,7 +812,7 @@
     <g
        transform="translate(28.89933,75.578852)"
        id="g64"
-       style="stroke-width:1.33333;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none">
+       style="stroke-width:2;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none">
       <circle
          r="5"
          fill="none"
@@ -741,7 +821,7 @@
          id="circle62"
          cx="0"
          cy="0"
-         style="stroke-width:1.33333;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
+         style="stroke-width:2;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="-3.5"
          y1="-3.5"
@@ -749,7 +829,7 @@
          y2="3.5"
          stroke="#333333"
          id="line63"
-         style="stroke-width:1.33333;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
+         style="stroke-width:2;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
       <line
          x1="3.5"
          y1="-3.5"
@@ -757,7 +837,7 @@
          y2="3.5"
          stroke="#333333"
          id="line64"
-         style="stroke-width:1.33333;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
+         style="stroke-width:2;stroke-dasharray:none;stroke:#c03f3f;stroke-opacity:1;fill:none" />
     </g>
     <text
        x="51.89933"
@@ -883,121 +963,337 @@
     </g>
   </g>
   <g
-     id="g2"
-     inkscape:label="inner B"
+     stroke="#c0392b"
+     stroke-width="2"
+     fill="none"
+     id="g31"
      transform="translate(-15.59732,-124.12867)"
-     style="stroke-width:2;stroke-dasharray:none">
+     inkscape:label="E field">
+    <!-- Straight lines directly under the trace -->
     <line
-       x1="303.68213"
-       y1="245.40083"
-       x2="354.44223"
-       y2="245.40083"
-       stroke="#0066cc"
-       stroke-width="0.898603"
-       marker-end="url(#bArrow)"
-       id="line9-6"
-       style="stroke-width:2;stroke-dasharray:none" />
+       x1="315"
+       y1="222"
+       x2="315"
+       y2="308"
+       marker-end="url(#arrE)"
+       id="line21" />
     <line
-       x1="373.77939"
-       y1="245.40083"
-       x2="414.87091"
-       y2="245.40083"
-       stroke="#0066cc"
-       stroke-width="0.898603"
-       marker-end="url(#bArrow)"
-       id="line12-8"
-       style="stroke-width:2;stroke-dasharray:none" />
+       x1="335"
+       y1="222"
+       x2="335"
+       y2="308"
+       marker-end="url(#arrE)"
+       id="line22" />
     <line
-       x1="381.03082"
-       y1="175.30357"
-       x2="327.85361"
-       y2="175.30357"
-       stroke="#0066cc"
-       stroke-width="0.898603"
-       marker-end="url(#bArrow)"
-       opacity="0.85"
-       id="line14"
-       style="stroke-width:2;stroke-dasharray:none" />
-    <path
-       d="m 303.68214,245.40085 c -36.25721,0 -36.25721,-70.09728 24.17148,-70.09728"
-       fill="none"
-       stroke="#0066cc"
-       stroke-width="0.653529"
-       stroke-dasharray="5, 3"
-       opacity="0.55"
-       id="path17"
-       style="stroke-width:2;stroke-dasharray:none;stroke-dashoffset:0" />
-    <path
-       d="m 414.87093,245.40085 c 36.25722,0 36.25722,-70.09728 -33.84006,-70.09728"
-       fill="none"
-       stroke="#0066cc"
-       stroke-width="0.653529"
-       stroke-dasharray="5, 3"
-       opacity="0.55"
-       id="path18"
-       style="stroke-width:2;stroke-dasharray:none;stroke-dashoffset:0" />
+       x1="355"
+       y1="222"
+       x2="355"
+       y2="308"
+       marker-end="url(#arrE)"
+       id="line23" />
+    <line
+       x1="375"
+       y1="222"
+       x2="375"
+       y2="308"
+       marker-end="url(#arrE)"
+       id="line24" />
+    <line
+       x1="395"
+       y1="222"
+       x2="395"
+       y2="308"
+       marker-end="url(#arrE)"
+       id="line25" />
+    <line
+       x1="412.14877"
+       y1="222"
+       x2="412.14877"
+       y2="308"
+       marker-end="url(#arrE)"
+       id="line26" />
+    <!-- Fringing field lines (curves from trace edges to return plane) -->
+    <g
+       id="g1"
+       inkscape:label="fringing E"
+       style="display:none">
+      <path
+         d="m 302,220 c -32,20 -62,60 -62,88"
+         marker-end="url(#arrE)"
+         id="path26" />
+      <path
+         d="m 298,213 c -58,7 -108,47 -108,95"
+         marker-end="url(#arrE)"
+         id="path27" />
+      <path
+         d="m 296,208 c -76,2 -156,42 -156,100"
+         marker-end="url(#arrE)"
+         id="path28" />
+      <path
+         d="m 418,220 c 32,20 62,60 62,88"
+         marker-end="url(#arrE)"
+         id="path29" />
+      <path
+         d="m 422,213 c 58,7 108,47 108,95"
+         marker-end="url(#arrE)"
+         id="path30" />
+      <path
+         d="m 424,208 c 76,2 156,42 156,100"
+         marker-end="url(#arrE)"
+         id="path31" />
+    </g>
   </g>
   <g
-     id="g2-7"
-     inkscape:label="inner B"
-     transform="matrix(1.7021286,0,0,1.7021286,-265.9987,-271.30149)"
-     style="stroke-width:1.17499935;stroke-dasharray:none">
-    <line
-       x1="303.68213"
-       y1="245.40083"
-       x2="354.44223"
-       y2="245.40083"
-       stroke="#0066cc"
-       stroke-width="0.898603"
-       marker-end="url(#bArrow-5)"
-       id="line9-6-9"
-       style="stroke-width:1.17499935;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
-    <line
-       x1="373.77939"
-       y1="245.40083"
-       x2="414.87091"
-       y2="245.40083"
-       stroke="#0066cc"
-       stroke-width="0.898603"
-       marker-end="url(#bArrow-5)"
-       id="line12-8-5"
-       style="stroke-width:1.17499935;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
-    <line
-       x1="381.03082"
-       y1="175.30357"
-       x2="327.85361"
-       y2="175.30357"
-       stroke="#0066cc"
-       stroke-width="0.898603"
-       marker-end="url(#bArrow-5)"
-       opacity="0.85"
-       id="line14-4"
-       style="stroke-width:1.17499935;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
-    <path
-       d="m 303.68214,245.40085 c -36.25721,0 -36.25721,-70.09728 24.17148,-70.09728"
-       fill="none"
-       stroke="#0066cc"
-       stroke-width="0.653529"
-       stroke-dasharray="5, 3"
-       opacity="0.55"
-       id="path17-3"
-       style="stroke-width:1.17499935;stroke-dasharray:none;stroke-dashoffset:0" />
-    <path
-       d="m 414.87093,245.40085 c 36.25722,0 36.25722,-70.09728 -33.84006,-70.09728"
-       fill="none"
-       stroke="#0066cc"
-       stroke-width="0.653529"
-       stroke-dasharray="5, 3"
-       opacity="0.55"
-       id="path18-1"
-       style="stroke-width:1.17499935;stroke-dasharray:none;stroke-dashoffset:0" />
+     id="g2"
+     inkscape:label="B field">
+    <g
+       id="g13"
+       inkscape:label="trace">
+      <g
+         id="g2-7"
+         inkscape:label="3"
+         transform="matrix(1.5919364,0,0,1.8591906,-220.06719,-293.04619)"
+         style="stroke-width:0.87189953;stroke-dasharray:none">
+        <line
+           x1="381.03082"
+           y1="175.30357"
+           x2="327.85361"
+           y2="175.30357"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5)"
+           opacity="0.85"
+           id="line14-4"
+           style="stroke-width:0.87189953;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
+        <path
+           d="m 328.11793,245.20995 c -38.16626,-1.14543 -38.73897,-69.90638 -0.26431,-69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3"
+           style="stroke-width:0.87189953;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <path
+           d="m 380.77836,175.4055 c 38.16626,1.14543 38.73897,69.90638 0.26431,69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-8"
+           style="stroke-width:0.87189953;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <line
+           x1="327.86548"
+           y1="245.31187"
+           x2="381.04269"
+           y2="245.31187"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-0-2)"
+           opacity="0.85"
+           id="line14-4-8"
+           style="stroke-width:0.87189953;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2)" />
+      </g>
+      <g
+         id="g2-7-8"
+         inkscape:label="2"
+         transform="matrix(1.4317855,0,0,1.3822833,-163.30195,-197.80384)"
+         style="stroke-width:1.066237;stroke-dasharray:none">
+        <line
+           x1="381.03082"
+           y1="175.30357"
+           x2="327.85361"
+           y2="175.30357"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-2)"
+           opacity="0.85"
+           id="line14-4-65"
+           style="stroke-width:1.066237;stroke-dasharray:none;marker-end:url(#bArrow-5-2)" />
+        <path
+           d="m 328.11793,245.20995 c -38.16626,-1.14543 -38.73897,-69.90638 -0.26431,-69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-0"
+           style="stroke-width:1.066237;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <path
+           d="m 380.77836,175.4055 c 38.16626,1.14543 38.73897,69.90638 0.26431,69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-8-2"
+           style="stroke-width:1.066237;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <line
+           x1="327.86548"
+           y1="245.31187"
+           x2="381.04269"
+           y2="245.31187"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-0-2-79)"
+           opacity="0.85"
+           id="line14-4-8-8"
+           style="stroke-width:1.066237;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2-79)" />
+      </g>
+      <g
+         id="g2-7-1"
+         inkscape:label="1"
+         transform="matrix(1.2673946,0,0,0.89049455,-105.0339,-100.12115)"
+         style="stroke-width:1.41195124;stroke-dasharray:none">
+        <line
+           x1="381.03082"
+           y1="175.30357"
+           x2="327.85361"
+           y2="175.30357"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-4)"
+           opacity="0.85"
+           id="line14-4-6"
+           style="stroke-width:1.41195124;stroke-dasharray:none;marker-end:url(#bArrow-5-4)" />
+        <path
+           d="m 328.11793,245.20995 c -38.16626,-1.14543 -38.73897,-69.90638 -0.26431,-69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-85"
+           style="stroke-width:1.41195124;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <path
+           d="m 380.77836,175.4055 c 38.16626,1.14543 38.73897,69.90638 0.26431,69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-8-7"
+           style="stroke-width:1.41195124;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <line
+           x1="327.86548"
+           y1="245.31187"
+           x2="381.04269"
+           y2="245.31187"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-0-2-3)"
+           opacity="0.85"
+           id="line14-4-8-6"
+           style="stroke-width:1.41195124;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2-3)" />
+      </g>
+    </g>
+    <g
+       id="g11"
+       inkscape:label="return"
+       style="display:none">
+      <g
+         id="g2-7-2"
+         inkscape:label="return outer B"
+         transform="matrix(-1.7082078,0,0,1.2991799,949.66285,-78.839256)"
+         style="stroke-width:1.175;stroke-dasharray:none">
+        <line
+           x1="381.03082"
+           y1="175.30357"
+           x2="327.85361"
+           y2="175.30357"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-7)"
+           opacity="0.85"
+           id="line14-4-3"
+           style="stroke-width:1.175;stroke-dasharray:none;marker-end:url(#bArrow-5-7)" />
+        <path
+           d="m 328.11793,245.20995 c -38.16626,-1.14543 -38.73897,-69.90638 -0.26431,-69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-3"
+           style="stroke-width:1.175;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <path
+           d="m 380.77836,175.4055 c 38.16626,1.14543 38.73897,69.90638 0.26431,69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-8-4"
+           style="stroke-width:1.175;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <line
+           x1="327.86548"
+           y1="245.31187"
+           x2="381.04269"
+           y2="245.31187"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-0-2-4)"
+           opacity="0.85"
+           id="line14-4-8-1"
+           style="stroke-width:1.175;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2-4)" />
+      </g>
+      <g
+         id="g2-7-1-1"
+         inkscape:label="return inner B"
+         transform="matrix(-1.2673946,0,0,0.89049455,793.41743,7.1104239)"
+         style="stroke-width:1.8826;stroke-dasharray:none">
+        <line
+           x1="381.03082"
+           y1="175.30357"
+           x2="327.85361"
+           y2="175.30357"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-4-1)"
+           opacity="0.85"
+           id="line14-4-6-3"
+           style="stroke-width:1.8826;stroke-dasharray:none;marker-end:url(#bArrow-5-4-1)" />
+        <path
+           d="m 328.11793,245.20995 c -38.16626,-1.14543 -38.73897,-69.90638 -0.26431,-69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-85-8"
+           style="stroke-width:1.8826;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <path
+           d="m 380.77836,175.4055 c 38.16626,1.14543 38.73897,69.90638 0.26431,69.90638"
+           fill="none"
+           stroke="#0066cc"
+           stroke-width="0.653529"
+           stroke-dasharray="5, 3"
+           opacity="0.55"
+           id="path17-3-8-7-7"
+           style="stroke-width:1.8826;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:nodetypes="cc" />
+        <line
+           x1="327.86548"
+           y1="245.31187"
+           x2="381.04269"
+           y2="245.31187"
+           stroke="#0066cc"
+           stroke-width="0.898603"
+           marker-end="url(#bArrow-5-0-2-3-9)"
+           opacity="0.85"
+           id="line14-4-8-6-4"
+           style="stroke-width:1.8826;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2-3-9)" />
+      </g>
+    </g>
   </g>
-  <text
-     x="215.01143"
-     y="224.24074"
-     font-size="14px"
-     fill="#666666"
-     font-style="italic"
-     id="text6"
-     style="font-size:14.6667px">B ≈ 0 (screened by the return plane)</text>
 </svg>

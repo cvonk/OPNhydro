@@ -22,15 +22,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="4"
-     inkscape:cx="362.375"
-     inkscape:cy="178.875"
-     inkscape:window-width="3840"
-     inkscape:window-height="2054"
-     inkscape:window-x="-11"
-     inkscape:window-y="-11"
+     inkscape:zoom="2"
+     inkscape:cx="309.75"
+     inkscape:cy="286.25"
+     inkscape:window-width="2160"
+     inkscape:window-height="1261"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g15">
+     inkscape:current-layer="g2">
     <inkscape:page
        x="0"
        y="0"
@@ -496,6 +496,50 @@
          x="318.58899"
          y="-20.347055"
          style="font-size:14.6667px;line-height:1">ahead of wavefront: no fields yet</tspan></text>
+    <g
+       id="g5"
+       inkscape:label="4"
+       transform="translate(-362.85664,-238.76224)"
+       style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1">
+      <circle
+         cx="430"
+         cy="319"
+         r="5"
+         fill="none"
+         stroke="#333333"
+         stroke-width="1"
+         id="circle18"
+         style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1" />
+      <circle
+         cx="430"
+         cy="319"
+         r="1.3"
+         fill="#333333"
+         id="circle19"
+         style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       id="g5-9"
+       inkscape:label="4"
+       transform="translate(-362.85664,-191.51224)"
+       style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1">
+      <circle
+         cx="430"
+         cy="319"
+         r="5"
+         fill="none"
+         stroke="#333333"
+         stroke-width="1"
+         id="circle18-4"
+         style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1" />
+      <circle
+         cx="430"
+         cy="319"
+         r="1.3"
+         fill="#333333"
+         id="circle19-8"
+         style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
   </g>
   <!-- =============== CURRENTS =============== -->
   <!-- Forward signal current on trace (+x̂) -->
@@ -824,23 +868,45 @@
   <!-- =============== AXES =============== -->
   <!-- =============== LEGEND =============== -->
   <g
-     transform="translate(86.783216,295.1049)"
+     transform="translate(-17.966784,293.8549)"
      id="g56">
     <!-- E field -->
     <!-- ∂E/∂t -->
     <g
        id="g2"
-       transform="translate(94.475522)">
+       transform="translate(68.475522,15)">
       <rect
-         x="228.94684"
-         y="-89.235023"
-         width="267.84064"
-         height="37.309219"
+         x="229.00053"
+         y="-89.181335"
+         width="426.98325"
+         height="37.201839"
          fill="#fafafa"
          stroke="#bbbbbb"
-         stroke-width="0.411761"
+         stroke-width="0.519142"
          id="rect49"
          ry="0" />
+      <g
+         id="g5-9-2"
+         inkscape:label="4"
+         transform="translate(77.74126,-389.6049)"
+         style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1">
+        <circle
+           cx="430"
+           cy="319"
+           r="5"
+           fill="none"
+           stroke="#333333"
+           stroke-width="1"
+           id="circle18-4-4"
+           style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1" />
+        <circle
+           cx="430"
+           cy="319"
+           r="1.3"
+           fill="#333333"
+           id="circle19-8-5"
+           style="fill:none;stroke:#6a69ce;stroke-width:2;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
       <line
          x1="237.34267"
          y1="-70.090904"
@@ -856,7 +922,18 @@
          font-size="11px"
          fill="#333333"
          id="text50"
-         style="font-size:14.6667px">E field</text>
+         style="font-size:14.6667px"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+   id="tspan6">E</tspan> field</text>
+      <text
+         x="521.09265"
+         y="-66.090904"
+         font-size="11px"
+         fill="#333333"
+         id="text50-1"
+         style="font-size:14.6667px"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+   id="tspan2">B</tspan> field (out of page)</text>
       <line
          x1="339.2587"
          y1="-69.111893"
@@ -873,7 +950,9 @@
          font-size="11px"
          fill="#333333"
          id="text51"
-         style="font-size:14.6667px">∂E/∂t (varying E)</text>
+         style="font-size:14.6667px">∂<tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica, Arial, sans-serif Bold'"
+   id="tspan8">E</tspan>/∂t (varying E)</text>
     </g>
     <!-- Fringing E indicator -->
     <!-- B conduction -->

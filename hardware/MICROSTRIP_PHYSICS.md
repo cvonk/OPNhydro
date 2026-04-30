@@ -49,10 +49,10 @@
 }
 .important-note {
   position: relative;
-  margin: 0 0 0.3rem;
   border-radius: 8px;
   overflow: hidden;
-  padding: 1rem 1rem 1rem 5rem;
+  padding: .8rem .2rem 0rem 5rem;
+  margin: 0 0 1.2rem 0;
   background: #f1f3a2;
   background: -webkit-gradient(
     linear,
@@ -66,6 +66,13 @@
     rgba(247, 247, 210, 1),
     rgba(240, 242, 155, 1)
   );
+}
+.important-note p {
+  margin: 0;
+  padding: 0;
+}
+.important-note .katex-display {
+  margin: 4px;
 }
 .important-note .MathJax_Preview {
   display: none;
@@ -95,13 +102,23 @@
 }
 </style>
 
-This document develops the electromagnetic theory behind PCB trace design and derives practical layout rules from it. It is a companion to the Board Design Guide, providing the physical reasoning that underpins the design decisions made there.
+Modern high-speed electronic systems cannot be fully understood using lumped circuit models alone. As signal transition times decrease and edge rates increase, the physical dimensions of PCB interconnects become comparable to the spatial extent of electromagnetic fields. Under these conditions, signal behavior is governed not only by circuit relationships, but by the propagation of electromagnetic waves.
 
-Chapter 1 builds the field theory picture from first principles — starting with Maxwell's equations applied to a microstrip, and working through wave propagation, conductor response, rail collapse, crosstalk, and EMI. Chapter 2 translates that physics into concrete layout rules, stack-up choices, and trace sizing for OPNhydro.
+In this regime, voltage and current are no longer sufficient as primary descriptions [^cantExplain]. They are derived quantities that emerge from more fundamental physical entities: the electric field $\mathbf E$ and the magnetic field $\mathbf B$.
 
-The treatment assumes familiarity with basic circuit theory (Ohm's law, Kirchhoff's laws) but does not require a background in electromagnetics. Where the mathematics goes deeper, expandable sections and Feynman-style narratives offer the same insight from a different angle.
+[^cantExplain]: It cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology. 
 
-Most textbook introductions to transmission lines start with the lumped-element model — an infinite ladder of series inductors and shunt capacitors. That model yields the right equations (the wave equation, $Z_0 = \sqrt{L/C}$, propagation delay), but it obscures the physics. It cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology. This document takes a different path: it starts from the fields themselves — Maxwell's equations applied to the cross-section of a microstrip — and derives the circuit quantities (impedance, capacitance, inductance) as consequences. The result is a mental model that transfers directly to layout decisions, where the fields, not the lumped elements, are what the designer actually controls.
+A PCB trace, together with its return path, forms a transmission structure that guides electromagnetic energy through space. The dominant portion of the energy resides in the fields in the dielectric. The conductors serve to define boundary conditions that shape and confine these fields.
+
+This perspective provides a unified framework for understanding a wide range of phenomena that are often treated separately in circuit theory, including:
+- signal propagation and transmission line behavior
+crosstalk between adjacent traces
+- power distribution network (PDN) transients and rail collapse
+- electromagnetic interference (EMI) and radiation
+
+Reasoning in fields is what makes signal integrity tractable: where energy is stored, how it flows, and when it escapes.
+
+Chapter 1 builds the field theory picture from first principles — starting with Maxwell's equations applied to a microstrip, and working through wave propagation, conductor response, rail collapse, crosstalk, and EMI. Chapter 2 translates that physics into concrete layout rules, stack-up choices and trace sizing.
 
 <br />
 
@@ -111,34 +128,21 @@ Most textbook introductions to transmission lines start with the lumped-element 
 
 ## 1. Field Theory
 
-**Circuit Theory**, the simplified low-frequency approximation taught in undergraduate courses, is based on field theory. It assumes that the PCB traces are much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws. Before the mid-1990s, a typical device might output signals with 10 ns rise times at 10 MHz — slow enough that even rough layout practices sufficed.
+> Since the TTL days, there has been a four orders of magnitude change in the switching speed of transistors.  -- *Dan Beeker*
 
-Where circuit theory talks about voltages and currents, field theory talks about the electric field $\mathbf E$ and the magnetic field $\mathbf B$. These are the same physics described at a deeper level: voltage is a measure of $\mathbf E$, and current arises because $\mathbf E$ pushes electrons. Together, $\mathbf E$ and $\mathbf B$ describe how energy is stored, how it moves from one place to another, and when it radiates.
+**Circuit Theory**, the simplified low-frequency approximation taught in undergraduate courses, is based on field theory. It assumes that the PCB traces are much smaller than the wavelength of the signal, so we can ignore wave propagation and use simple circuit laws — Ohm's Law, Kirchhoff's laws. Before the mid-1990s, a typical device might output signals with 10 ns rise times at 10 MHz — slow enough that even rough layout practices such as wire wrapping sufficed.
 
-Voltage and current are convenient abstractions, but they are not fundamental. Energy on a PCB does not ride on the wire — it propagates through the dielectric as an EM field, and the copper is only there to guide it. Reasoning in fields is what makes signal integrity tractable: where energy is stored, how it flows, and when it escapes.
+This **Field Theory** perspective provides a unified framework for understanding a wide range of phenomena that are often treated separately in circuit theory, including:
+- signal propagation and transmission line behavior
+- crosstalk between adjacent traces
+- power distribution network (PDN) transients and rail collapse
+- electromagnetic interference (EMI) and radiation
 
-> At a switching speed of 1 ns, it only takes a 10 cm PCB trace to become an efficient $\lambda/4$ antenna.  Since the TTL days, there has been a four orders of magnitude change in the switching speed of transistors.  -- Dan Beeker
+Each of these effects arises from the same underlying field interactions.
 
-As clock frequencies increase, rise times shorten — by convention, the rise time $t_r$ is taken as roughly 10% of the clock period:
-$$
-  t_r \approx \frac{1}{10\,f_{clk}}
-$$
+Traditional circuit models remain useful, but they obscure the physical mechanisms responsible for these behaviors. By contrast, a field-based description makes those mechanisms explicit and provides deeper insight into how geometry and material properties influence system performance.
 
-A 100 MHz clock demands 1 ns. At these short rise times, the wavelength of the signal's frequency content becomes comparable to (within ~10×) the physical dimensions of the PCB traces, and the circuit-theory assumptions fail. **Field Theory** is now required to account for radiation, retardation and wave propagation. 
-
-PCB design shifts from drawing paths for current to designing transmission lines that contain EM fields, manage parasitic inductance and capacitance, and control radiated emissions. Those physics classes about electromagnetic fields and transmission lines are no longer reserved for RF engineers — they become practical for anyone designing a fast PCB.
-
-A microstrip has **two regions**: the dielectric between the conductors, and the copper itself. §1.1 looks at the dielectric — that is where the wave lives and where the energy flows. §1.2 then turns to the copper, where the free electrons respond.
-<br />
-
-This chapter builds up the field theory picture from first principles:
-
-- **§1.1** — how a voltage step becomes an EM wave, and where its energy actually flows.
-- **§1.2** — what the copper does in response: sustained currents and surface-charge confinement.
-- **§1.3** — how the conduction current in the copper and the displacement current in the dielectric sustain one continuous magnetic field.
-- **§1.4** — what happens when the power distribution network cannot supply current fast enough (rail collapse).
-- **§1.5** — how the fields of one trace leak into another (crosstalk).
-- **§1.6** — what happens when the field escapes the board entirely (EMI).
+This chapter develops that field-based perspective starting from Maxwell’s equations and applies it to the analysis of PCB transmission structures.
 
 <br />
 
@@ -146,130 +150,136 @@ This chapter builds up the field theory picture from first principles:
 
 <br />
 
-### 1.1. From Voltage Step to EM Wave in the Dielectric
+### 1.1. From Voltage Step to Electromagnetic Wave in the Dielectric
 
 > "Energy and signals travel in the spaces not the traces"  -- Ralph Morrison
 
-Electromagnetic (EM) field theory, based on [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453), provides the fundamental description of electrical phenomena: fields, waves and radiation.
+When a voltage step is applied to a PCB trace, the resulting signal propagation is often described in terms of voltage and current. However, these quantities are not fundamental. They are derived from the underlying electromagnetic fields that evolve in space and time.
 
-In a PCB trace, these phenomena are not abstract -- they determine how signals propagate. 
+A more complete description begins with the electric field $\mathbf E$ and magnetic field $\mathbf B$. Signal transmission along a trace is not the motion of charge from source to load, but the propagation of a coupled electromagnetic disturbance guided by the geometry of the conductors and the dielectric.
+
+We examine how such a disturbance is created and how it propagates.
 <br />
 
-#### Two of Maxwell's Equations
 
-As we will see, Maxwell's equations tell the full story in four lines, but the key insight is in two of them — [Faraday's Law](https://coertvonk.com/physics/electromagnetism/magnetism/electromagnetic-induction-30157) and the [Ampère-Maxwell Law](https://coertvonk.com/physics/electromagnetism/magnetism/displacement-current-30269) — with Gauss's law providing the source-free divergence constraint.
-<div class="quote">
+#### 1.1.1. The Physical Setup
+
+Consider a **microstrip** structure consisting of:
+- a conducting trace,
+- a return plane,
+- a dielectric separating them.
+
+We define coordinates aligned with the geometry:
+- **$x$-axis:** perpendicular to the return plane (through the dielectric).
+- **$y$-axis:** traverse to the trace.
+- **$z$-axis:** along the direction of propagation.
+
+A voltage step is applied at one end of the trace. The question is: what **physical process carries this signal forward?**
+<br />
+
+
+#### 1.1.1. Governing Equations
+
+The evolution of the fields is governed by [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453). The key relations are:
+
+<div class="important-note"><span class="icon">💡</span>
 
 $$  
   \begin{align}  
+    \nabla \times \mathbf E &= -\frac{\partial \mathbf B}{\partial t}
+    \tag{\text{Faraday}}
+    \\
     \nabla \times \mathbf B &=
     \underbrace{\mu \ \mathbf J}_{\substack{\text{conduction} \\ \text{current}}}
     +\ 
     \underbrace{\mu\,\varepsilon\, \frac{\partial \mathbf E}{\partial t}}_{\substack{\text{displacement}\\ \text{current}}}
     \tag{\text{Ampère-Maxwell}} 
-    \\
-    \nabla \times \mathbf E &= -\frac{\partial \mathbf B}{\partial t}
-    \tag{\text{Faraday}}
   \end{align}
 $$ 
+
+where:
+- $\mathbf E$ is the electric field vectors at each point in space.
+- $\mathbf B$ is the magnetic field vectors at each point in space
+- $\mathbf J$ is the conduction current density
+- $\mu$ and $\varepsilon$ are constants for the material.
 </div>
 
-where $\mathbf E$ and $\mathbf B$ are the electric and magnetic field vectors at each point in space, $\mathbf J$ is the conduction current density, and $\mu$ and $\varepsilon$ are constants for the material. Note that the **displacement current** term in the Ampère-Maxwell law is not a real current, but a changing electric field that **acts as** a source of magnetic field, just like a real current.
+In the dielectric region between the conductors,:
+- there are no free charges ($\rho = 0$), and
+- there is no conduction current ($\mathbf J = \mathbf 0$).
+
+<div class="important-note"><span class="icon">💡</span>
+
+In the dielectric the equations reduce to:
+$$
+  \begin{align*}
+    \nabla \times \mathbf{B} &= \color{red}\cancel{\color{black}\mu \, \mathbf{J}} \color{black} + \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
+    \tag{\text{source-free Ampère-Maxwell}} \\
+    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
+    \tag{\text{Faraday}}
+  \end{align*}
+$$
+</div>
+
+
+These relations show that time-varying electric and magnetic fields generate each other.
 <br />
 
 
-#### The Physical Setup
+#### 1.1.3. Coupled Field Dynamics
 
-Consider a **microstrip**: a conductor trace above a ground return plane, separated by a dielectic — the basic microstrip geometry of every PCB. For simplicity, this section treats the dielectric as the only medium between the conductors.
-
-We align the Cartesian coordinates with the structure's geometry:
-- **$x$-axis:** is perpendicular to the return plane, representing the thickness of the dielectric.
-- **$y$-axis:** is parallel to the PCB surface and perpendicular to propagation, corresponding to the width of the microstrip.
-- **$z$-axis:** the direction along which the signal propagates, corresponding to the direction of the copper strip (trace).
-<br />
-
-
-#### Chain of Events
-
-In the source-free dielectric region ($\rho = 0, \mathbf J = \mathbf 0$), the fields evolve as shown below.
+When a **voltage step** is applied to the left end of the trace, the following chain of events unfolds:
 <figure>
   <center>
   <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 85%; max-width:800px; height: auto;">
-  <figcaption><i>Side view of microstrip <b>E</b> and <b>B</b> fields along the propagation direction.</i></figcaption>
+  <figcaption><i>Side-view of electric field.</i></figcaption>
   </center>
 </figure>
 
-When a **voltage step** is applied to the left end of the trace, the following chain of events unfolds:
+Immediately after the **voltage step** is applied, 
 
-**Step 1: Establish an Electric Field**
+1. The applied voltage immediately **establi shes an electric field** ($\mathbf E$) between the trace and the return plane. This field is initially confined near the source and increases from zero to a finite value → is therefore **time-varying**.
+<br />
 
-The applied voltage immediately creates an **electric field** between the trace and the return plane, directed in the $x$-direction.
+2. From the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$). This magnetic field is initially localized near the source, just like the electric field that created it, and rises from zero to a finite value → is therefore **time-varying**.
+<br />
 
-At the instant of switching:
-   - This field exists only near the source, 
-   - It rises from zero to a finite value → it is **changing in time**.
-
-**Step 2: A Changing Electric Field Creates a Magnetic Field**
-
-According to the Ampère-Maxwell Law:
-<div class="quote">
-
-A time-varying electric field ($\mathbf E$) **creates a magnetic field** that curls around the trace.
-</div>
-
-This magnetic field:
-- is initially localized near the source, just like the electric field that created it.
--  rises from zero to a finite value → it is **changing in time**.
-
-**Step 3: A Changing Magnetic Field Extends the Electric Field**
-
-According to Faraday's Law:
-<div class="quote">
-
-This time-varying magnetic field ($\mathbf B$) **creates an electric field**
-</div>
-
-This electric field is slightly **further** along the trace.
-
-**Step 4: Self-Sustaining Propagation**
+3. According to Faraday's Law, this time-varying magnetic field ($\mathbf B$) **creates an electric field** slightly **further** along the trace. Here it increases from zero to a finite value → is therefore **time-varying**.
 
 This coupling continues:
-- changing $\mathbf E$ → $\mathbf B$
-- changing $\mathbf B$ → $\mathbf E$ slighter father
+- a changing $\mathbf E$ produces $\mathbf B$
+- a changing $\mathbf B$ produces $\mathbf E$ slighter father
 
-Two key points:
-- The fields vary **in time** (they rise and fall at a point)
-- The fields vary **in space** (they differ from one location to the next)
+Two features are essential:
+- **Temporal variation:** the fields change in time at each point,
+- **Spatial variation:** the fields differ from one location to another.
 
-It is this coupling between temporal and spatial variation that forces the disturbance to move.  A field that changed only in time would remain localized; one that changed only in space would be static.  Together, they produce a **propagating wavefront**.
+Neither alone produces motion. Together, they enforce propagation. The disturbance advances as a **self-sustaining electromagnetic wavefront**.
 
-<div class="important-note"><span class="icon">💡</span>A voltage step on a trace launces an electromagnetic wave in the dielectric. The copper does not carry the energy; it guides the fields as we will see later.</div>
+
+<div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launces an electromagnetic wave in the dielectric.</div>
 <br />
 
-#### Intuitive Form 1
+
+#### 1.1.4. Intuitive Picture
+
+A useful way to visualize the process is as follows:
 
 <div class="quote feynman">
-Here is how Feynman might have explained it. Chalk in one hand, no notes.
 
-You’ve got a trace, a return plane and a slab of dielectric in between. That’s the whole system.
+  A voltage step creates an electric field near the source. Because this field changes in time, it generates a magnetic field. That magnetic field, also changing, generates a new electric field slightly farther along the trace. The two fields continuously regenerate each other, advancing step by step.
 
-You flip a switch. Instantly, there’s a voltage between the trace and the plane — and wherever there’s a voltage, there’s an electric field. So now you’ve got a field pointing from the trace down to the plane, right near the source.
-
-But here’s the key: the field didn’t just appear — it changed. And one of the deepest facts in physics is that a changing electric field produces a magnetic field. Not metaphorically—literally. It makes one.
-
-Now you’ve got a magnetic field, and it’s changing too. And Faraday tells us that a changing magnetic field produces an electric field. So the magnetic field you just created produces another electric field a little farther down the trace.
-
-And now that new electric field is changing, so it produces another magnetic field, and that produces another electric field…
-
-The two fields keep regenerating each other, step by step, moving forward. That’s the signal.
-
-The important thing is what’s actually moving. It’s not electrons streaming down the wire. The electrons mostly stay in place, just shifting slightly to accommodate the fields. What moves is the electromagnetic disturbance in the dielectric.
-
-The trace isn’t carrying the signal — it’s guiding it.
+  And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of energy. Isn't that something?
+  <figure>
+    <center>
+    <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 40%; max-width:400px; height: auto;">
+    </center>
+  </figure>
 </div>
 <br />
 
-#### Intuitive Form 2
+
+#### 1.1.4. Intuitive Picture (alt.)
 
 <div class="quote feynman">
 Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of plastic. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
@@ -281,8 +291,6 @@ Now, here is where it gets interesting. The electric field went from zero to som
 OK, so now we have a magnetic field. And it is also going from zero to something. It's changing in time too. And Faraday — long before Maxwell — figured out the other half of the story: **a changing magnetic field makes an electric field**. So the magnetic field we just made, by changing, makes another electric field — a little bit further along the trace than the one we started with.
 
 You see what's happening? The electric field made a magnetic field. The magnetic field made an electric field. The new electric field is further down the line. And now it is changing, so it makes another magnetic field, which makes another electric field, and off we go. The two fields are playing leapfrog[^LEAPFROG], and they're heading down the trace at an enormous speed.
-
-So when you flipped that switch — the light turned on because a little piece of light, essentially, rushed down the trace. Not the electrons. The field. The electrons are just sitting there wiggling; they're the audience, not the performers. The show is in the plastic, between the conductors, where the fields are doing their dance.
 
 And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of energy. Isn't that something?
 </div>
@@ -297,17 +305,7 @@ And that, really, is what every trace on every PCB is doing. It's not carrying e
 <br />
 
 
-#### Formal Form (optional)
-
-In the source-free dielectric, the two laws simplify to:
-$$
-  \begin{align*}
-    \nabla \times \mathbf{B} &= \color{red}\cancel{\color{black}\mu \, \mathbf{J}} \color{black} + \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
-    \tag{\text{source-free Ampère-Maxwell}} \\
-    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
-    \tag{\text{Faraday}}
-  \end{align*}
-$$
+#### 1.1.5. Wave Equation and Propagation Speed (optional)
 
 The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the source-free Ampère–Maxwell law and Gauss's law.
 
@@ -353,12 +351,12 @@ $$
 $$
 </div>
 
-Recognize the standard wave equation for any quantity propagating at speed $v$:
+In this we recognize the generic wave equation for any quantity propagating at speed $v$:
 <div class="quote">
 
 $$
     \nabla^2 f = \frac{1}{v^2} \ \frac{\partial^2 f}{\partial t^2}
-    \tag{\text{standard wave equation}}
+    \tag{\text{generic wave}}
 $$
 </div>
 
@@ -372,7 +370,7 @@ $$
   }
 $$
 
-where for vacuum, the permeability constant $\mu = \mu_0$, and the permittivity constant $\varepsilon = \varepsilon_0$. These $\mu_0$ and $\varepsilon_0$ follow from independent magnetic and electric experiments, respectively — neither involving light.
+In vacuum, the permeability constant $\mu = \mu_0$, and the permittivity constant $\varepsilon = \varepsilon_0$.
 $$
   \left\{
     \begin{align*}
@@ -382,43 +380,102 @@ $$
   \right.
 $$
 
-Substituting the constants:
+Substituting these constants:
 $$
     v = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 8.854 \times 10^{-12}}} \approx 299.8 \times 10^6 \text{ m/s}
 $$
 
 That is the speed of light $c$ — derived entirely from electric and magnetic constants.
 
-This was Maxwell's 1865 result. He started with two equations about how electric and magnetic fields change in space and time, combined them, and out fell the speed of light. That is one of the most remarkable results in all of physics.
-<br />
-
-#### Wave Propagation in Dielectric
-
-To find the propagation speed ($v'$) for the typical PCB dielectric glass epoxy (FR-4), we can keep $\mu = \mu_0$, but need to set $\varepsilon$ to $\varepsilon_r \varepsilon_0$, where $\varepsilon_r \approx 4.2$.
+**In a dielectric** such as FR-4, the permittivity is higher, and the propagation speed is reduced accordingly.
 $$
     v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 4.2 \times 8.854 \times 10^{-12}}} \approx 146.3 \times 10^6 \text{ m/s}
 $$
 
 The wave **propagation speed in FR-4** is therefore **~15 cm/ns**. To be precise, this is the bulk-FR-4 (or stripline) speed. On a microstrip, part of the field is in air above the trace, so the effective permittivity is a bit lower and the speed rises to ~17–18 cm/ns.
 
-At this point, we can name the simplification we have been using. Throughout this section, $\mathbf E$ points vertically and $\mathbf B$ curls horizontally — both entirely perpendicular to the propagation direction. A wave mode where neither field has a longitudinal component is called **TEM** (Transverse Electromagnetic). A stripline, where the trace is sandwiched between two return planes in a uniform dielectric, supports a pure TEM mode.
+Thus, the signal travels as an electromagnetic wave whose velocity is determined by material properties, not by the motion of electrons in the conductor.
 
-A microstrip does not: part of the field travels through the dielectric ($\varepsilon_r \approx 4.2$) and part through the air above ($\varepsilon_r = 1$). Strict TEM requires a homogeneous medium; the air-dielectric interface prevents this.
+#### 1.1.6. Interpretation
 
-Because the two media have different propagation speeds, the fields cannot be purely transverse — small longitudinal components appear to satisfy the boundary conditions. The mode is called **quasi-TEM**. At the frequencies relevant to PCB design (up to a few GHz), the longitudinal components are small enough that the quasi-TEM approximation holds well, and the transmission-line model — characteristic impedance, propagation delay, reflections — remains valid.
+The voltage step does not “move” down the trace as a flow of charge. Instead:
+- the electric and magnetic fields propagate through the dielectric,
+- the conductors define boundary conditions that guide these fields,
+- the signal is the advancing electromagnetic wavefront.
+
+The energy associated with the signal resides primarily in the fields, not in the conductor.
+
+#### 1.1.7. Mode Structure
+
+In this analysis, the electric field is predominantly perpendicular to the conductors, and the magnetic field lies transverse to the direction of propagation. In an ideal homogeneous medium, this corresponds to a **transverse electromagnetic (TEM)** mode.
+
+A microstrip is not homogeneous: part of the field exists in the dielectric and part in the air above. As a result, small longitudinal field components arise to satisfy boundary conditions. The mode is therefore quasi-TEM.
+<br />
+
+#### 1.1.8. Summary
+
+<div class="important-note"><span class="icon">💡</span>
+
+  A voltage step applied to a PCB trace launches an electromagnetic wave that propagates through the dielectric at speed:
+  $$
+    v = \frac{1}{\sqrt{\mu\,\varepsilon}}
+  $$
+</div>
+
+The conductors guide this wave by enforcing boundary conditions, while the energy and dynamics of the signal reside in the electric and magnetic fields
 <br />
 
 ---
 
 <br />
 
-### 1.2. Effect of the EM Wave on the Copper
+### 1.2. Conductor Response: Surface Charge and Current
 
-§1.1 looked at the dielectric — the wave, the energy, the propagation. Here we turn our attention to the trace and return plane. Inside the copper, there are **free electrons**, and they are not passive bystanders.
+Section §1.1 established that a signal propagates as an electromagnetic wave in the dielectric. The conductors do not carry the signal energy; instead, they respond to the fields of the wave. This section examines that response.
 
-#### Effects on the Free Electrons
+The presence of free electrons in the conductor allows it to enforce boundary conditions on the fields. These responses take two forms:
+- **surface charge**, which enforces electric-field boundary conditions
+- **surface current**, which sustains the magnetic field
 
-The observant reader might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one. (Throughout, $\hat x$ points from the trace to the return plane, $\hat z$ along the propagation direction.)
+Both arise directly from the incident electromagnetic wave.
+<br />
+
+#### 1.2.1. Intuitive Picture (optional)
+
+<div class="quote feynman">
+  When the wave reaches a section of copper, the electrons there don’t wait for instructions—they feel the electric field immediately.
+
+  The vertical field pushes charges apart, piling them up on the surfaces until the field inside the metal disappears. That’s how the wave gets confined between the conductors.
+
+  At the same time, the wave is moving, so the voltage changes from place to place. That creates a small field along the trace, and that field nudges the electrons sideways. That motion is the current.
+
+  The important point is that the electrons aren’t carrying the signal down the line. Each section just reacts locally as the wave arrives—building charge, supporting current, and then settling into a steady state as the wave passes.
+
+  The wave drives everything; the electrons respond.
+</div>
+
+#### 1.2.1. Intuitive Picture (alt)
+
+<div class="quote feynman">
+So put it all together:
+- The wave is in the plastic.
+- The *down-field* from the wave shoves electrons around on the copper surfaces. Those electrons build a wall that keeps the wave trapped in the plastic.
+- The *along-field* from the wave pushes other electrons along the trace, giving you the little current you measure with your ammeter.
+
+The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field, the same way a line of dominoes reacts to the first push. The dominoes aren't transporting the energy down the line — the *falling pattern* is. And on a PCB, the falling pattern is the field.
+
+You can also say this without ever mentioning an electron. The wave's $\mathbf E$ and $\mathbf B$ exist right up to the surface of the copper, but inside the copper they have to be zero — that's what good conductors do. So there's a jump at the surface, and nature does not allow that for free: wherever the perpendicular $\mathbf E$ has a jump, there must be **charge** to account for it; wherever the parallel $\mathbf B$ has a jump, there must be **current**. The metal has no choice. You can read off the surface charge and the surface current *purely from what the field is doing in the dielectric* — no forces, no electron motion, no kinetics. The electrons just sign the ledger.
+
+And that's really all there is to it. The hard part is believing it.
+</div>
+<br />
+
+
+#### 1.2.2. Electric Field Components Near the Conductor
+
+You might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one.
+
+> Throughout, $\hat x$ points from the trace to the return plane, $\hat z$ along the propagation direction.
 
 <figure>
   <center>
@@ -427,26 +484,30 @@ The observant reader might have noticed that the electric field between trace an
   </center>
 </figure>
 
-The **free electrons** in the copper feel three distinct effects:
+In a microstrip, the electric field has three relevant components:
 
-- **Vertical component $E_x$** (dominant) — confines the wave to the dielectric.
+TO DO: update?
 
-- **Horizontal component $E_z$ at the wavefront** (strong) — the steep cliff drives the current and establishes the surface charge.
+- **Traverse component $E_x$** (dominant)
+   - confines the wave to the dielectric.
 
-- **Horizontal component $E_z$ behind the wavefront** (small) — sustains the current against resistive drag.
+- **Longitudinal component $E_z$ at the wavefront**
+   - the steep cliff drives the current and establishes the surface charge.
 
-The following subsections describe each in detail, starting with $E_x$.
+- **Longitudinal component $E_z$ behind the wavefront** (smaller but essential)
+   - sustains the current against resistive drag.
+
+These components produce distinct effects on the electrons in the conductors.
 <br />
 
 
-#### Vertical Component $E_x$
+#### 1.2.3. Traverse component and Surface Charge Formation
 
-As the wavefront reaches a section of the conductor, $E_x$ there rises from zero to some value. The electrons in the conductor feel an upward force $F_x = -e \, E_x$ (the minus sign flips the direction of $E_x$). 
+As the wavefront reaches a section of the conductor,the transverse electric field $E_x$ rises from zero to a finite value.
 
-So, the electrons in both conductors are pushed *upward*:
-- *in the trace*, they move away from the dielectric-facing surface, leaving it positively charged;
-- *in the return plane*, they move toward the dielectric-facing surface, making it negatively charged.
-
+This field exerts a force on the **free electrons**.
+- *in the trace*, electrons move away from the dielectric-facing surface
+- *in the return plane*, the electrons move toward the dielectric-facing surface.
 <figure>
   <center>
   <img src="../media/infographics/microstrip-ex-confinement.svg" style="width:100%; max-width:900px; height: auto;">
@@ -454,29 +515,20 @@ So, the electrons in both conductors are pushed *upward*:
   </center>
 </figure>
 
-The local redistribution of electrons charges the distributed capacitance of the line. This charge builds its own upward-pointing electric field inside the metal, which grows until it exactly cancels the incoming $E_x$ — driving the net vertical field inside the copper to zero. Because the electric field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors. This **confines the wave to the dielectric**. 
+This redistribution of charge produces:
+- **positive surface charge** on the underside of the trace
+- **negative surface charge** on the top of the return plane
 
+At equilibrium:
+- the **net transverse field inside the conductor is driven to zero**, because the surface charges generate their own electric field that opposes the external field. 
+- The **external field is confined to the dielectric**, since the electric field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors.
 
-##### Intuitive Form
+This behavior enforces the boundary condition that electric fields do not penetrate ideal conductors.
+<br />
 
-<div class="quote feynman">
+##### Boundary Codition (Gauss's Law)
 
-I want to tell you what the down-field does, because I think this is the most beautiful thing happening on the whole PCB.
-
-The wave comes along with an electric field pointing from the trace down to the return plane. Now, what's an electric field? It's a rule that says how hard an electron gets pushed, and which way. The field points down, electrons are negative, so every electron in both conductors suddenly gets shoved *up*.
-
-In the trace, they move up, away from the bottom. Electrons leave, positive ions stay — so the bottom of the trace becomes a positively charged surface. In the return plane, they pile up on top — a negatively charged surface. You've made a capacitor, right there, on the fly.
-
-Now here's the good part. Those two sheets of charge have their own field, pointing the *other way*. Inside the copper, two fields are fighting: the wave pushing down, the surface charges pushing up. The electrons keep rearranging until those fields *exactly cancel* — and the field inside the metal goes to zero.
-
-And here's the whole point: because the field can't get into the copper, it has nowhere to go but to **stay between the two conductors**. The electrons have built a cage for the wave.
-</div>
-
-
-##### Formal Form (optional)
-
-Following the intuitive discussion above, here's the formal version.
-
+Following the more intuitive discussion above, here's the formal version.
 <figure>
   <center>
   <img src="../media/infographics/boundary-pillbox-gauss.svg" style="width: 70%; max-width:900px; height: auto;">
@@ -523,36 +575,63 @@ Following the intuitive discussion above, here's the formal version.
 
 <div class="important-note"><span class="icon">💡</span>
 
-Gauss's law applied to a thin pillbox straddling the conductor surface gives the surface charge density $\sigma_s$:
+The relationship between surface charge density and the electric field follows from Gauss’s law:
 $$
     \sigma_s = \varepsilon\, E_x, \quad \text{in }\left[ \rm{C/m^2} \right]
 $$
+
+where:
+- $\sigma_s$ is the surface charge density
+- $E_x$ is the electric field just outside the conductor.
 </div>
 
+This equation expresses the requirement that the surface charge adjusts to match the external field.  
 
-The positive surface charge $\sigma_s$ on the bottom of the trace is whatever the wave's $E_x$ in the dielectric *demands* at the boundary. The "electrons get pushed up" picture above is the dynamic mechanism; this equation is the algebraic statement of the same fact.
+The positive surface charge $\sigma_s$ on the conductor is whatever the wave's $E_x$ in the dielectric *demands* at the boundary.
 <br />
 
 
-#### Horizontal Component $E_z$ at the Wavefront
+##### Intuitive Form (old)
 
-**At the wavefront**, there is a strong variation in the $E_x$ field in the propagation direction (i.e., the field drops from full strength behind to zero ahead over a short distance). This is a field $E_z$ along the trace, exerting a force $F_z = -e\,E_z$ on the electrons — opposite to $E_z$, so backward along the trace, opposite to the wavefront's motion.
+<div class="quote feynman">
 
-The electrons in *both* conductors are pushed *sideways*:
-- *in the trace*, they are pushed backward, opposite to the wavefront's motion, towards the '$+$' terminal of the source;
-- *in the return plane*, they are attracted, in the same direction as the wavefront's motion, away from the '$-$' terminal of the source.
+I want to tell you what the down-field does, because I think this is the most beautiful thing happening on the whole PCB.
 
+The wave comes along with an electric field pointing from the trace down to the return plane. Now, what's an electric field? It's a rule that says how hard an electron gets pushed, and which way. The field points down, electrons are negative, so every electron in both conductors suddenly gets shoved *up*.
+
+In the trace, they move up, away from the bottom. Electrons leave, positive ions stay — so the bottom of the trace becomes a positively charged surface. In the return plane, they pile up on top — a negatively charged surface. You've made a capacitor, right there, on the fly.
+
+Now here's the good part. Those two sheets of charge have their own field, pointing the *other way*. Inside the copper, two fields are fighting: the wave pushing down, the surface charges pushing up. The electrons keep rearranging until those fields *exactly cancel* — and the field inside the metal goes to zero.
+
+And here's the whole point: because the field can't get into the copper, it has nowhere to go but to **stay between the two conductors**. The electrons have built a cage for the wave.
+</div>
+
+
+#### 1.2.4. Longitudinal Field and Current at the Wavefront
+
+**At the wavefront**, the electric field varies rapidly along the direction of propagation (i.e., the field drops from full strength behind to zero ahead over a short distance). This spatial variation produces a longitudinal field $E_z$:
+$$
+  E_z = - \frac{\partial V}{\partial z}
+$$
+
+This field exerts a force on the electrons along the conductor:
+- *in the trace*, electrons drift opposite to the direction of propagation
+- *in the return plane*, electrons drift in the direction of propagation
+
+The figure below illustrates this electron drift.
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-copper-current.svg" style="width: 80%; max-width:800px; height: auto;">
-  <figcaption><i>Horizontal current at the wavefront, driven by the longitudinal field $E_z$.</i></figcaption>
+  <img src="../media/infographics/microstrip-copper-current.svg" style="width: 80%; max-width:800px; height: auto;" alt="Current at the wavefront, driven by the longitudinal field E<sub>z</sub>.">
+  <figcaption><i>Current at the wavefront, driven by the longitudinal field E<sub>z</sub>.</i></figcaption>
   </center>
 </figure>
 
-This drift is the transmission-line **current**. And this same drift is what builds up the positive surface charge on the bottom of the trace: electrons drain out of the section horizontally toward the source, leaving the bottom of that section positively charged. The same current then accumulates as negative charge on the top of the return plane further back.
+This drift is the **conduction current**. 
+
+The current redistributes charge along the conductor to establish the surface charge distribution required by the boundary conditions.
 
 
-##### Intuitive Form
+##### Intuitive Form (old)
 
 <div class="quote feynman">
 
@@ -565,7 +644,7 @@ The free electrons in the copper feel that field and start to drift. Very slowly
 
 ##### Formal Form (optional)
 
-Following the intuitive discussion above, here's the formal version.
+Following the intuitive discussion above, here's a more formal version.
 
 The magnetic field $\mathbf{B}$, from the wave propagating through the dielectric, is screened by the return plane. To stay in the $xy$-plane, it has no other choice but to **loop around the trace**.
 <figure>
@@ -575,104 +654,112 @@ The magnetic field $\mathbf{B}$, from the wave propagating through the dielectri
   </center>
 </figure>
 
-> **A note on $\mathbf K$ and $\sigma_s$:** These are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a *perfect conductor*, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
-
-Zooming in on a small section of the trace/dielectric boundary, we see that the wave's $\mathbf B$ field is tangential to the trace surface. 
-<figure>
-  <center>
-  <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 100%; max-width:600px; height: auto;">
-  <figcaption><i>Close-up of Amperian loop straddling the trace/dielectric boundary.</i></figcaption>
-  </center>
-</figure>
-
 <details>
   <summary>Expand if you ❤️ to see the derivation</summary>
 
-Imagine a tiny rectangular "Amperian loop" straddling the bottom surface of the copper. Two sides — represented by the displacement vector $\mathbf L$ — run parallel to the surface (one inside the copper, one outside). Two sides of height $h$ run perpendicular to the surface.
+  Zooming in on a small section of the trace/dielectric boundary, we see that the wave's $\mathbf B$ field is tangential to the trace surface. 
+  <figure>
+    <center>
+    <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 100%; max-width:600px; height: auto;">
+    <figcaption><i>Crosss-section close-up of Amperian loop straddling the trace/dielectric boundary.</i></figcaption>
+    </center>
+  </figure>
 
-As we shrink the height $h \to 0$, the perpendicular sides contribute nothing. Inside the conductor, $\mathbf{B}_{in} = 0$. Therefore, the total path integral comes entirely from the outside leg:
-$$
-  \oint \mathbf{B} \cdot d \mathbf{l} = \mathbf{B}_{out} \cdot \mathbf{L}
-$$
+  Imagine a tiny rectangular "Amperian loop" straddling the bottom surface of the copper. Two sides — represented by the displacement vector $\mathbf L$ — run parallel to the surface (one inside the copper, one outside). Two sides of height $h$ run perpendicular to the surface.
 
-The current passing through this loop is the surface current density $\mathbf K$ (amps per meter) crossing the loop, integrated along $\mathbf L$:
-$$
-  I_{enc} = \mathbf K \cdot \mathbf L
-$$
+  As we shrink the height $h \to 0$, the perpendicular sides contribute nothing. Inside the conductor, $\mathbf{B}_{in} = 0$. Therefore, the total path integral comes entirely from the outside leg:
+  $$
+    \oint \mathbf{B} \cdot d \mathbf{l} = \mathbf{B}_{out} \cdot \mathbf{L}
+  $$
 
-(Both $\mathbf B_{out}$ and $\mathbf K$ end up parallel to $\mathbf L$ along the outside leg, so each dot product reduces to a magnitude product $B_{out}\,L$ and $K\,L$.)
+  The current passing through this loop is the surface current density $\mathbf K$ (amps per meter) crossing the loop, integrated along $\mathbf L$:
+  $$
+    I_{enc} = \mathbf K \cdot \mathbf L
+  $$
 
-Recall Ampère's Law in integral form:
-<div class="quote">
+  (Both $\mathbf B_{out}$ and $\mathbf K$ end up parallel to $\mathbf L$ along the outside leg, so each dot product reduces to a magnitude product $B_{out}\,L$ and $K\,L$.)
 
-$$
-  \oint \mathbf{B} \cdot d\mathbf{l} = \mu\, I_{enc}
-$$
-</div>
+  Recall Ampère's Law in integral form:
+  <div class="quote">
 
-Substitute $\oint \mathbf{B}\cdot d\mathbf{l}$ and $I_{enc}$ in Ampère's law:
-$$
-  \begin{align*}
-    \mathbf{B}_{out} \cdot \mathbf{L} &= \mu \left( \mathbf K \cdot \mathbf L \right) \\
-    \Rightarrow\quad B_{out}\,\bcancel{L} &= \mu\, K\,\bcancel{L} \\
-    \Rightarrow\quad \mathbf K &= \frac{1}{\mu}\,(\hat n \times \mathbf B_{\text{out}}) = \frac{1}{\mu}\, |\mathbf B_{\text{out}}|\, \hat z & \text{(right-hand rule)}
-  \end{align*}
-$$ where $\hat n$ is the outward normal from the conductor. 
+  $$
+    \oint \mathbf{B} \cdot d\mathbf{l} = \mu\, I_{enc}
+  $$
+  </div>
+
+  Substitute $\oint \mathbf{B}\cdot d\mathbf{l}$ and $I_{enc}$ in Ampère's law:
+  $$
+    \begin{align*}
+      \mathbf{B}_{out} \cdot \mathbf{L} &= \mu \left( \mathbf K \cdot \mathbf L \right) \\
+      \Rightarrow\quad B_{out}\,\bcancel{L} &= \mu\, K\,\bcancel{L} \\
+      \Rightarrow\quad \mathbf K &= \frac{1}{\mu}\,(\hat n \times \mathbf B_{\text{out}}) = \frac{1}{\mu}\, |\mathbf B_{\text{out}}|\, \hat z & \text{(right-hand rule)}
+    \end{align*}
+  $$ where $\hat n$ is the outward normal from the conductor. 
 </details>
 <br />
 
 <div class="important-note"><span class="icon">💡</span>
 
-Ampère's law applied to a thin loop straddling the conductor surface forces a surface current $\mathbf{K}$ in the propagation direction. This surface current isn't a separate phenomenon; it's whatever surface current the wave's tangential $\mathbf B$ demands:
+Ampère's Law forces a surface current [^sCurrent] in the propagation direction:
 $$
     \mathbf K = \frac{B_y}{\mu}\,\hat z, \quad \text{in }\left[ \rm{A/m} \right]
 $$
+
+where:
+- $\mathbf{K}$ is the surface current 
+- $B_y$ is the traverse component of the magnetic field at the boundary
+
+[^sCurrent]: $\mathbf K$ and $\sigma_s$ are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a *perfect conductor*, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
 </div>
+
+This shows that:
+- the magnetic field determines the required surface current
+- the current is not an independent cause, but a response to the field
 
 <details>
   <summary>Expand if you ❤️ to see the derivation</summary>
 
-Surface current $\mathbf{K}$ only exists in the $z$-direction ($\mathbf{K} = K_z \hat z$), so we can rewrite this as:
-$$
-  K_z = \frac{B_y}{\mu}
-$$
+  Surface current $\mathbf{K}$ only exists in the $z$-direction ($\mathbf{K} = K_z \hat z$), so we can rewrite this as:
+  $$
+    K_z = \frac{B_y}{\mu}
+  $$
 
-Recall the **Continuity Equation** (that follows from Ampère–Maxwell Law)
-<div class="quote">
+  Recall the **Continuity Equation** (that follows from Ampère–Maxwell Law)
+  <div class="quote">
 
-$$
-  \nabla \cdot \mathbf J + \frac{\partial \rho}{\partial t} = 0
-  \tag{Continuity Equation}
-$$
-</div>
+  $$
+    \nabla \cdot \mathbf J + \frac{\partial \rho}{\partial t} = 0
+    \tag{Continuity}
+  $$
+  </div>
 
-Expressed on a 2D surface, this becomes the surface charge conservation on the trace surface (the surface divergence operator $\nabla_s\cdot$ takes derivatives only in directions tangent to the surface — for our trace surface with normal $\hat x$, that's $\hat y$ and $\hat z$):
-$$
-  \begin{align*}
-    \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} &= 0 \\
-    \Rightarrow\quad
-    \frac{\partial K_y}{\partial y} + \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}&= 0
-  \end{align*}
-$$
+  Expressed on a 2D surface, this becomes the surface charge conservation on the trace surface (the surface divergence operator $\nabla_s\cdot$ takes derivatives only in directions tangent to the surface — for our trace surface with normal $\hat x$, that's $\hat y$ and $\hat z$):
+  $$
+    \begin{align*}
+      \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} &= 0 \\
+      \Rightarrow\quad
+      \frac{\partial K_y}{\partial y} + \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}&= 0
+    \end{align*}
+  $$
 
-As we saw, $\mathbf{K}$ exists only in the $+z$-direction:
-$$
-    \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}= 0 
-$$
+  As we saw, $\mathbf{K}$ exists only in the $+z$-direction:
+  $$
+      \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}= 0 
+  $$
 
-At the wavefront, $\sigma_s$ is ramping from zero to $\varepsilon E_x$ as the wave passes, so $\partial K_z/\partial z \neq 0$ — the current converges into the section to deposit the new charge.
+  At the wavefront, $\sigma_s$ is ramping from zero to $\varepsilon E_x$ as the wave passes, so $\partial K_z/\partial z \neq 0$ — the current converges into the section to deposit the new charge.
 
-Because the wave moves at speed $v$, the field follows the form $E_x(z-vt)$. This **wavefront constraint** links a *change in time* to a *change in space*:
-$$
-  \frac{\partial E_x}{\partial t} = -v\, \frac{\partial E_x}{\partial z}
-$$
+  Because the wave moves at speed $v$, the field follows the form $E_x(z-vt)$. This **wavefront constraint** links a *change in time* to a *change in space*:
+  $$
+    \frac{\partial E_x}{\partial t} = -v\, \frac{\partial E_x}{\partial z}
+  $$
 
-So $\partial/\partial t = -v\,\partial/\partial z$ for any field quantity. Apply that to surface charge conservation:
-$$
-    \frac{\partial K_z}{\partial z} = v\,\frac{\partial \sigma_s}{\partial z}
-$$
+  So $\partial/\partial t = -v\,\partial/\partial z$ for any field quantity. Apply that to surface charge conservation:
+  $$
+      \frac{\partial K_z}{\partial z} = v\,\frac{\partial \sigma_s}{\partial z}
+  $$
 
-Integrate along $z$ on both sides. Both $K_z$ and $\sigma_s$ vanish ahead of the wavefront, so the integration constant is zero.
+  Integrate along $z$ on both sides. Both $K_z$ and $\sigma_s$ vanish ahead of the wavefront, so the integration constant is zero.
 </details>
 <br />
 
@@ -682,32 +769,71 @@ The Continuity Equation and the Wavefront Constraint govern the surface current:
 $$
   K_z = v\,\sigma_s
 $$
+
+where:
+- $K_z$ is (the traverse component) of the surface current
+- $v$ is the propagation speed
+- $\sigma_s$ is the surface charge density
 </div>
 
-This is not as a *consequence* of electron motion, but as the *only* consistent answer when a charge pattern advances rigidly at speed $v$. The wavefront is the kinematic boundary between the field-off and field-on regions, and the surface charge and current are forced to advance at speed $v$ to keep up with it.
+The wavefront is the kinematic boundary between the field-off and field-on regions, and the surface charge and current are forced to advance at speed $v$ to keep up with it.
 <br />
 
 
-#### Recap: The At-Wavefront Cycle
+#### 1.2.5. Coupled Charge–Current Dynamics
+
+The surface charge and current are not independent quantities. They are linked by charge conservation.
+
+As the wavefront advances:
+- surface charge builds up on newly reached sections
+- current flows to supply this charge
+
+The continuity equation governs this relationship:
+$$
+  \nabla\cdot J + \frac{\partial \rho}{\partial t} = 0
+$$
+
+In surface form, this describes how current converges to create the required charge distribution.
+
+Thus:
+- current establishes charge
+- charge shapes the electric field
+- the field drives further current
+
+This closed interaction maintains the propagating wave.
+<br />
+
+
+#### 1.2.6. Recap: The At-Wavefront Cycle (TO DO: is this needed?)
 
 Tracking the signal trace, one wavefront step looks like this:
 
 1. $E_x$ appears → tries to push electrons up.
-2. $E_z$ appears simultaneously → pushes electrons backward along the trace (force $-e\,E_z$, opposite to $E_z$).
+2. $E_z$ appears simultaneously → pushes electrons backward along the trace.
 3. Electrons drift backward along the trace; the section at the wavefront loses electrons → bottom of the trace becomes positive.
 4. That positive surface charge generates its own field that cancels $E_x$ inside the metal.
 5. The wavefront advances one step further; the process repeats in the next section.
 
-Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net drift. The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
+Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net drift.
+
+The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
 <br />
 
-#### Horizontal Component $E_z$ Behind the Wavefront
 
-So far we have described the steep $E_z$ cliff at the wavefront itself. The conductor is also resistive, which produces a smaller $E_z$ behind the wavefront.
+#### 1.2.6. Longitudinal Field and Current behind the Wavefront
+
+Once the wavefront has passed:
+- the transverse field $E_x$ becomes steady
+the longitudinal field $E_z$ becomes small but nonzero
+
+This residual $E_z$ sustains the conduction current against resistive losses in the conductor.
+
 
 The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a small residual $E_z$ that re-accelerates the electrons between scattering events. This residual field behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no field drop, and no loss.
 
-**Why current still flows through already-charged sections.** The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small residual $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
+**Current still flows through already-charged sections.** 
+
+The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small residual $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
 
 ##### Intuitive Form
 
@@ -718,9 +844,9 @@ The electrons don't drift for free. They bang into copper atoms as they go — t
 And what about the sections the wavefront has already passed? Their surface charges are set — the capacitor is charged. But current still flows through them, because the wavefront is still advancing ahead, still demanding current to charge the *next* section. It's like a pipe that's already full of water — water still flows through it to supply whatever is at the end. The moment the wavefront reaches a matched load, the current doesn't vanish — it just switches from charging new sections to supplying the load.
 </div>
 
-##### Formal Form (optional)
+##### Boundary Condition (optional)
 
-Following the intuitive discussion above, here's the boundary-condition version.
+Following the intuitive discussion above, here's the more formal version.
 
 **Behind the wavefront**, $\sigma_s$ and $\mathbf K$ are steady — charge conservation reduces to $\nabla_s \cdot \mathbf K = 0$, which says the current flows uniformly along $z$.
 
@@ -740,20 +866,13 @@ For a perfect conductor ($\delta \to 0$), all the current crowds onto the surfac
 <br />
 
 
-#### Putting It Together
+#### 1.2.7. Summary
 
-<div class="quote feynman">
-So put it all together:
-- The wave is in the plastic.
-- The *down-field* from the wave shoves electrons around on the copper surfaces. Those electrons build a wall that keeps the wave trapped in the plastic.
-- The *along-field* from the wave pushes other electrons along the trace, giving you the little current you measure with your ammeter.
+The conductors respond to the electromagnetic wave through:
+- **surface charge formation**, which enforces electric-field boundary conditions
+- **surface currents**, which sustain the magnetic field
 
-The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field, the same way a line of dominoes reacts to the first push. The dominoes aren't transporting the energy down the line — the *falling pattern* is. And on a PCB, the falling pattern is the field.
-
-You can also say this without ever mentioning an electron. The wave's $\mathbf E$ and $\mathbf B$ exist right up to the surface of the copper, but inside the copper they have to be zero — that's what good conductors do. So there's a jump at the surface, and nature does not allow that for free: wherever the perpendicular $\mathbf E$ has a jump, there must be **charge** to account for it; wherever the parallel $\mathbf B$ has a jump, there must be **current**. The metal has no choice. You can read off the surface charge and the surface current *purely from what the field is doing in the dielectric* — no forces, no electron motion, no kinetics. The electrons just sign the ledger.
-
-And that's really all there is to it. The hard part is believing it.
-</div>
+These responses are driven entirely by the fields of the propagating wave and are governed by Maxwell’s equations and charge conservation.
 <br />
 
 
@@ -860,8 +979,6 @@ Thus, current and field are mutually dependent aspects of the same physical syst
 
 #### 1.3.3. Summary
 
-1.3.7 Summary
-
 The magnetic field in a PCB transmission structure arises from two sources:
 - conduction current in the conductors
 - displacement current in the dielectric
@@ -910,18 +1027,29 @@ When a digital device switches, internal transistors change state and require a 
 - vias and interconnects
 - decoupling capacitors
 
-The current cannot increase instantaneously. The magnetic field associated with current flow stores energy, and any change in that field requires time.
+This is captured by the familiar inductive relation:
 $$
   \Delta V = L_{PDN} \cdot \frac{dI}{dt}
 $$
-
 where $L_{PDN}$ is the effective inductance of the curent path.
 
-This is the same Faraday's-law physics from §1.1, applied to the power loop: a changing current through an inductive path induces a back-EMF that opposes the change. The chip experiences that as a voltage drop. Refer to Inductive Coupling in §1.5.2 for the derivation of the formula.
+This voltage drop can be understood directly in terms of energy. The magnetic field associated with the current stores energy
+$$
+  E = \tfrac{1}{2}L_{PDN}\,I^2
+$$
+
+As the current increases, the magnetic field must expand and its stored energy must grow. The required power is
+$$
+  P = \frac{dE}{dt} = L_{PDN}\,I\,\frac{dI}{dt}
+$$
+
+This energy cannot appear instantaneously; it must be delivered through the PDN. The voltage drop $\Delta V$ is the electrical manifestation of the work required to build up the magnetic field. In this sense, rail collapse is not simply a limitation of “current delivery,” but a consequence of the finite rate at which energy can be supplied to reconfigure the electromagnetic field.
+
+Equivalently, this is Faraday’s law applied to the power loop: a changing current induces a back-EMF that opposes the change. The chip experiences that opposition as a temporary reduction in supply voltage.
 
 If the voltage drop is large enough — what designers call **rail collapse** — the chip misinterprets logic levels or produces timing errors.
 
-The voltage drop during rail collapse represents the energy required to reconfigure the magnetic field in the available time. Thus, rail collapse can be understood as a **delay** in **field establishment** rather than a simple resistive loss.
+Since $L_{PDN}$ is set by the loop geometry, minimizing loop area reduces both the required magnetic energy and the voltage drop needed to establish it.
 <br />
 
 
@@ -1049,7 +1177,7 @@ $$
 $$
 
 **Characteristics:**
-- to the voltage transition rate $dV/dt$
+- proportional to the voltage transition rate $dV/dt$
 - depends on the strength and spacial extent of the electric field
 - increases with closer spacing, longre parallel runs and weaker field confinement
 
