@@ -299,7 +299,7 @@ And that, really, is what every trace on every PCB is doing. It's not carrying e
 
 <figure>
   <center>
-  <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 40%; max-width:400px; height: auto;">
+  <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 60%; max-width:400px; height: auto;">
   </center>
 </figure>
 <br />
@@ -473,9 +473,9 @@ And that's really all there is to it. The hard part is believing it.
 
 #### 1.2.2. Electric Field Components Near the Conductor
 
-You might have noticed that the electric field between trace and return plane is not perfectly vertical — it tilts slightly, carrying a small horizontal component alongside the dominant vertical one.
+In a microstrip, the electric field in the dielectric is primarily transverse (normal to the conductor surfaces), but it also contains a small longitudinal component along the direction of propagation.
 
-> Throughout, $\hat x$ points from the trace to the return plane, $\hat z$ along the propagation direction.
+> Throughout, $\hat x$ points from the trace to the return plane, $\hat z$ points in the propagation direction.
 
 <figure>
   <center>
@@ -484,24 +484,22 @@ You might have noticed that the electric field between trace and return plane is
   </center>
 </figure>
 
-In a microstrip, the electric field has three relevant components:
+We distinguish:
 
-TO DO: update?
+- **Traverse component $E_x$**
+   - dominant
+   - directed between trace and return plane
+   - confines the wave to the dielectric
 
-- **Traverse component $E_x$** (dominant)
-   - confines the wave to the dielectric.
+- **Longitudinal component $E_z$**
+   - localized near the wavefront
+   - persists at smaller magnitude behind the wave
 
-- **Longitudinal component $E_z$ at the wavefront**
-   - the steep cliff drives the current and establishes the surface charge.
-
-- **Longitudinal component $E_z$ behind the wavefront** (smaller but essential)
-   - sustains the current against resistive drag.
-
-These components produce distinct effects on the electrons in the conductors.
+These components produce distinct physical effects in the conductor.
 <br />
 
 
-#### 1.2.3. Traverse component and Surface Charge Formation
+#### 1.2.3. $E_x$ → Surface Charge Formation
 
 As the wavefront reaches a section of the conductor,the transverse electric field $E_x$ rises from zero to a finite value.
 
@@ -515,31 +513,30 @@ This field exerts a force on the **free electrons**.
   </center>
 </figure>
 
-This redistribution of charge produces:
+This redistribution produces:
 - **positive surface charge** on the underside of the trace
 - **negative surface charge** on the top of the return plane
 
-At equilibrium:
-- the **net transverse field inside the conductor is driven to zero**, because the surface charges generate their own electric field that opposes the external field. 
-- The **external field is confined to the dielectric**, since the electric field cannot extend into the copper, it is forced to remain in the dielectric between the two conductors.
+The system rapidly reaches a local equilibrium in which:
+- the **net field inside the conductor is driven to zero**, because the surface charges generate their own electric field that opposes the external field. 
+- The **external field is confined to the dielectric**, since the electric field cannot extend into the conductor.
 
-This behavior enforces the boundary condition that electric fields do not penetrate ideal conductors.
 <br />
 
-##### Boundary Codition (Gauss's Law)
+##### Boundary Codition (Gauss's Law) (optional)
 
 Following the more intuitive discussion above, here's the formal version.
-<figure>
-  <center>
-  <img src="../media/infographics/boundary-pillbox-gauss.svg" style="width: 70%; max-width:900px; height: auto;">
-  <figcaption><i>Side-view close-up of pillbox straddling the trace/dielectric boundary.</i></figcaption>
-  </center>
-</figure>
 
 <details>
   <summary>Expand if you ❤️ to see the derivation</summary>
 
   Imagine a conductor with a surface charge density $\sigma_s$ (charge per unit area) and normal vector $\hat n$ that points perpendicular to the conductor surface. To find the electric field just outside the surface, we place a very thin, small, cylindrical Gaussian "pillbox" so that it straddles the conductor surface.
+  <figure>
+    <center>
+    <img src="../media/infographics/boundary-pillbox-gauss.svg" style="width: 70%; max-width:900px; height: auto;">
+    <figcaption><i>Side-view close-up of pillbox straddling the trace/dielectric boundary.</i></figcaption>
+    </center>
+  </figure>
 
   Gauss's law in integral form states that the net electric flux through any closed surface ($S$) is directly proportional to the total electric charge ($Q_{enc}$) enclosed within that surface.
 
@@ -585,9 +582,9 @@ where:
 - $E_x$ is the electric field just outside the conductor.
 </div>
 
-This equation expresses the requirement that the surface charge adjusts to match the external field.  
+This behavior follows directly from Gauss’s law: the discontinuity in the normal electric field at the boundary is equal to the surface charge density.
 
-The positive surface charge $\sigma_s$ on the conductor is whatever the wave's $E_x$ in the dielectric *demands* at the boundary.
+Thus, the surface charge distribution is not arbitrary. It is precisely the charge required to enforce the boundary condition that the electric field cannot exist inside a good conductor.
 <br />
 
 
@@ -605,46 +602,19 @@ Now here's the good part. Those two sheets of charge have their own field, point
 
 And here's the whole point: because the field can't get into the copper, it has nowhere to go but to **stay between the two conductors**. The electrons have built a cage for the wave.
 </div>
+<br />
 
 
-#### 1.2.4. Longitudinal Field and Current at the Wavefront
+#### 1.2.4. Surface Current
 
-**At the wavefront**, the electric field varies rapidly along the direction of propagation (i.e., the field drops from full strength behind to zero ahead over a short distance). This spatial variation produces a longitudinal field $E_z$:
-$$
-  E_z = - \frac{\partial V}{\partial z}
-$$
-
-This field exerts a force on the electrons along the conductor:
-- *in the trace*, electrons drift opposite to the direction of propagation
-- *in the return plane*, electrons drift in the direction of propagation
-
-The figure below illustrates this electron drift.
-<figure>
-  <center>
-  <img src="../media/infographics/microstrip-copper-current.svg" style="width: 80%; max-width:800px; height: auto;" alt="Current at the wavefront, driven by the longitudinal field E<sub>z</sub>.">
-  <figcaption><i>Current at the wavefront, driven by the longitudinal field E<sub>z</sub>.</i></figcaption>
-  </center>
-</figure>
-
-This drift is the **conduction current**. 
-
-The current redistributes charge along the conductor to establish the surface charge distribution required by the boundary conditions.
+We present two views of the same system
+- Given a magnetic field at the surface, what current must exist? ($\mathbf B \to \mathbf K$)
+<br />
+- How does current get established as the wave propagates? ($\mathbf E \to \mathbf J$)
+<br />
 
 
-##### Intuitive Form (old)
-
-<div class="quote feynman">
-
-Now, what about the along-field? Where does that come from?
-
-It comes from the wave *going somewhere*. The voltage on the trace right here is at signal level. But a millimeter ahead, the wave hasn't arrived yet — the voltage is still zero. So you've got a voltage that changes from one place to another. And wherever the voltage changes from place to place, there's an electric field pointing from high to low. That's the along-field. It's a spatial gradient, $E_z = -\partial V / \partial z$. Right at the wavefront, where the voltage drops from full to zero in a very short distance, it's steep.
-
-The free electrons in the copper feel that field and start to drift. Very slowly, mind you — but they all drift together, and that is what we call a **current**. The current didn't cause anything. The field caused the current. The field shows up first, the electrons react. 
-</div>
-
-##### Formal Form (optional)
-
-Following the intuitive discussion above, here's a more formal version.
+##### The Magnetic Field drives the need for Surface Current
 
 The magnetic field $\mathbf{B}$, from the wave propagating through the dielectric, is screened by the return plane. To stay in the $xy$-plane, it has no other choice but to **loop around the trace**.
 <figure>
@@ -702,22 +672,89 @@ The magnetic field $\mathbf{B}$, from the wave propagating through the dielectri
 
 Ampère's Law forces a surface current [^sCurrent] in the propagation direction:
 $$
-    \mathbf K = \frac{B_y}{\mu}\,\hat z, \quad \text{in }\left[ \rm{A/m} \right]
+    \mathbf K = \frac{B_y}{\mu}\,\hat z
 $$
 
 where:
-- $\mathbf{K}$ is the surface current 
+- $\mathbf{K}$ is the surface current in A/m
 - $B_y$ is the traverse component of the magnetic field at the boundary
 
 [^sCurrent]: $\mathbf K$ and $\sigma_s$ are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a *perfect conductor*, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
 </div>
 
 This shows that:
-- the magnetic field determines the required surface current
-- the current is not an independent cause, but a response to the field
+- the **magnetic field determines the surface current**
+- the current is not an independent driver, but a response to the field
+
+In real conductors, this current is distributed over a thin layer of thickness equal to the skin depth, where the fields penetrate slightly into the material. The field dies off over the **skin depth** $\delta$ (≈ 2 μm in copper at 1 GHz; see Appendix A.4 for the derivation). That thin layer is where the current actually flows and the loss happens.
+
+Surface current density ($\mathbf K$) isn't really on a 2D sheet — it's the 3D current density ($\mathbf J$) packed into the skin-depth layer, and integrating $\mathbf J$ across that layer's depth recovers $\mathbf K$.
+$$
+  \mathbf K = \int_0^\infty \mathbf J(z'), dz'
+$$
+
+For a perfect conductor ($\delta \to 0$), all the current crowds onto the surface and $\mathbf J$ becomes a delta function — exactly $\mathbf K , \delta(\text{surface})$. For a real conductor, $\mathbf J$ is finite but concentrated in a thin layer of thickness ≈ $\delta$ (the skin depth), and the surface-current approximation $\mathbf K \approx \mathbf J \cdot \delta$ holds to corrections of order $\delta/d$.
+
+<br />
+
+
+##### The Longitudinal Electric Field drives the Surface Current
+
+While the previous section relates surface current to the magnetic field through boundary conditions, we now examine how that current is dynamically established as the wavefront propagates.
+
+At the wavefront, the voltage varies rapidly with position (i.e., from full strength behind to zero ahead over a short distance). This spatial variation produces a longitudinal field $E_z$:
+$$
+  E_z = - \frac{\partial V}{\partial z}
+$$
+
+This field drives a drift of electrons along the conductor, giving rise to the current observed in circuit terms.
+
+This field exerts a force on the electrons along the conductor:
+- *in the trace*, electrons drift opposite to the direction of propagation
+- *in the return plane*, electrons drift in the direction of propagation
+
+The figure below illustrates this electron drift.
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-copper-current.svg" style="width: 80%; max-width:800px; height: auto;" alt="Current at the wavefront, driven by the longitudinal field E<sub>z</sub>.">
+  <figcaption><i>Current at the wavefront, driven by the longitudinal field E<sub>z</sub>.</i></figcaption>
+  </center>
+</figure>
+
+This drift is the **conduction current**.
+
+However, this current should not be interpreted as transporting the signal. Instead:
+- the wave propagates in the dielectric
+- the electrons respond locally as the wavefront passes
+
+Each section of the conductor becomes active only when reached by the wave.
+<br />
+
+
+##### Charge–Current Coupling (Continuity)
+
+Surface charge and current are linked by charge conservation.
+
+As the wavefront advances:
+- surface charge builds up on newly reached sections
+- current flows to supply this charge
+
+The continuity equation governs this relationship:
+$$
+  \nabla\cdot J + \frac{\partial \rho}{\partial t} = 0
+$$
+
+In surface form, this implies that current converges or diverges as needed to create the required surface charge distribution.
+
+Thus:
+- current establishes charge
+- charge shapes the electric field
+- the field drives further current
+
+This closed interaction maintains the propagating wave.
 
 <details>
-  <summary>Expand if you ❤️ to see the derivation</summary>
+  <summary>Expand if you ❤️ to see the derivation (TO DO: do we need this?)</summary>
 
   Surface current $\mathbf{K}$ only exists in the $z$-direction ($\mathbf{K} = K_z \hat z$), so we can rewrite this as:
   $$
@@ -765,7 +802,7 @@ This shows that:
 
 <div class="important-note"><span class="icon">💡</span>
 
-The Continuity Equation and the Wavefront Constraint govern the surface current:
+This relationship is governed by the continuity equation:
 $$
   K_z = v\,\sigma_s
 $$
@@ -776,103 +813,49 @@ where:
 - $\sigma_s$ is the surface charge density
 </div>
 
-The wavefront is the kinematic boundary between the field-off and field-on regions, and the surface charge and current are forced to advance at speed $v$ to keep up with it.
+This expresses that surface charge and current advance together with the wave.
 <br />
 
 
-#### 1.2.5. Coupled Charge–Current Dynamics
-
-The surface charge and current are not independent quantities. They are linked by charge conservation.
-
-As the wavefront advances:
-- surface charge builds up on newly reached sections
-- current flows to supply this charge
-
-The continuity equation governs this relationship:
-$$
-  \nabla\cdot J + \frac{\partial \rho}{\partial t} = 0
-$$
-
-In surface form, this describes how current converges to create the required charge distribution.
-
-Thus:
-- current establishes charge
-- charge shapes the electric field
-- the field drives further current
-
-This closed interaction maintains the propagating wave.
-<br />
-
-
-#### 1.2.6. Recap: The At-Wavefront Cycle (TO DO: is this needed?)
-
-Tracking the signal trace, one wavefront step looks like this:
-
-1. $E_x$ appears → tries to push electrons up.
-2. $E_z$ appears simultaneously → pushes electrons backward along the trace.
-3. Electrons drift backward along the trace; the section at the wavefront loses electrons → bottom of the trace becomes positive.
-4. That positive surface charge generates its own field that cancels $E_x$ inside the metal.
-5. The wavefront advances one step further; the process repeats in the next section.
-
-Each section of the trace only "wakes up" when the wavefront arrives — until then, its electrons sit in thermal equilibrium with no net drift.
-
-The current you measure isn't transporting the signal's energy; the fields in the dielectric are doing that. The electrons in the trace are just reacting locally, section by section, as the wave sweeps past — producing the surface charge that traps the wave and the horizontal drift we call current.
-<br />
-
-
-#### 1.2.6. Longitudinal Field and Current behind the Wavefront
+#### 1.2.5. Behavior Behind the Wavefront
 
 Once the wavefront has passed:
-- the transverse field $E_x$ becomes steady
-the longitudinal field $E_z$ becomes small but nonzero
+- the transverse field ($E_x$) becomes steady
+- the longitudinal field ($E_z$) becomes small but nonzero
 
-This residual $E_z$ sustains the conduction current against resistive losses in the conductor.
+This residual longitudinal field ($E_z$) sustains the current against resistive losses.
+
+In other words:
+- $\sigma_s$ and $\mathbf K$ are steady
+- charge conservation reduces to $\nabla_s \cdot \mathbf K = 0$, which says the current flows uniformly along $z$.
+
+In a **real conductor**:
+- drifting electrons scatter off the lattice, converting drift kinetic energy to heat
+- the electromagnetic wave supplies this energy; its amplitude drops slightly with distance, giving a small residual $E_z$ that re-accelerates the electrons between scattering events.
 
 
-The drifting electrons scatter off the lattice, converting drift kinetic energy to heat — a drag force opposing the current. To sustain the current against the drag, the wave pays for it: its amplitude drops slightly with distance, giving a small residual $E_z$ that re-accelerates the electrons between scattering events. This residual field behind the wavefront is the "cost" of pushing current through a lossy conductor; on a superconducting line, there would be no drag, no field drop, and no loss.
+The surface charge at a given section is established once the wave has passed, but **current continues** through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small residual $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
+<br />
 
-**Current still flows through already-charged sections.** 
 
-The surface charge at a given section is established once the wave has passed, but current continues through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small residual $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
+#### 1.2.6. Interpretation
 
-##### Intuitive Form
+The conductor does not initiate or carry the signal. Instead, it enforces the structure required for the electromagnetic wave to exist.
+- **Surface charge** shapes the electric field and confines it to the dielectric
+- **Surface current** sustains the magnetic field
+- **Electron motion is local**, responding to the passing wave
 
-<div class="quote feynman">
-
-The electrons don't drift for free. They bang into copper atoms as they go — that's resistance — and every collision turns a little bit of drift energy into heat. That friction drains energy from the wave, so the wave amplitude drops slightly with distance. And a voltage that drops with distance means — there it is again — a spatial gradient. A gentler one this time, not the steep cliff at the wavefront, but enough to keep pushing the electrons forward against the drag. Behind the wavefront, the along-field is the system's way of paying the resistive tax.
-
-And what about the sections the wavefront has already passed? Their surface charges are set — the capacitor is charged. But current still flows through them, because the wavefront is still advancing ahead, still demanding current to charge the *next* section. It's like a pipe that's already full of water — water still flows through it to supply whatever is at the end. The moment the wavefront reaches a matched load, the current doesn't vanish — it just switches from charging new sections to supplying the load.
-</div>
-
-##### Boundary Condition (optional)
-
-Following the intuitive discussion above, here's the more formal version.
-
-**Behind the wavefront**, $\sigma_s$ and $\mathbf K$ are steady — charge conservation reduces to $\nabla_s \cdot \mathbf K = 0$, which says the current flows uniformly along $z$.
-
-The **residual $E_z$ violates** the perfect-conductor Boundary-condition. For an idealized perfect conductor, the boundary condition is $E_z = 0$ on the surface — no tangential field, no resistive losses. Real conductors have nonzero $E_z$, and the product $E_z \cdot K_z$ per unit area is the **ohmic dissipation**. The small residual $E_z$ behind the wavefront *is* that BC violation, expressed as a field.
-
-The field doesn't penetrate the copper — it dies off over the **skin depth** $\delta$ (≈ 2 μm in copper at 1 GHz; see Appendix A.4 for the derivation). That thin layer is where the current actually flows and the loss happens. The surface-current approximation $\mathbf K = (1/\mu_0)\,\hat n \times \mathbf B_{\text{out}}$ holds to corrections of order $\delta/d$, where $d$ is the conductor thickness.
-
-**Volume current density ($\mathbf J$)**
-
-Surface current density ($\mathbf K$) isn't really on a 2D sheet — it's the 3D current density ($\mathbf J$) packed into the skin-depth layer, and integrating $\mathbf J$ across that layer's depth recovers $\mathbf K$.
-$$
-  \mathbf K = \int_0^\infty \mathbf J(z'), dz'
-$$
-
-For a perfect conductor ($\delta \to 0$), all the current crowds onto the surface and $\mathbf J$ becomes a delta function — exactly $\mathbf K , \delta(\text{surface})$. For a real conductor, $\mathbf J$ is finite but concentrated in a thin layer of thickness ≈ $\delta$ (the skin depth), and the surface-current approximation $\mathbf K \approx \mathbf J \cdot \delta$ holds to corrections of order $\delta/d$.
-
+The signal itself remains a propagating electromagnetic field, guided by the conductor geometry.
 <br />
 
 
 #### 1.2.7. Summary
 
-The conductors respond to the electromagnetic wave through:
-- **surface charge formation**, which enforces electric-field boundary conditions
-- **surface currents**, which sustain the magnetic field
+The response of a conductor to a propagating electromagnetic wave consists of:
+- **surface charge formation** enforcing electric boundary conditions
+- **surface current** sustaining the magnetic field
 
-These responses are driven entirely by the fields of the propagating wave and are governed by Maxwell’s equations and charge conservation.
+These quantities are not independent drivers but are determined by the fields of the wave and constrained by Maxwell’s equations and charge conservation.
 <br />
 
 
@@ -890,7 +873,7 @@ In a PCB transmission structure, the magnetic field associated with a signal arr
   </center>
 </figure>
 
-#### 1.3.1. Intuition 1
+#### 1.3.1. Intuition
 
 <div class="quote feynman">
   You might think the magnetic field comes from the current in the copper—and that’s true, but only part of the story.
@@ -903,39 +886,6 @@ In a PCB transmission structure, the magnetic field associated with a signal arr
 
   If you tried to remove the displacement current term, the field would have nowhere to go—it would break at the boundary. Maxwell added that term so the field could remain whole.
 </div>
-
-#### 1.3.1. Intuition 2
-
-The equation is the short answer. Here is the long one, in a voice we have borrowed before: Imagine Feynman is still at the chalkboard. Someone in the third row raises a hand.
-<div class="quote feynman">
-
-  *"Professor, I'm confused. You just told us the wave has a magnetic field around it — that was part of the leapfrog thing. But now you're saying the electrons in the copper are flowing, and a flowing current also makes a magnetic field. So which is it? Are there two magnetic fields here, or what?"*
-
-  That's a wonderful question. And the answer — which I think is one of the most beautiful things Maxwell ever did — is that there's only **one** magnetic field. There's just one field in space, wrapping around the trace. But that field has *two different things that can keep it going*, and which one is keeping it going depends on *where you are*.
-
-  Let me show you. Maxwell's Ampère law — the real one, with his addition — says the curl of $\mathbf B$ is two things added together:
-  <div class="quote">
-
-  $$
-    \nabla \times \mathbf B = \mu \mathbf J + \mu \varepsilon \frac{\partial \mathbf E}{\partial t}
-  $$
-  </div>
-
-  That first piece — $\mu \mathbf J$ — is just the old-fashioned Ampère's law. Current flowing makes magnetic field.
-
-  That second piece was Maxwell's great invention. He realized Ampère's law couldn't be complete because if you had a capacitor, the current comes *into* one plate and *out of* the other, but in between — in the empty space — there's no current flowing. And yet the magnetic field has to be continuous; it can't just stop at the plate and start up again on the other side. Something has to keep it going across the gap. And Maxwell said: the thing that keeps it going is the *changing electric field* between the plates. He called it the **displacement current**, even though nothing is really being displaced. It's just a changing field that *looks like* a current, from the magnetic field's point of view.
-
-  Now look where we are on this PCB. You've got copper up top, copper down below, and plastic in between.
-
-  **Inside the copper,** electrons are flowing. So $\mathbf J$ is big. And the electric field in the copper is essentially zero — we just spent the last lecture explaining why. So the second term is nothing. The $\mu \mathbf J$ piece is doing all the work.
-
-  **Inside the plastic,** there are no free electrons. $\mathbf J = 0$. Nothing is flowing through the dielectric. So the first term is nothing. But the electric field is enormous in there, and it's changing in time as the wave goes by. So the second term — the displacement current — is doing all the work.
-
-  And here's what I want you to appreciate. You walk from the plastic up into the copper, crossing the boundary, and the $\mathbf B$ field doesn't care. It doesn't notice. It's perfectly smooth. It has the same value just below the surface as just above it. What changes is *who's responsible for it*. Down in the plastic, a changing electric field is keeping $\mathbf B$ alive. Up in the copper, moving electrons are keeping it alive. The field itself is completely oblivious — it just wraps around the trace as one continuous tube of magnetism.
-
-  That was Maxwell's real insight. Not that current makes magnetism — we knew that. Not that changing fields make fields — Faraday had half of that. Maxwell's piece was realizing that *a changing electric field is, for the purposes of magnetism, every bit as good as a current.* Nature doesn't care which one is feeding the field. It'll take either. And on a PCB, inside the copper it takes one, inside the plastic it takes the other, and the result is a seamless, beautiful, continuous magnetic field wrapping the whole transmission line.
-</div>
-
 
 #### 1.3.2. Physical Origin
 
