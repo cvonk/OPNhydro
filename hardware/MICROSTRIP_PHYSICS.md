@@ -220,24 +220,21 @@ These relations show that **time-varying electric and magnetic fields generate e
 
 When a **voltage step** is applied to the trace:
 
-1. The applied voltage immediately **establishes an electric field** ($\mathbf E$) between the trace and the return plane. This field is initially confined near the source and increases from zero to a finite value → is therefore **time-varying**.
+1. An **electric field is established** ($\mathbf E$) between the trace and the return plane near the source. Because it rises from zero, it is **time-varying**.
 <br />
 
-2. From the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$). This magnetic field is initially localized near the source, just like the electric field that created it, and rises from zero to a finite value → is therefore **time-varying**.
+2. From the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$) in the $xy$-plane. Because it also rises from zero, it is  **time-varying**.
 <br />
 
-3. According to Faraday's Law, this time-varying magnetic field ($\mathbf B$) **creates an electric field** slightly **further** along the trace. Here it increases from zero to a finite value → is therefore **time-varying**.
+3. According to Faraday's Law, this time-varying magnetic field, in turn, **generates a new electric field** ($\mathbf E$) in the $yz$-plane → slightly **further** along the trace. Again, it rises from zero and is therefore **time-varying**.
 
-This coupling continues:
-- a changing $\mathbf E$ produces $\mathbf B$
-- a changing $\mathbf B$ produces $\mathbf E$ slighter father
+Step 2 and 3 continue continuously in space and time. The result is not motion of charge along the conductor, but the propagation of a **self-sustaining electromagnetic wave**.
 
-Two features are essential:
+Two conditions are essential:
 - **Temporal variation:** the fields change in time at each point,
 - **Spatial variation:** the fields differ from one location to another.
 
-Neither alone produces motion. Together, they enforce propagation. The disturbance advances as a **self-sustaining electromagnetic wavefront**.
-
+Together, they enforce propagation.
 
 <div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launces an electromagnetic wave in the dielectric.</div>
 <br />
@@ -287,12 +284,12 @@ And that, really, is what every trace on every PCB is doing. It's not carrying e
 <br />
 
 
-#### 1.1.5. Wave Equation and Propagation Speed (optional)
+#### 1.1.5. Wave Equation and Velocity
 
 The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the source-free Ampère–Maxwell law and Gauss's law.
 
 <details>
-  <summary>Expand if you ❤️ to see the math.</summary>
+  <summary>Expand if you ❤️ to see the derivation.</summary>
 
   Take the curl of Faraday's law
   $$
@@ -343,68 +340,63 @@ $$
 </div>
 
 Comparing the two, term by term, gives the speed $v$ of the wave propagation:
-$$
-  \newcommand{\shaded}[1]{\colorbox{##F7F7D2}{$\displaystyle #1$}}
-  \frac{1}{v^2} = \mu \varepsilon
-  \quad \Rightarrow \quad
-  \shaded{
-    v = \frac{1}{\sqrt{\mu \, \varepsilon}}
-  }
-$$
-
-In vacuum, the permeability constant $\mu = \mu_0$, and the permittivity constant $\varepsilon = \varepsilon_0$.
-$$
-  \left\{
-    \begin{align*}
-      \mu_0 &= 4\pi \times 10^{-7} \text{ H/m} \\
-      \varepsilon_0 &= 8.854 \times 10^{-12} \text{ F/m}
-    \end{align*}
-  \right.
-$$
-
-Substituting these constants:
-$$
-    v = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 8.854 \times 10^{-12}}} \approx 299.8 \times 10^6 \text{ m/s}
-$$
-
-That is the speed of light $c$ — derived entirely from electric and magnetic constants.
-
-**In a dielectric** such as FR-4, the permittivity is higher, and the propagation speed is reduced accordingly.
-$$
-    v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 4.2 \times 8.854 \times 10^{-12}}} \approx 146.3 \times 10^6 \text{ m/s}
-$$
-
-The wave **propagation speed in FR-4** is therefore **~15 cm/ns**. To be precise, this is the bulk-FR-4 (or stripline) speed. On a microstrip, part of the field is in air above the trace, so the effective permittivity is a bit lower and the speed rises to ~17–18 cm/ns.
-
-Thus, the signal travels as an electromagnetic wave whose velocity is determined by material properties, not by the motion of electrons in the conductor.
-
-#### 1.1.6. Interpretation
-
-The voltage step does not “move” down the trace as a flow of charge. Instead:
-- the electric and magnetic fields propagate through the dielectric,
-- the conductors define boundary conditions that guide these fields,
-- the signal is the advancing electromagnetic wavefront.
-
-The energy associated with the signal resides primarily in the fields, not in the conductor.
-
-#### 1.1.7. Mode Structure
-
-In this analysis, the electric field is predominantly perpendicular to the conductors, and the magnetic field lies transverse to the direction of propagation. In an ideal homogeneous medium, this corresponds to a **transverse electromagnetic (TEM)** mode.
-
-A microstrip is not homogeneous: part of the field exists in the dielectric and part in the air above. As a result, small longitudinal field components arise to satisfy boundary conditions. The mode is therefore quasi-TEM.
-<br />
-
-#### 1.1.8. Summary
 
 <div class="important-note"><span class="icon">💡</span>
 
-  A voltage step applied to a PCB trace launches an electromagnetic wave that propagates through the dielectric at speed:
-  $$
-    v = \frac{1}{\sqrt{\mu\,\varepsilon}}
-  $$
+The propagation speed is only determined by material properties
+$$
+  v = \frac{1}{\sqrt{\mu \, \varepsilon}}
+$$
+
+where:
+- $v$ is the speed of the wave propagation
+- $\mu$ is the permeability of the material
+- $\varepsilon$ is the permittivity of the material 
 </div>
 
-The conductors guide this wave by enforcing boundary conditions, while the energy and dynamics of the signal reside in the electric and magnetic fields
+<details>
+  <summary>Expand to ❤️ how this gives the speed of light.</summary>
+
+  In vacuum, the permeability constant $\mu = \mu_0$, and the permittivity constant $\varepsilon = \varepsilon_0$.
+  $$
+    \left\{
+      \begin{align*}
+        \mu_0 &= 4\pi \times 10^{-7} \text{ H/m} \\
+        \varepsilon_0 &= 8.854 \times 10^{-12} \text{ F/m}
+      \end{align*}
+    \right.
+  $$
+
+  Substituting these constants:
+  $$
+      v = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 8.854 \times 10^{-12}}} \approx 299.8 \times 10^6 \text{ m/s}
+  $$
+
+  That is the speed of light $c$ — derived entirely from electric and magnetic constants.
+</details>
+<br />
+
+**In the dielectric** in a microstrip, the medium is not homogeneous (fields exist in both dielectric and air), and the mode is quasi-TEM rather than pure TEM. The propagation velocity is therefore determined by an **effective permittivity $\mu_r$**, so $\mu=\mu_r\,\mu_0$. For FR-4 this is:
+$$
+    v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 3.65 \times 8.854 \times 10^{-12}}} \approx 16 \text{ cm/ns}
+$$
+<br />
+
+
+#### 1.1.6. Interpretation
+
+The signal does not propagate as a moving charge. Instead:
+- the electric and magnetic fields propagate through space
+- the signal is the advancing electromagnetic wave
+
+The majority of the energy resides in the dielectric, although the fields extend into both dielectric and conductor regions.
+<br />
+
+
+#### 1.1.7. Summary
+
+A voltage step applied to a PCB trace launches an electromagnetic wave that propagates along the structure. The propagation velocity is determined by material properties.
+
 <br />
 
 ---
@@ -413,14 +405,15 @@ The conductors guide this wave by enforcing boundary conditions, while the energ
 
 ### 1.2. Conductor Response: Surface Charge and Current
 
-Section §1.1 established that a signal propagates as an electromagnetic wave in the dielectric. The conductors do not carry the signal energy; instead, they respond to the fields of the wave. This section examines that response.
+Section 1.1 established that signal propagation occurs as an electromagnetic wave in the dielectric. The conductors do not transport the signal energy; instead, they respond to the incident fields and enforce the boundary conditions required for the wave to exist.
 
-The presence of free electrons in the conductor allows it to enforce boundary conditions on the fields. These responses take two forms:
-- **surface charge**, which enforces electric-field boundary conditions
-- **surface current**, which sustains the magnetic field
+The **free electrons** in the conductor respond in two forms:
+- **surface charge**, associated with the electric field
+- **surface current**, associated with the magnetic field
 
-Both arise directly from the incident electromagnetic wave.
+Both arise directly from Maxwell’s equations.
 <br />
+
 
 #### 1.2.1. Intuitive Picture (optional)
 
@@ -453,37 +446,28 @@ And that's really all there is to it. The hard part is believing it.
 <br />
 
 
-#### 1.2.2. Electric Field Components Near the Conductor
-
-In a microstrip, the electric field in the dielectric is primarily transverse (normal to the conductor surfaces), but it also contains a small longitudinal component along the direction of propagation.
+#### 1.2.2. Electric Field at the Conductor Boundary
 
 > Throughout, $\hat x$ points from the trace to the return plane, $\hat z$ points in the propagation direction.
+
+In a microstrip, the electric field in the dielectric has two components:
+- a dominant transverse component $E_x$, normal to the conductor surfaces
+- a smaller longitudinal component $E_z$, along the direction of propagation
 
 <figure>
   <center>
   <img src="../media/infographics/microstrip-e-field.svg" style="width: 70%; max-width:800px; height: auto;">
-  <figcaption><i>Microstrip electric field.</i></figcaption>
+  <figcaption><i>Side-view: Microstrip electric field <b>E</b>.</i></figcaption>
   </center>
 </figure>
 
-We distinguish:
-
-- **Traverse component $E_x$**
-   - dominant
-   - directed between trace and return plane
-   - confines the wave to the dielectric
-
-- **Longitudinal component $E_z$**
-   - localized near the wavefront
-   - persists at smaller magnitude behind the wave
-
-These components produce distinct physical effects in the conductor.
+These components produce distinct physical effects at the conductor surface.
 <br />
 
 
-#### 1.2.3. $E_x$ → Surface Charge Formation
+#### 1.2.3. Surface Charge Formation (driven by $E_x$)
 
-As the wavefront reaches a section of the conductor,the transverse electric field $E_x$ rises from zero to a finite value.
+As the wavefront reaches a section of the conductor, the transverse electric field $E_x$ rises from zero to a finite value.
 
 This field exerts a force on the **free electrons**.
 - *in the trace*, electrons move away from the dielectric-facing surface
@@ -500,12 +484,11 @@ This redistribution produces:
 - **negative surface charge** on the top of the return plane
 
 The system rapidly reaches a local equilibrium in which:
-- the **net field inside the conductor is driven to zero**, because the surface charges generate their own electric field that opposes the external field. 
-- The **external field is confined to the dielectric**, since the electric field cannot extend into the conductor.
-
+- the *net field inside the conductor is driven to zero*, because the surface charges generate their own electric field that opposes the external field. 
+- The *external field is confined to the dielectric*, since the electric field cannot extend into the conductor.
 <br />
 
-##### Boundary Codition (Gauss's Law) (optional)
+##### Boundary Codition
 
 Following the more intuitive discussion above, here's the formal version.
 
@@ -556,49 +539,35 @@ Following the more intuitive discussion above, here's the formal version.
 
 The relationship between surface charge density and the electric field follows from Gauss’s law:
 $$
-    \sigma_s = \varepsilon\, E_x, \quad \text{in }\left[ \rm{C/m^2} \right]
+    \sigma_s = \varepsilon\, E_x
 $$
 
 where:
-- $\sigma_s$ is the surface charge density
+- $\sigma_s$ is the surface charge density (in C/m<sup>2</sup>)
 - $E_x$ is the electric field just outside the conductor.
 </div>
 
-This behavior follows directly from Gauss’s law: the discontinuity in the normal electric field at the boundary is equal to the surface charge density.
+This surface charge distribution is not arbitrary. It is exactly the distribution required to:
+- cancel the field inside the conductor
+- confine the external field to the dielectric
 
-Thus, the surface charge distribution is not arbitrary. It is precisely the charge required to enforce the boundary condition that the electric field cannot exist inside a good conductor.
+Thus, **the conductor shapes the electric field** through the formation of surface charge.
 <br />
 
 
-##### Intuitive Form (old)
+#### 1.2.4. Surface Current (driven by $\mathbf B$ and $E_z$)
 
-<div class="quote feynman">
-
-I want to tell you what the down-field does, because I think this is the most beautiful thing happening on the whole PCB.
-
-The wave comes along with an electric field pointing from the trace down to the return plane. Now, what's an electric field? It's a rule that says how hard an electron gets pushed, and which way. The field points down, electrons are negative, so every electron in both conductors suddenly gets shoved *up*.
-
-In the trace, they move up, away from the bottom. Electrons leave, positive ions stay — so the bottom of the trace becomes a positively charged surface. In the return plane, they pile up on top — a negatively charged surface. You've made a capacitor, right there, on the fly.
-
-Now here's the good part. Those two sheets of charge have their own field, pointing the *other way*. Inside the copper, two fields are fighting: the wave pushing down, the surface charges pushing up. The electrons keep rearranging until those fields *exactly cancel* — and the field inside the metal goes to zero.
-
-And here's the whole point: because the field can't get into the copper, it has nowhere to go but to **stay between the two conductors**. The electrons have built a cage for the wave.
-</div>
+This section presents two views of the surface current:
+1. Given a magnetic field at the surface, what current must exist? ($\mathbf B \to \mathbf K$)
+2. How does current get established as the wave propagates? ($E_z \to \mathbf J$)
 <br />
 
 
-#### 1.2.4. Surface Current
+##### 1. Magnetic Field $\mathbf B$ drives the need for a Surface Current
 
-We present two views of the same system
-- Given a magnetic field at the surface, what current must exist? ($\mathbf B \to \mathbf K$)
-<br />
-- How does current get established as the wave propagates? ($\mathbf E \to \mathbf J$)
-<br />
+The magnetic field associated with the propagating wave is tangential to the conductor surface. Maxwell’s equations require that this field be supported by current at the boundary.
 
-
-##### The Magnetic Field drives the need for Surface Current
-
-The magnetic field $\mathbf{B}$, from the wave propagating through the dielectric, is screened by the return plane. To stay in the $xy$-plane, it has no other choice but to **loop around the trace**.
+When the magnetic field from the trace tries to enter the return plane, it induces [eddy currents](https://coertvonk.com/physics/electromagnetism/magnetism/motional-emf-30242) that create their own opposite magnetic field. This prevent the magnetic field $\mathbf{B}$ from entering. To stay in the $xy$-plane, the magnetic field has no other choice but to **loop around the trace**.
 <figure>
   <center>
   <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 90%; max-width:800px; height: auto;">
@@ -668,102 +637,83 @@ This shows that:
 - the **magnetic field determines the surface current**
 - the current is not an independent driver, but a response to the field
 
-In real conductors, this current is distributed over a thin layer of thickness equal to the skin depth, where the fields penetrate slightly into the material. The field dies off over the **skin depth** $\delta$ (≈ 2 μm in copper at 1 GHz; see Appendix A.4 for the derivation). That thin layer is where the current actually flows and the loss happens.
+In real conductors, this current is distributed over a thin layer of thickness equal to the **skin depth**, where the fields penetrate slightly into the material. The skin depth $\delta$ is approximately 2 μm in copper at 1 GHz (see Appendix A.4).
 
-Surface current density ($\mathbf K$) isn't really on a 2D sheet — it's the 3D current density ($\mathbf J$) packed into the skin-depth layer, and integrating $\mathbf J$ across that layer's depth recovers $\mathbf K$.
-$$
-  \mathbf K = \int_0^\infty \mathbf J(z'), dz'
-$$
-
-For a perfect conductor ($\delta \to 0$), all the current crowds onto the surface and $\mathbf J$ becomes a delta function — exactly $\mathbf K , \delta(\text{surface})$. For a real conductor, $\mathbf J$ is finite but concentrated in a thin layer of thickness ≈ $\delta$ (the skin depth), and the surface-current approximation $\mathbf K \approx \mathbf J \cdot \delta$ holds to corrections of order $\delta/d$.
+For a real conductor, the surface-current approximation $\mathbf K \approx \mathbf J \cdot \delta$ holds for as long as $\delta \ll d$, where $d$ is the thickness of the conductor.
 
 <br />
 
 
-##### The Longitudinal Electric Field drives the Surface Current
+##### 2. Longitudinal Electric Field $E_z$ establishes the Surface Current
 
-While the previous section relates surface current to the magnetic field through boundary conditions, we now examine how that current is dynamically established as the wavefront propagates.
+While the previous result expresses a boundary condition, the current must also be established dynamically as the wave propagates.
 
-At the wavefront, the voltage varies rapidly with position (i.e., from full strength behind to zero ahead over a short distance). This spatial variation produces a longitudinal field $E_z$:
+
+At the wavefront, the voltage varies rapidly with position, changing from full intensity behind the wave to zero ahead of it. This produces a longitudinal electric field ($E_z$):
 $$
   E_z = - \frac{\partial V}{\partial z}
 $$
 
-This field drives a drift of electrons along the conductor, giving rise to the current observed in circuit terms.
-
-This field exerts a force on the electrons along the conductor:
-- *in the trace*, electrons drift opposite to the direction of propagation
-- *in the return plane*, electrons drift in the direction of propagation
-
-The figure below illustrates this electron drift.
 <figure>
   <center>
   <img src="../media/infographics/microstrip-copper-current.svg" style="width: 80%; max-width:800px; height: auto;" alt="Current at the wavefront, driven by the longitudinal field E<sub>z</sub>.">
-  <figcaption><i>Current at the wavefront, driven by the longitudinal field E<sub>z</sub>.</i></figcaption>
+  <figcaption><i>Side-view: Current at the wavefront, driven by E<sub>z</sub>.</i></figcaption>
   </center>
 </figure>
 
-This drift is the **conduction current**.
+This field drives electron drift along the conductor, giving rise to **conduction current**:
+- *in the trace*, electrons drift opposite to the direction of propagation
+- *in the return plane*, electrons drift in the direction of propagation
 
-However, this current should not be interpreted as transporting the signal. Instead:
-- the wave propagates in the dielectric
-- the electrons respond locally as the wavefront passes
-
-Each section of the conductor becomes active only when reached by the wave.
+This is the dynamic mechanism by which the current required by the magnetic field boundary condition is created.
 <br />
 
 
-##### Charge–Current Coupling (Continuity)
-
-Surface charge and current are linked by charge conservation.
+##### 3. Charge–Current Coupling (Continuity)
 
 As the wavefront advances:
 - surface charge builds up on newly reached sections
 - current flows to supply this charge
 
-The continuity equation governs this relationship:
+Surface charge and current are linked by the Continuity Equation, a fundamental law in physics that expresses the conservation of charge.
 $$
   \nabla\cdot J + \frac{\partial \rho}{\partial t} = 0
+  \tag{Continuity}
 $$
 
-In surface form, this implies that current converges or diverges as needed to create the required surface charge distribution.
-
-Thus:
-- current establishes charge
-- charge shapes the electric field
-- the field drives further current
-
-This closed interaction maintains the propagating wave.
+In surface form:
+$$
+  \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} = 0
+$$
 
 <details>
-  <summary>Expand if you ❤️ to see the derivation (TO DO: do we need this?)</summary>
+  <summary>Expand if you ❤️ to see the derivation</summary>
+
+  The surface divergence operator $\nabla_s\cdot$ takes derivatives only in directions tangent to the surface — for our trace surface with normal $\hat x$, that's $\hat y$ and $\hat z$:
+  $$
+    \left(
+    \frac{\partial K_y}{\partial y} + \frac{\partial K_z}{\partial z} \right)
+    + \frac{\partial \sigma_s}{\partial t} = 0
+  $$
 
   Surface current $\mathbf{K}$ only exists in the $z$-direction ($\mathbf{K} = K_z \hat z$), so we can rewrite this as:
   $$
-    K_z = \frac{B_y}{\mu}
+    \bcancel{\frac{\partial K_y}{\partial y}}
+    + \frac{\partial K_z}{\partial z}
+    + \frac{\partial \sigma_s}{\partial t} = 0
   $$
 
-  Recall the **Continuity Equation** (that follows from Ampère–Maxwell Law)
+  Recal the expression for the surface current $\mathbf K$ from the previous section:
   <div class="quote">
 
   $$
-    \nabla \cdot \mathbf J + \frac{\partial \rho}{\partial t} = 0
-    \tag{Continuity}
+    \mathbf K = \frac{B_y}{\mu}\,\hat z
   $$
   </div>
 
-  Expressed on a 2D surface, this becomes the surface charge conservation on the trace surface (the surface divergence operator $\nabla_s\cdot$ takes derivatives only in directions tangent to the surface — for our trace surface with normal $\hat x$, that's $\hat y$ and $\hat z$):
-  $$
-    \begin{align*}
-      \nabla_s \cdot \mathbf K + \frac{\partial \sigma_s}{\partial t} &= 0 \\
-      \Rightarrow\quad
-      \frac{\partial K_y}{\partial y} + \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}&= 0
-    \end{align*}
-  $$
-
   As we saw, $\mathbf{K}$ exists only in the $+z$-direction:
   $$
-      \frac{\partial K_z}{\partial z} + \frac{\partial \sigma_s}{\partial t}= 0 
+    K_z = \frac{B_y}{\mu}
   $$
 
   At the wavefront, $\sigma_s$ is ramping from zero to $\varepsilon E_x$ as the wave passes, so $\partial K_z/\partial z \neq 0$ — the current converges into the section to deposit the new charge.
@@ -784,7 +734,7 @@ This closed interaction maintains the propagating wave.
 
 <div class="important-note"><span class="icon">💡</span>
 
-This relationship is governed by the continuity equation:
+For a uniformly propagating wave, this leads to:
 $$
   K_z = v\,\sigma_s
 $$
@@ -795,7 +745,9 @@ where:
 - $\sigma_s$ is the surface charge density
 </div>
 
-This expresses that surface charge and current advance together with the wave.
+This relation holds for a traveling wave and expresses that:
+- surface charge and current move together
+- both are part of the same propagating field structure
 <br />
 
 
@@ -805,7 +757,7 @@ Once the wavefront has passed:
 - the transverse field ($E_x$) becomes steady
 - the longitudinal field ($E_z$) becomes small but nonzero
 
-This residual longitudinal field ($E_z$) sustains the current against resistive losses.
+This residual longitudinal field ($E_z$) sustains current against resistive losses in the conductor.
 
 In other words:
 - $\sigma_s$ and $\mathbf K$ are steady
