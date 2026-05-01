@@ -755,41 +755,30 @@ This relation holds for a traveling wave and expresses that:
 
 Once the wavefront has passed:
 - the transverse field ($E_x$) becomes steady
-- the longitudinal field ($E_z$) becomes small but nonzero
+- the longitudinal field ($E_z$) becomes small but nonzero (to sustains current against resistive losses in the conductor)
 
-This residual longitudinal field ($E_z$) sustains current against resistive losses in the conductor.
-
-In other words:
-- $\sigma_s$ and $\mathbf K$ are steady
-- charge conservation reduces to $\nabla_s \cdot \mathbf K = 0$, which says the current flows uniformly along $z$.
-
-In a **real conductor**:
-- drifting electrons scatter off the lattice, converting drift kinetic energy to heat
-- the electromagnetic wave supplies this energy; its amplitude drops slightly with distance, giving a small residual $E_z$ that re-accelerates the electrons between scattering events.
-
-
-The surface charge at a given section is established once the wave has passed, but **current continues** through that section to supply the wavefront still advancing ahead. Each already-charged section acts as a conduit — its surface charges steer the current, and the small residual $E_z$ sustains it against drag, exactly as in a DC wire where stable surface charges guide a steady current.
+The surface charge at a given section is established once the wave has passed, but **current continues** through that section to supply the wavefront still advancing ahead.
 <br />
 
 
 #### 1.2.6. Interpretation
 
-The conductor does not initiate or carry the signal. Instead, it enforces the structure required for the electromagnetic wave to exist.
-- **Surface charge** shapes the electric field and confines it to the dielectric
-- **Surface current** sustains the magnetic field
-- **Electron motion is local**, responding to the passing wave
+The conductor does not carry the signal in the conventional sense. Instead:
+- **surface charge** enforces electric-field boundary conditions
+- **surface current** sustains the magnetic field
+- **electron motion is local**, responding to the passing wave
 
-The signal itself remains a propagating electromagnetic field, guided by the conductor geometry.
+The signal itself remains a propagating electromagnetic field.
 <br />
 
 
 #### 1.2.7. Summary
 
 The response of a conductor to a propagating electromagnetic wave consists of:
-- **surface charge formation** enforcing electric boundary conditions
-- **surface current** sustaining the magnetic field
+- surface charge determined by the electric field
+- surface current determined by the magnetic field
 
-These quantities are not independent drivers but are determined by the fields of the wave and constrained by Maxwell’s equations and charge conservation.
+These quantities are fully constrained by Maxwell’s equations and are not independent drivers of signal propagation.
 <br />
 
 
