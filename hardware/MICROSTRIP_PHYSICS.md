@@ -105,8 +105,6 @@
 Modern high-speed electronic systems cannot be understood using lumped circuit models alone. As signal transition times decrease, the spatial extent of electromagnetic fields becomes comparable to the physical dimensions of PCB interconnects. Under these conditions, signal behavior is governed by the propagation of electromagnetic waves rather than by instantaneous circuit relationships.
 
 Voltage and current remain useful quantities, but they are not fundamental [^cantExplain]. They arise from the underlying electric and magnetic fields, E and B, which evolve in space and time according to Maxwell’s equations.
-
-Voltage and current remain useful quantities, but are no longer sufficient [^cantExplain]. They are derived quantities that arise from underlying electric and magnetic fields, $\mathbf E$ and $\mathbf B}, which evolve in space and time according to Maxwell’s equations.
 [^cantExplain]: It cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology. 
 
 A PCB trace together with its return path forms a transmission structure that guides electromagnetic energy. The conductors do not carry this energy in the conventional sense; instead, they establish boundary conditions that shape and confine the fields. The dominant portion of the signal energy resides in the dielectric region between conductors.
@@ -152,10 +150,17 @@ Consider a **microstrip** structure consisting of:
 - a return plane,
 - a dielectric separating them.
 
-We define coordinates:
-- **$x$-axis:** normal to the return plane (through the dielectric)
-- **$y$-axis:** traverse to the trace
-- **$z$-axis:** direction of propagation.
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-cross-section.svg" style="width: 90%; max-width:800px; height: auto;">
+  <figcaption><i>Cross-section of the microstrip.</i></figcaption>
+  </center>
+</figure>
+
+We define a right-handed coordinate system ($\hat x \times \hat y = \hat z$):
+- **$\hat x$:** from the trace down to the return plane (normal to the conductors, through the dielectric)
+- **$\hat y$:** transverse to the trace (in the plane of the board, perpendicular to the trace direction)
+- **$\hat z$:** direction of propagation
 
 A voltage step is applied at one end of the trace. The central question is: 
 
@@ -165,7 +170,7 @@ What physical mechanism carries this signal forward?
 <br />
 
 
-#### 1.1.1. Governing Equations
+#### 1.1.2. Governing Equations
 
 The fields are governed by two of [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453):
 $$  
@@ -226,7 +231,7 @@ When a **voltage step** is applied to the trace:
 2. From the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$) in the $xy$-plane. Because it also rises from zero, it is  **time-varying**.
 <br />
 
-3. According to Faraday's Law, this time-varying magnetic field, in turn, **generates a new electric field** ($\mathbf E$) in the $yz$-plane → slightly **further** along the trace. Again, it rises from zero and is therefore **time-varying**.
+3. According to Faraday's Law, this time-varying magnetic field, in turn, **generates a new electric field** ($\mathbf E$) slightly **further** along the trace. Again, it rises from zero and is therefore **time-varying**.
 
 Step 2 and 3 continue continuously in space and time. The result is not motion of charge along the conductor, but the propagation of a **self-sustaining electromagnetic wave**.
 
@@ -236,42 +241,26 @@ Two conditions are essential:
 
 Together, they enforce propagation.
 
-<div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launces an electromagnetic wave in the dielectric.</div>
+<div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launches an electromagnetic wave in the dielectric.</div>
 <br />
 
 
 #### 1.1.4. Intuitive Picture
 
-A useful way to visualize the process is as follows:
-
 <div class="quote feynman">
+  Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of dielectric. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
 
-  A voltage step creates an electric field near the source. Because this field changes in time, it generates a magnetic field. That magnetic field, also changing, generates a new electric field slightly farther along the trace. The two fields continuously regenerate each other, advancing step by step.
+  The instant you close the switch, there's a voltage between the trace and the plane. And whenever you have a voltage between two pieces of metal, there's an **electric field** between them. Bang — the field is just there, pointing from the trace down to the plane. Not in all of space, mind you — only right near the switch, because the rest of the trace hasn't heard the news yet.
+
+  Now, here is where it gets interesting. The electric field went from zero to something. That's a change. And it turns out — and this is one of the most marvelous things in physics — that **a changing electric field makes a magnetic field**. Not "has a magnetic field associated with it." Makes one. Maxwell figured this out. The electric field changes in time, and a magnetic field curls up around it, right there in the dielectric.
+
+  OK, so now we have a magnetic field. And it is also going from zero to something. It's changing in time too. And Faraday — long before Maxwell — figured out the other half of the story: **a changing magnetic field makes an electric field**. So the magnetic field we just made, by changing, makes another electric field — a little bit further along the trace than the one we started with.
+
+  You see what's happening? The electric field made a magnetic field. The magnetic field made an electric field. The new electric field is further down the line. And now it is changing, so it makes another magnetic field, which makes another electric field, and off we go. The two fields are playing leapfrog[^LEAPFROG], and they're heading down the trace at an enormous speed.
+
+  And how fast, exactly? In empty space these fields travel at the speed of light — that's what light *is*, by the way, the same kind of leapfrog. In the dielectric the fields go a little slower because the dielectric gets in their way. But still fast — about two-thirds the speed of light. Six inches in a nanosecond. *That's* how fast a signal really moves on your board.
 
   And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of energy. Isn't that something?
-  <figure>
-    <center>
-    <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 40%; max-width:400px; height: auto;">
-    </center>
-  </figure>
-</div>
-<br />
-
-
-#### 1.1.4. Intuitive Picture (alt.)
-
-<div class="quote feynman">
-Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of plastic. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
-
-The instant you close the switch, there's a voltage between the trace and the plane. And whenever you have a voltage between two pieces of metal, there's an **electric field** between them. Bang — the field is just there, pointing from the trace down to the plane. Not in all of space, mind you — only right near the switch, because the rest of the trace hasn't heard the news yet.
-
-Now, here is where it gets interesting. The electric field went from zero to something. That's a change. And it turns out — and this is one of the most marvelous things in physics — that **a changing electric field makes a magnetic field**. Not "has a magnetic field associated with it." Makes one. Maxwell figured this out. The electric field changes in time, and a magnetic field curls up around it, right there in the plastic.
-
-OK, so now we have a magnetic field. And it is also going from zero to something. It's changing in time too. And Faraday — long before Maxwell — figured out the other half of the story: **a changing magnetic field makes an electric field**. So the magnetic field we just made, by changing, makes another electric field — a little bit further along the trace than the one we started with.
-
-You see what's happening? The electric field made a magnetic field. The magnetic field made an electric field. The new electric field is further down the line. And now it is changing, so it makes another magnetic field, which makes another electric field, and off we go. The two fields are playing leapfrog[^LEAPFROG], and they're heading down the trace at an enormous speed.
-
-And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of energy. Isn't that something?
 </div>
 
 [^LEAPFROG]: In reality the two fields coexist at every point, but the "leapfrog" picture captures how each sustains the other.
@@ -376,7 +365,7 @@ where:
 </details>
 <br />
 
-**In the dielectric** in a microstrip, the medium is not homogeneous (fields exist in both dielectric and air), and the mode is quasi-TEM rather than pure TEM. The propagation velocity is therefore determined by an **effective permittivity $\mu_r$**, so $\mu=\mu_r\,\mu_0$. For FR-4 this is:
+**In the dielectric** in a microstrip, the medium is not homogeneous (fields exist in both dielectric and air), and the mode is quasi-TEM rather than pure TEM. The propagation velocity is therefore determined by an **effective permittivity $\varepsilon_r$**, so $\varepsilon=\varepsilon_r\,\varepsilon_0$. For FR-4 this is:
 $$
     v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 3.65 \times 8.854 \times 10^{-12}}} \approx 16 \text{ cm/ns}
 $$
@@ -407,6 +396,11 @@ A voltage step applied to a PCB trace launches an electromagnetic wave that prop
 
 Section 1.1 established that signal propagation occurs as an electromagnetic wave in the dielectric. The conductors do not transport the signal energy; instead, they respond to the incident fields and enforce the boundary conditions required for the wave to exist.
 
+<div class="important-note"><span class="icon">💡</span>
+
+**The wave is primary; the conductor response is a consequence.** The wave in the dielectric drives surface charge and surface current on the copper. Those surface quantities exist because Maxwell's equations require them at the boundary — not because they carry the signal.
+</div>
+
 The **free electrons** in the conductor respond in two forms:
 - **surface charge**, associated with the electric field
 - **surface current**, associated with the magnetic field
@@ -415,40 +409,31 @@ Both arise directly from Maxwell’s equations.
 <br />
 
 
-#### 1.2.1. Intuitive Picture (optional)
+#### 1.2.1. Intuitive Picture
 
 <div class="quote feynman">
-  When the wave reaches a section of copper, the electrons there don’t wait for instructions—they feel the electric field immediately.
+  So put it all together:
+  - The wave is in the dielectric.
+  - The *down-field* from the wave shoves electrons around on the copper surfaces. Those electrons build a wall that keeps the wave trapped in the dielectric.
+  - The *along-field* from the wave pushes other electrons along the trace, giving you the little current you measure with your ammeter.
 
-  The vertical field pushes charges apart, piling them up on the surfaces until the field inside the metal disappears. That’s how the wave gets confined between the conductors.
+  And here's a small puzzle. Once the wavefront has passed your section, the wall of charge is built — fine, that's what walls do. But the *current* keeps flowing. Why? Because the wavefront is still out there ahead of you, still building walls farther down the line, and it needs charge to do it. The current through your already-charged section is feeding the section in front of you — like water in a pipe still flowing because somebody downstream is still drinking. And the copper isn't perfect, by the way: there's a tiny residual along-field left at the surface paying the resistive toll, so the wave gets a little weaker as it goes.
 
-  At the same time, the wave is moving, so the voltage changes from place to place. That creates a small field along the trace, and that field nudges the electrons sideways. That motion is the current.
+  The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field, the same way a line of dominoes reacts to the first push. The dominoes aren't transporting the energy down the line — the *falling pattern* is. And on a PCB, the falling pattern is the field.
 
-  The important point is that the electrons aren’t carrying the signal down the line. Each section just reacts locally as the wave arrives—building charge, supporting current, and then settling into a steady state as the wave passes.
+  You can also say this without ever mentioning an electron. The wave's $\mathbf E$ and $\mathbf B$ exist right up to the surface of the copper, but inside the copper they have to be zero — that's what good conductors do. So there's a jump at the surface, and nature does not allow that for free: wherever the perpendicular $\mathbf E$ has a jump, there must be **charge** to account for it; wherever the parallel $\mathbf B$ has a jump, there must be **current**. The metal has no choice. You can read off the surface charge and the surface current *purely from what the field is doing in the dielectric* — no forces, no electron motion, no kinetics. The electrons just sign the ledger.
 
-  The wave drives everything; the electrons respond.
+  And that's really all there is to it. The hard part is believing it.
 </div>
 
-#### 1.2.1. Intuitive Picture (alt)
+> Translating into formal terms: 
+> - "down-field" → transverse $E_x$ (normal to the conductors);
+> - "along-field" → longitudinal $E_z$ (along the direction of propagation).
 
-<div class="quote feynman">
-So put it all together:
-- The wave is in the plastic.
-- The *down-field* from the wave shoves electrons around on the copper surfaces. Those electrons build a wall that keeps the wave trapped in the plastic.
-- The *along-field* from the wave pushes other electrons along the trace, giving you the little current you measure with your ammeter.
-
-The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field, the same way a line of dominoes reacts to the first push. The dominoes aren't transporting the energy down the line — the *falling pattern* is. And on a PCB, the falling pattern is the field.
-
-You can also say this without ever mentioning an electron. The wave's $\mathbf E$ and $\mathbf B$ exist right up to the surface of the copper, but inside the copper they have to be zero — that's what good conductors do. So there's a jump at the surface, and nature does not allow that for free: wherever the perpendicular $\mathbf E$ has a jump, there must be **charge** to account for it; wherever the parallel $\mathbf B$ has a jump, there must be **current**. The metal has no choice. You can read off the surface charge and the surface current *purely from what the field is doing in the dielectric* — no forces, no electron motion, no kinetics. The electrons just sign the ledger.
-
-And that's really all there is to it. The hard part is believing it.
-</div>
 <br />
 
 
 #### 1.2.2. Electric Field at the Conductor Boundary
-
-> Throughout, $\hat x$ points from the trace to the return plane, $\hat z$ points in the propagation direction.
 
 In a microstrip, the electric field in the dielectric has two components:
 - a dominant transverse component $E_x$, normal to the conductor surfaces
@@ -488,7 +473,7 @@ The system rapidly reaches a local equilibrium in which:
 - The *external field is confined to the dielectric*, since the electric field cannot extend into the conductor.
 <br />
 
-##### Boundary Codition
+##### Boundary Condition
 
 Following the more intuitive discussion above, here's the formal version.
 
@@ -557,15 +542,17 @@ Thus, **the conductor shapes the electric field** through the formation of surfa
 
 #### 1.2.4. Surface Current (driven by $\mathbf B$ and $E_z$)
 
-This section presents two views of the surface current:
-1. Given a magnetic field at the surface, what current must exist? ($\mathbf B \to \mathbf K$)
-2. How does current get established as the wave propagates? ($E_z \to \mathbf J$)
+This section presents two views of the surface current — the same two arguments the intuition foreshadowed:
+1. Given a magnetic field at the surface, what current must exist? ($\mathbf B \to \mathbf K$) — the formal "$\mathbf B$-jump → current" boundary argument.
+2. How does current get established as the wave propagates? ($E_z \to \mathbf J$) — the dynamical "along-field pushes electrons" picture.
 <br />
 
 
 ##### 1. Magnetic Field $\mathbf B$ drives the need for a Surface Current
 
 The magnetic field associated with the propagating wave is tangential to the conductor surface. Maxwell’s equations require that this field be supported by current at the boundary.
+
+> TO DO: This conflicts with the cancellation framing in §1.6.1 ("forward-going field around the trace and the backward-going field around the return current cancel each other out") 
 
 When the magnetic field from the trace tries to enter the return plane, it induces [eddy currents](https://coertvonk.com/physics/electromagnetism/magnetism/motional-emf-30242) that create their own opposite magnetic field. This prevent the magnetic field $\mathbf{B}$ from entering. To stay in the $xy$-plane, the magnetic field has no other choice but to **loop around the trace**.
 <figure>
@@ -582,7 +569,7 @@ When the magnetic field from the trace tries to enter the return plane, it induc
   <figure>
     <center>
     <img src="../media/infographics/boundary-amperian-loop.svg" style="width: 100%; max-width:600px; height: auto;">
-    <figcaption><i>Crosss-section close-up of Amperian loop straddling the trace/dielectric boundary.</i></figcaption>
+    <figcaption><i>Cross-section close-up of Amperian loop straddling the trace/dielectric boundary.</i></figcaption>
     </center>
   </figure>
 
@@ -628,7 +615,7 @@ $$
 
 where:
 - $\mathbf{K}$ is the surface current in A/m
-- $B_y$ is the traverse component of the magnetic field at the boundary
+- $B_y$ is the transverse component of the magnetic field at the boundary
 
 [^sCurrent]: $\mathbf K$ and $\sigma_s$ are **surface** densities — the boundary counterparts of the volume densities $\mathbf J$ (A/m², current per cross-sectional area) and $\rho$ (C/m³, charge per volume). In a *perfect conductor*, all the response squeezes into an infinitely thin layer at the surface, so the volume densities formally become delta-functions and the meaningful quantities are $\sigma_s$ (C/m²) and $\mathbf K$ (A/m).
 </div>
@@ -677,7 +664,7 @@ As the wavefront advances:
 
 Surface charge and current are linked by the Continuity Equation, a fundamental law in physics that expresses the conservation of charge.
 $$
-  \nabla\cdot J + \frac{\partial \rho}{\partial t} = 0
+  \nabla\cdot \mathbf J + \frac{\partial \rho}{\partial t} = 0
   \tag{Continuity}
 $$
 
@@ -703,7 +690,7 @@ $$
     + \frac{\partial \sigma_s}{\partial t} = 0
   $$
 
-  Recal the expression for the surface current $\mathbf K$ from the previous section:
+  Recall the expression for the surface current $\mathbf K$ from the previous section:
   <div class="quote">
 
   $$
@@ -740,7 +727,7 @@ $$
 $$
 
 where:
-- $K_z$ is (the traverse component) of the surface current
+- $K_z$ is (the transverse component) of the surface current
 - $v$ is the propagation speed
 - $\sigma_s$ is the surface charge density
 </div>
@@ -755,7 +742,7 @@ This relation holds for a traveling wave and expresses that:
 
 Once the wavefront has passed:
 - the transverse field ($E_x$) becomes steady
-- the longitudinal field ($E_z$) becomes small but nonzero (to sustains current against resistive losses in the conductor)
+- the longitudinal field ($E_z$) becomes small but nonzero (to sustain current against resistive losses in the conductor)
 
 The surface charge at a given section is established once the wave has passed, but **current continues** through that section to supply the wavefront still advancing ahead.
 <br />
@@ -787,7 +774,7 @@ These quantities are fully constrained by Maxwell’s equations and are not inde
 
 ### 1.3. Sources of the Magnetic Field
 
-Sections §1.1 and §1.2 established that signal propagation is an electromagnetic wave in the dielectric, and that the conductors respond through surface charge and current. We now examine a fundamental question:
+Sections §1.1 and §1.2 established that signal propagation is an electromagnetic wave in the dielectric, and that the conductors respond through surface charge and current. We here examine a fundamental question:
 
 > **What sustains the magnetic field as it spans both dielectric and conductor regions?**
 
@@ -798,7 +785,7 @@ Sections §1.1 and §1.2 established that signal propagation is an electromagnet
   </center>
 </figure>
 
-#### 1.3.1. Intuition
+#### 1.3.1. Intuitive Picture
 
 <div class="quote feynman">
   You might think the magnetic field comes from the current in the copper—and that’s true, but only part of the story.
@@ -814,7 +801,7 @@ Sections §1.1 and §1.2 established that signal propagation is an electromagnet
 <br />
 
 
-#### 1.3.2. Physical Origin
+#### 1.3.2. Sources of the Magnetic Field
 
 The magnetic field is governed by the Ampère–Maxwell equation:
 <div class="quote">
@@ -828,73 +815,69 @@ $$
 $$
 </div>
 
-This equation identifies two disting sources of the magnetic field:
+This identifies two sources:
 - **conduction current $\mathbf J$**
 - **displacement current $\varepsilon\frac{\partial\mathbf{E}}{\partial t}$**
-
-Both contribute to the curl of $\mathbf B$, and therefore to the magnetic field itself.
-
-
-##### Region-Dependent Contributions
-
-In different regions of a microstrip structure, different terms dominate:
-
-*Inside the conductor* (§1.2. [^k2j])
-- The electric field is approximately zero.
-- The displacement current term is negligible.
-- The magnetic field is sustained by **conduction current $\mathbf J$**.
-[^k2j]: The surface current $\mathbf K$ from §1.2 is just $\mathbf J$ integrated across the skin-depth layer where the current flows.
-
-*In the dielectric*  (§1.1)
-- There are no free charges, so $\mathbf J = 0$
-- the magnetic field is sustained by the **time variation of the electric field $\varepsilon\frac{\partial\mathbf{E}}{\partial t}$**
-
-Thus, in the dielectric, the magnetic field exists without any movement of charge.
+<br />
 
 
-##### Continuity Across the Boundary
+#### 1.3.3. Region-Dependent Contributions
 
-At the interface between conductor and dielectric, the governing equation does not change form. Instead, the dominant source term transitions smoothly:
-- from conduction current in the conductor
-- to displacement current in the dielectric
+In different regions different terms dominate:
 
-The magnetic field itself remains **continuous across the boundary**.
+In the **conductor** (§1.2. [^k2j])
+- $\mathbf E \approx 0$
+- displacement current is negligible.
+- magnetic field is sustained by **conduction current $\mathbf J$**
+[^k2j]: The surface current $\mathbf K$ from §1.2 is just $\mathbf J$ integrated across the skin-depth layer where the current flows
 
-This continuity is required because Maxwell’s equations describe a single electromagnetic field defined everywhere in space. The field does not “restart” or “jump” at material interfaces; only the mechanisms that sustain it change.
-
-
-##### Unified Interpretation
-
-The magnetic field surrounding a PCB trace is therefore a single, continuous entity:
-- In the conductor, it is supported by the motion of charge
-- In the dielectric, it is supported by the time variation of the electric field
-
-These are not separate fields, but two contributions to the same solution of Maxwell’s equations.
-
-From this perspective, the electromagnetic wave described in §1.1 is maintained seamlessly across materials:
-- The electric and magnetic fields propagate through the dielectric
-- The conductors respond by supplying the currents required to satisfy boundary conditions
-- The magnetic field remains continuous, regardless of which term sustains it locally
+In the **dielectric**  (§1.1)
+- $\mathbf J = 0$
+- magnetic field is sustained by the **displacement current $\varepsilon\frac{\partial\mathbf{E}}{\partial t}$**
+<br />
 
 
-#### 1.3.3. Implications
+#### 1.3.4. Continuity Across the Interface
 
-This unified view has several important consequences:
-- The magnetic field does not require a physical current path in every region
-- Field continuity determines how current must flow in the conductors
-- Displacement current in the dielectric is as essential to propagation as conduction current in the metal
+The governing equation is valid everywhere; only the dominant source term changes between regions.
 
-Thus, signal propagation is not confined to conductors. It is a property of the electromagnetic field, extending across both dielectric and conductive regions.
+The magnetic field forms a single continuous solution across the structure, even though:
+- it is supported by conduction current in the conductor
+- it is supported by displacement current in the dielectric
+
+At the boundary, the tangential magnetic field is consistent with the required surface current. Without the displacement current term, $\nabla \times \mathbf B$ would have a jump at the dielectric boundary — Maxwell added that term precisely so the field could remain whole, as §1.3.1 put it.
+
+**Closed current loop.** The continuity of the field is mirrored by a continuity of the *current* itself. Conduction current in the trace, displacement current in the dielectric, and conduction current in the return plane form one closed loop, required by the divergence-free constraint $\nabla \cdot \left(\mathbf J + \varepsilon\,\partial \mathbf E/\partial t \right) = 0$:
+
+- forward in the trace (along $+\hat z$)
+- across the dielectric in $+\hat x$ at the leading edge of a positive pulse (as $\mathbf E$ grows)
+- back in the return plane (along $-\hat z$)
+- across the dielectric in $-\hat x$ at the trailing edge (as $\mathbf E$ decays)
+
+The trace and the return plane act like the plates of a propagating capacitor: conduction in the metal, displacement in the dielectric, conduction back. The two source terms are not parallel mechanisms — they are complementary segments of one continuous current loop.
+<br />
 
 
-#### 1.3.4. Summary
+#### 1.3.5. Interpretation
 
-The magnetic field in a PCB transmission structure arises from two sources:
+The magnetic field is not confined to the conductor. It is a continuous field spanning both dielectric and conductor regions.
+
+Conduction current and displacement current are not separate phenomena; they are two contributions to the same electromagnetic field.
+
+<div class="important-note"><span class="icon">💡</span>
+
+**Reconciling §1.2 and §1.3.** §1.2 said "$\mathbf B$ determines $\mathbf K$"; §1.3 says "$\mathbf J$ sustains $\mathbf B$." These are not in conflict, and together they are the formal resolution of §1.3.1's "only part of the story." Maxwell-Ampère, $\nabla \times \mathbf B = \mu \mathbf J + \mu\varepsilon\,\partial \mathbf E/\partial t$, is an *identity* relating $\mathbf B$, $\mathbf J$, and $\partial \mathbf E/\partial t$ at every instant — none of the three is "the cause" of the others. The causal story is the one from §1.2: the wave in the dielectric is primary, and it drives the surface currents. Once those currents exist, Maxwell-Ampère bookkeeping requires them (together with the displacement current) to source the same continuous $\mathbf B$ field that drove them in the first place.
+</div>
+<br />
+
+
+#### 1.3.6. Summary
+
+The magnetic field in a PCB structure arises from:
 - conduction current in the conductors
 - displacement current in the dielectric
 
-These contributions are unified through the Ampère–Maxwell law and together form a continuous magnetic field that supports wave propagation.
-
+Both are required for a complete and consistent electromagnetic description.
 <br />
 
 ---
@@ -903,24 +886,17 @@ These contributions are unified through the Ampère–Maxwell law and together f
 
 ### 1.4. Power Distribution Networks and Rail Collapse 
 
-The power distribution network (PDN) supplies energy to active devices on the PCB. It consists of:
-- power and ground planes
-- interconnects and vias
-- decoupling capacitors
+The power distribution network (PDN) supplies energy to active devices. From a field perspective, it provides the electromagnetic energy required to support changing current and voltage conditions.
+<br />
 
-From a circuit perspective, the PDN delivers current to the load. From a field perspective, it establishes and maintains the **electromagnetic fields** required for device operation.
-
-When a device switches, it does not simply “draw current.” It requires a rapid reconfiguration of the electric and magnetic fields in its vicinity. The PDN must supply the energy associated with this changing field configuration.
-
-
-#### 1.4.1. Intuition
+#### 1.4.1. Intuitive Picture
 
 <div class="quote feynman">
   You ask the circuit for current right now.
 
-  But current isn’t just charge moving — it’s a magnetic field wrapped around a path. And that field has to grow if the current grows.
+  But current isn’t just charge moving — it’s a magnetic field wrapped around a path. And that field has to grow if the current grows. The bigger the path, the more field there is to grow — geometry matters.
 
-  Growing a magnetic field takes energy, and it takes time. The supply can’t instantly reshape the field everywhere in the power network.
+  Growing a magnetic field takes energy, and it takes time. The supply can’t instantly reshape the field everywhere in the power network — the news has to travel from the chip to the supply and back, at the speed of light in the dielectric. Fast, but for sub-nanosecond logic, still not fast enough.
 
   So what happens? The device pulls what it can locally, and the voltage dips. That’s rail collapse.
 
@@ -931,84 +907,80 @@ When a device switches, it does not simply “draw current.” It requires a rap
 <br />
 
 
-#### 1.4.2. Physical Origin of Rail Collapse
+#### 1.4.2. Physical Origin
 
-When a digital device switches, its internal transistors demand a rapid increase in current. This demand must be met through the PDN, which forms a closed current loop between the power source and the load.
+When a device switches, it requires a rapid increase in current. This corresponds to an increase in the magnetic field surrounding the current loop.
 
-Any current flowing in this loop is associated with a magnetic field distributed around the loop. This field stores energy. Increasing the current requires increasing the stored magnetic energy.
+The energy stored in this magnetic field is:
+$$
+  E = \tfrac{1}{2} \, L \, I^2
+$$
 
-This behavior is captured by the inductive relation:
+Increasing current requires increasing this stored energy.
+<br />
+
+#### 1.4.3. Voltage Drop and Inductance
+
+The required energy must be delivered through the PDN. This leads to a voltage drop:
 <div class="quote">
 
 $$
-  \Delta V = L_{PDN} \cdot \frac{dI}{dt}
-$$ where $L_{PDN}$ is the effective inductance of the curent path.
+  \Delta V = L \, \frac{dI}{dt}
+$$ where $L$ is the effective inductance of the current path.
 </div>
+
+This circuit expression represents the field-level requirement that:
+- changing current requires changing magnetic energy
+- changing magnetic energy requires power delivery
 
 If the voltage drop is large enough — what designers call **rail collapse** — the chip misinterprets logic levels or produces timing errors.
 
 
-##### Magnetic Energy Interpretation
+#### 1.4.4. Field Interpretation
 
-The voltage drop can be understood directly in terms of energy stored in the magnetic field. A current I establishes magnetic energy
-$$
-  E = \tfrac{1}{2}\,L_{PDN}\,I^2
-$$
+The circuit relation $\Delta V = L\,dI/dt$ is the macroscopic shadow of a field-level event. The chip's switching current flows in a loop — out the supply pin, through the bond wires, package leads, PCB power and ground planes, decoupling caps, and back. That loop has a magnetic field threaded through it, with energy density $\tfrac{1}{2}\mathbf B^2/\mu$ stored throughout the volume the loop encloses.
 
-As the current increases, the magnetic field must expand and its stored energy must grow. The required power is
-$$
-  P = \frac{dE}{dt} = L_{PDN}\,I\,\frac{dI}{dt}
-$$
+When the chip demands more current, the $\mathbf B$ field everywhere in that loop must grow. Three field-level constraints make this hard:
 
-This energy cannot appear instantaneously; it must be delivered through the PDN. The voltage drop $\Delta V$ is the electrical manifestation of the work required to build up the magnetic field.
+- **Energy must flow into the magnetic field.** That energy comes from the supply, but the supply is centimeters away. Energy moves at the speed of light in the dielectric ($\approx 15$ cm/ns in FR-4) — a 5 cm path is already $\approx 300$ ps round-trip, comparable to the rise time of fast logic.
+- **A growing $\mathbf B$ field induces an opposing $\mathbf E$ field** (Faraday). This back-EMF appears as a voltage drop across the loop's inductance and subtracts from the rail at the chip pin.
+- **The reconfiguration cannot propagate faster than the wave.** The rest of the PDN doesn't yet "know" the chip needs more current; the demand has to travel outward as an EM disturbance and the supply's response has to travel back.
 
-In this sense, rail collapse is not simply a limitation of current delivery, but a consequence of the finite rate at which energy can be supplied to reconfigure the electromagnetic field.
+The decoupling capacitor sidesteps all three. Its electric field already stores the energy locally — in the dielectric between its plates, millimeters from the load. The cap doesn't need to grow a $\mathbf B$ field across a long loop; it just releases stored $\mathbf E$-field energy through a much shorter path. The smaller the loop from cap to load, the smaller its inductance, and the less back-EMF the demand produces.
 
-##### Field-Based Interpretation
+This swap — the cap's $\mathbf E$-field reservoir feeding the growing $\mathbf B$-field around the demand loop — is the "negotiation between electric and magnetic fields" the §1.4.1 intuition named. Every time the chip switches, an $\mathbf E$-field somewhere has to give up energy so a $\mathbf B$-field somewhere can grow.
 
-Equivalently, this behavior follows from Faraday’s law. A changing current alters the magnetic field, which induces an electric field opposing that change. This induced field appears as a back-EMF that reduces the voltage available to the load.
-
-The device experiences this opposition as a temporary drop in supply voltage.
+Rail collapse is therefore a direct consequence of:
+- finite energy delivery rate (set by the speed of light in the PDN dielectric)
+- the geometry of the current loop (which sets how much $\mathbf B$-field energy must change)
+- the distance from local energy reservoirs (which sets how fast charge can be supplied)
 <br />
 
 
-#### 1.4.3. Role of Geometry (Loop Inductance)
+#### 1.4.5. Role of Geometry
 
-The inductance $L_{PDN}$ is determined by the geometry of the current loop:
-- separation between power and return paths
+Inductance depends on the geometry of the current loop:
 - loop area
-- current distribution in planes and vias
+- separation between supply and return paths
 
-Larger loop areas produce larger magnetic fields for a given current and therefore store more energy. As a result:
-- more energy is required to change the current
-- a larger voltage drop is induced
+Larger loop areas store more magnetic energy and require more energy to change current.
 
-Minimizing loop area reduces inductance, lowers stored magnetic energy, and improves transient response.
-
-In field terms, closely spaced planes confine the magnetic field to a smaller region, reducing the total field energy associated with a given current.
+Reducing loop area improves transient performance.
+<br />
 
 
-#### 1.4.4. Role of Decoupling Capacitors
+#### 1.4.6. Role of Decoupling Capacitors
 
-Decoupling capacitors provide a local source of energy to support rapid switching events.
-
-In circuit terms, they supply transient current. In field terms, they store energy in the **electric field** between their plates:
+Capacitors store energy in the electric field:
 $$
-  E = \tfrac{1}{2}CV^2
+  E = \tfrac{1}{2} \, C \, V^2
 $$
 
-When a device switches:
-- the capacitor releases electric-field energy locally
-- this reduces the need for rapid energy delivery through the larger PDN loop
-
-This complements the magnetic-energy behavior of the inductive PDN:
-- inductance governs energy stored in magnetic fields
-- capacitance governs energy stored in electric fields
-
-Effective PDN design balances these two forms of energy storage to maintain stable voltage.
+They can provide local energy, reducing the need for rapid energy transfer through the PDN.
+<br />
 
 
-##### Example (TO DO: do we need this?)
+#### 1.4.7. Example
 
 A typical microcontroller might switch 100 mA in 1 ns. Even a small parasitic inductance $L = 1\,\text{nH}$ (a few mm of trace) gives
 $$
@@ -1016,41 +988,16 @@ $$
 $$
 
 A 100 mV dip on a 3.3 V rail is enough to upset logic levels in some chips. A 5 mm trace from a poorly placed decoupling capacitor can already reach this.
-
-
-#### 1.4.5. Interpretation
-
-Rail collapse arises from the interaction of fields, energy storage, and geometry:
-- Increasing current requires expanding the magnetic field
-- Expanding the magnetic field requires energy
-- Delivering that energy requires voltage
-
-If the PDN cannot supply energy quickly enough, the voltage at the load drops.
-
-Thus, PDN behavior is fundamentally electromagnetic:
-- currents reflect changing fields
-- voltage drops reflect energy transfer constraints
-- geometry determines how efficiently energy can be stored and delivered
-
-
-#### 1.4.6. Design Implications (TO DO: do we still need this?)
-
-Effective PDN design focuses on minimizing the impedance seen by transient currents.
-
-Key strategies include:
-- Reduce loop inductance → place power and return planes close together and minimize via and path length.
-- Provide local energy storage → place decoupling capacitors close to load pins to maintain low impedance over a broad spectrum.
-- Prevent field spreading and lower inductance → maintaine continuous return paths.
 <br />
 
-#### 1.4.5. Summary
 
-A switching device requires rapid changes in current, which correspond to changes in the magnetic field of the PDN loop. The energy associated with this field is proportional to loop inductance and current squared.
+#### 1.4.8. Summary
 
-Because this energy must be supplied in finite time, a voltage drop is required. This manifests as rail collapse.
+Rail collapse arises because:
+- increasing current requires increasing magnetic field energy
+- energy cannot be delivered instantaneously
 
-Minimizing loop inductance and providing local electric-field energy storage through decoupling capacitors reduces this effect and stabilizes the supply voltage.
-
+Minimizing inductance and providing local energy storage reduces voltage drop.
 <br />
 
 ---
@@ -1060,24 +1007,43 @@ Minimizing loop inductance and providing local electric-field energy storage thr
 
 ### 1.5. Crosstalk
 
-Crosstalk is the unintended coupling of signals between adjacent conductors. In a PCB, it arises because the electromagnetic fields associated with one trace extend into space and interact with nearby structures.
+Crosstalk arises from interaction between electromagnetic fields associated with different conductors.
 
-From a field-theory perspective, crosstalk is not a secondary effect—it follows directly from Maxwell’s equations. Any time-varying electric or magnetic field can induce charge motion or voltage in a neighboring conductor.
+A time-varying signal produces electric and magnetic fields that extend into space. If another conductor lies within this field, it becomes part of the system.
+<br />
 
-#### 1.5.1. Intuition
 
-A signal trace does not contain its fields perfectly. When it switches, its electric and magnetic fields extend into the surrounding space.
+#### 1.5.1. Intuitive Picture
 
-If another conductor is placed within that space, it becomes part of the field system. The changing electric field moves charge on that conductor, and the changing magnetic field induces a voltage in it.
+<div class="quote feynman">
+
+Look. Two traces on a board, side by side. One of them is doing something — call it the *aggressor*, that's the standard name. The other is just sitting there, minding its own business. Call it the *victim*. Because in a moment, that's what it is.
+
+Here's the trouble. When you draw the aggressor on your schematic, you picture its field as a neat little package tucked between the trace and the return plane underneath. But fields don't care about your schematic. Maxwell tells them where to go, and Maxwell says fields *spread*. Most of the energy stays where you want it, sure — but some of the electric field bulges sideways into the dielectric, and some of the magnetic loops swing out wider than the trace itself. The fields are leaky. They don't have to be. They just are.
+
+And the victim is sitting right there in the leak. It didn't ask to be. The field doesn't ask permission.
+
+When the aggressor's *voltage* swings, the electric field changes everywhere — including over the victim. And what does a changing electric field do to a piece of metal? It pushes charge around. So charge moves on the victim. That's **capacitive coupling**. The two traces, whether you wanted it or not, *are* a capacitor.
+
+When the aggressor's *current* swings, the magnetic field changes everywhere — including through the little loop the victim makes with its own return path. And what does a changing magnetic field do to a loop? It drives a current around it, in the direction that *opposes the change* — Lenz's law, nature being stubborn about being pushed around. That's **inductive coupling**. The two trace-loops, whether you wanted it or not, *are* a transformer.
+
+So far, both effects just add up. But here's the puzzle: they don't add up the same way at both ends of the victim.
+
+The capacitive current splits and travels *both* ways down the victim. The inductive current, because of Lenz, flows only *one* way — backward, toward the aggressor's source.
+
+So at the near end (the end nearest the source), both effects push the same way and they *reinforce*. **Near-end crosstalk** — substantial. At the far end, they push opposite ways and they *fight*. **Far-end crosstalk** — on a uniform line, almost cancels. Same physics. Opposite sign. Depends on which end you put your probe.
+
+And once you see it, crosstalk stops looking like two circuits sneaking signals at each other. It's *one* electromagnetic field sloshing around between the aggressor and its return — and a second piece of copper that, through no fault of its own, found itself sitting where the field happens to be. Move the copper. Or confine the field. The fields never cared about your circuits to begin with.
+</div>
+
+> TO DO: remove the next paragraph.  They Intuition section already covers this
+
+A signal trace does not contain its fields perfectly. When it switches, its electric and magnetic fields extend into the surrounding space. If another conductor is placed within that space, it becomes part of the field system: the changing electric field moves charge on it, and the changing magnetic field induces a voltage along it.
 
 Crosstalk is therefore not an interaction between circuits, but between fields and conductors.
 
 
-#### 1.5.2. Physical Origin
-
-TO DO: write connecting paragraph
-
-##### Geometry and Field Overlap
+#### 1.5.2. Geometry and Field Overlap
 
 Consider two parallel microstrip traces above a common return plane:
 - the **aggressor** trace carries a time-varying signal
@@ -1094,50 +1060,77 @@ Each produces a different coupling mechanism — and both are direct consequence
 <figure>
   <center>
   <img src="../media/infographics/crosstalk-mechanisms.svg" style="width: 90%; max-width:600px; height: auto;">
-  <figcaption><i>Across-view: Capacitive coupling (<b>E</b> field fringing between traces) and inductive coupling (<b>B</b> field threading the victim loop).</i></figcaption>
+  <figcaption><i>Cross-section: Capacitive coupling (<b>E</b> field fringing between traces) and inductive coupling (<b>B</b> field threading the victim loop).</i></figcaption>
   </center>
 </figure>
 <br />
 
 
-##### Capacitive Coupling (electric field)
+#### 1.5.3. Capacitive Coupling (electric field)
 
-The electric field from the aggressor terminates partly on the victim trace, establishing a **mutual capacitance** $C_m$ between the two conductors.
-
-This is purely Gauss's law at work: electric field lines must terminate on a conductor, and if another trace is closer or more convenient than the return plane, some of them will land there instead.
-
-A time-varying voltage $V$ on the aggressor produces a time-varying electric field. This induces surface charge on the victim trace, resulting in a displacement current $I_C$:
-$$
-    I_C = C_m \ \frac{dV}{dt}
-$$
-
-**Characteristics:**
-- proportional to the voltage transition rate $dV/dt$
-- depends on the strength and spacial extent of the electric field
-- increases with closer spacing, longre parallel runs and weaker field confinement
-
-<br />
-
-
-##### Inductive Coupling (magnetic field)
-
-The time-varying current in the aggressor generates a time-varying magnetic field. Part of this field links the loop formed by the victim trace.
-
-By Faraday’s law, the changing magnetic flux induces a voltage:
-$$
-    \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} 
-    \tag{\text{Faraday}}
-$$
+The electric field terminates partly on the neighboring conductor, creating **mutual capacitance**.
 
 <details>
   <summary>Expand if you ❤️ to see the derivation.</summary>
 
-  Integrate Faraday's Law over the opn surface $S$ of the victim loop:
+  Imagine two parallel traces on a PCB:
+  - Trace 1 (Aggressor): has a time-varying voltage $V(t)$
+  - Trace 2 (Victim): is affected by the electric field of Trace 1.
+  - $C_m$ (Mutual Capacitance): The capacitance between Trace 1 and Trace 2.
+
+By definition, the charge $Q$ induced on the victim trace due to the potential on the aggressor trace is proportional to the mutual capacitance: 
+<div class="quote">
+
+  $$
+    Q = C_{m}\cdot V_{1}
+  $$
+</div>
+
+From the Continuity Equation ($\nabla \cdot \mathbf{J} + \frac{\partial \rho}{\partial t} = 0$), we know that a change in charge over time results in a flow of current. Taking the time derivative of the charge equation:
+$$
+  \frac{dQ}{dt} = \frac{d}{dt}(C_m V_1) 
+$$
+
+The current $I$ is defined as the rate of flow of charge ($I=\frac{dQ}{dt}$).
+</details>
+
+<div class="important-note"><span class="icon">💡</span>
+
+A time-varying voltage on the aggressor produces a time-varying electric field. This induces surface charge on the victim trace, resulting in current:
+$$
+    I_C = C_m \ \frac{dV}{dt}
+$$ where:
+- $I_C$ is the current in the victim trace
+- $C_m$ is the mutual capacitance
+- $V$ is the voltage on the aggressor
+</div>
+
+Characteristics:
+- proportional to the voltage transition rate $dV/dt$
+- depends on the strength and spatial extent of the electric field
+- increases with closer spacing, longer parallel runs and weaker field confinement
+<br />
+
+
+#### 1.5.4. Inductive Coupling (magnetic field)
+
+The changing current in the aggressor generates a changing magnetic field. Part of this field links the loop formed by the victim trace.
+
+<details>
+  <summary>Expand if you ❤️ to see the derivation.</summary>
+
+  By Faraday’s law, the changing magnetic flux induces an electric field:
+  $$
+      \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} 
+      \tag{\text{Faraday}}
+  $$
+
+  Integrate Faraday's Law over the open surface $S$ of the victim loop:
   $$
     \iint_S (\nabla \times \mathbf{E}) \cdot d\mathbf{a} = -\iint_S \frac{\partial \mathbf{B}}{\partial t} \cdot d\mathbf{a}
   $$
 
-  Using Stoke's Theorem, we convert the surface intgral of the curl of $\mathbf E$ into a line integral of $\mathbf E$ around the closed boundary loop $C$.
+  Using Stoke's Theorem, we convert the surface integral of the curl of $\mathbf E$ into a line integral of $\mathbf E$ around the closed boundary loop $C$.
   $$
     \oint_C \mathbf{E} \cdot d\mathbf{l} 
     = - \frac{d}{dt} \iint_S \mathbf{B} \cdot d\mathbf{a}
@@ -1145,7 +1138,7 @@ $$
 
   The term on the left, $\oint_C \mathbf{E} \cdot d\mathbf{l}$, is the definition of electromotive force or **induced voltage** $V_{ind}$.
 
-  The surface intgral on the right is the definition of magnetic flux ($\Phi_m$) passing through the loop:
+  The surface integral on the right is the definition of magnetic flux ($\Phi_m$) passing through the loop:
   <div class="quote">
 
   $$
@@ -1163,39 +1156,36 @@ $$
     \Phi_m \triangleq L_m I_a 
   $$ where $L_m$ "hides" the geometry (distance, height and length) into a single constant.
 
-  Finally, we substitude and the definition of flux back into the Faraday result:
+  Finally, we substitude and the definition of flux
   $$
     V_L = - \frac{d(L_m I_a )}{dt}
   $$
-
-  Since $L_m$ is constant determined by the physical layout of the traces:
 </details>
 <br />
 
 <div class="important-note"><span class="icon">💡</span>
 
-The changing magnetic flux creates an induced field that opposes the change that created it. The induced voltage $V_L$:  
+The changing magnetic flux creates an induced field that opposes the change that created it. The induced voltage:  
 $$
   V_L = - L_m\frac{dI}{dt}
-$$
+$$ where:
+- $V_L$ is the induced voltage on the victim trace
+- $L_m$ is the mutual inductance between the two trace-return-plane loops.
+- $I$ is the current in the aggressor trace.
 </div>
 
-Where $L_m$ is the mutual inductance between the two trace-return-plane loops. It depends on how much of the aggressor's $\mathbf B$ field threads through the victim's loop — set by the physical distance between traces, the height above the return plane, and the length of the parallel run.
+ It depends on how much of the aggressor's $\mathbf B$ field threads through the victim's loop — set by the physical distance between traces, the height above the return plane, and the length of the parallel run.
 
-**Characteristics:**
+Characteristics:
 - proportional to the rate of change of the aggressor's current $dI/dt$
 - depends on loop geometry and magnetic flux linkage
 - increases with larger loop area and weaker return-path control
-
-**Note:**
-
-Inductive crosstalk is worst where the return path is constrained. On a PCB with a continuous return plane, the return current mirrors directly under the trace, keeping the loop area small. But through connectors, packages, and vias, multiple signals often share a single return pin instead of a wide plane. The return currents are forced through a common impedance, the loop areas grow, and the mutual inductance between aggressor and victim increases sharply.
 <br />
 
 
-##### Both Matter
+#### 1.5.5. Combined Effect
 
-The total induced signal on the victim trace is the superposition of capacitive and inductive contributions.
+This is the reinforce-vs-fight asymmetry that the §1.5.1 intuition foreshadowed. Formally:
 
 The capacitive and inductive coupled signals arrive at the victim differently:
 
@@ -1203,35 +1193,32 @@ The capacitive and inductive coupled signals arrive at the victim differently:
 
 - **Inductive coupling** induces a current that opposes the aggressor's current (Lenz's law). That current flows toward the near end, producing a pulse of the same polarity as the aggressor there, and a pulse of opposite polarity at the far end.
 
+The total induced signal is the sum of capacitive and inductive contributions.
+
 In uniform transmission lines:
 
-- **Near-End Crosstalk (NEXT)** appears closest to the aggressor's source. The capacitive and inductive components have the same polarity — they add. 
+- **Near-End Crosstalk (NEXT)** appears closest to the aggressor's source. The capacitive and inductive components have the same polarity — they reinforce. 
 
-- **Far-End Crosstalk (FEXT)** appears at the far end. The capacitive and inductive components have opposite polarity — they partially cancel. In a microstrip, FEXT is nonzero but typically smaller than NEXT.
+- **Far-End Crosstalk (FEXT)** appears at the far end. The capacitive and inductive components have opposite polarity — they partially cancel.
+<br />
 
 
-#### 1.5.3. Design Implications
+#### 1.5.6. Design Implications
 
-Because crosstalk is determined by field geometry, it is controlled by physical layout rather than schematic connectivity.
-
-Key factors include:
+Crosstalk depends on field overlap and geometry:
 - **Trace spacing:** increasing separation reduces field overlap
 - **Dielectric thickness:** reducing height to the return plane improves confinement
 - **Return path continuity:** uninterrupted reference planes prevent field spreading
-- **Loop area:** minimizing loop area reduces magnetic coupling
-- **Routing structure:** stripline geometries provide better confinement than microstrip
+- **Loop area:** minimizing the *aggressor's* loop reduces the $\mathbf B$ field generated; minimizing the *victim's* loop reduces the flux it captures. Both levers reduce magnetic coupling.
+<br />
 
-
-#### 1.5.4. Summary
+#### 1.5.7. Summary
 
 Crosstalk is the result of electromagnetic fields from one conductor interacting with another. It arises from:
 - electric-field coupling (mutual capacitance)
 - magnetic-field coupling (mutual inductance)
 
-Both mechanisms are governed by Maxwell’s equations and depend on the spatial distribution of fields.
-
-Effective control of crosstalk requires managing those fields through careful geometric design.
-
+Both are direct consequences of Maxwell’s equations. As §1.5.1 put it: there is one shared electromagnetic field, and the victim is a conductor that found itself in the wrong place. Every layout decision that follows in §2 either reduces the field's reach or reduces the victim's overlap with it.
 <br />
 
 ---
@@ -1241,148 +1228,86 @@ Effective control of crosstalk requires managing those fields through careful ge
 
 ### 1.6. Electromagnetic Interference (EMI)
 
+Signal integrity asks whether the field arrives at the receiver correctly; EMI asks whether the field arrives somewhere it should not.
+
 In a properly designed transmission structure, the electromagnetic fields associated with a signal are largely confined to the region between the signal conductor and its return path. This confinement minimizes interaction with the surrounding environment.
 
-Electromagnetic interference (EMI) occurs when this confinement is degraded. The fields extend beyond their intended region, allowing energy to couple into other structures or radiate into free space.
+EMI occurs when electromagnetic fields are no longer confined to their intended region, allowing energy to couple into other structures or radiate into free space.
 
 Thus, EMI is not a separate phenomenon, but a direct consequence of how well the electromagnetic field is contained by the geometry.
+<br />
 
-<figure>
-  <center>
-  <img src="../media/infographics/emi-mechanisms.svg" style="width: 90%; max-width:800px; height: auto;">
-  <figcaption><i>Top: intact return path (fields cancel, minimal radiation) vs. broken return path (enlarged loop radiates). Middle: four EMI escape paths on a PCB. Bottom: radiation formula and design levers.</i></figcaption>
-  </center>
-</figure>
-
-
-#### 1.6.2. Intuitive Picture (TO DO: do we still need this?)
+#### 1.6.1. Intuitive Picture
 
 <div class="quote feynman">
-  A signal on a PCB is a guided electromagnetic wave. As long as the trace and its return path keep the fields tightly contained, the energy stays where it belongs.
+  Here's a thing about your PCB trace that nobody tells you. It is, secretly, an antenna. It always was.
 
-  But if you break that containment—open up the return path, spread the loop, or let the geometry get large compared to the wavelength—the fields are no longer “held in place.”
+  Because what's a trace, really? A piece of metal carrying a current. And what's an antenna? A piece of metal carrying a current. The difference between the two is whether the field stays put.
 
-  And once the fields are free, they don’t just sit there. They propagate outward as waves.
+  When you do everything right — trace tight to its return plane, return path continuous, loop area small — the field *does* stay put. The forward-going field around the trace and the backward-going field around the return current cancel each other out at any reasonable distance. A meter from the board, it's like the trace isn't even there. The wave runs happily down the line, the receiver is happy, and nothing leaks.
 
-  At that point, your PCB trace has quietly turned into an antenna.
+  But break the containment — *anywhere* — and the cancellation fails. A slot in the return plane. A long via transition without a return via. Power and ground too far apart. Whatever it is, the return current can't stay underneath the signal. It detours. The loop opens up. The forward and backward fields no longer have anyone to cancel against.
 
-  EMI is what happens when the fields escape.
+  And what do unconfined fields do? They don't sit around politely. They propagate. They've always wanted to propagate — that's what fields do — and now nothing's holding them in. The wave that was supposed to travel from your driver to your receiver is *also* traveling sideways, outward, into your enclosure, into the air, into the next room. At the speed of light. In every direction. And the bigger the loop you accidentally opened up, the more of the wave is getting out.
+
+  Here's the scary part. The radiated power scales as the *square* of the loop area, and the *fourth* power of frequency. Double the frequency: sixteen times more radiation. Quadruple the loop area: another sixteen times. Both at once: 256 times. That's why this hurts more every year — switching speeds keep going up, and the physics doesn't.
+
+  And once you see this, EMI stops looking like a separate failure mode. It's crosstalk where the victim is *very far away*. Same loose fields. Same Maxwell. Same return-path discipline. You're either keeping the field where you put it, or you're not. And if you're not, sooner or later the field is going to find somebody it doesn't belong to.
 </div>
 
 
-#### 1.6.3. Field Confinement in Ideal Structures
+#### 1.6.2. Field Confinement
 
-In an ideal microstrip or stripline:
-- the electric field is concentrated between signal and return
-- the magnetic field forms tight loops around the trace–return pair
-- the return current flows directly beneath the signal path
+To make the intuition above precise: in a well-designed structure, the signal's electric and magnetic fields stay tightly localized between the trace and its return plane. The forward field around the trace and the backward field around the return current cancel at any reasonable distance — the structure looks neutral from outside, even though it carries significant power inside.
 
-This configuration minimizes loop area and confines both electric and magnetic energy to a small region.
+Three geometric conditions deliver this confinement:
+- a continuous reference plane directly under the signal layer
+- minimal trace-to-plane distance, so the field is squeezed into a small dielectric volume
+- minimal loop area, set by the area enclosed between the forward signal current and its return current
 
-As a result:
-- little energy escapes the structure
-- coupling to other conductors is minimal
-radiation is weak
+The continuous return plane is the load-bearing element. It allows the return current to localize directly under the signal, which is what keeps the loop small. When all three conditions are met, little energy escapes, coupling to other conductors is minimal, and radiation is weak.
 <br />
 
 
-#### 1.6.4. Mechanism of Field Leakage
+#### 1.6.3. Loss of Confinement
 
-The physics comes from the familiar Maxwell's equations. The difference is context: signal integrity asks whether the field arrives at the receiver correctly; EMI asks whether the field arrives somewhere it should not.
+When the geometry conditions of §1.6.2 are violated, the fields must expand to satisfy Maxwell's equations. Common causes:
+- gaps or splits in reference planes
+- changes of reference layer without a close return via
+- long via transitions that separate signal and return
+- large separation between power and ground conductors
 
-Radiation is therefore not a separate mechanism—it is the natural continuation of the same field dynamics when boundary constraints are relaxed.
+In each case, the return current cannot remain directly under the signal. It detours; the loop opens up; the forward and backward fields no longer have anyone to cancel against. The magnetic field spreads outward, and the electric field extends further into the surrounding space.
+
+This expansion has two visible consequences. The **electric-field expansion** increases capacitive coupling to nearby conductors — felt by neighbors close enough to be in the bulging $\mathbf E$ field. The **magnetic-field expansion** increases mutual inductance with nearby loops, and at a distance becomes radiation into free space. Crosstalk and EMI are therefore the same failure mode at different ranges: both result from a loop that opened up further than the design intended.
 <br />
 
 
-#### 1.6.5. Conditions for Radiation
+#### 1.6.4. Radiation
 
-A current loop is an antenna. For a small loop (perimeter ≪ $\lambda$), the radiated electric field $E$ is proportional as [^EMCLOOP]
-[^EMCLOOP]: Derived from the magnetic dipole radiation formula. The full expression includes constants ($\mu_0$, $c$), but the proportionality to $f^2$, $A$, and $I$ captures the design levers.
+The expanded loop is an antenna.
+
+<div class="important-note"><span class="icon">💡</span>
+
+For a small loop (perimeter ≪ $\lambda$), the radiated electric field $E$ is proportional as [^EMCLOOP]
 $$
     E_{rad} \;\propto\; \frac{f^2 \, A \, I}{r}
-$$
-
-Where:
+$$ where:
 - $f$ is the frequency of the signal
 - $A$ is the loop area
 - $I$ is the loop current
 - $r$ is the distance
-<br />
+[^EMCLOOP]: Derived from the magnetic dipole radiation formula. The full expression includes constants ($\mu_0$, $c$), but the proportionality to $f^2$, $A$, and $I$ captures the design levers.
 
-#### 1.6.6. Mechanisms of Field Leakage
+</div>
 
-Field confinement depends on the availability of a continuous, nearby return path. When that path is disrupted or displaced, the fields must expand to satisfy Maxwell’s equations.
-
-Common causes include:
-- gaps or splits in reference planes
-- changes in reference layer without a close return path
-- long via transitions that separate signal and return
-- large separation between power and ground conductors
-
-In these situations:
-- return current cannot remain directly under the signal
-- loop area increases
-- the magnetic field spreads outward
-- the electric field extends further into surrounding space
-
-This expansion represents a **loss of confinement**.
+The scaling is sharp. Radiated *power* goes as $f^4 A^2$ — doubling the frequency multiplies power by 16, and quadrupling the loop area another 16. This is why edge rates and unintended loop area dominate EMC budgets at modern switching speeds.
 <br />
 
 
-#### 1.6.7 Radiation and Coupling
+#### 1.6.5. Summary
 
-When fields are no longer confined:
-- **Magnetic field expansion** increases mutual inductance with nearby structures
-- **Electric field expansion** increases capacitive coupling
-
-Together, these lead to:
-- **crosstalk** between adjacent conductors
-- **common-mode currents** on unintended paths
-radiation into free space
-
-Radiation can be understood as the limiting case of field leakage, where the fields are no longer bound to the structure and propagate outward as electromagnetic waves.
-<br />
-
-
-#### 1.6.8 Relation to Geometry and Return Paths
-
-Field confinement is fundamentally determined by geometry:
-
-Close proximity of signal and return paths → strong confinement
-Larger separation → weaker confinement
-
-A continuous reference plane enables:
-
-localized return current
-minimal loop area
-tightly bound magnetic field
-
-Conversely, discontinuities force the current to detour, increasing loop size and allowing the fields to expand.
-
-Thus, maintaining a continuous, nearby return path is the primary means of controlling EMI.
-<br />
-
-
-#### 1.6.9. Interpretation
-
-EMI is best understood not as an independent effect, but as a failure of the structure to confine the electromagnetic field.
-- Signals are electromagnetic waves guided by conductors
-- Conductors confine fields through boundary conditions and geometry
-- When that confinement weakens, the fields spread and interact with the environment
-
-In this view:
-- crosstalk is lateral field leakage
-- radiation is outward field leakage
-- both arise from the same underlying mechanism
-<br />
-
-
-#### 1.6.10. Summary
-
-Electromagnetic interference arises when the fields associated with a signal are no longer confined to their intended region.
-
-Disruptions in return paths or increases in loop area cause the electric and magnetic fields to spread, leading to coupling and radiation. Effective EMI control is therefore achieved by maintaining tight field confinement through careful control of geometry and return paths.
-
+EMI arises when electromagnetic fields extend beyond their intended region. Field confinement depends on a continuous, nearby return path and a small loop area. When the loop opens — from a plane discontinuity, a stray via, or a sloppy stack-up — the fields expand. At short range, the expansion shows up as crosstalk; at long range, as radiated emission. Controlling the geometry of the return path is the primary lever for both.
 <br />
 
 ---
@@ -1393,20 +1318,21 @@ Disruptions in return paths or increases in loop area cause the electric and mag
 
 ## 2. From Physics to Layout
 
-Chapter 1 established how signals actually travel on a PCB — as EM waves guided by copper boundaries, with energy in the dielectric and currents as the electrons' response to the field. This chapter turns that physics into layout decisions.
+Chapter 1 established that signals propagate as electromagnetic waves guided by conductor geometry, with energy residing primarily in the dielectric. Voltage and current are derived quantities that reflect the behavior of the underlying fields.
 
-The sections proceed from rules to physical build to final strategy:
+This chapter translates those results into practical PCB design decisions.
 
-- **§2.1** distills the field theory into layout rules covering signal quality, crosstalk, rail collapse, and EMI.
-- **§2.2** explains the OPNhydro stack-up — a Low-EMI four-layer arrangement driven by the 6.5 A peak on the 24 V input rail and the isolation moats around the pH and EC islands.
-- **§2.3** specifies the dielectric and copper.
-- **§2.4** separates the noisy motor-control, digital, and sensitive analog domains.
-- **§2.5** covers enclosure and mechanical constraints.
-- **§2.6** derives trace widths from current, impedance, and thermal limits.
-- **§2.7** assembles all of the above into a concrete layout strategy.
+The central principle is:
 
-Each rule in this chapter ties back to a specific result from Chapter 1. The aim is that no rule is a folklore prescription — every one has a physical reason behind it.
+> **PCB layout controls electromagnetic field geometry.**
+
+Design rules presented in this chapter follows from one of four physical mechanisms:
+- disruption of wave propagation (signal integrity)
+- insufficient energy delivery (PDN behavior)
+- field overlap (crosstalk)
+- loss of field confinement (EMI)
 <br />
+
 
 ### 2.1. PCB Design Rules
 
@@ -1461,7 +1387,7 @@ Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fie
 
 #### Rail Collapse
 
-Every time a chip switches, it draws a sharp current pulse from the power rail. That pulse passes through the inductance of the power distribution network, producing a voltage drop $\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$. The goal is to minimize the PDN inductance across the full frequency range over which the chip draws current.
+Every time a chip switches, it draws a sharp current pulse from the power rail. That pulse passes through the inductance of the power distribution network, producing a voltage drop $\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$. The goal is to minimize the PDN inductance across the full frequency range over which the chip draws current. Three levers reduce that inductance: tight coupling between power and return planes (small loop area), local energy reservoirs (decoupling caps close to the load), and continuous return paths (no detours that enlarge the loop).
 
 **Rule 3a — Tightly couple power and return planes.** A power plane and return plane separated by a thin dielectric (2–3 mil) form a parallel-plate capacitor with very low inductance. This provides broadband decoupling across the entire board area — the EM field between the planes can supply current before the discrete capacitors or the regulator can respond. This design uses two GND planes (L2, L3) with power routed as traces rather than a dedicated plane, so broadband plane decoupling is achieved through discrete capacitors instead (see §2.2).
 
