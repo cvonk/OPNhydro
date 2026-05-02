@@ -102,10 +102,10 @@
 }
 </style>
 
-Modern high-speed electronic systems cannot be understood using lumped circuit models alone. As signal transition times decrease, the spatial extent of electromagnetic fields becomes comparable to the physical dimensions of PCB interconnects. Under these conditions, signal behavior is governed by the propagation of electromagnetic waves rather than by instantaneous circuit relationships.
+Modern high-speed electronic systems cannot be understood using lumped circuit models alone[^cantExplain]. As signal transition times decrease, the spatial extent of electromagnetic fields becomes comparable to the physical dimensions of PCB interconnects. Under these conditions, signal behavior is governed by the propagation of electromagnetic waves rather than by instantaneous circuit relationships.
 
-Voltage and current remain useful quantities, but they are not fundamental [^cantExplain]. They arise from the underlying electric and magnetic fields, E and B, which evolve in space and time according to Maxwell’s equations.
-[^cantExplain]: It cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology. 
+Voltage and current remain useful quantities, but they are not fundamental. They arise from the underlying electric and magnetic fields, $\mathbf E$ and $\mathbf B$, which evolve in space and time according to Maxwell’s equations.
+[^cantExplain]: Circuit theory cannot explain why a split in the ground plane causes a signal integrity problem, why energy travels in the dielectric rather than in the copper, or why crosstalk depends on field geometry rather than circuit topology.
 
 A PCB trace together with its return path forms a transmission structure that guides electromagnetic energy. The conductors do not carry this energy in the conventional sense; instead, they establish boundary conditions that shape and confine the fields. The dominant portion of the signal energy resides in the dielectric region between conductors.
 
@@ -128,8 +128,6 @@ Chapter 1 builds the field theory picture from first principles — starting wit
 ## 1. Field Theory
 
 > "Since the TTL days, there has been a four orders of magnitude change in the switching speed of transistors."  -- *Dan Beeker*
-
-This chapter develops that field-based perspective starting from Maxwell’s equations and applies it to the analysis of PCB transmission structures.
 <br />
 
 
@@ -179,7 +177,7 @@ $$
     \tag{\text{Faraday}}
     \\
     \nabla \times \mathbf B &=
-    \mu \ \mathbf J
+    \mu\,\mathbf J
     +\ 
     \mu\,\varepsilon\, \frac{\partial \mathbf E}{\partial t}
     \tag{\text{Ampère-Maxwell}} 
@@ -187,10 +185,10 @@ $$
 $$ 
 
 where:
-- $\mathbf E$ is the electric field vectors at each point in space.
-- $\mathbf B$ is the magnetic field vectors at each point in space
+- $\mathbf E$ is the electric field vector at each point in space
+- $\mathbf B$ is the magnetic field vector at each point in space
 - $\mathbf J$ is the conduction current density
-- $\mu$ and $\varepsilon$ are constants for the material.
+- $\mu$ and $\varepsilon$ are constants for the material
 
 In the dielectric region:
 - no free charges: $\rho = 0$
@@ -214,38 +212,7 @@ These relations show that **time-varying electric and magnetic fields generate e
 <br />
 
 
-#### 1.1.3. Wave Propagation Mechanism
-
-<figure>
-  <center>
-  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 85%; max-width:800px; height: auto;">
-  <figcaption><i>Side-view of electric field.</i></figcaption>
-  </center>
-</figure>
-
-When a **voltage step** is applied to the trace:
-
-1. An **electric field is established** ($\mathbf E$) between the trace and the return plane near the source. Because it rises from zero, it is **time-varying**.
-<br />
-
-2. From the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$) in the $xy$-plane. Because it also rises from zero, it is  **time-varying**.
-<br />
-
-3. According to Faraday's Law, this time-varying magnetic field, in turn, **generates a new electric field** ($\mathbf E$) slightly **further** along the trace. Again, it rises from zero and is therefore **time-varying**.
-
-Step 2 and 3 continue continuously in space and time. The result is not motion of charge along the conductor, but the propagation of a **self-sustaining electromagnetic wave**.
-
-Two conditions are essential:
-- **Temporal variation:** the fields change in time at each point,
-- **Spatial variation:** the fields differ from one location to another.
-
-Together, they enforce propagation.
-
-<div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launches an electromagnetic wave in the dielectric.</div>
-<br />
-
-
-#### 1.1.4. Intuitive Picture
+#### 1.1.3. Intuitive Picture
 
 <div class="quote feynman">
   Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of dielectric. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
@@ -270,6 +237,41 @@ Together, they enforce propagation.
   <img src="../media/infographics/e-b-leapfrog-3.png" style="width: 60%; max-width:400px; height: auto;">
   </center>
 </figure>
+<br />
+
+
+#### 1.1.4. Wave Propagation Mechanism
+
+<figure>
+  <center>
+  <img src="../media/infographics/microstrip-side-view-wavefront.svg" style="width: 85%; max-width:800px; height: auto;">
+  <figcaption><i>Side-view of the wavefront propagating along the trace, with <b>E</b> pointing from trace to return plane.</i></figcaption>
+  </center>
+</figure>
+
+The intuition above pictures the wave as a sequence of E → B → E events. Maxwell's equations make this precise: a time variation at one point forces a spatial variation, and the wave's coherence comes from the two laws being applied everywhere simultaneously.
+
+When a **voltage step** is applied to the trace:
+
+1. An **electric field is established** ($\mathbf E$) between the trace and the return plane near the source. Because it rises from zero, it is **time-varying**.
+<br />
+
+2. From the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$) along $\hat y$ (transverse to the trace). The strength of this field changes as you move along $\hat z$ — that means a little further along $z$, its value is rising from zero; it is **time-varying**.
+<br />
+
+3. According to Faraday's law, this time-varying magnetic field **forces a spatial gradient in $\mathbf E$** along $\hat z$. A little further down the line, $\mathbf E$ is rising from zero; it too is **time-varying**, and the disturbance has moved forward.[^leapfrogRigor]
+
+Steps 2 and 3 continue throughout the structure. The result is not the transport of charge along the conductor, but the propagation of a **self-sustaining electromagnetic wave** that drives only local charge motion.
+
+Two conditions are essential:
+- **Temporal variation:** the fields change in time at each point.
+- **Spatial variation:** the fields differ from one location to another.
+
+Together, they enforce propagation.
+
+<div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launches an electromagnetic wave in the dielectric.</div>
+
+[^leapfrogRigor]: The "a little further down the line" framing in steps 2 and 3 is the leapfrog picture — useful for intuition, slightly loose as physics. The rigorous version: Maxwell-Ampère couples $\partial \mathbf E/\partial t$ here to $\partial \mathbf B/\partial z$ here, and the wavefront constraint $\partial/\partial t = -v\,\partial/\partial z$ converts the time variation into a spatial one. Appendix A.1 derives this coupling from Maxwell-Ampère; Appendix A.3 derives the wavefront constraint.
 <br />
 
 
@@ -304,10 +306,18 @@ The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the
   Apply Gauss's law:
   $$
       \nabla \cdot \mathbf E = \frac{\rho}{\varepsilon}
-      \tag{\text{Gauss's law}}
+      \tag{\text{Gauss}}
   $$
 
-  In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \mathbf E = 0$. The first term vanishes.
+  In the source-free dielectric there are no charges ($\rho = 0$), so this becomes $\nabla \cdot \mathbf E = 0$. The first term vanishes, leaving:
+  $$
+      -\nabla^2 \mathbf E = -\mu\,\varepsilon\, \frac{\partial^2 \mathbf E}{\partial t^2}
+  $$
+
+  Or equivalently, the wave equation:
+  $$
+      \nabla^2 \mathbf E = \mu\,\varepsilon\, \frac{\partial^2 \mathbf E}{\partial t^2}
+  $$
 </details>
 <br />
 
@@ -328,7 +338,7 @@ $$
 $$
 </div>
 
-Comparing the two, term by term, gives the speed $v$ of the wave propagation:
+Comparing the two, term by term, gives the wave speed $v$:
 
 <div class="important-note"><span class="icon">💡</span>
 
@@ -338,7 +348,7 @@ $$
 $$
 
 where:
-- $v$ is the speed of the wave propagation
+- $v$ is the wave speed
 - $\mu$ is the permeability of the material
 - $\varepsilon$ is the permittivity of the material 
 </div>
@@ -365,26 +375,26 @@ where:
 </details>
 <br />
 
-**In the dielectric** in a microstrip, the medium is not homogeneous (fields exist in both dielectric and air), and the mode is quasi-TEM rather than pure TEM. The propagation velocity is therefore determined by an **effective permittivity $\varepsilon_r$**, so $\varepsilon=\varepsilon_r\,\varepsilon_0$. For FR-4 this is:
+**In the dielectric** in a microstrip, the medium is not homogeneous (fields exist in both dielectric and air), and the mode is quasi-TEM rather than pure TEM. The propagation velocity (call it $v'$) is therefore determined by an **effective permittivity $\varepsilon_{\text{eff}}$**, so $\varepsilon = \varepsilon_{\text{eff}}\,\varepsilon_0$. The effective value is smaller than the bulk relative permittivity because part of the field is in air. For typical FR-4 microstrip ($\varepsilon_{\text{eff}} \approx 3.5$; bulk FR-4 has $\varepsilon_r \approx 4.3$):
 $$
-    v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 3.65 \times 8.854 \times 10^{-12}}} \approx 16 \text{ cm/ns}
+    v' = \frac{1}{\sqrt{4\pi \times 10^{-7} \times 3.5 \times 8.854 \times 10^{-12}}} \approx 16 \text{ cm/ns}
 $$
 <br />
 
 
 #### 1.1.6. Interpretation
 
-The signal does not propagate as a moving charge. Instead:
-- the electric and magnetic fields propagate through space
-- the signal is the advancing electromagnetic wave
+The signal does not propagate as a moving charge. The wave is the spatial pattern of $\mathbf E$ and $\mathbf B$ advancing through the dielectric, with the conductor surfaces forming the boundary that guides it. Energy resides in the dielectric volume, not in the copper.
 
-The majority of the energy resides in the dielectric, although the fields extend into both dielectric and conductor regions.
+For design, this reframes what a trace actually is. A trace is not a wire that carries current — it is one wall of a guiding structure whose other wall is the return plane. The integrity of the wave depends on what happens between those two walls. If the dielectric, the trace, and the return plane together form a clean boundary, the wave propagates undisturbed. If any one of them is compromised — a slot in the return plane, an abrupt change in dielectric, a missing return via, an unmatched termination — the wave is disrupted, and the signal pays the price.
+
+§1.2 examines what the conductors actually do to make this work: not transporting energy, but enforcing the boundary conditions that let the wave exist at all.
 <br />
 
 
 #### 1.1.7. Summary
 
-A voltage step applied to a PCB trace launches an electromagnetic wave that propagates along the structure. The propagation velocity is determined by material properties.
+A voltage step launches an electromagnetic wave that propagates in the dielectric, guided by the trace and its return plane. The propagation velocity is determined by material properties — about 16 cm/ns for FR-4 microstrip. The conductors do not carry the signal; they shape the boundary that lets the wave exist.
 
 <br />
 
@@ -427,7 +437,7 @@ Both arise directly from Maxwell’s equations.
 </div>
 
 > Translating into formal terms: 
-> - "down-field" → transverse $E_x$ (normal to the conductors);
+> - "down-field" → normal $E_x$ (perpendicular to the conductor surfaces);
 > - "along-field" → longitudinal $E_z$ (along the direction of propagation).
 
 <br />
@@ -436,13 +446,13 @@ Both arise directly from Maxwell’s equations.
 #### 1.2.2. Electric Field at the Conductor Boundary
 
 In a microstrip, the electric field in the dielectric has two components:
-- a dominant transverse component $E_x$, normal to the conductor surfaces
-- a smaller longitudinal component $E_z$, along the direction of propagation
+- a dominant **normal** component $E_x$, perpendicular to the conductor surfaces (along the dielectric thickness)
+- a smaller **longitudinal** component $E_z$, along the direction of propagation
 
 <figure>
   <center>
   <img src="../media/infographics/microstrip-e-field.svg" style="width: 70%; max-width:800px; height: auto;">
-  <figcaption><i>Side-view: Microstrip electric field <b>E</b>.</i></figcaption>
+  <figcaption><i>Side-view: $E_x$ (normal, dominant) and $E_z$ (longitudinal, small) components of the microstrip electric field.</i></figcaption>
   </center>
 </figure>
 
@@ -452,11 +462,11 @@ These components produce distinct physical effects at the conductor surface.
 
 #### 1.2.3. Surface Charge Formation (driven by $E_x$)
 
-As the wavefront reaches a section of the conductor, the transverse electric field $E_x$ rises from zero to a finite value.
+As the wavefront reaches a section of the conductor, the normal electric field $E_x$ rises from zero to a finite value.
 
-This field exerts a force on the **free electrons**.
-- *in the trace*, electrons move away from the dielectric-facing surface
-- *in the return plane*, the electrons move toward the dielectric-facing surface.
+This field exerts a force on the **free electrons**:
+- *in the trace*, electrons move away from the dielectric-facing surface.
+- *in the return plane*, electrons move toward the dielectric-facing surface.
 <figure>
   <center>
   <img src="../media/infographics/microstrip-ex-confinement.svg" style="width:100%; max-width:900px; height: auto;">
@@ -469,7 +479,7 @@ This redistribution produces:
 - **negative surface charge** on the top of the return plane
 
 The system rapidly reaches a local equilibrium in which:
-- the *net field inside the conductor is driven to zero*, because the surface charges generate their own electric field that opposes the external field. 
+- The *net field inside the conductor is driven to zero*, because the surface charges generate their own electric field that opposes the external field.
 - The *external field is confined to the dielectric*, since the electric field cannot extend into the conductor.
 <br />
 
@@ -493,7 +503,7 @@ Following the more intuitive discussion above, here's the formal version.
   <div class="quote">
 
   $$
-      \oint_S \mathbf E \cdot d\mathbf a = \frac{Q_{enc}}{\varepsilon} \tag{\text{Gauss's law}}
+      \oint_S \mathbf E \cdot d\mathbf a = \frac{Q_{enc}}{\varepsilon} \tag{\text{Gauss}}
   $$
   </div> 
 
@@ -518,7 +528,7 @@ Following the more intuitive discussion above, here's the formal version.
       \varepsilon\, E_x = \sigma_s
   $$
 </details>
-<br>
+<br />
 
 <div class="important-note"><span class="icon">💡</span>
 
@@ -528,7 +538,7 @@ $$
 $$
 
 where:
-- $\sigma_s$ is the surface charge density (in C/m<sup>2</sup>)
+- $\sigma_s$ is the surface charge density (in C/m<sup>2</sup>).
 - $E_x$ is the electric field just outside the conductor.
 </div>
 
@@ -548,13 +558,11 @@ This section presents two views of the surface current — the same two argument
 <br />
 
 
-##### 1. Magnetic Field $\mathbf B$ drives the need for a Surface Current
+##### Magnetic Field $\mathbf B$ drives the need for a Surface Current
 
 The magnetic field associated with the propagating wave is tangential to the conductor surface. Maxwell’s equations require that this field be supported by current at the boundary.
 
-> TO DO: This conflicts with the cancellation framing in §1.6.1 ("forward-going field around the trace and the backward-going field around the return current cancel each other out") 
-
-When the magnetic field from the trace tries to enter the return plane, it induces [eddy currents](https://coertvonk.com/physics/electromagnetism/magnetism/motional-emf-30242) that create their own opposite magnetic field. This prevent the magnetic field $\mathbf{B}$ from entering. To stay in the $xy$-plane, the magnetic field has no other choice but to **loop around the trace**.
+When the magnetic field from the trace tries to enter the return plane, it induces [eddy currents](https://coertvonk.com/physics/electromagnetism/magnetism/motional-emf-30242) that create their own opposite magnetic field. This prevents the magnetic field $\mathbf{B}$ from entering. The return plane is electrically large and a good conductor, so the field cannot escape underneath it either; it has no other choice but to **loop tightly around the trace** in the dielectric above.
 <figure>
   <center>
   <img src="../media/infographics/microstrip-cross-section-fields.svg" style="width: 90%; max-width:800px; height: auto;">
@@ -587,7 +595,7 @@ When the magnetic field from the trace tries to enter the return plane, it induc
 
   (Both $\mathbf B_{out}$ and $\mathbf K$ end up parallel to $\mathbf L$ along the outside leg, so each dot product reduces to a magnitude product $B_{out}\,L$ and $K\,L$.)
 
-  Recall Ampère's Law in integral form:
+  Recall Ampère's law in integral form:
   <div class="quote">
 
   $$
@@ -608,7 +616,7 @@ When the magnetic field from the trace tries to enter the return plane, it induc
 
 <div class="important-note"><span class="icon">💡</span>
 
-Ampère's Law forces a surface current [^sCurrent] in the propagation direction:
+Ampère's law forces a surface current [^sCurrent] in the propagation direction:
 $$
     \mathbf K = \frac{B_y}{\mu}\,\hat z
 $$
@@ -631,7 +639,7 @@ For a real conductor, the surface-current approximation $\mathbf K \approx \math
 <br />
 
 
-##### 2. Longitudinal Electric Field $E_z$ establishes the Surface Current
+##### Longitudinal Electric Field $E_z$ establishes the Surface Current
 
 While the previous result expresses a boundary condition, the current must also be established dynamically as the wave propagates.
 
@@ -656,7 +664,7 @@ This is the dynamic mechanism by which the current required by the magnetic fiel
 <br />
 
 
-##### 3. Charge–Current Coupling (Continuity)
+##### Charge–Current Coupling (Continuity)
 
 As the wavefront advances:
 - surface charge builds up on newly reached sections
@@ -715,7 +723,11 @@ $$
       \frac{\partial K_z}{\partial z} = v\,\frac{\partial \sigma_s}{\partial z}
   $$
 
-  Integrate along $z$ on both sides. Both $K_z$ and $\sigma_s$ vanish ahead of the wavefront, so the integration constant is zero.
+  Integrate along $z$ on both sides. Both $K_z$ and $\sigma_s$ vanish ahead of the wavefront, so the integration constant is zero, leaving:
+  $$
+      K_z = v\,\sigma_s
+  $$
+  The surface current and surface charge are locked together by the wave speed.
 </details>
 <br />
 
@@ -727,7 +739,7 @@ $$
 $$
 
 where:
-- $K_z$ is (the transverse component) of the surface current
+- $K_z$ is the longitudinal component of the surface current (along the propagation direction)
 - $v$ is the propagation speed
 - $\sigma_s$ is the surface charge density
 </div>
@@ -741,7 +753,7 @@ This relation holds for a traveling wave and expresses that:
 #### 1.2.5. Behavior Behind the Wavefront
 
 Once the wavefront has passed:
-- the transverse field ($E_x$) becomes steady
+- the normal field ($E_x$) becomes steady
 - the longitudinal field ($E_z$) becomes small but nonzero (to sustain current against resistive losses in the conductor)
 
 The surface charge at a given section is established once the wave has passed, but **current continues** through that section to supply the wavefront still advancing ahead.
@@ -756,6 +768,8 @@ The conductor does not carry the signal in the conventional sense. Instead:
 - **electron motion is local**, responding to the passing wave
 
 The signal itself remains a propagating electromagnetic field.
+
+For design, this means surface charge and surface current are *consequences* of the wave, not independent variables. They cannot be controlled directly — they are whatever the wave demands at the boundary. Controlling them therefore reduces to controlling the wave's geometry: the trace shape, the dielectric thickness, the continuity of the return plane. Every layout decision that follows in chapter 2 is a way of shaping the wave so the conductor response stays clean and predictable. The next two sections build on this: §1.3 shows that the same wave that drives surface current also produces displacement current in the dielectric, closing the magnetic-field loop; §1.4 shows that growing or reshaping a current loop costs energy, and that this cost is what limits how fast a chip can switch.
 <br />
 
 
@@ -1125,7 +1139,7 @@ The changing current in the aggressor generates a changing magnetic field. Part 
       \tag{\text{Faraday}}
   $$
 
-  Integrate Faraday's Law over the open surface $S$ of the victim loop:
+  Integrate Faraday's law over the open surface $S$ of the victim loop:
   $$
     \iint_S (\nabla \times \mathbf{E}) \cdot d\mathbf{a} = -\iint_S \frac{\partial \mathbf{B}}{\partial t} \cdot d\mathbf{a}
   $$
@@ -1524,7 +1538,7 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 ## Appendix A: More Math for Curious Readers
 
 
-### A.1. Ampère-Maxwell Law Couples Time Variation of E to Spatial Variation of B
+### A.1. Ampère-Maxwell law Couples Time Variation of E to Spatial Variation of B
 
 For the wavefront traveling in the $+\hat z$ direction, at a place in between the trace and the return plane, we can apply some simplifications:
 1. The magnetic field does not vary along $x$ or $y$, so all $\partial/\partial x$ and $\partial/\partial y$ vanish.
@@ -1606,9 +1620,9 @@ So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equati
 
 <br />
 
-### A.2. Faraday's Law Couples Time Variation of B to Spatial Variation of E
+### A.2. Faraday's law Couples Time Variation of B to Spatial Variation of E
 
-We can do the same for **Faraday's Law**.
+We can do the same for **Faraday's law**.
 
 For the wavefront traveling in the $+\hat z$ direction, at a place in between the trace and the return plane, we can apply some simplifications:
 1. The electric field does not vary along $x$ or $y$, so all $\partial/\partial x$ and $\partial/\partial y$ vanish.
