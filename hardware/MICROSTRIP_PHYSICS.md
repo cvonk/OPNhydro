@@ -125,13 +125,13 @@ Chapter 1 builds the field theory picture from first principles — starting wit
 
 <br />
 
-## 1. Field Theory
+## 1 Field Theory
 
 > "Since the TTL days, there has been a four orders of magnitude change in the switching speed of transistors."  -- *Dan Beeker*
 <br />
 
 
-### 1.1. From Voltage Step to Electromagnetic Wave in the Dielectric
+### 1.1 From Voltage Step to Electromagnetic Wave in the Dielectric
 
 > "Energy and signals travel in the spaces not the traces"  -- *Ralph Morrison*
 
@@ -141,7 +141,7 @@ We examine how such a disturbance is created and how it propagates.
 <br />
 
 
-#### 1.1.1. Physical Setup
+#### 1.1.1 Physical Setup
 
 Consider a **microstrip** structure consisting of:
 - a conducting trace,
@@ -168,7 +168,7 @@ What physical mechanism carries this signal forward?
 <br />
 
 
-#### 1.1.2. Governing Equations
+#### 1.1.2 Governing Equations
 
 The fields are governed by two of [Maxwell's equations](https://coertvonk.com/physics/electromagnetism/magnetism/materials-and-maxwells-equations-30453):
 $$  
@@ -212,7 +212,7 @@ These relations show that **time-varying electric and magnetic fields generate e
 <br />
 
 
-#### 1.1.3. Intuitive Picture
+#### 1.1.3 Intuitive Picture
 
 <div class="quote feynman">
   Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of dielectric. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
@@ -240,7 +240,7 @@ These relations show that **time-varying electric and magnetic fields generate e
 <br />
 
 
-#### 1.1.4. Wave Propagation Mechanism
+#### 1.1.4 Wave Propagation Mechanism
 
 <figure>
   <center>
@@ -275,7 +275,7 @@ Together, they enforce propagation.
 <br />
 
 
-#### 1.1.5. Wave Equation and Velocity
+#### 1.1.5 Wave Equation and Velocity
 
 The $\mathbf{E}$-field wave equation follows when you combine Faraday's law, the source-free Ampère–Maxwell law and Gauss's law.
 
@@ -382,7 +382,7 @@ $$
 <br />
 
 
-#### 1.1.6. Interpretation
+#### 1.1.6 Interpretation
 
 The signal does not propagate as a moving charge. The wave is the spatial pattern of $\mathbf E$ and $\mathbf B$ advancing through the dielectric, with the conductor surfaces forming the boundary that guides it. Energy resides in the dielectric volume, not in the copper.
 
@@ -392,17 +392,16 @@ For design, this reframes what a trace actually is. A trace is not a wire that c
 <br />
 
 
-#### 1.1.7. Summary
+#### 1.1.7 Summary
 
 A voltage step launches an electromagnetic wave that propagates in the dielectric, guided by the trace and its return plane. The propagation velocity is determined by material properties — about 16 cm/ns for FR-4 microstrip. The conductors do not carry the signal; they shape the boundary that lets the wave exist.
-
 <br />
 
 ---
 
 <br />
 
-### 1.2. Conductor Response: Surface Charge and Current
+### 1.2 Conductor Response: Surface Charge and Current
 
 Section 1.1 established that signal propagation occurs as an electromagnetic wave in the dielectric. The conductors do not transport the signal energy; instead, they respond to the incident fields and enforce the boundary conditions required for the wave to exist.
 
@@ -419,7 +418,7 @@ Both arise directly from Maxwell’s equations.
 <br />
 
 
-#### 1.2.1. Intuitive Picture
+#### 1.2.1 Intuitive Picture
 
 <div class="quote feynman">
   So put it all together:
@@ -443,7 +442,7 @@ Both arise directly from Maxwell’s equations.
 <br />
 
 
-#### 1.2.2. Electric Field at the Conductor Boundary
+#### 1.2.2 Electric Field at the Conductor Boundary
 
 In a microstrip, the electric field in the dielectric has two components:
 - a dominant **normal** component $E_x$, perpendicular to the conductor surfaces (along the dielectric thickness)
@@ -460,7 +459,7 @@ These components produce distinct physical effects at the conductor surface.
 <br />
 
 
-#### 1.2.3. Surface Charge Formation (driven by $E_x$)
+#### 1.2.3 Surface Charge Formation (driven by $E_x$)
 
 As the wavefront reaches a section of the conductor, the normal electric field $E_x$ rises from zero to a finite value.
 
@@ -550,7 +549,7 @@ Thus, **the conductor shapes the electric field** through the formation of surfa
 <br />
 
 
-#### 1.2.4. Surface Current (driven by $\mathbf B$ and $E_z$)
+#### 1.2.4 Surface Current (driven by $\mathbf B$ and $E_z$)
 
 This section presents two views of the surface current — the same two arguments the intuition foreshadowed:
 1. Given a magnetic field at the surface, what current must exist? ($\mathbf B \to \mathbf K$) — the formal "$\mathbf B$-jump → current" boundary argument.
@@ -750,7 +749,7 @@ This relation holds for a traveling wave and expresses that:
 <br />
 
 
-#### 1.2.5. Behavior Behind the Wavefront
+#### 1.2.5 Behavior Behind the Wavefront
 
 Once the wavefront has passed:
 - the normal field ($E_x$) becomes steady
@@ -760,7 +759,7 @@ The surface charge at a given section is established once the wave has passed, b
 <br />
 
 
-#### 1.2.6. Interpretation
+#### 1.2.6 Interpretation
 
 The conductor does not carry the signal in the conventional sense. Instead:
 - **surface charge** enforces electric-field boundary conditions
@@ -773,7 +772,7 @@ For design, this means surface charge and surface current are *consequences* of 
 <br />
 
 
-#### 1.2.7. Summary
+#### 1.2.7 Summary
 
 The response of a conductor to a propagating electromagnetic wave consists of:
 - surface charge determined by the electric field
@@ -782,11 +781,11 @@ The response of a conductor to a propagating electromagnetic wave consists of:
 These quantities are fully constrained by Maxwell’s equations and are not independent drivers of signal propagation.
 <br />
 
-
 ---
 
+<br />
 
-### 1.3. Sources of the Magnetic Field
+### 1.3 Sources of the Magnetic Field
 
 Sections §1.1 and §1.2 established that signal propagation is an electromagnetic wave in the dielectric, and that the conductors respond through surface charge and current. We here examine a fundamental question:
 
@@ -799,10 +798,10 @@ Sections §1.1 and §1.2 established that signal propagation is an electromagnet
   </center>
 </figure>
 
-#### 1.3.1. Intuitive Picture
+#### 1.3.1 Intuitive Picture
 
 <div class="quote feynman">
-  You might think the magnetic field comes from the current in the copper—and that’s true, but only part of the story.
+  You might think the magnetic field comes from the current in the copper — and that’s true, but only part of the story.
 
   Between the trace and the return plane, there’s no current flowing in the usual sense. But the electric field there is changing as the signal moves. And a changing electric field produces a magnetic field just as surely as a current does.
 
@@ -810,12 +809,12 @@ Sections §1.1 and §1.2 established that signal propagation is an electromagnet
 
   The current in the copper and the changing field in the dielectric are just two ways of sustaining the same magnetic field.
 
-  If you tried to remove the displacement current term, the field would have nowhere to go—it would break at the boundary. Maxwell added that term so the field could remain whole.
+  If you tried to remove the displacement current term, the field would have nowhere to go — it would break at the boundary. Maxwell added that term so the field could remain whole.
 </div>
 <br />
 
 
-#### 1.3.2. Sources of the Magnetic Field
+#### 1.3.2 Sources of the Magnetic Field
 
 The magnetic field is governed by the Ampère–Maxwell equation:
 <div class="quote">
@@ -835,23 +834,24 @@ This identifies two sources:
 <br />
 
 
-#### 1.3.3. Region-Dependent Contributions
+#### 1.3.3 Region-Dependent Contributions
 
 In different regions different terms dominate:
 
-In the **conductor** (§1.2. [^k2j])
-- $\mathbf E \approx 0$
-- displacement current is negligible.
+In the **conductor** (§1.2)[^k2j]:
+- $\mathbf E \approx 0$ inside
+- displacement current is negligible
 - magnetic field is sustained by **conduction current $\mathbf J$**
-[^k2j]: The surface current $\mathbf K$ from §1.2 is just $\mathbf J$ integrated across the skin-depth layer where the current flows
 
-In the **dielectric**  (§1.1)
+In the **dielectric** (§1.1):
 - $\mathbf J = 0$
 - magnetic field is sustained by the **displacement current $\varepsilon\frac{\partial\mathbf{E}}{\partial t}$**
+
+[^k2j]: The surface current $\mathbf K$ from §1.2 is just $\mathbf J$ integrated across the skin-depth layer where the current flows.
 <br />
 
 
-#### 1.3.4. Continuity Across the Interface
+#### 1.3.4 Continuity Across the Interface
 
 The governing equation is valid everywhere; only the dominant source term changes between regions.
 
@@ -872,38 +872,36 @@ The trace and the return plane act like the plates of a propagating capacitor: c
 <br />
 
 
-#### 1.3.5. Interpretation
+#### 1.3.5 Interpretation
 
-The magnetic field is not confined to the conductor. It is a continuous field spanning both dielectric and conductor regions.
-
-Conduction current and displacement current are not separate phenomena; they are two contributions to the same electromagnetic field.
+The magnetic field is not confined to the conductor. It is a continuous field spanning both dielectric and conductor regions. Conduction current and displacement current are not separate phenomena; they are two contributions to the same electromagnetic field.
 
 <div class="important-note"><span class="icon">💡</span>
 
 **Reconciling §1.2 and §1.3.** §1.2 said "$\mathbf B$ determines $\mathbf K$"; §1.3 says "$\mathbf J$ sustains $\mathbf B$." These are not in conflict, and together they are the formal resolution of §1.3.1's "only part of the story." Maxwell-Ampère, $\nabla \times \mathbf B = \mu \mathbf J + \mu\varepsilon\,\partial \mathbf E/\partial t$, is an *identity* relating $\mathbf B$, $\mathbf J$, and $\partial \mathbf E/\partial t$ at every instant — none of the three is "the cause" of the others. The causal story is the one from §1.2: the wave in the dielectric is primary, and it drives the surface currents. Once those currents exist, Maxwell-Ampère bookkeeping requires them (together with the displacement current) to source the same continuous $\mathbf B$ field that drove them in the first place.
 </div>
+
+For design, the closed-loop view is the one that matters. The loop's geometry sets its inductance — that's what §1.4 turns into a design lever (rail collapse, decoupling, stack-up). Break the conduction return (a slot in the plane, a missing return via) or break the displacement-current path (an abrupt change in dielectric) and the loop opens up — the fields stop cancelling at a distance, and the failure modes of §1.5 (crosstalk) and §1.6 (EMI) follow directly.
 <br />
 
 
-#### 1.3.6. Summary
+#### 1.3.6 Summary
 
-The magnetic field in a PCB structure arises from:
-- conduction current in the conductors
-- displacement current in the dielectric
-
-Both are required for a complete and consistent electromagnetic description.
+The magnetic field around a PCB trace is sustained by conduction current in the conductors and displacement current in the dielectric — together forming a single closed loop. Both terms are required by Maxwell's equations; neither alone is sufficient.
 <br />
 
 ---
 
 <br />
 
-### 1.4. Power Distribution Networks and Rail Collapse 
+### 1.4 Power Distribution Network and Rail Collapse
 
-The power distribution network (PDN) supplies energy to active devices. From a field perspective, it provides the electromagnetic energy required to support changing current and voltage conditions.
+The power distribution network (PDN) supplies the electromagnetic energy that active devices need to support changing current and voltage.
+
+> **The central question: when a chip switches, where does the energy come from, and why isn't it always there in time?**
 <br />
 
-#### 1.4.1. Intuitive Picture
+#### 1.4.1 Intuitive Picture
 
 <div class="quote feynman">
   You ask the circuit for current right now.
@@ -921,97 +919,55 @@ The power distribution network (PDN) supplies energy to active devices. From a f
 <br />
 
 
-#### 1.4.2. Physical Origin
+#### 1.4.2 Voltage Drop and Inductance
 
-When a device switches, it requires a rapid increase in current. This corresponds to an increase in the magnetic field surrounding the current loop.
-
-The energy stored in this magnetic field is:
+When a device switches, it requires a rapid increase in current. This corresponds to an increase in the magnetic field surrounding the current loop, with energy
 $$
-  E = \tfrac{1}{2} \, L \, I^2
+  W_L = \tfrac{1}{2} \, L \, I^2
 $$
-
-Increasing current requires increasing this stored energy.
-<br />
-
-#### 1.4.3. Voltage Drop and Inductance
-
-The required energy must be delivered through the PDN. This leads to a voltage drop:
+where $L$ is the inductance of the loop. Increasing current requires increasing this stored magnetic energy, and that energy has to be delivered through the PDN. The cost is a voltage drop:
 <div class="quote">
 
 $$
   \Delta V = L \, \frac{dI}{dt}
-$$ where $L$ is the effective inductance of the current path.
+$$
 </div>
 
-This circuit expression represents the field-level requirement that:
-- changing current requires changing magnetic energy
-- changing magnetic energy requires power delivery
-
 If the voltage drop is large enough — what designers call **rail collapse** — the chip misinterprets logic levels or produces timing errors.
+<br />
 
 
-#### 1.4.4. Field Interpretation
+#### 1.4.3 Field Interpretation
 
-The circuit relation $\Delta V = L\,dI/dt$ is the macroscopic shadow of a field-level event. The chip's switching current flows in a loop — out the supply pin, through the bond wires, package leads, PCB power and ground planes, decoupling caps, and back. That loop has a magnetic field threaded through it, with energy density $\tfrac{1}{2}\mathbf B^2/\mu$ stored throughout the volume the loop encloses.
+The circuit relation $\Delta V = L\,dI/dt$ is the macroscopic shadow of a field-level event. The chip's switching current flows in a loop — out the supply pin, through the bond wires, package leads, PCB power and ground planes, and back. That loop has a magnetic field threaded through it, with energy density $\tfrac{1}{2}\mathbf B^2/\mu$ stored throughout the volume the loop encloses.
 
-When the chip demands more current, the $\mathbf B$ field everywhere in that loop must grow. Three field-level constraints make this hard:
+When the chip demands more current, the $\mathbf B$ field everywhere in that loop must grow. Two field-level constraints make this hard:
 
-- **Energy must flow into the magnetic field.** That energy comes from the supply, but the supply is centimeters away. Energy moves at the speed of light in the dielectric ($\approx 15$ cm/ns in FR-4) — a 5 cm path is already $\approx 300$ ps round-trip, comparable to the rise time of fast logic.
+- **Energy delivery is wave-rate-limited.** The energy has to travel from the supply to the chip, and the supply only "knows" about the demand once it reaches it. Both legs are bounded by the speed of light in the dielectric ($\approx 15$ cm/ns in FR-4) — a 5 cm path is already $\approx 300$ ps round-trip, comparable to the rise time of fast logic.
 - **A growing $\mathbf B$ field induces an opposing $\mathbf E$ field** (Faraday). This back-EMF appears as a voltage drop across the loop's inductance and subtracts from the rail at the chip pin.
-- **The reconfiguration cannot propagate faster than the wave.** The rest of the PDN doesn't yet "know" the chip needs more current; the demand has to travel outward as an EM disturbance and the supply's response has to travel back.
 
-The decoupling capacitor sidesteps all three. Its electric field already stores the energy locally — in the dielectric between its plates, millimeters from the load. The cap doesn't need to grow a $\mathbf B$ field across a long loop; it just releases stored $\mathbf E$-field energy through a much shorter path. The smaller the loop from cap to load, the smaller its inductance, and the less back-EMF the demand produces.
+The decoupling capacitor sidesteps both. Its electric field already stores energy locally — $W_C = \tfrac{1}{2}\,C\,V^2$, in the dielectric between its plates, millimeters from the load. The cap doesn't need to grow a $\mathbf B$ field across a long loop; it just releases stored $\mathbf E$-field energy through a much shorter path. The smaller the loop from cap to load, the smaller its inductance, and the less back-EMF the demand produces.
 
 This swap — the cap's $\mathbf E$-field reservoir feeding the growing $\mathbf B$-field around the demand loop — is the "negotiation between electric and magnetic fields" the §1.4.1 intuition named. Every time the chip switches, an $\mathbf E$-field somewhere has to give up energy so a $\mathbf B$-field somewhere can grow.
 
-Rail collapse is therefore a direct consequence of:
-- finite energy delivery rate (set by the speed of light in the PDN dielectric)
-- the geometry of the current loop (which sets how much $\mathbf B$-field energy must change)
-- the distance from local energy reservoirs (which sets how fast charge can be supplied)
+Rail collapse is therefore the price the chip pays for these two constraints. The design levers that fight back are **minimize loop inductance** and **shorten the distance to local energy reservoirs**.
 <br />
 
 
-#### 1.4.5. Role of Geometry
+#### 1.4.4 Example
 
-Inductance depends on the geometry of the current loop:
-- loop area
-- separation between supply and return paths
+A typical microcontroller might switch 100 mA in 1 ns. A 5 mm trace between a poorly placed decoupling capacitor and the chip presents about $L = 5\,\text{nH}$ of parasitic inductance:
+$$
+  \Delta V = 5\,\text{nH} \cdot \frac{100\,\text{mA}}{1\,\text{ns}} = 500\,\text{mV}.
+$$
 
-Larger loop areas store more magnetic energy and require more energy to change current.
-
-Reducing loop area improves transient performance.
+A 500 mV dip on a 3.3 V rail is enough to upset logic levels on most chips. The lever is brutally simple: shorten the path.
 <br />
 
 
-#### 1.4.6. Role of Decoupling Capacitors
+#### 1.4.5 Summary
 
-Capacitors store energy in the electric field:
-$$
-  E = \tfrac{1}{2} \, C \, V^2
-$$
-
-They can provide local energy, reducing the need for rapid energy transfer through the PDN.
-<br />
-
-
-#### 1.4.7. Example
-
-A typical microcontroller might switch 100 mA in 1 ns. Even a small parasitic inductance $L = 1\,\text{nH}$ (a few mm of trace) gives
-$$
-  \Delta V = 1\,\text{nH} \cdot \frac{100\,\text{mA}}{1\,\text{ns}} = 100\,\text{mV}.
-$$
-
-A 100 mV dip on a 3.3 V rail is enough to upset logic levels in some chips. A 5 mm trace from a poorly placed decoupling capacitor can already reach this.
-<br />
-
-
-#### 1.4.8. Summary
-
-Rail collapse arises because:
-- increasing current requires increasing magnetic field energy
-- energy cannot be delivered instantaneously
-
-Minimizing inductance and providing local energy storage reduces voltage drop.
+Rail collapse is the gap between how fast a chip's current loop demands $\mathbf B$-field energy and how fast the supply can deliver it. The two design levers — both turned into concrete rules in §2.1 — are minimizing loop inductance (tight power/return coupling, short via paths, continuous return planes) and placing local $\mathbf E$-field reservoirs (decoupling capacitors) close enough to the load that the speed-of-light round-trip stays under the chip's rise time.
 <br />
 
 ---
@@ -1019,7 +975,7 @@ Minimizing inductance and providing local energy storage reduces voltage drop.
 <br />
 
 
-### 1.5. Crosstalk
+### 1.5 Crosstalk
 
 Crosstalk arises from interaction between electromagnetic fields associated with different conductors.
 
@@ -1027,7 +983,7 @@ A time-varying signal produces electric and magnetic fields that extend into spa
 <br />
 
 
-#### 1.5.1. Intuitive Picture
+#### 1.5.1 Intuitive Picture
 
 <div class="quote feynman">
 
@@ -1057,7 +1013,7 @@ A signal trace does not contain its fields perfectly. When it switches, its elec
 Crosstalk is therefore not an interaction between circuits, but between fields and conductors.
 
 
-#### 1.5.2. Geometry and Field Overlap
+#### 1.5.2 Geometry and Field Overlap
 
 Consider two parallel microstrip traces above a common return plane:
 - the **aggressor** trace carries a time-varying signal
@@ -1080,7 +1036,7 @@ Each produces a different coupling mechanism — and both are direct consequence
 <br />
 
 
-#### 1.5.3. Capacitive Coupling (electric field)
+#### 1.5.3 Capacitive Coupling (electric field)
 
 The electric field terminates partly on the neighboring conductor, creating **mutual capacitance**.
 
@@ -1126,7 +1082,7 @@ Characteristics:
 <br />
 
 
-#### 1.5.4. Inductive Coupling (magnetic field)
+#### 1.5.4 Inductive Coupling (magnetic field)
 
 The changing current in the aggressor generates a changing magnetic field. Part of this field links the loop formed by the victim trace.
 
@@ -1197,7 +1153,7 @@ Characteristics:
 <br />
 
 
-#### 1.5.5. Combined Effect
+#### 1.5.5 Combined Effect
 
 This is the reinforce-vs-fight asymmetry that the §1.5.1 intuition foreshadowed. Formally:
 
@@ -1217,7 +1173,7 @@ In uniform transmission lines:
 <br />
 
 
-#### 1.5.6. Design Implications
+#### 1.5.6 Design Implications
 
 Crosstalk depends on field overlap and geometry:
 - **Trace spacing:** increasing separation reduces field overlap
@@ -1226,7 +1182,7 @@ Crosstalk depends on field overlap and geometry:
 - **Loop area:** minimizing the *aggressor's* loop reduces the $\mathbf B$ field generated; minimizing the *victim's* loop reduces the flux it captures. Both levers reduce magnetic coupling.
 <br />
 
-#### 1.5.7. Summary
+#### 1.5.7 Summary
 
 Crosstalk is the result of electromagnetic fields from one conductor interacting with another. It arises from:
 - electric-field coupling (mutual capacitance)
@@ -1240,7 +1196,7 @@ Both are direct consequences of Maxwell’s equations. As §1.5.1 put it: there 
 <br />
 
 
-### 1.6. Electromagnetic Interference (EMI)
+### 1.6 Electromagnetic Interference (EMI)
 
 Signal integrity asks whether the field arrives at the receiver correctly; EMI asks whether the field arrives somewhere it should not.
 
@@ -1251,7 +1207,7 @@ EMI occurs when electromagnetic fields are no longer confined to their intended 
 Thus, EMI is not a separate phenomenon, but a direct consequence of how well the electromagnetic field is contained by the geometry.
 <br />
 
-#### 1.6.1. Intuitive Picture
+#### 1.6.1 Intuitive Picture
 
 <div class="quote feynman">
   Here's a thing about your PCB trace that nobody tells you. It is, secretly, an antenna. It always was.
@@ -1270,7 +1226,7 @@ Thus, EMI is not a separate phenomenon, but a direct consequence of how well the
 </div>
 
 
-#### 1.6.2. Field Confinement
+#### 1.6.2 Field Confinement
 
 To make the intuition above precise: in a well-designed structure, the signal's electric and magnetic fields stay tightly localized between the trace and its return plane. The forward field around the trace and the backward field around the return current cancel at any reasonable distance — the structure looks neutral from outside, even though it carries significant power inside.
 
@@ -1283,7 +1239,7 @@ The continuous return plane is the load-bearing element. It allows the return cu
 <br />
 
 
-#### 1.6.3. Loss of Confinement
+#### 1.6.3 Loss of Confinement
 
 When the geometry conditions of §1.6.2 are violated, the fields must expand to satisfy Maxwell's equations. Common causes:
 - gaps or splits in reference planes
@@ -1297,7 +1253,7 @@ This expansion has two visible consequences. The **electric-field expansion** in
 <br />
 
 
-#### 1.6.4. Radiation
+#### 1.6.4 Radiation
 
 The expanded loop is an antenna.
 
@@ -1319,7 +1275,7 @@ The scaling is sharp. Radiated *power* goes as $f^4 A^2$ — doubling the freque
 <br />
 
 
-#### 1.6.5. Summary
+#### 1.6.5 Summary
 
 EMI arises when electromagnetic fields extend beyond their intended region. Field confinement depends on a continuous, nearby return path and a small loop area. When the loop opens — from a plane discontinuity, a stray via, or a sloppy stack-up — the fields expand. At short range, the expansion shows up as crosstalk; at long range, as radiated emission. Controlling the geometry of the return path is the primary lever for both.
 <br />
@@ -1330,7 +1286,7 @@ EMI arises when electromagnetic fields extend beyond their intended region. Fiel
 
 <br />
 
-## 2. From Physics to Layout
+## 2 From Physics to Layout
 
 Chapter 1 established that signals propagate as electromagnetic waves guided by conductor geometry, with energy residing primarily in the dielectric. Voltage and current are derived quantities that reflect the behavior of the underlying fields.
 
@@ -1348,7 +1304,7 @@ Design rules presented in this chapter follows from one of four physical mechani
 <br />
 
 
-### 2.1. PCB Design Rules
+### 2.1 PCB Design Rules
 
 Everything in §1.1 through §1.5 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the return plane is the other. The copper confines the field ($E_x$ cancellation), the dielectric carries it forward (displacement current), and the return current in the return plane provides the equal-and-opposite $\mathbf B$ that prevents radiation (field cancellation at a distance).
 
@@ -1428,7 +1384,7 @@ EMI is not a separate problem — it is the consequence of every other problem l
 
 <br />
 
-### 2.2. PCB Stack-up
+### 2.2 PCB Stack-up
 
 The PCB has two hard constraints that drive most of the other design decisions. First, the 6.5 A peak current on the 24 V input rail requires copper heavy enough to handle that current without excessive resistive heating. Second, the isolation moats around the pH and EC islands must be maintained through all four layers, which means the layer stack-up cannot be an afterthought.
 
@@ -1456,7 +1412,7 @@ L4    | Bottom | Noisy signals / routed 24V power | Stepper drivers, MOSFETs, 24
 
 <br />
 
-### 2.3. PCB Materials
+### 2.3 PCB Materials
 
 The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The heavier copper on L1 and L4 keeps resistance and heat low on the high-current 24V traces. The two inner layers (L2 and L3) use standard 1 oz copper, which is sufficient for the return planes they carry.
 
@@ -1467,7 +1423,7 @@ The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The
 ---
 
 
-### 2.4. Segregating Functional Regions
+### 2.4 Segregating Functional Regions
 
 The board layout separates functional domains to minimize coupling between noise sources and sensitive circuits:
 
@@ -1480,7 +1436,7 @@ The board layout separates functional domains to minimize coupling between noise
 ---
 
 
-### 2.5. Enclosure and Mechanical
+### 2.5 Enclosure and Mechanical
 
 The board targets a ~100 mm × 80 mm footprint, which fits standard off-the-shelf enclosures. Recommended specifications:
 
@@ -1490,7 +1446,7 @@ The board targets a ~100 mm × 80 mm footprint, which fits standard off-the-shel
 - **Optional:** A clear lid panel allows status LED visibility without opening the enclosure.
 
 
-### 2.6. Trace Widths
+### 2.6 Trace Widths
 
 The trace widths can be calculated using the IPC-2221 empirical formula for PCB conductors.[^1]
 [^1]: [IPC-2221 Trace Width Calculator, Altium PCB Design Guide](https://resources.altium.com/p/ipc-2221-calculator-pcb-trace-current-and-heating).
@@ -1520,7 +1476,7 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 † Inner-layer routing cannot carry 6.5 A at 1 oz copper within any practical trace width. This net must remain on an outer layer.
 
 
-### 2.7. PCB Layout Strategy
+### 2.7 PCB Layout Strategy
 
 - **Star power distribution** — Run a dedicated pair of 24V traces from the power entry connector directly to the stepper section, and a separate pair to the logic regulator. Do not daisy-chain power from the motors to the sensors.
 - **Via stitching for high-current transitions** — When the 24V rail transitions between layers, use at least 3–4 vias per 2A connection. A single standard 10 mil via carries only 0.5–1A before excessive heating.
@@ -1538,7 +1494,7 @@ Net                     | Target Current    | Internal Trace Width | External Tr
 ## Appendix A: More Math for Curious Readers
 
 
-### A.1. Ampère-Maxwell law Couples Time Variation of E to Spatial Variation of B
+### A.1 Ampère-Maxwell law Couples Time Variation of E to Spatial Variation of B
 
 For the wavefront traveling in the $+\hat z$ direction, at a place in between the trace and the return plane, we can apply some simplifications:
 1. The magnetic field does not vary along $x$ or $y$, so all $\partial/\partial x$ and $\partial/\partial y$ vanish.
@@ -1620,7 +1576,7 @@ So, if $\mathbf E$ is changing in time at some point, the Ampère-Maxwell equati
 
 <br />
 
-### A.2. Faraday's law Couples Time Variation of B to Spatial Variation of E
+### A.2 Faraday's law Couples Time Variation of B to Spatial Variation of E
 
 We can do the same for **Faraday's law**.
 
@@ -1702,7 +1658,7 @@ where $\hat y$ points across the trace width — the direction $\mathbf B$ curls
 
 <br />
 
-### A.3. TEM Ratio
+### A.3 TEM Ratio
 
 For a TEM wave propagating in $+\hat z$ at speed $v$, the electric and magnetic field amplitudes are not independent — they are locked together by Faraday's law (§A.2) plus the wave-speed constraint.
 
@@ -1744,7 +1700,7 @@ $$
 <br />
 
 
-### A.4. Skin Depth
+### A.4 Skin Depth
 
 Inside a good conductor, the electromagnetic field does not propagate as a wave — it *diffuses*, decaying exponentially with depth. The decay length is the **skin depth** $\delta$.
 
