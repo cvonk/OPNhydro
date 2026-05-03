@@ -1308,20 +1308,7 @@ The rules in §2.1 prevent these failure modes by controlling the **geometry of 
 
 ### 2.1 PCB Design Rules
 
-Everything in §1 reduces to one design reality:
-
-> **A PCB layout defines the geometry of an electromagnetic wave.**
-
-The trace and return plane form a guiding structure. The dielectric carries the energy. The conductors enforce boundary conditions that confine and shape the fields.
-
-When this structure is preserved, signals propagate cleanly.
-When it is disturbed, one or more of four failure modes appears:
-- Signal integrity → wave disruption (reflections, ringing)
-- PDN failure → insufficient energy delivery (rail collapse)
-- Crosstalk → field overlap between structures
-- EMI → loss of field confinement and radiation
-
-Each rule below prevents one or more of these by controlling the geometry of the electromagnetic field.
+The rules are organized by failure mode, mirroring chapter 1: signal quality (§2.1.1), power distribution (§2.1.2), crosstalk (§2.1.3), and radiated EMI (§2.1.4). Each rule is lettered within its subsection (Rule 1a, 1b, …) so the project-specific sections in §2.2–§2.7 can reference them precisely. §2.1.5 cross-tabulates the rules by the design aspect they control.
 <br />
 
 
@@ -1355,7 +1342,7 @@ If the planes are the same potential, prevent leakage with nearby stitching vias
 <br />
 
 
-#### 2.1.2 PDN Failure
+#### 2.1.2 Power Distribution
 
 Every time a chip switches, it draws a sharp current pulse from the power rail. That pulse passes through the inductance of the power distribution network, producing a voltage drop $\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$. The goal is to minimize the PDN inductance across the full frequency range over which the chip draws current. Three levers reduce that inductance: tight coupling between power and return planes (small loop area), local energy reservoirs (decoupling caps close to the load), and continuous return paths (no detours that enlarge the loop).
 
@@ -1365,7 +1352,7 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 
 **Rule 2c — Minimize power and ground lead length in packages.** The inductance of the bond wires and package leads between die and PCB is often the dominant contributor to $L_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (QFN, BGA) have lower inductance than those with long leads (SOIC, DIP).
 
-**Rule 3d — Rely on on-chip decoupling for the highest frequencies.** Above ~100 MHz, no external capacitor can respond fast enough — the path inductance from capacitor to die is too high. Modern ICs include on-die decoupling for this reason. The PCB designer's job is to keep $L_{\text{PDN}}$ low at the frequencies below that.
+**Rule 2d — Rely on on-chip decoupling for the highest frequencies.** Above ~100 MHz, no external capacitor can respond fast enough — the path inductance from capacitor to die is too high. Modern ICs include on-die decoupling for this reason. The PCB designer's job is to keep $L_{\text{PDN}}$ low at the frequencies below that.
 <br />
 
 
@@ -1385,7 +1372,7 @@ Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fie
 <br />
 
 
-#### 2.1.4 EMI — Radiated Emissions
+#### 2.1.4 EMI
 
 EMI is not a separate problem — it is the consequence of every other problem listed above. When a return path is broken, the $\mathbf B$ fields stop cancelling and the loop radiates. When crosstalk couples energy onto an unintended trace, that trace becomes an unintentional antenna. When a rail collapses, the transient current loop radiates at the switching frequency and its harmonics.
 
