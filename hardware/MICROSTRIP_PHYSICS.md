@@ -977,9 +977,9 @@ Rail collapse is the gap between how fast a chip's current loop demands $\mathbf
 
 ### 1.5 Crosstalk
 
-Crosstalk arises from interaction between electromagnetic fields associated with different conductors.
+Crosstalk is interaction between electromagnetic fields associated with different conductors.
 
-A time-varying signal produces electric and magnetic fields that extend into space. If another conductor lies within this field, it becomes part of the system.
+> **The central question: how does a signal on one trace end up on a neighboring trace that no wire connects it to?**
 <br />
 
 
@@ -1005,12 +1005,7 @@ So at the near end (the end nearest the source), both effects push the same way 
 
 And once you see it, crosstalk stops looking like two circuits sneaking signals at each other. It's *one* electromagnetic field sloshing around between the aggressor and its return — and a second piece of copper that, through no fault of its own, found itself sitting where the field happens to be. Move the copper. Or confine the field. The fields never cared about your circuits to begin with.
 </div>
-
-> TO DO: remove the next paragraph.  They Intuition section already covers this
-
-A signal trace does not contain its fields perfectly. When it switches, its electric and magnetic fields extend into the surrounding space. If another conductor is placed within that space, it becomes part of the field system: the changing electric field moves charge on it, and the changing magnetic field induces a voltage along it.
-
-Crosstalk is therefore not an interaction between circuits, but between fields and conductors.
+<br />
 
 
 #### 1.5.2 Geometry and Field Overlap
@@ -1020,12 +1015,10 @@ Consider two parallel microstrip traces above a common return plane:
 - the **victim** trace is initially quiet
 
 As a voltage step propagates along the aggressor, it generates:
-- an electric field $\mathbf E$ between trace and return plane;
-- a magnetic field $\mathbf B$ looping around the trace.
+- an electric field $\mathbf E$ between trace and return plane
+- a magnetic field $\mathbf B$ looping around the trace
 
-These fields are not perfectly confined to the region directly beneath the aggressor. A portion extends laterally into the surrounding dielectric. If the victim trace lies within this region, it is exposed to both fields:
-
-Each produces a different coupling mechanism — and both are direct consequences of Maxwell's equations.
+These fields are not perfectly confined to the region directly beneath the aggressor. A portion extends laterally into the surrounding dielectric. If the victim trace lies within this region, it is exposed to both fields. Each produces a different coupling mechanism — and both are direct consequences of Maxwell's equations.
 
 <figure>
   <center>
@@ -1045,8 +1038,8 @@ The electric field terminates partly on the neighboring conductor, creating **mu
 
   Imagine two parallel traces on a PCB:
   - Trace 1 (Aggressor): has a time-varying voltage $V(t)$
-  - Trace 2 (Victim): is affected by the electric field of Trace 1.
-  - $C_m$ (Mutual Capacitance): The capacitance between Trace 1 and Trace 2.
+  - Trace 2 (Victim): is affected by the electric field of Trace 1
+  - $C_m$ (Mutual Capacitance): the capacitance between Trace 1 and Trace 2
 
 By definition, the charge $Q$ induced on the victim trace due to the potential on the aggressor trace is proportional to the mutual capacitance: 
 <div class="quote">
@@ -1058,10 +1051,14 @@ By definition, the charge $Q$ induced on the victim trace due to the potential o
 
 From the Continuity Equation ($\nabla \cdot \mathbf{J} + \frac{\partial \rho}{\partial t} = 0$), we know that a change in charge over time results in a flow of current. Taking the time derivative of the charge equation:
 $$
-  \frac{dQ}{dt} = \frac{d}{dt}(C_m V_1) 
+  \frac{dQ}{dt} = \frac{d}{dt}(C_m V_1)
 $$
 
-The current $I$ is defined as the rate of flow of charge ($I=\frac{dQ}{dt}$).
+The current $I$ is defined as the rate of flow of charge ($I = dQ/dt$). Since $C_m$ is set by the trace geometry (constant), it pulls out of the derivative, leaving:
+$$
+  I_C = C_m \, \frac{dV}{dt}
+$$
+The capacitive coupling current on the victim is proportional to $dV/dt$ on the aggressor.
 </details>
 
 <div class="important-note"><span class="icon">💡</span>
@@ -1121,14 +1118,17 @@ The changing current in the aggressor generates a changing magnetic field. Part 
     V_L = - \frac{d\Phi_m}{dt}
   $$
 
-  The magnetic flux ($\Phi_m$) threading through the victim loop is physically created by the current $I_a$ in the aggressor loop. Because the relationship is linear for most materials, we define **Mutual Inductance ($L_m$) as the ratio of flux to current.
+  The magnetic flux ($\Phi_m$) threading through the victim loop is physically created by the current $I$ in the aggressor loop. Because the relationship is linear for most materials, we define **Mutual Inductance ($L_m$)** as the ratio of flux to current.
   $$
-    \Phi_m \triangleq L_m I_a 
+    \Phi_m \triangleq L_m I
   $$ where $L_m$ "hides" the geometry (distance, height and length) into a single constant.
 
-  Finally, we substitude and the definition of flux
+  Finally, we substitute the definition of flux back into the Faraday result
   $$
-    V_L = - \frac{d(L_m I_a )}{dt}
+    \begin{align*}
+    V_L &= - \frac{d(L_m I )}{dt} \\
+    &= - L_m\,\frac{d I}{dt}
+    \end{align*}
   $$
 </details>
 <br />
@@ -1140,8 +1140,8 @@ $$
   V_L = - L_m\frac{dI}{dt}
 $$ where:
 - $V_L$ is the induced voltage on the victim trace
-- $L_m$ is the mutual inductance between the two trace-return-plane loops.
-- $I$ is the current in the aggressor trace.
+- $L_m$ is the mutual inductance between the two trace-return-plane loops
+- $I$ is the current in the aggressor trace
 </div>
 
  It depends on how much of the aggressor's $\mathbf B$ field threads through the victim's loop — set by the physical distance between traces, the height above the return plane, and the length of the parallel run.
@@ -1167,7 +1167,7 @@ The total induced signal is the sum of capacitive and inductive contributions.
 
 In uniform transmission lines:
 
-- **Near-End Crosstalk (NEXT)** appears closest to the aggressor's source. The capacitive and inductive components have the same polarity — they reinforce. 
+- **Near-End Crosstalk (NEXT)** appears closest to the aggressor's source. The capacitive and inductive components have the same polarity — they reinforce.
 
 - **Far-End Crosstalk (FEXT)** appears at the far end. The capacitive and inductive components have opposite polarity — they partially cancel.
 <br />
@@ -1179,8 +1179,10 @@ Crosstalk depends on field overlap and geometry:
 - **Trace spacing:** increasing separation reduces field overlap
 - **Dielectric thickness:** reducing height to the return plane improves confinement
 - **Return path continuity:** uninterrupted reference planes prevent field spreading
-- **Loop area:** minimizing the *aggressor's* loop reduces the $\mathbf B$ field generated; minimizing the *victim's* loop reduces the flux it captures. Both levers reduce magnetic coupling.
+- **Aggressor loop area:** smaller loop generates less $\mathbf B$ field
+- **Victim loop area:** smaller loop captures less flux
 <br />
+
 
 #### 1.5.7 Summary
 
@@ -1200,11 +1202,7 @@ Both are direct consequences of Maxwell’s equations. As §1.5.1 put it: there 
 
 Signal integrity asks whether the field arrives at the receiver correctly; EMI asks whether the field arrives somewhere it should not.
 
-In a properly designed transmission structure, the electromagnetic fields associated with a signal are largely confined to the region between the signal conductor and its return path. This confinement minimizes interaction with the surrounding environment.
-
-EMI occurs when electromagnetic fields are no longer confined to their intended region, allowing energy to couple into other structures or radiate into free space.
-
-Thus, EMI is not a separate phenomenon, but a direct consequence of how well the electromagnetic field is contained by the geometry.
+> **The central question: when the field escapes the intended region between trace and return plane, where does it go?**
 <br />
 
 #### 1.6.1 Intuitive Picture
@@ -1259,17 +1257,17 @@ The expanded loop is an antenna.
 
 <div class="important-note"><span class="icon">💡</span>
 
-For a small loop (perimeter ≪ $\lambda$), the radiated electric field $E$ is proportional as [^EMCLOOP]
+For a small loop (perimeter ≪ $\lambda$), the radiated electric field magnitude $|\mathbf E_{rad}|$ scales as[^EMCLOOP]
 $$
-    E_{rad} \;\propto\; \frac{f^2 \, A \, I}{r}
+    |\mathbf E_{rad}| \;\propto\; \frac{f^2 \, A \, I}{r}
 $$ where:
 - $f$ is the frequency of the signal
 - $A$ is the loop area
 - $I$ is the loop current
 - $r$ is the distance
-[^EMCLOOP]: Derived from the magnetic dipole radiation formula. The full expression includes constants ($\mu_0$, $c$), but the proportionality to $f^2$, $A$, and $I$ captures the design levers.
-
 </div>
+
+[^EMCLOOP]: Derived from the magnetic dipole radiation formula. The full expression includes constants ($\mu_0$, $c$), but the proportionality to $f^2$, $A$, and $I$ captures the design levers.
 
 The scaling is sharp. Radiated *power* goes as $f^4 A^2$ — doubling the frequency multiplies power by 16, and quadrupling the loop area another 16. This is why edge rates and unintended loop area dominate EMC budgets at modern switching speeds.
 <br />
@@ -1277,7 +1275,7 @@ The scaling is sharp. Radiated *power* goes as $f^4 A^2$ — doubling the freque
 
 #### 1.6.5 Summary
 
-EMI arises when electromagnetic fields extend beyond their intended region. Field confinement depends on a continuous, nearby return path and a small loop area. When the loop opens — from a plane discontinuity, a stray via, or a sloppy stack-up — the fields expand. At short range, the expansion shows up as crosstalk; at long range, as radiated emission. Controlling the geometry of the return path is the primary lever for both.
+EMI arises when electromagnetic fields extend beyond their intended region. Field confinement depends on a continuous, nearby return path and a small loop area. When the loop opens — from a plane discontinuity, a stray via, or a sloppy stack-up — the fields expand. At short range, the expansion shows up as crosstalk; at long range, as radiated emission. Controlling the geometry of the return path is the primary lever for both — the concrete layout rules are in §2.1.
 <br />
 
 ---
@@ -1288,30 +1286,30 @@ EMI arises when electromagnetic fields extend beyond their intended region. Fiel
 
 ## 2 From Physics to Layout
 
-Chapter 1 established that signals propagate as electromagnetic waves guided by conductor geometry, with energy residing primarily in the dielectric. Voltage and current are derived quantities that reflect the behavior of the underlying fields.
+Everything in §1 reduces to one design reality:
 
-This chapter translates those results into practical PCB design decisions.
+> **A PCB layout defines the geometry of an electromagnetic wave.**
 
-The central principle is:
+The trace and return plane form a guiding structure. The dielectric carries the energy. The conductors enforce boundary conditions that confine and shape the fields.
 
-> **PCB layout controls electromagnetic field geometry.**
+When this structure is preserved, signals propagate cleanly.
+When it is disturbed, one or more of four failure modes appears:
+- **Signal integrity** → wave disruption (reflections, ringing)
+- **PDN failure** → insufficient energy delivery (rail collapse)
+- **Crosstalk** → field overlap between structures
+- **EMI** → loss of field confinement and radiation
 
-Design rules presented in this chapter follows from one of four physical mechanisms:
-- disruption of wave propagation (signal integrity)
-- insufficient energy delivery (PDN behavior)
-- field overlap (crosstalk)
-- loss of field confinement (EMI)
+The rules in §2.1 prevent these failure modes by controlling the **geometry of the electromagnetic field**. Sections §2.2–§2.7 then apply those rules to the OPNhydro PCB.
 <br />
 
+---
+
+<br />
 
 ### 2.1 PCB Design Rules
 
-Everything in §1.1 through §1.5 leads to a single conclusion: the signal energy travels as an EM wave through the dielectric, guided by the copper boundaries. The trace is one wall, the return plane is the other. The copper confines the field ($E_x$ cancellation), the dielectric carries it forward (displacement current), and the return current in the return plane provides the equal-and-opposite $\mathbf B$ that prevents radiation (field cancellation at a distance).
 
-When that field structure breaks down, the consequences fall into four categories: degraded signal quality on a single net (reflections, ringing), rail collapse in the power distribution network (§1.4), crosstalk between adjacent nets (§1.5), and radiated EMI (§1.6). Every PCB layout rule exists to prevent one or more of these — by keeping the field confined, the return path intact, and the coupling between unrelated fields to a minimum.
-<br />
-
-#### Signal Quality
+#### 2.1.1 Signal Quality
 
 A signal traveling along a trace is an EM wave guided by the trace and its return plane. Anything that disrupts the wave's propagation — an impedance discontinuity, a missing return path, a stub — causes part of the energy to reflect back toward the source. The reflected wave interferes with the forward wave, producing ringing, overshoot, and timing uncertainty on the net.
 
@@ -1340,7 +1338,8 @@ If the planes are the same potential, prevent leakage with nearby stitching vias
 **Rule 1c — Keep every signal and power layer one dielectric away from a return plane.** The wave's confinement weakens as the trace moves away from its return — fields spread laterally, the loop area grows, and the characteristic impedance becomes ill-defined. Every routing layer needs a return plane in the immediately adjacent dielectric (no skipping a layer). This constraint is what drives the stack-up choice in §2.2.
 <br />
 
-#### Crosstalk
+
+#### 2.1.2 Crosstalk
 
 Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fields) and inductive ($L_m$, from overlapping $\mathbf B$ fields) — depend on how much of the aggressor's field volume overlaps with the victim's. Every mitigation strategy reduces that overlap.
 
@@ -1355,7 +1354,8 @@ Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fie
 **Rule 2e — Separate functional domains.** Motor control traces and analog sensor traces must not share the same dielectric space. Keep traces on adjacent layers perpendicular to each other to minimize the parallel run length between layers.
 <br />
 
-#### Rail Collapse
+
+#### 2.1.3 Rail Collapse
 
 Every time a chip switches, it draws a sharp current pulse from the power rail. That pulse passes through the inductance of the power distribution network, producing a voltage drop $\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$. The goal is to minimize the PDN inductance across the full frequency range over which the chip draws current. Three levers reduce that inductance: tight coupling between power and return planes (small loop area), local energy reservoirs (decoupling caps close to the load), and continuous return paths (no detours that enlarge the loop).
 
@@ -1368,7 +1368,7 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 **Rule 3d — Rely on on-chip decoupling for the highest frequencies.** Above ~100 MHz, no external capacitor can respond fast enough — the path inductance from capacitor to die is too high. Modern ICs include on-die decoupling for this reason. The PCB designer's job is to keep $L_{\text{PDN}}$ low at the frequencies below that.
 <br />
 
-#### EMI — Radiated Emissions
+#### 2.1.4 EMI — Radiated Emissions
 
 EMI is not a separate problem — it is the consequence of every other problem listed above. When a return path is broken, the $\mathbf B$ fields stop cancelling and the loop radiates. When crosstalk couples energy onto an unintended trace, that trace becomes an unintentional antenna. When a rail collapses, the transient current loop radiates at the switching frequency and its harmonics.
 
@@ -1377,7 +1377,19 @@ EMI is not a separate problem — it is the consequence of every other problem l
 **Rule 4b — Contain the fields at board edges.** EM fields that reach the edge of the PCB can radiate freely — there is no conductor to confine them. Pull traces and pours back from the board edge by at least 20× the dielectric thickness (the 20H rule). Place return plane stitching vias along the board perimeter to create a continuous shield.
 
 **Rule 4c — Filter at I/O boundaries.** Every cable attached to the board is a potential antenna. Place filtering (ferrite beads, capacitors, common-mode chokes) at the point where signals enter or leave the board, before the field has a chance to propagate onto the cable.
+<br />
 
+
+#### 2.1.5 Summary
+
+All PCB design rules reduce to controlling a few aspects of the electromagnetic field:
+- **Continuity** → closed current loops (Rules 1a, 1b)
+- **Confinement** → fields stay between trace and return (Rules 1c, 2c, 2d, 4a)
+- **Separation** → minimal unintended coupling (Rules 2a, 2b, 2e)
+- **Energy delivery** → local reservoirs near the load (Rules 3a–3d)
+- **Containment at boundaries** → no escape into cables or air (Rules 4b, 4c)
+
+A good PCB layout is one where the electromagnetic field has nowhere unexpected to go.
 <br />
 
 ---

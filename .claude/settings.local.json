@@ -40,7 +40,8 @@
       "WebFetch(domain:www.waveshare.com)",
       "Bash(python3 -)",
       "Bash(node -e ':*)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(awk ' *)"
     ],
     "additionalDirectories": [
       "u:\\Users\\Coert\\src\\OPNhydro\\hardware"
