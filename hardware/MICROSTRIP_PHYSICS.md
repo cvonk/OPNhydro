@@ -1308,6 +1308,22 @@ The rules in §2.1 prevent these failure modes by controlling the **geometry of 
 
 ### 2.1 PCB Design Rules
 
+Everything in §1 reduces to one design reality:
+
+> **A PCB layout defines the geometry of an electromagnetic wave.**
+
+The trace and return plane form a guiding structure. The dielectric carries the energy. The conductors enforce boundary conditions that confine and shape the fields.
+
+When this structure is preserved, signals propagate cleanly.
+When it is disturbed, one or more of four failure modes appears:
+- Signal integrity → wave disruption (reflections, ringing)
+- PDN failure → insufficient energy delivery (rail collapse)
+- Crosstalk → field overlap between structures
+- EMI → loss of field confinement and radiation
+
+Each rule below prevents one or more of these by controlling the geometry of the electromagnetic field.
+<br />
+
 
 #### 2.1.1 Signal Quality
 
@@ -1339,34 +1355,35 @@ If the planes are the same potential, prevent leakage with nearby stitching vias
 <br />
 
 
-#### 2.1.2 Crosstalk
-
-Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fields) and inductive ($L_m$, from overlapping $\mathbf B$ fields) — depend on how much of the aggressor's field volume overlaps with the victim's. Every mitigation strategy reduces that overlap.
-
-**Rule 2a — Increase trace spacing.** The fringing $\mathbf E$ field that causes capacitive coupling falls off roughly as $1/d$ with distance, and the $\mathbf B$ field that causes inductive coupling (Ampère's law) falls off at a comparable rate. The 3W rule (center-to-center spacing of at least 3× the trace width) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
-
-**Rule 2b — Minimize parallel run length.** Both $C_m$ and $L_m$ are proportional to the length over which two traces run in parallel. The coupling is cumulative — every millimeter of shared dielectric adds to the total. Where two sensitive traces must be routed near each other, cross them at 90° rather than running them in parallel.
-
-**Rule 2c — Reduce trace height above the return plane.** The closer a trace is to its return plane, the more tightly the $\mathbf E$ and $\mathbf B$ fields are confined directly underneath. Less field energy spills sideways into the neighboring trace's volume.
-
-**Rule 2d — Interpose a return plane between signal layers.** A grounded conductor between two signal layers terminates $\mathbf E$ field lines from traces above (Gauss's law — the lines land on the return plane instead of reaching the layer below) and provides a local return path that contains the $\mathbf B$ field, blocking inter-layer coupling.
-
-**Rule 2e — Separate functional domains.** Motor control traces and analog sensor traces must not share the same dielectric space. Keep traces on adjacent layers perpendicular to each other to minimize the parallel run length between layers.
-<br />
-
-
-#### 2.1.3 Rail Collapse
+#### 2.1.2 PDN Failure
 
 Every time a chip switches, it draws a sharp current pulse from the power rail. That pulse passes through the inductance of the power distribution network, producing a voltage drop $\Delta V = L_{\text{PDN}} \times \frac{dI}{dt}$. The goal is to minimize the PDN inductance across the full frequency range over which the chip draws current. Three levers reduce that inductance: tight coupling between power and return planes (small loop area), local energy reservoirs (decoupling caps close to the load), and continuous return paths (no detours that enlarge the loop).
 
-**Rule 3a — Tightly couple power and return planes.** A power plane and return plane separated by a thin dielectric (2–3 mil) form a parallel-plate capacitor with very low inductance. This provides broadband decoupling across the entire board area — the EM field between the planes can supply current before the discrete capacitors or the regulator can respond. This design uses two GND planes (L2, L3) with power routed as traces rather than a dedicated plane, so broadband plane decoupling is achieved through discrete capacitors instead (see §2.2).
+**Rule 2a — Tightly couple power and return planes.** A power plane and return plane separated by a thin dielectric (2–3 mil) form a parallel-plate capacitor with very low inductance. This provides broadband decoupling across the entire board area — the EM field between the planes can supply current before the discrete capacitors or the regulator can respond. This design uses two GND planes (L2, L3) with power routed as traces rather than a dedicated plane, so broadband plane decoupling is achieved through discrete capacitors instead (see §2.2).
 
-**Rule 3b — Use multiple, low-inductance decoupling capacitors.** A single capacitor has parasitic lead and via inductance that limits its effectiveness above its self-resonant frequency. Multiple smaller capacitors in parallel reduce the effective inductance (inductances in parallel divide). Place them as close to the chip's power pins as physically possible — every millimeter of trace adds inductance.
+**Rule 2b — Use multiple, low-inductance decoupling capacitors.** A single capacitor has parasitic lead and via inductance that limits its effectiveness above its self-resonant frequency. Multiple smaller capacitors in parallel reduce the effective inductance (inductances in parallel divide). Place them as close to the chip's power pins as physically possible — every millimeter of trace adds inductance.
 
-**Rule 3c — Minimize power and ground lead length in packages.** The inductance of the bond wires and package leads between die and PCB is often the dominant contributor to $L_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (QFN, BGA) have lower inductance than those with long leads (SOIC, DIP).
+**Rule 2c — Minimize power and ground lead length in packages.** The inductance of the bond wires and package leads between die and PCB is often the dominant contributor to $L_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (QFN, BGA) have lower inductance than those with long leads (SOIC, DIP).
 
 **Rule 3d — Rely on on-chip decoupling for the highest frequencies.** Above ~100 MHz, no external capacitor can respond fast enough — the path inductance from capacitor to die is too high. Modern ICs include on-die decoupling for this reason. The PCB designer's job is to keep $L_{\text{PDN}}$ low at the frequencies below that.
 <br />
+
+
+#### 2.1.3 Crosstalk
+
+Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fields) and inductive ($L_m$, from overlapping $\mathbf B$ fields) — depend on how much of the aggressor's field volume overlaps with the victim's. Every mitigation strategy reduces that overlap.
+
+**Rule 3a — Increase trace spacing.** The fringing $\mathbf E$ field that causes capacitive coupling falls off roughly as $1/d$ with distance, and the $\mathbf B$ field that causes inductive coupling (Ampère's law) falls off at a comparable rate. The 3W rule (center-to-center spacing of at least 3× the trace width) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
+
+**Rule 3b — Minimize parallel run length.** Both $C_m$ and $L_m$ are proportional to the length over which two traces run in parallel. The coupling is cumulative — every millimeter of shared dielectric adds to the total. Where two sensitive traces must be routed near each other, cross them at 90° rather than running them in parallel.
+
+**Rule 3c — Reduce trace height above the return plane.** The closer a trace is to its return plane, the more tightly the $\mathbf E$ and $\mathbf B$ fields are confined directly underneath. Less field energy spills sideways into the neighboring trace's volume.
+
+**Rule 3d — Interpose a return plane between signal layers.** A grounded conductor between two signal layers terminates $\mathbf E$ field lines from traces above (Gauss's law — the lines land on the return plane instead of reaching the layer below) and provides a local return path that contains the $\mathbf B$ field, blocking inter-layer coupling.
+
+**Rule 3e — Separate functional domains.** Motor control traces and analog sensor traces must not share the same dielectric space. Keep traces on adjacent layers perpendicular to each other to minimize the parallel run length between layers.
+<br />
+
 
 #### 2.1.4 EMI — Radiated Emissions
 
@@ -1384,9 +1401,9 @@ EMI is not a separate problem — it is the consequence of every other problem l
 
 All PCB design rules reduce to controlling a few aspects of the electromagnetic field:
 - **Continuity** → closed current loops (Rules 1a, 1b)
-- **Confinement** → fields stay between trace and return (Rules 1c, 2c, 2d, 4a)
-- **Separation** → minimal unintended coupling (Rules 2a, 2b, 2e)
-- **Energy delivery** → local reservoirs near the load (Rules 3a–3d)
+- **Confinement** → fields stay between trace and return (Rules 1c, 3c, 3d, 4a)
+- **Separation** → minimal unintended coupling (Rules 3a, 3b, 3e)
+- **Energy delivery** → local reservoirs near the load (Rules 2a–2d)
 - **Containment at boundaries** → no escape into cables or air (Rules 4b, 4c)
 
 A good PCB layout is one where the electromagnetic field has nowhere unexpected to go.
