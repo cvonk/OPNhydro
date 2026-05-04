@@ -1,0 +1,28 @@
+{
+    "parameters": [
+        {
+            "expr": "30",
+            "name": "board_size",
+            "value": "30"
+        },
+        {
+            "descr": "substrate thickness",
+            "expr": "0.1",
+            "name": "sub_t",
+            "value": "0.1"
+        },
+        {
+            "descr": "FR-4 TG135",
+            "expr": "4.4",
+            "name": "Er",
+            "value": "4.4"
+        },
+        {
+            "descr": "trace width for 50 Ohms",
+            "expr": "0.19",
+            "name": "w_50",
+            "value": "0.19"
+        }
+    ],
+    "version": 1
+}

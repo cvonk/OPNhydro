@@ -225,7 +225,7 @@ These relations show that **time-varying electric and magnetic fields generate e
 
   You see what's happening? The electric field made a magnetic field. The magnetic field made an electric field. The new electric field is further down the line. And now it is changing, so it makes another magnetic field, which makes another electric field, and off we go. The two fields are playing leapfrog[^LEAPFROG], and they're heading down the trace at an enormous speed.
 
-  And how fast, exactly? In empty space these fields travel at the speed of light — that's what light *is*, by the way, the same kind of leapfrog. In the dielectric the fields go a little slower because the dielectric gets in their way. But still fast — about two-thirds the speed of light. Six inches in a nanosecond. *That's* how fast a signal really moves on your board.
+  And how fast, exactly? In empty space these fields travel at the speed of light — that's what light *is*, by the way, the same kind of leapfrog. In the dielectric the fields go a little slower because the dielectric gets in their way. But still fast — about half the speed of light. Six inches in a nanosecond. *That's* how fast a signal really moves on your board.
 
   And that, really, is what every trace on every PCB is doing. It's not carrying electrons to some destination. It's guiding a little wave of energy. Isn't that something?
 </div>
@@ -615,9 +615,14 @@ When the magnetic field from the trace tries to enter the return plane, it induc
 
 <div class="important-note"><span class="icon">💡</span>
 
-Ampère's law forces a surface current [^sCurrent] in the propagation direction:
+Ampère's law forces a surface current [^sCurrent] in the propagation direction on the **trace**:
 $$
-    \mathbf K = \frac{B_y}{\mu}\,\hat z
+    \mathbf K_{\text{trace}} = \frac{B_y}{\mu}\,\hat z
+$$
+
+The **return plane** carries an equal and opposite current (its outward normal is $-\hat x$, so the right-hand rule flips the sign):
+$$
+    \mathbf K_{\text{plane}} = -\frac{B_y}{\mu}\,\hat z
 $$
 
 where:
@@ -847,6 +852,8 @@ In the **dielectric** (§1.1):
 - $\mathbf J = 0$
 - magnetic field is sustained by the **displacement current $\varepsilon\frac{\partial\mathbf{E}}{\partial t}$**
 
+Inside a good conductor, both $\mathbf B$ and $\mathbf J$ decay together over the skin depth — most of the magnetic field of interest lives in the dielectric, with the surface current $\mathbf K$ matching the tangential $\mathbf B$ just outside (§1.2.4 boundary condition).
+
 [^k2j]: The surface current $\mathbf K$ from §1.2 is just $\mathbf J$ integrated across the skin-depth layer where the current flows.
 <br />
 
@@ -874,12 +881,11 @@ The trace and the return plane act like the plates of a propagating capacitor: c
 
 #### 1.3.5 Interpretation
 
-The magnetic field is not confined to the conductor. It is a continuous field spanning both dielectric and conductor regions. Conduction current and displacement current are not separate phenomena; they are two contributions to the same electromagnetic field.
+The magnetic field lives primarily in the dielectric, with a thin skin-depth penetration into the conductors — a single continuous field across the structure. Conduction current and displacement current are not separate phenomena; they are two contributions to the same electromagnetic field.
 
-<div class="important-note"><span class="icon">💡</span>
+**Reconciling §1.2 and §1.3** 
 
-**Reconciling §1.2 and §1.3.** §1.2 said "$\mathbf B$ determines $\mathbf K$"; §1.3 says "$\mathbf J$ sustains $\mathbf B$." These are not in conflict, and together they are the formal resolution of §1.3.1's "only part of the story." Maxwell-Ampère, $\nabla \times \mathbf B = \mu \mathbf J + \mu\varepsilon\,\partial \mathbf E/\partial t$, is an *identity* relating $\mathbf B$, $\mathbf J$, and $\partial \mathbf E/\partial t$ at every instant — none of the three is "the cause" of the others. The causal story is the one from §1.2: the wave in the dielectric is primary, and it drives the surface currents. Once those currents exist, Maxwell-Ampère bookkeeping requires them (together with the displacement current) to source the same continuous $\mathbf B$ field that drove them in the first place.
-</div>
+§1.2 said "$\mathbf B$ determines $\mathbf K$"; §1.3 says "$\mathbf J$ sustains $\mathbf B$." These are not in conflict, and together they are the formal resolution of §1.3.1's "only part of the story." Maxwell-Ampère, $\nabla \times \mathbf B = \mu \mathbf J + \mu\varepsilon\,\partial \mathbf E/\partial t$, is an *identity* relating $\mathbf B$, $\mathbf J$, and $\partial \mathbf E/\partial t$ at every instant — none of the three is "the cause" of the others. The causal story is the one from §1.2: the wave in the dielectric is primary, and it drives the surface currents. Once those currents exist, Maxwell-Ampère bookkeeping requires them (together with the displacement current) to source the same continuous $\mathbf B$ field that drove them in the first place.
 
 For design, the closed-loop view is the one that matters. The loop's geometry sets its inductance — that's what §1.4 turns into a design lever (rail collapse, decoupling, stack-up). Break the conduction return (a slot in the plane, a missing return via) or break the displacement-current path (an abrupt change in dielectric) and the loop opens up — the fields stop cancelling at a distance, and the failure modes of §1.5 (crosstalk) and §1.6 (EMI) follow directly.
 <br />
@@ -939,11 +945,11 @@ If the voltage drop is large enough — what designers call **rail collapse** �
 
 #### 1.4.3 Field Interpretation
 
-The circuit relation $\Delta V = L\,dI/dt$ is the macroscopic shadow of a field-level event. The chip's switching current flows in a loop — out the supply pin, through the bond wires, package leads, PCB power and ground planes, and back. That loop has a magnetic field threaded through it, with energy density $\tfrac{1}{2}\mathbf B^2/\mu$ stored throughout the volume the loop encloses.
+The circuit relation $\Delta V = L\,dI/dt$ is the macroscopic shadow of a field-level event. The chip's switching current flows in a loop — out the supply pin, through the bond wires, package leads, PCB power and ground planes, and back. That loop has a magnetic field threaded through it, with energy density $\tfrac{1}{2}\mathbf B^2/\mu$ stored throughout the volume the field occupies — primarily inside the loop.
 
 When the chip demands more current, the $\mathbf B$ field everywhere in that loop must grow. Two field-level constraints make this hard:
 
-- **Energy delivery is wave-rate-limited.** The energy has to travel from the supply to the chip, and the supply only "knows" about the demand once it reaches it. Both legs are bounded by the speed of light in the dielectric ($\approx 15$ cm/ns in FR-4) — a 5 cm path is already $\approx 300$ ps round-trip, comparable to the rise time of fast logic.
+- **Energy delivery is wave-rate-limited.** The energy has to travel from the supply to the chip, and the supply only "knows" about the demand once it reaches it. Both legs are bounded by the speed of light in the dielectric ($\approx 16$ cm/ns in FR-4) — a 5 cm path adds $\approx 310$ ps each way, comparable to the rise time of fast logic.
 - **A growing $\mathbf B$ field induces an opposing $\mathbf E$ field** (Faraday). This back-EMF appears as a voltage drop across the loop's inductance and subtracts from the rail at the chip pin.
 
 The decoupling capacitor sidesteps both. Its electric field already stores energy locally — $W_C = \tfrac{1}{2}\,C\,V^2$, in the dielectric between its plates, millimeters from the load. The cap doesn't need to grow a $\mathbf B$ field across a long loop; it just releases stored $\mathbf E$-field energy through a much shorter path. The smaller the loop from cap to load, the smaller its inductance, and the less back-EMF the demand produces.
@@ -1352,7 +1358,7 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 
 **Rule 2c — Minimize power and ground lead length in packages.** The inductance of the bond wires and package leads between die and PCB is often the dominant contributor to $L_{\text{PDN}}$ at high frequencies. Packages with multiple, short power and ground pins (QFN, BGA) have lower inductance than those with long leads (SOIC, DIP).
 
-**Rule 2d — Rely on on-chip decoupling for the highest frequencies.** Above ~100 MHz, no external capacitor can respond fast enough — the path inductance from capacitor to die is too high. Modern ICs include on-die decoupling for this reason. The PCB designer's job is to keep $L_{\text{PDN}}$ low at the frequencies below that.
+**Rule 2d — Rely on on-chip decoupling for the highest frequencies.** Every external capacitor has a self-resonant frequency $f_{\text{SRF}} \approx 1/(2\pi\sqrt{L_{\text{path}}\,C})$ set by the cap-via-trace path inductance and the cap value; above it, the cap looks inductive and stops decoupling. For typical PCB geometries this lands in the 50–200 MHz range — above that, no external capacitor can respond fast enough. Modern ICs include on-die decoupling for this regime. The PCB designer's job is to keep $L_{\text{PDN}}$ low at the frequencies *below* $f_{\text{SRF}}$.
 <br />
 
 
@@ -1360,7 +1366,7 @@ Every time a chip switches, it draws a sharp current pulse from the power rail. 
 
 Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fields) and inductive ($L_m$, from overlapping $\mathbf B$ fields) — depend on how much of the aggressor's field volume overlaps with the victim's. Every mitigation strategy reduces that overlap.
 
-**Rule 3a — Increase trace spacing.** The fringing $\mathbf E$ field that causes capacitive coupling falls off roughly as $1/d$ with distance, and the $\mathbf B$ field that causes inductive coupling (Ampère's law) falls off at a comparable rate. The 3W rule (center-to-center spacing of at least 3× the trace width) is a practical approximation of this. For critical traces (analog sensors, clocks), use $5W$.
+**Rule 3a — Increase trace spacing.** Both the fringing $\mathbf E$ field and the $\mathbf B$ field around a trace fall off rapidly with lateral distance — faster than $1/d$ once the spacing exceeds the trace-to-plane height, because the trace and its image current in the return plane act as an opposing pair whose fields cancel at distance. The 3W rule (center-to-center spacing of at least 3× the trace width) is the practical approximation: at $d = 3W$, coupling is roughly 1% of the $d = W$ case. For critical traces (analog sensors, clocks), use $5W$.
 
 **Rule 3b — Minimize parallel run length.** Both $C_m$ and $L_m$ are proportional to the length over which two traces run in parallel. The coupling is cumulative — every millimeter of shared dielectric adds to the total. Where two sensitive traces must be routed near each other, cross them at 90° rather than running them in parallel.
 
@@ -1376,7 +1382,7 @@ Both coupling mechanisms — capacitive ($C_m$, from overlapping $\mathbf E$ fie
 
 EMI is not a separate problem — it is the consequence of every other problem listed above. When a return path is broken, the $\mathbf B$ fields stop cancelling and the loop radiates. When crosstalk couples energy onto an unintended trace, that trace becomes an unintentional antenna. When a rail collapses, the transient current loop radiates at the switching frequency and its harmonics.
 
-**Rule 4a — Minimize loop area.** Every current — signal, power, return — forms a loop. The radiated power from a loop is proportional to the loop area squared and to the fourth power of frequency: $P_{\text{rad}} \propto A^2 f^4$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
+**Rule 4a — Minimize loop area.** Every current — signal, power, return — forms a loop. For a given loop current $I$, the radiated power is proportional to the loop area squared and the fourth power of frequency: $P_{\text{rad}} \propto A^2 f^4 I^2$ (consistent with §1.6.4's $|\mathbf E_{rad}| \propto f^2 A I / r$). The chip and supply set $I$; layout sets $A$. Keep traces close to their return planes. Use ground vias at every layer transition. Route power close to its return.
 
 **Rule 4b — Contain the fields at board edges.** EM fields that reach the edge of the PCB can radiate freely — there is no conductor to confine them. Pull traces and pours back from the board edge by at least 20× the dielectric thickness (the 20H rule). Place return plane stitching vias along the board perimeter to create a continuous shield.
 
@@ -1434,6 +1440,27 @@ The design specifies a **4-layer PCB with 2 oz copper on the outer layers**. The
 
 
 **PCB finish:** HASL (Hot Air Solder Leveling) is sufficient and lowest cost for the packages used in this design (SSOP-20 at 0.65 mm pitch and larger). ENIG (Electroless Nickel Immersion Gold) is only worth the premium if a future revision adds true fine-pitch parts (QFN/LGA at 0.5 mm or below, or BGA).
+
+
+Note:
+- JLC PCB
+- Base material FR-4 TG135 ($\varepsilon_r\approx 4.4$ at 1 GHz)
+- Layers 4
+- Thickness 1.6mm
+- Surface finish: HASL (with lead)
+- Trace width for 50 Ohm impedance (single ended non coplaner) 6.16 mil 0.156 mm
+
+Layer   | Material                  | Tickness  | Thickness
+--------|---------------------------|-----------|----------
+L1      | outer copper weight 1oz   |  1.38 mil | 0.0350 mm
+Prepreg | 3313 RC57% 4.2mil         |  3.91 mil | 0.0994 mm
+L2      | Inner copper weight 0.5oz |  0.60 mil | 0.0152 mm
+Core    | 1.3mm H/HOZ with copper   | 49.80 mil | 1.2650 mm
+L3      | Inner copper weight 0.5oz |  0.60 mil | 0.0152 mm
+Prepreg | 3313 RC57% 4.2mil         |  3.91 mil | 0.0994 mm
+L4      | outer copper weight 1oz   |  1.38 mil | 0.0350 mm
+
+
 
 
 ---
