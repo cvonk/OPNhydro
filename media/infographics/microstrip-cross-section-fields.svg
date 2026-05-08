@@ -30,7 +30,7 @@
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g57" />
+     inkscape:current-layer="svg69" />
   <defs
      id="defs5">
     <marker
@@ -1045,7 +1045,8 @@
   </g>
   <g
      id="g2"
-     inkscape:label="B field">
+     inkscape:label="B field"
+     transform="matrix(-1,0,0,1,688.38343,0)">
     <g
        id="g13"
        inkscape:label="trace">
@@ -1053,7 +1054,7 @@
          id="g2-7"
          inkscape:label="3"
          transform="matrix(1.5919364,0,0,1.8591906,-220.06719,-293.04619)"
-         style="stroke-width:0.87189953;stroke-dasharray:none">
+         style="stroke-width:0.8719;stroke-dasharray:none">
         <line
            x1="381.03082"
            y1="175.30357"
@@ -1064,7 +1065,7 @@
            marker-end="url(#bArrow-5)"
            opacity="0.85"
            id="line14-4"
-           style="stroke-width:0.87189953;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
+           style="stroke-width:0.8719;stroke-dasharray:none;marker-end:url(#bArrow-5)" />
         <path
            d="m 328.11793,245.20995 c -38.16626,-1.14543 -38.73897,-69.90638 -0.26431,-69.90638"
            fill="none"
@@ -1073,7 +1074,7 @@
            stroke-dasharray="5, 3"
            opacity="0.55"
            id="path17-3"
-           style="stroke-width:0.87189953;stroke-dasharray:none;stroke-dashoffset:0"
+           style="stroke-width:0.8719;stroke-dasharray:none;stroke-dashoffset:0"
            sodipodi:nodetypes="cc" />
         <path
            d="m 380.77836,175.4055 c 38.16626,1.14543 38.73897,69.90638 0.26431,69.90638"
@@ -1083,7 +1084,7 @@
            stroke-dasharray="5, 3"
            opacity="0.55"
            id="path17-3-8"
-           style="stroke-width:0.87189953;stroke-dasharray:none;stroke-dashoffset:0"
+           style="stroke-width:0.8719;stroke-dasharray:none;stroke-dashoffset:0"
            sodipodi:nodetypes="cc" />
         <line
            x1="327.86548"
@@ -1095,13 +1096,13 @@
            marker-end="url(#bArrow-5-0-2)"
            opacity="0.85"
            id="line14-4-8"
-           style="stroke-width:0.87189953;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2)" />
+           style="stroke-width:0.8719;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2)" />
       </g>
       <g
          id="g2-7-8"
          inkscape:label="2"
          transform="matrix(1.4317855,0,0,1.3822833,-163.30195,-197.80384)"
-         style="stroke-width:1.066237;stroke-dasharray:none">
+         style="stroke-width:1.06624;stroke-dasharray:none">
         <line
            x1="381.03082"
            y1="175.30357"
@@ -1112,7 +1113,7 @@
            marker-end="url(#bArrow-5-2)"
            opacity="0.85"
            id="line14-4-65"
-           style="stroke-width:1.066237;stroke-dasharray:none;marker-end:url(#bArrow-5-2)" />
+           style="stroke-width:1.06624;stroke-dasharray:none;marker-end:url(#bArrow-5-2)" />
         <path
            d="m 328.11793,245.20995 c -38.16626,-1.14543 -38.73897,-69.90638 -0.26431,-69.90638"
            fill="none"
@@ -1121,7 +1122,7 @@
            stroke-dasharray="5, 3"
            opacity="0.55"
            id="path17-3-0"
-           style="stroke-width:1.066237;stroke-dasharray:none;stroke-dashoffset:0"
+           style="stroke-width:1.06624;stroke-dasharray:none;stroke-dashoffset:0"
            sodipodi:nodetypes="cc" />
         <path
            d="m 380.77836,175.4055 c 38.16626,1.14543 38.73897,69.90638 0.26431,69.90638"
@@ -1131,7 +1132,7 @@
            stroke-dasharray="5, 3"
            opacity="0.55"
            id="path17-3-8-2"
-           style="stroke-width:1.066237;stroke-dasharray:none;stroke-dashoffset:0"
+           style="stroke-width:1.06624;stroke-dasharray:none;stroke-dashoffset:0"
            sodipodi:nodetypes="cc" />
         <line
            x1="327.86548"
@@ -1143,13 +1144,13 @@
            marker-end="url(#bArrow-5-0-2-79)"
            opacity="0.85"
            id="line14-4-8-8"
-           style="stroke-width:1.066237;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2-79)" />
+           style="stroke-width:1.06624;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2-79)" />
       </g>
       <g
          id="g2-7-1"
          inkscape:label="1"
          transform="matrix(1.2673946,0,0,0.89049455,-105.0339,-100.12115)"
-         style="stroke-width:1.41195124;stroke-dasharray:none">
+         style="stroke-width:1.41195;stroke-dasharray:none">
         <line
            x1="381.03082"
            y1="175.30357"
@@ -1160,7 +1161,7 @@
            marker-end="url(#bArrow-5-4)"
            opacity="0.85"
            id="line14-4-6"
-           style="stroke-width:1.41195124;stroke-dasharray:none;marker-end:url(#bArrow-5-4)" />
+           style="stroke-width:1.41195;stroke-dasharray:none;marker-end:url(#bArrow-5-4)" />
         <path
            d="m 328.11793,245.20995 c -38.16626,-1.14543 -38.73897,-69.90638 -0.26431,-69.90638"
            fill="none"
@@ -1169,7 +1170,7 @@
            stroke-dasharray="5, 3"
            opacity="0.55"
            id="path17-3-85"
-           style="stroke-width:1.41195124;stroke-dasharray:none;stroke-dashoffset:0"
+           style="stroke-width:1.41195;stroke-dasharray:none;stroke-dashoffset:0"
            sodipodi:nodetypes="cc" />
         <path
            d="m 380.77836,175.4055 c 38.16626,1.14543 38.73897,69.90638 0.26431,69.90638"
@@ -1179,7 +1180,7 @@
            stroke-dasharray="5, 3"
            opacity="0.55"
            id="path17-3-8-7"
-           style="stroke-width:1.41195124;stroke-dasharray:none;stroke-dashoffset:0"
+           style="stroke-width:1.41195;stroke-dasharray:none;stroke-dashoffset:0"
            sodipodi:nodetypes="cc" />
         <line
            x1="327.86548"
@@ -1191,7 +1192,7 @@
            marker-end="url(#bArrow-5-0-2-3)"
            opacity="0.85"
            id="line14-4-8-6"
-           style="stroke-width:1.41195124;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2-3)" />
+           style="stroke-width:1.41195;stroke-dasharray:none;marker-end:url(#bArrow-5-0-2-3)" />
       </g>
     </g>
     <g

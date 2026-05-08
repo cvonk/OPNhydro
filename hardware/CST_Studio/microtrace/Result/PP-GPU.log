@@ -1,0 +1,4 @@
+Found 1 cuda-capable device(s).
+Device 0: NVIDIA GeForce RTX 5070 Ti
+CUDA_VISIBLE_DEVICES is set to: 
+CUDA Driver Version / Runtime Version: 13.0 / 12.4

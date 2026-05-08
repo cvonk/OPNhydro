@@ -1,0 +1,37 @@
+!data_id
+
+(include) Model.parameter.tlm-inc
+parameters
+  (use) variable_list
+
+!port 1
+  box -0.753 0.1 -0.816 0.816 -15 -15
+  direction z+
+  !shield electric
+
+
+# circuit definitions
+(include) Model.circuit.tlm-inc
+
+lumped_circuit Folder1:load
+  (use) lumped_circuit Folder1:load
+
+
+(include) Model.boundary.tlm-inc
+external_boundaries
+  (use) include_external_boundaries
+
+(include) Model.output.tlm-inc
+output
+  (use) simulation_parameters
+
+# job excitation definitions
+(include) Model.job.tlm-inc
+
+(include) Model.settings.tlm-inc
+!settings
+  (use) include_settings
+
+
+# stop criteria definitions
+(include) Model.stop.tlm-inc

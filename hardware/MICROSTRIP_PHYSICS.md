@@ -128,6 +128,7 @@ Chapter 1 builds the field theory picture from first principles — starting wit
 ## 1 Field Theory
 
 > "Since the TTL days, there has been a four orders of magnitude change in the switching speed of transistors."  -- *Dan Beeker*
+
 <br />
 
 
@@ -150,8 +151,8 @@ Consider a **microstrip** structure consisting of:
 
 <figure>
   <center>
-  <img src="../media/infographics/microstrip-cross-section.svg" style="width: 90%; max-width:800px; height: auto;">
-  <figcaption><i>Cross-section of the microstrip.</i></figcaption>
+  <img src="../media/infographics/microstrip-3d.svg" style="width: 80%; max-width:800px; height: auto;">
+  <figcaption><i>3D-view of the microstrip.</i></figcaption>
   </center>
 </figure>
 
@@ -163,7 +164,8 @@ We define a right-handed coordinate system ($\hat x \times \hat y = \hat z$):
 A voltage step is applied at one end of the trace. The central question is: 
 
 <div class="quote">
-What physical mechanism carries this signal forward?
+
+**What physical mechanism carries this signal forward?**
 </div>
 <br />
 
@@ -196,7 +198,7 @@ In the dielectric region:
 
 <div class="important-note"><span class="icon">💡</span>
 
-In the dielectric the equations reduce to:
+In the dielectric, the two equations reduce to:
 $$
   \begin{align*}
     \nabla \times \mathbf{B} &= \color{red}\cancel{\color{black}\mu \, \mathbf{J}} \color{black} + \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
@@ -215,6 +217,7 @@ These relations show that **time-varying electric and magnetic fields generate e
 #### 1.1.3 Intuitive Picture
 
 <div class="quote feynman">
+
   Now look — you've got a copper trace, and underneath it a big sheet of copper called the return plane. Between them, a thin slab of dielectric. That's it. That's the whole apparatus. And I want to tell you what happens when you flip a switch at one end and connect a battery.
 
   The instant you close the switch, there's a voltage between the trace and the plane. And whenever you have a voltage between two pieces of metal, there's an **electric field** between them. Bang — the field is just there, pointing from the trace down to the plane. Not in all of space, mind you — only right near the switch, because the rest of the trace hasn't heard the news yet.
@@ -253,15 +256,15 @@ The intuition above pictures the wave as a sequence of E → B → E events. Max
 
 When a **voltage step** is applied to the trace:
 
-1. An **electric field is established** ($\mathbf E$) between the trace and the return plane near the source. Because it rises from zero, it is **time-varying**.
+1. An **electric field is established** ($\mathbf E$), between the trace and the return plane, near the source. Because it rises from zero, it is **time-varying**.
 <br />
 
-2. From the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$) along $\hat y$ (transverse to the trace). The strength of this field changes as you move along $\hat z$ — that means a little further along $z$, its value is rising from zero; it is **time-varying**.
+2. According to the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$) along $\hat y$ (transverse to the trace). The strength of this field changes as you move along $\hat z$ — that means a little further along $z$, its value is rising from zero; it is **time-varying**.
 <br />
 
-3. According to Faraday's law, this time-varying magnetic field **forces a spatial gradient in $\mathbf E$** along $\hat z$. A little further down the line, $\mathbf E$ is rising from zero; it too is **time-varying**, and the disturbance has moved forward.[^leapfrogRigor]
+3. According to Faraday's law, this time-varying magnetic field **forces a spatial gradient in $\mathbf E$** along $\hat z$. Thus, a little further down the line, $\mathbf E$ is rising from zero; it too is **time-varying**, and the disturbance has moved forward.[^leapfrogRigor]
 
-Steps 2 and 3 continue throughout the structure. The result is not the transport of charge along the conductor, but the propagation of a **self-sustaining electromagnetic wave** that drives only local charge motion.
+Steps 2 and 3 continue throughout the structure. The result is not the transport of charge along the conductor, but the propagation of a **self-sustaining electromagnetic wave**.
 
 Two conditions are essential:
 - **Temporal variation:** the fields change in time at each point.
@@ -272,6 +275,7 @@ Together, they enforce propagation.
 <div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launches an electromagnetic wave in the dielectric.</div>
 
 [^leapfrogRigor]: The "a little further down the line" framing in steps 2 and 3 is the leapfrog picture — useful for intuition, slightly loose as physics. The rigorous version: Maxwell-Ampère couples $\partial \mathbf E/\partial t$ here to $\partial \mathbf B/\partial z$ here, and the wavefront constraint $\partial/\partial t = -v\,\partial/\partial z$ converts the time variation into a spatial one. Appendix A.1 derives this coupling from Maxwell-Ampère; Appendix A.3 derives the wavefront constraint.
+
 <br />
 
 
@@ -386,7 +390,7 @@ $$
 
 The signal does not propagate as a moving charge. The wave is the spatial pattern of $\mathbf E$ and $\mathbf B$ advancing through the dielectric, with the conductor surfaces forming the boundary that guides it. Energy resides in the dielectric volume, not in the copper.
 
-For design, this reframes what a trace actually is. A trace is not a wire that carries current — it is one wall of a guiding structure whose other wall is the return plane. The integrity of the wave depends on what happens between those two walls. If the dielectric, the trace, and the return plane together form a clean boundary, the wave propagates undisturbed. If any one of them is compromised — a slot in the return plane, an abrupt change in dielectric, a missing return via, an unmatched termination — the wave is disrupted, and the signal pays the price.
+For design, this reframes what a trace actually is. A trace is not a wire that carries current — it is one wall of a guiding structure whose other wall is the return plane. The integrity of the wave depends on what happens between those two walls. If the dielectric, the trace, and the return plane together form a clean boundary, the wave propagates undisturbed. If any one of them is compromised, the wave is disrupted, and the signal pays the price.
 
 §1.2 examines what the conductors actually do to make this work: not transporting energy, but enforcing the boundary conditions that let the wave exist at all.
 <br />
@@ -418,31 +422,7 @@ Both arise directly from Maxwell’s equations.
 <br />
 
 
-#### 1.2.1 Intuitive Picture
-
-<div class="quote feynman">
-  So put it all together:
-  - The wave is in the dielectric.
-  - The *down-field* from the wave shoves electrons around on the copper surfaces. Those electrons build a wall that keeps the wave trapped in the dielectric.
-  - The *along-field* from the wave pushes other electrons along the trace, giving you the little current you measure with your ammeter.
-
-  And here's a small puzzle. Once the wavefront has passed your section, the wall of charge is built — fine, that's what walls do. But the *current* keeps flowing. Why? Because the wavefront is still out there ahead of you, still building walls farther down the line, and it needs charge to do it. The current through your already-charged section is feeding the section in front of you — like water in a pipe still flowing because somebody downstream is still drinking. And the copper isn't perfect, by the way: there's a tiny residual along-field left at the surface paying the resistive toll, so the wave gets a little weaker as it goes.
-
-  The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field, the same way a line of dominoes reacts to the first push. The dominoes aren't transporting the energy down the line — the *falling pattern* is. And on a PCB, the falling pattern is the field.
-
-  You can also say this without ever mentioning an electron. The wave's $\mathbf E$ and $\mathbf B$ exist right up to the surface of the copper, but inside the copper they have to be zero — that's what good conductors do. So there's a jump at the surface, and nature does not allow that for free: wherever the perpendicular $\mathbf E$ has a jump, there must be **charge** to account for it; wherever the parallel $\mathbf B$ has a jump, there must be **current**. The metal has no choice. You can read off the surface charge and the surface current *purely from what the field is doing in the dielectric* — no forces, no electron motion, no kinetics. The electrons just sign the ledger.
-
-  And that's really all there is to it. The hard part is believing it.
-</div>
-
-> Translating into formal terms: 
-> - "down-field" → normal $E_x$ (perpendicular to the conductor surfaces);
-> - "along-field" → longitudinal $E_z$ (along the direction of propagation).
-
-<br />
-
-
-#### 1.2.2 Electric Field at the Conductor Boundary
+#### 1.2.1 Electric Field at the Conductor Boundary
 
 In a microstrip, the electric field in the dielectric has two components:
 - a dominant **normal** component $E_x$, perpendicular to the conductor surfaces (along the dielectric thickness)
@@ -451,11 +431,36 @@ In a microstrip, the electric field in the dielectric has two components:
 <figure>
   <center>
   <img src="../media/infographics/microstrip-e-field.svg" style="width: 70%; max-width:800px; height: auto;">
-  <figcaption><i>Side-view: $E_x$ (normal, dominant) and $E_z$ (longitudinal, small) components of the microstrip electric field.</i></figcaption>
+  <figcaption><i>Side-view: E<sub>x</sub> (normal, dominant) and E<sub>z</sub> (longitudinal, small) components of the microstrip electric field.</i></figcaption>
   </center>
 </figure>
 
 These components produce distinct physical effects at the conductor surface.
+<br />
+
+
+#### 1.2.2 Intuitive Picture
+
+<div class="quote feynman">
+
+  So put it all together:
+  - The wave is in the dielectric.
+  - The *down-field* from the wave shoves electrons around on the copper surfaces. Those electrons build a wall that keeps the wave trapped in the dielectric.
+  - The *along-field* from the wave pushes other electrons along the trace, giving you the little current you measure with your ammeter.
+
+  And here's a small puzzle. Once the wavefront has passed your section, the wall of charge is built — fine, that's what walls do. But the *current* keeps flowing. Why? Because the wavefront is still out there ahead of you, still building walls farther down the line, and it needs charge to do it. The current through your already-charged section is feeding the section in front of you — like water in a pipe still flowing because somebody downstream is still drinking.
+
+  The wave is the boss. The electrons are the help. And what the electrons do — the thing we call "current" — is not how the energy gets from here to there. The energy is out in the dielectric, in the fields. The current is just the electrons reacting to the field.
+
+  You can also say this without ever mentioning an electron. The wave's $\mathbf E$ and $\mathbf B$ exist right up to the surface of the copper, but inside the copper they have to be zero — that's what good conductors do. So there's a jump at the surface, and nature does not allow that for free: wherever the perpendicular $\mathbf E$ has a jump, there must be **charge** to account for it; wherever the parallel $\mathbf B$ has a jump, there must be **current**. The metal has no choice.
+
+  And that's really all there is to it. The hard part is believing it.
+</div>
+
+> Translating into formal terms: 
+> - "down-field" → normal $E_x$ (perpendicular to the conductor surfaces);
+> - "along-field" → longitudinal $E_z$ (along the direction of propagation).
+
 <br />
 
 
@@ -469,7 +474,7 @@ This field exerts a force on the **free electrons**:
 <figure>
   <center>
   <img src="../media/infographics/microstrip-ex-confinement.svg" style="width:100%; max-width:900px; height: auto;">
-  <figcaption><i>Microstrip E<sub>x</sub> confinement.</i></figcaption>
+  <figcaption><i>Side-view: Microstrip E<sub>x</sub> confinement.</i></figcaption>
   </center>
 </figure>
 
@@ -802,6 +807,26 @@ Sections §1.1 and §1.2 established that signal propagation is an electromagnet
   <figcaption><i>Cross-section of the microstrip. <b>B</b>-field curls around the trace.</i></figcaption>
   </center>
 </figure>
+
+<details>
+  <summary>Expand if you ❤️ to see the simulated fields</summary>
+
+  <figure>
+    <center>
+    <img src="../media/infographics/cross-section-simulated-h-field.png" style="width: 90%; max-width:800px; height: auto;">
+    <figcaption><i>Cross-section of the microstrip. CST simulation of <b>B</b>-field.</i></figcaption>
+    </center>
+  </figure>
+
+  <figure>
+    <center>
+    <img src="../media/infographics/cross-section-simulated-e-field.png" style="width: 90%; max-width:800px; height: auto;">
+    <figcaption><i>Cross-section of the microstrip. CST simulation of <b>E</b>-field.</i></figcaption>
+    </center>
+  </figure>
+</details>
+<br />
+
 
 #### 1.3.1 Intuitive Picture
 

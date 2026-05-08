@@ -1,13 +1,13 @@
 {
    "execution": {
-      "classname": "SMAPowerByEmagHPCFrameReduced",
+      "classname": "SMAPowerByEmagHPCFrame",
       "libname": "SMAPowerByEmagUI"
    },
    "inputVariables": [
       {
          "name": "board_size",
          "type": "float",
-         "value": 30.0
+         "value": 10.0
       },
       {
          "name": "sub_t",
@@ -23,6 +23,21 @@
          "name": "w_50",
          "type": "float",
          "value": 0.19
+      },
+      {
+         "name": "PEC_t",
+         "type": "float",
+         "value": 0.0152
+      },
+      {
+         "name": "board_width",
+         "type": "float",
+         "value": 2.0
+      },
+      {
+         "name": "board_length",
+         "type": "float",
+         "value": 10.0
       }
    ],
    "outputVariables": []

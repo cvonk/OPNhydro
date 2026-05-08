@@ -1,0 +1,114 @@
+Solver_HF_TD_AMD64 @ coert-ws:  ==============================================================================================================================
+                                235.00 ms |          |     SV-crop-all |                    Outside MCalcResultIdentification (Solver) | 54.74 MB |  0.0000 MB
+                                238.00 ms |          |     SV-crop-all |                                                    All meshes | 54.75 MB |  0.0082 MB
+                                239.00 ms |          | SV-crop-classic |                                                        mesh 0 | 54.76 MB |  0.0041 MB
+                                245.00 ms |          | SV-crop-classic |                 forced cropping of legacy matrices for mesh 0 | 55.31 MB |  0.5571 MB
+                                272.00 ms |          | SV-crop-classic |                            build merge translation for mesh 0 | 55.48 MB |  0.1638 MB
+                                272.00 ms |          | SV-crop-classic |                   accessed legacy reference matrix for mesh 0 | 55.48 MB |  0.0000 MB
+                                272.00 ms |          | SV-crop-classic |                      cropping legacy matrix family for mesh 0 | 55.48 MB |  0.0082 MB
+                                274.00 ms |          | SV-crop-classic |                         cropping legacy matrix Rho for mesh 0 | 57.20 MB |  1.7203 MB
+                                280.00 ms |          | SV-crop-classic |                          cropped legacy matrix Rho for mesh 0 | 57.20 MB |  0.0000 MB
+                                280.00 ms |          | SV-crop-classic |   calculated conspicuousness for legacy matrix Rho for mesh 0 | 57.20 MB |  0.0000 MB
+                                280.00 ms |          | SV-crop-classic |                         cropping legacy matrix Rho for mesh 0 | 57.20 MB |  0.0000 MB
+                                280.00 ms |          | SV-crop-classic |                         dropping legacy matrix Rho for mesh 0 | 57.20 MB |  0.0000 MB
+                                280.00 ms |          | SV-crop-classic |                          dropped legacy matrix Rho for mesh 0 | 57.20 MB |  0.0000 MB
+                                282.00 ms |          | SV-crop-classic |                          cropping legacy matrix ds for mesh 0 | 58.53 MB |  1.3230 MB
+                                287.00 ms |          | SV-crop-classic |                           cropped legacy matrix ds for mesh 0 | 58.53 MB |  0.0041 MB
+                                287.00 ms |          | SV-crop-classic |    calculated conspicuousness for legacy matrix ds for mesh 0 | 58.53 MB |  0.0000 MB
+                                287.00 ms |          | SV-crop-classic |                          cropping legacy matrix ds for mesh 0 | 58.53 MB |  0.0000 MB
+                                287.00 ms |          | SV-crop-classic |                          dropping legacy matrix ds for mesh 0 | 58.53 MB |  0.0000 MB
+                                288.00 ms |          | SV-crop-classic |                           dropped legacy matrix ds for mesh 0 | 58.53 MB |  0.0000 MB
+                                289.00 ms |          | SV-crop-classic |                          cropping legacy matrix dA for mesh 0 | 59.82 MB |  1.2861 MB
+                                297.00 ms |          | SV-crop-classic |                           cropped legacy matrix dA for mesh 0 | 59.82 MB |  0.0000 MB
+                                297.00 ms |          | SV-crop-classic |    calculated conspicuousness for legacy matrix dA for mesh 0 | 59.82 MB |  0.0000 MB
+                                297.00 ms |          | SV-crop-classic |                          cropping legacy matrix dA for mesh 0 | 59.82 MB |  0.0000 MB
+                                297.00 ms |          | SV-crop-classic |                          dropping legacy matrix dA for mesh 0 | 59.82 MB |  0.0000 MB
+                                298.00 ms |          | SV-crop-classic |                           dropped legacy matrix dA for mesh 0 | 59.82 MB |  0.0000 MB
+                                300.00 ms |          | SV-crop-classic |                         cropping legacy matrix dsd for mesh 0 | 61.10 MB |  1.2861 MB
+                                305.00 ms |          | SV-crop-classic |                          cropped legacy matrix dsd for mesh 0 | 61.10 MB |  0.0000 MB
+                                305.00 ms |          | SV-crop-classic |   calculated conspicuousness for legacy matrix dsd for mesh 0 | 61.10 MB |  0.0000 MB
+                                305.00 ms |          | SV-crop-classic |                         cropping legacy matrix dsd for mesh 0 | 61.10 MB |  0.0000 MB
+                                305.00 ms |          | SV-crop-classic |                         dropping legacy matrix dsd for mesh 0 | 61.10 MB |  0.0000 MB
+                                306.00 ms |          | SV-crop-classic |                          dropped legacy matrix dsd for mesh 0 | 61.10 MB |  0.0000 MB
+                                307.00 ms |          | SV-crop-classic |                         cropping legacy matrix dad for mesh 0 | 62.39 MB |  1.2861 MB
+                                313.00 ms |          | SV-crop-classic |                          cropped legacy matrix dad for mesh 0 | 62.39 MB |  0.0000 MB
+                                313.00 ms |          | SV-crop-classic |   calculated conspicuousness for legacy matrix dad for mesh 0 | 62.39 MB |  0.0000 MB
+                                313.00 ms |          | SV-crop-classic |                         cropping legacy matrix dad for mesh 0 | 62.39 MB |  0.0000 MB
+                                313.00 ms |          | SV-crop-classic |                         dropping legacy matrix dad for mesh 0 | 62.39 MB |  0.0000 MB
+                                313.00 ms |          | SV-crop-classic |                          dropped legacy matrix dad for mesh 0 | 62.39 MB |  0.0000 MB
+                                313.00 ms |          | SV-crop-classic |                      cropping legacy matrix family for mesh 0 | 62.39 MB |  0.0000 MB
+                                313.00 ms |          | SV-crop-classic |          successfully cropped legacy matrix family for mesh 0 | 62.39 MB |  0.0000 MB
+                                313.00 ms |          | SV-crop-classic |                                                        mesh 0 | 62.39 MB |  0.0000 MB
+                                313.00 ms |          | SV-crop-classic |                                                        mesh 1 | 62.39 MB |  0.0000 MB
+                                319.00 ms |          | SV-crop-classic |                 forced cropping of legacy matrices for mesh 1 | 62.41 MB |  0.0246 MB
+                                346.00 ms |          | SV-crop-classic |                            build merge translation for mesh 1 | 62.44 MB |  0.0205 MB
+                                346.00 ms |          | SV-crop-classic |                   accessed legacy reference matrix for mesh 1 | 62.44 MB |  0.0000 MB
+                                346.00 ms |          | SV-crop-classic |                      cropping legacy matrix family for mesh 1 | 62.44 MB |  0.0000 MB
+                                346.00 ms |          | SV-crop-classic |                         cropping legacy matrix Rho for mesh 1 | 62.44 MB |  0.0000 MB
+                                352.00 ms |          | SV-crop-classic |                          cropped legacy matrix Rho for mesh 1 | 62.44 MB |  0.0000 MB
+                                352.00 ms |          | SV-crop-classic |   calculated conspicuousness for legacy matrix Rho for mesh 1 | 62.44 MB |  0.0000 MB
+                                352.00 ms |          | SV-crop-classic |                         cropping legacy matrix Rho for mesh 1 | 62.44 MB |  0.0000 MB
+                                352.00 ms |          | SV-crop-classic |                         dropping legacy matrix Rho for mesh 1 | 62.44 MB |  0.0000 MB
+                                352.00 ms |          | SV-crop-classic |                          dropped legacy matrix Rho for mesh 1 | 62.44 MB |  0.0000 MB
+                                352.00 ms |          | SV-crop-classic |                          cropping legacy matrix ds for mesh 1 | 62.44 MB |  0.0000 MB
+                                357.00 ms |          | SV-crop-classic |                           cropped legacy matrix ds for mesh 1 | 62.44 MB |  0.0000 MB
+                                357.00 ms |          | SV-crop-classic |    calculated conspicuousness for legacy matrix ds for mesh 1 | 62.44 MB |  0.0000 MB
+                                357.00 ms |          | SV-crop-classic |                          cropping legacy matrix ds for mesh 1 | 62.44 MB |  0.0000 MB
+                                357.00 ms |          | SV-crop-classic |                          dropping legacy matrix ds for mesh 1 | 62.44 MB |  0.0000 MB
+                                358.00 ms |          | SV-crop-classic |                           dropped legacy matrix ds for mesh 1 | 62.44 MB |  0.0000 MB
+                                358.00 ms |          | SV-crop-classic |                          cropping legacy matrix dA for mesh 1 | 62.44 MB |  0.0000 MB
+                                363.00 ms |          | SV-crop-classic |                           cropped legacy matrix dA for mesh 1 | 62.44 MB |  0.0000 MB
+                                364.00 ms |          | SV-crop-classic |    calculated conspicuousness for legacy matrix dA for mesh 1 | 62.44 MB |  0.0000 MB
+                                364.00 ms |          | SV-crop-classic |                          cropping legacy matrix dA for mesh 1 | 62.44 MB |  0.0000 MB
+                                364.00 ms |          | SV-crop-classic |                          dropping legacy matrix dA for mesh 1 | 62.44 MB |  0.0000 MB
+                                364.00 ms |          | SV-crop-classic |                           dropped legacy matrix dA for mesh 1 | 62.44 MB |  0.0000 MB
+                                364.00 ms |          | SV-crop-classic |                         cropping legacy matrix dsd for mesh 1 | 62.44 MB |  0.0000 MB
+                                368.00 ms |          | SV-crop-classic |                          cropped legacy matrix dsd for mesh 1 | 62.44 MB |  0.0000 MB
+                                368.00 ms |          | SV-crop-classic |   calculated conspicuousness for legacy matrix dsd for mesh 1 | 62.44 MB |  0.0000 MB
+                                368.00 ms |          | SV-crop-classic |                         cropping legacy matrix dsd for mesh 1 | 62.44 MB |  0.0000 MB
+                                368.00 ms |          | SV-crop-classic |                         dropping legacy matrix dsd for mesh 1 | 62.44 MB |  0.0000 MB
+                                368.00 ms |          | SV-crop-classic |                          dropped legacy matrix dsd for mesh 1 | 62.44 MB |  0.0000 MB
+                                368.00 ms |          | SV-crop-classic |                         cropping legacy matrix dad for mesh 1 | 62.44 MB |  0.0000 MB
+                                373.00 ms |          | SV-crop-classic |                          cropped legacy matrix dad for mesh 1 | 62.44 MB |  0.0000 MB
+                                373.00 ms |          | SV-crop-classic |   calculated conspicuousness for legacy matrix dad for mesh 1 | 62.44 MB |  0.0000 MB
+                                373.00 ms |          | SV-crop-classic |                         cropping legacy matrix dad for mesh 1 | 62.44 MB |  0.0000 MB
+                                373.00 ms |          | SV-crop-classic |                         dropping legacy matrix dad for mesh 1 | 62.44 MB |  0.0000 MB
+                                374.00 ms |          | SV-crop-classic |                          dropped legacy matrix dad for mesh 1 | 62.44 MB |  0.0000 MB
+                                374.00 ms |          | SV-crop-classic |                      cropping legacy matrix family for mesh 1 | 62.44 MB |  0.0000 MB
+                                374.00 ms |          | SV-crop-classic |          successfully cropped legacy matrix family for mesh 1 | 62.44 MB |  0.0000 MB
+                                374.00 ms |          | SV-crop-classic |                                                        mesh 1 | 62.44 MB |  0.0000 MB
+                                374.00 ms |          |     SV-crop-m2h |                                                        Mesh 0 | 62.44 MB |  0.0041 MB
+                                374.00 ms |          |     SV-crop-m2h |                                                        mesh 0 | 62.44 MB |  0.0000 MB
+                                376.00 ms |          |     SV-crop-m2h |                                cropping M2H family for mesh 0 | 62.55 MB |  0.1147 MB
+                                376.00 ms |          |     SV-crop-m2h |                        allocated M2H target family for mesh 0 | 62.55 MB |  0.0000 MB
+                                468.00 ms |          |     SV-crop-m2h |                      accessed M2H reference family for mesh 0 | 67.52 MB |  4.9644 MB
+                                469.00 ms |          |     SV-crop-m2h |   loaded existing parts of target family from disk for mesh 0 | 67.52 MB |  0.0000 MB
+                                469.00 ms |          |     SV-crop-m2h |                       setting up merge translation for mesh 0 | 67.52 MB |  0.0000 MB
+                                498.00 ms |          |     SV-crop-m2h |           building index containers for M2H family for mesh 0 | 67.60 MB |  0.0778 MB
+                                498.00 ms |          |     SV-crop-m2h | successfully built index containers for M2H family for mesh 0 | 67.63 MB |  0.0328 MB
+                                498.00 ms |          |     SV-crop-m2h |                           allocated target M2H m2h for mesh 0 | 67.63 MB |  0.0000 MB
+                                501.00 ms |  --> 3rd |     SV-crop-m2h |                             cropped target M2H m2h for mesh 0 | 69.09 MB |  1.4623 MB
+                                506.00 ms | --> peak |     SV-crop-m2h |                          cropped target M2H family for mesh 0 | 69.52 MB |  0.4260 MB
+                                507.00 ms |          |     SV-crop-m2h |                 removed target M2H m2h from memory for mesh 0 | 66.72 MB | -2.7976 MB
+                                507.00 ms |          |     SV-crop-m2h |                       finished cropping M2H family for mesh 0 | 66.72 MB |  0.0000 MB
+                                507.00 ms |          |     SV-crop-m2h |                                                        mesh 0 | 66.72 MB |  0.0000 MB
+                                507.00 ms |          |     SV-crop-m2h |                                                        Mesh 0 | 66.72 MB |  0.0000 MB
+                                507.00 ms |          |     SV-crop-m2h |                                                        Mesh 1 | 66.72 MB |  0.0000 MB
+                                507.00 ms |          |     SV-crop-m2h |                                                        mesh 1 | 66.72 MB |  0.0041 MB
+                                508.00 ms |          |     SV-crop-m2h |                                cropping M2H family for mesh 1 | 66.75 MB |  0.0246 MB
+                                508.00 ms |          |     SV-crop-m2h |                        allocated M2H target family for mesh 1 | 66.75 MB |  0.0000 MB
+                                508.00 ms |          |     SV-crop-m2h |                      accessed M2H reference family for mesh 1 | 66.75 MB |  0.0000 MB
+                                508.00 ms |          |     SV-crop-m2h |   loaded existing parts of target family from disk for mesh 1 | 66.75 MB |  0.0000 MB
+                                508.00 ms |          |     SV-crop-m2h |                       setting up merge translation for mesh 1 | 66.75 MB |  0.0000 MB
+                                534.00 ms |          |     SV-crop-m2h |           building index containers for M2H family for mesh 1 | 66.81 MB |  0.0573 MB
+                                534.00 ms |          |     SV-crop-m2h | successfully built index containers for M2H family for mesh 1 | 66.81 MB |  0.0000 MB
+                                534.00 ms |          |     SV-crop-m2h |                           allocated target M2H m2h for mesh 1 | 66.81 MB |  0.0000 MB
+                                537.00 ms |          |     SV-crop-m2h |                             cropped target M2H m2h for mesh 1 | 68.82 MB |  2.0152 MB
+                                541.00 ms |  --> 2nd |     SV-crop-m2h |                          cropped target M2H family for mesh 1 | 69.14 MB |  0.3154 MB
+                                542.00 ms |          |     SV-crop-m2h |                 removed target M2H m2h from memory for mesh 1 | 66.81 MB | -2.3224 MB
+                                542.00 ms |          |     SV-crop-m2h |                       finished cropping M2H family for mesh 1 | 66.81 MB |  0.0000 MB
+                                542.00 ms |          |     SV-crop-m2h |                                                        mesh 1 | 66.81 MB |  0.0000 MB
+                                542.00 ms |          |     SV-crop-m2h |                                                        Mesh 1 | 66.81 MB |  0.0000 MB
+                                542.00 ms |          |     SV-crop-all |                                                    All meshes | 66.81 MB |  0.0000 MB
+                                544.00 ms |          |     SV-crop-all |                    Outside MCalcResultIdentification (Solver) | 66.81 MB |  0.0000 MB
+                                ==============================================================================================================================

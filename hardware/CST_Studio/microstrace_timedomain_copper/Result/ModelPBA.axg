@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSTAuxiliaryGeometry version="20170928">
+  <Objects>
+    <Object name="Lumped Elements\Folder1:load" id="5">
+      <FatArrow position="0.0625 0 15" direction="1 0 0" dimension="10 10 10" material="$WireMaterial$" text="load" short="load"/>
+      <LineSet points="0 0 15 0.0250000004 0 15 0.0250000004 0 15 0.0500000007 0 15 0.0500000007 0 15 0.075000003 0 15 0.075000003 0 15 0.100000001 0 15" stripped="1" material="$WireMaterial$"/>
+      <LineSet points="0.0500000007 0 15 0.075000003 0 15" stripped="1" material=""/>
+    </Object>
+    <Object name="Ports\port1" id="6">
+      <LineSet points="-0.753000021 -0.815999985 -15 0.100000001 -0.815999985 -15 0.100000001 0.815999985 -15 -0.753000021 0.815999985 -15 -0.753000021 -0.815999985 -15" stripped="1" material="$PortMaterial$" text="1" short="1"/>
+    </Object>
+    <Object name="Voltage and Current Monitors\voltage1" id="7">
+      <LineSet points="-0.100000001 0 0 -0.0656792223 0 0 -0.0350000001 0 0 0 0 0" stripped="1" material="$VoltagePathMaterial$"/>
+    </Object>
+  </Objects>
+  <Materials>
+    <Material name="$noSnappingMaterial$">
+      <Drawstyle color="0 0 0" transparency="0" linestrength="5"/>
+    </Material>
+    <Material name="">
+      <Drawstyle color="0 0 0.949999988" transparency="0.600000024" linestrength="0"/>
+    </Material>
+  </Materials>
+  <Groups/>
+</CSTAuxiliaryGeometry>

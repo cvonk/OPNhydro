@@ -1,0 +1,49 @@
+{
+   "execution": {
+      "classname": "SMAPowerByEmagHPCFrame",
+      "libname": "SMAPowerByEmagUI"
+   },
+   "inputVariables": [
+      {
+         "name": "board_width",
+         "type": "float",
+         "value": 2.0
+      },
+      {
+         "name": "board_length",
+         "type": "float",
+         "value": 30.0
+      },
+      {
+         "name": "dielectric_height",
+         "type": "float",
+         "value": 0.1
+      },
+      {
+         "name": "Er",
+         "type": "float",
+         "value": 4.3
+      },
+      {
+         "name": "trace_width",
+         "type": "float",
+         "value": 0.196
+      },
+      {
+         "name": "plane_height",
+         "type": "float",
+         "value": 0.035
+      },
+      {
+         "name": "trace_height",
+         "type": "float",
+         "value": 0.035
+      },
+      {
+         "name": "ground_height",
+         "type": "float",
+         "value": 0.035
+      }
+   ],
+   "outputVariables": []
+}

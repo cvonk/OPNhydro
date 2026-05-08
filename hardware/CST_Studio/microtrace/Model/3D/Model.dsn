@@ -1,10 +1,10 @@
 *** File Version: 21.00
 
-Number of ports: 0
-Portnames:
-Modenumbers:
-Porttypes:
-Portlabels:
+Number of ports: 2
+Portnames: "1" "2"
+Modenumbers: 1 1
+Porttypes: 3 3
+Portlabels: "" ""
 StaticSources:
 ThermalSources:
 FloquetPortNames:
@@ -15,7 +15,7 @@ Terminals:
 StaticToReferenceTable:
 ThermalToReferenceTable:
 TerminalToReferenceTable:
-PortToReferenceTable:
+PortToReferenceTable: "1" "1'" "2" "2'"
 FloquetToReferenceTable:
 SchematicToReferenceTable:
 StaticSourceGroups:
@@ -24,97 +24,46 @@ TerminalSourceGroups:
 PortSourceGroups:
 FloquetPortSourceGroups:
 SchematicPortSourceGroups:
-Number of frequency-points: 0
-Fmin: 1.000000e+09
+Number of frequency-points: 2
+Fmin: 0.000000e+00
 Fmax: 5.000000e+09
 Fscale: 1.000000e+09
 
 
 
+*** newset
+
+*** newmode
+SetType: 100
+Portname: 2
+Modenumber: 1
+Modetype: 4
+PortModeConsState: 0
+*** endmode
+
+*** endset
+
+
+*** newset
+
+*** newmode
+SetType: 100
+Portname: 1
+Modenumber: 1
+Modetype: 4
+PortModeConsState: 0
+*** endmode
+
+*** endset
+
+
 
 
 *** newmonitor
-monname: "h-field (f=5)"
+monname: "surface-current (f=1)"
 nmonfrequencies: 1
-monfrequencies: "5" 
-montype: 1
-mondomain: 1
-mon_fmin: ""
-mon_fmax: ""
-mon_nfSteps: ""
-*** endmonitor
-
-*** newmonitor
-monname: "e-field (f=5)"
-nmonfrequencies: 1
-monfrequencies: "5" 
-montype: 0
-mondomain: 1
-mon_fmin: ""
-mon_fmax: ""
-mon_nfSteps: ""
-*** endmonitor
-
-*** newmonitor
-monname: "h-field (f=4)"
-nmonfrequencies: 1
-monfrequencies: "4" 
-montype: 1
-mondomain: 1
-mon_fmin: ""
-mon_fmax: ""
-mon_nfSteps: ""
-*** endmonitor
-
-*** newmonitor
-monname: "e-field (f=4)"
-nmonfrequencies: 1
-monfrequencies: "4" 
-montype: 0
-mondomain: 1
-mon_fmin: ""
-mon_fmax: ""
-mon_nfSteps: ""
-*** endmonitor
-
-*** newmonitor
-monname: "h-field (f=3)"
-nmonfrequencies: 1
-monfrequencies: "3" 
-montype: 1
-mondomain: 1
-mon_fmin: ""
-mon_fmax: ""
-mon_nfSteps: ""
-*** endmonitor
-
-*** newmonitor
-monname: "e-field (f=3)"
-nmonfrequencies: 1
-monfrequencies: "3" 
-montype: 0
-mondomain: 1
-mon_fmin: ""
-mon_fmax: ""
-mon_nfSteps: ""
-*** endmonitor
-
-*** newmonitor
-monname: "h-field (f=2)"
-nmonfrequencies: 1
-monfrequencies: "2" 
-montype: 1
-mondomain: 1
-mon_fmin: ""
-mon_fmax: ""
-mon_nfSteps: ""
-*** endmonitor
-
-*** newmonitor
-monname: "e-field (f=2)"
-nmonfrequencies: 1
-monfrequencies: "2" 
-montype: 0
+monfrequencies: "1" 
+montype: 94
 mondomain: 1
 mon_fmin: ""
 mon_fmax: ""
@@ -136,6 +85,72 @@ mon_nfSteps: ""
 monname: "e-field (f=1)"
 nmonfrequencies: 1
 monfrequencies: "1" 
+montype: 0
+mondomain: 1
+mon_fmin: ""
+mon_fmax: ""
+mon_nfSteps: ""
+*** endmonitor
+
+*** newmonitor
+monname: "h-field (f=0.5)"
+nmonfrequencies: 1
+monfrequencies: "0.5" 
+montype: 1
+mondomain: 1
+mon_fmin: ""
+mon_fmax: ""
+mon_nfSteps: ""
+*** endmonitor
+
+*** newmonitor
+monname: "e-field (f=0.5)"
+nmonfrequencies: 1
+monfrequencies: "0.5" 
+montype: 0
+mondomain: 1
+mon_fmin: ""
+mon_fmax: ""
+mon_nfSteps: ""
+*** endmonitor
+
+*** newmonitor
+monname: "h-field (f=0.2)"
+nmonfrequencies: 1
+monfrequencies: "0.20000000000000001" 
+montype: 1
+mondomain: 1
+mon_fmin: ""
+mon_fmax: ""
+mon_nfSteps: ""
+*** endmonitor
+
+*** newmonitor
+monname: "e-field (f=0.2)"
+nmonfrequencies: 1
+monfrequencies: "0.20000000000000001" 
+montype: 0
+mondomain: 1
+mon_fmin: ""
+mon_fmax: ""
+mon_nfSteps: ""
+*** endmonitor
+
+*** newmonitor
+monname: "h-field (f=0.1)"
+nmonfrequencies: 1
+monfrequencies: "0.10000000000000001" 
+montype: 1
+mondomain: 1
+mon_fmin: ""
+mon_fmax: ""
+mon_nfSteps: ""
+*** endmonitor
+
+*** newmonitor
+monname: "e-field (f=0.1)"
+nmonfrequencies: 1
+monfrequencies: "0.10000000000000001" 
 montype: 0
 mondomain: 1
 mon_fmin: ""

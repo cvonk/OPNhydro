@@ -1,0 +1,4 @@
+Solver_HF_TD_AMD64 @ coert-ws:  =====================================================================================================
+                                66.00 ms | --> peak | SV-crop-all | Outside MCalcResultIdentification (Solver) | 41.30 MB | 0.0000 MB
+                                68.00 ms |  --> 2nd | SV-crop-all | Outside MCalcResultIdentification (Solver) | 41.30 MB | 0.0000 MB
+                                =====================================================================================================

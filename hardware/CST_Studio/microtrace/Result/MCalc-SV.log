@@ -1,0 +1,6 @@
+ParaControl_AMD64-1xN @ coert-ws:  ==============================================================================================
+                                   4249.00 ms |          | SV-crop-all | Outside MCalcResultIdentification | 25.55 MB | 0.0000 MB
+                                   4251.00 ms |  --> 3rd | SV-crop-all |                        All meshes | 25.66 MB | 0.1106 MB
+                                   4252.00 ms | --> peak | SV-crop-all |                        All meshes | 25.67 MB | 0.0082 MB
+                                   4252.00 ms |  --> 2nd | SV-crop-all | Outside MCalcResultIdentification | 25.67 MB | 0.0000 MB
+                                   ==============================================================================================

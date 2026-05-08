@@ -1,12 +1,12 @@
 {
     "parameters": [
         {
-            "expr": "30",
+            "expr": "10",
             "name": "board_size",
-            "value": "30"
+            "value": "10"
         },
         {
-            "descr": "substrate thickness",
+            "descr": "substrate/dielectric thickness",
             "expr": "0.1",
             "name": "sub_t",
             "value": "0.1"
@@ -22,6 +22,22 @@
             "expr": "0.19",
             "name": "w_50",
             "value": "0.19"
+        },
+        {
+            "descr": "return plane thickness",
+            "expr": "0.0152",
+            "name": "PEC_t",
+            "value": "0.0152"
+        },
+        {
+            "expr": "2",
+            "name": "board_width",
+            "value": "2"
+        },
+        {
+            "expr": "10",
+            "name": "board_length",
+            "value": "10"
         }
     ],
     "version": 1

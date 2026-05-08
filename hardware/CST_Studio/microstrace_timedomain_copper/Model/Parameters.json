@@ -1,0 +1,46 @@
+{
+    "parameters": [
+        {
+            "expr": "2",
+            "name": "board_width",
+            "value": "2"
+        },
+        {
+            "expr": "30",
+            "name": "board_length",
+            "value": "30"
+        },
+        {
+            "expr": "0.1",
+            "name": "dielectric_height",
+            "value": "0.1"
+        },
+        {
+            "expr": "4.3",
+            "name": "Er",
+            "value": "4.3"
+        },
+        {
+            "descr": "for 50 Ohm impedance",
+            "expr": ".196",
+            "name": "trace_width",
+            "value": ".196"
+        },
+        {
+            "expr": "0.0350",
+            "name": "plane_height",
+            "value": "0.0350"
+        },
+        {
+            "expr": "0.0350",
+            "name": "trace_height",
+            "value": "0.0350"
+        },
+        {
+            "expr": "0.0350",
+            "name": "ground_height",
+            "value": "0.0350"
+        }
+    ],
+    "version": 1
+}

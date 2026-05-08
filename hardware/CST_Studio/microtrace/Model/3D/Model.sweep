@@ -2,6 +2,7 @@
     "parameter sweep": {
         "options": {
             "restore parameter values after run": "false",
+            "simulation type": "Transient",
             "skip existing combinations": "true",
             "start active solver": "true"
         },

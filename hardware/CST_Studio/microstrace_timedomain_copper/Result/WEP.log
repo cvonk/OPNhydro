@@ -1,0 +1,17 @@
+{27944} >2026-05-08 13:19:32.00632< matrixcalc_AMD64 @ coert-ws: 1xN001:  Voltage Monitor: voltage1
+{27944} >2026-05-08 13:19:32.00632< matrixcalc_AMD64 @ coert-ws: 1xN001:  # edges: 3
+{27944} >2026-05-08 13:19:32.00632< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 0, point: 25485
+{27944} >2026-05-08 13:19:32.00632< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 0, wire ends: (0.00 | 0.00 | 0.00)
+{27944} >2026-05-08 13:19:32.00633< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 0, pos (-0.10 | 0.00 | 0.00)
+{27944} >2026-05-08 13:19:32.00633< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 0 is at boundary: 0
+{27944} >2026-05-08 13:19:32.00633< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 0 meets Holms proposition: near to mapped but not in PEC proximity
+{27944} >2026-05-08 13:19:32.00634< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 1, point: 25488
+{27944} >2026-05-08 13:19:32.00634< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 1, wire ends: (0.00 | 0.00 | 0.00)
+{27944} >2026-05-08 13:19:32.00634< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 1, pos (0.00 | 0.00 | 0.00)
+{27944} >2026-05-08 13:19:32.00634< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 1 is at boundary: 0
+{27944} >2026-05-08 13:19:32.00634< matrixcalc_AMD64 @ coert-ws: 1xN001:  ending 1 is inside PEC
+{27944} >2026-05-08 13:19:32.00635< matrixcalc_AMD64 @ coert-ws: 1xN001:  # endings: 2, # corrected: 0, not corrected: 0
+{27944} >2026-05-08 13:19:32.00635< matrixcalc_AMD64 @ coert-ws: 1xN001:  connection state of ending 0: 0
+{27944} >2026-05-08 13:19:32.00635< matrixcalc_AMD64 @ coert-ws: 1xN001:  connection state of ending 1: 1
+
+
