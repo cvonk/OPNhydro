@@ -152,7 +152,7 @@ Consider a **microstrip** structure consisting of:
 <figure>
   <center>
   <img src="../media/infographics/microstrip-3d.svg" style="width: 80%; max-width:800px; height: auto;">
-  <figcaption><i>3D-view of the microstrip.</i></figcaption>
+  <figcaption><i>3D-view of the microstrip structure.</i></figcaption>
   </center>
 </figure>
 
@@ -259,10 +259,37 @@ When a **voltage step** is applied to the trace:
 1. An **electric field is established** ($\mathbf E$), between the trace and the return plane, near the source. Because it rises from zero, it is **time-varying**.
 <br />
 
-2. According to the Ampère–Maxwell law, a time-varying electric field produces a **magnetic field** ($\mathbf B$) along $\hat y$ (transverse to the trace). The strength of this field changes as you move along $\hat z$ — that means a little further along $z$, its value is rising from zero; it is **time-varying**.
+2. According to the Ampère–Maxwell law, an electric field in the $x$-direction that varies along the $z$-axis ($\tfrac{\partial E_x}{dt}\gt 0$) causes a **magnetic field** in the $y$-direction ($B_y$) that varies with $z$ — that means a little further along $z$, its value is rising from zero; it is **time-varying**. <details><summary>Expand if you ❤️ to see the derivation.</summary>
+$$
+  \begin{align*}
+    \nabla \times \mathbf{B} &= \mu\,\varepsilon \frac{\partial \mathbf{E}}{\partial t}
+    &({\text{Ampère-Maxwell}}) \\  
+    \nabla\times\mathbf B &=
+    \mu\varepsilon\frac{\partial E_x}{dt}\hat x, &(\mathbf{E}=E_x\,\hat x) \\
+    \left(\frac{\partial B_z}{dy} - \frac{\partial B_y}{\partial z}\right)\cancel{\hat x} + \bcancel{\left(\ldots\right) \hat y} + \bcancel{\left(\ldots\right) \hat z} &=
+    \mu\varepsilon\frac{\partial E_x}{dt} \cancel{\hat x}, &(\text{like terms}) \\
+    -\frac{\partial B_y}{\partial z} &=
+    \mu\varepsilon\frac{\partial E_x}{dt}, &(\frac{\partial B_z}{dy}=0)
+  \end{align*}
+$$
+</details>
 <br />
 
-3. According to Faraday's law, this time-varying magnetic field **forces a spatial gradient in $\mathbf E$** along $\hat z$. Thus, a little further down the line, $\mathbf E$ is rising from zero; it too is **time-varying**, and the disturbance has moved forward.[^leapfrogRigor]
+3. According to Faraday's law, an magnetic field in the $y$-direction that varies along the $z$-axis ($\tfrac{\partial B_y}{dt}\gt 0$) causes a **electric field** in the $x$-direction ($E_x$) that varies with $z$ — that means a little further along $z$, its value is rising from zero; it too is **time-varying**, and the disturbance has moved forward.[^leapfrogRigor]. <details><summary>Expand if you ❤️ to see the derivation.</summary>
+$$
+  \begin{align*}
+    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t}
+    &({\text{Faraday}}) \\  
+    \nabla\times\mathbf E &=
+    -\frac{\partial B_y}{dt}\hat y, &(\mathbf{B}=B_y\,\hat y) \\
+    \bcancel{\left(\ldots\right)\hat x} + \left(\frac{\partial E_x}{\partial z} - \frac{\partial E_z}{\partial x}\right)\cancel{\hat y} +\bcancel{\left(\ldots\right)\hat z} &=
+    -\frac{\partial B_y}{\partial t} \cancel{\hat y} & (\text{like terms}) \\
+    \frac{\partial E_x}{\partial z} &=
+    -\frac{\partial B_y}{dt}, &(\frac{\partial E_x}{dx}=0)
+  \end{align*}
+$$
+</details>
+<br />
 
 Steps 2 and 3 continue throughout the structure. The result is not the transport of charge along the conductor, but the propagation of a **self-sustaining electromagnetic wave**.
 
@@ -272,7 +299,10 @@ Two conditions are essential:
 
 Together, they enforce propagation.
 
-<div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launches an electromagnetic wave in the dielectric.</div>
+<div class="important-note"><span class="icon">💡</span>A voltage step on a trace and return plane launches an electromagnetic wave in the dielectric.
+<br />
+<br />
+</div>
 
 [^leapfrogRigor]: The "a little further down the line" framing in steps 2 and 3 is the leapfrog picture — useful for intuition, slightly loose as physics. The rigorous version: Maxwell-Ampère couples $\partial \mathbf E/\partial t$ here to $\partial \mathbf B/\partial z$ here, and the wavefront constraint $\partial/\partial t = -v\,\partial/\partial z$ converts the time variation into a spatial one. Appendix A.1 derives this coupling from Maxwell-Ampère; Appendix A.3 derives the wavefront constraint.
 
